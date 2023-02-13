@@ -1,0 +1,134 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn type_no_copy() -> Option<Bar> {
+    let mut _0: std::option::Option<Bar>; // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:9:28: 9:39
+
+    bb0: {
+        _0 = const Option::<Bar>::None;  // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:10:5: 10:9
+                                         // mir::Constant
+                                         // + span: ui/consts/const-blocks/fn-call-in-const.rs:10:5: 10:9
+                                         // + literal: Const { ty: Option<Bar>, val: Value(Scalar(0x00)) }
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:11:2: 11:2
+    }
+}
+
+// MIR FOR CTFE
+fn type_no_copy() -> Option<Bar> {
+    let mut _0: std::option::Option<Bar>; // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:9:28: 9:39
+
+    bb0: {
+        _0 = Option::<Bar>::None;        // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:10:5: 10:9
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:11:2: 11:2
+    }
+}
+
+fn type_copy() -> u32 {
+    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:13:25: 13:28
+
+    bb0: {
+        _0 = const 3_u32;                // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:14:5: 14:6
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:15:2: 15:2
+    }
+}
+
+// MIR FOR CTFE
+fn type_copy() -> u32 {
+    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:13:25: 13:28
+
+    bb0: {
+        _0 = const 3_u32;                // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:14:5: 14:6
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:15:2: 15:2
+    }
+}
+
+const _: [u32; 2] = {
+    let mut _0: [u32; 2];                // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:10: 17:18
+    let mut _1: u32;                     // in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:22: 17:33
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:22: 17:33
+        ConstEvalCounter;                // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:22: 17:33
+        _1 = type_copy() -> bb1;         // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:22: 17:33
+                                         // mir::Constant
+                                         // + span: ui/consts/const-blocks/fn-call-in-const.rs:17:22: 17:31
+                                         // + literal: Const { ty: fn() -> u32 {type_copy}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = [move _1; 2];               // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:21: 17:37
+        StorageDead(_1);                 // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:36: 17:37
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:1: 17:38
+    }
+}
+
+_::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:16: 17:17
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:16: 17:17
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:16: 17:17
+    }
+}
+
+_::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:35: 17:36
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:35: 17:36
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:17:35: 17:36
+    }
+}
+
+const _: [Option<Bar>; 2] = {
+    let mut _0: [std::option::Option<Bar>; 2]; // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:10: 21:26
+
+    bb0: {
+        _0 = [const _; 2];               // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:29: 21:58
+                                         // mir::Constant
+                                         // + span: ui/consts/const-blocks/fn-call-in-const.rs:21:30: 21:54
+                                         // + literal: Const { ty: Option<Bar>, val: Unevaluated(_::{constant#1}, [std::option::Option<Bar>], None) }
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:1: 21:59
+    }
+}
+
+_::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:24: 21:25
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:24: 21:25
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:24: 21:25
+    }
+}
+
+_::{constant#1}: Option<Bar> = {
+    let mut _0: std::option::Option<Bar>; // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:36: 21:54
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:38: 21:52
+        _0 = type_no_copy() -> bb1;      // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:38: 21:52
+                                         // mir::Constant
+                                         // + span: ui/consts/const-blocks/fn-call-in-const.rs:21:38: 21:50
+                                         // + literal: Const { ty: fn() -> Option<Bar> {type_no_copy}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:36: 21:54
+    }
+}
+
+_::{constant#2}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:56: 21:57
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:56: 21:57
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:21:56: 21:57
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:23:11: 23:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-blocks/fn-call-in-const.rs:23:13: 23:13
+    }
+}

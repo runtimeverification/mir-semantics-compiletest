@@ -1,0 +1,35 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:9:15: 9:15
+
+    bb0: {
+        return;                          // scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:9:26: 9:26
+    }
+}
+
+fn g() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:11:8: 11:8
+    let _1: ();                          // in scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:13:9: 13:12
+    scope 1 {
+    }
+
+    bb0: {
+        _1 = f() -> bb1;                 // scope 1 at ui/unsafe-fn-called-from-unsafe-blk.rs:13:9: 13:12
+                                         // mir::Constant
+                                         // + span: ui/unsafe-fn-called-from-unsafe-blk.rs:13:9: 13:10
+                                         // + literal: Const { ty: unsafe fn() {f}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:15:2: 15:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:17:15: 17:15
+
+    bb0: {
+        return;                          // scope 0 at ui/unsafe-fn-called-from-unsafe-blk.rs:18:2: 18:2
+    }
+}

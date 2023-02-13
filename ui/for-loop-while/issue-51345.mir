@@ -1,0 +1,25 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/issue-51345.rs:4:11: 4:11
+    let mut _1: std::vec::Vec<()>;       // in scope 0 at ui/for-loop-while/issue-51345.rs:5:9: 5:14
+    scope 1 {
+        debug v => _1;                   // in scope 1 at ui/for-loop-while/issue-51345.rs:5:9: 5:14
+    }
+
+    bb0: {
+        _1 = Vec::<()>::new() -> bb1;    // scope 0 at ui/for-loop-while/issue-51345.rs:5:17: 5:27
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/issue-51345.rs:5:17: 5:25
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> Vec<()> {Vec::<()>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/for-loop-while/issue-51345.rs:8:1: 8:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/for-loop-while/issue-51345.rs:8:2: 8:2
+    }
+}

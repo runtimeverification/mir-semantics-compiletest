@@ -1,0 +1,217 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn lambda() -> U {
+    let mut _0: U;                       // return place in scope 0 at ui/mir/issue-99852.rs:5:22: 5:23
+    let _1: std::result::Result<T, ()>;  // in scope 0 at ui/mir/issue-99852.rs:10:9: 10:12
+    let mut _2: T;                       // in scope 0 at ui/mir/issue-99852.rs:10:33: 10:45
+    let mut _4: isize;                   // in scope 0 at ui/mir/issue-99852.rs:13:12: 13:19
+    let mut _6: std::result::Result<U, ()>; // in scope 0 at ui/mir/issue-99852.rs:13:43: 13:57
+    let mut _7: T;                       // in scope 0 at ui/mir/issue-99852.rs:13:53: 13:56
+    let mut _8: isize;                   // in scope 0 at ui/mir/issue-99852.rs:13:33: 13:40
+    let mut _10: bool;                   // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _11: bool;                   // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _12: bool;                   // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _13: bool;                   // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _14: isize;                  // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _15: isize;                  // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _16: isize;                  // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _17: isize;                  // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    let mut _18: isize;                  // in scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    scope 1 {
+        debug foo => _1;                 // in scope 1 at ui/mir/issue-99852.rs:10:9: 10:12
+        let _3: U;                       // in scope 1 at ui/mir/issue-99852.rs:11:9: 11:12
+        scope 2 {
+            debug baz => _3;             // in scope 2 at ui/mir/issue-99852.rs:11:9: 11:12
+            debug foo => _5;             // in scope 2 at ui/mir/issue-99852.rs:13:15: 13:18
+            debug bar => _9;             // in scope 2 at ui/mir/issue-99852.rs:13:36: 13:39
+            let _5: T;                   // in scope 2 at ui/mir/issue-99852.rs:13:15: 13:18
+            let _9: U;                   // in scope 2 at ui/mir/issue-99852.rs:13:36: 13:39
+        }
+    }
+
+    bb0: {
+        _10 = const false;               // scope 0 at ui/mir/issue-99852.rs:10:9: 10:12
+        _13 = const false;               // scope 0 at ui/mir/issue-99852.rs:10:9: 10:12
+        _12 = const false;               // scope 0 at ui/mir/issue-99852.rs:10:9: 10:12
+        _11 = const false;               // scope 0 at ui/mir/issue-99852.rs:10:9: 10:12
+        _2 = <T as Default>::default() -> bb1; // scope 0 at ui/mir/issue-99852.rs:10:33: 10:45
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-99852.rs:10:33: 10:43
+                                         // + literal: Const { ty: fn() -> T {<T as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _11 = const true;                // scope 0 at ui/mir/issue-99852.rs:10:30: 10:46
+        _1 = Result::<T, ()>::Ok(move _2); // scope 0 at ui/mir/issue-99852.rs:10:30: 10:46
+        _3 = <U as Default>::default() -> [return: bb2, unwind: bb28]; // scope 1 at ui/mir/issue-99852.rs:11:18: 11:30
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-99852.rs:11:18: 11:28
+                                         // + literal: Const { ty: fn() -> U {<U as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _10 = const true;                // scope 2 at ui/mir/issue-99852.rs:13:12: 13:19
+        _4 = discriminant(_1);           // scope 2 at ui/mir/issue-99852.rs:13:12: 13:19
+        switchInt(move _4) -> [0: bb3, otherwise: bb6]; // scope 2 at ui/mir/issue-99852.rs:13:12: 13:19
+    }
+
+    bb3: {
+        _11 = const false;               // scope 2 at ui/mir/issue-99852.rs:13:15: 13:18
+        _5 = move ((_1 as Ok).0: T);     // scope 2 at ui/mir/issue-99852.rs:13:15: 13:18
+        _7 = move _5;                    // scope 2 at ui/mir/issue-99852.rs:13:53: 13:56
+        _6 = transform::<T, U>(move _7) -> [return: bb4, unwind: bb10]; // scope 2 at ui/mir/issue-99852.rs:13:43: 13:57
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-99852.rs:13:43: 13:52
+                                         // + literal: Const { ty: fn(T) -> Result<U, ()> {transform::<T, U>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _12 = const true;                // scope 2 at ui/mir/issue-99852.rs:13:56: 13:57
+        _13 = const true;                // scope 2 at ui/mir/issue-99852.rs:13:56: 13:57
+        _8 = discriminant(_6);           // scope 2 at ui/mir/issue-99852.rs:13:33: 13:40
+        switchInt(move _8) -> [0: bb5, otherwise: bb6]; // scope 2 at ui/mir/issue-99852.rs:13:33: 13:40
+    }
+
+    bb5: {
+        _13 = const false;               // scope 2 at ui/mir/issue-99852.rs:13:36: 13:39
+        _9 = move ((_6 as Ok).0: U);     // scope 2 at ui/mir/issue-99852.rs:13:36: 13:39
+        _0 = move _9;                    // scope 2 at ui/mir/issue-99852.rs:14:9: 14:12
+        goto -> bb13;                    // scope 2 at ui/mir/issue-99852.rs:13:5: 17:6
+    }
+
+    bb6: {
+        _10 = const false;               // scope 2 at ui/mir/issue-99852.rs:16:9: 16:12
+        _0 = move _3;                    // scope 2 at ui/mir/issue-99852.rs:16:9: 16:12
+        goto -> bb13;                    // scope 2 at ui/mir/issue-99852.rs:13:5: 17:6
+    }
+
+    bb7: {
+        _10 = const false;               // scope 1 at ui/mir/issue-99852.rs:18:1: 18:2
+        _14 = discriminant(_1);          // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(move _14) -> [0: bb15, otherwise: bb14]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb8 (cleanup): {
+        _16 = discriminant(_1);          // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(move _16) -> [0: bb21, otherwise: bb9]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb9 (cleanup): {
+        switchInt(_12) -> [0: bb11, otherwise: bb25]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb10 (cleanup): {
+        drop(_3) -> bb28;                // scope 1 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb11 (cleanup): {
+        resume;                          // scope 0 at ui/mir/issue-99852.rs:5:1: 18:2
+    }
+
+    bb12: {
+        drop(_3) -> [return: bb7, unwind: bb8]; // scope 1 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb13: {
+        switchInt(_10) -> [0: bb7, otherwise: bb12]; // scope 1 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb14: {
+        _11 = const false;               // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(_12) -> [0: bb17, otherwise: bb20]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb15: {
+        switchInt(_11) -> [0: bb14, otherwise: bb16]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb16: {
+        drop(((_1 as Ok).0: T)) -> [return: bb14, unwind: bb9]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb17: {
+        _12 = const false;               // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        _12 = const false;               // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        _13 = const false;               // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        return;                          // scope 0 at ui/mir/issue-99852.rs:18:2: 18:2
+    }
+
+    bb18: {
+        switchInt(_13) -> [0: bb17, otherwise: bb19]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb19: {
+        drop(((_6 as Ok).0: U)) -> bb17; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb20: {
+        _15 = discriminant(_6);          // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(move _15) -> [0: bb18, otherwise: bb17]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb21 (cleanup): {
+        switchInt(_11) -> [0: bb9, otherwise: bb22]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb22 (cleanup): {
+        drop(((_1 as Ok).0: T)) -> bb9;  // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb23 (cleanup): {
+        switchInt(_13) -> [0: bb11, otherwise: bb24]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb24 (cleanup): {
+        drop(((_6 as Ok).0: U)) -> bb11; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb25 (cleanup): {
+        _17 = discriminant(_6);          // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(move _17) -> [0: bb23, otherwise: bb11]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb26 (cleanup): {
+        switchInt(_11) -> [0: bb11, otherwise: bb27]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb27 (cleanup): {
+        drop(((_1 as Ok).0: T)) -> bb11; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+
+    bb28 (cleanup): {
+        _18 = discriminant(_1);          // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+        switchInt(move _18) -> [0: bb26, otherwise: bb11]; // scope 0 at ui/mir/issue-99852.rs:18:1: 18:2
+    }
+}
+
+fn transform(_1: T) -> Result<U, ()> {
+    debug input => _1;                   // in scope 0 at ui/mir/issue-99852.rs:20:20: 20:25
+    let mut _0: std::result::Result<U, ()>; // return place in scope 0 at ui/mir/issue-99852.rs:20:33: 20:46
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+
+    bb0: {
+        _2 = core::panicking::panic(const "not yet implemented") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1 (cleanup): {
+        drop(_1) -> bb2;                 // scope 0 at ui/mir/issue-99852.rs:22:1: 22:2
+    }
+
+    bb2 (cleanup): {
+        resume;                          // scope 0 at ui/mir/issue-99852.rs:20:1: 22:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-99852.rs:24:11: 24:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/issue-99852.rs:24:13: 24:13
+    }
+}

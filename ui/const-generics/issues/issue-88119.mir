@@ -1,0 +1,183 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const <impl at ui/const-generics/issues/issue-88119.rs:11:1: 11:28>::NAME_BYTES: &[u8] = {
+    let mut _0: &[u8];                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:12:23: 12:36
+    let mut _1: &[u8; 2];                // in scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+    let _2: &[u8; 2];                    // in scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+        StorageLive(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+        _2 = const b"u8";                // scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+                                         // + literal: Const { ty: &[u8; 2], val: Value(Scalar(alloc4)) }
+        _1 = &(*_2);                     // scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+        _0 = move _1 as &[u8] (Pointer(Unsize)); // scope 0 at ui/const-generics/issues/issue-88119.rs:12:39: 12:44
+        StorageDead(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:12:43: 12:44
+        StorageDead(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:12:43: 12:44
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:12:5: 12:45
+    }
+}
+
+alloc4 (size: 2, align: 1) {
+    75 38                                           │ u8
+}
+
+fn name_len() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:15:47: 15:52
+    let mut _1: &[u8];                   // in scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+    let _2: &[u8];                       // in scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+
+    bb0: {
+        _2 = const _;                    // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+                                         // + literal: Const { ty: &[u8], val: Unevaluated(ConstName::NAME_BYTES, [T], None) }
+        _1 = _2;                         // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+        _0 = Len((*_1));                 // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:17:2: 17:2
+    }
+}
+
+// MIR FOR CTFE
+fn name_len() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:15:47: 15:52
+    let mut _1: &[u8];                   // in scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+    let _2: &[u8];                       // in scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+        StorageLive(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+        _2 = const _;                    // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:16:5: 16:18
+                                         // + literal: Const { ty: &[u8], val: Unevaluated(ConstName::NAME_BYTES, [T], None) }
+        _1 = &(*_2);                     // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+        ConstEvalCounter;                // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+        _0 = core::slice::<impl [u8]>::len(move _1) -> bb1; // scope 0 at ui/const-generics/issues/issue-88119.rs:16:5: 16:24
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:16:19: 16:22
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> usize {core::slice::<impl [u8]>::len}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:16:23: 16:24
+        StorageDead(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:17:1: 17:2
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:17:2: 17:2
+    }
+}
+
+<impl at ui/const-generics/issues/issue-88119.rs:19:1: 19:51>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:21:10: 21:25
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/issues/issue-88119.rs:21:10: 21:25
+        _0 = name_len::<T>() -> bb1;     // scope 0 at ui/const-generics/issues/issue-88119.rs:21:10: 21:25
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:21:10: 21:23
+                                         // + literal: Const { ty: fn() -> usize {name_len::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:21:10: 21:25
+    }
+}
+
+const <impl at ui/const-generics/issues/issue-88119.rs:19:1: 19:51>::NAME_BYTES: &[u8] = {
+    let mut _0: &[u8];                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:23:23: 23:36
+    let mut _1: &[u8; 2];                // in scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+    let _2: &[u8; 2];                    // in scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+        StorageLive(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+        _2 = const b"&T";                // scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+                                         // + literal: Const { ty: &[u8; 2], val: Value(Scalar(alloc17)) }
+        _1 = &(*_2);                     // scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+        _0 = move _1 as &[u8] (Pointer(Unsize)); // scope 0 at ui/const-generics/issues/issue-88119.rs:23:39: 23:44
+        StorageDead(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:23:43: 23:44
+        StorageDead(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:23:43: 23:44
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:23:5: 23:45
+    }
+}
+
+alloc17 (size: 2, align: 1) {
+    26 54                                           │ &T
+}
+
+<impl at ui/const-generics/issues/issue-88119.rs:26:1: 26:55>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:28:10: 28:25
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/issues/issue-88119.rs:28:10: 28:25
+        _0 = name_len::<T>() -> bb1;     // scope 0 at ui/const-generics/issues/issue-88119.rs:28:10: 28:25
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:28:10: 28:23
+                                         // + literal: Const { ty: fn() -> usize {name_len::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:28:10: 28:25
+    }
+}
+
+const <impl at ui/const-generics/issues/issue-88119.rs:26:1: 26:55>::NAME_BYTES: &[u8] = {
+    let mut _0: &[u8];                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:30:23: 30:36
+    let mut _1: &[u8; 6];                // in scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+    let _2: &[u8; 6];                    // in scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+        StorageLive(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+        _2 = const b"&mut T";            // scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+                                         // + literal: Const { ty: &[u8; 6], val: Value(Scalar(alloc9)) }
+        _1 = &(*_2);                     // scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+        _0 = move _1 as &[u8] (Pointer(Unsize)); // scope 0 at ui/const-generics/issues/issue-88119.rs:30:39: 30:48
+        StorageDead(_2);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:30:47: 30:48
+        StorageDead(_1);                 // scope 0 at ui/const-generics/issues/issue-88119.rs:30:47: 30:48
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:30:5: 30:49
+    }
+}
+
+alloc9 (size: 6, align: 1) {
+    26 6d 75 74 20 54                               │ &mut T
+}
+
+const ICE_1: &[u8] = {
+    let mut _0: &[u8];                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:33:18: 33:31
+
+    bb0: {
+        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-88119.rs:33:34: 33:69
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:33:34: 33:69
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: &[u8], val: Unevaluated(ConstName::NAME_BYTES, [&&mut u8], None) }
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:33:1: 33:70
+    }
+}
+
+const ICE_2: &[u8] = {
+    let mut _0: &[u8];                   // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:34:18: 34:31
+
+    bb0: {
+        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-88119.rs:34:34: 34:69
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-88119.rs:34:34: 34:69
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: &[u8], val: Unevaluated(ConstName::NAME_BYTES, [&mut &u8], None) }
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:34:1: 34:70
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-88119.rs:36:11: 36:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-88119.rs:36:13: 36:13
+    }
+}

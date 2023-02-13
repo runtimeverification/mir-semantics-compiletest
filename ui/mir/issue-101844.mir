@@ -1,0 +1,54 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/mir/issue-101844.rs:49:1: 49:36>::access_fn(_1: D) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-101844.rs:55:24: 55:24
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+
+    bb0: {
+        _2 = core::panicking::panic(const "not yet implemented") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1 (cleanup): {
+        drop(_1) -> bb2;                 // scope 0 at ui/mir/issue-101844.rs:57:5: 57:6
+    }
+
+    bb2 (cleanup): {
+        resume;                          // scope 0 at ui/mir/issue-101844.rs:55:5: 57:6
+    }
+}
+
+fn broken(_1: MS) -> () {
+    debug ms => _1;                      // in scope 0 at ui/mir/issue-101844.rs:64:19: 64:21
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-101844.rs:65:1: 65:1
+    let mut _2: ();                      // in scope 0 at ui/mir/issue-101844.rs:70:13: 70:52
+    let mut _3: MS;                      // in scope 0 at ui/mir/issue-101844.rs:70:49: 70:51
+    scope 1 {
+    }
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/mir/issue-101844.rs:70:49: 70:51
+        _2 = ImplShoulExist::<MS, ()>::access_fn(move _3) -> bb1; // scope 0 at ui/mir/issue-101844.rs:70:13: 70:52
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-101844.rs:70:13: 70:48
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(MS) {ImplShoulExist::<MS, ()>::access_fn}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/issue-101844.rs:71:2: 71:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-101844.rs:73:11: 73:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/issue-101844.rs:73:13: 73:13
+    }
+}

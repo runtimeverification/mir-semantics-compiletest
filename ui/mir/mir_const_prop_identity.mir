@@ -1,0 +1,22 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_const_prop_identity.rs:6:11: 6:11
+    let _1: bool;                        // in scope 0 at ui/mir/mir_const_prop_identity.rs:7:9: 7:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/mir/mir_const_prop_identity.rs:7:9: 7:10
+        scope 2 {
+            let mut _2: bool;            // in scope 2 at ui/mir/mir_const_prop_identity.rs:9:9: 9:14
+            scope 3 {
+                debug b => _2;           // in scope 3 at ui/mir/mir_const_prop_identity.rs:9:9: 9:14
+            }
+        }
+    }
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/mir/mir_const_prop_identity.rs:7:13: 7:17
+        _2 = const false;                // scope 2 at ui/mir/mir_const_prop_identity.rs:9:17: 9:22
+        _2 = const true;                 // scope 3 at ui/mir/mir_const_prop_identity.rs:10:5: 10:11
+        return;                          // scope 0 at ui/mir/mir_const_prop_identity.rs:12:2: 12:2
+    }
+}

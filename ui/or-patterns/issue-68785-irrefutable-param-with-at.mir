@@ -1,0 +1,89 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn my_fn(_1: MyEnum) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:69: 8:69
+    let _2: MyEnum;                      // in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    let mut _3: isize;                   // in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:15: 8:35
+    scope 1 {
+        debug x => _2;                   // in scope 1 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    }
+
+    bb0: {
+        _3 = discriminant(_1);           // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+        switchInt(move _3) -> [0: bb4, 1: bb1, otherwise: bb2]; // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    }
+
+    bb1: {
+        _2 = move _1;                    // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+        goto -> bb3;                     // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    }
+
+    bb2: {
+        unreachable;                     // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:71: 8:71
+    }
+
+    bb4: {
+        _2 = move _1;                    // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+        goto -> bb3;                     // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:8:10: 8:11
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:10:11: 10:11
+    let _1: ();                          // in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:11:5: 11:32
+    let mut _2: MyEnum;                  // in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:11:11: 11:31
+
+    bb0: {
+        _2 = MyEnum::FirstCase(const 0_u8); // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:11:11: 11:31
+        _1 = my_fn(move _2) -> bb1;      // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:11:5: 11:32
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:11:5: 11:10
+                                         // + literal: Const { ty: fn(MyEnum) {my_fn}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:12:2: 12:2
+    }
+}
+
+fn MyEnum::FirstCase(_1: u8) -> MyEnum {
+    let mut _0: MyEnum;                  // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+
+    bb0: {
+        _0 = MyEnum::FirstCase(move _1); // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+    }
+}
+
+// MIR FOR CTFE
+fn MyEnum::FirstCase(_1: u8) -> MyEnum {
+    let mut _0: MyEnum;                  // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+
+    bb0: {
+        _0 = MyEnum::FirstCase(move _1); // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:4:5: 4:14
+    }
+}
+
+fn MyEnum::OtherCase(_1: u16) -> MyEnum {
+    let mut _0: MyEnum;                  // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+
+    bb0: {
+        _0 = MyEnum::OtherCase(move _1); // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+    }
+}
+
+// MIR FOR CTFE
+fn MyEnum::OtherCase(_1: u16) -> MyEnum {
+    let mut _0: MyEnum;                  // return place in scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+
+    bb0: {
+        _0 = MyEnum::OtherCase(move _1); // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+        return;                          // scope 0 at ui/or-patterns/issue-68785-irrefutable-param-with-at.rs:5:5: 5:14
+    }
+}

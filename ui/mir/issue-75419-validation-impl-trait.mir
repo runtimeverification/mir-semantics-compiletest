@@ -1,0 +1,27 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn iter_slice(_1: &[T]) -> impl Iterator<Item = &T> {
+    debug xs => _1;                      // in scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:7:22: 7:24
+    let mut _0: impl std::iter::Iterator<Item = &T>; // return place in scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:7:38: 7:65
+    let mut _2: &[T];                    // in scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:8:5: 8:14
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:8:5: 8:14
+        _0 = core::slice::<impl [T]>::iter(move _2) -> bb1; // scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:8:5: 8:14
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-75419-validation-impl-trait.rs:8:8: 8:12
+                                         // + literal: Const { ty: for<'a> fn(&'a [T]) -> std::slice::Iter<'a, T> {core::slice::<impl [T]>::iter}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:9:2: 9:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/issue-75419-validation-impl-trait.rs:13:2: 13:2
+    }
+}

@@ -1,0 +1,182 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/drop/nondrop-cycle.rs:10:1: 10:15>::new() -> C<'_> {
+    let mut _0: C<'_>;                   // return place in scope 0 at ui/drop/nondrop-cycle.rs:11:17: 11:22
+    let mut _1: std::cell::Cell<std::option::Option<&C<'_>>>; // in scope 0 at ui/drop/nondrop-cycle.rs:11:32: 11:47
+    let mut _2: std::option::Option<&C<'_>>; // in scope 0 at ui/drop/nondrop-cycle.rs:11:42: 11:46
+
+    bb0: {
+        _2 = const Option::<&C<'_>>::None; // scope 0 at ui/drop/nondrop-cycle.rs:11:42: 11:46
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:11:42: 11:46
+                                         // + literal: Const { ty: Option<&C<'_>>, val: Value(Scalar(0x0000000000000000)) }
+        _1 = Cell::<Option<&C<'_>>>::new(move _2) -> bb1; // scope 0 at ui/drop/nondrop-cycle.rs:11:32: 11:47
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:11:32: 11:41
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Option<&C<'_>>) -> Cell<Option<&C<'_>>> {Cell::<Option<&C<'_>>>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = C::<'_> { p: move _1 };     // scope 0 at ui/drop/nondrop-cycle.rs:11:25: 11:49
+        return;                          // scope 0 at ui/drop/nondrop-cycle.rs:11:51: 11:51
+    }
+}
+
+fn f1() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/drop/nondrop-cycle.rs:14:9: 14:9
+    let _1: C<'_>;                       // in scope 0 at ui/drop/nondrop-cycle.rs:15:10: 15:12
+    let _2: C<'_>;                       // in scope 0 at ui/drop/nondrop-cycle.rs:15:14: 15:16
+    let mut _3: (C<'_>, C<'_>);          // in scope 0 at ui/drop/nondrop-cycle.rs:15:20: 15:40
+    let mut _4: C<'_>;                   // in scope 0 at ui/drop/nondrop-cycle.rs:15:21: 15:29
+    let mut _5: C<'_>;                   // in scope 0 at ui/drop/nondrop-cycle.rs:15:31: 15:39
+    let _6: ();                          // in scope 0 at ui/drop/nondrop-cycle.rs:16:5: 16:24
+    let mut _7: &std::cell::Cell<std::option::Option<&C<'_>>>; // in scope 0 at ui/drop/nondrop-cycle.rs:16:5: 16:24
+    let mut _8: std::option::Option<&C<'_>>; // in scope 0 at ui/drop/nondrop-cycle.rs:16:14: 16:23
+    let mut _9: &C<'_>;                  // in scope 0 at ui/drop/nondrop-cycle.rs:16:19: 16:22
+    let _10: &C<'_>;                     // in scope 0 at ui/drop/nondrop-cycle.rs:16:19: 16:22
+    let _11: ();                         // in scope 0 at ui/drop/nondrop-cycle.rs:17:5: 17:24
+    let mut _12: &std::cell::Cell<std::option::Option<&C<'_>>>; // in scope 0 at ui/drop/nondrop-cycle.rs:17:5: 17:24
+    let mut _13: std::option::Option<&C<'_>>; // in scope 0 at ui/drop/nondrop-cycle.rs:17:14: 17:23
+    let mut _14: &C<'_>;                 // in scope 0 at ui/drop/nondrop-cycle.rs:17:19: 17:22
+    let _15: &C<'_>;                     // in scope 0 at ui/drop/nondrop-cycle.rs:17:19: 17:22
+    scope 1 {
+        debug c1 => _1;                  // in scope 1 at ui/drop/nondrop-cycle.rs:15:10: 15:12
+        debug c2 => _2;                  // in scope 1 at ui/drop/nondrop-cycle.rs:15:14: 15:16
+    }
+
+    bb0: {
+        _4 = C::<'_>::new() -> bb1;      // scope 0 at ui/drop/nondrop-cycle.rs:15:21: 15:29
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:15:21: 15:27
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> C<'_> {C::<'_>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = C::<'_>::new() -> bb2;      // scope 0 at ui/drop/nondrop-cycle.rs:15:31: 15:39
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:15:31: 15:37
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() -> C<'_> {C::<'_>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = (move _4, move _5);         // scope 0 at ui/drop/nondrop-cycle.rs:15:20: 15:40
+        _1 = move (_3.0: C<'_>);         // scope 0 at ui/drop/nondrop-cycle.rs:15:10: 15:12
+        _2 = move (_3.1: C<'_>);         // scope 0 at ui/drop/nondrop-cycle.rs:15:14: 15:16
+        _7 = &(_1.0: std::cell::Cell<std::option::Option<&C<'_>>>); // scope 1 at ui/drop/nondrop-cycle.rs:16:5: 16:24
+        _10 = &_2;                       // scope 1 at ui/drop/nondrop-cycle.rs:16:19: 16:22
+        _9 = _10;                        // scope 1 at ui/drop/nondrop-cycle.rs:16:19: 16:22
+        _8 = Option::<&C<'_>>::Some(move _9); // scope 1 at ui/drop/nondrop-cycle.rs:16:14: 16:23
+        _6 = Cell::<Option<&C<'_>>>::set(move _7, move _8) -> bb3; // scope 1 at ui/drop/nondrop-cycle.rs:16:5: 16:24
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:16:10: 16:13
+                                         // + literal: Const { ty: for<'a> fn(&'a Cell<Option<&C<'_>>>, Option<&C<'_>>) {Cell::<Option<&C<'_>>>::set}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _12 = &(_2.0: std::cell::Cell<std::option::Option<&C<'_>>>); // scope 1 at ui/drop/nondrop-cycle.rs:17:5: 17:24
+        _15 = &_1;                       // scope 1 at ui/drop/nondrop-cycle.rs:17:19: 17:22
+        _14 = _15;                       // scope 1 at ui/drop/nondrop-cycle.rs:17:19: 17:22
+        _13 = Option::<&C<'_>>::Some(move _14); // scope 1 at ui/drop/nondrop-cycle.rs:17:14: 17:23
+        _11 = Cell::<Option<&C<'_>>>::set(move _12, move _13) -> bb4; // scope 1 at ui/drop/nondrop-cycle.rs:17:5: 17:24
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:17:10: 17:13
+                                         // + literal: Const { ty: for<'a> fn(&'a Cell<Option<&C<'_>>>, Option<&C<'_>>) {Cell::<Option<&C<'_>>>::set}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/drop/nondrop-cycle.rs:18:2: 18:2
+    }
+}
+
+fn f2() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/drop/nondrop-cycle.rs:20:9: 20:9
+    let _1: C<'_>;                       // in scope 0 at ui/drop/nondrop-cycle.rs:21:10: 21:12
+    let _2: C<'_>;                       // in scope 0 at ui/drop/nondrop-cycle.rs:21:14: 21:16
+    let mut _3: C<'_>;                   // in scope 0 at ui/drop/nondrop-cycle.rs:22:10: 22:18
+    let mut _4: C<'_>;                   // in scope 0 at ui/drop/nondrop-cycle.rs:23:10: 23:18
+    let _5: ();                          // in scope 0 at ui/drop/nondrop-cycle.rs:24:5: 24:24
+    let mut _6: &std::cell::Cell<std::option::Option<&C<'_>>>; // in scope 0 at ui/drop/nondrop-cycle.rs:24:5: 24:24
+    let mut _7: std::option::Option<&C<'_>>; // in scope 0 at ui/drop/nondrop-cycle.rs:24:14: 24:23
+    let mut _8: &C<'_>;                  // in scope 0 at ui/drop/nondrop-cycle.rs:24:19: 24:22
+    let _9: &C<'_>;                      // in scope 0 at ui/drop/nondrop-cycle.rs:24:19: 24:22
+    let _10: ();                         // in scope 0 at ui/drop/nondrop-cycle.rs:25:5: 25:24
+    let mut _11: &std::cell::Cell<std::option::Option<&C<'_>>>; // in scope 0 at ui/drop/nondrop-cycle.rs:25:5: 25:24
+    let mut _12: std::option::Option<&C<'_>>; // in scope 0 at ui/drop/nondrop-cycle.rs:25:14: 25:23
+    let mut _13: &C<'_>;                 // in scope 0 at ui/drop/nondrop-cycle.rs:25:19: 25:22
+    let _14: &C<'_>;                     // in scope 0 at ui/drop/nondrop-cycle.rs:25:19: 25:22
+    scope 1 {
+        debug c1 => _1;                  // in scope 1 at ui/drop/nondrop-cycle.rs:21:10: 21:12
+        debug c2 => _2;                  // in scope 1 at ui/drop/nondrop-cycle.rs:21:14: 21:16
+    }
+
+    bb0: {
+        _3 = C::<'_>::new() -> bb1;      // scope 1 at ui/drop/nondrop-cycle.rs:22:10: 22:18
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:22:10: 22:16
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> C<'_> {C::<'_>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = move _3;                    // scope 1 at ui/drop/nondrop-cycle.rs:22:5: 22:18
+        _4 = C::<'_>::new() -> bb2;      // scope 1 at ui/drop/nondrop-cycle.rs:23:10: 23:18
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:23:10: 23:16
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() -> C<'_> {C::<'_>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = move _4;                    // scope 1 at ui/drop/nondrop-cycle.rs:23:5: 23:18
+        _6 = &(_1.0: std::cell::Cell<std::option::Option<&C<'_>>>); // scope 1 at ui/drop/nondrop-cycle.rs:24:5: 24:24
+        _9 = &_2;                        // scope 1 at ui/drop/nondrop-cycle.rs:24:19: 24:22
+        _8 = _9;                         // scope 1 at ui/drop/nondrop-cycle.rs:24:19: 24:22
+        _7 = Option::<&C<'_>>::Some(move _8); // scope 1 at ui/drop/nondrop-cycle.rs:24:14: 24:23
+        _5 = Cell::<Option<&C<'_>>>::set(move _6, move _7) -> bb3; // scope 1 at ui/drop/nondrop-cycle.rs:24:5: 24:24
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:24:10: 24:13
+                                         // + literal: Const { ty: for<'a> fn(&'a Cell<Option<&C<'_>>>, Option<&C<'_>>) {Cell::<Option<&C<'_>>>::set}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _11 = &(_2.0: std::cell::Cell<std::option::Option<&C<'_>>>); // scope 1 at ui/drop/nondrop-cycle.rs:25:5: 25:24
+        _14 = &_1;                       // scope 1 at ui/drop/nondrop-cycle.rs:25:19: 25:22
+        _13 = _14;                       // scope 1 at ui/drop/nondrop-cycle.rs:25:19: 25:22
+        _12 = Option::<&C<'_>>::Some(move _13); // scope 1 at ui/drop/nondrop-cycle.rs:25:14: 25:23
+        _10 = Cell::<Option<&C<'_>>>::set(move _11, move _12) -> bb4; // scope 1 at ui/drop/nondrop-cycle.rs:25:5: 25:24
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:25:10: 25:13
+                                         // + literal: Const { ty: for<'a> fn(&'a Cell<Option<&C<'_>>>, Option<&C<'_>>) {Cell::<Option<&C<'_>>>::set}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/drop/nondrop-cycle.rs:26:2: 26:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/drop/nondrop-cycle.rs:28:11: 28:11
+    let _1: ();                          // in scope 0 at ui/drop/nondrop-cycle.rs:29:5: 29:9
+    let _2: ();                          // in scope 0 at ui/drop/nondrop-cycle.rs:30:5: 30:9
+
+    bb0: {
+        _1 = f1() -> bb1;                // scope 0 at ui/drop/nondrop-cycle.rs:29:5: 29:9
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:29:5: 29:7
+                                         // + literal: Const { ty: fn() {f1}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = f2() -> bb2;                // scope 0 at ui/drop/nondrop-cycle.rs:30:5: 30:9
+                                         // mir::Constant
+                                         // + span: ui/drop/nondrop-cycle.rs:30:5: 30:7
+                                         // + literal: Const { ty: fn() {f2}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/drop/nondrop-cycle.rs:31:2: 31:2
+    }
+}

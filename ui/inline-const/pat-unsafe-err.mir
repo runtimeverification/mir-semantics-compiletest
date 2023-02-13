@@ -1,0 +1,48 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn require_unsafe() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/pat-unsafe-err.rs:8:37: 8:42
+
+    bb0: {
+        _0 = const 1_usize;              // scope 0 at ui/inline-const/pat-unsafe-err.rs:8:45: 8:46
+        return;                          // scope 0 at ui/inline-const/pat-unsafe-err.rs:8:48: 8:48
+    }
+}
+
+// MIR FOR CTFE
+fn require_unsafe() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/pat-unsafe-err.rs:8:37: 8:42
+
+    bb0: {
+        _0 = const 1_usize;              // scope 0 at ui/inline-const/pat-unsafe-err.rs:8:45: 8:46
+        return;                          // scope 0 at ui/inline-const/pat-unsafe-err.rs:8:48: 8:48
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/pat-unsafe-err.rs:10:11: 10:11
+
+    bb0: {
+        return;                          // scope 0 at ui/inline-const/pat-unsafe-err.rs:17:2: 17:2
+    }
+}
+
+main::{constant#0}: () = {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/pat-unsafe-err.rs:12:15: 15:10
+    let _1: usize;                       // in scope 0 at ui/inline-const/pat-unsafe-err.rs:13:13: 13:29
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/inline-const/pat-unsafe-err.rs:13:13: 13:29
+        ConstEvalCounter;                // scope 0 at ui/inline-const/pat-unsafe-err.rs:13:13: 13:29
+        _1 = require_unsafe() -> bb1;    // scope 0 at ui/inline-const/pat-unsafe-err.rs:13:13: 13:29
+                                         // mir::Constant
+                                         // + span: ui/inline-const/pat-unsafe-err.rs:13:13: 13:27
+                                         // + literal: Const { ty: unsafe fn() -> usize {require_unsafe}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 0 at ui/inline-const/pat-unsafe-err.rs:13:29: 13:30
+        _0 = const ();                   // scope 0 at ui/inline-const/pat-unsafe-err.rs:12:15: 15:10
+        return;                          // scope 0 at ui/inline-const/pat-unsafe-err.rs:12:15: 15:10
+    }
+}

@@ -1,0 +1,32 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:5:11: 5:11
+    let _1: *const ();                   // in scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:6:9: 6:13
+    let mut _2: bool;                    // in scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:8:8: 8:22
+    let mut _3: *const ();               // in scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:8:8: 8:12
+    scope 1 {
+        debug data => _1;                // in scope 1 at ui/inference/inference-variable-behind-raw-pointer.rs:6:9: 6:13
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _1 = null::<()>() -> bb1;        // scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:6:16: 6:32
+                                         // mir::Constant
+                                         // + span: ui/inference/inference-variable-behind-raw-pointer.rs:6:16: 6:30
+                                         // + literal: Const { ty: fn() -> *const () {null::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = _1;                         // scope 2 at ui/inference/inference-variable-behind-raw-pointer.rs:8:8: 8:12
+        _2 = ptr::const_ptr::<impl *const ()>::is_null(move _3) -> bb2; // scope 2 at ui/inference/inference-variable-behind-raw-pointer.rs:8:8: 8:22
+                                         // mir::Constant
+                                         // + span: ui/inference/inference-variable-behind-raw-pointer.rs:8:13: 8:20
+                                         // + literal: Const { ty: fn(*const ()) -> bool {ptr::const_ptr::<impl *const ()>::is_null}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/inference/inference-variable-behind-raw-pointer.rs:11:2: 11:2
+    }
+}

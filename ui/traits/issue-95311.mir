@@ -1,0 +1,28 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/traits/issue-95311.rs:13:1: 13:20>::foo(_1: &T) -> () {
+    debug value => _1;                   // in scope 0 at ui/traits/issue-95311.rs:14:23: 14:28
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-95311.rs:14:34: 14:34
+    let _2: <T as std::ptr::Pointee>::Metadata; // in scope 0 at ui/traits/issue-95311.rs:15:9: 15:34
+    let mut _3: *const T;                // in scope 0 at ui/traits/issue-95311.rs:15:28: 15:33
+
+    bb0: {
+        _3 = &raw const (*_1);           // scope 0 at ui/traits/issue-95311.rs:15:28: 15:33
+        _2 = std::ptr::metadata::<T>(move _3) -> bb1; // scope 0 at ui/traits/issue-95311.rs:15:9: 15:34
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-95311.rs:15:9: 15:27
+                                         // + literal: Const { ty: fn(*const T) -> <T as Pointee>::Metadata {std::ptr::metadata::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/issue-95311.rs:16:6: 16:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-95311.rs:19:11: 19:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/issue-95311.rs:19:13: 19:13
+    }
+}

@@ -1,0 +1,26 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const FOO: Option<GstRc> = {
+    let mut _0: std::option::Option<GstRc>; // return place in scope 0 at ui/consts/issue-54387.rs:8:12: 8:25
+
+    bb0: {
+        _0 = Option::<GstRc>::None;      // scope 0 at ui/consts/issue-54387.rs:8:28: 8:32
+        return;                          // scope 0 at ui/consts/issue-54387.rs:8:1: 8:33
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-54387.rs:10:11: 10:11
+    let _1: std::option::Option<GstRc>;  // in scope 0 at ui/consts/issue-54387.rs:11:9: 11:13
+    scope 1 {
+        debug _meh => _1;                // in scope 1 at ui/consts/issue-54387.rs:11:9: 11:13
+    }
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-54387.rs:11:16: 11:19
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-54387.rs:11:16: 11:19
+                                         // + literal: Const { ty: Option<GstRc>, val: Unevaluated(FOO, [], None) }
+        return;                          // scope 0 at ui/consts/issue-54387.rs:12:2: 12:2
+    }
+}

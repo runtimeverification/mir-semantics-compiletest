@@ -1,0 +1,122 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static MAGIC_FFI_STATIC: u8 = {
+    let mut _0: u8;                      // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:13:26: 13:28
+
+    bb0: {
+        _0 = const 42_u8;                // scope 0 at ui/consts/const-eval/issue-55541.rs:13:31: 13:33
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:13:1: 13:34
+    }
+}
+
+static MAGIC_FFI_REF: &Wrapper = {
+    let mut _0: &Wrapper;                // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:17:27: 17:43
+    let mut _1: &u8;                     // in scope 0 at ui/consts/const-eval/issue-55541.rs:18:23: 18:40
+    let _2: &u8;                         // in scope 0 at ui/consts/const-eval/issue-55541.rs:18:24: 18:40
+    scope 1 {
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:18:23: 18:40
+        StorageLive(_2);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:18:24: 18:40
+        _2 = const {alloc1: &u8};        // scope 1 at ui/consts/const-eval/issue-55541.rs:18:24: 18:40
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-55541.rs:18:24: 18:40
+                                         // + literal: Const { ty: &u8, val: Value(Scalar(alloc1)) }
+        _1 = &(*_2);                     // scope 1 at ui/consts/const-eval/issue-55541.rs:18:23: 18:40
+        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-55541.rs:18:3: 18:41
+        _0 = transmute::<&u8, &Wrapper>(move _1) -> bb1; // scope 1 at ui/consts/const-eval/issue-55541.rs:18:3: 18:41
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-55541.rs:18:3: 18:22
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&u8) -> &Wrapper {transmute::<&u8, &Wrapper>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:18:40: 18:41
+        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-55541.rs:19:1: 19:2
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:17:1: 19:3
+    }
+}
+
+alloc1 (static: MAGIC_FFI_STATIC, size: 1, align: 1) {
+    2a                                              │ *
+}
+
+static MAGIC_FFI_REF2: &Wrapper2 = {
+    let mut _0: &Wrapper2;               // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:23:28: 23:45
+    let mut _1: &u8;                     // in scope 0 at ui/consts/const-eval/issue-55541.rs:24:23: 24:40
+    let _2: &u8;                         // in scope 0 at ui/consts/const-eval/issue-55541.rs:24:24: 24:40
+    scope 1 {
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:24:23: 24:40
+        StorageLive(_2);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:24:24: 24:40
+        _2 = const {alloc1: &u8};        // scope 1 at ui/consts/const-eval/issue-55541.rs:24:24: 24:40
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-55541.rs:24:24: 24:40
+                                         // + literal: Const { ty: &u8, val: Value(Scalar(alloc1)) }
+        _1 = &(*_2);                     // scope 1 at ui/consts/const-eval/issue-55541.rs:24:23: 24:40
+        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-55541.rs:24:3: 24:41
+        _0 = transmute::<&u8, &Wrapper2>(move _1) -> bb1; // scope 1 at ui/consts/const-eval/issue-55541.rs:24:3: 24:41
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-55541.rs:24:3: 24:22
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&u8) -> &Wrapper2 {transmute::<&u8, &Wrapper2>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 1 at ui/consts/const-eval/issue-55541.rs:24:40: 24:41
+        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-55541.rs:25:1: 25:2
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:23:1: 25:3
+    }
+}
+
+alloc1 (static: MAGIC_FFI_STATIC, size: 1, align: 1) {
+    2a                                              │ *
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:27:11: 27:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:27:13: 27:13
+    }
+}
+
+fn Wrapper(_1: ExternType) -> Wrapper {
+    let mut _0: Wrapper;                 // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+
+    bb0: {
+        _0 = Wrapper(move _1);           // scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+    }
+}
+
+// MIR FOR CTFE
+fn Wrapper(_1: ExternType) -> Wrapper {
+    let mut _0: Wrapper;                 // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+
+    bb0: {
+        _0 = Wrapper(move _1);           // scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:16:1: 16:19
+    }
+}
+
+fn Wrapper2(_1: PhantomData<Vec<i32>>, _2: ExternType) -> Wrapper2 {
+    let mut _0: Wrapper2;                // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+
+    bb0: {
+        _0 = Wrapper2(move _1, move _2); // scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+    }
+}
+
+// MIR FOR CTFE
+fn Wrapper2(_1: PhantomData<Vec<i32>>, _2: ExternType) -> Wrapper2 {
+    let mut _0: Wrapper2;                // return place in scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+
+    bb0: {
+        _0 = Wrapper2(move _1, move _2); // scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+        return;                          // scope 0 at ui/consts/const-eval/issue-55541.rs:22:1: 22:20
+    }
+}

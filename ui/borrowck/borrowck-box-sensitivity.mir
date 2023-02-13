@@ -1,0 +1,1667 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn copy_after_move() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:26:22: 26:22
+    let _1: std::boxed::Box<A>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:9: 27:10
+    let mut _2: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:30: 27:56
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:37: 27:48
+    let mut _6: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+    let mut _7: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+    let mut _8: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:9: 27:10
+    let mut _9: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:9: 27:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:27:9: 27:10
+        let _4: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:28:9: 28:11
+        scope 2 {
+            debug _x => _4;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:28:9: 28:11
+            let _5: isize;               // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:29:9: 29:11
+            scope 3 {
+                debug _y => _5;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:29:9: 29:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:37: 27:48
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:27:37: 27:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = A { x: move _3, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:30: 27:56
+        _1 = Box::<A>::new(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:27:21: 27:57
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:27:21: 27:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:28:14: 28:17
+        _4 = move ((*_8).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:28:14: 28:17
+        _9 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:29:14: 29:17
+        _5 = ((*_9).1: isize);           // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:29:14: 29:17
+        drop(_4) -> [return: bb3, unwind: bb6]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+    }
+
+    bb3: {
+        _6 = alloc::alloc::box_free::<A, std::alloc::Global>(move (_1.0: std::ptr::Unique<A>), move (_1.1: std::alloc::Global)) -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:30:2: 30:2
+    }
+
+    bb5 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:26:1: 30:2
+    }
+
+    bb6 (cleanup): {
+        _7 = alloc::alloc::box_free::<A, std::alloc::Global>(move (_1.0: std::ptr::Unique<A>), move (_1.1: std::alloc::Global)) -> bb5; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:30:1: 30:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn move_after_move() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:32:22: 32:22
+    let _1: std::boxed::Box<B>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:9: 33:10
+    let mut _2: B;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:30: 33:66
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:37: 33:48
+    let mut _4: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:53: 33:64
+    let mut _7: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+    let mut _8: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+    let mut _9: *const B;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:9: 33:10
+    let mut _10: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:9: 33:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:33:9: 33:10
+        let _5: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:34:9: 34:11
+        scope 2 {
+            debug _x => _5;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:34:9: 34:11
+            let _6: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:35:9: 35:11
+            scope 3 {
+                debug _y => _6;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:35:9: 35:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:37: 33:48
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:33:37: 33:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = Box::<isize>::new(const 1_isize) -> [return: bb2, unwind: bb8]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:53: 33:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:33:53: 33:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = B { x: move _3, y: move _4 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:30: 33:66
+        _1 = Box::<B>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:21: 33:67
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:33:21: 33:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(B) -> Box<B> {Box::<B>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _9 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:34:14: 34:17
+        _5 = move ((*_9).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:34:14: 34:17
+        _10 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:35:14: 35:17
+        _6 = move ((*_10).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:35:14: 35:17
+        drop(_6) -> [return: bb4, unwind: bb7]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+    }
+
+    bb4: {
+        drop(_5) -> [return: bb5, unwind: bb10]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+    }
+
+    bb5: {
+        _7 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:36:2: 36:2
+    }
+
+    bb7 (cleanup): {
+        drop(_5) -> bb10;                // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+    }
+
+    bb8 (cleanup): {
+        drop(_3) -> bb9;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:33:65: 33:66
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:32:1: 36:2
+    }
+
+    bb10 (cleanup): {
+        _8 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:36:1: 36:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn borrow_after_move() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:38:24: 38:24
+    let _1: std::boxed::Box<A>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:9: 39:10
+    let mut _2: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:30: 39:56
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:37: 39:48
+    let mut _6: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+    let mut _7: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+    let mut _8: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:9: 39:10
+    let mut _9: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:9: 39:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:39:9: 39:10
+        let _4: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:40:9: 40:11
+        scope 2 {
+            debug _x => _4;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:40:9: 40:11
+            let _5: &isize;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:41:9: 41:11
+            scope 3 {
+                debug _y => _5;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:41:9: 41:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:37: 39:48
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:39:37: 39:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = A { x: move _3, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:30: 39:56
+        _1 = Box::<A>::new(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:39:21: 39:57
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:39:21: 39:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:40:14: 40:17
+        _4 = move ((*_8).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:40:14: 40:17
+        _9 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:41:14: 41:18
+        _5 = &((*_9).1: isize);          // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:41:14: 41:18
+        drop(_4) -> [return: bb3, unwind: bb6]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+    }
+
+    bb3: {
+        _6 = alloc::alloc::box_free::<A, std::alloc::Global>(move (_1.0: std::ptr::Unique<A>), move (_1.1: std::alloc::Global)) -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:42:2: 42:2
+    }
+
+    bb5 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:38:1: 42:2
+    }
+
+    bb6 (cleanup): {
+        _7 = alloc::alloc::box_free::<A, std::alloc::Global>(move (_1.0: std::ptr::Unique<A>), move (_1.1: std::alloc::Global)) -> bb5; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:42:1: 42:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn move_after_borrow() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:44:24: 44:24
+    let _1: std::boxed::Box<B>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+    let mut _2: B;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:30: 45:66
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:37: 45:48
+    let mut _4: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:53: 45:64
+    let _7: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:48:5: 48:16
+    let mut _8: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:48:13: 48:15
+    let mut _9: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    let mut _10: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    let mut _11: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    let mut _12: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+    let mut _13: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+    let mut _14: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+    let mut _15: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:45:9: 45:10
+        let _5: &std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:46:9: 46:11
+        scope 2 {
+            debug _x => _5;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:46:9: 46:11
+            let _6: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:47:9: 47:11
+            scope 3 {
+                debug _y => _6;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:47:9: 47:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:37: 45:48
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:45:37: 45:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = Box::<isize>::new(const 1_isize) -> [return: bb2, unwind: bb8]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:53: 45:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:45:53: 45:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = B { x: move _3, y: move _4 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:30: 45:66
+        _1 = Box::<B>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:21: 45:67
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:45:21: 45:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(B) -> Box<B> {Box::<B>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _14 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:46:14: 46:18
+        _5 = &((*_14).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:46:14: 46:18
+        _15 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:47:14: 47:17
+        _6 = move ((*_15).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:47:14: 47:17
+        _8 = _5;                         // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:48:13: 48:15
+        _7 = use_imm::<Box<isize>>(move _8) -> [return: bb4, unwind: bb7]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:48:5: 48:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:48:5: 48:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) {use_imm::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_6) -> [return: bb5, unwind: bb13]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    }
+
+    bb5: {
+        _12 = deref_copy (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+        drop(((*_12).0: std::boxed::Box<isize>)) -> [return: bb11, unwind: bb10]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:2: 49:2
+    }
+
+    bb7 (cleanup): {
+        drop(_6) -> bb13;                // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    }
+
+    bb8 (cleanup): {
+        drop(_3) -> bb9;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:45:65: 45:66
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:44:1: 49:2
+    }
+
+    bb10 (cleanup): {
+        _10 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _9 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb12 (cleanup): {
+        _11 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb13 (cleanup): {
+        _13 = deref_copy (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+        drop(((*_13).0: std::boxed::Box<isize>)) -> bb12; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:49:1: 49:2
+    }
+}
+
+fn copy_after_mut_borrow() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:50:28: 50:28
+    let mut _1: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:9: 51:14
+    let mut _2: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:34: 51:60
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:41: 51:52
+    let _6: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:54:5: 54:16
+    let mut _7: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:54:13: 54:15
+    let mut _8: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:9: 51:14
+    let mut _9: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:9: 51:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:51:9: 51:14
+        let _4: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:52:9: 52:11
+        scope 2 {
+            debug _x => _4;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:52:9: 52:11
+            let _5: isize;               // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:53:9: 53:11
+            scope 3 {
+                debug _y => _5;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:53:9: 53:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:41: 51:52
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:51:41: 51:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = A { x: move _3, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:34: 51:60
+        _1 = Box::<A>::new(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:51:25: 51:61
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:51:25: 51:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:52:14: 52:22
+        _4 = &mut ((*_8).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:52:14: 52:22
+        _9 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:53:14: 53:17
+        _5 = ((*_9).1: isize);           // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:53:14: 53:17
+        _7 = &mut (*_4);                 // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:54:13: 54:15
+        _6 = use_mut::<Box<isize>>(move _7) -> [return: bb3, unwind: bb5]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:54:5: 54:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:54:5: 54:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_1) -> bb4;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:55:1: 55:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:55:2: 55:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:55:1: 55:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:50:1: 55:2
+    }
+}
+
+fn move_after_mut_borrow() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:56:28: 56:28
+    let mut _1: std::boxed::Box<B>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+    let mut _2: B;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:34: 57:70
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:41: 57:52
+    let mut _4: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:57: 57:68
+    let _7: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:60:5: 60:16
+    let mut _8: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:60:13: 60:15
+    let mut _9: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    let mut _10: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    let mut _11: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    let mut _12: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+    let mut _13: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+    let mut _14: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+    let mut _15: *const B;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:57:9: 57:14
+        let _5: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:58:9: 58:11
+        scope 2 {
+            debug _x => _5;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:58:9: 58:11
+            let _6: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:59:9: 59:11
+            scope 3 {
+                debug _y => _6;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:59:9: 59:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:41: 57:52
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:57:41: 57:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = Box::<isize>::new(const 1_isize) -> [return: bb2, unwind: bb8]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:57: 57:68
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:57:57: 57:65
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = B { x: move _3, y: move _4 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:34: 57:70
+        _1 = Box::<B>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:25: 57:71
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:57:25: 57:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(B) -> Box<B> {Box::<B>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _14 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:58:14: 58:22
+        _5 = &mut ((*_14).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:58:14: 58:22
+        _15 = (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:59:14: 59:17
+        _6 = move ((*_15).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:59:14: 59:17
+        _8 = &mut (*_5);                 // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:60:13: 60:15
+        _7 = use_mut::<Box<isize>>(move _8) -> [return: bb4, unwind: bb7]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:60:5: 60:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:60:5: 60:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_6) -> [return: bb5, unwind: bb13]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    }
+
+    bb5: {
+        _12 = deref_copy (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+        drop(((*_12).0: std::boxed::Box<isize>)) -> [return: bb11, unwind: bb10]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:2: 61:2
+    }
+
+    bb7 (cleanup): {
+        drop(_6) -> bb13;                // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    }
+
+    bb8 (cleanup): {
+        drop(_3) -> bb9;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:57:69: 57:70
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:56:1: 61:2
+    }
+
+    bb10 (cleanup): {
+        _10 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _9 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb12 (cleanup): {
+        _11 = alloc::alloc::box_free::<B, std::alloc::Global>(move (_1.0: std::ptr::Unique<B>), move (_1.1: std::alloc::Global)) -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+                                         // + literal: Const { ty: unsafe fn(Unique<B>, std::alloc::Global) {alloc::alloc::box_free::<B, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb13 (cleanup): {
+        _13 = deref_copy (((_1.0: std::ptr::Unique<B>).0: std::ptr::NonNull<B>).0: *const B); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+        drop(((*_13).0: std::boxed::Box<isize>)) -> bb12; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:61:1: 61:2
+    }
+}
+
+fn borrow_after_mut_borrow() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:62:30: 62:30
+    let mut _1: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:9: 63:14
+    let mut _2: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:34: 63:60
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:41: 63:52
+    let _6: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:66:5: 66:16
+    let mut _7: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:66:13: 66:15
+    let mut _8: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:9: 63:14
+    let mut _9: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:9: 63:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:63:9: 63:14
+        let _4: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:64:9: 64:11
+        scope 2 {
+            debug _x => _4;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:64:9: 64:11
+            let _5: &isize;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:65:9: 65:11
+            scope 3 {
+                debug _y => _5;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:65:9: 65:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:41: 63:52
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:63:41: 63:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = A { x: move _3, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:34: 63:60
+        _1 = Box::<A>::new(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:63:25: 63:61
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:63:25: 63:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:64:14: 64:22
+        _4 = &mut ((*_8).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:64:14: 64:22
+        _9 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:65:14: 65:18
+        _5 = &((*_9).1: isize);          // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:65:14: 65:18
+        _7 = &mut (*_4);                 // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:66:13: 66:15
+        _6 = use_mut::<Box<isize>>(move _7) -> [return: bb3, unwind: bb5]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:66:5: 66:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:66:5: 66:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_1) -> bb4;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:67:1: 67:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:67:2: 67:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:67:1: 67:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:62:1: 67:2
+    }
+}
+
+fn mut_borrow_after_borrow() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:68:30: 68:30
+    let mut _1: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:9: 69:14
+    let mut _2: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:34: 69:60
+    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:41: 69:52
+    let _6: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:72:5: 72:16
+    let mut _7: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:72:13: 72:15
+    let mut _8: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:9: 69:14
+    let mut _9: *const A;                // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:9: 69:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:69:9: 69:14
+        let _4: &std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:70:9: 70:11
+        scope 2 {
+            debug _x => _4;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:70:9: 70:11
+            let _5: &mut isize;          // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:71:9: 71:11
+            scope 3 {
+                debug _y => _5;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:71:9: 71:11
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:41: 69:52
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:69:41: 69:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = A { x: move _3, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:34: 69:60
+        _1 = Box::<A>::new(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:69:25: 69:61
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:69:25: 69:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:70:14: 70:18
+        _4 = &((*_8).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:70:14: 70:18
+        _9 = (((_1.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:71:14: 71:22
+        _5 = &mut ((*_9).1: isize);      // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:71:14: 71:22
+        _7 = _4;                         // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:72:13: 72:15
+        _6 = use_imm::<Box<isize>>(move _7) -> [return: bb3, unwind: bb5]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:72:5: 72:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:72:5: 72:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) {use_imm::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_1) -> bb4;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:73:1: 73:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:73:2: 73:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:73:1: 73:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:68:1: 73:2
+    }
+}
+
+fn copy_after_move_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:74:29: 74:29
+    let _1: std::boxed::Box<C>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _2: C;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:30: 75:81
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:37: 75:73
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:46: 75:72
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:53: 75:64
+    let mut _8: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _9: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+    let mut _10: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+    let mut _11: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+    let mut _12: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+    let mut _13: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _14: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _15: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _16: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _17: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _18: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    let mut _19: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:75:9: 75:10
+        let _6: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:76:9: 76:11
+        scope 2 {
+            debug _x => _6;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:76:9: 76:11
+            let _7: isize;               // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:77:9: 77:11
+            scope 3 {
+                debug _y => _7;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:77:9: 77:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:53: 75:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:75:53: 75:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:46: 75:72
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:37: 75:73
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:75:37: 75:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = C { x: move _3, y: const 2_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:30: 75:81
+        _1 = Box::<C>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:75:21: 75:82
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:75:21: 75:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _17 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:76:14: 76:19
+        _8 = deref_copy ((*_17).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:76:14: 76:19
+        _18 = (((_8.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:76:14: 76:19
+        _6 = move ((*_18).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:76:14: 76:19
+        _19 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:77:14: 77:17
+        _7 = ((*_19).1: isize);          // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:77:14: 77:17
+        drop(_6) -> [return: bb4, unwind: bb9]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+    }
+
+    bb4: {
+        _13 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+        _14 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+        _10 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_13).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_14).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:2: 78:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:74:1: 78:2
+    }
+
+    bb7: {
+        _9 = alloc::alloc::box_free::<C, std::alloc::Global>(move (_1.0: std::ptr::Unique<C>), move (_1.1: std::alloc::Global)) -> bb5; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // + literal: Const { ty: unsafe fn(Unique<C>, std::alloc::Global) {alloc::alloc::box_free::<C, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb8 (cleanup): {
+        _11 = alloc::alloc::box_free::<C, std::alloc::Global>(move (_1.0: std::ptr::Unique<C>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // + literal: Const { ty: unsafe fn(Unique<C>, std::alloc::Global) {alloc::alloc::box_free::<C, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb9 (cleanup): {
+        _15 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+        _16 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+        _12 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_15).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_16).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb8; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:78:1: 78:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn move_after_move_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:80:29: 80:29
+    let _1: std::boxed::Box<D>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _2: D;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:30: 81:91
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:37: 81:73
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:46: 81:72
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:53: 81:64
+    let mut _6: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:78: 81:89
+    let mut _9: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _10: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    let mut _11: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    let mut _12: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    let mut _13: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    let mut _14: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _15: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _16: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _17: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _18: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _19: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    let mut _20: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:81:9: 81:10
+        let _7: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:82:9: 82:11
+        scope 2 {
+            debug _x => _7;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:82:9: 82:11
+            let _8: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:83:9: 83:11
+            scope 3 {
+                debug _y => _8;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:83:9: 83:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:53: 81:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:81:53: 81:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:46: 81:72
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:37: 81:73
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:81:37: 81:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = Box::<isize>::new(const 2_isize) -> [return: bb3, unwind: bb9]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:78: 81:89
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:81:78: 81:86
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _2 = D { x: move _3, y: move _6 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:30: 81:91
+        _1 = Box::<D>::new(move _2) -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:21: 81:92
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:81:21: 81:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(D) -> Box<D> {Box::<D>::new}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _18 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:82:14: 82:19
+        _9 = deref_copy ((*_18).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:82:14: 82:19
+        _19 = (((_9.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:82:14: 82:19
+        _7 = move ((*_19).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:82:14: 82:19
+        _20 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:83:14: 83:17
+        _8 = move ((*_20).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:83:14: 83:17
+        drop(_8) -> [return: bb5, unwind: bb8]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    }
+
+    bb5: {
+        drop(_7) -> [return: bb6, unwind: bb13]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    }
+
+    bb6: {
+        _14 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+        _15 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+        _11 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_14).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_15).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb11; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:2: 84:2
+    }
+
+    bb8 (cleanup): {
+        drop(_7) -> bb13;                // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+    }
+
+    bb9 (cleanup): {
+        drop(_3) -> bb10;                // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:81:90: 81:91
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:80:1: 84:2
+    }
+
+    bb11: {
+        _10 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb12 (cleanup): {
+        _12 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb13 (cleanup): {
+        _16 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+        _17 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+        _13 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_16).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_17).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb12; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:84:1: 84:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn borrow_after_move_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:86:31: 86:31
+    let _1: std::boxed::Box<C>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _2: C;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:30: 87:81
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:37: 87:73
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:46: 87:72
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:53: 87:64
+    let mut _8: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _9: ();                      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+    let mut _10: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+    let mut _11: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+    let mut _12: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+    let mut _13: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _14: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _15: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _16: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _17: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _18: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    let mut _19: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:87:9: 87:10
+        let _6: std::boxed::Box<isize>;  // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:88:9: 88:11
+        scope 2 {
+            debug _x => _6;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:88:9: 88:11
+            let _7: &isize;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:89:9: 89:11
+            scope 3 {
+                debug _y => _7;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:89:9: 89:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:53: 87:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:87:53: 87:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:46: 87:72
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:37: 87:73
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:87:37: 87:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = C { x: move _3, y: const 2_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:30: 87:81
+        _1 = Box::<C>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:87:21: 87:82
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:87:21: 87:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _17 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:88:14: 88:19
+        _8 = deref_copy ((*_17).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:88:14: 88:19
+        _18 = (((_8.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:88:14: 88:19
+        _6 = move ((*_18).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:88:14: 88:19
+        _19 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:89:14: 89:18
+        _7 = &((*_19).1: isize);         // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:89:14: 89:18
+        drop(_6) -> [return: bb4, unwind: bb9]; // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+    }
+
+    bb4: {
+        _13 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+        _14 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+        _10 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_13).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_14).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:2: 90:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:86:1: 90:2
+    }
+
+    bb7: {
+        _9 = alloc::alloc::box_free::<C, std::alloc::Global>(move (_1.0: std::ptr::Unique<C>), move (_1.1: std::alloc::Global)) -> bb5; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // + literal: Const { ty: unsafe fn(Unique<C>, std::alloc::Global) {alloc::alloc::box_free::<C, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb8 (cleanup): {
+        _11 = alloc::alloc::box_free::<C, std::alloc::Global>(move (_1.0: std::ptr::Unique<C>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // + literal: Const { ty: unsafe fn(Unique<C>, std::alloc::Global) {alloc::alloc::box_free::<C, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb9 (cleanup): {
+        _15 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+        _16 = deref_copy (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+        _12 = alloc::alloc::box_free::<A, std::alloc::Global>(move (((*_15).0: std::boxed::Box<A>).0: std::ptr::Unique<A>), move (((*_16).0: std::boxed::Box<A>).1: std::alloc::Global)) -> bb8; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:90:1: 90:2
+                                         // + literal: Const { ty: unsafe fn(Unique<A>, std::alloc::Global) {alloc::alloc::box_free::<A, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn move_after_borrow_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:92:31: 92:31
+    let _1: std::boxed::Box<D>;          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _2: D;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:30: 93:91
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:37: 93:73
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:46: 93:72
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:53: 93:64
+    let mut _6: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:78: 93:89
+    let _9: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:96:5: 96:16
+    let mut _10: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:96:13: 96:15
+    let mut _11: std::boxed::Box<A>;     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _12: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    let mut _13: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    let mut _14: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    let mut _15: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _16: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _17: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _18: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    let mut _19: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:93:9: 93:10
+        let _7: &std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:94:9: 94:11
+        scope 2 {
+            debug _x => _7;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:94:9: 94:11
+            let _8: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:95:9: 95:11
+            scope 3 {
+                debug _y => _8;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:95:9: 95:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:53: 93:64
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:93:53: 93:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:46: 93:72
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:37: 93:73
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:93:37: 93:45
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = Box::<isize>::new(const 2_isize) -> [return: bb3, unwind: bb9]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:78: 93:89
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:93:78: 93:86
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _2 = D { x: move _3, y: move _6 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:30: 93:91
+        _1 = Box::<D>::new(move _2) -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:21: 93:92
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:93:21: 93:29
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(D) -> Box<D> {Box::<D>::new}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _17 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:94:14: 94:20
+        _11 = deref_copy ((*_17).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:94:14: 94:20
+        _18 = (((_11.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:94:14: 94:20
+        _7 = &((*_18).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:94:14: 94:20
+        _19 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:95:14: 95:17
+        _8 = move ((*_19).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:95:14: 95:17
+        _10 = _7;                        // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:96:13: 96:15
+        _9 = use_imm::<Box<isize>>(move _10) -> [return: bb5, unwind: bb8]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:96:5: 96:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:96:5: 96:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) {use_imm::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        drop(_8) -> [return: bb6, unwind: bb14]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    }
+
+    bb6: {
+        _15 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+        drop(((*_15).0: std::boxed::Box<A>)) -> [return: bb12, unwind: bb11]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:2: 97:2
+    }
+
+    bb8 (cleanup): {
+        drop(_8) -> bb14;                // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    }
+
+    bb9 (cleanup): {
+        drop(_3) -> bb10;                // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:93:90: 93:91
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:92:1: 97:2
+    }
+
+    bb11 (cleanup): {
+        _13 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _12 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb13 (cleanup): {
+        _14 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb14 (cleanup): {
+        _16 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+        drop(((*_16).0: std::boxed::Box<A>)) -> bb13; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:97:1: 97:2
+    }
+}
+
+fn copy_after_mut_borrow_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:98:35: 98:35
+    let mut _1: std::boxed::Box<C>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+    let mut _2: C;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:34: 99:85
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:41: 99:77
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:50: 99:76
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:57: 99:68
+    let _8: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:102:5: 102:16
+    let mut _9: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:102:13: 102:15
+    let mut _10: std::boxed::Box<A>;     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+    let mut _11: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+    let mut _12: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+    let mut _13: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:99:9: 99:14
+        let _6: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:100:9: 100:11
+        scope 2 {
+            debug _x => _6;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:100:9: 100:11
+            let _7: isize;               // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:101:9: 101:11
+            scope 3 {
+                debug _y => _7;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:101:9: 101:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:57: 99:68
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:99:57: 99:65
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:50: 99:76
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:41: 99:77
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:99:41: 99:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = C { x: move _3, y: const 2_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:34: 99:85
+        _1 = Box::<C>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:99:25: 99:86
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:99:25: 99:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _11 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:100:14: 100:24
+        _10 = deref_copy ((*_11).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:100:14: 100:24
+        _12 = (((_10.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:100:14: 100:24
+        _6 = &mut ((*_12).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:100:14: 100:24
+        _13 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:101:14: 101:17
+        _7 = ((*_13).1: isize);          // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:101:14: 101:17
+        _9 = &mut (*_6);                 // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:102:13: 102:15
+        _8 = use_mut::<Box<isize>>(move _9) -> [return: bb4, unwind: bb6]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:102:5: 102:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:102:5: 102:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_1) -> bb5;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:103:1: 103:2
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:103:2: 103:2
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> bb7;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:103:1: 103:2
+    }
+
+    bb7 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:98:1: 103:2
+    }
+}
+
+fn move_after_mut_borrow_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:104:35: 104:35
+    let mut _1: std::boxed::Box<D>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _2: D;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:34: 105:95
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:41: 105:77
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:50: 105:76
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:57: 105:68
+    let mut _6: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:82: 105:93
+    let _9: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:108:5: 108:16
+    let mut _10: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:108:13: 108:15
+    let mut _11: std::boxed::Box<A>;     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _12: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    let mut _13: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    let mut _14: ();                     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    let mut _15: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _16: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _17: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _18: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    let mut _19: *const D;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:105:9: 105:14
+        let _7: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:106:9: 106:11
+        scope 2 {
+            debug _x => _7;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:106:9: 106:11
+            let _8: std::boxed::Box<isize>; // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:107:9: 107:11
+            scope 3 {
+                debug _y => _8;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:107:9: 107:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:57: 105:68
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:105:57: 105:65
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:50: 105:76
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:41: 105:77
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:105:41: 105:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = Box::<isize>::new(const 2_isize) -> [return: bb3, unwind: bb9]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:82: 105:93
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:105:82: 105:90
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _2 = D { x: move _3, y: move _6 }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:34: 105:95
+        _1 = Box::<D>::new(move _2) -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:25: 105:96
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:105:25: 105:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(D) -> Box<D> {Box::<D>::new}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _17 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:106:14: 106:24
+        _11 = deref_copy ((*_17).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:106:14: 106:24
+        _18 = (((_11.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:106:14: 106:24
+        _7 = &mut ((*_18).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:106:14: 106:24
+        _19 = (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:107:14: 107:17
+        _8 = move ((*_19).1: std::boxed::Box<isize>); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:107:14: 107:17
+        _10 = &mut (*_7);                // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:108:13: 108:15
+        _9 = use_mut::<Box<isize>>(move _10) -> [return: bb5, unwind: bb8]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:108:5: 108:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:108:5: 108:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        drop(_8) -> [return: bb6, unwind: bb14]; // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    }
+
+    bb6: {
+        _15 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+        drop(((*_15).0: std::boxed::Box<A>)) -> [return: bb12, unwind: bb11]; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:2: 109:2
+    }
+
+    bb8 (cleanup): {
+        drop(_8) -> bb14;                // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    }
+
+    bb9 (cleanup): {
+        drop(_3) -> bb10;                // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:105:94: 105:95
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:104:1: 109:2
+    }
+
+    bb11 (cleanup): {
+        _13 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _12 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb13 (cleanup): {
+        _14 = alloc::alloc::box_free::<D, std::alloc::Global>(move (_1.0: std::ptr::Unique<D>), move (_1.1: std::alloc::Global)) -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+                                         // + literal: Const { ty: unsafe fn(Unique<D>, std::alloc::Global) {alloc::alloc::box_free::<D, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb14 (cleanup): {
+        _16 = deref_copy (((_1.0: std::ptr::Unique<D>).0: std::ptr::NonNull<D>).0: *const D); // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+        drop(((*_16).0: std::boxed::Box<A>)) -> bb13; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:109:1: 109:2
+    }
+}
+
+fn borrow_after_mut_borrow_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:110:37: 110:37
+    let mut _1: std::boxed::Box<C>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+    let mut _2: C;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:34: 111:85
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:41: 111:77
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:50: 111:76
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:57: 111:68
+    let _8: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:114:5: 114:16
+    let mut _9: &mut std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:114:13: 114:15
+    let mut _10: std::boxed::Box<A>;     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+    let mut _11: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+    let mut _12: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+    let mut _13: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:111:9: 111:14
+        let _6: &mut std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:112:9: 112:11
+        scope 2 {
+            debug _x => _6;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:112:9: 112:11
+            let _7: &isize;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:113:9: 113:11
+            scope 3 {
+                debug _y => _7;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:113:9: 113:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:57: 111:68
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:111:57: 111:65
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:50: 111:76
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:41: 111:77
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:111:41: 111:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = C { x: move _3, y: const 2_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:34: 111:85
+        _1 = Box::<C>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:111:25: 111:86
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:111:25: 111:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _11 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:112:14: 112:24
+        _10 = deref_copy ((*_11).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:112:14: 112:24
+        _12 = (((_10.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:112:14: 112:24
+        _6 = &mut ((*_12).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:112:14: 112:24
+        _13 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:113:14: 113:18
+        _7 = &((*_13).1: isize);         // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:113:14: 113:18
+        _9 = &mut (*_6);                 // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:114:13: 114:15
+        _8 = use_mut::<Box<isize>>(move _9) -> [return: bb4, unwind: bb6]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:114:5: 114:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:114:5: 114:12
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<isize>) {use_mut::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_1) -> bb5;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:115:1: 115:2
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:115:2: 115:2
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> bb7;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:115:1: 115:2
+    }
+
+    bb7 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:110:1: 115:2
+    }
+}
+
+fn mut_borrow_after_borrow_nested() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:116:37: 116:37
+    let mut _1: std::boxed::Box<C>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+    let mut _2: C;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:34: 117:85
+    let mut _3: std::boxed::Box<A>;      // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:41: 117:77
+    let mut _4: A;                       // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:50: 117:76
+    let mut _5: std::boxed::Box<isize>;  // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:57: 117:68
+    let _8: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:120:5: 120:16
+    let mut _9: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:120:13: 120:15
+    let mut _10: std::boxed::Box<A>;     // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+    let mut _11: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+    let mut _12: *const A;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+    let mut _13: *const C;               // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:117:9: 117:14
+        let _6: &std::boxed::Box<isize>; // in scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:118:9: 118:11
+        scope 2 {
+            debug _x => _6;              // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:118:9: 118:11
+            let _7: &mut isize;          // in scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:119:9: 119:11
+            scope 3 {
+                debug _y => _7;          // in scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:119:9: 119:11
+            }
+        }
+    }
+
+    bb0: {
+        _5 = Box::<isize>::new(const 0_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:57: 117:68
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:117:57: 117:65
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = A { x: move _5, y: const 1_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:50: 117:76
+        _3 = Box::<A>::new(move _4) -> bb2; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:41: 117:77
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:117:41: 117:49
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = C { x: move _3, y: const 2_isize }; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:34: 117:85
+        _1 = Box::<C>::new(move _2) -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:117:25: 117:86
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:117:25: 117:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _11 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:118:14: 118:20
+        _10 = deref_copy ((*_11).0: std::boxed::Box<A>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:118:14: 118:20
+        _12 = (((_10.0: std::ptr::Unique<A>).0: std::ptr::NonNull<A>).0: *const A); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:118:14: 118:20
+        _6 = &((*_12).0: std::boxed::Box<isize>); // scope 1 at ui/borrowck/borrowck-box-sensitivity.rs:118:14: 118:20
+        _13 = (((_1.0: std::ptr::Unique<C>).0: std::ptr::NonNull<C>).0: *const C); // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:119:14: 119:22
+        _7 = &mut ((*_13).1: isize);     // scope 2 at ui/borrowck/borrowck-box-sensitivity.rs:119:14: 119:22
+        _9 = _6;                         // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:120:13: 120:15
+        _8 = use_imm::<Box<isize>>(move _9) -> [return: bb4, unwind: bb6]; // scope 3 at ui/borrowck/borrowck-box-sensitivity.rs:120:5: 120:16
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:120:5: 120:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) {use_imm::<Box<isize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_1) -> bb5;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:121:1: 121:2
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:121:2: 121:2
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> bb7;                 // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:121:1: 121:2
+    }
+
+    bb7 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:116:1: 121:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:123:11: 123:11
+    let _1: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:124:5: 124:22
+    let _2: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:125:5: 125:22
+    let _3: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:126:5: 126:24
+    let _4: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:128:5: 128:24
+    let _5: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:130:5: 130:28
+    let _6: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:131:5: 131:28
+    let _7: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:132:5: 132:30
+    let _8: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:133:5: 133:30
+    let _9: ();                          // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:135:5: 135:29
+    let _10: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:136:5: 136:29
+    let _11: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:137:5: 137:31
+    let _12: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:139:5: 139:31
+    let _13: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:141:5: 141:35
+    let _14: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:142:5: 142:35
+    let _15: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:143:5: 143:37
+    let _16: ();                         // in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:144:5: 144:37
+
+    bb0: {
+        _1 = copy_after_move() -> bb1;   // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:124:5: 124:22
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:124:5: 124:20
+                                         // + literal: Const { ty: fn() {copy_after_move}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = move_after_move() -> bb2;   // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:125:5: 125:22
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:125:5: 125:20
+                                         // + literal: Const { ty: fn() {move_after_move}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = borrow_after_move() -> bb3; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:126:5: 126:24
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:126:5: 126:22
+                                         // + literal: Const { ty: fn() {borrow_after_move}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _4 = move_after_borrow() -> bb4; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:128:5: 128:24
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:128:5: 128:22
+                                         // + literal: Const { ty: fn() {move_after_borrow}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _5 = copy_after_mut_borrow() -> bb5; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:130:5: 130:28
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:130:5: 130:26
+                                         // + literal: Const { ty: fn() {copy_after_mut_borrow}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _6 = move_after_mut_borrow() -> bb6; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:131:5: 131:28
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:131:5: 131:26
+                                         // + literal: Const { ty: fn() {move_after_mut_borrow}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _7 = borrow_after_mut_borrow() -> bb7; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:132:5: 132:30
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:132:5: 132:28
+                                         // + literal: Const { ty: fn() {borrow_after_mut_borrow}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _8 = mut_borrow_after_borrow() -> bb8; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:133:5: 133:30
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:133:5: 133:28
+                                         // + literal: Const { ty: fn() {mut_borrow_after_borrow}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _9 = copy_after_move_nested() -> bb9; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:135:5: 135:29
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:135:5: 135:27
+                                         // + literal: Const { ty: fn() {copy_after_move_nested}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        _10 = move_after_move_nested() -> bb10; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:136:5: 136:29
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:136:5: 136:27
+                                         // + literal: Const { ty: fn() {move_after_move_nested}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        _11 = borrow_after_move_nested() -> bb11; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:137:5: 137:31
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:137:5: 137:29
+                                         // + literal: Const { ty: fn() {borrow_after_move_nested}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _12 = move_after_borrow_nested() -> bb12; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:139:5: 139:31
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:139:5: 139:29
+                                         // + literal: Const { ty: fn() {move_after_borrow_nested}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _13 = copy_after_mut_borrow_nested() -> bb13; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:141:5: 141:35
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:141:5: 141:33
+                                         // + literal: Const { ty: fn() {copy_after_mut_borrow_nested}, val: Value(<ZST>) }
+    }
+
+    bb13: {
+        _14 = move_after_mut_borrow_nested() -> bb14; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:142:5: 142:35
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:142:5: 142:33
+                                         // + literal: Const { ty: fn() {move_after_mut_borrow_nested}, val: Value(<ZST>) }
+    }
+
+    bb14: {
+        _15 = borrow_after_mut_borrow_nested() -> bb15; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:143:5: 143:37
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:143:5: 143:35
+                                         // + literal: Const { ty: fn() {borrow_after_mut_borrow_nested}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _16 = mut_borrow_after_borrow_nested() -> bb16; // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:144:5: 144:37
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-box-sensitivity.rs:144:5: 144:35
+                                         // + literal: Const { ty: fn() {mut_borrow_after_borrow_nested}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:145:2: 145:2
+    }
+}
+
+fn use_mut(_1: &mut T) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:147:26: 147:26
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:147:29: 147:29
+    }
+}
+
+fn use_imm(_1: &T) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:148:22: 148:22
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/borrowck-box-sensitivity.rs:148:25: 148:25
+    }
+}

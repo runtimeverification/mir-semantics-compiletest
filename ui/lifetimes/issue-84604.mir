@@ -1,0 +1,35 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-84604.rs:4:23: 4:23
+
+    bb0: {
+        return;                          // scope 0 at ui/lifetimes/issue-84604.rs:4:25: 4:25
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-84604.rs:6:11: 6:11
+    let _1: ();                          // in scope 0 at ui/lifetimes/issue-84604.rs:7:5: 7:25
+    let _2: ();                          // in scope 0 at ui/lifetimes/issue-84604.rs:8:5: 8:33
+
+    bb0: {
+        _1 = f::<dyn Frob<str>>() -> bb1; // scope 0 at ui/lifetimes/issue-84604.rs:7:5: 7:25
+                                         // mir::Constant
+                                         // + span: ui/lifetimes/issue-84604.rs:7:5: 7:23
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() {f::<dyn Frob<str>>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = f::<dyn Frob<str>>() -> bb2; // scope 0 at ui/lifetimes/issue-84604.rs:8:5: 8:33
+                                         // mir::Constant
+                                         // + span: ui/lifetimes/issue-84604.rs:8:5: 8:31
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() {f::<dyn Frob<str>>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/lifetimes/issue-84604.rs:9:2: 9:2
+    }
+}

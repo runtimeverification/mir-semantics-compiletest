@@ -1,0 +1,30 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn auto() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-is-contextual.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/auto-traits/auto-is-contextual.rs:11:13: 11:13
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-is-contextual.rs:13:11: 13:11
+    let _1: ();                          // in scope 0 at ui/auto-traits/auto-is-contextual.rs:14:5: 14:11
+    let _2: i32;                         // in scope 0 at ui/auto-traits/auto-is-contextual.rs:15:9: 15:13
+    scope 1 {
+        debug auto => _2;                // in scope 1 at ui/auto-traits/auto-is-contextual.rs:15:9: 15:13
+    }
+
+    bb0: {
+        _1 = auto() -> bb1;              // scope 0 at ui/auto-traits/auto-is-contextual.rs:14:5: 14:11
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-is-contextual.rs:14:5: 14:9
+                                         // + literal: Const { ty: fn() {auto}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = const 10_i32;               // scope 0 at ui/auto-traits/auto-is-contextual.rs:15:16: 15:18
+        return;                          // scope 0 at ui/auto-traits/auto-is-contextual.rs:18:2: 18:2
+    }
+}

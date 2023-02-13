@@ -1,0 +1,57 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn write() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:7:16: 7:16
+    let mut _1: impl FnOnce();           // in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:13
+    let mut _2: ();                      // in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:15
+
+    bb0: {
+        _1 = create() -> bb1;            // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:13
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:11
+                                         // + literal: Const { ty: fn() -> impl FnOnce() {create}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = <impl FnOnce() as FnOnce<()>>::call_once(move _1, move _2) -> bb2; // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:15
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-77306-1.rs:8:5: 8:13
+                                         // + literal: Const { ty: extern "rust-call" fn(impl FnOnce(), ()) -> <impl FnOnce() as FnOnce<()>>::Output {<impl FnOnce() as FnOnce<()>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:9:2: 9:2
+    }
+}
+
+fn create() -> impl FnOnce() {
+    let mut _0: impl FnOnce();           // return place in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:11:20: 11:33
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:13:2: 13:2
+    }
+}
+
+fn create::{closure#0}(_1: [closure@ui/mir/mir-inlining/ice-issue-77306-1.rs:12:4: 12:6]) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:12:7: 12:7
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:12:9: 12:9
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:15:11: 15:11
+    let _1: ();                          // in scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:16:5: 16:12
+
+    bb0: {
+        _1 = write() -> bb1;             // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:16:5: 16:12
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-77306-1.rs:16:5: 16:10
+                                         // + literal: Const { ty: fn() {write}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-77306-1.rs:17:2: 17:2
+    }
+}

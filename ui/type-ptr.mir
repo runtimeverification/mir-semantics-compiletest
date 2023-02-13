@@ -1,0 +1,40 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f(_1: *const isize) -> *const isize {
+    debug a => _1;                       // in scope 0 at ui/type-ptr.rs:6:6: 6:7
+    let mut _0: *const isize;            // return place in scope 0 at ui/type-ptr.rs:6:26: 6:38
+
+    bb0: {
+        _0 = _1;                         // scope 0 at ui/type-ptr.rs:6:48: 6:49
+        return;                          // scope 0 at ui/type-ptr.rs:6:52: 6:52
+    }
+}
+
+fn g(_1: *const isize) -> *const isize {
+    debug a => _1;                       // in scope 0 at ui/type-ptr.rs:8:6: 8:7
+    let mut _0: *const isize;            // return place in scope 0 at ui/type-ptr.rs:8:45: 8:46
+    let mut _2: *const isize;            // in scope 0 at ui/type-ptr.rs:8:51: 8:52
+    scope 1 {
+        debug b => _0;                   // in scope 1 at ui/type-ptr.rs:8:45: 8:46
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/type-ptr.rs:8:51: 8:52
+        _0 = f(move _2) -> bb1;          // scope 0 at ui/type-ptr.rs:8:49: 8:53
+                                         // mir::Constant
+                                         // + span: ui/type-ptr.rs:8:49: 8:50
+                                         // + literal: Const { ty: fn(*const isize) -> *const isize {f}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/type-ptr.rs:8:66: 8:66
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/type-ptr.rs:10:15: 10:15
+
+    bb0: {
+        return;                          // scope 0 at ui/type-ptr.rs:10:26: 10:26
+    }
+}

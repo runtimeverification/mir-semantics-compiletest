@@ -1,0 +1,45 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: P, _2: &Foo) -> &impl Trait {
+    debug _post => _1;                   // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:10:5: 10:10
+    debug x => _2;                       // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:11:5: 11:6
+    let mut _0: &impl Trait;             // return place in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:12:6: 12:20
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:13:5: 13:6
+        drop(_1) -> bb1;                 // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:14:1: 14:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:14:2: 14:2
+    }
+}
+
+fn bar(_1: T, _2: &Foo) -> &impl Trait {
+    debug post => _1;                    // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:18:5: 18:9
+    debug x => _2;                       // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:19:5: 19:6
+    let mut _0: &impl Trait;             // return place in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:5: 21:17
+    let mut _3: T;                       // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:9: 21:13
+    let mut _4: &Foo;                    // in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:15: 21:16
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:9: 21:13
+        _4 = _2;                         // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:15: 21:16
+        _0 = foo::<T>(move _3, move _4) -> bb1; // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:21:5: 21:17
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/unactionable_diagnostic_fixed.rs:21:5: 21:8
+                                         // + literal: Const { ty: for<'x> fn(T, &'x Foo) -> &'x impl Trait {foo::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:23:2: 23:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:25:11: 25:11
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/unactionable_diagnostic_fixed.rs:25:13: 25:13
+    }
+}

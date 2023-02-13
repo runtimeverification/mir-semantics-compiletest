@@ -1,0 +1,27 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn noop(_1: <F as Foo>::Bar) -> <F as Foo>::Bar {
+    debug foo => _1;                     // in scope 0 at ui/transmute-equal-assoc-types.rs:7:24: 7:27
+    let mut _0: <F as Foo>::Bar;         // return place in scope 0 at ui/transmute-equal-assoc-types.rs:7:40: 7:46
+    let mut _2: <F as Foo>::Bar;         // in scope 0 at ui/transmute-equal-assoc-types.rs:8:27: 8:30
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/transmute-equal-assoc-types.rs:8:27: 8:30
+        _0 = transmute::<<F as Foo>::Bar, <F as Foo>::Bar>(move _2) -> bb1; // scope 0 at ui/transmute-equal-assoc-types.rs:8:5: 8:31
+                                         // mir::Constant
+                                         // + span: ui/transmute-equal-assoc-types.rs:8:5: 8:26
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(<F as Foo>::Bar) -> <F as Foo>::Bar {transmute::<<F as Foo>::Bar, <F as Foo>::Bar>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/transmute-equal-assoc-types.rs:9:2: 9:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/transmute-equal-assoc-types.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/transmute-equal-assoc-types.rs:11:13: 11:13
+    }
+}

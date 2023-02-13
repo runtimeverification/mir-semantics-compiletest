@@ -1,0 +1,113 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:6:11: 6:11
+    let mut _1: std::vec::Vec<i32>;      // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:7:9: 7:16
+    let mut _2: std::slice::Iter<'_, i32>; // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _3: &[i32; 3];               // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _5: std::option::Option<&i32>; // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _6: &mut std::slice::Iter<'_, i32>; // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _7: &mut std::slice::Iter<'_, i32>; // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _8: isize;                   // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:5: 11:6
+    let _10: ();                         // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:10:9: 10:21
+    let mut _11: &mut std::vec::Vec<i32>; // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:10:9: 10:21
+    let mut _12: i32;                    // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:10:18: 10:20
+    scope 1 {
+        debug foo => _1;                 // in scope 1 at ui/for-loop-while/loop-label-shadowing.rs:7:9: 7:16
+        scope 2 {
+            let mut _4: std::slice::Iter<'_, i32>; // in scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+            let mut _13: &[i32; 3];      // in scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+            scope 3 {
+                debug iter => _4;        // in scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                let _9: &i32;            // in scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:15: 9:16
+                scope 4 {
+                    debug i => _9;       // in scope 4 at ui/for-loop-while/loop-label-shadowing.rs:9:15: 9:16
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = Vec::<i32>::new() -> bb1;   // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:7:19: 7:29
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/loop-label-shadowing.rs:7:19: 7:27
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> Vec<i32> {Vec::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _13 = const _;                   // scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // + literal: Const { ty: &[i32; 3], val: Unevaluated(main, [], Some(promoted[0])) }
+        _3 = _13;                        // scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        _2 = <&[i32; 3] as IntoIterator>::into_iter(move _3) -> [return: bb2, unwind: bb9]; // scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // + literal: Const { ty: fn(&[i32; 3]) -> <&[i32; 3] as IntoIterator>::IntoIter {<&[i32; 3] as IntoIterator>::into_iter}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = move _2;                    // scope 2 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        goto -> bb3;                     // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:5: 11:6
+    }
+
+    bb3: {
+        _7 = &mut _4;                    // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        _6 = &mut (*_7);                 // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        _5 = <std::slice::Iter<'_, i32> as Iterator>::next(move _6) -> [return: bb4, unwind: bb9]; // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+                                         // + literal: Const { ty: for<'a> fn(&'a mut std::slice::Iter<'_, i32>) -> Option<<std::slice::Iter<'_, i32> as Iterator>::Item> {<std::slice::Iter<'_, i32> as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _8 = discriminant(_5);           // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        switchInt(move _8) -> [0: bb7, 1: bb5, otherwise: bb6]; // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    }
+
+    bb5: {
+        _9 = ((_5 as Some).0: &i32);     // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:15: 9:16
+        _11 = &mut _1;                   // scope 4 at ui/for-loop-while/loop-label-shadowing.rs:10:9: 10:21
+        _12 = (*_9);                     // scope 4 at ui/for-loop-while/loop-label-shadowing.rs:10:18: 10:20
+        _10 = Vec::<i32>::push(move _11, move _12) -> [return: bb11, unwind: bb9]; // scope 4 at ui/for-loop-while/loop-label-shadowing.rs:10:9: 10:21
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/loop-label-shadowing.rs:10:13: 10:17
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<i32>, i32) {Vec::<i32>::push}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        unreachable;                     // scope 3 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    }
+
+    bb7: {
+        drop(_1) -> bb8;                 // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:12:1: 12:2
+    }
+
+    bb8: {
+        return;                          // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:12:2: 12:2
+    }
+
+    bb9 (cleanup): {
+        drop(_1) -> bb10;                // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:12:1: 12:2
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:6:1: 12:2
+    }
+
+    bb11: {
+        goto -> bb3;                     // scope 4 at ui/for-loop-while/loop-label-shadowing.rs:10:9: 10:21
+    }
+}
+
+promoted[0] in main: &[i32; 3] = {
+    let mut _0: &[i32; 3];               // return place in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    let mut _1: [i32; 3];                // in scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:21: 9:30
+
+    bb0: {
+        _1 = [const 1_i32, const 2_i32, const 3_i32]; // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:21: 9:30
+        _0 = &_1;                        // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+        return;                          // scope 0 at ui/for-loop-while/loop-label-shadowing.rs:9:20: 9:30
+    }
+}

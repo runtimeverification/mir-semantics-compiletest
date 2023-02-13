@@ -1,0 +1,36 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static mut Y: u32 = {
+    let mut _0: u32;                     // return place in scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:5:15: 5:18
+
+    bb0: {
+        _0 = const 0_u32;                // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:5:21: 5:22
+        return;                          // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:5:1: 5:23
+    }
+}
+
+fn should_ok() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:7:23: 7:23
+    let mut _1: *mut u32;                // in scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:8:5: 8:6
+
+    bb0: {
+        _1 = const {alloc1: *mut u32};   // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:8:5: 8:6
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-assignment-to-static-mut.rs:8:5: 8:6
+                                         // + literal: Const { ty: *mut u32, val: Value(Scalar(alloc1)) }
+        (*_1) = const 1_u32;             // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:8:5: 8:10
+        return;                          // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:9:2: 9:2
+    }
+}
+
+alloc1 (static: Y, size: 4, align: 4) {
+    00 00 00 00                                     │ ....
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/borrowck-assignment-to-static-mut.rs:11:13: 11:13
+    }
+}

@@ -1,0 +1,94 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+Foo::x::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:5:25: 5:26
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:5:25: 5:26
+        return;                          // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:5:25: 5:26
+    }
+}
+
+static mut SFOO: Foo = {
+    let mut _0: Foo;                     // return place in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:18: 7:21
+    let mut _1: [usize; 2];              // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:33: 7:41
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:33: 7:41
+        _1 = [const 23_usize, const 32_usize]; // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:33: 7:41
+        _0 = Foo { x: move _1 };         // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:24: 7:43
+        StorageDead(_1);                 // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:42: 7:43
+        return;                          // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:7:1: 7:44
+    }
+}
+
+fn <impl at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:9:1: 9:9>::x(_1: &mut Foo) -> &mut usize {
+    debug self => _1;                    // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:10: 10:19
+    let mut _0: &mut usize;              // return place in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:24: 10:34
+    let mut _2: &mut usize;              // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:37: 10:51
+    let mut _3: &mut usize;              // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:37: 10:51
+    let _4: usize;                       // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:49: 10:50
+
+    bb0: {
+        _4 = const 0_usize;              // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:49: 10:50
+        _3 = &mut ((*_1).0: [usize; 2])[_4]; // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:37: 10:51
+        _2 = &mut (*_3);                 // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:37: 10:51
+        _0 = &mut (*_2);                 // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:37: 10:51
+        return;                          // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:10:53: 10:53
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:13:11: 13:11
+    let mut _2: &mut Foo;                // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:30: 15:39
+    let mut _3: *mut Foo;                // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:35: 15:39
+    let mut _5: &mut Foo;                // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:17: 16:28
+    let _6: usize;                       // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:19: 17:20
+    let mut _7: (usize, bool);           // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:9: 17:26
+    let mut _8: (usize, bool);           // in scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:18:9: 18:16
+    scope 1 {
+        let _1: *mut Foo;                // in scope 1 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:13: 15:17
+        scope 2 {
+            debug sfoo => _1;            // in scope 2 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:13: 15:17
+            let _4: &mut usize;          // in scope 2 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:13: 16:14
+            scope 3 {
+                debug x => _4;           // in scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:13: 16:14
+            }
+        }
+    }
+
+    bb0: {
+        _3 = const {alloc1: *mut Foo};   // scope 1 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:35: 15:39
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:35: 15:39
+                                         // + literal: Const { ty: *mut Foo, val: Value(Scalar(alloc1)) }
+        _2 = &mut (*_3);                 // scope 1 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:30: 15:39
+        _1 = &raw mut (*_2);             // scope 1 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:15:30: 15:39
+        _5 = &mut (*_1);                 // scope 2 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:17: 16:28
+        _4 = Foo::x(move _5) -> bb1;     // scope 2 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:17: 16:28
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:16:25: 16:26
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo) -> &'a mut usize {Foo::x}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = const 1_usize;              // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:19: 17:20
+        _7 = CheckedAdd(((*_1).0: [usize; 2])[_6], const 1_usize); // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:9: 17:26
+        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).0: [usize; 2])[_6], const 1_usize) -> bb2; // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:9: 17:26
+    }
+
+    bb2: {
+        ((*_1).0: [usize; 2])[_6] = move (_7.0: usize); // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:17:9: 17:26
+        _8 = CheckedAdd((*_4), const 1_usize); // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:18:9: 18:16
+        assert(!move (_8.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_usize) -> bb3; // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:18:9: 18:16
+    }
+
+    bb3: {
+        (*_4) = move (_8.0: usize);      // scope 3 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:18:9: 18:16
+        return;                          // scope 0 at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:20:2: 20:2
+    }
+}
+
+alloc1 (static: SFOO, size: 16, align: 8) {
+    17 00 00 00 00 00 00 00 20 00 00 00 00 00 00 00 │ ........ .......
+}

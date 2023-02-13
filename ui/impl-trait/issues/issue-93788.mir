@@ -1,0 +1,121 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/impl-trait/issues/issue-93788.rs:10:1: 10:22>::foo(_1: &D) -> Option<()> {
+    debug self => _1;                    // in scope 0 at ui/impl-trait/issues/issue-93788.rs:12:12: 12:16
+    let mut _0: std::option::Option<()>; // return place in scope 0 at ui/impl-trait/issues/issue-93788.rs:12:21: 12:31
+
+    bb0: {
+        _0 = const Option::<()>::None;   // scope 0 at ui/impl-trait/issues/issue-93788.rs:12:34: 12:38
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issues/issue-93788.rs:12:34: 12:38
+                                         // + literal: Const { ty: Option<()>, val: Value(Scalar(0x00)) }
+        return;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:12:40: 12:40
+    }
+}
+
+fn run(_1: F) -> () {
+    debug f => _1;                       // in scope 0 at ui/impl-trait/issues/issue-93788.rs:15:11: 15:12
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-93788.rs:16:5: 16:5
+    let _2: &D;                          // in scope 0 at ui/impl-trait/issues/issue-93788.rs:19:9: 19:10
+    let mut _3: std::option::Option<<&D as Tr>::It>; // in scope 0 at ui/impl-trait/issues/issue-93788.rs:20:25: 20:32
+    let mut _4: &D;                      // in scope 0 at ui/impl-trait/issues/issue-93788.rs:20:25: 20:32
+    let mut _5: isize;                   // in scope 0 at ui/impl-trait/issues/issue-93788.rs:20:15: 20:22
+    let _7: ();                          // in scope 0 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:13
+    let mut _8: &F;                      // in scope 0 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:10
+    let mut _9: (<&D as Tr>::It,);       // in scope 0 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:13
+    let mut _10: &D;                     // in scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+    scope 1 {
+        debug d => _2;                   // in scope 1 at ui/impl-trait/issues/issue-93788.rs:19:9: 19:10
+        scope 2 {
+            debug i => _6;               // in scope 2 at ui/impl-trait/issues/issue-93788.rs:20:20: 20:21
+            let _6: <&D as Tr>::It;      // in scope 2 at ui/impl-trait/issues/issue-93788.rs:20:20: 20:21
+        }
+    }
+
+    bb0: {
+        _10 = const _;                   // scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+                                         // + literal: Const { ty: &D, val: Unevaluated(run, [F], Some(promoted[0])) }
+        _2 = _10;                        // scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+        goto -> bb1;                     // scope 1 at ui/impl-trait/issues/issue-93788.rs:20:5: 22:6
+    }
+
+    bb1: {
+        _4 = _2;                         // scope 2 at ui/impl-trait/issues/issue-93788.rs:20:25: 20:32
+        _3 = <&D as Tr>::foo(move _4) -> [return: bb2, unwind: bb6]; // scope 2 at ui/impl-trait/issues/issue-93788.rs:20:25: 20:32
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issues/issue-93788.rs:20:27: 20:30
+                                         // + literal: Const { ty: fn(&D) -> Option<<&D as Tr>::It> {<&D as Tr>::foo}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = discriminant(_3);           // scope 2 at ui/impl-trait/issues/issue-93788.rs:20:15: 20:22
+        switchInt(move _5) -> [1: bb3, otherwise: bb4]; // scope 2 at ui/impl-trait/issues/issue-93788.rs:20:15: 20:22
+    }
+
+    bb3: {
+        _6 = move ((_3 as Some).0: <&D as Tr>::It); // scope 2 at ui/impl-trait/issues/issue-93788.rs:20:20: 20:21
+        _8 = &_1;                        // scope 2 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:10
+        _7 = <F as Fn<(<&D as Tr>::It,)>>::call(move _8, move _9) -> [return: bb8, unwind: bb6]; // scope 2 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:13
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issues/issue-93788.rs:21:9: 21:10
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a F, (<&D as Tr>::It,)) -> <F as FnOnce<(<&D as Tr>::It,)>>::Output {<F as Fn<(<&D as Tr>::It,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_1) -> bb5;                 // scope 0 at ui/impl-trait/issues/issue-93788.rs:23:1: 23:2
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:23:2: 23:2
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> bb7;                 // scope 0 at ui/impl-trait/issues/issue-93788.rs:23:1: 23:2
+    }
+
+    bb7 (cleanup): {
+        resume;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:15:1: 23:2
+    }
+
+    bb8: {
+        goto -> bb1;                     // scope 2 at ui/impl-trait/issues/issue-93788.rs:21:9: 21:13
+    }
+}
+
+promoted[0] in run: &D = {
+    let mut _0: &D;                      // return place in scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+    let mut _1: D;                       // in scope 0 at ui/impl-trait/issues/issue-93788.rs:19:14: 19:15
+
+    bb0: {
+        _1 = D;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:19:14: 19:15
+        _0 = &_1;                        // scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+        return;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:19:13: 19:15
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-93788.rs:25:11: 25:11
+    let _1: ();                          // in scope 0 at ui/impl-trait/issues/issue-93788.rs:26:5: 26:16
+    let mut _2: [closure@ui/impl-trait/issues/issue-93788.rs:26:9: 26:12]; // in scope 0 at ui/impl-trait/issues/issue-93788.rs:26:9: 26:15
+
+    bb0: {
+        _1 = run::<[closure@ui/impl-trait/issues/issue-93788.rs:26:9: 26:12]>(move _2) -> bb1; // scope 0 at ui/impl-trait/issues/issue-93788.rs:26:5: 26:16
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issues/issue-93788.rs:26:5: 26:8
+                                         // + literal: Const { ty: fn([closure@ui/impl-trait/issues/issue-93788.rs:26:9: 26:12]) {run::<[closure@ui/impl-trait/issues/issue-93788.rs:26:9: 26:12]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:27:2: 27:2
+    }
+}
+
+fn main::{closure#0}(_1: &[closure@ui/impl-trait/issues/issue-93788.rs:26:9: 26:12], _2: ()) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-93788.rs:26:13: 26:13
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/issues/issue-93788.rs:26:15: 26:15
+    }
+}

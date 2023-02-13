@@ -1,0 +1,74 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:4:22: 4:27
+
+    bb0: {
+        _0 = const 8_usize;              // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:10:9: 10:10
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:12:2: 12:2
+    }
+}
+
+// MIR FOR CTFE
+fn foo() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:4:22: 4:27
+    let mut _1: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:7:8: 7:13
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:7:8: 7:13
+        _1 = const false;                // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:7:8: 7:13
+        switchInt(move _1) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:7:8: 7:13
+    }
+
+    bb1: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:8:9: 8:33
+        _0 = std::mem::size_of::<T>() -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:8:9: 8:33
+                                         // mir::Constant
+                                         // + span: ui/const-generics/generic_const_exprs/function-call.rs:8:9: 8:31
+                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _0 = const 8_usize;              // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:10:9: 10:10
+        goto -> bb3;                     // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:7:5: 11:6
+    }
+
+    bb3: {
+        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:11:5: 11:6
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:12:2: 12:2
+    }
+}
+
+fn test() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:14:14: 14:14
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:18:2: 18:2
+    }
+}
+
+test::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:15:17: 15:27
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:15:17: 15:27
+        _0 = foo::<T>() -> bb1;          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:15:17: 15:27
+                                         // mir::Constant
+                                         // + span: ui/const-generics/generic_const_exprs/function-call.rs:15:17: 15:25
+                                         // + literal: Const { ty: fn() -> usize {foo::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:15:17: 15:27
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:20:11: 20:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/function-call.rs:20:13: 20:13
+    }
+}

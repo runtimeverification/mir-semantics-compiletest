@@ -1,0 +1,54 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-37883.rs:5:11: 5:11
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-types/issue-37883.rs:5:13: 5:13
+    }
+}
+
+fn Translation::powf(_1: &Self, _2: <E as EuclideanSpace>::Real) -> <E as EuclideanSpace>::Coordinates {
+    debug self => _1;                    // in scope 0 at ui/associated-types/issue-37883.rs:22:13: 22:18
+    debug n => _2;                       // in scope 0 at ui/associated-types/issue-37883.rs:22:20: 22:21
+    let mut _0: <E as EuclideanSpace>::Coordinates; // return place in scope 0 at ui/associated-types/issue-37883.rs:22:60: 22:74
+    let mut _3: <E as EuclideanSpace>::Coordinates; // in scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+    let mut _4: &Self;                   // in scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+    let mut _5: <E as EuclideanSpace>::Real; // in scope 0 at ui/associated-types/issue-37883.rs:23:28: 23:29
+    let mut _6: bool;                    // in scope 0 at ui/associated-types/issue-37883.rs:24:5: 24:6
+
+    bb0: {
+        _6 = const false;                // scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+        _6 = const true;                 // scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+        _4 = _1;                         // scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+        _3 = <Self as Translation<E>>::to_vector(move _4) -> [return: bb1, unwind: bb5]; // scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:25
+                                         // mir::Constant
+                                         // + span: ui/associated-types/issue-37883.rs:23:14: 23:23
+                                         // + literal: Const { ty: for<'a> fn(&'a Self) -> <E as EuclideanSpace>::Coordinates {<Self as Translation<E>>::to_vector}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = const false;                // scope 0 at ui/associated-types/issue-37883.rs:23:28: 23:29
+        _5 = move _2;                    // scope 0 at ui/associated-types/issue-37883.rs:23:28: 23:29
+        _0 = <<E as EuclideanSpace>::Coordinates as Mul<<E as EuclideanSpace>::Real>>::mul(move _3, move _5) -> [return: bb2, unwind: bb5]; // scope 0 at ui/associated-types/issue-37883.rs:23:9: 23:29
+                                         // mir::Constant
+                                         // + span: ui/associated-types/issue-37883.rs:23:9: 23:29
+                                         // + literal: Const { ty: fn(<E as EuclideanSpace>::Coordinates, <E as EuclideanSpace>::Real) -> <<E as EuclideanSpace>::Coordinates as Mul<<E as EuclideanSpace>::Real>>::Output {<<E as EuclideanSpace>::Coordinates as Mul<<E as EuclideanSpace>::Real>>::mul}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/associated-types/issue-37883.rs:24:6: 24:6
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/associated-types/issue-37883.rs:22:5: 24:6
+    }
+
+    bb4 (cleanup): {
+        drop(_2) -> bb3;                 // scope 0 at ui/associated-types/issue-37883.rs:24:5: 24:6
+    }
+
+    bb5 (cleanup): {
+        switchInt(_6) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/associated-types/issue-37883.rs:24:5: 24:6
+    }
+}

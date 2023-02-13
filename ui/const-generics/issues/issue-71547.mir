@@ -1,0 +1,39 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn get_val(_1: &T) -> &<T as GetType<"hello">>::Ty {
+    debug value => _1;                   // in scope 0 at ui/const-generics/issues/issue-71547.rs:11:19: 11:24
+    let mut _0: &<T as GetType<"hello">>::Ty; // return place in scope 0 at ui/const-generics/issues/issue-71547.rs:15:5: 15:16
+    let mut _2: &T;                      // in scope 0 at ui/const-generics/issues/issue-71547.rs:15:5: 15:16
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/const-generics/issues/issue-71547.rs:15:5: 15:16
+        _0 = <T as GetType<"hello">>::get(move _2) -> bb1; // scope 0 at ui/const-generics/issues/issue-71547.rs:15:5: 15:16
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-71547.rs:15:11: 15:14
+                                         // + literal: Const { ty: for<'a> fn(&'a T) -> &'a <T as GetType<"hello">>::Ty {<T as GetType<"hello">>::get}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-71547.rs:16:2: 16:2
+    }
+}
+
+get_val::{constant#0}: &str = {
+    let mut _0: &str;                    // return place in scope 0 at ui/const-generics/issues/issue-71547.rs:13:16: 13:23
+
+    bb0: {
+        _0 = const "hello";              // scope 0 at ui/const-generics/issues/issue-71547.rs:13:16: 13:23
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-71547.rs:13:16: 13:23
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        return;                          // scope 0 at ui/const-generics/issues/issue-71547.rs:13:16: 13:23
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-71547.rs:18:11: 18:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-71547.rs:18:13: 18:13
+    }
+}

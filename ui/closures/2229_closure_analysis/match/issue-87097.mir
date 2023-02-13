@@ -1,0 +1,106 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn discriminant_is_a_ref() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:13:28: 13:28
+    let _1: A;                           // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:14:9: 14:13
+    scope 1 {
+        debug here => _1;                // in scope 1 at ui/closures/2229_closure_analysis/match/issue-87097.rs:14:9: 14:13
+        let _2: &Variant;                // in scope 1 at ui/closures/2229_closure_analysis/match/issue-87097.rs:15:9: 15:16
+        scope 2 {
+            debug out_ref => _2;         // in scope 2 at ui/closures/2229_closure_analysis/match/issue-87097.rs:15:9: 15:16
+        }
+    }
+
+    bb0: {
+        _1 = const A {{ field: Variant::A }}; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:14:16: 14:39
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/issue-87097.rs:14:16: 14:39
+                                         // + literal: Const { ty: A, val: Value(Scalar(0x00)) }
+        _2 = &(_1.0: Variant);           // scope 1 at ui/closures/2229_closure_analysis/match/issue-87097.rs:15:19: 15:30
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:21:2: 21:2
+    }
+}
+
+fn discriminant_is_a_ref::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/issue-87097.rs:17:5: 17:7]) -> () {
+    debug out_ref => (*((*_1).0: &&Variant)); // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:15:9: 15:16
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:8: 17:8
+    let mut _2: isize;                   // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:18:9: 18:19
+    let mut _3: &&Variant;               // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:5: 20:6
+    let mut _4: &Variant;                // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:5: 20:6
+
+    bb0: {
+        _3 = deref_copy ((*_1).0: &&Variant); // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:14: 17:21
+        _4 = deref_copy (*_3);           // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:14: 17:21
+        _2 = discriminant((*_4));        // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:14: 17:21
+        switchInt(move _2) -> [0: bb2, 1: bb2, otherwise: bb1]; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:8: 17:21
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:17:14: 17:21
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:20:6: 20:6
+    }
+}
+
+fn discriminant_is_a_field() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:23:30: 23:30
+    let _1: A;                           // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:24:9: 24:13
+    scope 1 {
+        debug here => _1;                // in scope 1 at ui/closures/2229_closure_analysis/match/issue-87097.rs:24:9: 24:13
+    }
+
+    bb0: {
+        _1 = const A {{ field: Variant::A }}; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:24:16: 24:39
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/issue-87097.rs:24:16: 24:39
+                                         // + literal: Const { ty: A, val: Value(Scalar(0x00)) }
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:30:2: 30:2
+    }
+}
+
+fn discriminant_is_a_field::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/issue-87097.rs:26:5: 26:7]) -> () {
+    debug here => (*((*_1).0: &A));      // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:24:9: 24:13
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:8: 26:8
+    let mut _2: isize;                   // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:27:9: 27:19
+    let mut _3: &A;                      // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:5: 29:6
+
+    bb0: {
+        _3 = deref_copy ((*_1).0: &A);   // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:14: 26:24
+        _2 = discriminant(((*_3).0: Variant)); // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:14: 26:24
+        switchInt(move _2) -> [0: bb2, 1: bb2, otherwise: bb1]; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:8: 26:24
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:26:14: 26:24
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:29:6: 29:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:32:11: 32:11
+    let _1: ();                          // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:33:5: 33:28
+    let _2: ();                          // in scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:34:5: 34:30
+
+    bb0: {
+        _1 = discriminant_is_a_ref() -> bb1; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:33:5: 33:28
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/issue-87097.rs:33:5: 33:26
+                                         // + literal: Const { ty: fn() {discriminant_is_a_ref}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = discriminant_is_a_field() -> bb2; // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:34:5: 34:30
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/issue-87097.rs:34:5: 34:28
+                                         // + literal: Const { ty: fn() {discriminant_is_a_field}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/issue-87097.rs:35:2: 35:2
+    }
+}

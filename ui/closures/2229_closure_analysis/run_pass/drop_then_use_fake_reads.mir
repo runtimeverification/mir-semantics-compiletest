@@ -1,0 +1,49 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:5:11: 5:11
+    let mut _1: i32;                     // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:6:9: 6:14
+    let mut _3: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 10:6
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:6:9: 6:14
+        let _2: [closure@ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 7:15]; // in scope 1 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:9: 7:10
+        scope 2 {
+            debug c => _2;               // in scope 2 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:9: 7:10
+        }
+    }
+
+    bb0: {
+        _1 = const 1_i32;                // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:6:17: 6:18
+        _3 = &mut _1;                    // scope 1 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 10:6
+        _2 = [closure@ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 7:15] { x: move _3 }; // scope 1 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 10:6
+                                         // closure
+                                         // + def_id: DefId(0:4 ~ drop_then_use_fake_reads[9b90]::main::{closure#0})
+                                         // + substs: [
+                                         //     i16,
+                                         //     extern "rust-call" fn(()),
+                                         //     (&mut i32,),
+                                         // ]
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:11:2: 11:2
+    }
+}
+
+fn main::{closure#0}(_1: &mut [closure@ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 7:15]) -> () {
+    debug x => (*((*_1).0: &mut i32));   // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:6:9: 6:14
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:16: 7:16
+    let _2: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:9: 8:21
+    let mut _3: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:14: 8:20
+    let mut _4: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:7:13: 10:6
+
+    bb0: {
+        _4 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:14: 8:20
+        _3 = &mut (*_4);                 // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:14: 8:20
+        _2 = std::mem::drop::<&mut i32>(move _3) -> bb1; // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:9: 8:21
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:8:9: 8:13
+                                         // + literal: Const { ty: fn(&mut i32) {std::mem::drop::<&mut i32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/drop_then_use_fake_reads.rs:10:6: 10:6
+    }
+}

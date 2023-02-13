@@ -1,0 +1,68 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> impl Into<for<'a> fn(&'a ())> {
+    let mut _0: impl std::convert::Into<for<'a> fn(&'a ())>; // return place in scope 0 at ui/impl-trait/issue-51185.rs:2:13: 2:42
+    let mut _1: [closure@ui/impl-trait/issue-51185.rs:3:6: 3:9]; // in scope 0 at ui/impl-trait/issue-51185.rs:3:5: 3:13
+
+    bb0: {
+        _0 = move _1 as for<'a> fn(&'a ()) (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/impl-trait/issue-51185.rs:3:5: 3:13
+        return;                          // scope 0 at ui/impl-trait/issue-51185.rs:4:2: 4:2
+    }
+}
+
+fn foo::{closure#0}(_1: &[closure@ui/impl-trait/issue-51185.rs:3:6: 3:9], _2: &()) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issue-51185.rs:3:10: 3:10
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/issue-51185.rs:3:13: 3:13
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issue-51185.rs:6:11: 6:11
+    let _1: ();                          // in scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:22
+    let mut _2: for<'a> fn(&'a ());      // in scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:17
+    let mut _3: impl std::convert::Into<for<'a> fn(&'a ())>; // in scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:10
+    let mut _4: &();                     // in scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+    let _5: &();                         // in scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+    let mut _6: &();                     // in scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+
+    bb0: {
+        _3 = foo() -> bb1;               // scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:10
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-51185.rs:7:5: 7:8
+                                         // + literal: Const { ty: fn() -> impl Into<for<'a> fn(&'a ())> {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <impl Into<for<'a> fn(&'a ())> as Into<for<'a> fn(&'a ())>>::into(move _3) -> bb2; // scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:17
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-51185.rs:7:11: 7:15
+                                         // + literal: Const { ty: fn(impl Into<for<'a> fn(&'a ())>) -> for<'a> fn(&'a ()) {<impl Into<for<'a> fn(&'a ())> as Into<for<'a> fn(&'a ())>>::into}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = const _;                    // scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-51185.rs:7:18: 7:21
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[0])) }
+        _5 = _6;                         // scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+        _4 = _5;                         // scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+        _1 = move _2(move _4) -> bb3;    // scope 0 at ui/impl-trait/issue-51185.rs:7:5: 7:22
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/impl-trait/issue-51185.rs:8:2: 8:2
+    }
+}
+
+promoted[0] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+    let mut _1: ();                      // in scope 0 at ui/impl-trait/issue-51185.rs:7:19: 7:21
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/impl-trait/issue-51185.rs:7:19: 7:21
+        _0 = &_1;                        // scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+        return;                          // scope 0 at ui/impl-trait/issue-51185.rs:7:18: 7:21
+    }
+}

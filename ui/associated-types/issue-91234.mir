@@ -1,0 +1,28 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-91234.rs:13:11: 13:11
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-types/issue-91234.rs:13:13: 13:13
+    }
+}
+
+fn Enum::Variant(_1: <&Struct as Trait>::Type) -> Enum<'_> {
+    let mut _0: Enum<'_>;                // return place in scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+
+    bb0: {
+        _0 = Enum::<'_>::Variant(move _1); // scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+        return;                          // scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+    }
+}
+
+// MIR FOR CTFE
+fn Enum::Variant(_1: <&Struct as Trait>::Type) -> Enum<'_> {
+    let mut _0: Enum<'_>;                // return place in scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+
+    bb0: {
+        _0 = Enum::<'_>::Variant(move _1); // scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+        return;                          // scope 0 at ui/associated-types/issue-91234.rs:10:5: 10:12
+    }
+}

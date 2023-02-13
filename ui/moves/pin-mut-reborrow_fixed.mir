@@ -1,0 +1,64 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/moves/pin-mut-reborrow_fixed.rs:6:1: 6:9>::foo(_1: Pin<&mut Foo>) -> () {
+    debug self => _1;                    // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:7:12: 7:16
+    let mut _0: ();                      // return place in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:7:34: 7:34
+
+    bb0: {
+        return;                          // scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:7:36: 7:36
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:10:11: 10:11
+    let mut _1: Foo;                     // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:11:9: 11:16
+    let mut _3: &mut Foo;                // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:12:28: 12:36
+    let _4: ();                          // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:23
+    let mut _5: std::pin::Pin<&mut Foo>; // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:17
+    let mut _6: &mut std::pin::Pin<&mut Foo>; // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:17
+    let _7: ();                          // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:14:5: 14:14
+    let mut _8: std::pin::Pin<&mut Foo>; // in scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:14:5: 14:8
+    scope 1 {
+        debug foo => _1;                 // in scope 1 at ui/moves/pin-mut-reborrow_fixed.rs:11:9: 11:16
+        let mut _2: std::pin::Pin<&mut Foo>; // in scope 1 at ui/moves/pin-mut-reborrow_fixed.rs:12:9: 12:16
+        scope 2 {
+            debug foo => _2;             // in scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:12:9: 12:16
+        }
+    }
+
+    bb0: {
+        _3 = &mut _1;                    // scope 1 at ui/moves/pin-mut-reborrow_fixed.rs:12:28: 12:36
+        _2 = Pin::<&mut Foo>::new(move _3) -> bb1; // scope 1 at ui/moves/pin-mut-reborrow_fixed.rs:12:19: 12:37
+                                         // mir::Constant
+                                         // + span: ui/moves/pin-mut-reborrow_fixed.rs:12:19: 12:27
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&mut Foo) -> Pin<&mut Foo> {Pin::<&mut Foo>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = &mut _2;                    // scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:17
+        _5 = Pin::<&mut Foo>::as_mut(move _6) -> bb2; // scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:17
+                                         // mir::Constant
+                                         // + span: ui/moves/pin-mut-reborrow_fixed.rs:13:9: 13:15
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Pin<&mut Foo>) -> Pin<&'a mut <&mut Foo as Deref>::Target> {Pin::<&mut Foo>::as_mut}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = Foo::foo(move _5) -> bb3;   // scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:13:5: 13:23
+                                         // mir::Constant
+                                         // + span: ui/moves/pin-mut-reborrow_fixed.rs:13:18: 13:21
+                                         // + literal: Const { ty: for<'a> fn(Pin<&'a mut Foo>) {Foo::foo}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _8 = move _2;                    // scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:14:5: 14:8
+        _7 = Foo::foo(move _8) -> bb4;   // scope 2 at ui/moves/pin-mut-reborrow_fixed.rs:14:5: 14:14
+                                         // mir::Constant
+                                         // + span: ui/moves/pin-mut-reborrow_fixed.rs:14:9: 14:12
+                                         // + literal: Const { ty: for<'a> fn(Pin<&'a mut Foo>) {Foo::foo}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/moves/pin-mut-reborrow_fixed.rs:15:2: 15:2
+    }
+}

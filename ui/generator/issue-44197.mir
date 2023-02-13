@@ -1,0 +1,578 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: &str) -> String {
+    let mut _0: std::string::String;     // return place in scope 0 at ui/generator/issue-44197.rs:8:20: 8:26
+
+    bb0: {
+        _0 = String::new() -> bb1;       // scope 0 at ui/generator/issue-44197.rs:9:5: 9:18
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:9:5: 9:16
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/generator/issue-44197.rs:10:2: 10:2
+    }
+}
+
+fn bar(_1: String) -> impl Generator<Yield = String, Return = ()> {
+    debug baz => _1;                     // in scope 0 at ui/generator/issue-44197.rs:12:8: 12:11
+    let mut _0: impl std::ops::Generator<Yield = std::string::String, Return = ()>; // return place in scope 0 at ui/generator/issue-44197.rs:12:24: 12:71
+
+    bb0: {
+        _0 = [generator@ui/generator/issue-44197.rs:13:5: 13:12 (#0)] { baz: move _1 }; // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+                                         // generator
+                                         // + def_id: DefId(0:9 ~ issue_44197[3617]::bar::{closure#0})
+                                         // + substs: [
+                                         //     (),
+                                         //     std::string::String,
+                                         //     (),
+                                         //     for<'a, 'b> {std::string::String, &'a str, &'b std::string::String, ()},
+                                         //     (std::string::String,),
+                                         // ]
+                                         // + movability: Movable
+        return;                          // scope 0 at ui/generator/issue-44197.rs:16:2: 16:2
+    }
+}
+
+fn bar::{closure#0}(_1: Pin<&mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]>, _2: ()) -> GeneratorState<String, ()> {
+    debug baz => ((*(_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12])).0: std::string::String); // in scope 0 at ui/generator/issue-44197.rs:12:8: 12:11
+    let mut _0: std::ops::GeneratorState<std::string::String, ()>; // return place in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _3: std::string::String;     // in scope 0 at ui/generator/issue-44197.rs:14:15: 14:24
+    let mut _4: &str;                    // in scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+    let _5: &str;                        // in scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+    let mut _6: &std::string::String;    // in scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+    let _7: &std::string::String;        // in scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+    let mut _8: ();                      // in scope 0 at ui/generator/issue-44197.rs:13:13: 13:13
+    let mut _9: u32;                     // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _10: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _11: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _12: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _13: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _14: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _15: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    let mut _16: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]; // in scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+
+    bb0: {
+        _10 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+        _9 = discriminant((*_10));       // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+        switchInt(move _9) -> [0: bb1, 1: bb9, 2: bb8, 3: bb7, otherwise: bb10]; // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    }
+
+    bb1: {
+        _11 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+        _7 = &((*_11).0: std::string::String); // scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+        _6 = _7;                         // scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+        _5 = <String as Deref>::deref(move _6) -> [return: bb2, unwind: bb4]; // scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:14:19: 14:23
+                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a <String as Deref>::Target {<String as Deref>::deref}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = _5;                         // scope 0 at ui/generator/issue-44197.rs:14:19: 14:23
+        _3 = foo(move _4) -> [return: bb3, unwind: bb4]; // scope 0 at ui/generator/issue-44197.rs:14:15: 14:24
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:14:15: 14:18
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {foo}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _0 = GeneratorState::<String, ()>::Yielded(move _3); // scope 0 at ui/generator/issue-44197.rs:14:9: 14:24
+        _12 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:14:9: 14:24
+        discriminant((*_12)) = 3;        // scope 0 at ui/generator/issue-44197.rs:14:9: 14:24
+        return;                          // scope 0 at ui/generator/issue-44197.rs:14:9: 14:24
+    }
+
+    bb4 (cleanup): {
+        _15 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:15:5: 15:6
+        drop(((*_15).0: std::string::String)) -> bb5; // scope 0 at ui/generator/issue-44197.rs:15:5: 15:6
+    }
+
+    bb5 (cleanup): {
+        _16 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+        discriminant((*_16)) = 2;        // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+        resume;                          // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    }
+
+    bb6: {
+        _0 = GeneratorState::<String, ()>::Complete(move _8); // scope 0 at ui/generator/issue-44197.rs:15:6: 15:6
+        _13 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:15:6: 15:6
+        discriminant((*_13)) = 1;        // scope 0 at ui/generator/issue-44197.rs:15:6: 15:6
+        return;                          // scope 0 at ui/generator/issue-44197.rs:15:6: 15:6
+    }
+
+    bb7: {
+        _8 = const ();                   // scope 0 at ui/generator/issue-44197.rs:13:13: 15:6
+        _14 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:13:5: 13:12]); // scope 0 at ui/generator/issue-44197.rs:15:5: 15:6
+        drop(((*_14).0: std::string::String)) -> [return: bb6, unwind: bb5]; // scope 0 at ui/generator/issue-44197.rs:15:5: 15:6
+    }
+
+    bb8: {
+        assert(const false, "generator resumed after panicking") -> bb8; // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    }
+
+    bb9: {
+        assert(const false, "generator resumed after completion") -> bb9; // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    }
+
+    bb10: {
+        unreachable;                     // scope 0 at ui/generator/issue-44197.rs:13:5: 15:6
+    }
+}
+
+fn foo2(_1: &str) -> Result<String, ()> {
+    let mut _0: std::result::Result<std::string::String, ()>; // return place in scope 0 at ui/generator/issue-44197.rs:18:21: 18:39
+    let mut _2: ();                      // in scope 0 at ui/generator/issue-44197.rs:19:9: 19:11
+
+    bb0: {
+        _0 = Result::<String, ()>::Err(move _2); // scope 0 at ui/generator/issue-44197.rs:19:5: 19:12
+        return;                          // scope 0 at ui/generator/issue-44197.rs:20:2: 20:2
+    }
+}
+
+fn bar2(_1: String) -> impl Generator<Yield = String, Return = ()> {
+    debug baz => _1;                     // in scope 0 at ui/generator/issue-44197.rs:22:9: 22:12
+    let mut _0: impl std::ops::Generator<Yield = std::string::String, Return = ()>; // return place in scope 0 at ui/generator/issue-44197.rs:22:25: 22:72
+
+    bb0: {
+        _0 = [generator@ui/generator/issue-44197.rs:23:5: 23:12 (#0)] { baz: move _1 }; // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+                                         // generator
+                                         // + def_id: DefId(0:12 ~ issue_44197[3617]::bar2::{closure#0})
+                                         // + substs: [
+                                         //     (),
+                                         //     std::string::String,
+                                         //     (),
+                                         //     for<'a, 'b> {std::string::String, &'a str, &'b std::string::String, std::result::Result<std::string::String, ()>, bool, ()},
+                                         //     (std::string::String,),
+                                         // ]
+                                         // + movability: Movable
+        return;                          // scope 0 at ui/generator/issue-44197.rs:28:2: 28:2
+    }
+}
+
+fn bar2::{closure#0}(_1: Pin<&mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]>, _2: ()) -> GeneratorState<String, ()> {
+    debug baz => ((*(_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12])).0: std::string::String); // in scope 0 at ui/generator/issue-44197.rs:22:9: 22:12
+    let mut _0: std::ops::GeneratorState<std::string::String, ()>; // return place in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _3: &str;                    // in scope 0 at ui/generator/issue-44197.rs:24:32: 24:36
+    let _4: &str;                        // in scope 0 at ui/generator/issue-44197.rs:24:32: 24:36
+    let mut _5: &std::string::String;    // in scope 0 at ui/generator/issue-44197.rs:24:32: 24:36
+    let _6: &std::string::String;        // in scope 0 at ui/generator/issue-44197.rs:24:32: 24:36
+    let mut _7: isize;                   // in scope 0 at ui/generator/issue-44197.rs:24:16: 24:24
+    let mut _9: std::string::String;     // in scope 0 at ui/generator/issue-44197.rs:25:19: 25:23
+    let mut _10: isize;                  // in scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    let mut _11: ();                     // in scope 0 at ui/generator/issue-44197.rs:23:13: 23:13
+    let mut _12: u32;                    // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _13: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _14: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _15: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _16: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _17: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _18: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _19: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _20: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _21: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _22: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _23: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _24: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _25: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _26: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _27: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _28: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _29: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    let mut _30: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]; // in scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    scope 1 {
+        debug quux => _8;                // in scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+        let _8: std::string::String;     // in scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+    }
+
+    bb0: {
+        _13 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+        _12 = discriminant((*_13));      // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+        switchInt(move _12) -> [0: bb1, 1: bb15, 2: bb14, 3: bb13, otherwise: bb16]; // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    }
+
+    bb1: {
+        _14 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:27: 24:37
+        (((*_14) as variant#3).1: bool) = const false; // scope 1 at ui/generator/issue-44197.rs:24:27: 24:37
+        _15 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:32: 24:36
+        _6 = &((*_15).0: std::string::String); // scope 1 at ui/generator/issue-44197.rs:24:32: 24:36
+        _5 = _6;                         // scope 1 at ui/generator/issue-44197.rs:24:32: 24:36
+        _4 = <String as Deref>::deref(move _5) -> [return: bb2, unwind: bb6]; // scope 1 at ui/generator/issue-44197.rs:24:32: 24:36
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:24:32: 24:36
+                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a <String as Deref>::Target {<String as Deref>::deref}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = _4;                         // scope 1 at ui/generator/issue-44197.rs:24:32: 24:36
+        _16 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:27: 24:37
+        (((*_16) as variant#3).0: std::result::Result<std::string::String, ()>) = foo2(move _3) -> [return: bb3, unwind: bb6]; // scope 1 at ui/generator/issue-44197.rs:24:27: 24:37
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:24:27: 24:31
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> Result<String, ()> {foo2}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _17 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:36: 24:37
+        (((*_17) as variant#3).1: bool) = const true; // scope 1 at ui/generator/issue-44197.rs:24:36: 24:37
+        _18 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:16: 24:24
+        _7 = discriminant((((*_18) as variant#3).0: std::result::Result<std::string::String, ()>)); // scope 1 at ui/generator/issue-44197.rs:24:16: 24:24
+        switchInt(move _7) -> [0: bb4, otherwise: bb5]; // scope 1 at ui/generator/issue-44197.rs:24:16: 24:24
+    }
+
+    bb4: {
+        _19 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+        (((*_19) as variant#3).1: bool) = const false; // scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+        _20 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+        _8 = move (((((*_20) as variant#3).0: std::result::Result<std::string::String, ()>) as Ok).0: std::string::String); // scope 1 at ui/generator/issue-44197.rs:24:19: 24:23
+        _9 = move _8;                    // scope 1 at ui/generator/issue-44197.rs:25:19: 25:23
+        _0 = GeneratorState::<String, ()>::Yielded(move _9); // scope 1 at ui/generator/issue-44197.rs:25:13: 25:23
+        _21 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 1 at ui/generator/issue-44197.rs:25:13: 25:23
+        discriminant((*_21)) = 3;        // scope 1 at ui/generator/issue-44197.rs:25:13: 25:23
+        return;                          // scope 1 at ui/generator/issue-44197.rs:25:13: 25:23
+    }
+
+    bb5: {
+        _11 = const ();                  // scope 0 at ui/generator/issue-44197.rs:26:10: 26:10
+        goto -> bb11;                    // scope 0 at ui/generator/issue-44197.rs:24:9: 26:10
+    }
+
+    bb6 (cleanup): {
+        _24 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        (((*_24) as variant#3).1: bool) = const false; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        _29 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        drop(((*_29).0: std::string::String)) -> bb7; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb7 (cleanup): {
+        _30 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+        discriminant((*_30)) = 2;        // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+        resume;                          // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    }
+
+    bb8: {
+        _22 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        (((*_22) as variant#3).1: bool) = const false; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        _28 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        drop(((*_28).0: std::string::String)) -> [return: bb12, unwind: bb7]; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb9: {
+        _26 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        switchInt((((*_26) as variant#3).1: bool)) -> [0: bb8, otherwise: bb10]; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb10: {
+        _25 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        drop((((((*_25) as variant#3).0: std::result::Result<std::string::String, ()>) as Ok).0: std::string::String)) -> [return: bb8, unwind: bb6]; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb11: {
+        _27 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        _10 = discriminant((((*_27) as variant#3).0: std::result::Result<std::string::String, ()>)); // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+        switchInt(move _10) -> [0: bb9, otherwise: bb8]; // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb12: {
+        _0 = GeneratorState::<String, ()>::Complete(move _11); // scope 0 at ui/generator/issue-44197.rs:27:6: 27:6
+        _23 = deref_copy (_1.0: &mut [generator@ui/generator/issue-44197.rs:23:5: 23:12]); // scope 0 at ui/generator/issue-44197.rs:27:6: 27:6
+        discriminant((*_23)) = 1;        // scope 0 at ui/generator/issue-44197.rs:27:6: 27:6
+        return;                          // scope 0 at ui/generator/issue-44197.rs:27:6: 27:6
+    }
+
+    bb13: {
+        _11 = const ();                  // scope 1 at ui/generator/issue-44197.rs:24:38: 26:10
+        goto -> bb11;                    // scope 0 at ui/generator/issue-44197.rs:27:5: 27:6
+    }
+
+    bb14: {
+        assert(const false, "generator resumed after panicking") -> bb14; // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    }
+
+    bb15: {
+        assert(const false, "generator resumed after completion") -> bb15; // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    }
+
+    bb16: {
+        unreachable;                     // scope 0 at ui/generator/issue-44197.rs:23:5: 27:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generator/issue-44197.rs:30:11: 30:11
+    let mut _1: (&std::ops::GeneratorState<std::string::String, ()>, &std::ops::GeneratorState<std::string::String, ()>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _2: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _3: std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at ui/generator/issue-44197.rs:32:9: 32:53
+    let mut _4: std::pin::Pin<&mut impl std::ops::Generator<Yield = std::string::String, Return = ()>>; // in scope 0 at ui/generator/issue-44197.rs:32:9: 32:42
+    let mut _5: &mut impl std::ops::Generator<Yield = std::string::String, Return = ()>; // in scope 0 at ui/generator/issue-44197.rs:32:18: 32:41
+    let mut _6: impl std::ops::Generator<Yield = std::string::String, Return = ()>; // in scope 0 at ui/generator/issue-44197.rs:32:23: 32:41
+    let mut _7: std::string::String;     // in scope 0 at ui/generator/issue-44197.rs:32:27: 32:40
+    let mut _8: ();                      // in scope 0 at ui/generator/issue-44197.rs:32:50: 32:52
+    let mut _9: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _10: std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at ui/generator/issue-44197.rs:33:9: 33:47
+    let mut _11: std::string::String;    // in scope 0 at ui/generator/issue-44197.rs:33:33: 33:46
+    let _12: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _13: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _16: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _17: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _19: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _20: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _21: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _22: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _23: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _24: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _25: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _26: (&std::ops::GeneratorState<std::string::String, ()>, &std::ops::GeneratorState<std::string::String, ()>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _27: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _28: std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at ui/generator/issue-44197.rs:35:16: 35:61
+    let mut _29: std::pin::Pin<&mut impl std::ops::Generator<Yield = std::string::String, Return = ()>>; // in scope 0 at ui/generator/issue-44197.rs:35:16: 35:50
+    let mut _30: &mut impl std::ops::Generator<Yield = std::string::String, Return = ()>; // in scope 0 at ui/generator/issue-44197.rs:35:25: 35:49
+    let mut _31: impl std::ops::Generator<Yield = std::string::String, Return = ()>; // in scope 0 at ui/generator/issue-44197.rs:35:30: 35:49
+    let mut _32: std::string::String;    // in scope 0 at ui/generator/issue-44197.rs:35:35: 35:48
+    let mut _33: ();                     // in scope 0 at ui/generator/issue-44197.rs:35:58: 35:60
+    let mut _34: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _35: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _36: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _37: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _38: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _39: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _40: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _42: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _43: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _44: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _45: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _46: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _47: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _48: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _49: &std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    scope 1 {
+        debug left_val => _12;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _13;          // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _18: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 2 {
+            debug kind => _18;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 3 {
+        debug left_val => _35;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _36;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _41: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 4 {
+            debug kind => _41;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+
+    bb0: {
+        _7 = String::new() -> bb1;       // scope 0 at ui/generator/issue-44197.rs:32:27: 32:40
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:32:27: 32:38
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = bar(move _7) -> bb2;        // scope 0 at ui/generator/issue-44197.rs:32:23: 32:41
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:32:23: 32:26
+                                         // + literal: Const { ty: fn(String) -> impl Generator<Yield = String, Return = ()> {bar}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = &mut _6;                    // scope 0 at ui/generator/issue-44197.rs:32:18: 32:41
+        _4 = Pin::<&mut impl Generator<Yield = String, Return = ()>>::new(move _5) -> [return: bb3, unwind: bb25]; // scope 0 at ui/generator/issue-44197.rs:32:9: 32:42
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:32:9: 32:17
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&mut impl Generator<Yield = String, Return = ()>) -> Pin<&mut impl Generator<Yield = String, Return = ()>> {Pin::<&mut impl Generator<Yield = String, Return = ()>>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _3 = <impl Generator<Yield = String, Return = ()> as Generator>::resume(move _4, move _8) -> [return: bb4, unwind: bb25]; // scope 0 at ui/generator/issue-44197.rs:32:9: 32:53
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:32:43: 32:49
+                                         // + literal: Const { ty: for<'a> fn(Pin<&'a mut impl Generator<Yield = String, Return = ()>>, ()) -> GeneratorState<<impl Generator<Yield = String, Return = ()> as Generator>::Yield, <impl Generator<Yield = String, Return = ()> as Generator>::Return> {<impl Generator<Yield = String, Return = ()> as Generator>::resume}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _11 = String::new() -> [return: bb5, unwind: bb24]; // scope 0 at ui/generator/issue-44197.rs:33:33: 33:46
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:33:33: 33:44
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _10 = GeneratorState::<String, ()>::Yielded(move _11); // scope 0 at ui/generator/issue-44197.rs:33:9: 33:47
+        _9 = &_10;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = (move _2, move _9);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _12 = (_1.0: &std::ops::GeneratorState<std::string::String, ()>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _13 = (_1.1: &std::ops::GeneratorState<std::string::String, ()>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _16 = _12;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _17 = _13;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _15 = <GeneratorState<String, ()> as PartialEq>::eq(move _16, move _17) -> [return: bb6, unwind: bb23]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a GeneratorState<String, ()>, &'b GeneratorState<String, ()>) -> bool {<GeneratorState<String, ()> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _14 = Not(move _15);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _14) -> [0: bb8, otherwise: bb7]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb7: {
+        _18 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _20 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _22 = _12;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _21 = _22;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _24 = _13;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _23 = _24;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _25 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _19 = core::panicking::assert_failed::<GeneratorState<String, ()>, GeneratorState<String, ()>>(move _20, move _21, move _23, move _25) -> bb23; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a GeneratorState<String, ()>, &'b GeneratorState<String, ()>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<GeneratorState<String, ()>, GeneratorState<String, ()>>}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        drop(_10) -> [return: bb9, unwind: bb24]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb9: {
+        drop(_3) -> [return: bb10, unwind: bb25]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb10: {
+        drop(_6) -> bb11;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb11: {
+        _32 = String::new() -> bb12;     // scope 0 at ui/generator/issue-44197.rs:35:35: 35:48
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:35:35: 35:46
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _31 = bar2(move _32) -> bb13;    // scope 0 at ui/generator/issue-44197.rs:35:30: 35:49
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:35:30: 35:34
+                                         // + literal: Const { ty: fn(String) -> impl Generator<Yield = String, Return = ()> {bar2}, val: Value(<ZST>) }
+    }
+
+    bb13: {
+        _30 = &mut _31;                  // scope 0 at ui/generator/issue-44197.rs:35:25: 35:49
+        _29 = Pin::<&mut impl Generator<Yield = String, Return = ()>>::new(move _30) -> [return: bb14, unwind: bb22]; // scope 0 at ui/generator/issue-44197.rs:35:16: 35:50
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:35:16: 35:24
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(&mut impl Generator<Yield = String, Return = ()>) -> Pin<&mut impl Generator<Yield = String, Return = ()>> {Pin::<&mut impl Generator<Yield = String, Return = ()>>::new}, val: Value(<ZST>) }
+    }
+
+    bb14: {
+        _28 = <impl Generator<Yield = String, Return = ()> as Generator>::resume(move _29, move _33) -> [return: bb15, unwind: bb22]; // scope 0 at ui/generator/issue-44197.rs:35:16: 35:61
+                                         // mir::Constant
+                                         // + span: ui/generator/issue-44197.rs:35:51: 35:57
+                                         // + literal: Const { ty: for<'a> fn(Pin<&'a mut impl Generator<Yield = String, Return = ()>>, ()) -> GeneratorState<<impl Generator<Yield = String, Return = ()> as Generator>::Yield, <impl Generator<Yield = String, Return = ()> as Generator>::Return> {<impl Generator<Yield = String, Return = ()> as Generator>::resume}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _27 = &_28;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _49 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &GeneratorState<String, ()>, val: Unevaluated(main, [], Some(promoted[0])) }
+        _34 = _49;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _26 = (move _27, move _34);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _35 = (_26.0: &std::ops::GeneratorState<std::string::String, ()>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _36 = (_26.1: &std::ops::GeneratorState<std::string::String, ()>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _39 = _35;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _40 = _36;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _38 = <GeneratorState<String, ()> as PartialEq>::eq(move _39, move _40) -> [return: bb16, unwind: bb21]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a GeneratorState<String, ()>, &'b GeneratorState<String, ()>) -> bool {<GeneratorState<String, ()> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _37 = Not(move _38);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _37) -> [0: bb18, otherwise: bb17]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb17: {
+        _41 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _43 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _45 = _35;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _44 = _45;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _47 = _36;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _46 = _47;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _48 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _42 = core::panicking::assert_failed::<GeneratorState<String, ()>, GeneratorState<String, ()>>(move _43, move _44, move _46, move _48) -> bb21; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a GeneratorState<String, ()>, &'b GeneratorState<String, ()>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<GeneratorState<String, ()>, GeneratorState<String, ()>>}, val: Value(<ZST>) }
+    }
+
+    bb18: {
+        drop(_28) -> [return: bb19, unwind: bb22]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb19: {
+        drop(_31) -> bb20;               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb20: {
+        return;                          // scope 0 at ui/generator/issue-44197.rs:36:2: 36:2
+    }
+
+    bb21 (cleanup): {
+        drop(_28) -> bb22;               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb22 (cleanup): {
+        drop(_31) -> bb26;               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb23 (cleanup): {
+        drop(_10) -> bb24;               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb24 (cleanup): {
+        drop(_3) -> bb25;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb25 (cleanup): {
+        drop(_6) -> bb26;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb26 (cleanup): {
+        resume;                          // scope 0 at ui/generator/issue-44197.rs:30:1: 36:2
+    }
+}
+
+promoted[0] in main: &GeneratorState<String, ()> = {
+    let mut _0: &std::ops::GeneratorState<std::string::String, ()>; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: std::ops::GeneratorState<std::string::String, ()>; // in scope 0 at ui/generator/issue-44197.rs:35:63: 35:91
+    let mut _2: ();                      // in scope 0 at ui/generator/issue-44197.rs:35:88: 35:90
+
+    bb0: {
+        _2 = ();                         // scope 0 at ui/generator/issue-44197.rs:35:88: 35:90
+        _1 = GeneratorState::<String, ()>::Complete(move _2); // scope 0 at ui/generator/issue-44197.rs:35:63: 35:91
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}

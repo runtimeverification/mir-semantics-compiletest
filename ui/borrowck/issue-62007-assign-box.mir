@@ -1,0 +1,103 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn to_refs(_1: Box<&mut List<T>>) -> Vec<&mut T> {
+    debug list => _1;                    // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    let mut _0: std::vec::Vec<&mut T>;   // return place in scope 0 at ui/borrowck/issue-62007-assign-box.rs:16:9: 16:19
+    let _2: ();                          // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:18:9: 18:37
+    let mut _3: &mut std::vec::Vec<&mut T>; // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:18:9: 18:37
+    let mut _4: &mut T;                  // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:18:21: 18:36
+    let mut _5: std::option::Option<&mut std::boxed::Box<List<T>>>; // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+    let mut _6: &mut std::option::Option<std::boxed::Box<List<T>>>; // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+    let mut _7: isize;                   // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:19:16: 19:23
+    let mut _9: &mut List<T>;            // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:20:21: 20:22
+    let mut _10: &mut List<T>;           // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    let mut _11: &mut List<T>;           // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    let mut _12: std::boxed::Box<List<T>>; // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:19:21: 19:22
+    let mut _13: *const &mut List<T>;    // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    let mut _14: *const &mut List<T>;    // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    let mut _15: *const List<T>;         // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:19:21: 19:22
+    let mut _16: *const &mut List<T>;    // in scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:15: 15:23
+    scope 1 {
+        debug result => _0;              // in scope 1 at ui/borrowck/issue-62007-assign-box.rs:16:9: 16:19
+        scope 2 {
+            debug n => _8;               // in scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:21: 19:22
+            let _8: &mut std::boxed::Box<List<T>>; // in scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:21: 19:22
+        }
+    }
+
+    bb0: {
+        _0 = Vec::<&mut T>::new() -> [return: bb10, unwind: bb8]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:57
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> Vec<&mut T> {Vec::<&mut T>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = &mut _0;                    // scope 1 at ui/borrowck/issue-62007-assign-box.rs:18:9: 18:37
+        _13 = (((_1.0: std::ptr::Unique<&mut List<T>>).0: std::ptr::NonNull<&mut List<T>>).0: *const &mut List<T>); // scope 1 at ui/borrowck/issue-62007-assign-box.rs:18:21: 18:36
+        _10 = deref_copy (*_13);         // scope 1 at ui/borrowck/issue-62007-assign-box.rs:18:21: 18:36
+        _4 = &mut ((*_10).0: T);         // scope 1 at ui/borrowck/issue-62007-assign-box.rs:18:21: 18:36
+        _2 = Vec::<&mut T>::push(move _3, move _4) -> [return: bb2, unwind: bb7]; // scope 1 at ui/borrowck/issue-62007-assign-box.rs:18:9: 18:37
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-62007-assign-box.rs:18:16: 18:20
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<&mut T>, &mut T) {Vec::<&mut T>::push}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _14 = (((_1.0: std::ptr::Unique<&mut List<T>>).0: std::ptr::NonNull<&mut List<T>>).0: *const &mut List<T>); // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+        _11 = deref_copy (*_14);         // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+        _6 = &mut ((*_11).1: std::option::Option<std::boxed::Box<List<T>>>); // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+        _5 = Option::<Box<List<T>>>::as_mut(move _6) -> [return: bb3, unwind: bb7]; // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:26: 19:44
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-62007-assign-box.rs:19:36: 19:42
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Option<Box<List<T>>>) -> Option<&'a mut Box<List<T>>> {Option::<Box<List<T>>>::as_mut}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _7 = discriminant(_5);           // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:16: 19:23
+        switchInt(move _7) -> [1: bb4, otherwise: bb5]; // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:16: 19:23
+    }
+
+    bb4: {
+        _8 = move ((_5 as Some).0: &mut std::boxed::Box<List<T>>); // scope 2 at ui/borrowck/issue-62007-assign-box.rs:19:21: 19:22
+        _12 = deref_copy (*_8);          // scope 2 at ui/borrowck/issue-62007-assign-box.rs:20:21: 20:22
+        _15 = (((_12.0: std::ptr::Unique<List<T>>).0: std::ptr::NonNull<List<T>>).0: *const List<T>); // scope 2 at ui/borrowck/issue-62007-assign-box.rs:20:21: 20:22
+        _9 = &mut (*_15);                // scope 2 at ui/borrowck/issue-62007-assign-box.rs:20:21: 20:22
+        _16 = (((_1.0: std::ptr::Unique<&mut List<T>>).0: std::ptr::NonNull<&mut List<T>>).0: *const &mut List<T>); // scope 2 at ui/borrowck/issue-62007-assign-box.rs:20:13: 20:22
+        (*_16) = move _9;                // scope 2 at ui/borrowck/issue-62007-assign-box.rs:20:13: 20:22
+        goto -> bb1;                     // scope 1 at ui/borrowck/issue-62007-assign-box.rs:17:5: 24:6
+    }
+
+    bb5: {
+        drop(_1) -> bb6;                 // scope 0 at ui/borrowck/issue-62007-assign-box.rs:25:1: 25:2
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/borrowck/issue-62007-assign-box.rs:25:2: 25:2
+    }
+
+    bb7 (cleanup): {
+        drop(_0) -> bb8;                 // scope 0 at ui/borrowck/issue-62007-assign-box.rs:25:1: 25:2
+    }
+
+    bb8 (cleanup): {
+        drop(_1) -> bb9;                 // scope 0 at ui/borrowck/issue-62007-assign-box.rs:25:1: 25:2
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/issue-62007-assign-box.rs:15:1: 25:2
+    }
+
+    bb10: {
+        goto -> bb1;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-62007-assign-box.rs:27:11: 27:11
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/issue-62007-assign-box.rs:27:13: 27:13
+    }
+}

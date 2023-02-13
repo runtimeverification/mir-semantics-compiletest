@@ -1,0 +1,60 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:7:15: 7:15
+    let _1: std::boxed::Box<Foo>;        // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:8:9: 8:10
+    let mut _2: Foo;                     // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:8:22: 8:27
+    let mut _4: &std::boxed::Box<Foo>;   // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:17: 9:19
+    let mut _5: &&&std::boxed::Box<Foo>; // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+    let _6: &&std::boxed::Box<Foo>;      // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:12: 12:15
+    let _7: &std::boxed::Box<Foo>;       // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:13: 12:15
+    let mut _9: std::boxed::Box<Foo>;    // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:17: 9:19
+    let mut _10: &&std::boxed::Box<Foo>; // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+    let mut _11: &std::boxed::Box<Foo>;  // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+    let mut _12: std::boxed::Box<Foo>;   // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+    let mut _13: *const Foo;             // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:17: 9:19
+    let mut _14: *const Foo;             // in scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+    scope 1 {
+        debug b => _1;                   // in scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:8:9: 8:10
+        let _3: &Foo;                    // in scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:13: 9:14
+        scope 2 {
+            debug f => _3;               // in scope 2 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:13: 9:14
+            scope 3 {
+                let _8: &Foo;            // in scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+                scope 4 {
+                    debug f => _8;       // in scope 4 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+                    scope 5 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = Box::<Foo>::new(move _2) -> bb1; // scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:8:13: 8:28
+                                         // mir::Constant
+                                         // + span: ui/rfcs/rfc-2005-default-binding-mode/box.rs:8:13: 8:21
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Foo) -> Box<Foo> {Box::<Foo>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = &_1;                        // scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:17: 9:19
+        _9 = deref_copy (*_4);           // scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:13: 9:14
+        _13 = (((_9.0: std::ptr::Unique<Foo>).0: std::ptr::NonNull<Foo>).0: *const Foo); // scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:13: 9:14
+        _3 = &(*_13);                    // scope 1 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:9:13: 9:14
+        _7 = &_1;                        // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:13: 12:15
+        _6 = &_7;                        // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:12: 12:15
+        _5 = &_6;                        // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:12:11: 12:15
+        _10 = deref_copy (*_5);          // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+        _11 = deref_copy (*_10);         // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+        _12 = deref_copy (*_11);         // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+        _14 = (((_12.0: std::ptr::Unique<Foo>).0: std::ptr::NonNull<Foo>).0: *const Foo); // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+        _8 = &(*_14);                    // scope 3 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:13:13: 13:14
+        drop(_1) -> bb2;                 // scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:18:1: 18:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/rfcs/rfc-2005-default-binding-mode/box.rs:18:2: 18:2
+    }
+}

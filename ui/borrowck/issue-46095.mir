@@ -1,0 +1,89 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/borrowck/issue-46095.rs:4:1: 4:7>::take_mutably(_1: &mut A) -> () {
+    debug self => _1;                    // in scope 0 at ui/borrowck/issue-46095.rs:5:21: 5:30
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-46095.rs:5:32: 5:32
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/issue-46095.rs:5:34: 5:34
+    }
+}
+
+fn identity(_1: T) -> T {
+    debug t => _1;                       // in scope 0 at ui/borrowck/issue-46095.rs:8:16: 8:17
+    let mut _0: T;                       // return place in scope 0 at ui/borrowck/issue-46095.rs:8:25: 8:26
+
+    bb0: {
+        _0 = move _1;                    // scope 0 at ui/borrowck/issue-46095.rs:9:5: 9:6
+        return;                          // scope 0 at ui/borrowck/issue-46095.rs:10:2: 10:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-46095.rs:17:11: 17:11
+    let mut _1: A;                       // in scope 0 at ui/borrowck/issue-46095.rs:18:9: 18:15
+    let mut _4: &mut A;                  // in scope 0 at ui/borrowck/issue-46095.rs:21:20: 21:27
+    let mut _5: &mut A;                  // in scope 0 at ui/borrowck/issue-46095.rs:21:29: 21:36
+    let mut _6: &mut A;                  // in scope 0 at ui/borrowck/issue-46095.rs:21:29: 21:36
+    let _7: ();                          // in scope 0 at ui/borrowck/issue-46095.rs:24:9: 24:42
+    let mut _8: &mut A;                  // in scope 0 at ui/borrowck/issue-46095.rs:24:9: 24:42
+    let _9: usize;                       // in scope 0 at ui/borrowck/issue-46095.rs:24:17: 24:26
+    let _10: ();                         // in scope 0 at ui/borrowck/issue-46095.rs:28:9: 28:44
+    let mut _11: &mut A;                 // in scope 0 at ui/borrowck/issue-46095.rs:28:9: 28:44
+    let _12: usize;                      // in scope 0 at ui/borrowck/issue-46095.rs:28:17: 28:28
+    let mut _13: usize;                  // in scope 0 at ui/borrowck/issue-46095.rs:28:9: 28:29
+    let mut _14: bool;                   // in scope 0 at ui/borrowck/issue-46095.rs:28:9: 28:29
+    let mut _15: &mut A;                 // in scope 0 at ui/borrowck/issue-46095.rs:21:9: 21:16
+    let mut _16: &mut A;                 // in scope 0 at ui/borrowck/issue-46095.rs:21:9: 21:16
+    scope 1 {
+        debug a1 => _1;                  // in scope 1 at ui/borrowck/issue-46095.rs:18:9: 18:15
+        let mut _2: A;                   // in scope 1 at ui/borrowck/issue-46095.rs:19:9: 19:15
+        scope 2 {
+            debug a2 => _2;              // in scope 2 at ui/borrowck/issue-46095.rs:19:9: 19:15
+            let _3: [&mut A; 2];         // in scope 2 at ui/borrowck/issue-46095.rs:21:9: 21:16
+            scope 3 {
+                debug wrapped => _3;     // in scope 3 at ui/borrowck/issue-46095.rs:21:9: 21:16
+            }
+        }
+    }
+
+    bb0: {
+        _4 = &mut _1;                    // scope 2 at ui/borrowck/issue-46095.rs:21:20: 21:27
+        _6 = &mut _2;                    // scope 2 at ui/borrowck/issue-46095.rs:21:29: 21:36
+        _5 = &mut (*_6);                 // scope 2 at ui/borrowck/issue-46095.rs:21:29: 21:36
+        _3 = [move _4, move _5];         // scope 2 at ui/borrowck/issue-46095.rs:21:19: 21:37
+        _9 = const 0_usize;              // scope 3 at ui/borrowck/issue-46095.rs:24:17: 24:26
+        _15 = deref_copy _3[_9];         // scope 3 at ui/borrowck/issue-46095.rs:24:9: 24:42
+        _8 = &mut (*_15);                // scope 3 at ui/borrowck/issue-46095.rs:24:9: 24:42
+        _7 = A::take_mutably(move _8) -> bb1; // scope 3 at ui/borrowck/issue-46095.rs:24:9: 24:42
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-46095.rs:24:28: 24:40
+                                         // + literal: Const { ty: for<'a> fn(&'a mut A) {A::take_mutably}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _12 = identity::<usize>(const 0_usize) -> bb2; // scope 3 at ui/borrowck/issue-46095.rs:28:17: 28:28
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-46095.rs:28:17: 28:25
+                                         // + literal: Const { ty: fn(usize) -> usize {identity::<usize>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _13 = const 2_usize;             // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:29
+        _14 = Lt(_12, _13);              // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:29
+        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> bb3; // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:29
+    }
+
+    bb3: {
+        _16 = deref_copy _3[_12];        // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:44
+        _11 = &mut (*_16);               // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:44
+        _10 = A::take_mutably(move _11) -> bb4; // scope 3 at ui/borrowck/issue-46095.rs:28:9: 28:44
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-46095.rs:28:30: 28:42
+                                         // + literal: Const { ty: for<'a> fn(&'a mut A) {A::take_mutably}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/issue-46095.rs:30:2: 30:2
+    }
+}

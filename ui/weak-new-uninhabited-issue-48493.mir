@@ -1,0 +1,39 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/weak-new-uninhabited-issue-48493.rs:3:11: 3:11
+    let mut _1: std::rc::Weak<main::Void>; // in scope 0 at ui/weak-new-uninhabited-issue-48493.rs:5:13: 5:41
+    let mut _2: std::sync::Weak<main::Void>; // in scope 0 at ui/weak-new-uninhabited-issue-48493.rs:6:13: 6:43
+    scope 1 {
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _1 = std::rc::Weak::<Void>::new() -> bb1; // scope 0 at ui/weak-new-uninhabited-issue-48493.rs:5:13: 5:41
+                                         // mir::Constant
+                                         // + span: ui/weak-new-uninhabited-issue-48493.rs:5:13: 5:39
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> std::rc::Weak<Void> {std::rc::Weak::<Void>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/weak-new-uninhabited-issue-48493.rs:5:41: 5:42
+    }
+
+    bb2: {
+        _2 = std::sync::Weak::<Void>::new() -> bb3; // scope 1 at ui/weak-new-uninhabited-issue-48493.rs:6:13: 6:43
+                                         // mir::Constant
+                                         // + span: ui/weak-new-uninhabited-issue-48493.rs:6:13: 6:41
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() -> std::sync::Weak<Void> {std::sync::Weak::<Void>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_2) -> bb4;                 // scope 1 at ui/weak-new-uninhabited-issue-48493.rs:6:43: 6:44
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/weak-new-uninhabited-issue-48493.rs:7:2: 7:2
+    }
+}

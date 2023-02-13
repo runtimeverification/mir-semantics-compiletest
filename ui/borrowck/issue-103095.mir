@@ -1,0 +1,93 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/borrowck/issue-103095.rs:16:1: 16:46>::new(_1: T, _2: D) -> Data<T, D> {
+    debug value => _1;                   // in scope 0 at ui/borrowck/issue-103095.rs:17:12: 17:17
+    debug f => _2;                       // in scope 0 at ui/borrowck/issue-103095.rs:17:22: 17:23
+    let mut _0: Data<T, D>;              // return place in scope 0 at ui/borrowck/issue-103095.rs:17:31: 17:35
+    let _3: <D as FnOnceForGenericRef<T>>::FnOutput; // in scope 0 at ui/borrowck/issue-103095.rs:18:13: 18:19
+    let mut _4: D;                       // in scope 0 at ui/borrowck/issue-103095.rs:18:22: 18:23
+    let mut _5: (&T,);                   // in scope 0 at ui/borrowck/issue-103095.rs:18:22: 18:31
+    let mut _6: &T;                      // in scope 0 at ui/borrowck/issue-103095.rs:18:24: 18:30
+    let _7: &T;                          // in scope 0 at ui/borrowck/issue-103095.rs:18:24: 18:30
+    let mut _8: std::option::Option<T>;  // in scope 0 at ui/borrowck/issue-103095.rs:20:20: 20:31
+    let mut _9: T;                       // in scope 0 at ui/borrowck/issue-103095.rs:20:25: 20:30
+    let mut _10: std::option::Option<<D as FnOnceForGenericRef<T>>::FnOutput>; // in scope 0 at ui/borrowck/issue-103095.rs:21:21: 21:33
+    let mut _11: <D as FnOnceForGenericRef<T>>::FnOutput; // in scope 0 at ui/borrowck/issue-103095.rs:21:26: 21:32
+    scope 1 {
+        debug output => _3;              // in scope 1 at ui/borrowck/issue-103095.rs:18:13: 18:19
+    }
+
+    bb0: {
+        _4 = move _2;                    // scope 0 at ui/borrowck/issue-103095.rs:18:22: 18:23
+        _7 = &_1;                        // scope 0 at ui/borrowck/issue-103095.rs:18:24: 18:30
+        _6 = _7;                         // scope 0 at ui/borrowck/issue-103095.rs:18:24: 18:30
+        _5 = (move _6,);                 // scope 0 at ui/borrowck/issue-103095.rs:18:22: 18:31
+        _3 = <D as FnOnce<(&T,)>>::call_once(move _4, move _5) -> [return: bb1, unwind: bb2]; // scope 0 at ui/borrowck/issue-103095.rs:18:22: 18:31
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-103095.rs:18:22: 18:23
+                                         // + literal: Const { ty: extern "rust-call" fn(D, (&T,)) -> <D as FnOnce<(&T,)>>::Output {<D as FnOnce<(&T,)>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _9 = move _1;                    // scope 1 at ui/borrowck/issue-103095.rs:20:25: 20:30
+        _8 = Option::<T>::Some(move _9); // scope 1 at ui/borrowck/issue-103095.rs:20:20: 20:31
+        _11 = move _3;                   // scope 1 at ui/borrowck/issue-103095.rs:21:26: 21:32
+        _10 = Option::<<D as FnOnceForGenericRef<T>>::FnOutput>::Some(move _11); // scope 1 at ui/borrowck/issue-103095.rs:21:21: 21:33
+        _0 = Data::<T, D> { value: move _8, output: move _10 }; // scope 1 at ui/borrowck/issue-103095.rs:19:9: 22:10
+        return;                          // scope 0 at ui/borrowck/issue-103095.rs:23:6: 23:6
+    }
+
+    bb2 (cleanup): {
+        drop(_1) -> bb3;                 // scope 0 at ui/borrowck/issue-103095.rs:23:5: 23:6
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/borrowck/issue-103095.rs:17:5: 23:6
+    }
+}
+
+fn test() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-103095.rs:26:11: 26:11
+    let _1: Data<std::string::String, [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]>; // in scope 0 at ui/borrowck/issue-103095.rs:27:5: 27:37
+    let mut _2: std::string::String;     // in scope 0 at ui/borrowck/issue-103095.rs:27:15: 27:28
+    let mut _3: [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]; // in scope 0 at ui/borrowck/issue-103095.rs:27:30: 27:36
+
+    bb0: {
+        _2 = String::new() -> bb1;       // scope 0 at ui/borrowck/issue-103095.rs:27:15: 27:28
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-103095.rs:27:15: 27:26
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = Data::<String, [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]>::new(move _2, move _3) -> bb2; // scope 0 at ui/borrowck/issue-103095.rs:27:5: 27:37
+                                         // mir::Constant
+                                         // + span: ui/borrowck/issue-103095.rs:27:5: 27:14
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(String, [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]) -> Data<String, [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]> {Data::<String, [closure@ui/borrowck/issue-103095.rs:27:30: 27:33]>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        drop(_1) -> bb3;                 // scope 0 at ui/borrowck/issue-103095.rs:27:37: 27:38
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/borrowck/issue-103095.rs:28:2: 28:2
+    }
+}
+
+fn test::{closure#0}(_1: [closure@ui/borrowck/issue-103095.rs:27:30: 27:33], _2: &String) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-103095.rs:27:34: 27:34
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/issue-103095.rs:27:36: 27:36
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-103095.rs:30:11: 30:11
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/issue-103095.rs:30:13: 30:13
+    }
+}

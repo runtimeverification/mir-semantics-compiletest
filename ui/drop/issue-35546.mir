@@ -1,0 +1,93 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn clear(_1: &mut Option<Box<Node<dyn Send>>>) -> () {
+    debug head => _1;                    // in scope 0 at ui/drop/issue-35546.rs:13:10: 13:14
+    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-35546.rs:13:50: 13:50
+    let mut _2: std::option::Option<std::boxed::Box<Node<dyn std::marker::Send>>>; // in scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+    let mut _3: &mut std::option::Option<std::boxed::Box<Node<dyn std::marker::Send>>>; // in scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+    let mut _4: isize;                   // in scope 0 at ui/drop/issue-35546.rs:15:9: 15:19
+    let _5: std::boxed::Box<Node<dyn std::marker::Send>>; // in scope 0 at ui/drop/issue-35546.rs:15:14: 15:18
+    let mut _6: std::option::Option<std::boxed::Box<Node<dyn std::marker::Send>>>; // in scope 0 at ui/drop/issue-35546.rs:15:31: 15:40
+    let mut _7: ();                      // in scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+    let mut _8: ();                      // in scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+    let mut _9: ();                      // in scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+    let mut _10: *const Node<dyn std::marker::Send>; // in scope 0 at ui/drop/issue-35546.rs:15:14: 15:18
+    let mut _11: *const Node<dyn std::marker::Send>; // in scope 0 at ui/drop/issue-35546.rs:15:14: 15:18
+    let mut _12: *const Node<dyn std::marker::Send>; // in scope 0 at ui/drop/issue-35546.rs:15:14: 15:18
+    scope 1 {
+        debug node => _5;                // in scope 1 at ui/drop/issue-35546.rs:15:14: 15:18
+    }
+
+    bb0: {
+        _3 = &mut (*_1);                 // scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+        _2 = Option::<Box<Node<dyn Send>>>::take(move _3) -> bb1; // scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+                                         // mir::Constant
+                                         // + span: ui/drop/issue-35546.rs:14:16: 14:20
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Option<Box<Node<dyn Send>>>) -> Option<Box<Node<dyn Send>>> {Option::<Box<Node<dyn Send>>>::take}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = discriminant(_2);           // scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+        switchInt(move _4) -> [0: bb9, 1: bb3, otherwise: bb2]; // scope 0 at ui/drop/issue-35546.rs:14:5: 14:22
+    }
+
+    bb2: {
+        unreachable;                     // scope 0 at ui/drop/issue-35546.rs:14:11: 14:22
+    }
+
+    bb3: {
+        _5 = move ((_2 as Some).0: std::boxed::Box<Node<dyn std::marker::Send>>); // scope 0 at ui/drop/issue-35546.rs:15:14: 15:18
+        _12 = (((_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>).0: std::ptr::NonNull<Node<dyn std::marker::Send>>).0: *const Node<dyn std::marker::Send>); // scope 1 at ui/drop/issue-35546.rs:15:31: 15:40
+        _6 = move ((*_12).0: std::option::Option<std::boxed::Box<Node<dyn std::marker::Send>>>); // scope 1 at ui/drop/issue-35546.rs:15:31: 15:40
+        drop((*_1)) -> [return: bb6, unwind: bb5]; // scope 1 at ui/drop/issue-35546.rs:15:23: 15:28
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/drop/issue-35546.rs:13:1: 18:2
+    }
+
+    bb5 (cleanup): {
+        (*_1) = move _6;                 // scope 1 at ui/drop/issue-35546.rs:15:23: 15:28
+        _11 = deref_copy (((_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>).0: std::ptr::NonNull<Node<dyn std::marker::Send>>).0: *const Node<dyn std::marker::Send>); // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+        drop(((*_11).1: dyn std::marker::Send)) -> bb10; // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+    }
+
+    bb6: {
+        (*_1) = move _6;                 // scope 1 at ui/drop/issue-35546.rs:15:23: 15:28
+        _10 = deref_copy (((_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>).0: std::ptr::NonNull<Node<dyn std::marker::Send>>).0: *const Node<dyn std::marker::Send>); // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+        drop(((*_10).1: dyn std::marker::Send)) -> [return: bb8, unwind: bb7]; // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+    }
+
+    bb7 (cleanup): {
+        _8 = alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>(move (_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>), move (_5.1: std::alloc::Global)) -> bb4; // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+                                         // mir::Constant
+                                         // + span: ui/drop/issue-35546.rs:15:39: 15:40
+                                         // + literal: Const { ty: unsafe fn(Unique<Node<dyn Send>>, std::alloc::Global) {alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _7 = alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>(move (_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>), move (_5.1: std::alloc::Global)) -> bb9; // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+                                         // mir::Constant
+                                         // + span: ui/drop/issue-35546.rs:15:39: 15:40
+                                         // + literal: Const { ty: unsafe fn(Unique<Node<dyn Send>>, std::alloc::Global) {alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        return;                          // scope 0 at ui/drop/issue-35546.rs:18:2: 18:2
+    }
+
+    bb10 (cleanup): {
+        _9 = alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>(move (_5.0: std::ptr::Unique<Node<dyn std::marker::Send>>), move (_5.1: std::alloc::Global)) -> bb4; // scope 0 at ui/drop/issue-35546.rs:15:39: 15:40
+                                         // mir::Constant
+                                         // + span: ui/drop/issue-35546.rs:15:39: 15:40
+                                         // + literal: Const { ty: unsafe fn(Unique<Node<dyn Send>>, std::alloc::Global) {alloc::alloc::box_free::<Node<dyn Send>, std::alloc::Global>}, val: Value(<ZST>) }
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-35546.rs:20:11: 20:11
+
+    bb0: {
+        return;                          // scope 0 at ui/drop/issue-35546.rs:20:13: 20:13
+    }
+}

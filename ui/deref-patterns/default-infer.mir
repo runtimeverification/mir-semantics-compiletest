@@ -1,0 +1,43 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/deref-patterns/default-infer.rs:4:11: 4:11
+    let mut _1: &str;                    // in scope 0 at ui/deref-patterns/default-infer.rs:5:11: 5:36
+    let mut _2: bool;                    // in scope 0 at ui/deref-patterns/default-infer.rs:6:9: 6:11
+    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:77
+
+    bb0: {
+        _1 = <&str as Default>::default() -> bb1; // scope 0 at ui/deref-patterns/default-infer.rs:5:11: 5:36
+                                         // mir::Constant
+                                         // + span: ui/deref-patterns/default-infer.rs:5:11: 5:34
+                                         // + literal: Const { ty: fn() -> &str {<&str as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <str as PartialEq>::eq(_1, const "") -> bb2; // scope 0 at ui/deref-patterns/default-infer.rs:6:9: 6:11
+                                         // mir::Constant
+                                         // + span: ui/deref-patterns/default-infer.rs:6:9: 6:11
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/deref-patterns/default-infer.rs:6:9: 6:11
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        switchInt(move _2) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/deref-patterns/default-infer.rs:6:9: 6:11
+    }
+
+    bb3: {
+        _3 = core::panicking::panic(const "internal error: entered unreachable code"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:77
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:34: 68:76
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/deref-patterns/default-infer.rs:9:2: 9:2
+    }
+}

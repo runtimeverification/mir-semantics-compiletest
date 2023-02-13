@@ -1,0 +1,43 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-expr-array-init.rs:7:11: 7:11
+    let _1: [std::cell::Cell<i32>; 20];  // in scope 0 at ui/inline-const/const-expr-array-init.rs:8:9: 8:11
+    scope 1 {
+        debug _x => _1;                  // in scope 1 at ui/inline-const/const-expr-array-init.rs:8:9: 8:11
+    }
+
+    bb0: {
+        _1 = [const _; 20];              // scope 0 at ui/inline-const/const-expr-array-init.rs:8:14: 8:42
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-expr-array-init.rs:8:15: 8:37
+                                         // + literal: Const { ty: Cell<i32>, val: Unevaluated(main::{constant#0}, [std::cell::Cell<i32>], None) }
+        return;                          // scope 0 at ui/inline-const/const-expr-array-init.rs:9:2: 9:2
+    }
+}
+
+main::{constant#0}: Cell<i32> = {
+    let mut _0: std::cell::Cell<i32>;    // return place in scope 0 at ui/inline-const/const-expr-array-init.rs:8:21: 8:37
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/inline-const/const-expr-array-init.rs:8:23: 8:35
+        _0 = Cell::<i32>::new(const 0_i32) -> bb1; // scope 0 at ui/inline-const/const-expr-array-init.rs:8:23: 8:35
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-expr-array-init.rs:8:23: 8:32
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(i32) -> Cell<i32> {Cell::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/inline-const/const-expr-array-init.rs:8:21: 8:37
+    }
+}
+
+main::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-array-init.rs:8:39: 8:41
+
+    bb0: {
+        _0 = const 20_usize;             // scope 0 at ui/inline-const/const-expr-array-init.rs:8:39: 8:41
+        return;                          // scope 0 at ui/inline-const/const-expr-array-init.rs:8:39: 8:41
+    }
+}

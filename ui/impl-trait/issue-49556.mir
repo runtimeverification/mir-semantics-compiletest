@@ -1,0 +1,65 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn iter(_1: &[usize]) -> impl Iterator<Item = usize> + '_ {
+    debug data => _1;                    // in scope 0 at ui/impl-trait/issue-49556.rs:2:13: 2:17
+    let mut _0: impl std::iter::Iterator<Item = usize> + '_; // return place in scope 0 at ui/impl-trait/issue-49556.rs:2:35: 2:67
+    let mut _2: std::iter::Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]>; // in scope 0 at ui/impl-trait/issue-49556.rs:3:5: 6:10
+    let mut _3: std::slice::Iter<'_, usize>; // in scope 0 at ui/impl-trait/issue-49556.rs:3:5: 3:16
+    let mut _4: &[usize];                // in scope 0 at ui/impl-trait/issue-49556.rs:3:5: 3:16
+    let mut _5: [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]; // in scope 0 at ui/impl-trait/issue-49556.rs:5:13: 5:18
+    let mut _6: [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16]; // in scope 0 at ui/impl-trait/issue-49556.rs:8:13: 8:19
+
+    bb0: {
+        _4 = _1;                         // scope 0 at ui/impl-trait/issue-49556.rs:3:5: 3:16
+        _3 = core::slice::<impl [usize]>::iter(move _4) -> bb1; // scope 0 at ui/impl-trait/issue-49556.rs:3:5: 3:16
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-49556.rs:3:10: 3:14
+                                         // + literal: Const { ty: for<'a> fn(&'a [usize]) -> std::slice::Iter<'a, usize> {core::slice::<impl [usize]>::iter}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <std::slice::Iter<'_, usize> as Iterator>::map::<&usize, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]>(move _3, move _5) -> bb2; // scope 0 at ui/impl-trait/issue-49556.rs:3:5: 6:10
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-49556.rs:4:10: 4:13
+                                         // + literal: Const { ty: fn(std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]) -> Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]> {<std::slice::Iter<'_, usize> as Iterator>::map::<&usize, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _0 = <Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]> as Iterator>::map::<usize, [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16]>(move _2, move _6) -> bb3; // scope 0 at ui/impl-trait/issue-49556.rs:3:5: 9:10
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-49556.rs:7:10: 7:13
+                                         // + literal: Const { ty: fn(Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]>, [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16]) -> Map<Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]>, [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16]> {<Map<std::slice::Iter<'_, usize>, [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16]> as Iterator>::map::<usize, [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16]>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/impl-trait/issue-49556.rs:10:2: 10:2
+    }
+}
+
+fn iter::{closure#0}(_1: &mut [closure@ui/impl-trait/issue-49556.rs:5:13: 5:16], _2: &usize) -> &usize {
+    debug x => _2;                       // in scope 0 at ui/impl-trait/issue-49556.rs:5:14: 5:15
+    let mut _0: &usize;                  // return place in scope 0 at ui/impl-trait/issue-49556.rs:5:17: 5:17
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/impl-trait/issue-49556.rs:5:17: 5:18
+        return;                          // scope 0 at ui/impl-trait/issue-49556.rs:5:18: 5:18
+    }
+}
+
+fn iter::{closure#1}(_1: &mut [closure@ui/impl-trait/issue-49556.rs:8:13: 8:16], _2: &usize) -> usize {
+    debug x => _2;                       // in scope 0 at ui/impl-trait/issue-49556.rs:8:14: 8:15
+    let mut _0: usize;                   // return place in scope 0 at ui/impl-trait/issue-49556.rs:8:17: 8:17
+
+    bb0: {
+        _0 = (*_2);                      // scope 0 at ui/impl-trait/issue-49556.rs:8:17: 8:19
+        return;                          // scope 0 at ui/impl-trait/issue-49556.rs:8:19: 8:19
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issue-49556.rs:12:11: 12:11
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/issue-49556.rs:13:2: 13:2
+    }
+}

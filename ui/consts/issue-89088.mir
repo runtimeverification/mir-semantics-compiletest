@@ -1,0 +1,186 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const FOO: &A = {
+    let mut _0: &A;                      // return place in scope 0 at ui/consts/issue-89088.rs:8:12: 8:14
+    let _1: &A;                          // in scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+    let _2: A;                           // in scope 0 at ui/consts/issue-89088.rs:8:18: 8:48
+    let mut _3: std::borrow::Cow<'_, str>; // in scope 0 at ui/consts/issue-89088.rs:8:27: 8:47
+    let mut _4: &str;                    // in scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+    let _5: &str;                        // in scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+    let mut _6: &A;                      // in scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+        _6 = const _;                    // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:8:17: 8:48
+                                         // + literal: Const { ty: &A, val: Unevaluated(FOO, [], Some(promoted[0])) }
+        _1 = &(*_6);                     // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+        _0 = &(*_1);                     // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-89088.rs:8:47: 8:48
+        return;                          // scope 0 at ui/consts/issue-89088.rs:8:1: 8:49
+    }
+}
+
+promoted[0] in FOO: &A = {
+    let mut _0: &A;                      // return place in scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+    let mut _1: A;                       // in scope 0 at ui/consts/issue-89088.rs:8:18: 8:48
+    let mut _2: std::borrow::Cow<'_, str>; // in scope 0 at ui/consts/issue-89088.rs:8:27: 8:47
+    let mut _3: &str;                    // in scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+    let mut _4: &str;                    // in scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+
+    bb0: {
+        _4 = const "foo";                // scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:8:41: 8:46
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = &(*_4);                     // scope 0 at ui/consts/issue-89088.rs:8:41: 8:46
+        _2 = Cow::<'_, str>::Borrowed(move _3); // scope 0 at ui/consts/issue-89088.rs:8:27: 8:47
+        _1 = A::Field(move _2);          // scope 0 at ui/consts/issue-89088.rs:8:18: 8:48
+        _0 = &_1;                        // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+        return;                          // scope 0 at ui/consts/issue-89088.rs:8:17: 8:48
+    }
+}
+
+fn <impl at ui/consts/issue-89088.rs:10:10: 10:19>::eq(_1: &A, _2: &A) -> bool {
+    debug self => _1;                    // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    debug other => _2;                   // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let mut _3: (&A, &A);                // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let mut _4: &A;                      // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let mut _5: &A;                      // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let _6: &std::borrow::Cow<'_, str>;  // in scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+    let _7: &std::borrow::Cow<'_, str>;  // in scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+    let mut _8: &std::borrow::Cow<'_, str>; // in scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+    let mut _9: &std::borrow::Cow<'_, str>; // in scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+    let mut _10: &A;                     // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    let mut _11: &A;                     // in scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+    scope 1 {
+        debug __self_0 => _6;            // in scope 1 at ui/consts/issue-89088.rs:12:11: 12:28
+        debug __arg1_0 => _7;            // in scope 1 at ui/consts/issue-89088.rs:12:11: 12:28
+    }
+
+    bb0: {
+        _4 = _1;                         // scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+        _5 = _2;                         // scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+        _3 = (move _4, move _5);         // scope 0 at ui/consts/issue-89088.rs:10:10: 10:19
+        _10 = deref_copy (_3.0: &A);     // scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+        _6 = &(((*_10) as Field).0: std::borrow::Cow<'_, str>); // scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+        _11 = deref_copy (_3.1: &A);     // scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+        _7 = &(((*_11) as Field).0: std::borrow::Cow<'_, str>); // scope 0 at ui/consts/issue-89088.rs:12:11: 12:28
+        _8 = _6;                         // scope 1 at ui/consts/issue-89088.rs:12:11: 12:28
+        _9 = _7;                         // scope 1 at ui/consts/issue-89088.rs:12:11: 12:28
+        _0 = <Cow<'_, str> as PartialEq>::eq(move _8, move _9) -> bb1; // scope 1 at ui/consts/issue-89088.rs:12:11: 12:28
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:12:11: 12:28
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Cow<'_, str>, &'b Cow<'_, str>) -> bool {<Cow<'_, str> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-89088.rs:10:19: 10:19
+    }
+}
+
+fn <impl at ui/consts/issue-89088.rs:10:21: 10:23>::assert_receiver_is_total_eq(_1: &A) -> () {
+    debug self => _1;                    // in scope 0 at ui/consts/issue-89088.rs:10:21: 10:23
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-89088.rs:10:21: 10:23
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-89088.rs:10:23: 10:23
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-89088.rs:15:11: 15:11
+    let _1: A;                           // in scope 0 at ui/consts/issue-89088.rs:16:9: 16:12
+    let mut _2: std::borrow::Cow<'_, str>; // in scope 0 at ui/consts/issue-89088.rs:16:24: 16:44
+    let mut _3: &str;                    // in scope 0 at ui/consts/issue-89088.rs:16:38: 16:43
+    let _4: &str;                        // in scope 0 at ui/consts/issue-89088.rs:16:38: 16:43
+    let mut _5: &A;                      // in scope 0 at ui/consts/issue-89088.rs:18:11: 18:15
+    let mut _6: bool;                    // in scope 0 at ui/consts/issue-89088.rs:19:9: 19:12
+    let mut _7: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+    let mut _8: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+    scope 1 {
+        debug var => _1;                 // in scope 1 at ui/consts/issue-89088.rs:16:9: 16:12
+    }
+
+    bb0: {
+        _4 = const "bar";                // scope 0 at ui/consts/issue-89088.rs:16:38: 16:43
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:16:38: 16:43
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = _4;                         // scope 0 at ui/consts/issue-89088.rs:16:38: 16:43
+        _2 = Cow::<'_, str>::Borrowed(move _3); // scope 0 at ui/consts/issue-89088.rs:16:24: 16:44
+        _1 = A::Field(move _2);          // scope 0 at ui/consts/issue-89088.rs:16:15: 16:45
+        _5 = &_1;                        // scope 1 at ui/consts/issue-89088.rs:18:11: 18:15
+        _6 = <A as PartialEq>::eq(_5, const {alloc5: &A}) -> [return: bb1, unwind: bb4]; // scope 1 at ui/consts/issue-89088.rs:19:9: 19:12
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:19:9: 19:12
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a A, &'b A) -> bool {<A as PartialEq>::eq}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-89088.rs:19:9: 19:12
+                                         // + literal: Const { ty: &A, val: Value(Scalar(alloc5)) }
+    }
+
+    bb1: {
+        switchInt(move _6) -> [0: bb2, otherwise: bb3]; // scope 1 at ui/consts/issue-89088.rs:19:9: 19:12
+    }
+
+    bb2: {
+        _8 = core::panicking::panic(const "not yet implemented") -> bb4; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        _7 = core::panicking::panic(const "not yet implemented") -> bb4; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4 (cleanup): {
+        drop(_1) -> bb5;                 // scope 0 at ui/consts/issue-89088.rs:22:1: 22:2
+    }
+
+    bb5 (cleanup): {
+        resume;                          // scope 0 at ui/consts/issue-89088.rs:15:1: 22:2
+    }
+}
+
+alloc5 (size: 32, align: 8) {
+    0x00 │ 00 00 00 00 00 00 00 00 ╾───────alloc3────────╼ │ ........╾──────╼
+    0x10 │ 03 00 00 00 00 00 00 00 __ __ __ __ __ __ __ __ │ ........░░░░░░░░
+}
+
+alloc3 (size: 3, align: 1) {
+    66 6f 6f                                        │ foo
+}
+
+fn A::Field(_1: Cow<'_, str>) -> A {
+    let mut _0: A;                       // return place in scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+
+    bb0: {
+        _0 = A::Field(move _1);          // scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+        return;                          // scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+    }
+}
+
+// MIR FOR CTFE
+fn A::Field(_1: Cow<'_, str>) -> A {
+    let mut _0: A;                       // return place in scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+
+    bb0: {
+        _0 = A::Field(move _1);          // scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+        return;                          // scope 0 at ui/consts/issue-89088.rs:12:5: 12:10
+    }
+}

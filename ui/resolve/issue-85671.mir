@@ -1,0 +1,89 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/resolve/issue-85671.rs:13:1: 13:47>::as_slice(_1: &A<&[Element]>) -> &[Element] {
+    debug self => _1;                    // in scope 0 at ui/resolve/issue-85671.rs:15:17: 15:22
+    let mut _0: &[Element];              // return place in scope 0 at ui/resolve/issue-85671.rs:15:17: 15:22
+
+    bb0: {
+        _0 = deref_copy ((*_1).0: &[Element]); // scope 0 at ui/resolve/issue-85671.rs:16:9: 16:15
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:17:6: 17:6
+    }
+}
+
+fn <impl at ui/resolve/issue-85671.rs:20:1: 20:19>::failing(_1: &A<Cont>) -> () {
+    debug self => _1;                    // in scope 0 at ui/resolve/issue-85671.rs:22:26: 22:31
+    let mut _0: ();                      // return place in scope 0 at ui/resolve/issue-85671.rs:23:5: 23:5
+    let _2: A<&[Coef]>;                  // in scope 0 at ui/resolve/issue-85671.rs:26:9: 26:35
+    let mut _3: &A<&[Coef]>;             // in scope 0 at ui/resolve/issue-85671.rs:26:9: 26:35
+    let _4: A<&[Coef]>;                  // in scope 0 at ui/resolve/issue-85671.rs:26:9: 26:24
+    let mut _5: &A<Cont>;                // in scope 0 at ui/resolve/issue-85671.rs:26:9: 26:24
+
+    bb0: {
+        _5 = _1;                         // scope 0 at ui/resolve/issue-85671.rs:26:9: 26:24
+        _4 = A::<Cont>::as_ref_a::<Coef>(move _5) -> bb1; // scope 0 at ui/resolve/issue-85671.rs:26:9: 26:24
+                                         // mir::Constant
+                                         // + span: ui/resolve/issue-85671.rs:26:14: 26:22
+                                         // + literal: Const { ty: for<'a> fn(&'a A<Cont>) -> A<&'a [<A<Cont> as AsSlice>::Element]> {A::<Cont>::as_ref_a::<Coef>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = &_4;                        // scope 0 at ui/resolve/issue-85671.rs:26:9: 26:35
+        _2 = A::<&[Coef]>::as_ref_a::<Coef>(move _3) -> bb2; // scope 0 at ui/resolve/issue-85671.rs:26:9: 26:35
+                                         // mir::Constant
+                                         // + span: ui/resolve/issue-85671.rs:26:25: 26:33
+                                         // + literal: Const { ty: for<'a> fn(&'a A<&[Coef]>) -> A<&'a [<A<&[Coef]> as AsSlice>::Element]> {A::<&[Coef]>::as_ref_a::<Coef>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:27:6: 27:6
+    }
+}
+
+fn <impl at ui/resolve/issue-85671.rs:20:1: 20:19>::as_ref_a(_1: &A<Cont>) -> A<&[Coef]> {
+    debug self => _1;                    // in scope 0 at ui/resolve/issue-85671.rs:29:27: 29:32
+    let mut _0: A<&[Coef]>;              // return place in scope 0 at ui/resolve/issue-85671.rs:29:37: 29:69
+    let mut _2: &[Coef];                 // in scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+    let _3: &[Coef];                     // in scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+    let mut _4: &A<Cont>;                // in scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+
+    bb0: {
+        _4 = _1;                         // scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+        _3 = <A<Cont> as AsSlice>::as_slice(move _4) -> bb1; // scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+                                         // mir::Constant
+                                         // + span: ui/resolve/issue-85671.rs:33:16: 33:24
+                                         // + literal: Const { ty: for<'a> fn(&'a A<Cont>) -> &'a [<A<Cont> as AsSlice>::Element] {<A<Cont> as AsSlice>::as_slice}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = _3;                         // scope 0 at ui/resolve/issue-85671.rs:33:11: 33:26
+        _0 = A::<&[Coef]>(move _2);      // scope 0 at ui/resolve/issue-85671.rs:33:9: 33:27
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:34:6: 34:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/resolve/issue-85671.rs:37:11: 37:11
+
+    bb0: {
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:37:13: 37:13
+    }
+}
+
+fn A(_1: Cont) -> A<Cont> {
+    let mut _0: A<Cont>;                 // return place in scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+
+    bb0: {
+        _0 = A::<Cont>(move _1);         // scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+    }
+}
+
+// MIR FOR CTFE
+fn A(_1: Cont) -> A<Cont> {
+    let mut _0: A<Cont>;                 // return place in scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+
+    bb0: {
+        _0 = A::<Cont>(move _1);         // scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+        return;                          // scope 0 at ui/resolve/issue-85671.rs:10:1: 10:19
+    }
+}

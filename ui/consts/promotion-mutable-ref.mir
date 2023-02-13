@@ -1,0 +1,166 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static mut TEST: i32 = {
+    let mut _0: i32;                     // return place in scope 0 at ui/consts/promotion-mutable-ref.rs:4:18: 4:21
+    let _1: &mut [i32; 3];               // in scope 0 at ui/consts/promotion-mutable-ref.rs:6:9: 6:10
+    let mut _2: [i32; 3];                // in scope 0 at ui/consts/promotion-mutable-ref.rs:6:18: 6:25
+    let _3: usize;                       // in scope 0 at ui/consts/promotion-mutable-ref.rs:7:7: 7:8
+    let mut _4: usize;                   // in scope 0 at ui/consts/promotion-mutable-ref.rs:7:5: 7:9
+    let mut _5: bool;                    // in scope 0 at ui/consts/promotion-mutable-ref.rs:7:5: 7:9
+    let mut _6: (i32, bool);             // in scope 0 at ui/consts/promotion-mutable-ref.rs:7:5: 7:14
+    let _7: usize;                       // in scope 0 at ui/consts/promotion-mutable-ref.rs:8:7: 8:8
+    let mut _8: usize;                   // in scope 0 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+    let mut _9: bool;                    // in scope 0 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/consts/promotion-mutable-ref.rs:6:9: 6:10
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:6:9: 6:10
+        StorageLive(_2);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:6:18: 6:25
+        _2 = [const 1_i32, const 2_i32, const 3_i32]; // scope 0 at ui/consts/promotion-mutable-ref.rs:6:18: 6:25
+        _1 = &mut _2;                    // scope 0 at ui/consts/promotion-mutable-ref.rs:6:13: 6:25
+        StorageLive(_3);                 // scope 1 at ui/consts/promotion-mutable-ref.rs:7:7: 7:8
+        _3 = const 0_usize;              // scope 1 at ui/consts/promotion-mutable-ref.rs:7:7: 7:8
+        _4 = Len((*_1));                 // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:9
+        _5 = Lt(_3, _4);                 // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:9
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1; // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:9
+    }
+
+    bb1: {
+        _6 = CheckedAdd((*_1)[_3], const 1_i32); // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:14
+        assert(!move (_6.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_1)[_3], const 1_i32) -> bb2; // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:14
+    }
+
+    bb2: {
+        (*_1)[_3] = move (_6.0: i32);    // scope 1 at ui/consts/promotion-mutable-ref.rs:7:5: 7:14
+        StorageDead(_3);                 // scope 1 at ui/consts/promotion-mutable-ref.rs:7:14: 7:15
+        StorageLive(_7);                 // scope 1 at ui/consts/promotion-mutable-ref.rs:8:7: 8:8
+        _7 = const 0_usize;              // scope 1 at ui/consts/promotion-mutable-ref.rs:8:7: 8:8
+        _8 = Len((*_1));                 // scope 1 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+        _9 = Lt(_7, _8);                 // scope 1 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> bb3; // scope 1 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+    }
+
+    bb3: {
+        _0 = (*_1)[_7];                  // scope 1 at ui/consts/promotion-mutable-ref.rs:8:5: 8:9
+        StorageDead(_2);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:9:1: 9:2
+        StorageDead(_1);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:9:1: 9:2
+        StorageDead(_7);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:9:1: 9:2
+        return;                          // scope 0 at ui/consts/promotion-mutable-ref.rs:4:1: 9:3
+    }
+}
+
+static mut TEST2: &mut [i32] = {
+    let mut _0: &mut [i32];              // return place in scope 0 at ui/consts/promotion-mutable-ref.rs:13:19: 13:37
+    let mut _1: &mut [i32; 3];           // in scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+    let mut _2: &mut [i32; 3];           // in scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+    let mut _3: [i32; 3];                // in scope 0 at ui/consts/promotion-mutable-ref.rs:13:45: 13:52
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+        StorageLive(_2);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+        StorageLive(_3);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:45: 13:52
+        _3 = [const 0_i32, const 1_i32, const 2_i32]; // scope 0 at ui/consts/promotion-mutable-ref.rs:13:45: 13:52
+        _2 = &mut _3;                    // scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+        _1 = &mut (*_2);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+        _0 = move _1 as &mut [i32] (Pointer(Unsize)); // scope 0 at ui/consts/promotion-mutable-ref.rs:13:40: 13:52
+        StorageDead(_2);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:51: 13:52
+        StorageDead(_1);                 // scope 0 at ui/consts/promotion-mutable-ref.rs:13:51: 13:52
+        return;                          // scope 0 at ui/consts/promotion-mutable-ref.rs:13:1: 13:53
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/promotion-mutable-ref.rs:15:11: 15:11
+    let mut _1: (&i32, &i32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _2: &i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _3: i32;                         // in scope 0 at ui/consts/promotion-mutable-ref.rs:16:16: 16:31
+    let mut _4: *mut i32;                // in scope 0 at ui/consts/promotion-mutable-ref.rs:16:25: 16:29
+    let mut _5: &i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _6: &i32;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _7: &i32;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _10: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _11: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _13: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _14: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _15: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _16: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _17: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _18: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _19: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _20: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    scope 1 {
+    }
+    scope 2 {
+        debug left_val => _6;            // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _7;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _12: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 3 {
+            debug kind => _12;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+
+    bb0: {
+        _4 = const {alloc1: *mut i32};   // scope 1 at ui/consts/promotion-mutable-ref.rs:16:25: 16:29
+                                         // mir::Constant
+                                         // + span: ui/consts/promotion-mutable-ref.rs:16:25: 16:29
+                                         // + literal: Const { ty: *mut i32, val: Value(Scalar(alloc1)) }
+        _3 = (*_4);                      // scope 1 at ui/consts/promotion-mutable-ref.rs:16:25: 16:29
+        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _20 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
+        _5 = _20;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = (move _2, move _5);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _6 = (_1.0: &i32);               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _7 = (_1.1: &i32);               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _10 = (*_6);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _11 = const 2_i32;               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _9 = Eq(move _10, move _11);     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _8 = Not(move _9);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _8) -> [0: bb2, otherwise: bb1]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb1: {
+        _12 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _14 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _16 = _6;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _15 = _16;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _18 = _7;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _17 = _18;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _19 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _13 = core::panicking::assert_failed::<i32, i32>(move _14, move _15, move _17, move _19); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/consts/promotion-mutable-ref.rs:17:2: 17:2
+    }
+}
+
+alloc1 (static: TEST, size: 4, align: 4) {
+    02 00 00 00                                     │ ....
+}
+
+promoted[0] in main: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: i32;                     // in scope 0 at ui/consts/promotion-mutable-ref.rs:16:33: 16:34
+
+    bb0: {
+        _1 = const 2_i32;                // scope 0 at ui/consts/promotion-mutable-ref.rs:16:33: 16:34
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}

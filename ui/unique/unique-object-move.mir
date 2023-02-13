@@ -1,0 +1,50 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn EventLoop::foo(_1: &Self) -> () {
+    debug self => _1;                    // in scope 0 at ui/unique/unique-object-move.rs:7:30: 7:35
+    let mut _0: ();                      // return place in scope 0 at ui/unique/unique-object-move.rs:7:37: 7:37
+
+    bb0: {
+        return;                          // scope 0 at ui/unique/unique-object-move.rs:7:39: 7:39
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unique/unique-object-move.rs:15:15: 15:15
+    let _1: std::boxed::Box<dyn EventLoop>; // in scope 0 at ui/unique/unique-object-move.rs:16:9: 16:14
+    let mut _2: std::boxed::Box<dyn EventLoop>; // in scope 0 at ui/unique/unique-object-move.rs:16:37: 16:92
+    let mut _3: std::boxed::Box<dyn EventLoop>; // in scope 0 at ui/unique/unique-object-move.rs:16:37: 16:92
+    let mut _4: std::boxed::Box<UvEventLoop>; // in scope 0 at ui/unique/unique-object-move.rs:16:37: 16:70
+    let mut _5: UvEventLoop;             // in scope 0 at ui/unique/unique-object-move.rs:16:46: 16:69
+    scope 1 {
+        debug loop_ => _1;               // in scope 1 at ui/unique/unique-object-move.rs:16:9: 16:14
+        let _6: std::boxed::Box<dyn EventLoop>; // in scope 1 at ui/unique/unique-object-move.rs:17:9: 17:16
+        scope 2 {
+            debug _loop2_ => _6;         // in scope 2 at ui/unique/unique-object-move.rs:17:9: 17:16
+        }
+    }
+
+    bb0: {
+        _5 = const UvEventLoop {{ uvio: 0_isize }}; // scope 0 at ui/unique/unique-object-move.rs:16:46: 16:69
+                                         // mir::Constant
+                                         // + span: ui/unique/unique-object-move.rs:16:46: 16:69
+                                         // + literal: Const { ty: UvEventLoop, val: Value(Scalar(0x0000000000000000)) }
+        _4 = Box::<UvEventLoop>::new(move _5) -> bb1; // scope 0 at ui/unique/unique-object-move.rs:16:37: 16:70
+                                         // mir::Constant
+                                         // + span: ui/unique/unique-object-move.rs:16:37: 16:45
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(UvEventLoop) -> Box<UvEventLoop> {Box::<UvEventLoop>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = move _4 as std::boxed::Box<dyn EventLoop> (Pointer(Unsize)); // scope 0 at ui/unique/unique-object-move.rs:16:37: 16:70
+        _2 = move _3;                    // scope 0 at ui/unique/unique-object-move.rs:16:37: 16:92
+        _1 = move _2 as std::boxed::Box<dyn EventLoop> (Pointer(Unsize)); // scope 0 at ui/unique/unique-object-move.rs:16:37: 16:92
+        _6 = move _1;                    // scope 1 at ui/unique/unique-object-move.rs:17:19: 17:24
+        drop(_6) -> bb2;                 // scope 1 at ui/unique/unique-object-move.rs:18:1: 18:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/unique/unique-object-move.rs:18:2: 18:2
+    }
+}

@@ -1,0 +1,53 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:8:11: 8:11
+    let _1: Union;                       // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:9:9: 9:10
+    let mut _3: &Union;                  // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 13:6
+    let _4: u64;                         // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:8
+    let mut _5: &[closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15]; // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:6
+    let mut _6: ();                      // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:8
+    scope 1 {
+        debug u => _1;                   // in scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:9:9: 9:10
+        let _2: [closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15]; // in scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:9: 11:10
+        scope 2 {
+            debug c => _2;               // in scope 2 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:9: 11:10
+        }
+    }
+
+    bb0: {
+        _1 = Union { value: const 42_u64 }; // scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:9:13: 9:32
+        _3 = &_1;                        // scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 13:6
+        _2 = [closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15] { u: move _3 }; // scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 13:6
+                                         // closure
+                                         // + def_id: DefId(0:6 ~ issue_87378[2421]::main::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn(()) -> u64,
+                                         //     (&Union,),
+                                         // ]
+        _5 = &_2;                        // scope 2 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:6
+        _4 = <[closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15] as Fn<()>>::call(move _5, move _6) -> bb1; // scope 2 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:8
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:15:5: 15:6
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15], ()) -> <[closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15] as FnOnce<()>>::Output {<[closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:16:2: 16:2
+    }
+}
+
+fn main::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 11:15]) -> u64 {
+    debug u => (*((*_1).0: &Union));     // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:9:9: 9:10
+    let mut _0: u64;                     // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:16: 11:16
+    let mut _2: &Union;                  // in scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:11:13: 13:6
+    scope 1 {
+    }
+
+    bb0: {
+        _2 = deref_copy ((*_1).0: &Union); // scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:12:17: 12:24
+        _0 = ((*_2).0: u64);             // scope 1 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:12:17: 12:24
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/issue-87378.rs:13:6: 13:6
+    }
+}

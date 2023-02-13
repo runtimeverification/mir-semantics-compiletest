@@ -1,0 +1,110 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static FOO: Foo = {
+    let mut _0: Foo;                     // return place in scope 0 at ui/statics/issue-44373-2.rs:8:13: 8:16
+
+    bb0: {
+        _0 = Foo(const true);            // scope 0 at ui/statics/issue-44373-2.rs:8:19: 8:28
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:8:1: 8:29
+    }
+}
+
+static CONTAINER: Container = {
+    let mut _0: Container;               // return place in scope 0 at ui/statics/issue-44373-2.rs:9:19: 9:28
+    let mut _1: &[&Foo];                 // in scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+    let mut _2: &[&Foo; 1];              // in scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+    let _3: &[&Foo; 1];                  // in scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+    let _4: [&Foo; 1];                   // in scope 0 at ui/statics/issue-44373-2.rs:9:42: 9:48
+    let mut _5: &Foo;                    // in scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+    let _6: &Foo;                        // in scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+    let _7: &Foo;                        // in scope 0 at ui/statics/issue-44373-2.rs:9:44: 9:47
+    let mut _8: &[&Foo; 1];              // in scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        StorageLive(_2);                 // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        StorageLive(_3);                 // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        _8 = const _;                    // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+                                         // mir::Constant
+                                         // + span: ui/statics/issue-44373-2.rs:9:41: 9:48
+                                         // + literal: Const { ty: &[&Foo; 1], val: Unevaluated(CONTAINER, [], Some(promoted[0])) }
+        _3 = &(*_8);                     // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        _2 = &(*_3);                     // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        _1 = move _2 as &[&Foo] (Pointer(Unsize)); // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        StorageDead(_2);                 // scope 0 at ui/statics/issue-44373-2.rs:9:47: 9:48
+        _0 = Container(move _1);         // scope 0 at ui/statics/issue-44373-2.rs:9:31: 9:49
+        StorageDead(_3);                 // scope 0 at ui/statics/issue-44373-2.rs:9:48: 9:49
+        StorageDead(_1);                 // scope 0 at ui/statics/issue-44373-2.rs:9:48: 9:49
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:9:1: 9:50
+    }
+}
+
+promoted[0] in CONTAINER: &[&Foo; 1] = {
+    let mut _0: &[&Foo; 1];              // return place in scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+    let mut _1: [&Foo; 1];               // in scope 0 at ui/statics/issue-44373-2.rs:9:42: 9:48
+    let mut _2: &Foo;                    // in scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+    let mut _3: &Foo;                    // in scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+    let mut _4: &Foo;                    // in scope 0 at ui/statics/issue-44373-2.rs:9:44: 9:47
+
+    bb0: {
+        _4 = const {alloc1: &Foo};       // scope 0 at ui/statics/issue-44373-2.rs:9:44: 9:47
+                                         // mir::Constant
+                                         // + span: ui/statics/issue-44373-2.rs:9:44: 9:47
+                                         // + literal: Const { ty: &Foo, val: Value(Scalar(alloc1)) }
+        _3 = &(*_4);                     // scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+        _2 = &(*_3);                     // scope 0 at ui/statics/issue-44373-2.rs:9:43: 9:47
+        _1 = [move _2];                  // scope 0 at ui/statics/issue-44373-2.rs:9:42: 9:48
+        _0 = &_1;                        // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:9:41: 9:48
+    }
+}
+
+alloc1 (static: FOO, size: 1, align: 1) {
+    01                                              │ .
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/statics/issue-44373-2.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:11:13: 11:13
+    }
+}
+
+fn Foo(_1: bool) -> Foo {
+    let mut _0: Foo;                     // return place in scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+
+    bb0: {
+        _0 = Foo(move _1);               // scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: bool) -> Foo {
+    let mut _0: Foo;                     // return place in scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+
+    bb0: {
+        _0 = Foo(move _1);               // scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:4:1: 4:11
+    }
+}
+
+fn Container(_1: &[&Foo]) -> Container {
+    let mut _0: Container;               // return place in scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+
+    bb0: {
+        _0 = Container(move _1);         // scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+    }
+}
+
+// MIR FOR CTFE
+fn Container(_1: &[&Foo]) -> Container {
+    let mut _0: Container;               // return place in scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+
+    bb0: {
+        _0 = Container(move _1);         // scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+        return;                          // scope 0 at ui/statics/issue-44373-2.rs:6:1: 6:17
+    }
+}

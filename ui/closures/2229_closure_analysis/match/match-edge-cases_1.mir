@@ -1,0 +1,180 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const PATTERN_REF: &str = {
+    let mut _0: &str;                    // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:4:20: 4:24
+
+    bb0: {
+        _0 = const "Hello World";        // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:4:27: 4:40
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:4:27: 4:40
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:4:1: 4:41
+    }
+}
+
+const NUMBER: i32 = {
+    let mut _0: i32;                     // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:5:15: 5:18
+
+    bb0: {
+        _0 = const 30_i32;               // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:5:21: 5:23
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:5:1: 5:24
+    }
+}
+
+const NUMBER_POINTER: *const i32 = {
+    let mut _0: *const i32;              // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:23: 6:33
+    let _1: &i32;                        // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+    let _2: i32;                         // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:37: 6:43
+    let mut _3: &i32;                    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+        _3 = const _;                    // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+                                         // + literal: Const { ty: &i32, val: Unevaluated(NUMBER_POINTER, [], Some(promoted[0])) }
+        _1 = &(*_3);                     // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+        _0 = &raw const (*_1);           // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+        StorageDead(_1);                 // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:42: 6:43
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:1: 6:44
+    }
+}
+
+promoted[0] in NUMBER_POINTER: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+    let mut _1: i32;                     // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:37: 6:43
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:37: 6:43
+        _0 = &_1;                        // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:6:36: 6:43
+    }
+}
+
+fn edge_case_ref(_1: &str) -> () {
+    debug event => _1;                   // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:8:22: 8:27
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:8:35: 8:35
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:15:2: 15:2
+    }
+}
+
+fn edge_case_ref::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:9:13: 9:15]) -> () {
+    debug event => (*((*_1).0: &&str));  // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:8:22: 8:27
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:9:16: 9:16
+    let mut _2: bool;                    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:11:13: 11:24
+    let mut _3: &&str;                   // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:9:13: 14:6
+
+    bb0: {
+        _3 = deref_copy ((*_1).0: &&str); // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:11:13: 11:24
+        _2 = <str as PartialEq>::eq((*_3), const "Hello World") -> bb1; // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:11:13: 11:24
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:11:13: 11:24
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:11:13: 11:24
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:14:6: 14:6
+    }
+}
+
+fn edge_case_str(_1: String) -> () {
+    debug event => _1;                   // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:17:22: 17:27
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:17:37: 17:37
+    scope 1 {
+    }
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:24:1: 24:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:24:2: 24:2
+    }
+}
+
+fn edge_case_str::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:18:13: 18:15]) -> () {
+    debug event => (*((*_1).0: &std::string::String)); // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:17:22: 17:27
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:18:16: 18:16
+    let mut _2: &str;                    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:15: 19:29
+    let mut _3: &std::string::String;    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:15: 19:29
+    let mut _4: bool;                    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:20:13: 20:20
+    let mut _5: &std::string::String;    // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:18:13: 23:6
+
+    bb0: {
+        _5 = deref_copy ((*_1).0: &std::string::String); // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:15: 19:29
+        _3 = _5;                         // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:15: 19:29
+        _2 = String::as_str(move _3) -> bb1; // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:15: 19:29
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:19:21: 19:27
+                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a str {String::as_str}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = <str as PartialEq>::eq(_2, const "hello") -> bb2; // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:20:13: 20:20
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:20:13: 20:20
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:20:13: 20:20
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:23:6: 23:6
+    }
+}
+
+fn edge_case_raw_ptr(_1: *const i32) -> () {
+    debug event => _1;                   // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:26:26: 26:31
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:26:45: 26:45
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:33:2: 33:2
+    }
+}
+
+fn edge_case_raw_ptr::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:27:13: 27:15]) -> () {
+    debug event => (*((*_1).0: &*const i32)); // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:26:26: 26:31
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:27:16: 27:16
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:32:6: 32:6
+    }
+}
+
+fn edge_case_char(_1: char) -> () {
+    debug event => _1;                   // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:35:23: 35:28
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:35:36: 35:36
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:42:2: 42:2
+    }
+}
+
+fn edge_case_char::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:36:13: 36:15]) -> () {
+    debug event => (*((*_1).0: &char));  // in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:35:23: 35:28
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:36:16: 36:16
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:41:6: 41:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:44:11: 44:11
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/match/match-edge-cases_1.rs:44:13: 44:13
+    }
+}

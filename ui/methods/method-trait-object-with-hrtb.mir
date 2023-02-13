@@ -1,0 +1,231 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn internal::<impl at ui/methods/method-trait-object-with-hrtb.rs:13:5: 13:33>::foo(_1: &()) -> &u32 {
+    debug self => _1;                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:16: 16:21
+    let mut _0: &u32;                    // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+    let mut _2: &u32;                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+
+    bb0: {
+        _2 = const _;                    // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+                                         // + literal: Const { ty: &u32, val: Unevaluated(<() as MyObject<'a>>::foo, [ReErased], Some(promoted[0])) }
+        _0 = _2;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:45: 16:45
+    }
+}
+
+promoted[0] in internal::<impl at ui/methods/method-trait-object-with-hrtb.rs:13:5: 13:33>::foo: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+    let mut _1: u32;                     // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:42: 16:43
+
+    bb0: {
+        _1 = const 4_u32;                // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:42: 16:43
+        _0 = &_1;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:16:41: 16:43
+    }
+}
+
+fn t1(_1: &dyn for<'a> MyObject<'a, for<'a> Output = &'a u32>) -> () {
+    debug d => _1;                       // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:20:7: 20:8
+    let mut _0: ();                      // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:20:63: 20:63
+    let _2: &u32;                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:21:5: 21:12
+    let mut _3: &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32>; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:21:5: 21:12
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:21:5: 21:12
+        _2 = <dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> as MyObject<'_>>::foo(move _3) -> bb1; // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:21:5: 21:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:21:7: 21:10
+                                         // + literal: Const { ty: for<'b> fn(&'b dyn for<'a> MyObject<'a, for<'a> Output = &'a u32>) -> <dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> as MyObject<'_>>::Output {<dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> as MyObject<'_>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:22:2: 22:2
+    }
+}
+
+fn t2(_1: &dyn MyObject<'_, Output = &u32>) -> () {
+    debug d => _1;                       // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:24:7: 24:8
+    let mut _0: ();                      // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:24:65: 24:65
+    let _2: &u32;                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:25:5: 25:12
+    let mut _3: &dyn internal::MyObject<'_, Output = &u32>; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:25:5: 25:12
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:25:5: 25:12
+        _2 = <dyn MyObject<'_, Output = &u32> as MyObject<'_>>::foo(move _3) -> bb1; // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:25:5: 25:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:25:7: 25:10
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn MyObject<'_, Output = &u32>) -> <dyn MyObject<'_, Output = &u32> as MyObject<'_>>::Output {<dyn MyObject<'_, Output = &u32> as MyObject<'_>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:26:2: 26:2
+    }
+}
+
+fn t3(_1: &dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync) -> () {
+    debug d => _1;                       // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:28:7: 28:8
+    let mut _0: ();                      // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:28:72: 28:72
+    let _2: &u32;                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:29:5: 29:12
+    let mut _3: &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32> + std::marker::Sync; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:29:5: 29:12
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:29:5: 29:12
+        _2 = <dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync as MyObject<'_>>::foo(move _3) -> bb1; // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:29:5: 29:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:29:7: 29:10
+                                         // + literal: Const { ty: for<'b> fn(&'b dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync) -> <dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync as MyObject<'_>>::Output {<dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync as MyObject<'_>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:30:2: 30:2
+    }
+}
+
+fn t4(_1: &dyn MyObject<'_, Output = &u32> + Sync) -> () {
+    debug d => _1;                       // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:32:7: 32:8
+    let mut _0: ();                      // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:32:74: 32:74
+    let _2: &u32;                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:33:5: 33:12
+    let mut _3: &dyn internal::MyObject<'_, Output = &u32> + std::marker::Sync; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:33:5: 33:12
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:33:5: 33:12
+        _2 = <dyn MyObject<'_, Output = &u32> + Sync as MyObject<'_>>::foo(move _3) -> bb1; // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:33:5: 33:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:33:7: 33:10
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn MyObject<'_, Output = &u32> + Sync) -> <dyn MyObject<'_, Output = &u32> + Sync as MyObject<'_>>::Output {<dyn MyObject<'_, Output = &u32> + Sync as MyObject<'_>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:34:2: 34:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:36:11: 36:11
+    let _1: ();                          // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:5: 37:12
+    let mut _2: &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32>; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+    let mut _3: &();                     // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+    let _4: &();                         // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+    let _5: ();                          // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:5: 38:12
+    let mut _6: &dyn internal::MyObject<'_, Output = &u32>; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    let mut _7: &();                     // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    let _8: &();                         // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    let _9: ();                          // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:5: 39:12
+    let mut _10: &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32> + std::marker::Sync; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    let mut _11: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    let _12: &();                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    let _13: ();                         // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:5: 40:12
+    let mut _14: &dyn internal::MyObject<'_, Output = &u32> + std::marker::Sync; // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    let mut _15: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    let _16: &();                        // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    let mut _17: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    let mut _18: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    let mut _19: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    let mut _20: &();                    // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+
+    bb0: {
+        _20 = const _;                   // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[3])) }
+        _4 = _20;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+        _3 = _4;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+        _2 = move _3 as &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32> (Pointer(Unsize)); // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+        _1 = t1(move _2) -> bb1;         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:5: 37:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:37:5: 37:7
+                                         // + literal: Const { ty: for<'b> fn(&'b (dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + 'b)) {t1}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _19 = const _;                   // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[2])) }
+        _8 = _19;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+        _7 = _8;                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+        _6 = move _7 as &dyn internal::MyObject<'_, Output = &u32> (Pointer(Unsize)); // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+        _5 = t2(move _6) -> bb2;         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:5: 38:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:38:5: 38:7
+                                         // + literal: Const { ty: for<'a> fn(&'a (dyn MyObject<'static, Output = &'static u32> + 'a)) {t2}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _18 = const _;                   // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[1])) }
+        _12 = _18;                       // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+        _11 = _12;                       // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+        _10 = move _11 as &dyn for<'a> internal::MyObject<'a, for<'a> Output = &'a u32> + std::marker::Sync (Pointer(Unsize)); // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+        _9 = t3(move _10) -> bb3;        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:5: 39:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:39:5: 39:7
+                                         // + literal: Const { ty: for<'b> fn(&'b (dyn for<'a> MyObject<'a, for<'a> Output = &'a u32> + Sync + 'b)) {t3}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _17 = const _;                   // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[0])) }
+        _16 = _17;                       // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+        _15 = _16;                       // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+        _14 = move _15 as &dyn internal::MyObject<'_, Output = &u32> + std::marker::Sync (Pointer(Unsize)); // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+        _13 = t4(move _14) -> bb4;       // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:5: 40:12
+                                         // mir::Constant
+                                         // + span: ui/methods/method-trait-object-with-hrtb.rs:40:5: 40:7
+                                         // + literal: Const { ty: for<'a> fn(&'a (dyn MyObject<'static, Output = &'static u32> + Sync + 'a)) {t4}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:41:2: 41:2
+    }
+}
+
+promoted[0] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    let mut _1: ();                      // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:9: 40:11
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:9: 40:11
+        _0 = &_1;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:40:8: 40:11
+    }
+}
+
+promoted[1] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    let mut _1: ();                      // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:9: 39:11
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:9: 39:11
+        _0 = &_1;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:39:8: 39:11
+    }
+}
+
+promoted[2] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    let mut _1: ();                      // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:9: 38:11
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:9: 38:11
+        _0 = &_1;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:38:8: 38:11
+    }
+}
+
+promoted[3] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+    let mut _1: ();                      // in scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:9: 37:11
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:9: 37:11
+        _0 = &_1;                        // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+        return;                          // scope 0 at ui/methods/method-trait-object-with-hrtb.rs:37:8: 37:11
+    }
+}

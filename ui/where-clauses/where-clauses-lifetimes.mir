@@ -1,0 +1,58 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: I) -> () {
+    debug it => _1;                      // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:6:15: 6:21
+    let mut _0: ();                      // return place in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:6:26: 6:26
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:6:61: 6:62
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:6:62: 6:62
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:8:11: 8:11
+    let _1: ();                          // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:5: 9:23
+    let mut _2: std::slice::Iter<'_, isize>; // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+    let mut _3: &[isize];                // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+    let mut _4: &[isize; 2];             // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+    let mut _5: &[isize; 2];             // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+
+    bb0: {
+        _5 = const _;                    // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+                                         // mir::Constant
+                                         // + span: ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+                                         // + literal: Const { ty: &[isize; 2], val: Unevaluated(main, [], Some(promoted[0])) }
+        _4 = _5;                         // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+        _3 = move _4 as &[isize] (Pointer(Unsize)); // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+        _2 = core::slice::<impl [isize]>::iter(move _3) -> bb1; // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+                                         // mir::Constant
+                                         // + span: ui/where-clauses/where-clauses-lifetimes.rs:9:16: 9:20
+                                         // + literal: Const { ty: for<'a> fn(&'a [isize]) -> std::slice::Iter<'a, isize> {core::slice::<impl [isize]>::iter}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = foo::<'_, std::slice::Iter<'_, isize>>(move _2) -> bb2; // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:5: 9:23
+                                         // mir::Constant
+                                         // + span: ui/where-clauses/where-clauses-lifetimes.rs:9:5: 9:8
+                                         // + literal: Const { ty: fn(std::slice::Iter<'_, isize>) {foo::<'_, std::slice::Iter<'_, isize>>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:10:2: 10:2
+    }
+}
+
+promoted[0] in main: &[isize; 2] = {
+    let mut _0: &[isize; 2];             // return place in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+    let mut _1: [isize; 2];              // in scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:15
+
+    bb0: {
+        _1 = [const 1_isize, const 2_isize]; // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:15
+        _0 = &_1;                        // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+        return;                          // scope 0 at ui/where-clauses/where-clauses-lifetimes.rs:9:9: 9:22
+    }
+}

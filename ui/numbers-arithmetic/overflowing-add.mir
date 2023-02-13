@@ -1,0 +1,28 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/numbers-arithmetic/overflowing-add.rs:8:11: 8:11
+    let _1: u8;                          // in scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:9: 9:11
+    let mut _2: u8;                      // in scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:27
+    let mut _3: (u8, bool);              // in scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:27
+    let mut _4: (u8, bool);              // in scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:35
+    scope 1 {
+        debug _x => _1;                  // in scope 1 at ui/numbers-arithmetic/overflowing-add.rs:9:9: 9:11
+    }
+
+    bb0: {
+        _3 = CheckedAdd(const 200_u8, const 200_u8); // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:27
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const 200_u8, const 200_u8) -> bb1; // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:27
+    }
+
+    bb1: {
+        _2 = move (_3.0: u8);            // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:27
+        _4 = CheckedAdd(_2, const 200_u8); // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:35
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _2, const 200_u8) -> bb2; // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:35
+    }
+
+    bb2: {
+        _1 = move (_4.0: u8);            // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:9:14: 9:35
+        return;                          // scope 0 at ui/numbers-arithmetic/overflowing-add.rs:10:2: 10:2
+    }
+}

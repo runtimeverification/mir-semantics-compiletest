@@ -1,0 +1,413 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f(_1: &u8, _2: &u8) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:7:12: 7:13
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:7:20: 7:21
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:7:31: 7:35
+    let mut _3: u8;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:7
+    let mut _4: u8;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:8:11: 8:13
+
+    bb0: {
+        _3 = (*_1);                      // scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:7
+        _4 = (*_2);                      // scope 0 at ui/consts/issue-90870_fixed.rs:8:11: 8:13
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:13
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:12:2: 12:2
+    }
+}
+
+// MIR FOR CTFE
+fn f(_1: &u8, _2: &u8) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:7:12: 7:13
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:7:20: 7:21
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:7:31: 7:35
+    let mut _3: u8;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:7
+    let mut _4: u8;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:8:11: 8:13
+
+    bb0: {
+        StorageLive(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:7
+        _3 = (*_1);                      // scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:7
+        StorageLive(_4);                 // scope 0 at ui/consts/issue-90870_fixed.rs:8:11: 8:13
+        _4 = (*_2);                      // scope 0 at ui/consts/issue-90870_fixed.rs:8:11: 8:13
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/consts/issue-90870_fixed.rs:8:5: 8:13
+        StorageDead(_4);                 // scope 0 at ui/consts/issue-90870_fixed.rs:8:12: 8:13
+        StorageDead(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:8:12: 8:13
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:12:2: 12:2
+    }
+}
+
+fn g(_1: &&&&i64, _2: &&&&i64) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:14:39: 14:43
+    let mut _3: i64;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+    let mut _4: i64;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+    let mut _5: &&&i64;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _6: &&i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _7: &i64;                    // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _8: &&&i64;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _9: &&i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _10: &i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+
+    bb0: {
+        _5 = deref_copy (*_1);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _6 = deref_copy (*_5);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _7 = deref_copy (*_6);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _3 = (*_7);                      // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _8 = deref_copy (*_2);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _9 = deref_copy (*_8);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _10 = deref_copy (*_9);          // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _4 = (*_10);                     // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:19
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:19:2: 19:2
+    }
+}
+
+// MIR FOR CTFE
+fn g(_1: &&&&i64, _2: &&&&i64) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:14:39: 14:43
+    let mut _3: i64;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+    let mut _4: i64;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+    let mut _5: &&&i64;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _6: &&i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _7: &i64;                    // in scope 0 at ui/consts/issue-90870_fixed.rs:14:12: 14:13
+    let mut _8: &&&i64;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _9: &&i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+    let mut _10: &i64;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:14:24: 14:25
+
+    bb0: {
+        StorageLive(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _5 = deref_copy (*_1);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _6 = deref_copy (*_5);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _7 = deref_copy (*_6);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        _3 = (*_7);                      // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:10
+        StorageLive(_4);                 // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _8 = deref_copy (*_2);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _9 = deref_copy (*_8);           // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _10 = deref_copy (*_9);          // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _4 = (*_10);                     // scope 0 at ui/consts/issue-90870_fixed.rs:15:14: 15:19
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/consts/issue-90870_fixed.rs:15:5: 15:19
+        StorageDead(_4);                 // scope 0 at ui/consts/issue-90870_fixed.rs:15:18: 15:19
+        StorageDead(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:15:18: 15:19
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:19:2: 19:2
+    }
+}
+
+fn h(_1: &[u8], _2: &[u8]) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:21:12: 21:17
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:21:26: 21:31
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:21:43: 21:47
+    let mut _3: (&[u8], &[u8]);          // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _4: &[u8];                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:47: 22:48
+    let mut _5: &[u8];                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:50: 22:51
+    let mut _6: usize;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _7: usize;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _8: bool;                    // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _9: usize;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _10: usize;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _11: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _16: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+    let mut _17: u8;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:23:12: 23:14
+    let mut _18: u8;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:23:18: 23:20
+    let mut _19: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:27:17: 27:19
+    let mut _20: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:28:17: 28:19
+    let mut _21: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+    let mut _22: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+    let mut _23: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+    let mut _24: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+    let mut _25: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _26: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _27: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _28: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _29: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _30: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    scope 1 {
+        debug l => _12;                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        debug at => _13;                 // in scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        debug r => _14;                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        debug bt => _15;                 // in scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        let _12: &u8;                    // in scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        let _13: &[u8];                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        let _14: &u8;                    // in scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        let _15: &[u8];                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+    }
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    }
+
+    bb1: {
+        _4 = _1;                         // scope 1 at ui/consts/issue-90870_fixed.rs:22:47: 22:48
+        _5 = _2;                         // scope 1 at ui/consts/issue-90870_fixed.rs:22:50: 22:51
+        _3 = (move _4, move _5);         // scope 1 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+        _25 = deref_copy (_3.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _9 = Len((*_25));                // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _10 = const 1_usize;             // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _11 = Ge(move _9, move _10);     // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        switchInt(move _11) -> [0: bb6, otherwise: bb2]; // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    }
+
+    bb2: {
+        _26 = deref_copy (_3.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _6 = Len((*_26));                // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _7 = const 1_usize;              // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _8 = Ge(move _6, move _7);       // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        switchInt(move _8) -> [0: bb6, otherwise: bb3]; // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    }
+
+    bb3: {
+        _27 = deref_copy (_3.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        _12 = &(*_27)[0 of 1];           // scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        _28 = deref_copy (_3.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        _13 = &(*_28)[1:];               // scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        _29 = deref_copy (_3.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        _14 = &(*_29)[0 of 1];           // scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        _30 = deref_copy (_3.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        _15 = &(*_30)[1:];               // scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        _17 = (*_12);                    // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:14
+        _18 = (*_14);                    // scope 1 at ui/consts/issue-90870_fixed.rs:23:18: 23:20
+        _16 = Eq(move _17, move _18);    // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+        switchInt(move _16) -> [0: bb5, otherwise: bb4]; // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+    }
+
+    bb4: {
+        _19 = _13;                       // scope 1 at ui/consts/issue-90870_fixed.rs:27:17: 27:19
+        _1 = move _19;                   // scope 1 at ui/consts/issue-90870_fixed.rs:27:13: 27:19
+        _20 = _15;                       // scope 1 at ui/consts/issue-90870_fixed.rs:28:17: 28:19
+        _2 = move _20;                   // scope 1 at ui/consts/issue-90870_fixed.rs:28:13: 28:19
+        goto -> bb1;                     // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    }
+
+    bb5: {
+        _0 = const false;                // scope 1 at ui/consts/issue-90870_fixed.rs:30:20: 30:25
+        goto -> bb11;                    // scope 0 at ui/consts/issue-90870_fixed.rs:35:2: 35:2
+    }
+
+    bb6: {
+        _22 = _1;                        // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+        _21 = core::slice::<impl [u8]>::is_empty(move _22) -> bb9; // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-90870_fixed.rs:34:7: 34:15
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> bool {core::slice::<impl [u8]>::is_empty}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _0 = const false;                // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+        goto -> bb11;                    // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb8: {
+        _24 = _2;                        // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+        _23 = core::slice::<impl [u8]>::is_empty(move _24) -> bb10; // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-90870_fixed.rs:34:23: 34:31
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> bool {core::slice::<impl [u8]>::is_empty}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        switchInt(move _21) -> [0: bb7, otherwise: bb8]; // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb10: {
+        _0 = move _23;                   // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+        goto -> bb11;                    // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb11: {
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:35:2: 35:2
+    }
+}
+
+// MIR FOR CTFE
+fn h(_1: &[u8], _2: &[u8]) -> bool {
+    debug a => _1;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:21:12: 21:17
+    debug b => _2;                       // in scope 0 at ui/consts/issue-90870_fixed.rs:21:26: 21:31
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-90870_fixed.rs:21:43: 21:47
+    let _3: ();                          // in scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    let mut _4: ();                      // in scope 0 at ui/consts/issue-90870_fixed.rs:21:1: 35:2
+    let mut _5: (&[u8], &[u8]);          // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _6: &[u8];                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:47: 22:48
+    let mut _7: &[u8];                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:50: 22:51
+    let mut _8: usize;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _9: usize;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _10: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    let mut _11: usize;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _12: usize;                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _13: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    let mut _18: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+    let mut _19: u8;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:23:12: 23:14
+    let mut _20: u8;                     // in scope 0 at ui/consts/issue-90870_fixed.rs:23:18: 23:20
+    let mut _21: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:27:17: 27:19
+    let mut _22: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:28:17: 28:19
+    let mut _23: !;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:29:16: 31:10
+    let mut _24: !;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    let _25: ();                         // in scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    let mut _26: !;                      // in scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    let mut _27: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+    let mut _28: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+    let mut _29: bool;                   // in scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+    let mut _30: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+    let mut _31: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _32: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _33: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _34: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _35: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    let mut _36: &[u8];                  // in scope 0 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+    scope 1 {
+        debug l => _14;                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        debug at => _15;                 // in scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        debug r => _16;                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        debug bt => _17;                 // in scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        let _14: &u8;                    // in scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        let _15: &[u8];                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        let _16: &u8;                    // in scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        let _17: &[u8];                  // in scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+    }
+
+    bb0: {
+        StorageLive(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+        goto -> bb1;                     // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    }
+
+    bb1: {
+        StorageLive(_5);                 // scope 1 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+        StorageLive(_6);                 // scope 1 at ui/consts/issue-90870_fixed.rs:22:47: 22:48
+        _6 = _1;                         // scope 1 at ui/consts/issue-90870_fixed.rs:22:47: 22:48
+        StorageLive(_7);                 // scope 1 at ui/consts/issue-90870_fixed.rs:22:50: 22:51
+        _7 = _2;                         // scope 1 at ui/consts/issue-90870_fixed.rs:22:50: 22:51
+        _5 = (move _6, move _7);         // scope 1 at ui/consts/issue-90870_fixed.rs:22:46: 22:52
+        StorageDead(_7);                 // scope 1 at ui/consts/issue-90870_fixed.rs:22:51: 22:52
+        StorageDead(_6);                 // scope 1 at ui/consts/issue-90870_fixed.rs:22:51: 22:52
+        _31 = deref_copy (_5.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _11 = Len((*_31));               // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _12 = const 1_usize;             // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        _13 = Ge(move _11, move _12);    // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+        switchInt(move _13) -> [0: bb6, otherwise: bb2]; // scope 1 at ui/consts/issue-90870_fixed.rs:22:16: 22:28
+    }
+
+    bb2: {
+        _32 = deref_copy (_5.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _8 = Len((*_32));                // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _9 = const 1_usize;              // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        _10 = Ge(move _8, move _9);      // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+        switchInt(move _10) -> [0: bb6, otherwise: bb3]; // scope 1 at ui/consts/issue-90870_fixed.rs:22:30: 22:42
+    }
+
+    bb3: {
+        StorageLive(_14);                // scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        _33 = deref_copy (_5.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        _14 = &(*_33)[0 of 1];           // scope 1 at ui/consts/issue-90870_fixed.rs:22:17: 22:18
+        StorageLive(_15);                // scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        _34 = deref_copy (_5.0: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        _15 = &(*_34)[1:];               // scope 1 at ui/consts/issue-90870_fixed.rs:22:20: 22:22
+        StorageLive(_16);                // scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        _35 = deref_copy (_5.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        _16 = &(*_35)[0 of 1];           // scope 1 at ui/consts/issue-90870_fixed.rs:22:31: 22:32
+        StorageLive(_17);                // scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        _36 = deref_copy (_5.1: &[u8]);  // scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        _17 = &(*_36)[1:];               // scope 1 at ui/consts/issue-90870_fixed.rs:22:34: 22:36
+        StorageLive(_18);                // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+        StorageLive(_19);                // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:14
+        _19 = (*_14);                    // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:14
+        StorageLive(_20);                // scope 1 at ui/consts/issue-90870_fixed.rs:23:18: 23:20
+        _20 = (*_16);                    // scope 1 at ui/consts/issue-90870_fixed.rs:23:18: 23:20
+        _18 = Eq(move _19, move _20);    // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+        StorageDead(_20);                // scope 1 at ui/consts/issue-90870_fixed.rs:23:19: 23:20
+        StorageDead(_19);                // scope 1 at ui/consts/issue-90870_fixed.rs:23:19: 23:20
+        switchInt(move _18) -> [0: bb5, otherwise: bb4]; // scope 1 at ui/consts/issue-90870_fixed.rs:23:12: 23:20
+    }
+
+    bb4: {
+        StorageLive(_21);                // scope 1 at ui/consts/issue-90870_fixed.rs:27:17: 27:19
+        _21 = &(*_15);                   // scope 1 at ui/consts/issue-90870_fixed.rs:27:17: 27:19
+        _1 = move _21;                   // scope 1 at ui/consts/issue-90870_fixed.rs:27:13: 27:19
+        StorageDead(_21);                // scope 1 at ui/consts/issue-90870_fixed.rs:27:18: 27:19
+        StorageLive(_22);                // scope 1 at ui/consts/issue-90870_fixed.rs:28:17: 28:19
+        _22 = &(*_17);                   // scope 1 at ui/consts/issue-90870_fixed.rs:28:17: 28:19
+        _2 = move _22;                   // scope 1 at ui/consts/issue-90870_fixed.rs:28:13: 28:19
+        StorageDead(_22);                // scope 1 at ui/consts/issue-90870_fixed.rs:28:18: 28:19
+        _4 = const ();                   // scope 1 at ui/consts/issue-90870_fixed.rs:23:21: 29:10
+        StorageDead(_18);                // scope 1 at ui/consts/issue-90870_fixed.rs:31:9: 31:10
+        StorageDead(_17);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_16);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_15);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_14);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_5);                 // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+        goto -> bb1;                     // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+    }
+
+    bb5: {
+        _0 = const false;                // scope 1 at ui/consts/issue-90870_fixed.rs:30:20: 30:25
+        StorageDead(_18);                // scope 1 at ui/consts/issue-90870_fixed.rs:31:9: 31:10
+        StorageDead(_17);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_16);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_15);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_14);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_5);                 // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        goto -> bb12;                    // scope 0 at ui/consts/issue-90870_fixed.rs:35:2: 35:2
+    }
+
+    bb6: {
+        StorageLive(_25);                // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+        _3 = const ();                   // scope 0 at ui/consts/issue-90870_fixed.rs:22:5: 32:6
+        StorageDead(_25);                // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_5);                 // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageDead(_3);                 // scope 0 at ui/consts/issue-90870_fixed.rs:32:5: 32:6
+        StorageLive(_27);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+        StorageLive(_28);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+        _28 = &(*_1);                    // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+        _27 = core::slice::<impl [u8]>::is_empty(move _28) -> bb10; // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:17
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-90870_fixed.rs:34:7: 34:15
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> bool {core::slice::<impl [u8]>::is_empty}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _0 = const false;                // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+        goto -> bb9;                     // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb8: {
+        StorageLive(_29);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+        StorageLive(_30);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+        _30 = &(*_2);                    // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+        _29 = core::slice::<impl [u8]>::is_empty(move _30) -> bb11; // scope 0 at ui/consts/issue-90870_fixed.rs:34:21: 34:33
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-90870_fixed.rs:34:23: 34:31
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> bool {core::slice::<impl [u8]>::is_empty}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        StorageDead(_29);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:32: 34:33
+        StorageDead(_27);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:32: 34:33
+        goto -> bb12;                    // scope 0 at ui/consts/issue-90870_fixed.rs:35:2: 35:2
+    }
+
+    bb10: {
+        StorageDead(_28);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:16: 34:17
+        switchInt(move _27) -> [0: bb7, otherwise: bb8]; // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb11: {
+        StorageDead(_30);                // scope 0 at ui/consts/issue-90870_fixed.rs:34:32: 34:33
+        _0 = move _29;                   // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+        goto -> bb9;                     // scope 0 at ui/consts/issue-90870_fixed.rs:34:5: 34:33
+    }
+
+    bb12: {
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:35:2: 35:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-90870_fixed.rs:37:11: 37:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-90870_fixed.rs:37:13: 37:13
+    }
+}

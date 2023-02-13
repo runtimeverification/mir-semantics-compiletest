@@ -1,0 +1,184 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const A_I8_T: [u32; 126] = {
+    let mut _0: [u32; 126];              // return place in scope 0 at ui/consts/issue-23833.rs:6:7: 6:44
+
+    bb0: {
+        _0 = [const 0_u32; 126];         // scope 0 at ui/consts/issue-23833.rs:7:7: 7:34
+        return;                          // scope 0 at ui/consts/issue-23833.rs:5:1: 7:35
+    }
+}
+
+A_I8_T::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-23833.rs:6:13: 6:43
+    let mut _1: i8;                      // in scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+    let mut _2: i8;                      // in scope 0 at ui/consts/issue-23833.rs:6:14: 6:27
+    let mut _3: (i8, bool);              // in scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+        StorageLive(_2);                 // scope 0 at ui/consts/issue-23833.rs:6:14: 6:27
+        _2 = const _;                    // scope 0 at ui/consts/issue-23833.rs:6:14: 6:21
+        _3 = CheckedSub(_2, const 1_i8); // scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, const 1_i8) -> bb1; // scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+    }
+
+    bb1: {
+        _1 = move (_3.0: i8);            // scope 0 at ui/consts/issue-23833.rs:6:13: 6:34
+        StorageDead(_2);                 // scope 0 at ui/consts/issue-23833.rs:6:33: 6:34
+        _0 = move _1 as usize (IntToInt); // scope 0 at ui/consts/issue-23833.rs:6:13: 6:43
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-23833.rs:6:42: 6:43
+        return;                          // scope 0 at ui/consts/issue-23833.rs:6:13: 6:43
+    }
+}
+
+A_I8_T::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+    let mut _1: usize;                   // in scope 0 at ui/consts/issue-23833.rs:7:11: 7:29
+    let mut _2: (usize, bool);           // in scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-23833.rs:7:11: 7:29
+        _1 = const _ as usize (IntToInt); // scope 0 at ui/consts/issue-23833.rs:7:11: 7:29
+        _2 = CheckedSub(_1, const 1_usize); // scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+        assert(!move (_2.1: bool), "attempt to compute `{} - {}`, which would overflow", move _1, const 1_usize) -> bb1; // scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+    }
+
+    bb1: {
+        _0 = move (_2.0: usize);         // scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-23833.rs:7:32: 7:33
+        return;                          // scope 0 at ui/consts/issue-23833.rs:7:11: 7:33
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-23833.rs:9:11: 9:11
+    let _1: ();                          // in scope 0 at ui/consts/issue-23833.rs:10:5: 10:21
+    let mut _2: &[u32];                  // in scope 0 at ui/consts/issue-23833.rs:10:9: 10:20
+    let _3: &[u32];                      // in scope 0 at ui/consts/issue-23833.rs:10:10: 10:20
+    let mut _4: &[u32; 126];             // in scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+    let mut _5: std::ops::RangeFull;     // in scope 0 at ui/consts/issue-23833.rs:10:17: 10:19
+    let mut _6: &[u32; 126];             // in scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+
+    bb0: {
+        _6 = const _;                    // scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:10:10: 10:16
+                                         // + literal: Const { ty: &[u32; 126], val: Unevaluated(main, [], Some(promoted[0])) }
+        _4 = _6;                         // scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+        _3 = <[u32; 126] as Index<RangeFull>>::index(move _4, move _5) -> bb1; // scope 0 at ui/consts/issue-23833.rs:10:10: 10:20
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:10:10: 10:20
+                                         // + literal: Const { ty: for<'a> fn(&'a [u32; 126], RangeFull) -> &'a <[u32; 126] as Index<RangeFull>>::Output {<[u32; 126] as Index<RangeFull>>::index}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = _3;                         // scope 0 at ui/consts/issue-23833.rs:10:9: 10:20
+        _1 = foo::<&[u32]>(move _2) -> bb2; // scope 0 at ui/consts/issue-23833.rs:10:5: 10:21
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:10:5: 10:8
+                                         // + literal: Const { ty: fn(&[u32]) {foo::<&[u32]>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/consts/issue-23833.rs:11:2: 11:2
+    }
+}
+
+promoted[0] in main: &[u32; 126] = {
+    let mut _0: &[u32; 126];             // return place in scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+    let mut _1: [u32; 126];              // in scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+        _0 = &_1;                        // scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+        return;                          // scope 0 at ui/consts/issue-23833.rs:10:10: 10:16
+    }
+}
+
+fn foo(_1: T) -> () {
+    debug x => _1;                       // in scope 0 at ui/consts/issue-23833.rs:13:22: 13:23
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-23833.rs:13:28: 13:28
+    let _2: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _3: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _4: &[&str];                 // in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+    let mut _5: &[&str; 2];              // in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+    let _6: &[&str; 2];                  // in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+    let mut _7: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _8: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _9: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _10: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _11: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+    let mut _12: &T;                     // in scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+    let _13: &T;                         // in scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+    let mut _14: &[&str; 2];             // in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+
+    bb0: {
+        _14 = const _;                   // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:14:14: 14:20
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(foo, [T], Some(promoted[0])) }
+        _6 = _14;                        // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+        _5 = _6;                         // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+        _4 = move _5 as &[&str] (Pointer(Unsize)); // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+        _13 = &_1;                       // scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+        _12 = _13;                       // scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+        _11 = core::fmt::ArgumentV1::<'_>::new_debug::<T>(move _12) -> [return: bb1, unwind: bb5]; // scope 0 at ui/consts/issue-23833.rs:14:22: 14:23
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:14:22: 14:23
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: for<'b> fn(&'b T) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_debug::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _10 = [move _11];                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _9 = &_10;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _8 = _9;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _7 = move _8 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb5]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = _print(move _3) -> [return: bb3, unwind: bb5]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_1) -> bb4;                 // scope 0 at ui/consts/issue-23833.rs:15:1: 15:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/consts/issue-23833.rs:15:2: 15:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/consts/issue-23833.rs:15:1: 15:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/consts/issue-23833.rs:13:1: 15:2
+    }
+}
+
+promoted[0] in foo: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+    let mut _1: [&str; 2];               // in scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+
+    bb0: {
+        _1 = [const "", const "\n"];     // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:14:14: 14:20
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-23833.rs:14:14: 14:20
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+        return;                          // scope 0 at ui/consts/issue-23833.rs:14:14: 14:20
+    }
+}

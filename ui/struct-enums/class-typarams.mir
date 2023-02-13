@@ -1,0 +1,62 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/struct-enums/class-typarams.rs:15:1: 15:15>::speak(_1: &mut cat<U>) -> () {
+    debug self => _1;                    // in scope 0 at ui/struct-enums/class-typarams.rs:16:18: 16:27
+    let mut _0: ();                      // return place in scope 0 at ui/struct-enums/class-typarams.rs:16:29: 16:29
+    let mut _2: (usize, bool);           // in scope 0 at ui/struct-enums/class-typarams.rs:16:31: 16:46
+
+    bb0: {
+        _2 = CheckedAdd(((*_1).0: usize), const 1_usize); // scope 0 at ui/struct-enums/class-typarams.rs:16:31: 16:46
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).0: usize), const 1_usize) -> bb1; // scope 0 at ui/struct-enums/class-typarams.rs:16:31: 16:46
+    }
+
+    bb1: {
+        ((*_1).0: usize) = move (_2.0: usize); // scope 0 at ui/struct-enums/class-typarams.rs:16:31: 16:46
+        return;                          // scope 0 at ui/struct-enums/class-typarams.rs:16:49: 16:49
+    }
+}
+
+fn <impl at ui/struct-enums/class-typarams.rs:15:1: 15:15>::meow_count(_1: &mut cat<U>) -> usize {
+    debug self => _1;                    // in scope 0 at ui/struct-enums/class-typarams.rs:17:23: 17:32
+    let mut _0: usize;                   // return place in scope 0 at ui/struct-enums/class-typarams.rs:17:37: 17:42
+
+    bb0: {
+        _0 = ((*_1).0: usize);           // scope 0 at ui/struct-enums/class-typarams.rs:17:45: 17:55
+        return;                          // scope 0 at ui/struct-enums/class-typarams.rs:17:57: 17:57
+    }
+}
+
+fn cat(_1: usize, _2: isize) -> cat<U> {
+    debug in_x => _1;                    // in scope 0 at ui/struct-enums/class-typarams.rs:20:11: 20:15
+    debug in_y => _2;                    // in scope 0 at ui/struct-enums/class-typarams.rs:20:25: 20:29
+    let mut _0: cat<U>;                  // return place in scope 0 at ui/struct-enums/class-typarams.rs:20:42: 20:48
+    let mut _3: usize;                   // in scope 0 at ui/struct-enums/class-typarams.rs:22:16: 22:20
+    let mut _4: isize;                   // in scope 0 at ui/struct-enums/class-typarams.rs:23:21: 23:25
+    let mut _5: std::marker::PhantomData<U>; // in scope 0 at ui/struct-enums/class-typarams.rs:24:12: 24:23
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/struct-enums/class-typarams.rs:22:16: 22:20
+        _4 = _2;                         // scope 0 at ui/struct-enums/class-typarams.rs:23:21: 23:25
+        _0 = cat::<U> { meows: move _3, how_hungry: move _4, m: move _5 }; // scope 0 at ui/struct-enums/class-typarams.rs:21:5: 25:6
+        return;                          // scope 0 at ui/struct-enums/class-typarams.rs:26:2: 26:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/struct-enums/class-typarams.rs:29:15: 29:15
+    let _1: cat<isize>;                  // in scope 0 at ui/struct-enums/class-typarams.rs:30:7: 30:12
+    scope 1 {
+        debug _nyan => _1;               // in scope 1 at ui/struct-enums/class-typarams.rs:30:7: 30:12
+    }
+
+    bb0: {
+        _1 = cat::<isize>(const 52_usize, const 99_isize) -> bb1; // scope 0 at ui/struct-enums/class-typarams.rs:30:28: 30:48
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/class-typarams.rs:30:28: 30:40
+                                         // + literal: Const { ty: fn(usize, isize) -> cat<isize> {cat::<isize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/struct-enums/class-typarams.rs:32:2: 32:2
+    }
+}

@@ -1,0 +1,52 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/coercion/issue-36007.rs:17:11: 17:11
+    let _1: Foo<Bar>;                    // in scope 0 at ui/coercion/issue-36007.rs:18:9: 18:12
+    let mut _2: std::boxed::Box<Bar>;    // in scope 0 at ui/coercion/issue-36007.rs:18:19: 18:32
+    let mut _3: Bar;                     // in scope 0 at ui/coercion/issue-36007.rs:18:28: 18:31
+    scope 1 {
+        debug foo => _1;                 // in scope 1 at ui/coercion/issue-36007.rs:18:9: 18:12
+        let _4: Foo<Bar>;                // in scope 1 at ui/coercion/issue-36007.rs:19:9: 19:15
+        scope 2 {
+            debug foobar => _4;          // in scope 2 at ui/coercion/issue-36007.rs:19:9: 19:15
+        }
+    }
+
+    bb0: {
+        _2 = Box::<Bar>::new(move _3) -> bb1; // scope 0 at ui/coercion/issue-36007.rs:18:19: 18:32
+                                         // mir::Constant
+                                         // + span: ui/coercion/issue-36007.rs:18:19: 18:27
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Bar) -> Box<Bar> {Box::<Bar>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = Foo::<Bar>(move _2);        // scope 0 at ui/coercion/issue-36007.rs:18:15: 18:33
+        _4 = move _1;                    // scope 1 at ui/coercion/issue-36007.rs:19:28: 19:31
+        drop(_4) -> bb2;                 // scope 1 at ui/coercion/issue-36007.rs:20:1: 20:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/coercion/issue-36007.rs:20:2: 20:2
+    }
+}
+
+fn Foo(_1: Box<T>) -> Foo<T> {
+    let mut _0: Foo<T>;                  // return place in scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+
+    bb0: {
+        _0 = Foo::<T>(move _1);          // scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+        return;                          // scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: Box<T>) -> Foo<T> {
+    let mut _0: Foo<T>;                  // return place in scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+
+    bb0: {
+        _0 = Foo::<T>(move _1);          // scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+        return;                          // scope 0 at ui/coercion/issue-36007.rs:7:1: 7:22
+    }
+}

@@ -1,0 +1,55 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const _: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at ui/consts/promote_borrowed_field.rs:5:10: 5:14
+    let _1: &i32;                        // in scope 0 at ui/consts/promote_borrowed_field.rs:6:9: 6:10
+    let _2: (i32, bool);                 // in scope 0 at ui/consts/promote_borrowed_field.rs:6:14: 6:24
+    let mut _3: &(i32, bool);            // in scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/consts/promote_borrowed_field.rs:6:9: 6:10
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/promote_borrowed_field.rs:6:9: 6:10
+        _3 = const _;                    // scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+                                         // mir::Constant
+                                         // + span: ui/consts/promote_borrowed_field.rs:6:13: 6:26
+                                         // + literal: Const { ty: &(i32, bool), val: Unevaluated(_, [], Some(promoted[0])) }
+        _1 = &((*_3).0: i32);            // scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+        _0 = &(*_1);                     // scope 1 at ui/consts/promote_borrowed_field.rs:7:5: 7:6
+        StorageDead(_1);                 // scope 0 at ui/consts/promote_borrowed_field.rs:8:1: 8:2
+        return;                          // scope 0 at ui/consts/promote_borrowed_field.rs:5:1: 8:3
+    }
+}
+
+promoted[0] in _: &(i32, bool) = {
+    let mut _0: &(i32, bool);            // return place in scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+    let mut _1: (i32, bool);             // in scope 0 at ui/consts/promote_borrowed_field.rs:6:14: 6:24
+
+    bb0: {
+        _1 = (const 5_i32, const false); // scope 0 at ui/consts/promote_borrowed_field.rs:6:14: 6:24
+        _0 = &_1;                        // scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+        return;                          // scope 0 at ui/consts/promote_borrowed_field.rs:6:13: 6:26
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/promote_borrowed_field.rs:10:11: 10:11
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/promote_borrowed_field.rs:12:2: 12:2
+    }
+}
+
+promoted[0] in main: &(i32, bool) = {
+    let mut _0: &(i32, bool);            // return place in scope 0 at ui/consts/promote_borrowed_field.rs:11:27: 11:40
+    let mut _1: (i32, bool);             // in scope 0 at ui/consts/promote_borrowed_field.rs:11:28: 11:38
+
+    bb0: {
+        _1 = (const 5_i32, const false); // scope 0 at ui/consts/promote_borrowed_field.rs:11:28: 11:38
+        _0 = &_1;                        // scope 0 at ui/consts/promote_borrowed_field.rs:11:27: 11:40
+        return;                          // scope 0 at ui/consts/promote_borrowed_field.rs:11:27: 11:40
+    }
+}

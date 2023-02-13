@@ -1,0 +1,90 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn two_args() -> [u8; M + 2] {
+    let mut _0: [u8; M + 2];             // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:50: 5:61
+
+    bb0: {
+        _0 = [const 0_u8; M + 2];        // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:5: 6:15
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:7:2: 7:2
+    }
+}
+
+two_args::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+
+    bb0: {
+        _1 = CheckedAdd(const M, const 2_usize); // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:5:55: 5:60
+    }
+}
+
+two_args::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+
+    bb0: {
+        _1 = CheckedAdd(const M, const 2_usize); // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:6:9: 6:14
+    }
+}
+
+fn yay() -> [u8; 4] {
+    let mut _0: [u8; 4];                 // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:9:29: 9:36
+
+    bb0: {
+        _0 = two_args::<N, 2>() -> bb1;  // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:6: 10:24
+                                         // mir::Constant
+                                         // + span: ui/const-generics/generic_const_exprs/no_dependence.rs:10:6: 10:22
+                                         // + literal: Const { ty: fn() -> [u8; M + 2] {two_args::<N, 2>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:11:2: 11:2
+    }
+}
+
+yay::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:9:34: 9:35
+
+    bb0: {
+        _0 = const 4_usize;              // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:9:34: 9:35
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:9:34: 9:35
+    }
+}
+
+yay::{constant#2}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:17: 10:18
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:17: 10:18
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:17: 10:18
+    }
+}
+
+yay::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:20: 10:21
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:20: 10:21
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:10:20: 10:21
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:13:11: 13:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/no_dependence.rs:13:13: 13:13
+    }
+}

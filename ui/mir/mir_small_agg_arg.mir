@@ -1,0 +1,35 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: (i8, i8)) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_small_agg_arg.rs:3:26: 3:26
+    let _2: i8;                          // in scope 0 at ui/mir/mir_small_agg_arg.rs:3:9: 3:10
+    let _3: i8;                          // in scope 0 at ui/mir/mir_small_agg_arg.rs:3:12: 3:13
+    scope 1 {
+        debug x => _2;                   // in scope 1 at ui/mir/mir_small_agg_arg.rs:3:9: 3:10
+        debug y => _3;                   // in scope 1 at ui/mir/mir_small_agg_arg.rs:3:12: 3:13
+    }
+
+    bb0: {
+        _2 = (_1.0: i8);                 // scope 0 at ui/mir/mir_small_agg_arg.rs:3:9: 3:10
+        _3 = (_1.1: i8);                 // scope 0 at ui/mir/mir_small_agg_arg.rs:3:12: 3:13
+        return;                          // scope 0 at ui/mir/mir_small_agg_arg.rs:4:2: 4:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_small_agg_arg.rs:6:11: 6:11
+    let _1: ();                          // in scope 0 at ui/mir/mir_small_agg_arg.rs:7:5: 7:16
+    let mut _2: (i8, i8);                // in scope 0 at ui/mir/mir_small_agg_arg.rs:7:9: 7:15
+
+    bb0: {
+        _2 = const (0_i8, 1_i8);         // scope 0 at ui/mir/mir_small_agg_arg.rs:7:9: 7:15
+        _1 = foo(move _2) -> bb1;        // scope 0 at ui/mir/mir_small_agg_arg.rs:7:5: 7:16
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_small_agg_arg.rs:7:5: 7:8
+                                         // + literal: Const { ty: fn((i8, i8)) {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/mir_small_agg_arg.rs:8:2: 8:2
+    }
+}

@@ -1,0 +1,61 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn inner(_1: String, _2: bool) -> () {
+    debug dummy => _1;                   // in scope 0 at ui/tail-call-arg-leak.rs:5:10: 5:15
+    debug b => _2;                       // in scope 0 at ui/tail-call-arg-leak.rs:5:25: 5:26
+    let mut _0: ();                      // return place in scope 0 at ui/tail-call-arg-leak.rs:5:34: 5:34
+    let mut _3: bool;                    // in scope 0 at ui/tail-call-arg-leak.rs:5:39: 5:40
+    let mut _4: std::string::String;     // in scope 0 at ui/tail-call-arg-leak.rs:5:56: 5:61
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/tail-call-arg-leak.rs:5:39: 5:40
+        switchInt(move _3) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/tail-call-arg-leak.rs:5:39: 5:40
+    }
+
+    bb1: {
+        _4 = move _1;                    // scope 0 at ui/tail-call-arg-leak.rs:5:56: 5:61
+        _0 = inner(move _4, const false) -> bb3; // scope 0 at ui/tail-call-arg-leak.rs:5:50: 5:69
+                                         // mir::Constant
+                                         // + span: ui/tail-call-arg-leak.rs:5:50: 5:55
+                                         // + literal: Const { ty: fn(String, bool) {inner}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        drop(_1) -> bb3;                 // scope 0 at ui/tail-call-arg-leak.rs:5:73: 5:74
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/tail-call-arg-leak.rs:5:74: 5:74
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/tail-call-arg-leak.rs:7:15: 7:15
+    let _1: ();                          // in scope 0 at ui/tail-call-arg-leak.rs:8:5: 8:34
+    let mut _2: std::string::String;     // in scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:27
+    let mut _3: &str;                    // in scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:27
+    let _4: &str;                        // in scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:15
+
+    bb0: {
+        _4 = const "hi";                 // scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:15
+                                         // mir::Constant
+                                         // + span: ui/tail-call-arg-leak.rs:8:11: 8:15
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = _4;                         // scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:27
+        _2 = <str as ToString>::to_string(move _3) -> bb1; // scope 0 at ui/tail-call-arg-leak.rs:8:11: 8:27
+                                         // mir::Constant
+                                         // + span: ui/tail-call-arg-leak.rs:8:16: 8:25
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = inner(move _2, const true) -> bb2; // scope 0 at ui/tail-call-arg-leak.rs:8:5: 8:34
+                                         // mir::Constant
+                                         // + span: ui/tail-call-arg-leak.rs:8:5: 8:10
+                                         // + literal: Const { ty: fn(String, bool) {inner}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/tail-call-arg-leak.rs:9:2: 9:2
+    }
+}

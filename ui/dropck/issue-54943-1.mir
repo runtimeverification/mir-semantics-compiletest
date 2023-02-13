@@ -1,0 +1,119 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: T) -> () {
+    debug _t => _1;                      // in scope 0 at ui/dropck/issue-54943-1.rs:6:11: 6:13
+    let mut _0: ();                      // return place in scope 0 at ui/dropck/issue-54943-1.rs:6:18: 6:18
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/dropck/issue-54943-1.rs:7:1: 7:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/dropck/issue-54943-1.rs:7:2: 7:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/dropck/issue-54943-1.rs:9:11: 9:11
+    let _1: std::string::String;         // in scope 0 at ui/dropck/issue-54943-1.rs:11:10: 11:12
+    let _2: main::A<'_, &str>;           // in scope 0 at ui/dropck/issue-54943-1.rs:11:14: 11:16
+    let mut _3: (std::string::String, main::A<'_, &str>); // in scope 0 at ui/dropck/issue-54943-1.rs:11:36: 11:70
+    let mut _4: std::string::String;     // in scope 0 at ui/dropck/issue-54943-1.rs:11:37: 11:57
+    let mut _5: main::A<'_, &str>;       // in scope 0 at ui/dropck/issue-54943-1.rs:11:59: 11:69
+    let mut _6: &&str;                   // in scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+    let _7: &&str;                       // in scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+    let _8: ();                          // in scope 0 at ui/dropck/issue-54943-1.rs:12:5: 12:18
+    let mut _9: (std::string::String, main::A<'_, &str>); // in scope 0 at ui/dropck/issue-54943-1.rs:12:9: 12:17
+    let mut _10: std::string::String;    // in scope 0 at ui/dropck/issue-54943-1.rs:12:10: 12:12
+    let mut _11: main::A<'_, &str>;      // in scope 0 at ui/dropck/issue-54943-1.rs:12:14: 12:16
+    let mut _12: &&str;                  // in scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+    let mut _13: bool;                   // in scope 0 at ui/dropck/issue-54943-1.rs:13:1: 13:2
+    scope 1 {
+        debug a1 => _1;                  // in scope 1 at ui/dropck/issue-54943-1.rs:11:10: 11:12
+        debug a2 => _2;                  // in scope 1 at ui/dropck/issue-54943-1.rs:11:14: 11:16
+    }
+
+    bb0: {
+        _13 = const false;               // scope 0 at ui/dropck/issue-54943-1.rs:11:36: 11:70
+        _4 = <String as From<&str>>::from(const "auto") -> bb1; // scope 0 at ui/dropck/issue-54943-1.rs:11:37: 11:57
+                                         // mir::Constant
+                                         // + span: ui/dropck/issue-54943-1.rs:11:37: 11:49
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(&str) -> String {<String as From<&str>>::from}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/dropck/issue-54943-1.rs:11:50: 11:56
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1: {
+        _12 = const _;                   // scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+                                         // mir::Constant
+                                         // + span: ui/dropck/issue-54943-1.rs:11:61: 11:68
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
+        _7 = _12;                        // scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+        _6 = _7;                         // scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+        _5 = A::<'_, &str>(move _6);     // scope 0 at ui/dropck/issue-54943-1.rs:11:59: 11:69
+        _3 = (move _4, move _5);         // scope 0 at ui/dropck/issue-54943-1.rs:11:36: 11:70
+        _13 = const true;                // scope 0 at ui/dropck/issue-54943-1.rs:11:10: 11:12
+        _1 = move (_3.0: std::string::String); // scope 0 at ui/dropck/issue-54943-1.rs:11:10: 11:12
+        _2 = move (_3.1: main::A<'_, &str>); // scope 0 at ui/dropck/issue-54943-1.rs:11:14: 11:16
+        _13 = const false;               // scope 1 at ui/dropck/issue-54943-1.rs:12:10: 12:12
+        _10 = move _1;                   // scope 1 at ui/dropck/issue-54943-1.rs:12:10: 12:12
+        _11 = move _2;                   // scope 1 at ui/dropck/issue-54943-1.rs:12:14: 12:16
+        _9 = (move _10, move _11);       // scope 1 at ui/dropck/issue-54943-1.rs:12:9: 12:17
+        _8 = foo::<(String, A<'_, &str>)>(move _9) -> [return: bb2, unwind: bb3]; // scope 1 at ui/dropck/issue-54943-1.rs:12:5: 12:18
+                                         // mir::Constant
+                                         // + span: ui/dropck/issue-54943-1.rs:12:5: 12:8
+                                         // + literal: Const { ty: fn((String, A<'_, &str>)) {foo::<(String, A<'_, &str>)>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _13 = const false;               // scope 0 at ui/dropck/issue-54943-1.rs:13:1: 13:2
+        return;                          // scope 0 at ui/dropck/issue-54943-1.rs:13:2: 13:2
+    }
+
+    bb3 (cleanup): {
+        switchInt(_13) -> [0: bb4, otherwise: bb5]; // scope 0 at ui/dropck/issue-54943-1.rs:13:1: 13:2
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/dropck/issue-54943-1.rs:9:1: 13:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/dropck/issue-54943-1.rs:13:1: 13:2
+    }
+}
+
+promoted[0] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+    let mut _1: &str;                    // in scope 0 at ui/dropck/issue-54943-1.rs:11:62: 11:68
+
+    bb0: {
+        _1 = const "this";               // scope 0 at ui/dropck/issue-54943-1.rs:11:62: 11:68
+                                         // mir::Constant
+                                         // + span: ui/dropck/issue-54943-1.rs:11:62: 11:68
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+        return;                          // scope 0 at ui/dropck/issue-54943-1.rs:11:61: 11:68
+    }
+}
+
+fn A(_1: &B) -> A<'_, B> {
+    let mut _0: main::A<'_, B>;          // return place in scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+
+    bb0: {
+        _0 = A::<'_, B>(move _1);        // scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+        return;                          // scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+    }
+}
+
+// MIR FOR CTFE
+fn A(_1: &B) -> A<'_, B> {
+    let mut _0: main::A<'_, B>;          // return place in scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+
+    bb0: {
+        _0 = A::<'_, B>(move _1);        // scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+        return;                          // scope 0 at ui/dropck/issue-54943-1.rs:10:5: 10:24
+    }
+}

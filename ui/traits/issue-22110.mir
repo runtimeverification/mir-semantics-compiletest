@@ -1,0 +1,52 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/traits/issue-22110.rs:14:1: 14:29>::foo(_1: &F, _2: A) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/issue-22110.rs:15:12: 15:17
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-22110.rs:15:25: 15:25
+
+    bb0: {
+        drop(_2) -> bb1;                 // scope 0 at ui/traits/issue-22110.rs:15:27: 15:28
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/issue-22110.rs:15:28: 15:28
+    }
+}
+
+fn baz(_1: F) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-22110.rs:18:41: 18:41
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/traits/issue-22110.rs:18:43: 18:44
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/issue-22110.rs:18:44: 18:44
+    }
+}
+
+fn components(_1: for<'a> fn(&'a A)) -> () {
+    debug t => _1;                       // in scope 0 at ui/traits/issue-22110.rs:20:20: 20:21
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-22110.rs:21:5: 21:5
+    let mut _2: for<'a> fn(&'a A);       // in scope 0 at ui/traits/issue-22110.rs:23:9: 23:10
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/traits/issue-22110.rs:23:9: 23:10
+        _0 = baz::<A, for<'a> fn(&'a A)>(move _2) -> bb1; // scope 0 at ui/traits/issue-22110.rs:23:5: 23:11
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-22110.rs:23:5: 23:8
+                                         // + literal: Const { ty: fn(for<'a> fn(&'a A)) {baz::<A, for<'a> fn(&'a A)>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/issue-22110.rs:24:2: 24:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-22110.rs:26:11: 26:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/issue-22110.rs:27:2: 27:2
+    }
+}

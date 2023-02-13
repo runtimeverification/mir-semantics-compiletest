@@ -1,0 +1,56 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/inference/issue-70703.rs:15:1: 15:34>::consume(_1: (), _2: P) -> () {
+    debug self => _1;                    // in scope 0 at ui/inference/issue-70703.rs:16:16: 16:20
+    let mut _0: ();                      // return place in scope 0 at ui/inference/issue-70703.rs:16:28: 16:28
+
+    bb0: {
+        drop(_2) -> bb1;                 // scope 0 at ui/inference/issue-70703.rs:16:29: 16:30
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/inference/issue-70703.rs:16:30: 16:30
+    }
+}
+
+fn make_product_consumer(_1: F) -> impl ProductConsumer<<F as Factory>::Product> {
+    let mut _0: impl ProductConsumer<<F as Factory>::Product>; // return place in scope 0 at ui/inference/issue-70703.rs:19:47: 19:79
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/inference/issue-70703.rs:21:1: 21:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/inference/issue-70703.rs:21:2: 21:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inference/issue-70703.rs:23:11: 23:11
+    let _1: impl ProductConsumer<<() as Factory>::Product>; // in scope 0 at ui/inference/issue-70703.rs:24:9: 24:17
+    let mut _2: ();                      // in scope 0 at ui/inference/issue-70703.rs:24:42: 24:44
+    let _3: ();                          // in scope 0 at ui/inference/issue-70703.rs:25:5: 25:25
+    let mut _4: impl ProductConsumer<<() as Factory>::Product>; // in scope 0 at ui/inference/issue-70703.rs:25:5: 25:13
+    let mut _5: ();                      // in scope 0 at ui/inference/issue-70703.rs:25:22: 25:24
+    scope 1 {
+        debug consumer => _1;            // in scope 1 at ui/inference/issue-70703.rs:24:9: 24:17
+    }
+
+    bb0: {
+        _1 = make_product_consumer::<()>(move _2) -> bb1; // scope 0 at ui/inference/issue-70703.rs:24:20: 24:45
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-70703.rs:24:20: 24:41
+                                         // + literal: Const { ty: fn(()) -> impl ProductConsumer<<() as Factory>::Product> {make_product_consumer::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = <impl ProductConsumer<<() as Factory>::Product> as ProductConsumer<()>>::consume(move _4, move _5) -> bb2; // scope 1 at ui/inference/issue-70703.rs:25:5: 25:25
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-70703.rs:25:14: 25:21
+                                         // + literal: Const { ty: fn(impl ProductConsumer<<() as Factory>::Product>, ()) {<impl ProductConsumer<<() as Factory>::Product> as ProductConsumer<()>>::consume}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/inference/issue-70703.rs:26:2: 26:2
+    }
+}

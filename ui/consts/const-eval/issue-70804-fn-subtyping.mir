@@ -1,0 +1,89 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn nested(_1: (for<'a> fn(&'a ()), String)) -> (fn(&()), String) {
+    debug x => _1;                       // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:3:17: 3:18
+    let mut _0: (fn(&()), std::string::String); // return place in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:3:53: 3:78
+
+    bb0: {
+        _0 = move _1;                    // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:5:2: 5:2
+    }
+}
+
+// MIR FOR CTFE
+fn nested(_1: (for<'a> fn(&'a ()), String)) -> (fn(&()), String) {
+    debug x => _1;                       // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:3:17: 3:18
+    let mut _0: (fn(&()), std::string::String); // return place in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:3:53: 3:78
+
+    bb0: {
+        _0 = move _1;                    // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:5:2: 5:2
+    }
+}
+
+const TEST: (fn(&()), String) = {
+    let mut _0: (fn(&()), std::string::String); // return place in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:17: 7:42
+    let mut _1: (for<'a> fn(&'a ()), std::string::String); // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:52: 7:76
+    let mut _2: for<'a> fn(&'a ());      // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+    let mut _3: [closure@ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:57]; // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+    let mut _4: std::string::String;     // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:62: 7:75
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:52: 7:76
+        StorageLive(_2);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+        StorageLive(_3);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+        _3 = [closure@ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:57]; // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+                                         // closure
+                                         // + def_id: DefId(0:6 ~ issue_70804_fn_subtyping[9cb5]::TEST::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     for<'a> extern "rust-call" fn((&'a (),)),
+                                         //     (),
+                                         // ]
+        _2 = move _3 as for<'a> fn(&'a ()) (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:60
+        StorageDead(_3);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:56: 7:57
+        StorageLive(_4);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:62: 7:75
+        ConstEvalCounter;                // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:62: 7:75
+        _4 = String::new() -> bb1;       // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:62: 7:75
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:62: 7:73
+                                         // + literal: Const { ty: fn() -> String {String::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = (move _2, move _4);         // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:52: 7:76
+        StorageDead(_4);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:75: 7:76
+        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:75: 7:76
+        ConstEvalCounter;                // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:45: 7:77
+        _0 = nested(move _1) -> [return: bb2, unwind: bb3]; // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:45: 7:77
+                                         // mir::Constant
+                                         // + span: ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:45: 7:51
+                                         // + literal: Const { ty: fn((for<'a> fn(&'a ()), String)) -> (fn(&'static ()), String) {nested}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        StorageDead(_1);                 // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:76: 7:77
+        return;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:1: 7:78
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:1: 7:78
+    }
+}
+
+fn TEST::{closure#0}(_1: &[closure@ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:53: 7:57], _2: &()) -> () {
+    debug _x => _2;                      // in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:54: 7:56
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:58: 7:58
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:7:60: 7:60
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:9:11: 9:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-eval/issue-70804-fn-subtyping.rs:9:13: 9:13
+    }
+}

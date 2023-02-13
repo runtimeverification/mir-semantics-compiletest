@@ -1,0 +1,48 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f() -> isize {
+    let mut _0: isize;                   // return place in scope 0 at ui/drop/drop-on-ret.rs:7:11: 7:16
+    let _1: std::string::String;         // in scope 0 at ui/drop/drop-on-ret.rs:9:13: 9:15
+    let mut _2: &str;                    // in scope 0 at ui/drop/drop-on-ret.rs:9:26: 9:55
+    let _3: &str;                        // in scope 0 at ui/drop/drop-on-ret.rs:9:26: 9:43
+    scope 1 {
+        debug _s => _1;                  // in scope 1 at ui/drop/drop-on-ret.rs:9:13: 9:15
+    }
+
+    bb0: {
+        _3 = const "should not leak";    // scope 0 at ui/drop/drop-on-ret.rs:9:26: 9:43
+                                         // mir::Constant
+                                         // + span: ui/drop/drop-on-ret.rs:9:26: 9:43
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = _3;                         // scope 0 at ui/drop/drop-on-ret.rs:9:26: 9:55
+        _1 = <str as ToString>::to_string(move _2) -> bb1; // scope 0 at ui/drop/drop-on-ret.rs:9:26: 9:55
+                                         // mir::Constant
+                                         // + span: ui/drop/drop-on-ret.rs:9:44: 9:53
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const 1_isize;              // scope 1 at ui/drop/drop-on-ret.rs:10:16: 10:17
+        drop(_1) -> bb2;                 // scope 0 at ui/drop/drop-on-ret.rs:11:5: 11:6
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/drop/drop-on-ret.rs:13:2: 13:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/drop/drop-on-ret.rs:15:15: 15:15
+    let _1: isize;                       // in scope 0 at ui/drop/drop-on-ret.rs:15:17: 15:20
+
+    bb0: {
+        _1 = f() -> bb1;                 // scope 0 at ui/drop/drop-on-ret.rs:15:17: 15:20
+                                         // mir::Constant
+                                         // + span: ui/drop/drop-on-ret.rs:15:17: 15:18
+                                         // + literal: Const { ty: fn() -> isize {f}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/drop/drop-on-ret.rs:15:23: 15:23
+    }
+}

@@ -1,0 +1,25 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/box/new.rs:4:11: 4:11
+    let _1: std::boxed::Box<i32>;        // in scope 0 at ui/box/new.rs:5:9: 5:11
+    scope 1 {
+        debug _a => _1;                  // in scope 1 at ui/box/new.rs:5:9: 5:11
+    }
+
+    bb0: {
+        _1 = Box::<i32>::new(const 1_i32) -> bb1; // scope 0 at ui/box/new.rs:5:14: 5:25
+                                         // mir::Constant
+                                         // + span: ui/box/new.rs:5:14: 5:22
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/box/new.rs:6:1: 6:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/box/new.rs:6:2: 6:2
+    }
+}

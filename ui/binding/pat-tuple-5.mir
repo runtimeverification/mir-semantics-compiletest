@@ -1,0 +1,68 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn tuple() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-5.rs:2:12: 2:12
+    let _1: (tuple::S, tuple::Z, tuple::W); // in scope 0 at ui/binding/pat-tuple-5.rs:6:9: 6:10
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/binding/pat-tuple-5.rs:6:9: 6:10
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/binding/pat-tuple-5.rs:11:2: 11:2
+    }
+}
+
+fn tuple_struct() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-5.rs:13:19: 13:19
+    let _1: tuple_struct::SS;            // in scope 0 at ui/binding/pat-tuple-5.rs:19:9: 19:10
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/binding/pat-tuple-5.rs:19:9: 19:10
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/binding/pat-tuple-5.rs:24:2: 24:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-5.rs:26:11: 26:11
+    let _1: ();                          // in scope 0 at ui/binding/pat-tuple-5.rs:27:5: 27:12
+    let _2: ();                          // in scope 0 at ui/binding/pat-tuple-5.rs:28:5: 28:19
+
+    bb0: {
+        _1 = tuple() -> bb1;             // scope 0 at ui/binding/pat-tuple-5.rs:27:5: 27:12
+                                         // mir::Constant
+                                         // + span: ui/binding/pat-tuple-5.rs:27:5: 27:10
+                                         // + literal: Const { ty: fn() {tuple}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = tuple_struct() -> bb2;      // scope 0 at ui/binding/pat-tuple-5.rs:28:5: 28:19
+                                         // mir::Constant
+                                         // + span: ui/binding/pat-tuple-5.rs:28:5: 28:17
+                                         // + literal: Const { ty: fn() {tuple_struct}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/binding/pat-tuple-5.rs:29:2: 29:2
+    }
+}
+
+fn SS(_1: tuple_struct::S, _2: tuple_struct::Z, _3: tuple_struct::W) -> SS {
+    let mut _0: tuple_struct::SS;        // return place in scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+
+    bb0: {
+        _0 = SS(move _1, move _2, move _3); // scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+        return;                          // scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+    }
+}
+
+// MIR FOR CTFE
+fn SS(_1: tuple_struct::S, _2: tuple_struct::Z, _3: tuple_struct::W) -> SS {
+    let mut _0: tuple_struct::SS;        // return place in scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+
+    bb0: {
+        _0 = SS(move _1, move _2, move _3); // scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+        return;                          // scope 0 at ui/binding/pat-tuple-5.rs:14:5: 14:14
+    }
+}

@@ -1,0 +1,107 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn take_auto(_1: T) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-traits.rs:17:29: 17:29
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/auto-traits/auto-traits.rs:17:30: 17:31
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:17:31: 17:31
+    }
+}
+
+fn take_auto_unsafe(_1: T) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-traits.rs:18:42: 18:42
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/auto-traits/auto-traits.rs:18:43: 18:44
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:18:44: 18:44
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-traits.rs:20:11: 20:11
+    let _1: ();                          // in scope 0 at ui/auto-traits/auto-traits.rs:25:5: 25:17
+    let _2: ();                          // in scope 0 at ui/auto-traits/auto-traits.rs:26:5: 26:30
+    let mut _3: AutoBool;                // in scope 0 at ui/auto-traits/auto-traits.rs:26:15: 26:29
+    let _4: ();                          // in scope 0 at ui/auto-traits/auto-traits.rs:27:5: 27:24
+    let _5: ();                          // in scope 0 at ui/auto-traits/auto-traits.rs:28:5: 28:37
+    let mut _6: AutoBool;                // in scope 0 at ui/auto-traits/auto-traits.rs:28:22: 28:36
+    scope 1 {
+    }
+
+    bb0: {
+        _1 = take_auto::<i32>(const 0_i32) -> bb1; // scope 0 at ui/auto-traits/auto-traits.rs:25:5: 25:17
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:25:5: 25:14
+                                         // + literal: Const { ty: fn(i32) {take_auto::<i32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = const AutoBool(true);       // scope 0 at ui/auto-traits/auto-traits.rs:26:15: 26:29
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:26:15: 26:29
+                                         // + literal: Const { ty: AutoBool, val: Value(Scalar(0x01)) }
+        _2 = take_auto::<AutoBool>(move _3) -> bb2; // scope 0 at ui/auto-traits/auto-traits.rs:26:5: 26:30
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:26:5: 26:14
+                                         // + literal: Const { ty: fn(AutoBool) {take_auto::<AutoBool>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = take_auto_unsafe::<i32>(const 0_i32) -> bb3; // scope 0 at ui/auto-traits/auto-traits.rs:27:5: 27:24
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:27:5: 27:21
+                                         // + literal: Const { ty: fn(i32) {take_auto_unsafe::<i32>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _6 = const AutoBool(true);       // scope 0 at ui/auto-traits/auto-traits.rs:28:22: 28:36
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:28:22: 28:36
+                                         // + literal: Const { ty: AutoBool, val: Value(Scalar(0x01)) }
+        _5 = take_auto_unsafe::<AutoBool>(move _6) -> bb4; // scope 0 at ui/auto-traits/auto-traits.rs:28:5: 28:37
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-traits.rs:28:5: 28:21
+                                         // + literal: Const { ty: fn(AutoBool) {take_auto_unsafe::<AutoBool>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:32:2: 32:2
+    }
+}
+
+promoted[0] in main: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at ui/auto-traits/auto-traits.rs:31:33: 31:35
+    let mut _1: i32;                     // in scope 0 at ui/auto-traits/auto-traits.rs:31:34: 31:35
+
+    bb0: {
+        _1 = const 0_i32;                // scope 0 at ui/auto-traits/auto-traits.rs:31:34: 31:35
+        _0 = &_1;                        // scope 0 at ui/auto-traits/auto-traits.rs:31:33: 31:35
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:31:33: 31:35
+    }
+}
+
+fn AutoBool(_1: bool) -> AutoBool {
+    let mut _0: AutoBool;                // return place in scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+
+    bb0: {
+        _0 = AutoBool(move _1);          // scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+    }
+}
+
+// MIR FOR CTFE
+fn AutoBool(_1: bool) -> AutoBool {
+    let mut _0: AutoBool;                // return place in scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+
+    bb0: {
+        _0 = AutoBool(move _1);          // scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+        return;                          // scope 0 at ui/auto-traits/auto-traits.rs:12:1: 12:16
+    }
+}

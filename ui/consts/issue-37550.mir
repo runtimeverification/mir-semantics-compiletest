@@ -1,0 +1,83 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn x() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-37550.rs:5:14: 5:14
+    let _1: bool;                        // in scope 0 at ui/consts/issue-37550.rs:6:9: 6:10
+    let mut _3: &bool;                   // in scope 0 at ui/consts/issue-37550.rs:7:13: 7:17
+    scope 1 {
+        debug t => _1;                   // in scope 1 at ui/consts/issue-37550.rs:6:9: 6:10
+        let _2: [closure@ui/consts/issue-37550.rs:7:13: 7:15]; // in scope 1 at ui/consts/issue-37550.rs:7:9: 7:10
+        scope 2 {
+            debug x => _2;               // in scope 2 at ui/consts/issue-37550.rs:7:9: 7:10
+        }
+    }
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/consts/issue-37550.rs:6:13: 6:17
+        _3 = &_1;                        // scope 1 at ui/consts/issue-37550.rs:7:13: 7:17
+        _2 = [closure@ui/consts/issue-37550.rs:7:13: 7:15] { t: move _3 }; // scope 1 at ui/consts/issue-37550.rs:7:13: 7:17
+                                         // closure
+                                         // + def_id: DefId(0:4 ~ issue_37550[21e0]::x::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn(()) -> bool,
+                                         //     (&bool,),
+                                         // ]
+        return;                          // scope 0 at ui/consts/issue-37550.rs:8:2: 8:2
+    }
+}
+
+// MIR FOR CTFE
+fn x() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-37550.rs:5:14: 5:14
+    let _1: bool;                        // in scope 0 at ui/consts/issue-37550.rs:6:9: 6:10
+    let mut _3: &bool;                   // in scope 0 at ui/consts/issue-37550.rs:7:13: 7:17
+    scope 1 {
+        debug t => _1;                   // in scope 1 at ui/consts/issue-37550.rs:6:9: 6:10
+        let _2: [closure@ui/consts/issue-37550.rs:7:13: 7:15]; // in scope 1 at ui/consts/issue-37550.rs:7:9: 7:10
+        scope 2 {
+            debug x => _2;               // in scope 2 at ui/consts/issue-37550.rs:7:9: 7:10
+        }
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-37550.rs:6:9: 6:10
+        _1 = const true;                 // scope 0 at ui/consts/issue-37550.rs:6:13: 6:17
+        StorageLive(_2);                 // scope 1 at ui/consts/issue-37550.rs:7:9: 7:10
+        StorageLive(_3);                 // scope 1 at ui/consts/issue-37550.rs:7:13: 7:17
+        _3 = &_1;                        // scope 1 at ui/consts/issue-37550.rs:7:13: 7:17
+        _2 = [closure@ui/consts/issue-37550.rs:7:13: 7:15] { t: move _3 }; // scope 1 at ui/consts/issue-37550.rs:7:13: 7:17
+                                         // closure
+                                         // + def_id: DefId(0:4 ~ issue_37550[21e0]::x::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn(()) -> bool,
+                                         //     (&bool,),
+                                         // ]
+        StorageDead(_3);                 // scope 1 at ui/consts/issue-37550.rs:7:14: 7:15
+        _0 = const ();                   // scope 0 at ui/consts/issue-37550.rs:5:14: 8:2
+        StorageDead(_2);                 // scope 1 at ui/consts/issue-37550.rs:8:1: 8:2
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-37550.rs:8:1: 8:2
+        return;                          // scope 0 at ui/consts/issue-37550.rs:8:2: 8:2
+    }
+}
+
+fn x::{closure#0}(_1: &[closure@ui/consts/issue-37550.rs:7:13: 7:15]) -> bool {
+    debug t => (*((*_1).0: &bool));      // in scope 0 at ui/consts/issue-37550.rs:6:9: 6:10
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-37550.rs:7:16: 7:16
+    let mut _2: &bool;                   // in scope 0 at ui/consts/issue-37550.rs:7:13: 7:17
+
+    bb0: {
+        _2 = deref_copy ((*_1).0: &bool); // scope 0 at ui/consts/issue-37550.rs:7:16: 7:17
+        _0 = (*_2);                      // scope 0 at ui/consts/issue-37550.rs:7:16: 7:17
+        return;                          // scope 0 at ui/consts/issue-37550.rs:7:17: 7:17
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-37550.rs:10:11: 10:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-37550.rs:10:13: 10:13
+    }
+}

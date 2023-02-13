@@ -1,0 +1,194 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:5:14: 5:15
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:6:9: 6:10
+    scope 1 {
+        debug x => _0;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:6:9: 6:10
+    }
+
+    bb0: {
+        _0 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:6:13: 6:14
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:8:2: 8:2
+    }
+}
+
+// MIR FOR CTFE
+fn foo(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:5:14: 5:15
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:5:27: 5:32
+    let _2: usize;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:6:9: 6:10
+    scope 1 {
+        debug x => _2;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:6:9: 6:10
+    }
+
+    bb0: {
+        StorageLive(_2);                 // scope 0 at ui/consts/locals-in-const-fn.rs:6:9: 6:10
+        _2 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:6:13: 6:14
+        _0 = _2;                         // scope 1 at ui/consts/locals-in-const-fn.rs:7:5: 7:6
+        StorageDead(_2);                 // scope 0 at ui/consts/locals-in-const-fn.rs:8:1: 8:2
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:8:2: 8:2
+    }
+}
+
+static FOO: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:10:13: 10:18
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/locals-in-const-fn.rs:10:21: 10:28
+        _0 = foo(const 42_usize) -> bb1; // scope 0 at ui/consts/locals-in-const-fn.rs:10:21: 10:28
+                                         // mir::Constant
+                                         // + span: ui/consts/locals-in-const-fn.rs:10:21: 10:24
+                                         // + literal: Const { ty: fn(usize) -> usize {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:10:1: 10:29
+    }
+}
+
+fn bar(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:12:14: 12:19
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:12:31: 12:36
+    let mut _2: (usize, bool);           // in scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+    let _3: &usize;                      // in scope 0 at ui/consts/locals-in-const-fn.rs:14:9: 14:10
+    scope 1 {
+        debug x => _3;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:14:9: 14:10
+    }
+
+    bb0: {
+        _2 = CheckedAdd(_1, const 8_usize); // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", _1, const 8_usize) -> bb1; // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+    }
+
+    bb1: {
+        _1 = move (_2.0: usize);         // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+        _3 = &_1;                        // scope 0 at ui/consts/locals-in-const-fn.rs:14:13: 14:15
+        _0 = (*_3);                      // scope 1 at ui/consts/locals-in-const-fn.rs:15:5: 15:7
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:16:2: 16:2
+    }
+}
+
+// MIR FOR CTFE
+fn bar(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:12:14: 12:19
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:12:31: 12:36
+    let mut _2: (usize, bool);           // in scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+    let _3: &usize;                      // in scope 0 at ui/consts/locals-in-const-fn.rs:14:9: 14:10
+    scope 1 {
+        debug x => _3;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:14:9: 14:10
+    }
+
+    bb0: {
+        _2 = CheckedAdd(_1, const 8_usize); // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", _1, const 8_usize) -> bb1; // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+    }
+
+    bb1: {
+        _1 = move (_2.0: usize);         // scope 0 at ui/consts/locals-in-const-fn.rs:13:5: 13:11
+        StorageLive(_3);                 // scope 0 at ui/consts/locals-in-const-fn.rs:14:9: 14:10
+        _3 = &_1;                        // scope 0 at ui/consts/locals-in-const-fn.rs:14:13: 14:15
+        _0 = (*_3);                      // scope 1 at ui/consts/locals-in-const-fn.rs:15:5: 15:7
+        StorageDead(_3);                 // scope 0 at ui/consts/locals-in-const-fn.rs:16:1: 16:2
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:16:2: 16:2
+    }
+}
+
+static BAR: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:18:13: 18:18
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/locals-in-const-fn.rs:18:21: 18:28
+        _0 = bar(const 42_usize) -> bb1; // scope 0 at ui/consts/locals-in-const-fn.rs:18:21: 18:28
+                                         // mir::Constant
+                                         // + span: ui/consts/locals-in-const-fn.rs:18:21: 18:24
+                                         // + literal: Const { ty: fn(usize) -> usize {bar}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:18:1: 18:29
+    }
+}
+
+fn boo(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:20:14: 20:19
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:20:31: 20:36
+    let mut _2: usize;                   // in scope 0 at ui/consts/locals-in-const-fn.rs:22:13: 22:18
+    let mut _3: (usize, bool);           // in scope 0 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+    let mut _4: usize;                   // in scope 0 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+    scope 1 {
+        debug x => _2;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:22:13: 22:18
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:22:21: 22:22
+        _3 = CheckedAdd(_2, const 10_usize); // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", _2, const 10_usize) -> bb1; // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+    }
+
+    bb1: {
+        _2 = move (_3.0: usize);         // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+        _4 = _2;                         // scope 1 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+        _1 = move _4;                    // scope 1 at ui/consts/locals-in-const-fn.rs:24:9: 24:14
+        _0 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:26:5: 26:6
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:27:2: 27:2
+    }
+}
+
+// MIR FOR CTFE
+fn boo(_1: usize) -> usize {
+    debug i => _1;                       // in scope 0 at ui/consts/locals-in-const-fn.rs:20:14: 20:19
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:20:31: 20:36
+    let _2: ();                          // in scope 0 at ui/consts/locals-in-const-fn.rs:21:5: 25:6
+    let mut _3: usize;                   // in scope 0 at ui/consts/locals-in-const-fn.rs:22:13: 22:18
+    let mut _4: (usize, bool);           // in scope 0 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+    let mut _5: usize;                   // in scope 0 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+    scope 1 {
+        debug x => _3;                   // in scope 1 at ui/consts/locals-in-const-fn.rs:22:13: 22:18
+    }
+
+    bb0: {
+        StorageLive(_2);                 // scope 0 at ui/consts/locals-in-const-fn.rs:21:5: 25:6
+        StorageLive(_3);                 // scope 0 at ui/consts/locals-in-const-fn.rs:22:13: 22:18
+        _3 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:22:21: 22:22
+        _4 = CheckedAdd(_3, const 10_usize); // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", _3, const 10_usize) -> bb1; // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+    }
+
+    bb1: {
+        _3 = move (_4.0: usize);         // scope 1 at ui/consts/locals-in-const-fn.rs:23:9: 23:16
+        StorageLive(_5);                 // scope 1 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+        _5 = _3;                         // scope 1 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+        _1 = move _5;                    // scope 1 at ui/consts/locals-in-const-fn.rs:24:9: 24:14
+        StorageDead(_5);                 // scope 1 at ui/consts/locals-in-const-fn.rs:24:13: 24:14
+        _2 = const ();                   // scope 0 at ui/consts/locals-in-const-fn.rs:21:5: 25:6
+        StorageDead(_3);                 // scope 0 at ui/consts/locals-in-const-fn.rs:25:5: 25:6
+        StorageDead(_2);                 // scope 0 at ui/consts/locals-in-const-fn.rs:25:5: 25:6
+        _0 = _1;                         // scope 0 at ui/consts/locals-in-const-fn.rs:26:5: 26:6
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:27:2: 27:2
+    }
+}
+
+static BOO: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/locals-in-const-fn.rs:29:13: 29:18
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/locals-in-const-fn.rs:29:21: 29:28
+        _0 = boo(const 42_usize) -> bb1; // scope 0 at ui/consts/locals-in-const-fn.rs:29:21: 29:28
+                                         // mir::Constant
+                                         // + span: ui/consts/locals-in-const-fn.rs:29:21: 29:24
+                                         // + literal: Const { ty: fn(usize) -> usize {boo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:29:1: 29:29
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/locals-in-const-fn.rs:31:11: 31:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/locals-in-const-fn.rs:35:2: 35:2
+    }
+}

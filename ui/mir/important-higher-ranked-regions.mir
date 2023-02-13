@@ -1,0 +1,38 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: Foo<for<'a> fn(&'a ()), u32>) -> Foo<fn(&()), String> {
+    debug x => _1;                       // in scope 0 at ui/mir/important-higher-ranked-regions.rs:22:8: 22:9
+    let mut _0: Foo<fn(&()), std::string::String>; // return place in scope 0 at ui/mir/important-higher-ranked-regions.rs:22:44: 22:72
+
+    bb0: {
+        _0 = move _1;                    // scope 0 at ui/mir/important-higher-ranked-regions.rs:23:5: 23:6
+        return;                          // scope 0 at ui/mir/important-higher-ranked-regions.rs:24:2: 24:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/important-higher-ranked-regions.rs:26:11: 26:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/important-higher-ranked-regions.rs:26:13: 26:13
+    }
+}
+
+fn Foo(_1: T) -> Foo<T, U> {
+    let mut _0: Foo<T, U>;               // return place in scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+
+    bb0: {
+        _0 = Foo::<T, U>(move _1);       // scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+        return;                          // scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: T) -> Foo<T, U> {
+    let mut _0: Foo<T, U>;               // return place in scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+
+    bb0: {
+        _0 = Foo::<T, U>(move _1);       // scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+        return;                          // scope 0 at ui/mir/important-higher-ranked-regions.rs:11:1: 11:17
+    }
+}

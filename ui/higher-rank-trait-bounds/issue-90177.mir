@@ -1,0 +1,55 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: &dyn CanBeDynamic<for<'f> Assoc = ()>) -> () {
+    debug a => _1;                       // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:15:8: 15:9
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:15:30: 15:30
+    let _2: ();                          // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:16:5: 16:21
+    let mut _3: &dyn CanBeDynamic<for<'f> Assoc = ()>; // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:16:5: 16:21
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:16:5: 16:21
+        _2 = <dyn CanBeDynamic<for<'f> Assoc = ()> as Base<'_>>::do_something(move _3) -> bb1; // scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:16:5: 16:21
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/issue-90177.rs:16:7: 16:19
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn CanBeDynamic<for<'f> Assoc = ()>) {<dyn CanBeDynamic<for<'f> Assoc = ()> as Base<'_>>::do_something}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:17:2: 17:2
+    }
+}
+
+fn <impl at ui/higher-rank-trait-bounds/issue-90177.rs:21:1: 21:24>::do_something(_1: &S) -> () {
+    debug self => _1;                    // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:24:21: 24:26
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:24:28: 24:28
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:24:30: 24:30
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:29:11: 29:11
+    let _1: S;                           // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:30:9: 30:10
+    let _2: ();                          // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:31:5: 31:12
+    let mut _3: &dyn CanBeDynamic<for<'f> Assoc = ()>; // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+    let mut _4: &S;                      // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+    let _5: &S;                          // in scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+    scope 1 {
+        debug s => _1;                   // in scope 1 at ui/higher-rank-trait-bounds/issue-90177.rs:30:9: 30:10
+    }
+
+    bb0: {
+        _5 = &_1;                        // scope 1 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+        _4 = _5;                         // scope 1 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+        _3 = move _4 as &dyn CanBeDynamic<for<'f> Assoc = ()> (Pointer(Unsize)); // scope 1 at ui/higher-rank-trait-bounds/issue-90177.rs:31:9: 31:11
+        _2 = foo(move _3) -> bb1;        // scope 1 at ui/higher-rank-trait-bounds/issue-90177.rs:31:5: 31:12
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/issue-90177.rs:31:5: 31:8
+                                         // + literal: Const { ty: for<'a> fn(&'a (dyn CanBeDynamic<for<'f> Assoc = ()> + 'a)) {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/issue-90177.rs:32:2: 32:2
+    }
+}

@@ -1,0 +1,65 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn func(_1: ()) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:11:40: 11:40
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:11:42: 11:42
+    }
+}
+
+fn assert_is_func(_1: fn(A)) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:12:32: 12:32
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:12:34: 12:34
+    }
+}
+
+fn test() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:15:1: 15:1
+    let _1: ();                          // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:5: 18:25
+    let mut _2: fn(());                  // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:20: 18:24
+
+    bb0: {
+        _2 = func as fn(()) (Pointer(ReifyFnPointer)); // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:20: 18:24
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:20: 18:24
+                                         // + literal: Const { ty: for<'a> fn(<Foo<'a> as Bar>::Type) {func}, val: Value(<ZST>) }
+        _1 = assert_is_func::<()>(move _2) -> bb1; // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:5: 18:25
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:18:5: 18:19
+                                         // + literal: Const { ty: fn(fn(())) {assert_is_func::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:19:2: 19:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:21:11: 21:11
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:21:13: 21:13
+    }
+}
+
+fn Foo(_1: &()) -> Foo<'_> {
+    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+
+    bb0: {
+        _0 = Foo::<'_>(move _1);         // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: &()) -> Foo<'_> {
+    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+
+    bb0: {
+        _0 = Foo::<'_>(move _1);         // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-80956.rs:6:1: 6:15
+    }
+}

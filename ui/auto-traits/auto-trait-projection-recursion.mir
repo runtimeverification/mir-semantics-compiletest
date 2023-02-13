@@ -1,0 +1,64 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn is_send() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:30:23: 30:23
+
+    bb0: {
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:30:25: 30:25
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:32:11: 32:11
+    let _1: ();                          // in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:33:5: 33:31
+
+    bb0: {
+        _1 = is_send::<X<C<'_>>>() -> bb1; // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:33:5: 33:31
+                                         // mir::Constant
+                                         // + span: ui/auto-traits/auto-trait-projection-recursion.rs:33:5: 33:29
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() {is_send::<X<C<'_>>>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:34:2: 34:2
+    }
+}
+
+fn C(_1: &()) -> C<'_> {
+    let mut _0: C<'_>;                   // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+
+    bb0: {
+        _0 = C::<'_>(move _1);           // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+    }
+}
+
+// MIR FOR CTFE
+fn C(_1: &()) -> C<'_> {
+    let mut _0: C<'_>;                   // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+
+    bb0: {
+        _0 = C::<'_>(move _1);           // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:27:1: 27:13
+    }
+}
+
+fn X(_1: <T as Y>::P) -> X<T> {
+    let mut _0: X<T>;                    // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+
+    bb0: {
+        _0 = X::<T>(move _1);            // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+    }
+}
+
+// MIR FOR CTFE
+fn X(_1: <T as Y>::P) -> X<T> {
+    let mut _0: X<T>;                    // return place in scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+
+    bb0: {
+        _0 = X::<T>(move _1);            // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+        return;                          // scope 0 at ui/auto-traits/auto-trait-projection-recursion.rs:28:1: 28:15
+    }
+}

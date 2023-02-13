@@ -1,0 +1,59 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn Foo::dummy(_1: &Self, _2: T) -> () {
+    debug self => _1;                    // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:5:25: 5:30
+    debug arg => _2;                     // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:5:32: 5:35
+    let mut _0: ();                      // return place in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:5:40: 5:40
+
+    bb0: {
+        drop(_2) -> bb1;                 // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:5:42: 5:43
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:5:43: 5:43
+    }
+}
+
+fn <impl at ui/where-clauses/where-clause-method-substituion-rpass.rs:16:1: 16:20>::method(_1: &i32) -> () {
+    debug self => _1;                    // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:17:18: 17:23
+    let mut _0: ();                      // return place in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:17:25: 17:25
+
+    bb0: {
+        return;                          // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:18:6: 18:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:21:11: 21:11
+    let _1: ();                          // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+    let mut _2: &i32;                    // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+    let mut _3: &i32;                    // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+
+    bb0: {
+        _3 = const _;                    // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+                                         // mir::Constant
+                                         // + span: ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
+        _2 = _3;                         // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+        _1 = <i32 as Bar<X>>::method::<S>(move _2) -> bb1; // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+                                         // mir::Constant
+                                         // + span: ui/where-clauses/where-clause-method-substituion-rpass.rs:22:7: 22:13
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: for<'a> fn(&'a i32) {<i32 as Bar<X>>::method::<S>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:23:2: 23:2
+    }
+}
+
+promoted[0] in main: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+    let mut _1: i32;                     // in scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:6
+
+    bb0: {
+        _1 = const 1_i32;                // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:6
+        _0 = &_1;                        // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+        return;                          // scope 0 at ui/where-clauses/where-clause-method-substituion-rpass.rs:22:5: 22:20
+    }
+}

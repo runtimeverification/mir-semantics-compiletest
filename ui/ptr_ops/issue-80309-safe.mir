@@ -1,0 +1,220 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn zero(_1: usize) -> usize {
+    debug x => _1;                       // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:6:13: 6:14
+    let mut _0: usize;                   // return place in scope 0 at ui/ptr_ops/issue-80309-safe.rs:6:26: 6:31
+    let mut _2: usize;                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:52
+    let mut _3: *const i8;               // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:43
+    let mut _4: *const i8;               // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:27
+    let mut _5: usize;                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:41: 7:42
+    let mut _6: usize;                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:55: 7:56
+    let mut _7: (usize, bool);           // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:56
+
+    bb0: {
+        _4 = null::<i8>() -> bb1;        // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:27
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:7:5: 7:25
+                                         // + literal: Const { ty: fn() -> *const i8 {null::<i8>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = _1;                         // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:41: 7:42
+        _3 = ptr::const_ptr::<impl *const i8>::wrapping_add(move _4, move _5) -> bb2; // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:43
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:7:28: 7:40
+                                         // + literal: Const { ty: fn(*const i8, usize) -> *const i8 {ptr::const_ptr::<impl *const i8>::wrapping_add}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = move _3 as usize (PointerExposeAddress); // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:52
+        _6 = _1;                         // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:55: 7:56
+        _7 = CheckedSub(_2, _6);         // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:56
+        assert(!move (_7.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, move _6) -> bb3; // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:56
+    }
+
+    bb3: {
+        _0 = move (_7.0: usize);         // scope 0 at ui/ptr_ops/issue-80309-safe.rs:7:5: 7:56
+        return;                          // scope 0 at ui/ptr_ops/issue-80309-safe.rs:8:2: 8:2
+    }
+}
+
+fn qux(_1: &[i8]) -> i8 {
+    debug x => _1;                       // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:9:12: 9:13
+    let mut _0: i8;                      // return place in scope 0 at ui/ptr_ops/issue-80309-safe.rs:9:25: 9:27
+    let _2: usize;                       // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:7: 10:32
+    let mut _3: usize;                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:31
+    let mut _4: *const i8;               // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:22
+    let mut _5: &[i8];                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:22
+    let mut _6: usize;                   // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+    let mut _7: bool;                    // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+
+    bb0: {
+        _5 = _1;                         // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:22
+        _4 = core::slice::<impl [i8]>::as_ptr(move _5) -> bb1; // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:22
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:10:14: 10:20
+                                         // + literal: Const { ty: for<'a> fn(&'a [i8]) -> *const i8 {core::slice::<impl [i8]>::as_ptr}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = move _4 as usize (PointerExposeAddress); // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:12: 10:31
+        _2 = zero(move _3) -> bb2;       // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:7: 10:32
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:10:7: 10:11
+                                         // + literal: Const { ty: fn(usize) -> usize {zero}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = Len((*_1));                 // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+        _7 = Lt(_2, _6);                 // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _2) -> bb3; // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+    }
+
+    bb3: {
+        _0 = (*_1)[_2];                  // scope 0 at ui/ptr_ops/issue-80309-safe.rs:10:5: 10:33
+        return;                          // scope 0 at ui/ptr_ops/issue-80309-safe.rs:11:2: 11:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/ptr_ops/issue-80309-safe.rs:13:11: 13:11
+    let _1: std::vec::Vec<i8>;           // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:14:9: 14:10
+    let mut _2: std::boxed::Box<[i8]>;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _3: std::boxed::Box<[i8; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _4: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _5: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _6: *mut u8;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _7: std::boxed::Box<[i8; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let _8: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _9: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _10: &[&str];                // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    let mut _11: &[&str; 2];             // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    let _12: &[&str; 2];                 // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    let mut _13: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _14: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _15: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _16: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _17: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+    let mut _18: &i8;                    // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+    let _19: &i8;                        // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+    let _20: i8;                         // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+    let mut _21: &[i8];                  // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+    let _22: &[i8];                      // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+    let mut _23: &std::vec::Vec<i8>;     // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+    let _24: &std::vec::Vec<i8>;         // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+    let mut _26: *const [i8; 2];         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    scope 1 {
+        debug z => _1;                   // in scope 1 at ui/ptr_ops/issue-80309-safe.rs:14:9: 14:10
+        let mut _25: &[&str; 2];         // in scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _4 = const 2_usize;              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _5 = const 1_usize;              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _7 = ShallowInitBox(move _6, [i8; 2]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _26 = (((_7.0: std::ptr::Unique<[i8; 2]>).0: std::ptr::NonNull<[i8; 2]>).0: *const [i8; 2]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        (*_26) = [const 42_i8, const 43_i8]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        _3 = move _7;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _2 = move _3 as std::boxed::Box<[i8]> (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _1 = slice::<impl [i8]>::into_vec::<std::alloc::Global>(move _2) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Box<[i8]>) -> Vec<i8> {slice::<impl [i8]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _25 = const _;                   // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
+        _12 = _25;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+        _11 = _12;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+        _10 = move _11 as &[&str] (Pointer(Unsize)); // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+        _24 = &_1;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+        _23 = _24;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+        _22 = <Vec<i8> as Deref>::deref(move _23) -> [return: bb3, unwind: bb9]; // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<i8>) -> &'a <Vec<i8> as Deref>::Target {<Vec<i8> as Deref>::deref}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _21 = _22;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:24: 15:26
+        _20 = qux(move _21) -> [return: bb4, unwind: bb9]; // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:20: 15:23
+                                         // + literal: Const { ty: for<'a> fn(&'a [i8]) -> i8 {qux}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _19 = &_20;                      // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+        _18 = _19;                       // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+        _17 = core::fmt::ArgumentV1::<'_>::new_display::<i8>(move _18) -> [return: bb5, unwind: bb9]; // scope 1 at ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:20: 15:27
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: for<'b> fn(&'b i8) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<i8>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _16 = [move _17];                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _15 = &_16;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _14 = _15;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _13 = move _14 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _9 = Arguments::<'_>::new_v1(move _10, move _13) -> [return: bb6, unwind: bb9]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _8 = _print(move _9) -> [return: bb7, unwind: bb9]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        drop(_1) -> bb8;                 // scope 0 at ui/ptr_ops/issue-80309-safe.rs:16:1: 16:2
+    }
+
+    bb8: {
+        return;                          // scope 0 at ui/ptr_ops/issue-80309-safe.rs:16:2: 16:2
+    }
+
+    bb9 (cleanup): {
+        drop(_1) -> bb10;                // scope 0 at ui/ptr_ops/issue-80309-safe.rs:16:1: 16:2
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/ptr_ops/issue-80309-safe.rs:13:1: 16:2
+    }
+}
+
+promoted[0] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    let mut _1: [&str; 2];               // in scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+
+    bb0: {
+        _1 = [const "", const "\n"];     // scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+        return;                          // scope 0 at ui/ptr_ops/issue-80309-safe.rs:15:14: 15:18
+    }
+}

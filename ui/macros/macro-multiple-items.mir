@@ -1,0 +1,43 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/macros/macro-multiple-items.rs:6:9: 6:17>::bar(_1: &Foo) -> () {
+    debug self => _1;                    // in scope 0 at ui/macros/macro-multiple-items.rs:7:20: 7:25
+    let mut _0: ();                      // return place in scope 0 at ui/macros/macro-multiple-items.rs:7:27: 7:27
+
+    bb0: {
+        return;                          // scope 0 at ui/macros/macro-multiple-items.rs:7:29: 7:29
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/macros/macro-multiple-items.rs:14:15: 14:15
+    let mut _1: &Foo;                    // in scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+    let mut _2: &Foo;                    // in scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+
+    bb0: {
+        _2 = const _;                    // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+                                         // mir::Constant
+                                         // + span: ui/macros/macro-multiple-items.rs:15:5: 15:14
+                                         // + literal: Const { ty: &Foo, val: Unevaluated(main, [], Some(promoted[0])) }
+        _1 = _2;                         // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+        _0 = Foo::bar(move _1) -> bb1;   // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+                                         // mir::Constant
+                                         // + span: ui/macros/macro-multiple-items.rs:15:9: 15:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Foo) {Foo::bar}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/macros/macro-multiple-items.rs:16:2: 16:2
+    }
+}
+
+promoted[0] in main: &Foo = {
+    let mut _0: &Foo;                    // return place in scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+    let mut _1: Foo;                     // in scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:8
+
+    bb0: {
+        _1 = Foo;                        // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:8
+        _0 = &_1;                        // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+        return;                          // scope 0 at ui/macros/macro-multiple-items.rs:15:5: 15:14
+    }
+}

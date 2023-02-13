@@ -1,0 +1,51 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const L: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70225.rs:5:10: 5:15
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/const-generics/issues/issue-70225.rs:5:18: 5:19
+        return;                          // scope 0 at ui/const-generics/issues/issue-70225.rs:5:1: 5:20
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-70225.rs:7:11: 7:11
+    let _1: Printer;                     // in scope 0 at ui/const-generics/issues/issue-70225.rs:8:9: 8:10
+    let _2: usize;                       // in scope 0 at ui/const-generics/issues/issue-70225.rs:9:5: 9:14
+    let mut _3: &Printer;                // in scope 0 at ui/const-generics/issues/issue-70225.rs:9:5: 9:14
+    scope 1 {
+        debug p => _1;                   // in scope 1 at ui/const-generics/issues/issue-70225.rs:8:9: 8:10
+    }
+
+    bb0: {
+        _3 = &_1;                        // scope 1 at ui/const-generics/issues/issue-70225.rs:9:5: 9:14
+        _2 = <Printer as Print<3>>::print(move _3) -> bb1; // scope 1 at ui/const-generics/issues/issue-70225.rs:9:5: 9:14
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70225.rs:9:7: 9:12
+                                         // + literal: Const { ty: for<'a> fn(&'a Printer) -> usize {<Printer as Print<3>>::print}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70225.rs:10:2: 10:2
+    }
+}
+
+fn Print::print(_1: &Self) -> usize {
+    debug self => _1;                    // in scope 0 at ui/const-generics/issues/issue-70225.rs:13:14: 13:19
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70225.rs:13:24: 13:29
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/const-generics/issues/issue-70225.rs:14:9: 14:10
+        return;                          // scope 0 at ui/const-generics/issues/issue-70225.rs:15:6: 15:6
+    }
+}
+
+<impl at ui/const-generics/issues/issue-70225.rs:19:1: 19:26>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70225.rs:19:12: 19:13
+
+    bb0: {
+        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-70225.rs:19:12: 19:13
+        return;                          // scope 0 at ui/const-generics/issues/issue-70225.rs:19:12: 19:13
+    }
+}

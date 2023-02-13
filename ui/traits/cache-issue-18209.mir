@@ -1,0 +1,39 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn Foo::load() -> Box<Self> {
+    let mut _0: std::boxed::Box<Self>;   // return place in scope 0 at ui/traits/cache-issue-18209.rs:11:18: 11:27
+
+    bb0: {
+        _0 = <Self as Foo>::load_from() -> bb1; // scope 0 at ui/traits/cache-issue-18209.rs:12:9: 12:25
+                                         // mir::Constant
+                                         // + span: ui/traits/cache-issue-18209.rs:12:9: 12:23
+                                         // + literal: Const { ty: fn() -> Box<Self> {<Self as Foo>::load_from}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/cache-issue-18209.rs:13:6: 13:6
+    }
+}
+
+fn load() -> Box<M> {
+    let mut _0: std::boxed::Box<M>;      // return place in scope 0 at ui/traits/cache-issue-18209.rs:16:26: 16:32
+
+    bb0: {
+        _0 = <M as Foo>::load() -> bb1;  // scope 0 at ui/traits/cache-issue-18209.rs:17:5: 17:16
+                                         // mir::Constant
+                                         // + span: ui/traits/cache-issue-18209.rs:17:5: 17:14
+                                         // + literal: Const { ty: fn() -> Box<M> {<M as Foo>::load}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/cache-issue-18209.rs:18:2: 18:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/cache-issue-18209.rs:20:11: 20:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/cache-issue-18209.rs:20:14: 20:14
+    }
+}

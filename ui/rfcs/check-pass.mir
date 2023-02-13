@@ -1,0 +1,144 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn sse2() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:17:17: 17:17
+
+    bb0: {
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:17:19: 17:19
+    }
+}
+
+// MIR FOR CTFE
+fn sse2() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:17:17: 17:17
+
+    bb0: {
+        _0 = const ();                   // scope 0 at ui/rfcs/check-pass.rs:17:17: 17:19
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:17:19: 17:19
+    }
+}
+
+const SSE2_ONLY: () = {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:20:18: 20:20
+    let _1: ();                          // in scope 0 at ui/rfcs/check-pass.rs:21:5: 21:11
+    scope 1 {
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 1 at ui/rfcs/check-pass.rs:21:5: 21:11
+        ConstEvalCounter;                // scope 1 at ui/rfcs/check-pass.rs:21:5: 21:11
+        _1 = sse2() -> bb1;              // scope 1 at ui/rfcs/check-pass.rs:21:5: 21:11
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:21:5: 21:9
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 1 at ui/rfcs/check-pass.rs:21:11: 21:12
+        _0 = const ();                   // scope 1 at ui/rfcs/check-pass.rs:20:23: 22:2
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:20:1: 22:3
+    }
+}
+
+fn also_sse2() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:25:16: 25:16
+    let _1: ();                          // in scope 0 at ui/rfcs/check-pass.rs:26:5: 26:11
+
+    bb0: {
+        _1 = sse2() -> bb1;              // scope 0 at ui/rfcs/check-pass.rs:26:5: 26:11
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:26:5: 26:9
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:27:2: 27:2
+    }
+}
+
+fn sse2_and_avx() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:31:19: 31:19
+    let _1: ();                          // in scope 0 at ui/rfcs/check-pass.rs:32:5: 32:11
+
+    bb0: {
+        _1 = sse2() -> bb1;              // scope 0 at ui/rfcs/check-pass.rs:32:5: 32:11
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:32:5: 32:9
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:33:2: 33:2
+    }
+}
+
+fn <impl at ui/rfcs/check-pass.rs:37:1: 37:9>::sse2(_1: &Foo) -> () {
+    debug self => _1;                    // in scope 0 at ui/rfcs/check-pass.rs:39:13: 39:18
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:39:20: 39:20
+    let _2: ();                          // in scope 0 at ui/rfcs/check-pass.rs:40:9: 40:15
+
+    bb0: {
+        _2 = sse2() -> bb1;              // scope 0 at ui/rfcs/check-pass.rs:40:9: 40:15
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:40:9: 40:13
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:41:6: 41:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/rfcs/check-pass.rs:44:11: 44:11
+    let _1: ();                          // in scope 0 at ui/rfcs/check-pass.rs:47:13: 47:19
+    let _2: ();                          // in scope 0 at ui/rfcs/check-pass.rs:48:13: 48:23
+    let mut _3: &Foo;                    // in scope 0 at ui/rfcs/check-pass.rs:48:13: 48:23
+    let _4: unsafe fn();                 // in scope 0 at ui/rfcs/check-pass.rs:51:9: 51:17
+    let mut _5: fn();                    // in scope 0 at ui/rfcs/check-pass.rs:51:33: 51:37
+    scope 1 {
+        let mut _6: &Foo;                // in scope 1 at ui/rfcs/check-pass.rs:48:13: 48:23
+    }
+    scope 2 {
+        debug sse2_ptr => _4;            // in scope 2 at ui/rfcs/check-pass.rs:51:9: 51:17
+    }
+
+    bb0: {
+        _1 = sse2() -> bb1;              // scope 1 at ui/rfcs/check-pass.rs:47:13: 47:19
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:47:13: 47:17
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = const _;                    // scope 1 at ui/rfcs/check-pass.rs:48:13: 48:23
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:48:13: 48:23
+                                         // + literal: Const { ty: &Foo, val: Unevaluated(main, [], Some(promoted[0])) }
+        _3 = _6;                         // scope 1 at ui/rfcs/check-pass.rs:48:13: 48:23
+        _2 = Foo::sse2(move _3) -> bb2;  // scope 1 at ui/rfcs/check-pass.rs:48:13: 48:23
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:48:17: 48:21
+                                         // + literal: Const { ty: for<'a> fn(&'a Foo) {Foo::sse2}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = sse2 as fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/rfcs/check-pass.rs:51:33: 51:37
+                                         // mir::Constant
+                                         // + span: ui/rfcs/check-pass.rs:51:33: 51:37
+                                         // + literal: Const { ty: fn() {sse2}, val: Value(<ZST>) }
+        _4 = move _5 as unsafe fn() (Pointer(UnsafeFnPointer)); // scope 0 at ui/rfcs/check-pass.rs:51:33: 51:37
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:52:2: 52:2
+    }
+}
+
+promoted[0] in main: &Foo = {
+    let mut _0: &Foo;                    // return place in scope 0 at ui/rfcs/check-pass.rs:48:13: 48:23
+    let mut _1: Foo;                     // in scope 0 at ui/rfcs/check-pass.rs:48:13: 48:16
+
+    bb0: {
+        _1 = Foo;                        // scope 0 at ui/rfcs/check-pass.rs:48:13: 48:16
+        _0 = &_1;                        // scope 0 at ui/rfcs/check-pass.rs:48:13: 48:23
+        return;                          // scope 0 at ui/rfcs/check-pass.rs:48:13: 48:23
+    }
+}

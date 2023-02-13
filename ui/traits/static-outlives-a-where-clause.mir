@@ -1,0 +1,68 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/traits/static-outlives-a-where-clause.rs:6:1: 6:26>::xyz(_1: T) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:7:12: 7:16
+    let mut _0: ();                      // return place in scope 0 at ui/traits/static-outlives-a-where-clause.rs:7:18: 7:18
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/traits/static-outlives-a-where-clause.rs:7:19: 7:20
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/static-outlives-a-where-clause.rs:7:20: 7:20
+    }
+}
+
+fn <impl at ui/traits/static-outlives-a-where-clause.rs:13:1: 13:18>::uvw(_1: T) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:12: 14:16
+    let mut _0: ();                      // return place in scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:18: 14:18
+    let _2: ();                          // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:20: 14:30
+    let mut _3: T;                       // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:20: 14:24
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:20: 14:24
+        _2 = <T as Foo<'_>>::xyz(move _3) -> bb1; // scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:20: 14:30
+                                         // mir::Constant
+                                         // + span: ui/traits/static-outlives-a-where-clause.rs:14:25: 14:28
+                                         // + literal: Const { ty: fn(T) {<T as Foo<'_>>::xyz}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/static-outlives-a-where-clause.rs:14:33: 14:33
+    }
+}
+
+fn foo(_1: T) -> () {
+    debug t => _1;                       // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:17:11: 17:12
+    let mut _0: ();                      // return place in scope 0 at ui/traits/static-outlives-a-where-clause.rs:17:17: 17:17
+    let _2: ();                          // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:18:5: 18:12
+    let mut _3: T;                       // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:18:5: 18:6
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/traits/static-outlives-a-where-clause.rs:18:5: 18:6
+        _2 = <T as Bar>::uvw(move _3) -> bb1; // scope 0 at ui/traits/static-outlives-a-where-clause.rs:18:5: 18:12
+                                         // mir::Constant
+                                         // + span: ui/traits/static-outlives-a-where-clause.rs:18:7: 18:10
+                                         // + literal: Const { ty: fn(T) {<T as Bar>::uvw}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/static-outlives-a-where-clause.rs:19:2: 19:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/static-outlives-a-where-clause.rs:21:11: 21:11
+    let _1: ();                          // in scope 0 at ui/traits/static-outlives-a-where-clause.rs:22:5: 22:11
+
+    bb0: {
+        _1 = foo::<i32>(const 0_i32) -> bb1; // scope 0 at ui/traits/static-outlives-a-where-clause.rs:22:5: 22:11
+                                         // mir::Constant
+                                         // + span: ui/traits/static-outlives-a-where-clause.rs:22:5: 22:8
+                                         // + literal: Const { ty: fn(i32) {foo::<i32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/static-outlives-a-where-clause.rs:23:2: 23:2
+    }
+}

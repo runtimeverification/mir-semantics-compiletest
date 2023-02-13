@@ -1,0 +1,40 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn future_from_generator(_1: T) -> impl FakeFuture<Output = <T as FakeGenerator>::Return> {
+    debug x => _1;                       // in scope 0 at ui/impl-trait/bounds_regression.rs:14:3: 14:4
+    let mut _0: impl FakeFuture<Output = <T as FakeGenerator>::Return>; // return place in scope 0 at ui/impl-trait/bounds_regression.rs:14:12: 14:47
+    let mut _2: T;                       // in scope 0 at ui/impl-trait/bounds_regression.rs:15:15: 15:16
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/impl-trait/bounds_regression.rs:15:15: 15:16
+        _0 = GenFuture::<T>(move _2);    // scope 0 at ui/impl-trait/bounds_regression.rs:15:5: 15:17
+        return;                          // scope 0 at ui/impl-trait/bounds_regression.rs:16:2: 16:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/bounds_regression.rs:24:11: 24:11
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/bounds_regression.rs:24:13: 24:13
+    }
+}
+
+fn GenFuture(_1: T) -> GenFuture<T> {
+    let mut _0: GenFuture<T>;            // return place in scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+
+    bb0: {
+        _0 = GenFuture::<T>(move _1);    // scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+        return;                          // scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+    }
+}
+
+// MIR FOR CTFE
+fn GenFuture(_1: T) -> GenFuture<T> {
+    let mut _0: GenFuture<T>;            // return place in scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+
+    bb0: {
+        _0 = GenFuture::<T>(move _1);    // scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+        return;                          // scope 0 at ui/impl-trait/bounds_regression.rs:18:1: 18:47
+    }
+}

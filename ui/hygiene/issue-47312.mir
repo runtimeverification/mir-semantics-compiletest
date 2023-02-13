@@ -1,0 +1,44 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/hygiene/issue-47312.rs:15:12: 15:12
+    let _1: bar::S;                      // in scope 0 at ui/hygiene/issue-47312.rs:16:13: 16:14
+    scope 1 {
+        debug s => _1;                   // in scope 1 at ui/hygiene/issue-47312.rs:16:13: 16:14
+    }
+
+    bb0: {
+        _1 = const S(0_i32);             // scope 0 at ui/hygiene/issue-47312.rs:16:17: 16:21
+                                         // mir::Constant
+                                         // + span: ui/hygiene/issue-47312.rs:16:17: 16:21
+                                         // + literal: Const { ty: S, val: Value(Scalar(0x00000000)) }
+        return;                          // scope 0 at ui/hygiene/issue-47312.rs:18:6: 18:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/hygiene/issue-47312.rs:21:11: 21:11
+
+    bb0: {
+        return;                          // scope 0 at ui/hygiene/issue-47312.rs:21:13: 21:13
+    }
+}
+
+fn S(_1: i32) -> S {
+    let mut _0: bar::S;                  // return place in scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+
+    bb0: {
+        _0 = S(move _1);                 // scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+        return;                          // scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+    }
+}
+
+// MIR FOR CTFE
+fn S(_1: i32) -> S {
+    let mut _0: bar::S;                  // return place in scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+
+    bb0: {
+        _0 = S(move _1);                 // scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+        return;                          // scope 0 at ui/hygiene/issue-47312.rs:14:5: 14:13
+    }
+}

@@ -1,0 +1,81 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn add(_1: usize, _2: usize) -> usize {
+    debug x => _1;                       // in scope 0 at ui/consts/const-fn-const-eval.rs:4:14: 4:15
+    debug y => _2;                       // in scope 0 at ui/consts/const-fn-const-eval.rs:4:24: 4:25
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn-const-eval.rs:4:37: 4:42
+    let mut _3: usize;                   // in scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:6
+    let mut _4: usize;                   // in scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+    let mut _5: (usize, bool);           // in scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:6
+        _4 = _2;                         // scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+        _5 = CheckedAdd(_3, _4);         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+    }
+
+    bb1: {
+        _0 = move (_5.0: usize);         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+        return;                          // scope 0 at ui/consts/const-fn-const-eval.rs:6:2: 6:2
+    }
+}
+
+// MIR FOR CTFE
+fn add(_1: usize, _2: usize) -> usize {
+    debug x => _1;                       // in scope 0 at ui/consts/const-fn-const-eval.rs:4:14: 4:15
+    debug y => _2;                       // in scope 0 at ui/consts/const-fn-const-eval.rs:4:24: 4:25
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn-const-eval.rs:4:37: 4:42
+    let mut _3: usize;                   // in scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:6
+    let mut _4: usize;                   // in scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+    let mut _5: (usize, bool);           // in scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+
+    bb0: {
+        StorageLive(_3);                 // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:6
+        _3 = _1;                         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:6
+        StorageLive(_4);                 // scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+        _4 = _2;                         // scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+        _5 = CheckedAdd(_3, _4);         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+    }
+
+    bb1: {
+        _0 = move (_5.0: usize);         // scope 0 at ui/consts/const-fn-const-eval.rs:5:5: 5:10
+        StorageDead(_4);                 // scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+        StorageDead(_3);                 // scope 0 at ui/consts/const-fn-const-eval.rs:5:9: 5:10
+        return;                          // scope 0 at ui/consts/const-fn-const-eval.rs:6:2: 6:2
+    }
+}
+
+const ARR: [i32; 3] = {
+    let mut _0: [i32; 3];                // return place in scope 0 at ui/consts/const-fn-const-eval.rs:8:12: 8:28
+
+    bb0: {
+        _0 = [const 5_i32, const 6_i32, const 7_i32]; // scope 0 at ui/consts/const-fn-const-eval.rs:8:31: 8:40
+        return;                          // scope 0 at ui/consts/const-fn-const-eval.rs:8:1: 8:41
+    }
+}
+
+ARR::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn-const-eval.rs:8:18: 8:27
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/const-fn-const-eval.rs:8:18: 8:27
+        _0 = add(const 1_usize, const 2_usize) -> bb1; // scope 0 at ui/consts/const-fn-const-eval.rs:8:18: 8:27
+                                         // mir::Constant
+                                         // + span: ui/consts/const-fn-const-eval.rs:8:18: 8:21
+                                         // + literal: Const { ty: fn(usize, usize) -> usize {add}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/const-fn-const-eval.rs:8:18: 8:27
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-fn-const-eval.rs:10:15: 10:15
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-fn-const-eval.rs:10:17: 10:17
+    }
+}

@@ -1,0 +1,46 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn f() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927-1.rs:3:17: 3:22
+
+    bb0: {
+        _0 = const 5_usize;              // scope 0 at ui/consts/issue-29927-1.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/issue-29927-1.rs:5:2: 5:2
+    }
+}
+
+// MIR FOR CTFE
+fn f() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927-1.rs:3:17: 3:22
+
+    bb0: {
+        _0 = const 5_usize;              // scope 0 at ui/consts/issue-29927-1.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/issue-29927-1.rs:5:2: 5:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-29927-1.rs:9:11: 9:11
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-29927-1.rs:11:2: 11:2
+    }
+}
+
+main::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927-1.rs:10:17: 10:20
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-29927-1.rs:10:17: 10:20
+        _0 = f() -> bb1;                 // scope 0 at ui/consts/issue-29927-1.rs:10:17: 10:20
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-29927-1.rs:10:17: 10:18
+                                         // + literal: Const { ty: fn() -> usize {f}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-29927-1.rs:10:17: 10:20
+    }
+}

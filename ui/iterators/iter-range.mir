@@ -1,0 +1,214 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn range_(_1: isize, _2: isize, _3: F) -> () {
+    debug a => _1;                       // in scope 0 at ui/iterators/iter-range.rs:4:14: 4:15
+    debug b => _2;                       // in scope 0 at ui/iterators/iter-range.rs:4:24: 4:25
+    debug it => _3;                      // in scope 0 at ui/iterators/iter-range.rs:4:34: 4:40
+    let mut _0: ();                      // return place in scope 0 at ui/iterators/iter-range.rs:4:45: 4:45
+    let mut _4: bool;                    // in scope 0 at ui/iterators/iter-range.rs:5:5: 5:21
+    let mut _5: bool;                    // in scope 0 at ui/iterators/iter-range.rs:5:13: 5:20
+    let mut _6: isize;                   // in scope 0 at ui/iterators/iter-range.rs:5:14: 5:15
+    let mut _7: isize;                   // in scope 0 at ui/iterators/iter-range.rs:5:18: 5:19
+    let mut _8: !;                       // in scope 0 at ui/iterators/iter-range.rs:5:5: 5:21
+    let mut _9: isize;                   // in scope 0 at ui/iterators/iter-range.rs:6:9: 6:14
+    let mut _10: bool;                   // in scope 0 at ui/iterators/iter-range.rs:7:11: 7:16
+    let mut _11: isize;                  // in scope 0 at ui/iterators/iter-range.rs:7:11: 7:12
+    let mut _12: isize;                  // in scope 0 at ui/iterators/iter-range.rs:7:15: 7:16
+    let _13: ();                         // in scope 0 at ui/iterators/iter-range.rs:7:19: 7:24
+    let mut _14: &mut F;                 // in scope 0 at ui/iterators/iter-range.rs:7:19: 7:21
+    let mut _15: (isize,);               // in scope 0 at ui/iterators/iter-range.rs:7:19: 7:24
+    let mut _16: isize;                  // in scope 0 at ui/iterators/iter-range.rs:7:22: 7:23
+    let mut _17: (isize, bool);          // in scope 0 at ui/iterators/iter-range.rs:7:26: 7:32
+    scope 1 {
+        debug i => _9;                   // in scope 1 at ui/iterators/iter-range.rs:6:9: 6:14
+    }
+
+    bb0: {
+        _6 = _1;                         // scope 0 at ui/iterators/iter-range.rs:5:14: 5:15
+        _7 = _2;                         // scope 0 at ui/iterators/iter-range.rs:5:18: 5:19
+        _5 = Lt(move _6, move _7);       // scope 0 at ui/iterators/iter-range.rs:5:13: 5:20
+        _4 = Not(move _5);               // scope 0 at ui/iterators/iter-range.rs:5:5: 5:21
+        switchInt(move _4) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/iterators/iter-range.rs:5:5: 5:21
+    }
+
+    bb1: {
+        _8 = core::panicking::panic(const "assertion failed: (a < b)") -> bb9; // scope 0 at ui/iterators/iter-range.rs:5:5: 5:21
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:5:5: 5:21
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        _9 = _1;                         // scope 0 at ui/iterators/iter-range.rs:6:24: 6:25
+        goto -> bb3;                     // scope 1 at ui/iterators/iter-range.rs:7:5: 7:35
+    }
+
+    bb3: {
+        _11 = _9;                        // scope 1 at ui/iterators/iter-range.rs:7:11: 7:12
+        _12 = _2;                        // scope 1 at ui/iterators/iter-range.rs:7:15: 7:16
+        _10 = Lt(move _11, move _12);    // scope 1 at ui/iterators/iter-range.rs:7:11: 7:16
+        switchInt(move _10) -> [0: bb7, otherwise: bb4]; // scope 1 at ui/iterators/iter-range.rs:7:11: 7:16
+    }
+
+    bb4: {
+        _14 = &mut _3;                   // scope 1 at ui/iterators/iter-range.rs:7:19: 7:21
+        _16 = _9;                        // scope 1 at ui/iterators/iter-range.rs:7:22: 7:23
+        _15 = (move _16,);               // scope 1 at ui/iterators/iter-range.rs:7:19: 7:24
+        _13 = <F as FnMut<(isize,)>>::call_mut(move _14, move _15) -> [return: bb5, unwind: bb9]; // scope 1 at ui/iterators/iter-range.rs:7:19: 7:24
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:7:19: 7:21
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut F, (isize,)) -> <F as FnOnce<(isize,)>>::Output {<F as FnMut<(isize,)>>::call_mut}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _17 = CheckedAdd(_9, const 1_isize); // scope 1 at ui/iterators/iter-range.rs:7:26: 7:32
+        assert(!move (_17.1: bool), "attempt to compute `{} + {}`, which would overflow", _9, const 1_isize) -> [success: bb6, unwind: bb9]; // scope 1 at ui/iterators/iter-range.rs:7:26: 7:32
+    }
+
+    bb6: {
+        _9 = move (_17.0: isize);        // scope 1 at ui/iterators/iter-range.rs:7:26: 7:32
+        goto -> bb3;                     // scope 1 at ui/iterators/iter-range.rs:7:5: 7:35
+    }
+
+    bb7: {
+        drop(_3) -> bb8;                 // scope 0 at ui/iterators/iter-range.rs:8:1: 8:2
+    }
+
+    bb8: {
+        return;                          // scope 0 at ui/iterators/iter-range.rs:8:2: 8:2
+    }
+
+    bb9 (cleanup): {
+        drop(_3) -> bb10;                // scope 0 at ui/iterators/iter-range.rs:8:1: 8:2
+    }
+
+    bb10 (cleanup): {
+        resume;                          // scope 0 at ui/iterators/iter-range.rs:4:1: 8:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/iterators/iter-range.rs:10:15: 10:15
+    let mut _1: isize;                   // in scope 0 at ui/iterators/iter-range.rs:11:9: 11:16
+    let _2: ();                          // in scope 0 at ui/iterators/iter-range.rs:12:5: 12:34
+    let mut _3: [closure@ui/iterators/iter-range.rs:12:20: 12:23]; // in scope 0 at ui/iterators/iter-range.rs:12:20: 12:32
+    let mut _4: &mut isize;              // in scope 0 at ui/iterators/iter-range.rs:12:20: 12:32
+    let _5: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _6: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _7: &[&str];                 // in scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+    let mut _8: &[&str; 2];              // in scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+    let _9: &[&str; 2];                  // in scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+    let mut _10: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _11: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _12: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _13: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _14: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/iterators/iter-range.rs:13:20: 13:23
+    let mut _15: &isize;                 // in scope 0 at ui/iterators/iter-range.rs:13:20: 13:23
+    let _16: &isize;                     // in scope 0 at ui/iterators/iter-range.rs:13:20: 13:23
+    scope 1 {
+        debug sum => _1;                 // in scope 1 at ui/iterators/iter-range.rs:11:9: 11:16
+        let mut _17: &[&str; 2];         // in scope 1 at ui/iterators/iter-range.rs:13:14: 13:18
+    }
+
+    bb0: {
+        _1 = const 0_isize;              // scope 0 at ui/iterators/iter-range.rs:11:26: 11:27
+        _4 = &mut _1;                    // scope 1 at ui/iterators/iter-range.rs:12:20: 12:32
+        _3 = [closure@ui/iterators/iter-range.rs:12:20: 12:23] { sum: move _4 }; // scope 1 at ui/iterators/iter-range.rs:12:20: 12:32
+                                         // closure
+                                         // + def_id: DefId(0:6 ~ iter_range[6014]::main::{closure#0})
+                                         // + substs: [
+                                         //     i16,
+                                         //     extern "rust-call" fn((isize,)),
+                                         //     (&mut isize,),
+                                         // ]
+        _2 = range_::<[closure@ui/iterators/iter-range.rs:12:20: 12:23]>(const 0_isize, const 100_isize, move _3) -> bb1; // scope 1 at ui/iterators/iter-range.rs:12:5: 12:34
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:12:5: 12:11
+                                         // + literal: Const { ty: fn(isize, isize, [closure@ui/iterators/iter-range.rs:12:20: 12:23]) {range_::<[closure@ui/iterators/iter-range.rs:12:20: 12:23]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _17 = const _;                   // scope 1 at ui/iterators/iter-range.rs:13:14: 13:18
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:13:14: 13:18
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
+        _9 = _17;                        // scope 1 at ui/iterators/iter-range.rs:13:14: 13:18
+        _8 = _9;                         // scope 1 at ui/iterators/iter-range.rs:13:14: 13:18
+        _7 = move _8 as &[&str] (Pointer(Unsize)); // scope 1 at ui/iterators/iter-range.rs:13:14: 13:18
+        _16 = &_1;                       // scope 1 at ui/iterators/iter-range.rs:13:20: 13:23
+        _15 = _16;                       // scope 1 at ui/iterators/iter-range.rs:13:20: 13:23
+        _14 = core::fmt::ArgumentV1::<'_>::new_display::<isize>(move _15) -> bb2; // scope 1 at ui/iterators/iter-range.rs:13:20: 13:23
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:13:20: 13:23
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: for<'b> fn(&'b isize) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<isize>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _13 = [move _14];                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _12 = &_13;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _11 = _12;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _10 = move _11 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _6 = Arguments::<'_>::new_v1(move _7, move _10) -> bb3; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _5 = _print(move _6) -> bb4;     // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/iterators/iter-range.rs:14:2: 14:2
+    }
+}
+
+promoted[0] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+    let mut _1: [&str; 2];               // in scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+
+    bb0: {
+        _1 = [const "", const "\n"];     // scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:13:14: 13:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/iterators/iter-range.rs:13:14: 13:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+        return;                          // scope 0 at ui/iterators/iter-range.rs:13:14: 13:18
+    }
+}
+
+fn main::{closure#0}(_1: &mut [closure@ui/iterators/iter-range.rs:12:20: 12:23], _2: isize) -> () {
+    debug x => _2;                       // in scope 0 at ui/iterators/iter-range.rs:12:21: 12:22
+    debug sum => (*((*_1).0: &mut isize)); // in scope 0 at ui/iterators/iter-range.rs:11:9: 11:16
+    let mut _0: ();                      // return place in scope 0 at ui/iterators/iter-range.rs:12:24: 12:24
+    let mut _3: isize;                   // in scope 0 at ui/iterators/iter-range.rs:12:31: 12:32
+    let mut _4: (isize, bool);           // in scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+    let mut _5: &mut isize;              // in scope 0 at ui/iterators/iter-range.rs:12:20: 12:32
+    let mut _6: &mut isize;              // in scope 0 at ui/iterators/iter-range.rs:12:20: 12:32
+    let mut _7: &mut isize;              // in scope 0 at ui/iterators/iter-range.rs:12:20: 12:32
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/iterators/iter-range.rs:12:31: 12:32
+        _5 = deref_copy ((*_1).0: &mut isize); // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+        _4 = CheckedAdd((*_5), _3);      // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+        _6 = deref_copy ((*_1).0: &mut isize); // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_6), move _3) -> bb1; // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+    }
+
+    bb1: {
+        _7 = deref_copy ((*_1).0: &mut isize); // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+        (*_7) = move (_4.0: isize);      // scope 0 at ui/iterators/iter-range.rs:12:24: 12:32
+        return;                          // scope 0 at ui/iterators/iter-range.rs:12:32: 12:32
+    }
+}

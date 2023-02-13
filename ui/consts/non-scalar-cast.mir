@@ -1,0 +1,47 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/non-scalar-cast.rs:5:11: 5:11
+    let _1: &main::A;                    // in scope 0 at ui/consts/non-scalar-cast.rs:8:9: 8:11
+    scope 1 {
+        debug _x => _1;                  // in scope 1 at ui/consts/non-scalar-cast.rs:8:9: 8:11
+    }
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/non-scalar-cast.rs:8:14: 8:17
+                                         // mir::Constant
+                                         // + span: ui/consts/non-scalar-cast.rs:8:14: 8:17
+                                         // + literal: Const { ty: &A, val: Unevaluated(FOO, [], None) }
+        return;                          // scope 0 at ui/consts/non-scalar-cast.rs:9:2: 9:2
+    }
+}
+
+const FOO: &A = {
+    let mut _0: &main::A;                // return place in scope 0 at ui/consts/non-scalar-cast.rs:7:16: 7:18
+    let _1: &main::A;                    // in scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+    let _2: main::A;                     // in scope 0 at ui/consts/non-scalar-cast.rs:7:22: 7:30
+    let mut _3: &main::A;                // in scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+        _3 = const _;                    // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+                                         // mir::Constant
+                                         // + span: ui/consts/non-scalar-cast.rs:7:21: 7:30
+                                         // + literal: Const { ty: &A, val: Unevaluated(FOO, [], Some(promoted[0])) }
+        _1 = &(*_3);                     // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+        _0 = &(*_1);                     // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+        StorageDead(_1);                 // scope 0 at ui/consts/non-scalar-cast.rs:7:29: 7:30
+        return;                          // scope 0 at ui/consts/non-scalar-cast.rs:7:5: 7:31
+    }
+}
+
+promoted[0] in FOO: &A = {
+    let mut _0: &main::A;                // return place in scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+    let mut _1: main::A;                 // in scope 0 at ui/consts/non-scalar-cast.rs:7:22: 7:30
+
+    bb0: {
+        _1 = A;                          // scope 0 at ui/consts/non-scalar-cast.rs:7:23: 7:24
+        _0 = &_1;                        // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+        return;                          // scope 0 at ui/consts/non-scalar-cast.rs:7:21: 7:30
+    }
+}

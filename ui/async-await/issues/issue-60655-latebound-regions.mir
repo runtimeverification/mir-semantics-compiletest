@@ -1,0 +1,261 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn null_function_ptr() -> Func {
+    let mut _0: Func;                    // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:14:27: 14:31
+
+    bb0: {
+        _0 = const Option::<for<'a> fn(&'a ())>::None; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:15:5: 15:31
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:15:5: 15:31
+                                         // + literal: Const { ty: Option<for<'a> fn(&'a ())>, val: Value(Scalar(0x0000000000000000)) }
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:16:2: 16:2
+    }
+}
+
+fn async_nop(_1: &u8) -> impl Future<Output = ()> {
+    debug _ => _1;                       // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+    let mut _0: impl std::future::Future<Output = ()>; // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:28
+    let mut _2: [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+
+    bb0: {
+        _2 = [generator@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30 (#0)] { _: _1 }; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+                                         // generator
+                                         // + def_id: DefId(0:8 ~ issue_60655_latebound_regions[869c]::async_nop::{closure#0})
+                                         // + substs: [
+                                         //     std::future::ResumeTy,
+                                         //     (),
+                                         //     (),
+                                         //     {},
+                                         //     (&u8,),
+                                         // ]
+                                         // + movability: Static
+        _0 = identity_future::<(), [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]>(move _2) -> bb1; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+                                         // + literal: Const { ty: fn([async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]) -> [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30] {identity_future::<(), [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:30: 18:30
+    }
+}
+
+fn async_nop::{closure#0}(_1: Pin<&mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]>, _2: &mut Context<'_>) -> Poll<()> {
+    debug _task_context => _5;           // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    debug _ => ((*(_1.0: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30])).0: &u8); // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+    let mut _0: std::task::Poll<()>;     // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _3: &u8;                     // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+    let mut _4: ();                      // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _5: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _6: u32;                     // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _7: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _8: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    let mut _9: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    scope 1 {
+        debug _ => _3;                   // in scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _7 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+        _6 = discriminant((*_7));        // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+        switchInt(move _6) -> [0: bb1, 1: bb2, otherwise: bb3]; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    }
+
+    bb1: {
+        _5 = move _2;                    // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+        _8 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+        _3 = ((*_8).0: &u8);             // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:20: 18:21
+        _4 = const ();                   // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+        _0 = Poll::<()>::Ready(move _4); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:30: 18:30
+        _9 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:30: 18:30
+        discriminant((*_9)) = 1;         // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:30: 18:30
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:30: 18:30
+    }
+
+    bb2: {
+        assert(const false, "`async fn` resumed after completion") -> bb2; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    }
+
+    bb3: {
+        unreachable;                     // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:18:28: 18:30
+    }
+}
+
+fn serve() -> ServeFut {
+    let mut _0: ServeFut;                // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:23:15: 23:23
+    let mut _1: [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+
+    bb0: {
+        _1 = [generator@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6 (#0)]; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+                                         // generator
+                                         // + def_id: DefId(0:11 ~ issue_60655_latebound_regions[869c]::serve::{closure#0})
+                                         // + substs: [
+                                         //     std::future::ResumeTy,
+                                         //     (),
+                                         //     (),
+                                         //     for<'a, 'b> {std::future::ResumeTy, u8, &'a u8, impl std::future::Future<Output = ()>, ()},
+                                         //     (),
+                                         // ]
+                                         // + movability: Static
+        _0 = identity_future::<(), [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]>(move _1) -> bb1; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+                                         // + literal: Const { ty: fn([async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]) -> [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6] {identity_future::<(), [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:28:2: 28:2
+    }
+}
+
+fn serve::{closure#0}(_1: Pin<&mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]>, _2: &mut Context<'_>) -> Poll<()> {
+    debug _task_context => _18;          // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _0: std::task::Poll<()>;     // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _3: impl std::future::Future<Output = ()>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _4: impl std::future::Future<Output = ()>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:22
+    let mut _5: &u8;                     // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:19: 26:21
+    let _6: &u8;                         // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:19: 26:21
+    let mut _7: std::task::Poll<()>;     // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _8: std::pin::Pin<&mut impl std::future::Future<Output = ()>>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _9: &mut impl std::future::Future<Output = ()>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _10: &mut impl std::future::Future<Output = ()>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _11: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+    let mut _12: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+    let mut _13: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _14: isize;                  // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _16: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    let mut _17: ();                     // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _18: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _19: u32;                    // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _20: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _21: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _22: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _23: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _24: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _25: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _26: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    let mut _27: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]; // in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    scope 1 {
+        debug x => (((*(_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6])) as variant#3).0: u8); // in scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:25:13: 25:14
+        scope 2 {
+            debug __awaitee => (((*(_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6])) as variant#3).1: impl std::future::Future<Output = ()>); // in scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+            let _15: ();                 // in scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+            scope 3 {
+            }
+            scope 4 {
+                debug result => _15;     // in scope 4 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+            }
+        }
+    }
+
+    bb0: {
+        _20 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        _19 = discriminant((*_20));      // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        switchInt(move _19) -> [0: bb1, 1: bb13, 2: bb12, 3: bb11, otherwise: bb14]; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    }
+
+    bb1: {
+        _18 = move _2;                   // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        _21 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:25:17: 25:18
+        (((*_21) as variant#3).0: u8) = const 5_u8; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:25:17: 25:18
+        _22 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:19: 26:21
+        _6 = &(((*_22) as variant#3).0: u8); // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:19: 26:21
+        _5 = _6;                         // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:19: 26:21
+        _4 = async_nop(move _5) -> [return: bb2, unwind: bb10]; // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:22
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:18
+                                         // + literal: Const { ty: for<'a> fn(&'a u8) -> impl Future<Output = ()> {async_nop}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = <impl Future<Output = ()> as IntoFuture>::into_future(move _4) -> [return: bb3, unwind: bb10]; // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // + literal: Const { ty: fn(impl Future<Output = ()>) -> <impl Future<Output = ()> as IntoFuture>::IntoFuture {<impl Future<Output = ()> as IntoFuture>::into_future}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _23 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        (((*_23) as variant#3).1: impl std::future::Future<Output = ()>) = move _3; // scope 1 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        goto -> bb4;                     // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    }
+
+    bb4: {
+        _24 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        _10 = &mut (((*_24) as variant#3).1: impl std::future::Future<Output = ()>); // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        _9 = &mut (*_10);                // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        _8 = Pin::<&mut impl Future<Output = ()>>::new_unchecked(move _9) -> [return: bb5, unwind: bb10]; // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // + literal: Const { ty: unsafe fn(&mut impl Future<Output = ()>) -> Pin<&mut impl Future<Output = ()>> {Pin::<&mut impl Future<Output = ()>>::new_unchecked}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _13 = _18;                       // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        _12 = move _13;                  // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+        _11 = &mut (*_12);               // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+        _7 = <impl Future<Output = ()> as Future>::poll(move _8, move _11) -> [return: bb6, unwind: bb10]; // scope 3 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(Pin<&'a mut impl Future<Output = ()>>, &'b mut Context<'c>) -> Poll<<impl Future<Output = ()> as Future>::Output> {<impl Future<Output = ()> as Future>::poll}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _14 = discriminant(_7);          // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        switchInt(move _14) -> [0: bb9, 1: bb7, otherwise: bb8]; // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    }
+
+    bb7: {
+        _0 = Poll::<()>::Pending;        // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        _25 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        discriminant((*_25)) = 3;        // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        return;                          // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    }
+
+    bb8: {
+        unreachable;                     // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    }
+
+    bb9: {
+        _15 = ((_7 as Ready).0: ());     // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+        _17 = _15;                       // scope 4 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:9: 26:28
+        _0 = Poll::<()>::Ready(move _17); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:27:6: 27:6
+        _26 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:27:6: 27:6
+        discriminant((*_26)) = 1;        // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:27:6: 27:6
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:27:6: 27:6
+    }
+
+    bb10 (cleanup): {
+        _27 = deref_copy (_1.0: &mut [async block@ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6]); // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        discriminant((*_27)) = 2;        // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        resume;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    }
+
+    bb11: {
+        _16 = move _2;                   // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+        _18 = move _16;                  // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+        goto -> bb4;                     // scope 2 at ui/async-await/issues/issue-60655-latebound-regions.rs:26:22: 26:28
+    }
+
+    bb12: {
+        assert(const false, "`async fn` resumed after panicking") -> bb12; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    }
+
+    bb13: {
+        assert(const false, "`async fn` resumed after completion") -> bb13; // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    }
+
+    bb14: {
+        unreachable;                     // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:24:5: 27:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:30:11: 30:11
+
+    bb0: {
+        return;                          // scope 0 at ui/async-await/issues/issue-60655-latebound-regions.rs:30:13: 30:13
+    }
+}

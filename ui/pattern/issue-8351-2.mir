@@ -1,0 +1,48 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/pattern/issue-8351-2.rs:9:15: 9:15
+    let _1: E;                           // in scope 0 at ui/pattern/issue-8351-2.rs:10:9: 10:10
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    scope 1 {
+        debug e => _1;                   // in scope 1 at ui/pattern/issue-8351-2.rs:10:9: 10:10
+    }
+
+    bb0: {
+        _1 = E::Foo { f: const 0_isize, b: const false }; // scope 0 at ui/pattern/issue-8351-2.rs:10:13: 10:35
+        switchInt(((_1 as Foo).0: isize)) -> [1: bb1, 0: bb3, otherwise: bb2]; // scope 1 at ui/pattern/issue-8351-2.rs:11:5: 11:12
+    }
+
+    bb1: {
+        switchInt(((_1 as Foo).1: bool)) -> [0: bb2, otherwise: bb4]; // scope 1 at ui/pattern/issue-8351-2.rs:11:5: 11:12
+    }
+
+    bb2: {
+        _3 = begin_panic::<&str>(const "explicit panic"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        switchInt(((_1 as Foo).1: bool)) -> [0: bb5, otherwise: bb2]; // scope 1 at ui/pattern/issue-8351-2.rs:11:5: 11:12
+    }
+
+    bb4: {
+        _2 = begin_panic::<&str>(const "explicit panic"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/pattern/issue-8351-2.rs:16:2: 16:2
+    }
+}

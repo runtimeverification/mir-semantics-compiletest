@@ -1,0 +1,81 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: bool) -> Foo {
+    debug b => _1;                       // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:7:8: 7:9
+    let mut _0: Foo;                     // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:7:20: 7:23
+    let mut _2: bool;                    // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:8:8: 8:9
+    let _3: u32;                         // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:11:9: 11:10
+    scope 1 {
+        debug x => _3;                   // in scope 1 at ui/lazy-type-alias-impl-trait/recursion.rs:11:9: 11:10
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:8:8: 8:9
+        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:8:8: 8:9
+    }
+
+    bb1: {
+        _0 = const 42_u32;               // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:9:16: 9:18
+        goto -> bb4;                     // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:13:2: 13:2
+    }
+
+    bb2: {
+        _3 = foo(const false) -> bb3;    // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:11:18: 11:28
+                                         // mir::Constant
+                                         // + span: ui/lazy-type-alias-impl-trait/recursion.rs:11:18: 11:21
+                                         // + literal: Const { ty: fn(bool) -> Foo {foo}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _0 = const 99_u32;               // scope 1 at ui/lazy-type-alias-impl-trait/recursion.rs:12:5: 12:7
+        goto -> bb4;                     // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:13:2: 13:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:13:2: 13:2
+    }
+}
+
+fn bar(_1: bool) -> impl Debug {
+    debug b => _1;                       // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:15:8: 15:9
+    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:15:20: 15:40
+    let mut _2: bool;                    // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:16:8: 16:9
+    let _3: u32;                         // in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:19:9: 19:10
+    scope 1 {
+        debug x => _3;                   // in scope 1 at ui/lazy-type-alias-impl-trait/recursion.rs:19:9: 19:10
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:16:8: 16:9
+        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:16:8: 16:9
+    }
+
+    bb1: {
+        _0 = const 42_u32;               // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:17:16: 17:18
+        goto -> bb4;                     // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:21:2: 21:2
+    }
+
+    bb2: {
+        _3 = bar(const false) -> bb3;    // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:19:18: 19:28
+                                         // mir::Constant
+                                         // + span: ui/lazy-type-alias-impl-trait/recursion.rs:19:18: 19:21
+                                         // + literal: Const { ty: fn(bool) -> impl Debug {bar}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _0 = const 99_u32;               // scope 1 at ui/lazy-type-alias-impl-trait/recursion.rs:20:5: 20:7
+        goto -> bb4;                     // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:21:2: 21:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:21:2: 21:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:23:11: 23:11
+
+    bb0: {
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion.rs:23:13: 23:13
+    }
+}

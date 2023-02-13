@@ -1,0 +1,81 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:15: 4:15
+    let _1: std::vec::Vec<isize>;        // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:21: 4:22
+    let mut _2: std::slice::Iter<'_, isize>; // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    let mut _3: &std::vec::Vec<isize>;   // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    let mut _5: std::option::Option<&isize>; // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    let mut _6: &mut std::slice::Iter<'_, isize>; // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    let mut _7: &mut std::slice::Iter<'_, isize>; // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    let mut _8: isize;                   // in scope 0 at ui/for-loop-while/for-loop-panic.rs:4:49: 4:80
+    let mut _9: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/for-loop-while/for-loop-panic.rs:4:21: 4:22
+        let mut _4: std::slice::Iter<'_, isize>; // in scope 1 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        scope 2 {
+            debug iter => _4;            // in scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        }
+    }
+
+    bb0: {
+        _1 = Vec::<isize>::new() -> bb1; // scope 0 at ui/for-loop-while/for-loop-panic.rs:4:37: 4:47
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/for-loop-panic.rs:4:37: 4:45
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() -> Vec<isize> {Vec::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = &_1;                        // scope 1 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        _2 = <&Vec<isize> as IntoIterator>::into_iter(move _3) -> [return: bb2, unwind: bb8]; // scope 1 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+                                         // + literal: Const { ty: fn(&Vec<isize>) -> <&Vec<isize> as IntoIterator>::IntoIter {<&Vec<isize> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = move _2;                    // scope 1 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        _7 = &mut _4;                    // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        _6 = &mut (*_7);                 // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        _5 = <std::slice::Iter<'_, isize> as Iterator>::next(move _6) -> [return: bb3, unwind: bb8]; // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+                                         // + literal: Const { ty: for<'a> fn(&'a mut std::slice::Iter<'_, isize>) -> Option<<std::slice::Iter<'_, isize> as Iterator>::Item> {<std::slice::Iter<'_, isize> as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _8 = discriminant(_5);           // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+        switchInt(move _8) -> [0: bb6, 1: bb4, otherwise: bb5]; // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    }
+
+    bb4: {
+        _9 = begin_panic::<&str>(const "moop") -> bb8; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/for-loop-while/for-loop-panic.rs:4:70: 4:76
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb5: {
+        unreachable;                     // scope 2 at ui/for-loop-while/for-loop-panic.rs:4:58: 4:60
+    }
+
+    bb6: {
+        drop(_1) -> bb7;                 // scope 0 at ui/for-loop-while/for-loop-panic.rs:4:81: 4:82
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/for-loop-while/for-loop-panic.rs:4:82: 4:82
+    }
+
+    bb8 (cleanup): {
+        drop(_1) -> bb9;                 // scope 0 at ui/for-loop-while/for-loop-panic.rs:4:81: 4:82
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/for-loop-while/for-loop-panic.rs:4:1: 4:82
+    }
+}

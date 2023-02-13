@@ -1,0 +1,43 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:18:10: 18:10
+    let mut _1: i32;                     // in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:29:9: 29:14
+    let _2: ();                          // in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:36:5: 36:17
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/macros/parse-complex-macro-invoc-op.rs:29:9: 29:14
+    }
+
+    bb0: {
+        _1 = const 1_i32;                // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:29:17: 29:18
+        _1 = const 2_i32;                // scope 1 at ui/macros/parse-complex-macro-invoc-op.rs:30:5: 30:15
+        _1 = const 3_i32;                // scope 1 at ui/macros/parse-complex-macro-invoc-op.rs:31:5: 31:16
+        _2 = std::mem::drop::<i32>(const 1_i32) -> bb1; // scope 1 at ui/macros/parse-complex-macro-invoc-op.rs:36:5: 36:17
+                                         // mir::Constant
+                                         // + span: ui/macros/parse-complex-macro-invoc-op.rs:36:9: 36:13
+                                         // + literal: Const { ty: fn(i32) {std::mem::drop::<i32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:40:2: 40:2
+    }
+}
+
+promoted[0] in foo: &f64 = {
+    let mut _0: &f64;                    // return place in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:33:5: 33:22
+    let mut _1: f64;                     // in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:33:9: 33:13
+
+    bb0: {
+        _1 = const 1f64;                 // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:33:9: 33:13
+        _0 = &_1;                        // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:33:5: 33:22
+        return;                          // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:33:5: 33:22
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:42:11: 42:11
+
+    bb0: {
+        return;                          // scope 0 at ui/macros/parse-complex-macro-invoc-op.rs:42:13: 42:13
+    }
+}

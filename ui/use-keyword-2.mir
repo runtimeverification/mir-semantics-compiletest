@@ -1,0 +1,51 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/use-keyword-2.rs:12:1: 12:7>::f() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/use-keyword-2.rs:13:12: 13:12
+
+    bb0: {
+        return;                          // scope 0 at ui/use-keyword-2.rs:13:14: 13:14
+    }
+}
+
+fn <impl at ui/use-keyword-2.rs:12:1: 12:7>::g() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/use-keyword-2.rs:14:12: 14:12
+
+    bb0: {
+        _0 = A::f() -> bb1;              // scope 0 at ui/use-keyword-2.rs:15:9: 15:20
+                                         // mir::Constant
+                                         // + span: ui/use-keyword-2.rs:15:9: 15:18
+                                         // + literal: Const { ty: fn() {A::f}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/use-keyword-2.rs:16:6: 16:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/use-keyword-2.rs:19:11: 19:11
+    let _1: A;                           // in scope 0 at ui/use-keyword-2.rs:20:9: 20:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/use-keyword-2.rs:20:9: 20:10
+        let _2: A;                       // in scope 1 at ui/use-keyword-2.rs:21:9: 21:10
+        scope 2 {
+            debug b => _2;               // in scope 2 at ui/use-keyword-2.rs:21:9: 21:10
+            let _3: ();                  // in scope 2 at ui/use-keyword-2.rs:22:9: 22:10
+            scope 3 {
+                debug c => _3;           // in scope 3 at ui/use-keyword-2.rs:22:9: 22:10
+            }
+        }
+    }
+
+    bb0: {
+        _3 = A::g() -> bb1;              // scope 2 at ui/use-keyword-2.rs:22:17: 22:23
+                                         // mir::Constant
+                                         // + span: ui/use-keyword-2.rs:22:17: 22:21
+                                         // + literal: Const { ty: fn() {A::g}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/use-keyword-2.rs:23:2: 23:2
+    }
+}

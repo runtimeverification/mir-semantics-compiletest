@@ -1,0 +1,58 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static UTF8_CHAR_WIDTH: [u8; 0] = {
+    let mut _0: [u8; 0];                 // return place in scope 0 at ui/mir/issue-66930.rs:5:25: 5:32
+
+    bb0: {
+        _0 = [];                         // scope 0 at ui/mir/issue-66930.rs:5:35: 5:37
+        return;                          // scope 0 at ui/mir/issue-66930.rs:5:1: 5:38
+    }
+}
+
+UTF8_CHAR_WIDTH::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/issue-66930.rs:5:30: 5:31
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/mir/issue-66930.rs:5:30: 5:31
+        return;                          // scope 0 at ui/mir/issue-66930.rs:5:30: 5:31
+    }
+}
+
+fn utf8_char_width(_1: u8) -> usize {
+    debug b => _1;                       // in scope 0 at ui/mir/issue-66930.rs:7:24: 7:25
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/issue-66930.rs:7:34: 7:39
+    let mut _2: u8;                      // in scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+    let mut _3: &[u8; 0];                // in scope 0 at ui/mir/issue-66930.rs:8:5: 8:20
+    let _4: usize;                       // in scope 0 at ui/mir/issue-66930.rs:8:21: 8:31
+    let mut _5: u8;                      // in scope 0 at ui/mir/issue-66930.rs:8:21: 8:22
+    let mut _6: usize;                   // in scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+    let mut _7: bool;                    // in scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+
+    bb0: {
+        _3 = const <static(DefId(0:3 ~ issue_66930[c686]::UTF8_CHAR_WIDTH))>; // scope 0 at ui/mir/issue-66930.rs:8:5: 8:20
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-66930.rs:8:5: 8:20
+                                         // + literal: Const { ty: &[u8; 0], val: Value(Scalar(alloc1)) }
+        _5 = _1;                         // scope 0 at ui/mir/issue-66930.rs:8:21: 8:22
+        _4 = move _5 as usize (IntToInt); // scope 0 at ui/mir/issue-66930.rs:8:21: 8:31
+        _6 = const 0_usize;              // scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+        _7 = Lt(_4, _6);                 // scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _4) -> bb1; // scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+    }
+
+    bb1: {
+        _2 = (*_3)[_4];                  // scope 0 at ui/mir/issue-66930.rs:8:5: 8:32
+        _0 = move _2 as usize (IntToInt); // scope 0 at ui/mir/issue-66930.rs:8:5: 8:41
+        return;                          // scope 0 at ui/mir/issue-66930.rs:9:2: 9:2
+    }
+}
+
+alloc1 (static: UTF8_CHAR_WIDTH, size: 0, align: 1) {}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-66930.rs:11:11: 11:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/issue-66930.rs:11:13: 11:13
+    }
+}

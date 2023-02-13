@@ -1,0 +1,87 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/async-await/issues/issue-58885.rs:10:1: 10:9>::do_sth(_1: &Xyz, _2: &dyn Foo) -> impl Future<Output = bool> {
+    debug self => _1;                    // in scope 0 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+    debug foo => _2;                     // in scope 0 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+    let mut _0: impl std::future::Future<Output = bool>; // return place in scope 0 at ui/async-await/issues/issue-58885.rs:13:10: 13:14
+    let mut _3: [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+
+    bb0: {
+        _3 = [generator@ui/async-await/issues/issue-58885.rs:14:5: 16:6 (#0)] { self: _1, foo: _2 }; // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+                                         // generator
+                                         // + def_id: DefId(0:9 ~ issue_58885[9d40]::{impl#0}::do_sth::{closure#0})
+                                         // + substs: [
+                                         //     std::future::ResumeTy,
+                                         //     (),
+                                         //     bool,
+                                         //     {},
+                                         //     (&Xyz, &dyn Foo),
+                                         // ]
+                                         // + movability: Static
+        _0 = identity_future::<bool, [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]>(move _3) -> bb1; // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+                                         // mir::Constant
+                                         // + span: ui/async-await/issues/issue-58885.rs:14:5: 16:6
+                                         // + literal: Const { ty: fn([async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]) -> [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6] {identity_future::<bool, [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/async-await/issues/issue-58885.rs:16:6: 16:6
+    }
+}
+
+fn <impl at ui/async-await/issues/issue-58885.rs:10:1: 10:9>::do_sth::{closure#0}(_1: Pin<&mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]>, _2: &mut Context<'_>) -> Poll<bool> {
+    debug _task_context => _6;           // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    debug self => ((*(_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6])).0: &Xyz); // in scope 0 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+    debug foo => ((*(_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6])).1: &dyn Foo); // in scope 0 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+    let mut _0: std::task::Poll<bool>;   // return place in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let _3: &Xyz;                        // in scope 0 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+    let mut _5: bool;                    // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _6: &mut std::task::Context<'_>; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _7: u32;                     // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _8: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _9: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _10: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    let mut _11: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]; // in scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    scope 1 {
+        debug self => _3;                // in scope 1 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+        let _4: &dyn Foo;                // in scope 1 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+        scope 2 {
+            debug foo => _4;             // in scope 2 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+        }
+    }
+
+    bb0: {
+        _8 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]); // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+        _7 = discriminant((*_8));        // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+        switchInt(move _7) -> [0: bb1, 1: bb2, otherwise: bb3]; // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    }
+
+    bb1: {
+        _6 = move _2;                    // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+        _9 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]); // scope 0 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+        _3 = ((*_9).0: &Xyz);            // scope 0 at ui/async-await/issues/issue-58885.rs:12:9: 12:17
+        _10 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]); // scope 1 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+        _4 = ((*_10).1: &dyn Foo);       // scope 1 at ui/async-await/issues/issue-58885.rs:12:19: 12:22
+        _5 = const true;                 // scope 2 at ui/async-await/issues/issue-58885.rs:15:9: 15:13
+        _0 = Poll::<bool>::Ready(move _5); // scope 0 at ui/async-await/issues/issue-58885.rs:16:6: 16:6
+        _11 = deref_copy (_1.0: &mut [async fn body@ui/async-await/issues/issue-58885.rs:14:5: 16:6]); // scope 0 at ui/async-await/issues/issue-58885.rs:16:6: 16:6
+        discriminant((*_11)) = 1;        // scope 0 at ui/async-await/issues/issue-58885.rs:16:6: 16:6
+        return;                          // scope 0 at ui/async-await/issues/issue-58885.rs:16:6: 16:6
+    }
+
+    bb2: {
+        assert(const false, "`async fn` resumed after completion") -> bb2; // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    }
+
+    bb3: {
+        unreachable;                     // scope 0 at ui/async-await/issues/issue-58885.rs:14:5: 16:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/async-await/issues/issue-58885.rs:19:11: 19:11
+
+    bb0: {
+        return;                          // scope 0 at ui/async-await/issues/issue-58885.rs:19:13: 19:13
+    }
+}

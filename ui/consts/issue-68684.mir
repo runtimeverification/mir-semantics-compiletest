@@ -1,0 +1,76 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn _a() -> _Enum {
+    let mut _0: _Enum;                   // return place in scope 0 at ui/consts/issue-68684.rs:9:18: 9:23
+
+    bb0: {
+        _0 = _Enum::A() -> bb1;          // scope 0 at ui/consts/issue-68684.rs:10:5: 10:12
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-68684.rs:10:5: 10:10
+                                         // + literal: Const { ty: fn() -> _Enum {_Enum::A}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-68684.rs:11:2: 11:2
+    }
+}
+
+// MIR FOR CTFE
+fn _a() -> _Enum {
+    let mut _0: _Enum;                   // return place in scope 0 at ui/consts/issue-68684.rs:9:18: 9:23
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-68684.rs:10:5: 10:12
+        _0 = _Enum::A() -> bb1;          // scope 0 at ui/consts/issue-68684.rs:10:5: 10:12
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-68684.rs:10:5: 10:10
+                                         // + literal: Const { ty: fn() -> _Enum {_Enum::A}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-68684.rs:11:2: 11:2
+    }
+}
+
+const _A: _Enum = {
+    let mut _0: _Enum;                   // return place in scope 0 at ui/consts/issue-68684.rs:13:11: 13:16
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-68684.rs:13:19: 13:23
+        _0 = _a() -> bb1;                // scope 0 at ui/consts/issue-68684.rs:13:19: 13:23
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-68684.rs:13:19: 13:21
+                                         // + literal: Const { ty: fn() -> _Enum {_a}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-68684.rs:13:1: 13:24
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-68684.rs:15:11: 15:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-68684.rs:15:13: 15:13
+    }
+}
+
+fn _Enum::A() -> _Enum {
+    let mut _0: _Enum;                   // return place in scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+
+    bb0: {
+        _0 = _Enum::A;                   // scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+    }
+}
+
+// MIR FOR CTFE
+fn _Enum::A() -> _Enum {
+    let mut _0: _Enum;                   // return place in scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+
+    bb0: {
+        _0 = _Enum::A;                   // scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+        return;                          // scope 0 at ui/consts/issue-68684.rs:4:5: 4:6
+    }
+}

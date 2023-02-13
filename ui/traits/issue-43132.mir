@@ -1,0 +1,113 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-43132.rs:4:11: 4:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/issue-43132.rs:5:2: 5:2
+    }
+}
+
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-43132.rs:7:10: 7:10
+    let _1: Forward<(std::boxed::Box<dyn Future<Error = u32>>,)>; // in scope 0 at ui/traits/issue-43132.rs:8:9: 8:10
+    let _2: (MaybeDone<(Forward<(std::boxed::Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18])>, ()); // in scope 0 at ui/traits/issue-43132.rs:11:5: 11:29
+    let mut _3: (Forward<(std::boxed::Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18]); // in scope 0 at ui/traits/issue-43132.rs:11:5: 11:22
+    let mut _4: Forward<(std::boxed::Box<dyn Future<Error = u32>>,)>; // in scope 0 at ui/traits/issue-43132.rs:11:5: 11:6
+    let mut _5: [closure@ui/traits/issue-43132.rs:11:15: 11:18]; // in scope 0 at ui/traits/issue-43132.rs:11:15: 11:21
+    scope 1 {
+        debug b => _1;                   // in scope 1 at ui/traits/issue-43132.rs:8:9: 8:10
+    }
+
+    bb0: {
+        _1 = mk::<Forward<(Box<dyn Future<Error = u32>>,)>>() -> bb1; // scope 0 at ui/traits/issue-43132.rs:8:13: 10:8
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-43132.rs:8:13: 10:6
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> Forward<(Box<dyn Future<Error = u32>>,)> {mk::<Forward<(Box<dyn Future<Error = u32>>,)>>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = move _1;                    // scope 1 at ui/traits/issue-43132.rs:11:5: 11:6
+        _3 = <Forward<(Box<dyn Future<Error = u32>>,)> as Future>::map_err::<[closure@ui/traits/issue-43132.rs:11:15: 11:18], ()>(move _4, move _5) -> bb2; // scope 1 at ui/traits/issue-43132.rs:11:5: 11:22
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-43132.rs:11:7: 11:14
+                                         // + literal: Const { ty: fn(Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18]) -> (Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18]) {<Forward<(Box<dyn Future<Error = u32>>,)> as Future>::map_err::<[closure@ui/traits/issue-43132.rs:11:15: 11:18], ()>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = <(Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18]) as Future>::join(move _3) -> bb3; // scope 1 at ui/traits/issue-43132.rs:11:5: 11:29
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-43132.rs:11:23: 11:27
+                                         // + literal: Const { ty: fn((Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18])) -> (MaybeDone<(Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18])>, ()) {<(Forward<(Box<dyn Future<Error = u32>>,)>, [closure@ui/traits/issue-43132.rs:11:15: 11:18]) as Future>::join}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/traits/issue-43132.rs:12:2: 12:2
+    }
+}
+
+fn foo::{closure#0}(_1: [closure@ui/traits/issue-43132.rs:11:15: 11:18], _2: u32) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-43132.rs:11:19: 11:19
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/issue-43132.rs:11:21: 11:21
+    }
+}
+
+fn mk() -> T {
+    let mut _0: T;                       // return place in scope 0 at ui/traits/issue-43132.rs:14:15: 14:16
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:15:5: 15:12
+    }
+
+    bb1: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:15:5: 15:12
+    }
+}
+
+fn Future::map_err(_1: Self, _2: F) -> (Self, F) {
+    debug self => _1;                    // in scope 0 at ui/traits/issue-43132.rs:36:22: 36:26
+    let mut _0: (Self, F);               // return place in scope 0 at ui/traits/issue-43132.rs:36:37: 36:46
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:41:9: 41:16
+    }
+
+    bb1: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:41:9: 41:16
+    }
+}
+
+fn Future::join(_1: Self) -> (MaybeDone<Self>, ()) {
+    debug self => _1;                    // in scope 0 at ui/traits/issue-43132.rs:44:13: 44:17
+    let mut _0: (MaybeDone<Self>, ());   // return place in scope 0 at ui/traits/issue-43132.rs:44:22: 44:43
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:48:9: 48:16
+    }
+
+    bb1: {
+        goto -> bb1;                     // scope 0 at ui/traits/issue-43132.rs:48:9: 48:16
+    }
+}
+
+fn MaybeDone::_Done(_1: <A as Future>::Error) -> MaybeDone<A> {
+    let mut _0: MaybeDone<A>;            // return place in scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+
+    bb0: {
+        _0 = MaybeDone::<A>::_Done(move _1); // scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+        return;                          // scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+    }
+}
+
+// MIR FOR CTFE
+fn MaybeDone::_Done(_1: <A as Future>::Error) -> MaybeDone<A> {
+    let mut _0: MaybeDone<A>;            // return place in scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+
+    bb0: {
+        _0 = MaybeDone::<A>::_Done(move _1); // scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+        return;                          // scope 0 at ui/traits/issue-43132.rs:57:5: 57:10
+    }
+}

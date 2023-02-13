@@ -1,0 +1,291 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const <impl at ui/consts/issue-73976-monomorphic.rs:16:1: 16:30>::VALUE: TypeId = {
+    let mut _0: std::any::TypeId;        // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:17:22: 17:28
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-73976-monomorphic.rs:17:31: 17:48
+        _0 = TypeId::of::<T>() -> bb1;   // scope 0 at ui/consts/issue-73976-monomorphic.rs:17:31: 17:48
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:17:31: 17:46
+                                         // + literal: Const { ty: fn() -> TypeId {TypeId::of::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:17:5: 17:49
+    }
+}
+
+fn check_type_id() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:20:41: 20:45
+    let mut _1: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+    let mut _2: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let mut _3: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let mut _4: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+
+    bb0: {
+        _4 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // + literal: Const { ty: &TypeId, val: Unevaluated(check_type_id, [T], Some(promoted[1])) }
+        _1 = _4;                         // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+        _3 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // + literal: Const { ty: &TypeId, val: Unevaluated(check_type_id, [T], Some(promoted[0])) }
+        _2 = _3;                         // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+        _0 = <TypeId as PartialEq>::eq(move _1, move _2) -> bb1; // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:55
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:5: 21:55
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a TypeId, &'b TypeId) -> bool {<TypeId as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:22:2: 22:2
+    }
+}
+
+promoted[0] in check_type_id: &TypeId = {
+    let mut _0: &std::any::TypeId;       // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let mut _1: std::any::TypeId;        // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: TypeId, val: Unevaluated(GetTypeId::<T>::VALUE, [usize], None) }
+        _0 = &_1;                        // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    }
+}
+
+promoted[1] in check_type_id: &TypeId = {
+    let mut _0: &std::any::TypeId;       // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+    let mut _1: std::any::TypeId;        // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: TypeId, val: Unevaluated(GetTypeId::<T>::VALUE, [T], None) }
+        _0 = &_1;                        // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+    }
+}
+
+// MIR FOR CTFE
+fn check_type_id() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:20:41: 20:45
+    let mut _1: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+    let _2: std::any::TypeId;            // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+    let mut _3: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let _4: std::any::TypeId;            // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let mut _5: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+    let mut _6: &std::any::TypeId;       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+        _6 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+                                         // + literal: Const { ty: &TypeId, val: Unevaluated(check_type_id, [T], Some(promoted[1])) }
+        _1 = &(*_6);                     // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:26
+        StorageLive(_3);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+        _5 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+                                         // + literal: Const { ty: &TypeId, val: Unevaluated(check_type_id, [T], Some(promoted[0])) }
+        _3 = &(*_5);                     // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:30: 21:55
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:55
+        _0 = <TypeId as PartialEq>::eq(move _1, move _3) -> bb1; // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:5: 21:55
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:21:5: 21:55
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a TypeId, &'b TypeId) -> bool {<TypeId as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_3);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:54: 21:55
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:21:54: 21:55
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:22:2: 22:2
+    }
+}
+
+const <impl at ui/consts/issue-73976-monomorphic.rs:26:1: 26:35>::VALUE: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:27:22: 27:27
+    let mut _1: &str;                    // in scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:57
+    let _2: &str;                        // in scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:51
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:57
+        StorageLive(_2);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:51
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:51
+        _2 = std::any::type_name::<T>() -> bb1; // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:51
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:27:30: 27:49
+                                         // + literal: Const { ty: fn() -> &'static str {std::any::type_name::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = &(*_2);                     // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:57
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:57
+        _0 = core::str::<impl str>::len(move _1) -> bb2; // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:30: 27:57
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:27:52: 27:55
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> usize {core::str::<impl str>::len}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        StorageDead(_2);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:56: 27:57
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:56: 27:57
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:27:5: 27:58
+    }
+}
+
+fn check_type_name_len() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:30:47: 30:51
+    let mut _1: usize;                   // in scope 0 at ui/consts/issue-73976-monomorphic.rs:31:14: 31:40
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:31:14: 31:40
+        switchInt(_1) -> [5: bb2, otherwise: bb1]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:344:9: 344:9
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+    }
+
+    bb2: {
+        _0 = const true;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:32:2: 32:2
+    }
+}
+
+// MIR FOR CTFE
+fn check_type_name_len() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:30:47: 30:51
+    let mut _1: usize;                   // in scope 0 at ui/consts/issue-73976-monomorphic.rs:31:14: 31:40
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:31:14: 31:40
+        _1 = const _;                    // scope 0 at ui/consts/issue-73976-monomorphic.rs:31:14: 31:40
+        switchInt(_1) -> [5: bb2, otherwise: bb1]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:344:9: 344:9
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+    }
+
+    bb2: {
+        _0 = const true;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+    }
+
+    bb3: {
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-73976-monomorphic.rs:32:1: 32:2
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:32:2: 32:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:34:11: 34:11
+    let mut _1: bool;                    // in scope 0 at ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+    let mut _2: bool;                    // in scope 0 at ui/consts/issue-73976-monomorphic.rs:35:13: 35:37
+    let mut _3: !;                       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+    let mut _4: bool;                    // in scope 0 at ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+    let mut _5: bool;                    // in scope 0 at ui/consts/issue-73976-monomorphic.rs:36:13: 36:43
+    let mut _6: !;                       // in scope 0 at ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+
+    bb0: {
+        _2 = check_type_id::<usize>() -> bb1; // scope 0 at ui/consts/issue-73976-monomorphic.rs:35:13: 35:37
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:35:13: 35:35
+                                         // + literal: Const { ty: fn() -> bool {check_type_id::<usize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = Not(move _2);               // scope 0 at ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+        switchInt(move _1) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+    }
+
+    bb2: {
+        _3 = core::panicking::panic(const "assertion failed: check_type_id::<usize>()"); // scope 0 at ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:35:5: 35:38
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        _5 = check_type_name_len::<usize>() -> bb4; // scope 0 at ui/consts/issue-73976-monomorphic.rs:36:13: 36:43
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:36:13: 36:41
+                                         // + literal: Const { ty: fn() -> bool {check_type_name_len::<usize>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _4 = Not(move _5);               // scope 0 at ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+        switchInt(move _4) -> [0: bb6, otherwise: bb5]; // scope 0 at ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+    }
+
+    bb5: {
+        _6 = core::panicking::panic(const "assertion failed: check_type_name_len::<usize>()"); // scope 0 at ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-73976-monomorphic.rs:36:5: 36:44
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:37:2: 37:2
+    }
+}
+
+fn GetTypeId(_1: T) -> GetTypeId<T> {
+    let mut _0: GetTypeId<T>;            // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+
+    bb0: {
+        _0 = GetTypeId::<T>(move _1);    // scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+    }
+}
+
+// MIR FOR CTFE
+fn GetTypeId(_1: T) -> GetTypeId<T> {
+    let mut _0: GetTypeId<T>;            // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+
+    bb0: {
+        _0 = GetTypeId::<T>(move _1);    // scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:14:1: 14:24
+    }
+}
+
+fn GetTypeNameLen(_1: T) -> GetTypeNameLen<T> {
+    let mut _0: GetTypeNameLen<T>;       // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+
+    bb0: {
+        _0 = GetTypeNameLen::<T>(move _1); // scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+    }
+}
+
+// MIR FOR CTFE
+fn GetTypeNameLen(_1: T) -> GetTypeNameLen<T> {
+    let mut _0: GetTypeNameLen<T>;       // return place in scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+
+    bb0: {
+        _0 = GetTypeNameLen::<T>(move _1); // scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+        return;                          // scope 0 at ui/consts/issue-73976-monomorphic.rs:24:1: 24:29
+    }
+}

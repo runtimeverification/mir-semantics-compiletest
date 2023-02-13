@@ -1,0 +1,35 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/issue-18425.rs:7:11: 7:11
+    let mut _1: [std::boxed::Box<usize>; 1]; // in scope 0 at ui/array-slice-vec/issue-18425.rs:8:13: 8:35
+    let mut _2: std::boxed::Box<usize>;  // in scope 0 at ui/array-slice-vec/issue-18425.rs:8:14: 8:31
+    scope 1 {
+    }
+
+    bb0: {
+        _2 = Box::<usize>::new(const 1_usize) -> bb1; // scope 0 at ui/array-slice-vec/issue-18425.rs:8:14: 8:31
+                                         // mir::Constant
+                                         // + span: ui/array-slice-vec/issue-18425.rs:8:14: 8:22
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(usize) -> Box<usize> {Box::<usize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = [move _2; 1];               // scope 0 at ui/array-slice-vec/issue-18425.rs:8:13: 8:35
+        drop(_1) -> bb2;                 // scope 0 at ui/array-slice-vec/issue-18425.rs:8:35: 8:36
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/array-slice-vec/issue-18425.rs:9:2: 9:2
+    }
+}
+
+main::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/array-slice-vec/issue-18425.rs:8:33: 8:34
+
+    bb0: {
+        _0 = const 1_usize;              // scope 0 at ui/array-slice-vec/issue-18425.rs:8:33: 8:34
+        return;                          // scope 0 at ui/array-slice-vec/issue-18425.rs:8:33: 8:34
+    }
+}

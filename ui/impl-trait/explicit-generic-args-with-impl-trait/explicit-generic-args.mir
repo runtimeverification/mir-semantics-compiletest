@@ -1,0 +1,46 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: impl AsRef<T>) -> () {
+    debug _f => _1;                      // in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:3:19: 3:21
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:3:38: 3:38
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:3:39: 3:40
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:3:40: 3:40
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:5:11: 5:11
+    let _1: ();                          // in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:5: 6:31
+    let mut _2: std::string::String;     // in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:30
+    let mut _3: &str;                    // in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:30
+    let _4: &str;                        // in scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:18
+
+    bb0: {
+        _4 = const "";                   // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:18
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = _4;                         // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:30
+        _2 = <str as ToString>::to_string(move _3) -> bb1; // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:16: 6:30
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:19: 6:28
+                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = foo::<str, String>(move _2) -> bb2; // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:5: 6:31
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:6:5: 6:15
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(String) {foo::<str, String>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/impl-trait/explicit-generic-args-with-impl-trait/explicit-generic-args.rs:7:2: 7:2
+    }
+}

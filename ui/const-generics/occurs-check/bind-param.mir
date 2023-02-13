@@ -1,0 +1,92 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn bind(_1: [u8; N]) -> [u8; N] {
+    debug value => _1;                   // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:25: 7:30
+    let mut _0: [u8; N];                 // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:44: 7:51
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+
+    bb0: {
+        _2 = core::panicking::panic(const "not yet implemented"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+bind::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:37: 7:38
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:37: 7:38
+        return;                          // scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:37: 7:38
+    }
+}
+
+bind::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:49: 7:50
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:49: 7:50
+        return;                          // scope 0 at ui/const-generics/occurs-check/bind-param.rs:7:49: 7:50
+    }
+}
+
+fn sink(_1: [u8; 5]) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:11:21: 11:21
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/occurs-check/bind-param.rs:11:23: 11:23
+    }
+}
+
+sink::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:11:17: 11:18
+
+    bb0: {
+        _0 = const 5_usize;              // scope 0 at ui/const-generics/occurs-check/bind-param.rs:11:17: 11:18
+        return;                          // scope 0 at ui/const-generics/occurs-check/bind-param.rs:11:17: 11:18
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/occurs-check/bind-param.rs:13:11: 13:11
+    let mut _1: [u8; 5];                 // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:14:9: 14:16
+    let mut _2: [u8; 5];                 // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:15:11: 15:20
+    let mut _3: [u8; 5];                 // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:15:16: 15:19
+    let _4: ();                          // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:16:5: 16:14
+    let mut _5: [u8; 5];                 // in scope 0 at ui/const-generics/occurs-check/bind-param.rs:16:10: 16:13
+    scope 1 {
+        debug arr => _1;                 // in scope 1 at ui/const-generics/occurs-check/bind-param.rs:14:9: 14:16
+    }
+
+    bb0: {
+        _1 = <[u8; 5] as Default>::default() -> bb1; // scope 0 at ui/const-generics/occurs-check/bind-param.rs:14:19: 14:37
+                                         // mir::Constant
+                                         // + span: ui/const-generics/occurs-check/bind-param.rs:14:19: 14:35
+                                         // + literal: Const { ty: fn() -> [u8; 5] {<[u8; 5] as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = _1;                         // scope 1 at ui/const-generics/occurs-check/bind-param.rs:15:16: 15:19
+        _2 = bind::<5>(move _3) -> bb2;  // scope 1 at ui/const-generics/occurs-check/bind-param.rs:15:11: 15:20
+                                         // mir::Constant
+                                         // + span: ui/const-generics/occurs-check/bind-param.rs:15:11: 15:15
+                                         // + literal: Const { ty: fn([u8; 5]) -> [u8; 5] {bind::<5>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _1 = move _2;                    // scope 1 at ui/const-generics/occurs-check/bind-param.rs:15:5: 15:20
+        _5 = _1;                         // scope 1 at ui/const-generics/occurs-check/bind-param.rs:16:10: 16:13
+        _4 = sink(move _5) -> bb3;       // scope 1 at ui/const-generics/occurs-check/bind-param.rs:16:5: 16:14
+                                         // mir::Constant
+                                         // + span: ui/const-generics/occurs-check/bind-param.rs:16:5: 16:9
+                                         // + literal: Const { ty: fn([u8; 5]) {sink}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/const-generics/occurs-check/bind-param.rs:17:2: 17:2
+    }
+}

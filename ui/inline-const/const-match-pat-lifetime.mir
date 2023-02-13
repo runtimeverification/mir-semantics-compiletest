@@ -1,0 +1,280 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn issue_78174() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:11:18: 11:18
+    let mut _1: &str;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:12:11: 12:16
+    let mut _2: bool;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:9: 13:37
+    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:77
+
+    bb0: {
+        _1 = const "foo";                // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:12:11: 12:16
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:12:11: 12:16
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = <str as PartialEq>::eq(_1, const "foo") -> bb1; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:9: 13:37
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:13:9: 13:37
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:13:9: 13:37
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1: {
+        switchInt(move _2) -> [0: bb2, otherwise: bb3]; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:9: 13:37
+    }
+
+    bb2: {
+        _3 = core::panicking::panic(const "internal error: entered unreachable code"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:77
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:9: 68:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/panic.rs:68:34: 68:76
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:16:2: 16:2
+    }
+}
+
+issue_78174::{constant#0}: &str = {
+    let mut _0: &str;                    // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:15: 13:37
+
+    bb0: {
+        _0 = const "foo";                // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:17: 13:35
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:13:17: 13:35
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:13:15: 13:37
+    }
+}
+
+fn <impl at ui/inline-const/const-match-pat-lifetime.rs:18:10: 18:19>::eq(_1: &InvariantRef<'_, T>, _2: &InvariantRef<'_, T>) -> bool {
+    debug self => _1;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:10: 18:19
+    debug other => _2;                   // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:10: 18:19
+    let mut _0: bool;                    // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:10: 18:19
+    let mut _3: bool;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+    let mut _4: &&T;                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+    let mut _5: &&T;                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+    let mut _6: bool;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+    let mut _7: &std::marker::PhantomData<&mut &T>; // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+    let mut _8: &std::marker::PhantomData<&mut &T>; // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+
+    bb0: {
+        _4 = &((*_1).0: &T);             // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+        _5 = &((*_2).0: &T);             // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+        _3 = <&T as PartialEq>::eq(move _4, move _5) -> bb4; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:19:40: 19:45
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &T, &'b &T) -> bool {<&T as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+        goto -> bb3;                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+    }
+
+    bb2: {
+        _7 = &((*_1).1: std::marker::PhantomData<&mut &T>); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+        _8 = &((*_2).1: std::marker::PhantomData<&mut &T>); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+        _6 = <PhantomData<&mut &T> as PartialEq>::eq(move _7, move _8) -> bb5; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a PhantomData<&mut &T>, &'b PhantomData<&mut &T>) -> bool {<PhantomData<&mut &T> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:19: 18:19
+    }
+
+    bb4: {
+        switchInt(move _3) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+    }
+
+    bb5: {
+        _0 = move _6;                    // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+        goto -> bb3;                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:47: 19:73
+    }
+}
+
+fn <impl at ui/inline-const/const-match-pat-lifetime.rs:18:21: 18:23>::assert_receiver_is_total_eq(_1: &InvariantRef<'_, T>) -> () {
+    debug self => _1;                    // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:21: 18:23
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:21: 18:23
+    scope 1 {
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:18:23: 18:23
+    }
+}
+
+fn <impl at ui/inline-const/const-match-pat-lifetime.rs:21:1: 21:40>::new(_1: &T) -> InvariantRef<'_, T> {
+    debug r => _1;                       // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:22:22: 22:23
+    let mut _0: InvariantRef<'_, T>;     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:22:35: 22:39
+    let mut _2: &T;                      // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:22: 23:23
+    let mut _3: std::marker::PhantomData<&mut &T>; // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:25: 23:36
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:22: 23:23
+        _0 = InvariantRef::<'_, T>(move _2, move _3); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:9: 23:37
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:24:6: 24:6
+    }
+}
+
+// MIR FOR CTFE
+fn <impl at ui/inline-const/const-match-pat-lifetime.rs:21:1: 21:40>::new(_1: &T) -> InvariantRef<'_, T> {
+    debug r => _1;                       // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:22:22: 22:23
+    let mut _0: InvariantRef<'_, T>;     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:22:35: 22:39
+    let mut _2: &T;                      // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:22: 23:23
+    let mut _3: std::marker::PhantomData<&mut &T>; // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:25: 23:36
+
+    bb0: {
+        StorageLive(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:22: 23:23
+        _2 = &(*_1);                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:22: 23:23
+        StorageLive(_3);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:25: 23:36
+        _3 = PhantomData::<&mut &T>;     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:25: 23:36
+        _0 = InvariantRef::<'_, T>(move _2, move _3); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:9: 23:37
+        StorageDead(_3);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:36: 23:37
+        StorageDead(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:23:36: 23:37
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:24:6: 24:6
+    }
+}
+
+fn match_invariant_ref() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:27:30: 27:30
+
+    bb0: {
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:32:2: 32:2
+    }
+}
+
+match_invariant_ref::{constant#0}: InvariantRef<'_, ()> = {
+    let mut _0: InvariantRef<'_, ()>;    // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:17: 28:52
+    let mut _1: &();                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+    let _2: &();                         // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+    let _3: ();                          // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:47: 28:49
+    let mut _4: &();                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+        StorageLive(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+        _4 = const _;                    // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+                                         // + literal: Const { ty: &(), val: Unevaluated(match_invariant_ref::{constant#0}, [<const_ty>], Some(promoted[0])) }
+        _2 = &(*_4);                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+        _1 = &(*_2);                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+        ConstEvalCounter;                // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:19: 28:50
+        _0 = InvariantRef::<'_, ()>::new(move _1) -> bb1; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:19: 28:50
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:28:19: 28:45
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&()) -> InvariantRef<'_, ()> {InvariantRef::<'_, ()>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:49: 28:50
+        StorageDead(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:51: 28:52
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:17: 28:52
+    }
+}
+
+promoted[0] in match_invariant_ref::{constant#0}: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+    let mut _1: ();                      // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:47: 28:49
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:47: 28:49
+        _0 = &_1;                        // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:28:46: 28:49
+    }
+}
+
+match_invariant_ref::{constant#1}: InvariantRef<'_, ()> = {
+    let mut _0: InvariantRef<'_, ()>;    // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:15: 29:51
+    let mut _1: &();                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+    let _2: &();                         // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+    let _3: ();                          // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:46: 29:48
+    let mut _4: &();                     // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+        StorageLive(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+        _4 = const _;                    // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+                                         // + literal: Const { ty: &(), val: Unevaluated(match_invariant_ref::{constant#1}, [<const_ty>], Some(promoted[0])) }
+        _2 = &(*_4);                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+        _1 = &(*_2);                     // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+        ConstEvalCounter;                // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:17: 29:49
+        _0 = InvariantRef::<'_, ()>::new(move _1) -> bb1; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:17: 29:49
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:29:17: 29:44
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&()) -> InvariantRef<'_, ()> {InvariantRef::<'_, ()>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_1);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:48: 29:49
+        StorageDead(_2);                 // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:50: 29:51
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:15: 29:51
+    }
+}
+
+promoted[0] in match_invariant_ref::{constant#1}: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+    let mut _1: ();                      // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:46: 29:48
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:46: 29:48
+        _0 = &_1;                        // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:29:45: 29:48
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:34:11: 34:11
+    let _1: ();                          // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:35:5: 35:18
+    let _2: ();                          // in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:36:5: 36:26
+
+    bb0: {
+        _1 = issue_78174() -> bb1;       // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:35:5: 35:18
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:35:5: 35:16
+                                         // + literal: Const { ty: fn() {issue_78174}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = match_invariant_ref() -> bb2; // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:36:5: 36:26
+                                         // mir::Constant
+                                         // + span: ui/inline-const/const-match-pat-lifetime.rs:36:5: 36:24
+                                         // + literal: Const { ty: fn() {match_invariant_ref}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:37:2: 37:2
+    }
+}
+
+fn InvariantRef(_1: &T, _2: PhantomData<&mut &T>) -> InvariantRef<'_, T> {
+    let mut _0: InvariantRef<'_, T>;     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+
+    bb0: {
+        _0 = InvariantRef::<'_, T>(move _1, move _2); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+    }
+}
+
+// MIR FOR CTFE
+fn InvariantRef(_1: &T, _2: PhantomData<&mut &T>) -> InvariantRef<'_, T> {
+    let mut _0: InvariantRef<'_, T>;     // return place in scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+
+    bb0: {
+        _0 = InvariantRef::<'_, T>(move _1, move _2); // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+        return;                          // scope 0 at ui/inline-const/const-match-pat-lifetime.rs:19:1: 19:39
+    }
+}

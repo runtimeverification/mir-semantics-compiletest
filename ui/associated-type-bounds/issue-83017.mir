@@ -1,0 +1,25 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-83017.rs:32:1: 32:1
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-83017.rs:35:2: 35:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-83017.rs:37:11: 37:11
+    let _1: ();                          // in scope 0 at ui/associated-type-bounds/issue-83017.rs:38:5: 38:15
+
+    bb0: {
+        _1 = foo::<Z>() -> bb1;          // scope 0 at ui/associated-type-bounds/issue-83017.rs:38:5: 38:15
+                                         // mir::Constant
+                                         // + span: ui/associated-type-bounds/issue-83017.rs:38:5: 38:13
+                                         // + literal: Const { ty: fn() {foo::<Z>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-83017.rs:39:2: 39:2
+    }
+}

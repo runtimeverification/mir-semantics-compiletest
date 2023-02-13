@@ -1,0 +1,120 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const <impl at ui/consts/issue-79137-monomorphic.rs:9:1: 9:27>::VALUE: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:10:22: 10:27
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/consts/issue-79137-monomorphic.rs:10:30: 10:60
+        _0 = std::mem::variant_count::<T>() -> bb1; // scope 0 at ui/consts/issue-79137-monomorphic.rs:10:30: 10:60
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-79137-monomorphic.rs:10:30: 10:58
+                                         // + literal: Const { ty: fn() -> usize {std::mem::variant_count::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:10:5: 10:61
+    }
+}
+
+fn check_variant_count() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:13:38: 13:42
+    let mut _1: usize;                   // in scope 0 at ui/consts/issue-79137-monomorphic.rs:14:14: 14:49
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/issue-79137-monomorphic.rs:14:14: 14:49
+        switchInt(_1) -> [2: bb2, otherwise: bb1]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:344:9: 344:9
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+    }
+
+    bb2: {
+        _0 = const true;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:15:2: 15:2
+    }
+}
+
+// MIR FOR CTFE
+fn check_variant_count() -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:13:38: 13:42
+    let mut _1: usize;                   // in scope 0 at ui/consts/issue-79137-monomorphic.rs:14:14: 14:49
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-79137-monomorphic.rs:14:14: 14:49
+        _1 = const _;                    // scope 0 at ui/consts/issue-79137-monomorphic.rs:14:14: 14:49
+        switchInt(_1) -> [2: bb2, otherwise: bb1]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:344:9: 344:9
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:346:18: 346:23
+    }
+
+    bb2: {
+        _0 = const true;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+        goto -> bb3;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
+    }
+
+    bb3: {
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-79137-monomorphic.rs:15:1: 15:2
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:15:2: 15:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:17:11: 17:11
+    let mut _1: bool;                    // in scope 0 at ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+    let mut _2: bool;                    // in scope 0 at ui/consts/issue-79137-monomorphic.rs:18:13: 18:40
+    let mut _3: !;                       // in scope 0 at ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+
+    bb0: {
+        _2 = check_variant_count::<()>() -> bb1; // scope 0 at ui/consts/issue-79137-monomorphic.rs:18:13: 18:40
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-79137-monomorphic.rs:18:13: 18:38
+                                         // + literal: Const { ty: fn() -> bool {check_variant_count::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = Not(move _2);               // scope 0 at ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+        switchInt(move _1) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+    }
+
+    bb2: {
+        _3 = core::panicking::panic(const "assertion failed: check_variant_count::<()>()"); // scope 0 at ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-79137-monomorphic.rs:18:5: 18:41
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:19:2: 19:2
+    }
+}
+
+fn GetVariantCount(_1: T) -> GetVariantCount<T> {
+    let mut _0: GetVariantCount<T>;      // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+
+    bb0: {
+        _0 = GetVariantCount::<T>(move _1); // scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+    }
+}
+
+// MIR FOR CTFE
+fn GetVariantCount(_1: T) -> GetVariantCount<T> {
+    let mut _0: GetVariantCount<T>;      // return place in scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+
+    bb0: {
+        _0 = GetVariantCount::<T>(move _1); // scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+        return;                          // scope 0 at ui/consts/issue-79137-monomorphic.rs:7:1: 7:30
+    }
+}

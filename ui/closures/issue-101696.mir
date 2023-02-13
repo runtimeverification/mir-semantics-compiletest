@@ -1,0 +1,127 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/closures/issue-101696.rs:5:10: 5:17>::default() -> MyType<'_> {
+    let mut _0: MyType<'_>;              // return place in scope 0 at ui/closures/issue-101696.rs:5:10: 5:17
+    let mut _1: usize;                   // in scope 0 at ui/closures/issue-101696.rs:7:5: 7:17
+    let mut _2: std::marker::PhantomData<&()>; // in scope 0 at ui/closures/issue-101696.rs:8:5: 8:34
+
+    bb0: {
+        _1 = <usize as Default>::default() -> bb1; // scope 0 at ui/closures/issue-101696.rs:7:5: 7:17
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:7:5: 7:17
+                                         // + literal: Const { ty: fn() -> usize {<usize as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <PhantomData<&()> as Default>::default() -> bb2; // scope 0 at ui/closures/issue-101696.rs:8:5: 8:34
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:8:5: 8:34
+                                         // + literal: Const { ty: fn() -> PhantomData<&()> {<PhantomData<&()> as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _0 = MyType::<'_> { field: move _1, _phantom: move _2 }; // scope 0 at ui/closures/issue-101696.rs:5:10: 5:17
+        return;                          // scope 0 at ui/closures/issue-101696.rs:5:17: 5:17
+    }
+}
+
+fn <impl at ui/closures/issue-101696.rs:11:10: 11:17>::default() -> MyTypeVariant<'_> {
+    let mut _0: MyTypeVariant<'_>;       // return place in scope 0 at ui/closures/issue-101696.rs:11:10: 11:17
+    let mut _1: usize;                   // in scope 0 at ui/closures/issue-101696.rs:13:5: 13:17
+    let mut _2: std::marker::PhantomData<&()>; // in scope 0 at ui/closures/issue-101696.rs:14:5: 14:34
+
+    bb0: {
+        _1 = <usize as Default>::default() -> bb1; // scope 0 at ui/closures/issue-101696.rs:13:5: 13:17
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:13:5: 13:17
+                                         // + literal: Const { ty: fn() -> usize {<usize as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <PhantomData<&()> as Default>::default() -> bb2; // scope 0 at ui/closures/issue-101696.rs:14:5: 14:34
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:14:5: 14:34
+                                         // + literal: Const { ty: fn() -> PhantomData<&()> {<PhantomData<&()> as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _0 = MyTypeVariant::<'_> { field: move _1, _phantom: move _2 }; // scope 0 at ui/closures/issue-101696.rs:11:10: 11:17
+        return;                          // scope 0 at ui/closures/issue-101696.rs:11:17: 11:17
+    }
+}
+
+fn foo(_1: F) -> () {
+    debug f => _1;                       // in scope 0 at ui/closures/issue-101696.rs:27:34: 27:35
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-101696.rs:27:40: 27:40
+    let _2: T;                           // in scope 0 at ui/closures/issue-101696.rs:28:9: 28:14
+    let _3: ();                          // in scope 0 at ui/closures/issue-101696.rs:29:5: 29:13
+    let mut _4: F;                       // in scope 0 at ui/closures/issue-101696.rs:29:5: 29:6
+    let mut _5: (T,);                    // in scope 0 at ui/closures/issue-101696.rs:29:5: 29:13
+    let mut _6: T;                       // in scope 0 at ui/closures/issue-101696.rs:29:7: 29:12
+    let mut _7: bool;                    // in scope 0 at ui/closures/issue-101696.rs:30:1: 30:2
+    scope 1 {
+        debug input => _2;               // in scope 1 at ui/closures/issue-101696.rs:28:9: 28:14
+    }
+
+    bb0: {
+        _7 = const false;                // scope 0 at ui/closures/issue-101696.rs:28:9: 28:14
+        _7 = const true;                 // scope 0 at ui/closures/issue-101696.rs:28:9: 28:14
+        _2 = <T as Default>::default() -> [return: bb1, unwind: bb5]; // scope 0 at ui/closures/issue-101696.rs:28:17: 28:29
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:28:17: 28:27
+                                         // + literal: Const { ty: fn() -> T {<T as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _7 = const false;                // scope 1 at ui/closures/issue-101696.rs:29:5: 29:6
+        _4 = move _1;                    // scope 1 at ui/closures/issue-101696.rs:29:5: 29:6
+        _6 = move _2;                    // scope 1 at ui/closures/issue-101696.rs:29:7: 29:12
+        _5 = (move _6,);                 // scope 1 at ui/closures/issue-101696.rs:29:5: 29:13
+        _3 = <F as FnOnce<(T,)>>::call_once(move _4, move _5) -> [return: bb2, unwind: bb5]; // scope 1 at ui/closures/issue-101696.rs:29:5: 29:13
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:29:5: 29:6
+                                         // + literal: Const { ty: extern "rust-call" fn(F, (T,)) -> <F as FnOnce<(T,)>>::Output {<F as FnOnce<(T,)>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/issue-101696.rs:30:2: 30:2
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/closures/issue-101696.rs:27:1: 30:2
+    }
+
+    bb4 (cleanup): {
+        drop(_1) -> bb3;                 // scope 0 at ui/closures/issue-101696.rs:30:1: 30:2
+    }
+
+    bb5 (cleanup): {
+        switchInt(_7) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/closures/issue-101696.rs:30:1: 30:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-101696.rs:32:11: 32:11
+    let _1: ();                          // in scope 0 at ui/closures/issue-101696.rs:33:5: 35:7
+    let mut _2: [closure@ui/closures/issue-101696.rs:33:9: 33:46]; // in scope 0 at ui/closures/issue-101696.rs:33:9: 35:6
+
+    bb0: {
+        _1 = foo::<MyTypeVariant<'_>, [closure@ui/closures/issue-101696.rs:33:9: 33:46]>(move _2) -> bb1; // scope 0 at ui/closures/issue-101696.rs:33:5: 35:7
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-101696.rs:33:5: 33:8
+                                         // + literal: Const { ty: fn([closure@ui/closures/issue-101696.rs:33:9: 33:46]) {foo::<MyTypeVariant<'_>, [closure@ui/closures/issue-101696.rs:33:9: 33:46]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/closures/issue-101696.rs:36:2: 36:2
+    }
+}
+
+fn main::{closure#0}(_1: [closure@ui/closures/issue-101696.rs:33:9: 33:46], _2: MyTypeVariant<'_>) -> () {
+    debug a => _2;                       // in scope 0 at ui/closures/issue-101696.rs:33:10: 33:11
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-101696.rs:33:47: 33:47
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/issue-101696.rs:35:6: 35:6
+    }
+}

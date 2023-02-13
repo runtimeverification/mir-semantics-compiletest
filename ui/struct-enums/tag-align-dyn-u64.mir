@@ -1,0 +1,132 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn mk_rec() -> Rec {
+    let mut _0: Rec;                     // return place in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:16:16: 16:19
+    let mut _1: Tag<u64>;                // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:17:26: 17:38
+
+    bb0: {
+        _1 = const Tag::<u64>::Tag2(0_u64); // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:17:26: 17:38
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:17:26: 17:38
+                                         // + literal: Const { ty: Tag<u64>, val: Value(Scalar(0x0000000000000000)) }
+        _0 = Rec { c8: const 0_u8, t: move _1 }; // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:17:12: 17:40
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:18:2: 18:2
+    }
+}
+
+fn is_u64_aligned(_1: &Tag<u64>) -> bool {
+    debug u => _1;                       // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:20:19: 20:20
+    let mut _0: bool;                    // return place in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:20:36: 20:40
+    let _2: usize;                       // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:21:9: 21:10
+    let mut _3: &Tag<u64>;               // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:21:44: 21:45
+    let mut _5: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:23:12: 23:33
+    let mut _6: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:23:13: 23:14
+    let mut _7: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:23:17: 23:32
+    let mut _8: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:23:18: 23:27
+    let mut _9: (usize, bool);           // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:23:17: 23:32
+    scope 1 {
+        debug p => _2;                   // in scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:21:9: 21:10
+        let _4: usize;                   // in scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:22:9: 22:18
+        scope 3 {
+            debug u64_align => _4;       // in scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:22:9: 22:18
+        }
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _3 = _1;                         // scope 2 at ui/struct-enums/tag-align-dyn-u64.rs:21:44: 21:45
+        _2 = transmute::<&Tag<u64>, usize>(move _3) -> bb1; // scope 2 at ui/struct-enums/tag-align-dyn-u64.rs:21:29: 21:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:21:29: 21:43
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&Tag<u64>) -> usize {transmute::<&Tag<u64>, usize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = std::mem::min_align_of::<u64>() -> bb2; // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:22:21: 22:52
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:22:21: 22:50
+                                         // + literal: Const { ty: fn() -> usize {std::mem::min_align_of::<u64>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = _2;                         // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:13: 23:14
+        _8 = _4;                         // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:18: 23:27
+        _9 = CheckedSub(_8, const 1_usize); // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:17: 23:32
+        assert(!move (_9.1: bool), "attempt to compute `{} - {}`, which would overflow", move _8, const 1_usize) -> bb3; // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:17: 23:32
+    }
+
+    bb3: {
+        _7 = move (_9.0: usize);         // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:17: 23:32
+        _5 = BitAnd(move _6, move _7);   // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:12: 23:33
+        _0 = Eq(move _5, const 0_usize); // scope 3 at ui/struct-enums/tag-align-dyn-u64.rs:23:12: 23:38
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:24:2: 24:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:26:15: 26:15
+    let _1: Rec;                         // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:27:9: 27:10
+    let mut _2: bool;                    // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+    let mut _3: bool;                    // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:28:13: 28:33
+    let mut _4: &Tag<u64>;               // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:28:28: 28:32
+    let _5: &Tag<u64>;                   // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:28:28: 28:32
+    let mut _6: !;                       // in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:27:9: 27:10
+    }
+
+    bb0: {
+        _1 = mk_rec() -> bb1;            // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:27:13: 27:21
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:27:13: 27:19
+                                         // + literal: Const { ty: fn() -> Rec {mk_rec}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = &(_1.1: Tag<u64>);          // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:28: 28:32
+        _4 = _5;                         // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:28: 28:32
+        _3 = is_u64_aligned(move _4) -> bb2; // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:13: 28:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:28:13: 28:27
+                                         // + literal: Const { ty: for<'a> fn(&'a Tag<u64>) -> bool {is_u64_aligned}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = Not(move _3);               // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+        switchInt(move _2) -> [0: bb4, otherwise: bb3]; // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+    }
+
+    bb3: {
+        _6 = core::panicking::panic(const "assertion failed: is_u64_aligned(&x.t)"); // scope 1 at ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-u64.rs:28:5: 28:34
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:29:2: 29:2
+    }
+}
+
+fn Tag::Tag2(_1: A) -> Tag<A> {
+    let mut _0: Tag<A>;                  // return place in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+
+    bb0: {
+        _0 = Tag::<A>::Tag2(move _1);    // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+    }
+}
+
+// MIR FOR CTFE
+fn Tag::Tag2(_1: A) -> Tag<A> {
+    let mut _0: Tag<A>;                  // return place in scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+
+    bb0: {
+        _0 = Tag::<A>::Tag2(move _1);    // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-u64.rs:8:5: 8:9
+    }
+}

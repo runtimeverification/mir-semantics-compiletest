@@ -1,0 +1,68 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn map_project_broken(_1: MiniYoke<Y>, _2: impl for<'a> FnOnce(<Y as MiniYokeable<'a>>::Output,
+core::marker::PhantomData<&'a ()>) -> <P as MiniYokeable<'a>>::Output) -> MiniYoke<P> {
+    debug source => _1;                  // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:14:5: 14:11
+    debug f => _2;                       // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:15:5: 15:6
+    let mut _0: MiniYoke<P>;             // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:19:6: 19:17
+    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+
+    bb0: {
+        _3 = panic(const "not implemented") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:34: 706:51
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb1 (cleanup): {
+        drop(_2) -> bb2;                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:25:1: 25:2
+    }
+
+    bb2 (cleanup): {
+        drop(_1) -> bb3;                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:25:1: 25:2
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:13:1: 25:2
+    }
+}
+
+fn demo_broken(_1: MiniYoke<Bar<'_>>) -> MiniYoke<&str> {
+    debug bar => _1;                     // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:40:16: 40:19
+    let mut _0: MiniYoke<&str>;          // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:40:48: 40:70
+    let mut _2: MiniYoke<Bar<'_>>;       // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:24: 41:27
+    let mut _3: [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:37]; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:50
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:24: 41:27
+        _0 = map_project_broken::<Bar<'_>, &str, [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:37]>(move _2, move _3) -> bb1; // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:5: 41:51
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:5: 41:23
+                                         // + literal: Const { ty: fn(MiniYoke<Bar<'_>>, [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:37]) -> MiniYoke<&str> {map_project_broken::<Bar<'_>, &str, [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:37]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:42:2: 42:2
+    }
+}
+
+fn demo_broken::{closure#0}(_1: [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:29: 41:37], _2: Bar<'_>, _3: PhantomData<&()>) -> &str {
+    debug bar => _2;                     // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:30: 41:33
+    let mut _0: &str;                    // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:38: 41:38
+
+    bb0: {
+        _0 = (_2.0: &str);               // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:38: 41:50
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:41:50: 41:50
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:44:11: 44:11
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-89436.rs:44:13: 44:13
+    }
+}

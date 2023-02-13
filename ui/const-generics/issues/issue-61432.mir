@@ -1,0 +1,47 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn promote() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-61432.rs:3:28: 3:28
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-61432.rs:5:2: 5:2
+    }
+}
+
+promoted[0] in promote: &i32 = {
+    let mut _0: &i32;                    // return place in scope 0 at ui/const-generics/issues/issue-61432.rs:4:13: 4:15
+    let mut _1: i32;                     // in scope 0 at ui/const-generics/issues/issue-61432.rs:4:14: 4:15
+
+    bb0: {
+        _1 = const N;                    // scope 0 at ui/const-generics/issues/issue-61432.rs:4:14: 4:15
+        _0 = &_1;                        // scope 0 at ui/const-generics/issues/issue-61432.rs:4:13: 4:15
+        return;                          // scope 0 at ui/const-generics/issues/issue-61432.rs:4:13: 4:15
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-61432.rs:7:11: 7:11
+    let _1: ();                          // in scope 0 at ui/const-generics/issues/issue-61432.rs:8:5: 8:19
+
+    bb0: {
+        _1 = promote::<0>() -> bb1;      // scope 0 at ui/const-generics/issues/issue-61432.rs:8:5: 8:19
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-61432.rs:8:5: 8:17
+                                         // + literal: Const { ty: fn() {promote::<0>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-61432.rs:9:2: 9:2
+    }
+}
+
+main::{constant#0}: i32 = {
+    let mut _0: i32;                     // return place in scope 0 at ui/const-generics/issues/issue-61432.rs:8:15: 8:16
+
+    bb0: {
+        _0 = const 0_i32;                // scope 0 at ui/const-generics/issues/issue-61432.rs:8:15: 8:16
+        return;                          // scope 0 at ui/const-generics/issues/issue-61432.rs:8:15: 8:16
+    }
+}

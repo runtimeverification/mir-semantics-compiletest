@@ -1,0 +1,246 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn test_generic(_1: T, _2: T, _3: F) -> () {
+    debug expected => _1;                // in scope 0 at ui/expr-if-generic.rs:3:23: 3:31
+    debug not_expected => _2;            // in scope 0 at ui/expr-if-generic.rs:3:36: 3:48
+    debug eq => _3;                      // in scope 0 at ui/expr-if-generic.rs:3:53: 3:55
+    let mut _0: ();                      // return place in scope 0 at ui/expr-if-generic.rs:3:60: 3:60
+    let _4: T;                           // in scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+    let mut _5: &T;                      // in scope 0 at ui/expr-if-generic.rs:7:31: 7:47
+    let mut _6: bool;                    // in scope 0 at ui/expr-if-generic.rs:8:5: 8:34
+    let mut _7: bool;                    // in scope 0 at ui/expr-if-generic.rs:8:13: 8:33
+    let mut _8: F;                       // in scope 0 at ui/expr-if-generic.rs:8:13: 8:15
+    let mut _9: (T, T);                  // in scope 0 at ui/expr-if-generic.rs:8:13: 8:33
+    let mut _10: T;                      // in scope 0 at ui/expr-if-generic.rs:8:16: 8:24
+    let mut _11: T;                      // in scope 0 at ui/expr-if-generic.rs:8:26: 8:32
+    let mut _12: !;                      // in scope 0 at ui/expr-if-generic.rs:8:5: 8:34
+    let mut _13: bool;                   // in scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    let mut _14: bool;                   // in scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    let mut _15: bool;                   // in scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    scope 1 {
+        debug actual => _4;              // in scope 1 at ui/expr-if-generic.rs:7:9: 7:15
+    }
+
+    bb0: {
+        _15 = const false;               // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _13 = const false;               // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _14 = const false;               // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _15 = const true;                // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _13 = const true;                // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _14 = const true;                // scope 0 at ui/expr-if-generic.rs:7:9: 7:15
+        _5 = &_1;                        // scope 0 at ui/expr-if-generic.rs:7:31: 7:47
+        _4 = <T as Clone>::clone(move _5) -> [return: bb1, unwind: bb11]; // scope 0 at ui/expr-if-generic.rs:7:31: 7:47
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:7:40: 7:45
+                                         // + literal: Const { ty: for<'a> fn(&'a T) -> T {<T as Clone>::clone}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _14 = const false;               // scope 1 at ui/expr-if-generic.rs:8:13: 8:15
+        _8 = move _3;                    // scope 1 at ui/expr-if-generic.rs:8:13: 8:15
+        _15 = const false;               // scope 1 at ui/expr-if-generic.rs:8:16: 8:24
+        _10 = move _1;                   // scope 1 at ui/expr-if-generic.rs:8:16: 8:24
+        _11 = move _4;                   // scope 1 at ui/expr-if-generic.rs:8:26: 8:32
+        _9 = (move _10, move _11);       // scope 1 at ui/expr-if-generic.rs:8:13: 8:33
+        _7 = <F as FnOnce<(T, T)>>::call_once(move _8, move _9) -> [return: bb2, unwind: bb11]; // scope 1 at ui/expr-if-generic.rs:8:13: 8:33
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:8:13: 8:15
+                                         // + literal: Const { ty: extern "rust-call" fn(F, (T, T)) -> <F as FnOnce<(T, T)>>::Output {<F as FnOnce<(T, T)>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = Not(move _7);               // scope 1 at ui/expr-if-generic.rs:8:5: 8:34
+        switchInt(move _6) -> [0: bb4, otherwise: bb3]; // scope 1 at ui/expr-if-generic.rs:8:5: 8:34
+    }
+
+    bb3: {
+        _12 = core::panicking::panic(const "assertion failed: eq(expected, actual)") -> bb11; // scope 1 at ui/expr-if-generic.rs:8:5: 8:34
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:8:5: 8:34
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        switchInt(_13) -> [0: bb5, otherwise: bb9]; // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/expr-if-generic.rs:9:2: 9:2
+    }
+
+    bb6 (cleanup): {
+        switchInt(_13) -> [0: bb7, otherwise: bb12]; // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb7 (cleanup): {
+        switchInt(_15) -> [0: bb8, otherwise: bb13]; // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb8 (cleanup): {
+        resume;                          // scope 0 at ui/expr-if-generic.rs:3:1: 9:2
+    }
+
+    bb9: {
+        drop(_2) -> [return: bb5, unwind: bb7]; // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb10 (cleanup): {
+        drop(_3) -> bb6;                 // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb11 (cleanup): {
+        switchInt(_14) -> [0: bb6, otherwise: bb10]; // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb12 (cleanup): {
+        drop(_2) -> bb7;                 // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+
+    bb13 (cleanup): {
+        drop(_1) -> bb8;                 // scope 0 at ui/expr-if-generic.rs:9:1: 9:2
+    }
+}
+
+fn test_bool() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/expr-if-generic.rs:11:16: 11:16
+    let _1: ();                          // in scope 0 at ui/expr-if-generic.rs:13:5: 13:55
+
+    bb0: {
+        _1 = test_generic::<bool, fn(bool, bool) -> bool {compare_bool}>(const true, const false, compare_bool) -> bb1; // scope 0 at ui/expr-if-generic.rs:13:5: 13:55
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:13:5: 13:28
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(bool, bool, fn(bool, bool) -> bool {compare_bool}) {test_generic::<bool, fn(bool, bool) -> bool {compare_bool}>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:13:42: 13:54
+                                         // + literal: Const { ty: fn(bool, bool) -> bool {compare_bool}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/expr-if-generic.rs:14:2: 14:2
+    }
+}
+
+fn compare_bool(_1: bool, _2: bool) -> bool {
+    debug b1 => _1;                      // in scope 0 at ui/expr-if-generic.rs:12:21: 12:23
+    debug b2 => _2;                      // in scope 0 at ui/expr-if-generic.rs:12:31: 12:33
+    let mut _0: bool;                    // return place in scope 0 at ui/expr-if-generic.rs:12:44: 12:48
+    let mut _3: bool;                    // in scope 0 at ui/expr-if-generic.rs:12:58: 12:60
+    let mut _4: bool;                    // in scope 0 at ui/expr-if-generic.rs:12:64: 12:66
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/expr-if-generic.rs:12:58: 12:60
+        _4 = _2;                         // scope 0 at ui/expr-if-generic.rs:12:64: 12:66
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/expr-if-generic.rs:12:58: 12:66
+        return;                          // scope 0 at ui/expr-if-generic.rs:12:69: 12:69
+    }
+}
+
+fn <impl at ui/expr-if-generic.rs:16:10: 16:15>::clone(_1: &Pair) -> Pair {
+    debug self => _1;                    // in scope 0 at ui/expr-if-generic.rs:16:10: 16:15
+    let mut _0: Pair;                    // return place in scope 0 at ui/expr-if-generic.rs:16:10: 16:15
+    let mut _2: isize;                   // in scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+    let mut _3: &isize;                  // in scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+    let _4: &isize;                      // in scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+    let mut _5: isize;                   // in scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+    let mut _6: &isize;                  // in scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+    let _7: &isize;                      // in scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+
+    bb0: {
+        _4 = &((*_1).0: isize);          // scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+        _3 = _4;                         // scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+        _2 = (*_3);                      // scope 0 at ui/expr-if-generic.rs:18:5: 18:13
+        _7 = &((*_1).1: isize);          // scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+        _6 = _7;                         // scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+        _5 = (*_6);                      // scope 0 at ui/expr-if-generic.rs:19:5: 19:13
+        _0 = Pair { a: move _2, b: move _5 }; // scope 0 at ui/expr-if-generic.rs:16:10: 16:15
+        return;                          // scope 0 at ui/expr-if-generic.rs:16:15: 16:15
+    }
+}
+
+fn test_rec() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/expr-if-generic.rs:22:15: 22:15
+    let _1: ();                          // in scope 0 at ui/expr-if-generic.rs:26:5: 26:77
+    let mut _2: Pair;                    // in scope 0 at ui/expr-if-generic.rs:26:29: 26:45
+    let mut _3: Pair;                    // in scope 0 at ui/expr-if-generic.rs:26:47: 26:63
+
+    bb0: {
+        _2 = Pair { a: const 1_isize, b: const 2_isize }; // scope 0 at ui/expr-if-generic.rs:26:29: 26:45
+        _3 = Pair { a: const 2_isize, b: const 3_isize }; // scope 0 at ui/expr-if-generic.rs:26:47: 26:63
+        _1 = test_generic::<Pair, fn(Pair, Pair) -> bool {compare_rec}>(move _2, move _3, compare_rec) -> bb1; // scope 0 at ui/expr-if-generic.rs:26:5: 26:77
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:26:5: 26:28
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Pair, Pair, fn(Pair, Pair) -> bool {compare_rec}) {test_generic::<Pair, fn(Pair, Pair) -> bool {compare_rec}>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:26:65: 26:76
+                                         // + literal: Const { ty: fn(Pair, Pair) -> bool {compare_rec}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/expr-if-generic.rs:27:2: 27:2
+    }
+}
+
+fn compare_rec(_1: Pair, _2: Pair) -> bool {
+    debug t1 => _1;                      // in scope 0 at ui/expr-if-generic.rs:23:20: 23:22
+    debug t2 => _2;                      // in scope 0 at ui/expr-if-generic.rs:23:30: 23:32
+    let mut _0: bool;                    // return place in scope 0 at ui/expr-if-generic.rs:23:43: 23:47
+    let mut _3: bool;                    // in scope 0 at ui/expr-if-generic.rs:24:9: 24:21
+    let mut _4: isize;                   // in scope 0 at ui/expr-if-generic.rs:24:9: 24:13
+    let mut _5: isize;                   // in scope 0 at ui/expr-if-generic.rs:24:17: 24:21
+    let mut _6: bool;                    // in scope 0 at ui/expr-if-generic.rs:24:25: 24:37
+    let mut _7: isize;                   // in scope 0 at ui/expr-if-generic.rs:24:25: 24:29
+    let mut _8: isize;                   // in scope 0 at ui/expr-if-generic.rs:24:33: 24:37
+
+    bb0: {
+        _4 = (_1.0: isize);              // scope 0 at ui/expr-if-generic.rs:24:9: 24:13
+        _5 = (_2.0: isize);              // scope 0 at ui/expr-if-generic.rs:24:17: 24:21
+        _3 = Eq(move _4, move _5);       // scope 0 at ui/expr-if-generic.rs:24:9: 24:21
+        switchInt(move _3) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/expr-if-generic.rs:24:9: 24:37
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/expr-if-generic.rs:24:9: 24:37
+        goto -> bb3;                     // scope 0 at ui/expr-if-generic.rs:24:9: 24:37
+    }
+
+    bb2: {
+        _7 = (_1.1: isize);              // scope 0 at ui/expr-if-generic.rs:24:25: 24:29
+        _8 = (_2.1: isize);              // scope 0 at ui/expr-if-generic.rs:24:33: 24:37
+        _6 = Eq(move _7, move _8);       // scope 0 at ui/expr-if-generic.rs:24:25: 24:37
+        _0 = move _6;                    // scope 0 at ui/expr-if-generic.rs:24:9: 24:37
+        goto -> bb3;                     // scope 0 at ui/expr-if-generic.rs:24:9: 24:37
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/expr-if-generic.rs:25:6: 25:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/expr-if-generic.rs:29:15: 29:15
+    let _1: ();                          // in scope 0 at ui/expr-if-generic.rs:29:17: 29:28
+    let _2: ();                          // in scope 0 at ui/expr-if-generic.rs:29:30: 29:40
+
+    bb0: {
+        _1 = test_bool() -> bb1;         // scope 0 at ui/expr-if-generic.rs:29:17: 29:28
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:29:17: 29:26
+                                         // + literal: Const { ty: fn() {test_bool}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = test_rec() -> bb2;          // scope 0 at ui/expr-if-generic.rs:29:30: 29:40
+                                         // mir::Constant
+                                         // + span: ui/expr-if-generic.rs:29:30: 29:38
+                                         // + literal: Const { ty: fn() {test_rec}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/expr-if-generic.rs:29:43: 29:43
+    }
+}

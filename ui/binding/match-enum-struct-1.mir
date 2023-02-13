@@ -1,0 +1,36 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/binding/match-enum-struct-1.rs:9:15: 9:15
+    let _1: E;                           // in scope 0 at ui/binding/match-enum-struct-1.rs:10:9: 10:10
+    let mut _2: isize;                   // in scope 0 at ui/binding/match-enum-struct-1.rs:16:9: 16:22
+    let mut _4: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    scope 1 {
+        debug e => _1;                   // in scope 1 at ui/binding/match-enum-struct-1.rs:10:9: 10:10
+        let _3: isize;                   // in scope 1 at ui/binding/match-enum-struct-1.rs:16:19: 16:21
+        scope 2 {
+            debug _f => _3;              // in scope 2 at ui/binding/match-enum-struct-1.rs:16:19: 16:21
+        }
+    }
+
+    bb0: {
+        _1 = E::Foo { f: const 1_isize }; // scope 0 at ui/binding/match-enum-struct-1.rs:10:13: 10:25
+        _2 = discriminant(_1);           // scope 1 at ui/binding/match-enum-struct-1.rs:15:11: 15:12
+        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 1 at ui/binding/match-enum-struct-1.rs:15:5: 15:12
+    }
+
+    bb1: {
+        _4 = begin_panic::<&str>(const "explicit panic"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        _3 = ((_1 as Foo).0: isize);     // scope 1 at ui/binding/match-enum-struct-1.rs:16:19: 16:21
+        return;                          // scope 0 at ui/binding/match-enum-struct-1.rs:19:2: 19:2
+    }
+}

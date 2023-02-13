@@ -1,0 +1,30 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: &str) -> () {
+    debug _a => _1;                      // in scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:4:8: 4:10
+    let mut _0: ();                      // return place in scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:4:18: 4:18
+
+    bb0: {
+        return;                          // scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:4:20: 4:20
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:6:11: 6:11
+    let _1: fn(&str);                    // in scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:7:9: 7:10
+    let mut _2: fn(&str);                // in scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:7:13: 7:36
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/binop/binary-op-on-fn-ptr-eq.rs:7:9: 7:10
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _2 = foo as for<'a> fn(&'a str) (Pointer(ReifyFnPointer)); // scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:7:13: 7:16
+                                         // mir::Constant
+                                         // + span: ui/binop/binary-op-on-fn-ptr-eq.rs:7:13: 7:16
+                                         // + literal: Const { ty: for<'a> fn(&'a str) {foo}, val: Value(<ZST>) }
+        _1 = _2;                         // scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:7:13: 7:36
+        return;                          // scope 0 at ui/binop/binary-op-on-fn-ptr-eq.rs:9:2: 9:2
+    }
+}

@@ -1,0 +1,681 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn a() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:3:11: 3:16
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:3:19: 3:20
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:3:22: 3:22
+    }
+}
+
+fn b() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:6:10: 6:15
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:6:18: 6:19
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:6:21: 6:21
+    }
+}
+
+fn bar(_1: u32) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:9:16: 9:16
+
+    bb0: {
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:9:18: 9:18
+    }
+}
+
+fn baz() -> *const dyn Fn(u32) {
+    let mut _0: *const dyn std::ops::Fn(u32); // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:11:13: 11:31
+    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+
+    bb0: {
+        _1 = core::panicking::panic(const "not implemented"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:34: 706:51
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:13:10: 13:10
+    let mut _1: bool;                    // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:43
+    let mut _2: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:19
+    let _3: *const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:19
+    let mut _4: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    let mut _5: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+
+    bb0: {
+        _3 = baz() -> bb1;               // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:19
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:17
+                                         // + literal: Const { ty: fn() -> *const (dyn Fn(u32) + 'static) {baz}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = &_3;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:19
+        _5 = const _;                    // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+                                         // + literal: Const { ty: &*const dyn Fn(u32), val: Unevaluated(foo, [], Some(promoted[0])) }
+        _4 = _5;                         // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> bb2; // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:43
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:15:14: 15:43
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a *const dyn Fn(u32), &'b *const dyn Fn(u32)) -> bool {<*const dyn Fn(u32) as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:18:2: 18:2
+    }
+}
+
+promoted[0] in foo: &*const dyn Fn(u32) = {
+    let mut _0: &*const dyn std::ops::Fn(u32); // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    let mut _1: *const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    let mut _2: *const dyn std::ops::Fn(u32); // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    let mut _3: &dyn std::ops::Fn(u32);  // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    let mut _4: &fn(u32) {bar};          // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:27
+    let mut _5: &fn(u32) {bar};          // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:27
+    let mut _6: fn(u32) {bar};           // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:24: 15:27
+
+    bb0: {
+        _6 = bar;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:24: 15:27
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:15:24: 15:27
+                                         // + literal: Const { ty: fn(u32) {bar}, val: Value(<ZST>) }
+        _5 = &_6;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:27
+        _4 = &(*_5);                     // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:27
+        _3 = move _4 as &dyn std::ops::Fn(u32) (Pointer(Unsize)); // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:27
+        _2 = &raw const (*_3);           // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+        _1 = move _2 as *const dyn std::ops::Fn(u32) (Pointer(Unsize)); // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+        _0 = &_1;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:15:23: 15:43
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:20:11: 20:11
+    let _1: [closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32]; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:21:9: 21:12
+    let mut _2: bool;                    // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:20
+    let mut _3: &[closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32]; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:13
+    let mut _4: (bool,);                 // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:20
+    let _6: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
+    let mut _7: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _8: &[&str];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _9: &[&str; 5];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let _10: &[&str; 5];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _11: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _12: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _13: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _14: [core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _15: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _16: &&str;                  // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let _17: &&str;                      // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _18: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _19: &u32;                   // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let _20: &u32;                       // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _21: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _22: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let _23: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _24: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let mut _25: &&bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let _26: &&bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let _27: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let mut _28: &[std::fmt::rt::v1::Argument]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _29: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _30: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _31: [std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _32: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _33: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _34: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _35: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _36: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _37: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _38: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _39: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _40: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _41: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _42: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _43: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _44: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _45: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _46: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _47: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _48: core::fmt::UnsafeArg;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _50: bool;                   // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:20
+    let mut _51: &[closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31]; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:13
+    let mut _52: (bool,);                // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:20
+    let _54: ();                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
+    let mut _55: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _56: &[&str];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _57: &[&str; 5];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let _58: &[&str; 5];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _59: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _60: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _61: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _62: [core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _63: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _64: &&str;                  // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let _65: &&str;                      // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _66: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _67: &u32;                   // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let _68: &u32;                       // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _69: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _70: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let _71: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _72: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let mut _73: &&bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let _74: &&bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let _75: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+    let mut _76: &[std::fmt::rt::v1::Argument]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _77: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _78: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let _79: [std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _80: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _81: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _82: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _83: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _84: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _85: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _86: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _87: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _88: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _89: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _90: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _91: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _92: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _93: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _94: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _95: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _96: core::fmt::UnsafeArg;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    scope 1 {
+        debug foo => _1;                 // in scope 1 at ui/fn/fn-recover-return-sign_fixed.rs:21:9: 21:12
+        let _5: bool;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+        let _49: [closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31]; // in scope 1 at ui/fn/fn-recover-return-sign_fixed.rs:25:9: 25:12
+        scope 2 {
+            debug tmp => _5;             // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+            let mut _101: &&str;         // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+            let mut _102: &u32;          // in scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+            let mut _103: &&str;         // in scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+            let mut _104: &[&str; 5];    // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+            scope 3 {
+            }
+        }
+        scope 4 {
+            debug bar => _49;            // in scope 4 at ui/fn/fn-recover-return-sign_fixed.rs:25:9: 25:12
+            let _53: bool;               // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+            scope 5 {
+                debug tmp => _53;        // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+                let mut _97: &&str;      // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                let mut _98: &u32;       // in scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                let mut _99: &&str;      // in scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                let mut _100: &[&str; 5]; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                scope 6 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _3 = &_1;                        // scope 1 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:13
+        _4 = const (false,);             // scope 1 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:20
+        _2 = <[closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32] as Fn<(bool,)>>::call(move _3, move _4) -> bb1; // scope 1 at ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:20
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:10: 23:13
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32], (bool,)) -> <[closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32] as FnOnce<(bool,)>>::Output {<[closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32] as Fn<(bool,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = _2;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+        _104 = const _;                  // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &[&str; 5], val: Unevaluated(main, [], Some(promoted[7])) }
+        _10 = _104;                      // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _9 = _10;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _8 = move _9 as &[&str] (Pointer(Unsize)); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _103 = const _;                  // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[6])) }
+        _17 = _103;                      // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        _16 = _17;                       // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        _15 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _16) -> bb2; // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _102 = const _;                  // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[5])) }
+        _20 = _102;                      // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        _19 = _20;                       // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        _18 = core::fmt::ArgumentV1::<'_>::new_display::<u32>(move _19) -> bb3; // scope 2 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: for<'b> fn(&'b u32) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<u32>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _101 = const _;                  // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[4])) }
+        _23 = _101;                      // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        _22 = _23;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        _21 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _22) -> bb4; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _27 = &_5;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _26 = &_27;                      // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _25 = _26;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _24 = core::fmt::ArgumentV1::<'_>::new_debug::<&bool>(move _25) -> bb5; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: for<'b> fn(&'b &bool) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_debug::<&bool>}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _14 = [move _15, move _18, move _21, move _24]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _13 = &_14;                      // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _12 = _13;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _11 = move _12 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _33 = const std::fmt::rt::v1::Alignment::Unknown; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _34 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _35 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _32 = Argument::new(const 0_usize, const ' ', move _33, const 0_u32, move _34, move _35) -> bb6; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _37 = const std::fmt::rt::v1::Alignment::Unknown; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _38 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _39 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _36 = Argument::new(const 1_usize, const ' ', move _37, const 0_u32, move _38, move _39) -> bb7; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _41 = const std::fmt::rt::v1::Alignment::Unknown; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _42 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _43 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _40 = Argument::new(const 2_usize, const ' ', move _41, const 0_u32, move _42, move _43) -> bb8; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _45 = const std::fmt::rt::v1::Alignment::Unknown; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _46 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _47 = Implied;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _44 = Argument::new(const 3_usize, const ' ', move _45, const 4_u32, move _46, move _47) -> bb9; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        _31 = [move _32, move _36, move _40, move _44]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _30 = &_31;                      // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _29 = _30;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _28 = move _29 as &[std::fmt::rt::v1::Argument] (Pointer(Unsize)); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _48 = core::fmt::UnsafeArg::new() -> bb10; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: unsafe fn() -> core::fmt::UnsafeArg {core::fmt::UnsafeArg::new}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        _7 = Arguments::<'_>::new_v1_formatted(move _8, move _11, move _28, move _48) -> bb11; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>], &[Argument], core::fmt::UnsafeArg) -> Arguments<'_> {Arguments::<'_>::new_v1_formatted}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _6 = _eprint(move _7) -> bb12;   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:28
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_eprint}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _51 = &_49;                      // scope 4 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:13
+        _52 = const (false,);            // scope 4 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:20
+        _50 = <[closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31] as Fn<(bool,)>>::call(move _51, move _52) -> bb13; // scope 4 at ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:20
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:10: 27:13
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31], (bool,)) -> <[closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31] as FnOnce<(bool,)>>::Output {<[closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31] as Fn<(bool,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb13: {
+        _53 = _50;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
+        _100 = const _;                  // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &[&str; 5], val: Unevaluated(main, [], Some(promoted[3])) }
+        _58 = _100;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _57 = _58;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _56 = move _57 as &[&str] (Pointer(Unsize)); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _99 = const _;                   // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[2])) }
+        _65 = _99;                       // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        _64 = _65;                       // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        _63 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _64) -> bb14; // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // + user_ty: UserType(6)
+                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb14: {
+        _98 = const _;                   // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[1])) }
+        _68 = _98;                       // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        _67 = _68;                       // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        _66 = core::fmt::ArgumentV1::<'_>::new_display::<u32>(move _67) -> bb15; // scope 5 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // + user_ty: UserType(7)
+                                         // + literal: Const { ty: for<'b> fn(&'b u32) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<u32>}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _97 = const _;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
+        _71 = _97;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        _70 = _71;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        _69 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _70) -> bb16; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + user_ty: UserType(8)
+                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _75 = &_53;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _74 = &_75;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _73 = _74;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+        _72 = core::fmt::ArgumentV1::<'_>::new_debug::<&bool>(move _73) -> bb17; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
+                                         // + user_ty: UserType(9)
+                                         // + literal: Const { ty: for<'b> fn(&'b &bool) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_debug::<&bool>}, val: Value(<ZST>) }
+    }
+
+    bb17: {
+        _62 = [move _63, move _66, move _69, move _72]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _61 = &_62;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _60 = _61;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _59 = move _60 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _81 = const std::fmt::rt::v1::Alignment::Unknown; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _82 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _83 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _80 = Argument::new(const 0_usize, const ' ', move _81, const 0_u32, move _82, move _83) -> bb18; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb18: {
+        _85 = const std::fmt::rt::v1::Alignment::Unknown; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _86 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _87 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _84 = Argument::new(const 1_usize, const ' ', move _85, const 0_u32, move _86, move _87) -> bb19; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb19: {
+        _89 = const std::fmt::rt::v1::Alignment::Unknown; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _90 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _91 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _88 = Argument::new(const 2_usize, const ' ', move _89, const 0_u32, move _90, move _91) -> bb20; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb20: {
+        _93 = const std::fmt::rt::v1::Alignment::Unknown; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
+        _94 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _95 = Implied;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _92 = Argument::new(const 3_usize, const ' ', move _93, const 4_u32, move _94, move _95) -> bb21; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+    }
+
+    bb21: {
+        _79 = [move _80, move _84, move _88, move _92]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _78 = &_79;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _77 = _78;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _76 = move _77 as &[std::fmt::rt::v1::Argument] (Pointer(Unsize)); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+        _96 = core::fmt::UnsafeArg::new() -> bb22; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + literal: Const { ty: unsafe fn() -> core::fmt::UnsafeArg {core::fmt::UnsafeArg::new}, val: Value(<ZST>) }
+    }
+
+    bb22: {
+        _55 = Arguments::<'_>::new_v1_formatted(move _56, move _59, move _76, move _96) -> bb23; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+                                         // + user_ty: UserType(5)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>], &[Argument], core::fmt::UnsafeArg) -> Arguments<'_> {Arguments::<'_>::new_v1_formatted}, val: Value(<ZST>) }
+    }
+
+    bb23: {
+        _54 = _eprint(move _55) -> bb24; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:28
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_eprint}, val: Value(<ZST>) }
+    }
+
+    bb24: {
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:28:2: 28:2
+    }
+}
+
+promoted[0] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _1: &str;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+
+    bb0: {
+        _1 = const "bar(false)";         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    }
+}
+
+promoted[1] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _1: u32;                     // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+
+    bb0: {
+        _1 = const 27_u32;               // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        _0 = &_1;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    }
+}
+
+promoted[2] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    let mut _1: &str;                    // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+
+    bb0: {
+        _1 = const "ui/fn/fn-recover-return-sign_fixed.rs"; // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:27:5: 27:21
+    }
+}
+
+promoted[3] in main: &[&str; 5] = {
+    let mut _0: &[&str; 5];              // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _1: [&str; 5];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+
+    bb0: {
+        _1 = [const "[", const ":", const "] ", const " = ", const "\n"]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    }
+}
+
+promoted[4] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    let mut _1: &str;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+
+    bb0: {
+        _1 = const "foo(false)";         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+    }
+}
+
+promoted[5] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _1: u32;                     // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+
+    bb0: {
+        _1 = const 23_u32;               // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        _0 = &_1;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    }
+}
+
+promoted[6] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    let mut _1: &str;                    // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+
+    bb0: {
+        _1 = const "ui/fn/fn-recover-return-sign_fixed.rs"; // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // mir::Constant
+                                         // + span: ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:23:5: 23:21
+    }
+}
+
+promoted[7] in main: &[&str; 5] = {
+    let mut _0: &[&str; 5];              // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    let mut _1: [&str; 5];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+
+    bb0: {
+        _1 = [const "[", const ":", const "] ", const " = ", const "\n"]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+    }
+}
+
+fn main::{closure#0}(_1: &[closure@ui/fn/fn-recover-return-sign_fixed.rs:21:15: 21:32], _2: bool) -> bool {
+    debug a => _2;                       // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:21:16: 21:17
+    let mut _0: bool;                    // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:21:28: 21:32
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:21:35: 21:36
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:21:38: 21:38
+    }
+}
+
+fn main::{closure#1}(_1: &[closure@ui/fn/fn-recover-return-sign_fixed.rs:25:15: 25:31], _2: bool) -> bool {
+    debug a => _2;                       // in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:25:16: 25:17
+    let mut _0: bool;                    // return place in scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:25:27: 25:31
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:25:34: 25:35
+        return;                          // scope 0 at ui/fn/fn-recover-return-sign_fixed.rs:25:37: 25:37
+    }
+}

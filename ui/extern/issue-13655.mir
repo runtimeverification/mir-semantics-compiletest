@@ -1,0 +1,165 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/extern/issue-13655.rs:7:1: 7:32>::call(_1: &Foo<T>, _2: ()) -> T {
+    debug self => _1;                    // in scope 0 at ui/extern/issue-13655.rs:8:32: 8:37
+    let mut _0: T;                       // return place in scope 0 at ui/extern/issue-13655.rs:10:13: 10:14
+    scope 1 {
+        debug t => _0;                   // in scope 1 at ui/extern/issue-13655.rs:10:13: 10:14
+    }
+
+    bb0: {
+        _0 = ((*_1).0: T);               // scope 0 at ui/extern/issue-13655.rs:10:13: 10:14
+        return;                          // scope 0 at ui/extern/issue-13655.rs:12:6: 12:6
+    }
+}
+
+fn <impl at ui/extern/issue-13655.rs:15:1: 15:35>::call_mut(_1: &mut Foo<T>, _2: ()) -> T {
+    debug self => _1;                    // in scope 0 at ui/extern/issue-13655.rs:16:36: 16:45
+    let mut _0: T;                       // return place in scope 0 at ui/extern/issue-13655.rs:16:57: 16:58
+    let mut _3: &Foo<T>;                 // in scope 0 at ui/extern/issue-13655.rs:17:9: 17:22
+    let mut _4: ();                      // in scope 0 at ui/extern/issue-13655.rs:17:19: 17:21
+
+    bb0: {
+        _3 = &(*_1);                     // scope 0 at ui/extern/issue-13655.rs:17:9: 17:22
+        _0 = <Foo<T> as Fn<()>>::call(move _3, move _4) -> bb1; // scope 0 at ui/extern/issue-13655.rs:17:9: 17:22
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:17:14: 17:18
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Foo<T>, ()) -> <Foo<T> as FnOnce<()>>::Output {<Foo<T> as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/extern/issue-13655.rs:18:6: 18:6
+    }
+}
+
+fn <impl at ui/extern/issue-13655.rs:21:1: 21:36>::call_once(_1: Foo<T>, _2: ()) -> T {
+    debug self => _1;                    // in scope 0 at ui/extern/issue-13655.rs:24:37: 24:41
+    let mut _0: T;                       // return place in scope 0 at ui/extern/issue-13655.rs:24:53: 24:54
+    let mut _3: &Foo<T>;                 // in scope 0 at ui/extern/issue-13655.rs:25:9: 25:22
+    let mut _4: ();                      // in scope 0 at ui/extern/issue-13655.rs:25:19: 25:21
+
+    bb0: {
+        _3 = &_1;                        // scope 0 at ui/extern/issue-13655.rs:25:9: 25:22
+        _0 = <Foo<T> as Fn<()>>::call(move _3, move _4) -> bb1; // scope 0 at ui/extern/issue-13655.rs:25:9: 25:22
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:25:14: 25:18
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Foo<T>, ()) -> <Foo<T> as FnOnce<()>>::Output {<Foo<T> as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/extern/issue-13655.rs:26:6: 26:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/extern/issue-13655.rs:29:11: 29:11
+    let _1: u8;                          // in scope 0 at ui/extern/issue-13655.rs:30:7: 30:8
+    let _2: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _3: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _4: &[&str];                 // in scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+    let mut _5: &[&str; 2];              // in scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+    let _6: &[&str; 2];                  // in scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+    let mut _7: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _8: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _9: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _10: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _11: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:26
+    let mut _12: &u8;                    // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:26
+    let _13: &u8;                        // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:26
+    let _14: u8;                         // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:26
+    let mut _15: &Foo<u8>;               // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:24
+    let _16: Foo<u8>;                    // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:24
+    let mut _17: u8;                     // in scope 0 at ui/extern/issue-13655.rs:31:22: 31:23
+    let mut _18: ();                     // in scope 0 at ui/extern/issue-13655.rs:31:18: 31:26
+    scope 1 {
+        debug t => _1;                   // in scope 1 at ui/extern/issue-13655.rs:30:7: 30:8
+        let mut _19: &[&str; 2];         // in scope 1 at ui/extern/issue-13655.rs:31:12: 31:16
+    }
+
+    bb0: {
+        _1 = const 1_u8;                 // scope 0 at ui/extern/issue-13655.rs:30:15: 30:16
+        _19 = const _;                   // scope 1 at ui/extern/issue-13655.rs:31:12: 31:16
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:31:12: 31:16
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
+        _6 = _19;                        // scope 1 at ui/extern/issue-13655.rs:31:12: 31:16
+        _5 = _6;                         // scope 1 at ui/extern/issue-13655.rs:31:12: 31:16
+        _4 = move _5 as &[&str] (Pointer(Unsize)); // scope 1 at ui/extern/issue-13655.rs:31:12: 31:16
+        _17 = const 1_u8;                // scope 1 at ui/extern/issue-13655.rs:31:22: 31:23
+        _16 = Foo::<u8>(move _17);       // scope 1 at ui/extern/issue-13655.rs:31:18: 31:24
+        _15 = &_16;                      // scope 1 at ui/extern/issue-13655.rs:31:18: 31:24
+        _14 = <Foo<u8> as Fn<()>>::call(move _15, move _18) -> bb1; // scope 1 at ui/extern/issue-13655.rs:31:18: 31:26
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:31:18: 31:24
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Foo<u8>, ()) -> <Foo<u8> as FnOnce<()>>::Output {<Foo<u8> as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _13 = &_14;                      // scope 1 at ui/extern/issue-13655.rs:31:18: 31:26
+        _12 = _13;                       // scope 1 at ui/extern/issue-13655.rs:31:18: 31:26
+        _11 = core::fmt::ArgumentV1::<'_>::new_display::<u8>(move _12) -> bb2; // scope 1 at ui/extern/issue-13655.rs:31:18: 31:26
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:31:18: 31:26
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: for<'b> fn(&'b u8) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<u8>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _10 = [move _11];                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _9 = &_10;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _8 = _9;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _7 = move _8 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb3; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _2 = _print(move _3) -> bb4;     // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/extern/issue-13655.rs:32:2: 32:2
+    }
+}
+
+promoted[0] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+    let mut _1: [&str; 2];               // in scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+
+    bb0: {
+        _1 = [const "", const "\n"];     // scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:31:12: 31:16
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/extern/issue-13655.rs:31:12: 31:16
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+        return;                          // scope 0 at ui/extern/issue-13655.rs:31:12: 31:16
+    }
+}
+
+fn Foo(_1: T) -> Foo<T> {
+    let mut _0: Foo<T>;                  // return place in scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+
+    bb0: {
+        _0 = Foo::<T>(move _1);          // scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+        return;                          // scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: T) -> Foo<T> {
+    let mut _0: Foo<T>;                  // return place in scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+
+    bb0: {
+        _0 = Foo::<T>(move _1);          // scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+        return;                          // scope 0 at ui/extern/issue-13655.rs:5:1: 5:14
+    }
+}

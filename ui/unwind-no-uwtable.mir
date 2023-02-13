@@ -1,0 +1,261 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/unwind-no-uwtable.rs:10:1: 10:27>::drop(_1: &mut Increase<'_>) -> () {
+    debug self => _1;                    // in scope 0 at ui/unwind-no-uwtable.rs:11:13: 11:22
+    let mut _0: ();                      // return place in scope 0 at ui/unwind-no-uwtable.rs:11:24: 11:24
+    let mut _2: (u8, bool);              // in scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+    let mut _3: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:11:13: 11:22
+    let mut _4: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:11:13: 11:22
+    let mut _5: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:11:13: 11:22
+
+    bb0: {
+        _3 = deref_copy ((*_1).0: &mut u8); // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+        _2 = CheckedAdd((*_3), const 1_u8); // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+        _4 = deref_copy ((*_1).0: &mut u8); // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_u8) -> bb1; // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+    }
+
+    bb1: {
+        _5 = deref_copy ((*_1).0: &mut u8); // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+        (*_5) = move (_2.0: u8);         // scope 0 at ui/unwind-no-uwtable.rs:12:9: 12:21
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:13:6: 13:6
+    }
+}
+
+fn unwind() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unwind-no-uwtable.rs:17:13: 17:13
+    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+
+    bb0: {
+        _1 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn increase(_1: &mut u8) -> () {
+    debug count => _1;                   // in scope 0 at ui/unwind-no-uwtable.rs:22:13: 22:18
+    let mut _0: ();                      // return place in scope 0 at ui/unwind-no-uwtable.rs:22:29: 22:29
+    let _2: Increase<'_>;                // in scope 0 at ui/unwind-no-uwtable.rs:23:9: 23:18
+    let mut _3: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:23:30: 23:35
+    let _4: ();                          // in scope 0 at ui/unwind-no-uwtable.rs:24:5: 24:13
+    scope 1 {
+        debug _increase => _2;           // in scope 1 at ui/unwind-no-uwtable.rs:23:9: 23:18
+    }
+
+    bb0: {
+        _3 = &mut (*_1);                 // scope 0 at ui/unwind-no-uwtable.rs:23:30: 23:35
+        _2 = Increase::<'_>(move _3);    // scope 0 at ui/unwind-no-uwtable.rs:23:21: 23:36
+        _4 = unwind() -> [return: bb1, unwind: bb3]; // scope 1 at ui/unwind-no-uwtable.rs:24:5: 24:13
+                                         // mir::Constant
+                                         // + span: ui/unwind-no-uwtable.rs:24:5: 24:11
+                                         // + literal: Const { ty: fn() {unwind}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_2) -> bb2;                 // scope 0 at ui/unwind-no-uwtable.rs:25:1: 25:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:25:2: 25:2
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> bb4;                 // scope 0 at ui/unwind-no-uwtable.rs:25:1: 25:2
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/unwind-no-uwtable.rs:22:1: 25:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/unwind-no-uwtable.rs:27:11: 27:11
+    let mut _1: u8;                      // in scope 0 at ui/unwind-no-uwtable.rs:28:9: 28:18
+    let mut _2: bool;                    // in scope 0 at ui/unwind-no-uwtable.rs:29:5: 32:17
+    let mut _3: bool;                    // in scope 0 at ui/unwind-no-uwtable.rs:29:13: 32:16
+    let mut _4: &std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/unwind-no-uwtable.rs:29:13: 32:16
+    let _5: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/unwind-no-uwtable.rs:29:13: 32:7
+    let mut _6: std::panic::AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>; // in scope 0 at ui/unwind-no-uwtable.rs:29:33: 32:6
+    let mut _7: [closure@ui/unwind-no-uwtable.rs:31:9: 31:11]; // in scope 0 at ui/unwind-no-uwtable.rs:31:9: 31:32
+    let mut _8: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:31:9: 31:32
+    let mut _9: !;                       // in scope 0 at ui/unwind-no-uwtable.rs:29:5: 32:17
+    let mut _10: (&u8, &u8);             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _11: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let mut _12: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _16: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _17: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _18: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _20: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _21: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _22: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _23: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _24: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _25: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    scope 1 {
+        debug count => _1;               // in scope 1 at ui/unwind-no-uwtable.rs:28:9: 28:18
+        let _13: &u8;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        let _14: &u8;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let mut _27: &u8;                // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        scope 2 {
+            debug left_val => _13;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+            debug right_val => _14;      // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+            let _19: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            scope 3 {
+                debug kind => _19;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            }
+        }
+    }
+
+    bb0: {
+        _1 = const 0_u8;                 // scope 0 at ui/unwind-no-uwtable.rs:28:21: 28:22
+        _8 = &mut _1;                    // scope 1 at ui/unwind-no-uwtable.rs:31:9: 31:32
+        _7 = [closure@ui/unwind-no-uwtable.rs:31:9: 31:11] { count: move _8 }; // scope 1 at ui/unwind-no-uwtable.rs:31:9: 31:32
+                                         // closure
+                                         // + def_id: DefId(0:15 ~ unwind_no_uwtable[d979]::main::{closure#0})
+                                         // + substs: [
+                                         //     i16,
+                                         //     extern "rust-call" fn(()),
+                                         //     (&mut u8,),
+                                         // ]
+        _6 = AssertUnwindSafe::<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>(move _7); // scope 1 at ui/unwind-no-uwtable.rs:29:33: 32:6
+        _5 = catch_unwind::<AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>, ()>(move _6) -> bb1; // scope 1 at ui/unwind-no-uwtable.rs:29:13: 32:7
+                                         // mir::Constant
+                                         // + span: ui/unwind-no-uwtable.rs:29:13: 29:32
+                                         // + literal: Const { ty: fn(AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>) -> Result<(), Box<(dyn Any + Send + 'static)>> {catch_unwind::<AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>, ()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = &_5;                        // scope 1 at ui/unwind-no-uwtable.rs:29:13: 32:16
+        _3 = Result::<(), Box<dyn Any + Send>>::is_err(move _4) -> [return: bb2, unwind: bb8]; // scope 1 at ui/unwind-no-uwtable.rs:29:13: 32:16
+                                         // mir::Constant
+                                         // + span: ui/unwind-no-uwtable.rs:32:8: 32:14
+                                         // + literal: Const { ty: for<'a> fn(&'a Result<(), Box<dyn Any + Send>>) -> bool {Result::<(), Box<dyn Any + Send>>::is_err}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _2 = Not(move _3);               // scope 1 at ui/unwind-no-uwtable.rs:29:5: 32:17
+        drop(_5) -> bb3;                 // scope 1 at ui/unwind-no-uwtable.rs:32:16: 32:17
+    }
+
+    bb3: {
+        switchInt(move _2) -> [0: bb5, otherwise: bb4]; // scope 1 at ui/unwind-no-uwtable.rs:29:5: 32:17
+    }
+
+    bb4: {
+        _9 = core::panicking::panic(const "assertion failed: panic::catch_unwind(AssertUnwindSafe(#[inline(never)] ||\\n                increase(&mut count))).is_err()"); // scope 1 at ui/unwind-no-uwtable.rs:29:5: 32:17
+                                         // mir::Constant
+                                         // + span: ui/unwind-no-uwtable.rs:29:5: 32:17
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb5: {
+        _11 = &_1;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _27 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[0])) }
+        _12 = _27;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _10 = (move _11, move _12);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _13 = (_10.0: &u8);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _14 = (_10.1: &u8);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _17 = (*_13);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _18 = const 1_u8;                // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _16 = Eq(move _17, move _18);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _15 = Not(move _16);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _15) -> [0: bb7, otherwise: bb6]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb6: {
+        _19 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _21 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _23 = _13;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _22 = _23;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _25 = _14;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _24 = _25;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _26 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _20 = core::panicking::assert_failed::<u8, u8>(move _21, move _22, move _24, move _26); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:34:2: 34:2
+    }
+
+    bb8 (cleanup): {
+        drop(_5) -> bb9;                 // scope 1 at ui/unwind-no-uwtable.rs:32:16: 32:17
+    }
+
+    bb9 (cleanup): {
+        resume;                          // scope 0 at ui/unwind-no-uwtable.rs:27:1: 34:2
+    }
+}
+
+promoted[0] in main: &u8 = {
+    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: u8;                      // in scope 0 at ui/unwind-no-uwtable.rs:33:23: 33:24
+
+    bb0: {
+        _1 = const 1_u8;                 // scope 0 at ui/unwind-no-uwtable.rs:33:23: 33:24
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+fn main::{closure#0}(_1: &mut [closure@ui/unwind-no-uwtable.rs:31:9: 31:11]) -> () {
+    debug count => (*((*_1).0: &mut u8)); // in scope 0 at ui/unwind-no-uwtable.rs:28:9: 28:18
+    let mut _0: ();                      // return place in scope 0 at ui/unwind-no-uwtable.rs:31:12: 31:12
+    let mut _2: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:31:21: 31:31
+    let mut _3: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:31:21: 31:31
+    let mut _4: &mut u8;                 // in scope 0 at ui/unwind-no-uwtable.rs:31:9: 31:32
+
+    bb0: {
+        _4 = deref_copy ((*_1).0: &mut u8); // scope 0 at ui/unwind-no-uwtable.rs:31:21: 31:31
+        _3 = &mut (*_4);                 // scope 0 at ui/unwind-no-uwtable.rs:31:21: 31:31
+        _2 = &mut (*_3);                 // scope 0 at ui/unwind-no-uwtable.rs:31:21: 31:31
+        _0 = increase(move _2) -> bb1;   // scope 0 at ui/unwind-no-uwtable.rs:31:12: 31:32
+                                         // mir::Constant
+                                         // + span: ui/unwind-no-uwtable.rs:31:12: 31:20
+                                         // + literal: Const { ty: for<'a> fn(&'a mut u8) {increase}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:31:32: 31:32
+    }
+}
+
+fn Increase(_1: &mut u8) -> Increase<'_> {
+    let mut _0: Increase<'_>;            // return place in scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+
+    bb0: {
+        _0 = Increase::<'_>(move _1);    // scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+    }
+}
+
+// MIR FOR CTFE
+fn Increase(_1: &mut u8) -> Increase<'_> {
+    let mut _0: Increase<'_>;            // return place in scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+
+    bb0: {
+        _0 = Increase::<'_>(move _1);    // scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+        return;                          // scope 0 at ui/unwind-no-uwtable.rs:8:1: 8:20
+    }
+}

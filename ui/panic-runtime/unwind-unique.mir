@@ -1,0 +1,45 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn failfn() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/panic-runtime/unwind-unique.rs:5:13: 5:13
+    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+
+    bb0: {
+        _1 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/panic-runtime/unwind-unique.rs:9:11: 9:11
+    let _1: std::boxed::Box<i32>;        // in scope 0 at ui/panic-runtime/unwind-unique.rs:10:5: 10:16
+    let _2: ();                          // in scope 0 at ui/panic-runtime/unwind-unique.rs:11:5: 11:13
+
+    bb0: {
+        _1 = Box::<i32>::new(const 0_i32) -> bb1; // scope 0 at ui/panic-runtime/unwind-unique.rs:10:5: 10:16
+                                         // mir::Constant
+                                         // + span: ui/panic-runtime/unwind-unique.rs:10:5: 10:13
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/panic-runtime/unwind-unique.rs:10:16: 10:17
+    }
+
+    bb2: {
+        _2 = failfn() -> bb3;            // scope 0 at ui/panic-runtime/unwind-unique.rs:11:5: 11:13
+                                         // mir::Constant
+                                         // + span: ui/panic-runtime/unwind-unique.rs:11:5: 11:11
+                                         // + literal: Const { ty: fn() {failfn}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/panic-runtime/unwind-unique.rs:12:2: 12:2
+    }
+}

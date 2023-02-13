@@ -1,0 +1,25 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn ty_check() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-76407.rs:18:1: 18:1
+
+    bb0: {
+        return;                          // scope 0 at ui/generic-associated-types/issue-76407.rs:21:3: 21:3
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-76407.rs:23:11: 23:11
+    let _1: ();                          // in scope 0 at ui/generic-associated-types/issue-76407.rs:24:5: 24:27
+
+    bb0: {
+        _1 = ty_check::<MyStruct>() -> bb1; // scope 0 at ui/generic-associated-types/issue-76407.rs:24:5: 24:27
+                                         // mir::Constant
+                                         // + span: ui/generic-associated-types/issue-76407.rs:24:5: 24:25
+                                         // + literal: Const { ty: fn() {ty_check::<MyStruct>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/generic-associated-types/issue-76407.rs:25:2: 25:2
+    }
+}

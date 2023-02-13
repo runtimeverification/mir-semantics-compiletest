@@ -1,0 +1,38 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-67639-normalization-ice.rs:9:11: 9:11
+    let _1: ();                          // in scope 0 at ui/mir/issue-67639-normalization-ice.rs:10:5: 10:22
+
+    bb0: {
+        _1 = join_all::<u32>() -> bb1;   // scope 0 at ui/mir/issue-67639-normalization-ice.rs:10:5: 10:22
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-67639-normalization-ice.rs:10:5: 10:20
+                                         // + literal: Const { ty: fn() {join_all::<u32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/issue-67639-normalization-ice.rs:11:2: 11:2
+    }
+}
+
+fn join_all() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-67639-normalization-ice.rs:30:1: 30:1
+    let _1: std::vec::Vec<<<I as Foo>::Item as Bar>::Item2>; // in scope 0 at ui/mir/issue-67639-normalization-ice.rs:33:5: 33:42
+
+    bb0: {
+        _1 = Vec::<<<I as Foo>::Item as Bar>::Item2>::new() -> bb1; // scope 0 at ui/mir/issue-67639-normalization-ice.rs:33:5: 33:42
+                                         // mir::Constant
+                                         // + span: ui/mir/issue-67639-normalization-ice.rs:33:5: 33:40
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn() -> Vec<<<I as Foo>::Item as Bar>::Item2> {Vec::<<<I as Foo>::Item as Bar>::Item2>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/mir/issue-67639-normalization-ice.rs:33:42: 33:43
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/mir/issue-67639-normalization-ice.rs:34:2: 34:2
+    }
+}

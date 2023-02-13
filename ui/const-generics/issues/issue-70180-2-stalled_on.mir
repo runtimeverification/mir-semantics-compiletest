@@ -1,0 +1,169 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn works() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:3:12: 3:12
+    let _1: [u8; 4];                     // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:4:9: 4:14
+    let _2: ();                          // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:5: 6:21
+    let mut _3: &[u8; 4];                // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:14: 6:20
+    let _4: &[u8; 4];                    // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:14: 6:20
+    scope 1 {
+        debug array => _1;               // in scope 1 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:4:9: 4:14
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _1 = default_byte_array::<4>() -> bb1; // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:4:30: 4:50
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:4:30: 4:48
+                                         // + literal: Const { ty: fn() -> [u8; 4] {default_byte_array::<4>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = &_1;                        // scope 2 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:14: 6:20
+        _3 = _4;                         // scope 2 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:14: 6:20
+        _2 = <[u8; 4] as Foo<i32>>::foo(move _3) -> bb2; // scope 2 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:5: 6:21
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:6:5: 6:13
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8; 4]) {<[u8; 4] as Foo<i32>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:7:2: 7:2
+    }
+}
+
+works::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:5:16: 5:17
+
+    bb0: {
+        _0 = const 4_usize;              // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:5:16: 5:17
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:5:16: 5:17
+    }
+}
+
+fn didnt_work() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:9:17: 9:17
+    let _1: [u8; 4];                     // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:10:9: 10:14
+    let _2: ();                          // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:5: 11:21
+    let mut _3: &[u8; 4];                // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:14: 11:20
+    let _4: &[u8; 4];                    // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:14: 11:20
+    scope 1 {
+        debug array => _1;               // in scope 1 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:10:9: 10:14
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        _1 = default_byte_array::<4>() -> bb1; // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:10:30: 10:50
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:10:30: 10:48
+                                         // + literal: Const { ty: fn() -> [u8; 4] {default_byte_array::<4>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = &_1;                        // scope 1 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:14: 11:20
+        _3 = _4;                         // scope 1 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:14: 11:20
+        _2 = <[u8; 4] as Foo<i32>>::foo(move _3) -> bb2; // scope 1 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:5: 11:21
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:11:5: 11:13
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8; 4]) {<[u8; 4] as Foo<i32>>::foo}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:13:2: 13:2
+    }
+}
+
+didnt_work::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:12:16: 12:17
+
+    bb0: {
+        _0 = const 4_usize;              // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:12:16: 12:17
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:12:16: 12:17
+    }
+}
+
+fn Foo::foo(_1: &Self) -> () {
+    debug self => _1;                    // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:16:12: 16:17
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:16:19: 16:19
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:16:21: 16:21
+    }
+}
+
+<impl at ui/const-generics/issues/issue-70180-2-stalled_on.rs:19:1: 19:26>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:19:24: 19:25
+
+    bb0: {
+        _0 = const 4_usize;              // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:19:24: 19:25
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:19:24: 19:25
+    }
+}
+
+<impl at ui/const-generics/issues/issue-70180-2-stalled_on.rs:20:1: 20:26>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:20:24: 20:25
+
+    bb0: {
+        _0 = const 8_usize;              // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:20:24: 20:25
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:20:24: 20:25
+    }
+}
+
+fn default_byte_array() -> [u8; N] {
+    let mut _0: [u8; N];                 // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:23:44: 23:51
+
+    bb0: {
+        _0 = <[u8; N] as Default>::default() -> bb1; // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:27:5: 27:23
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:27:5: 27:21
+                                         // + literal: Const { ty: fn() -> [u8; N] {<[u8; N] as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:28:2: 28:2
+    }
+}
+
+default_byte_array::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:23:49: 23:50
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:23:49: 23:50
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:23:49: 23:50
+    }
+}
+
+default_byte_array::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:25:10: 25:11
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:25:10: 25:11
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:25:10: 25:11
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:30:11: 30:11
+    let _1: ();                          // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:31:5: 31:12
+    let _2: ();                          // in scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:32:5: 32:17
+
+    bb0: {
+        _1 = works() -> bb1;             // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:31:5: 31:12
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:31:5: 31:10
+                                         // + literal: Const { ty: fn() {works}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = didnt_work() -> bb2;        // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:32:5: 32:17
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-70180-2-stalled_on.rs:32:5: 32:15
+                                         // + literal: Const { ty: fn() {didnt_work}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-70180-2-stalled_on.rs:33:2: 33:2
+    }
+}

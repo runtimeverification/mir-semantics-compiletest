@@ -1,0 +1,171 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn test_generic(_1: T, _2: F) -> () {
+    debug expected => _1;                // in scope 0 at ui/expr-block-generic-unique2.rs:4:23: 4:31
+    debug eq => _2;                      // in scope 0 at ui/expr-block-generic-unique2.rs:4:36: 4:38
+    let mut _0: ();                      // return place in scope 0 at ui/expr-block-generic-unique2.rs:4:43: 4:43
+    let _3: T;                           // in scope 0 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+    let mut _4: &T;                      // in scope 0 at ui/expr-block-generic-unique2.rs:5:23: 5:39
+    let mut _5: bool;                    // in scope 0 at ui/expr-block-generic-unique2.rs:6:5: 6:34
+    let mut _6: bool;                    // in scope 0 at ui/expr-block-generic-unique2.rs:6:13: 6:33
+    let mut _7: F;                       // in scope 0 at ui/expr-block-generic-unique2.rs:6:13: 6:15
+    let mut _8: (T, T);                  // in scope 0 at ui/expr-block-generic-unique2.rs:6:13: 6:33
+    let mut _9: T;                       // in scope 0 at ui/expr-block-generic-unique2.rs:6:16: 6:24
+    let mut _10: T;                      // in scope 0 at ui/expr-block-generic-unique2.rs:6:26: 6:32
+    let mut _11: !;                      // in scope 0 at ui/expr-block-generic-unique2.rs:6:5: 6:34
+    let mut _12: bool;                   // in scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    let mut _13: bool;                   // in scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    scope 1 {
+        debug actual => _3;              // in scope 1 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+    }
+
+    bb0: {
+        _13 = const false;               // scope 0 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+        _12 = const false;               // scope 0 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+        _13 = const true;                // scope 0 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+        _12 = const true;                // scope 0 at ui/expr-block-generic-unique2.rs:5:9: 5:15
+        _4 = &_1;                        // scope 0 at ui/expr-block-generic-unique2.rs:5:23: 5:39
+        _3 = <T as Clone>::clone(move _4) -> [return: bb1, unwind: bb8]; // scope 0 at ui/expr-block-generic-unique2.rs:5:23: 5:39
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:5:32: 5:37
+                                         // + literal: Const { ty: for<'a> fn(&'a T) -> T {<T as Clone>::clone}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _12 = const false;               // scope 1 at ui/expr-block-generic-unique2.rs:6:13: 6:15
+        _7 = move _2;                    // scope 1 at ui/expr-block-generic-unique2.rs:6:13: 6:15
+        _13 = const false;               // scope 1 at ui/expr-block-generic-unique2.rs:6:16: 6:24
+        _9 = move _1;                    // scope 1 at ui/expr-block-generic-unique2.rs:6:16: 6:24
+        _10 = move _3;                   // scope 1 at ui/expr-block-generic-unique2.rs:6:26: 6:32
+        _8 = (move _9, move _10);        // scope 1 at ui/expr-block-generic-unique2.rs:6:13: 6:33
+        _6 = <F as FnOnce<(T, T)>>::call_once(move _7, move _8) -> [return: bb2, unwind: bb8]; // scope 1 at ui/expr-block-generic-unique2.rs:6:13: 6:33
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:6:13: 6:15
+                                         // + literal: Const { ty: extern "rust-call" fn(F, (T, T)) -> <F as FnOnce<(T, T)>>::Output {<F as FnOnce<(T, T)>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = Not(move _6);               // scope 1 at ui/expr-block-generic-unique2.rs:6:5: 6:34
+        switchInt(move _5) -> [0: bb4, otherwise: bb3]; // scope 1 at ui/expr-block-generic-unique2.rs:6:5: 6:34
+    }
+
+    bb3: {
+        _11 = core::panicking::panic(const "assertion failed: eq(expected, actual)") -> bb8; // scope 1 at ui/expr-block-generic-unique2.rs:6:5: 6:34
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:6:5: 6:34
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/expr-block-generic-unique2.rs:7:2: 7:2
+    }
+
+    bb5 (cleanup): {
+        switchInt(_13) -> [0: bb6, otherwise: bb9]; // scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/expr-block-generic-unique2.rs:4:1: 7:2
+    }
+
+    bb7 (cleanup): {
+        drop(_2) -> bb5;                 // scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    }
+
+    bb8 (cleanup): {
+        switchInt(_12) -> [0: bb5, otherwise: bb7]; // scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    }
+
+    bb9 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/expr-block-generic-unique2.rs:7:1: 7:2
+    }
+}
+
+fn test_vec() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/expr-block-generic-unique2.rs:9:15: 9:15
+    let _1: ();                          // in scope 0 at ui/expr-block-generic-unique2.rs:11:5: 11:60
+    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/expr-block-generic-unique2.rs:11:35: 11:46
+
+    bb0: {
+        _2 = Box::<isize>::new(const 1_isize) -> bb1; // scope 0 at ui/expr-block-generic-unique2.rs:11:35: 11:46
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:11:35: 11:43
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = test_generic::<Box<isize>, fn(Box<isize>, Box<isize>) -> bool {compare_vec}>(move _2, compare_vec) -> bb2; // scope 0 at ui/expr-block-generic-unique2.rs:11:5: 11:60
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:11:5: 11:34
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Box<isize>, fn(Box<isize>, Box<isize>) -> bool {compare_vec}) {test_generic::<Box<isize>, fn(Box<isize>, Box<isize>) -> bool {compare_vec}>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:11:48: 11:59
+                                         // + literal: Const { ty: fn(Box<isize>, Box<isize>) -> bool {compare_vec}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/expr-block-generic-unique2.rs:12:2: 12:2
+    }
+}
+
+fn compare_vec(_1: Box<isize>, _2: Box<isize>) -> bool {
+    debug v1 => _1;                      // in scope 0 at ui/expr-block-generic-unique2.rs:10:20: 10:22
+    debug v2 => _2;                      // in scope 0 at ui/expr-block-generic-unique2.rs:10:36: 10:38
+    let mut _0: bool;                    // return place in scope 0 at ui/expr-block-generic-unique2.rs:10:55: 10:59
+    let mut _3: &std::boxed::Box<isize>; // in scope 0 at ui/expr-block-generic-unique2.rs:10:69: 10:71
+    let mut _4: &std::boxed::Box<isize>; // in scope 0 at ui/expr-block-generic-unique2.rs:10:75: 10:77
+
+    bb0: {
+        _3 = &_1;                        // scope 0 at ui/expr-block-generic-unique2.rs:10:69: 10:71
+        _4 = &_2;                        // scope 0 at ui/expr-block-generic-unique2.rs:10:75: 10:77
+        _0 = <Box<isize> as PartialEq>::eq(move _3, move _4) -> [return: bb1, unwind: bb4]; // scope 0 at ui/expr-block-generic-unique2.rs:10:69: 10:77
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:10:69: 10:77
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Box<isize>, &'b Box<isize>) -> bool {<Box<isize> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_2) -> [return: bb2, unwind: bb5]; // scope 0 at ui/expr-block-generic-unique2.rs:10:79: 10:80
+    }
+
+    bb2: {
+        drop(_1) -> bb3;                 // scope 0 at ui/expr-block-generic-unique2.rs:10:79: 10:80
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/expr-block-generic-unique2.rs:10:80: 10:80
+    }
+
+    bb4 (cleanup): {
+        drop(_2) -> bb5;                 // scope 0 at ui/expr-block-generic-unique2.rs:10:79: 10:80
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/expr-block-generic-unique2.rs:10:79: 10:80
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/expr-block-generic-unique2.rs:10:5: 10:80
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/expr-block-generic-unique2.rs:14:15: 14:15
+    let _1: ();                          // in scope 0 at ui/expr-block-generic-unique2.rs:14:17: 14:27
+
+    bb0: {
+        _1 = test_vec() -> bb1;          // scope 0 at ui/expr-block-generic-unique2.rs:14:17: 14:27
+                                         // mir::Constant
+                                         // + span: ui/expr-block-generic-unique2.rs:14:17: 14:25
+                                         // + literal: Const { ty: fn() {test_vec}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/expr-block-generic-unique2.rs:14:30: 14:30
+    }
+}

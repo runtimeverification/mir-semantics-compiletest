@@ -1,0 +1,90 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn inner() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:5:25: 5:30
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:6:5: 6:6
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:7:2: 7:2
+    }
+}
+
+// MIR FOR CTFE
+fn inner() -> usize {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:5:25: 5:30
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:6:5: 6:6
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:7:2: 7:2
+    }
+}
+
+fn test() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:9:15: 9:15
+    scope 1 {
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:14:2: 14:2
+    }
+}
+
+fn test::{closure#0}(_1: &[closure@ui/const-generics/late-bound-vars/in_closure.rs:10:13: 10:15]) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:10:16: 10:16
+    scope 1 {
+        scope 2 {
+        }
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:13:6: 13:6
+    }
+}
+
+test::{closure#0}::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:11:21: 11:34
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:11:21: 11:34
+        _0 = inner::<'_>() -> bb1;       // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:11:21: 11:34
+                                         // mir::Constant
+                                         // + span: ui/const-generics/late-bound-vars/in_closure.rs:11:21: 11:32
+                                         // + literal: Const { ty: fn() -> usize {inner::<'_>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:11:21: 11:34
+    }
+}
+
+test::{closure#0}::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:12:21: 12:34
+
+    bb0: {
+        ConstEvalCounter;                // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:12:21: 12:34
+        _0 = inner::<'_>() -> bb1;       // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:12:21: 12:34
+                                         // mir::Constant
+                                         // + span: ui/const-generics/late-bound-vars/in_closure.rs:12:21: 12:32
+                                         // + literal: Const { ty: fn() -> usize {inner::<'_>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:12:21: 12:34
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:16:11: 16:11
+    let _1: ();                          // in scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:17:5: 17:11
+
+    bb0: {
+        _1 = test() -> bb1;              // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:17:5: 17:11
+                                         // mir::Constant
+                                         // + span: ui/const-generics/late-bound-vars/in_closure.rs:17:5: 17:9
+                                         // + literal: Const { ty: fn() {test}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/late-bound-vars/in_closure.rs:18:2: 18:2
+    }
+}

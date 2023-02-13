@@ -1,0 +1,37 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: Option<u32>) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:39: 5:39
+    let mut _2: isize;                   // in scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:9: 5:16
+
+    bb0: {
+        _2 = discriminant(_1);           // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:9: 5:23
+        switchInt(move _2) -> [0: bb2, 1: bb2, otherwise: bb1]; // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:9: 5:23
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:9: 5:23
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:5:41: 5:41
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:7:11: 7:11
+    let _1: ();                          // in scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:8:5: 8:14
+    let mut _2: std::option::Option<u32>; // in scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:8:9: 8:13
+
+    bb0: {
+        _2 = Option::<u32>::None;        // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:8:9: 8:13
+        _1 = foo(move _2) -> bb1;        // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:8:5: 8:14
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/issue-67514-irrefutable-param.rs:8:5: 8:8
+                                         // + literal: Const { ty: fn(Option<u32>) {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/or-patterns/issue-67514-irrefutable-param.rs:9:2: 9:2
+    }
+}

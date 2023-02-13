@@ -1,0 +1,88 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn make() -> T {
+    let mut _0: T;                       // return place in scope 0 at ui/hr-subtype/return-static.rs:3:17: 3:18
+    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+
+    bb0: {
+        _1 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn take(_1: T) -> () {
+    debug x => _1;                       // in scope 0 at ui/hr-subtype/return-static.rs:7:12: 7:13
+    let mut _0: ();                      // return place in scope 0 at ui/hr-subtype/return-static.rs:7:18: 7:18
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/hr-subtype/return-static.rs:7:19: 7:20
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/hr-subtype/return-static.rs:7:20: 7:20
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/hr-subtype/return-static.rs:9:11: 9:11
+    let _1: for<'a> fn(&'a u32) -> &u32; // in scope 0 at ui/hr-subtype/return-static.rs:10:9: 10:10
+    let mut _3: for<'a> fn(&'a u32) -> &u32; // in scope 0 at ui/hr-subtype/return-static.rs:11:27: 11:28
+    let mut _4: &u32;                    // in scope 0 at ui/hr-subtype/return-static.rs:11:29: 11:32
+    let _5: &u32;                        // in scope 0 at ui/hr-subtype/return-static.rs:11:29: 11:32
+    let _6: ();                          // in scope 0 at ui/hr-subtype/return-static.rs:12:5: 12:46
+    let mut _7: for<'a> fn(&'a u32) -> &u32; // in scope 0 at ui/hr-subtype/return-static.rs:12:44: 12:45
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/hr-subtype/return-static.rs:10:9: 10:10
+        let _2: &u32;                    // in scope 1 at ui/hr-subtype/return-static.rs:11:9: 11:10
+        let mut _8: &u32;                // in scope 1 at ui/hr-subtype/return-static.rs:11:29: 11:32
+        scope 2 {
+            debug y => _2;               // in scope 2 at ui/hr-subtype/return-static.rs:11:9: 11:10
+        }
+    }
+
+    bb0: {
+        _1 = make::<for<'a> fn(&'a u32) -> &u32>() -> bb1; // scope 0 at ui/hr-subtype/return-static.rs:10:39: 10:45
+                                         // mir::Constant
+                                         // + span: ui/hr-subtype/return-static.rs:10:39: 10:43
+                                         // + literal: Const { ty: fn() -> for<'a> fn(&'a u32) -> &u32 {make::<for<'a> fn(&'a u32) -> &u32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = _1;                         // scope 1 at ui/hr-subtype/return-static.rs:11:27: 11:28
+        _8 = const _;                    // scope 1 at ui/hr-subtype/return-static.rs:11:29: 11:32
+                                         // mir::Constant
+                                         // + span: ui/hr-subtype/return-static.rs:11:29: 11:32
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[0])) }
+        _5 = _8;                         // scope 1 at ui/hr-subtype/return-static.rs:11:29: 11:32
+        _4 = _5;                         // scope 1 at ui/hr-subtype/return-static.rs:11:29: 11:32
+        _2 = move _3(move _4) -> bb2;    // scope 1 at ui/hr-subtype/return-static.rs:11:27: 11:33
+    }
+
+    bb2: {
+        _7 = _1;                         // scope 2 at ui/hr-subtype/return-static.rs:12:44: 12:45
+        _6 = take::<for<'b> fn(&'b u32) -> &'b u32>(move _7) -> bb3; // scope 2 at ui/hr-subtype/return-static.rs:12:5: 12:46
+                                         // mir::Constant
+                                         // + span: ui/hr-subtype/return-static.rs:12:5: 12:43
+                                         // + literal: Const { ty: fn(for<'b> fn(&'b u32) -> &'b u32) {take::<for<'b> fn(&'b u32) -> &'b u32>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/hr-subtype/return-static.rs:13:2: 13:2
+    }
+}
+
+promoted[0] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/hr-subtype/return-static.rs:11:29: 11:32
+    let mut _1: u32;                     // in scope 0 at ui/hr-subtype/return-static.rs:11:30: 11:32
+
+    bb0: {
+        _1 = const 22_u32;               // scope 0 at ui/hr-subtype/return-static.rs:11:30: 11:32
+        _0 = &_1;                        // scope 0 at ui/hr-subtype/return-static.rs:11:29: 11:32
+        return;                          // scope 0 at ui/hr-subtype/return-static.rs:11:29: 11:32
+    }
+}

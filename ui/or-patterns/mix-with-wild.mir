@@ -1,0 +1,90 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn test(_1: Option<usize>) -> bool {
+    debug x => _1;                       // in scope 0 at ui/or-patterns/mix-with-wild.rs:8:13: 8:14
+    let mut _0: bool;                    // return place in scope 0 at ui/or-patterns/mix-with-wild.rs:8:34: 8:38
+    let mut _2: isize;                   // in scope 0 at ui/or-patterns/mix-with-wild.rs:10:9: 10:20
+
+    bb0: {
+        _2 = discriminant(_1);           // scope 0 at ui/or-patterns/mix-with-wild.rs:9:11: 9:12
+        switchInt(move _2) -> [1: bb2, otherwise: bb1]; // scope 0 at ui/or-patterns/mix-with-wild.rs:9:5: 9:12
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/or-patterns/mix-with-wild.rs:11:14: 11:19
+        goto -> bb3;                     // scope 0 at ui/or-patterns/mix-with-wild.rs:11:14: 11:19
+    }
+
+    bb2: {
+        _0 = const true;                 // scope 0 at ui/or-patterns/mix-with-wild.rs:10:24: 10:28
+        goto -> bb3;                     // scope 0 at ui/or-patterns/mix-with-wild.rs:10:24: 10:28
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/or-patterns/mix-with-wild.rs:13:2: 13:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/mix-with-wild.rs:15:11: 15:11
+    let mut _1: bool;                    // in scope 0 at ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+    let mut _2: bool;                    // in scope 0 at ui/or-patterns/mix-with-wild.rs:16:13: 16:27
+    let mut _3: std::option::Option<usize>; // in scope 0 at ui/or-patterns/mix-with-wild.rs:16:18: 16:26
+    let mut _4: !;                       // in scope 0 at ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+    let mut _5: bool;                    // in scope 0 at ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+    let mut _6: bool;                    // in scope 0 at ui/or-patterns/mix-with-wild.rs:17:13: 17:24
+    let mut _7: bool;                    // in scope 0 at ui/or-patterns/mix-with-wild.rs:17:14: 17:24
+    let mut _8: std::option::Option<usize>; // in scope 0 at ui/or-patterns/mix-with-wild.rs:17:19: 17:23
+    let mut _9: !;                       // in scope 0 at ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+
+    bb0: {
+        _3 = Option::<usize>::Some(const 42_usize); // scope 0 at ui/or-patterns/mix-with-wild.rs:16:18: 16:26
+        _2 = test(move _3) -> bb1;       // scope 0 at ui/or-patterns/mix-with-wild.rs:16:13: 16:27
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/mix-with-wild.rs:16:13: 16:17
+                                         // + literal: Const { ty: fn(Option<usize>) -> bool {test}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = Not(move _2);               // scope 0 at ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+        switchInt(move _1) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+    }
+
+    bb2: {
+        _4 = core::panicking::panic(const "assertion failed: test(Some(42))"); // scope 0 at ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/mix-with-wild.rs:16:5: 16:28
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        _8 = Option::<usize>::None;      // scope 0 at ui/or-patterns/mix-with-wild.rs:17:19: 17:23
+        _7 = test(move _8) -> bb4;       // scope 0 at ui/or-patterns/mix-with-wild.rs:17:14: 17:24
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/mix-with-wild.rs:17:14: 17:18
+                                         // + literal: Const { ty: fn(Option<usize>) -> bool {test}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _6 = Not(move _7);               // scope 0 at ui/or-patterns/mix-with-wild.rs:17:13: 17:24
+        _5 = Not(move _6);               // scope 0 at ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+        switchInt(move _5) -> [0: bb6, otherwise: bb5]; // scope 0 at ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+    }
+
+    bb5: {
+        _9 = core::panicking::panic(const "assertion failed: !test(None)"); // scope 0 at ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+                                         // mir::Constant
+                                         // + span: ui/or-patterns/mix-with-wild.rs:17:5: 17:25
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/or-patterns/mix-with-wild.rs:18:2: 18:2
+    }
+}

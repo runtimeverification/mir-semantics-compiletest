@@ -1,0 +1,40 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn qqq(_1: impl Iterator<Item = u32>) -> impl Iterator<Item = u64> {
+    debug lol => _1;                     // in scope 0 at ui/impl-trait/issue-46959.rs:5:8: 5:11
+    let mut _0: impl std::iter::Iterator<Item = u64>; // return place in scope 0 at ui/impl-trait/issue-46959.rs:5:41: 5:64
+    let mut _2: impl Iterator<Item = u32>; // in scope 0 at ui/impl-trait/issue-46959.rs:6:9: 6:12
+    let mut _3: [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20]; // in scope 0 at ui/impl-trait/issue-46959.rs:6:17: 6:28
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/impl-trait/issue-46959.rs:6:9: 6:12
+        _0 = <impl Iterator<Item = u32> as Iterator>::map::<u64, [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20]>(move _2, move _3) -> bb1; // scope 0 at ui/impl-trait/issue-46959.rs:6:9: 6:29
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/issue-46959.rs:6:13: 6:16
+                                         // + literal: Const { ty: fn(impl Iterator<Item = u32>, [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20]) -> Map<impl Iterator<Item = u32>, [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20]> {<impl Iterator<Item = u32> as Iterator>::map::<u64, [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/issue-46959.rs:7:2: 7:2
+    }
+}
+
+fn qqq::{closure#0}(_1: &mut [closure@ui/impl-trait/issue-46959.rs:6:17: 6:20], _2: u32) -> u64 {
+    debug x => _2;                       // in scope 0 at ui/impl-trait/issue-46959.rs:6:18: 6:19
+    let mut _0: u64;                     // return place in scope 0 at ui/impl-trait/issue-46959.rs:6:20: 6:20
+    let mut _3: u32;                     // in scope 0 at ui/impl-trait/issue-46959.rs:6:20: 6:21
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/impl-trait/issue-46959.rs:6:20: 6:21
+        _0 = move _3 as u64 (IntToInt);  // scope 0 at ui/impl-trait/issue-46959.rs:6:20: 6:28
+        return;                          // scope 0 at ui/impl-trait/issue-46959.rs:6:28: 6:28
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issue-46959.rs:9:11: 9:11
+
+    bb0: {
+        return;                          // scope 0 at ui/impl-trait/issue-46959.rs:9:13: 9:13
+    }
+}

@@ -1,0 +1,47 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/cast/cast-to-infer-ty.rs:5:15: 5:15
+    let _1: *const i32;                  // in scope 0 at ui/cast/cast-to-infer-ty.rs:6:9: 6:10
+    let mut _2: bool;                    // in scope 0 at ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+    let mut _3: bool;                    // in scope 0 at ui/cast/cast-to-infer-ty.rs:7:13: 7:24
+    let mut _4: *const i32;              // in scope 0 at ui/cast/cast-to-infer-ty.rs:7:13: 7:14
+    let mut _5: !;                       // in scope 0 at ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+    scope 1 {
+        debug i => _1;                   // in scope 1 at ui/cast/cast-to-infer-ty.rs:6:9: 6:10
+    }
+
+    bb0: {
+        _1 = const {0x0 as *const i32};  // scope 0 at ui/cast/cast-to-infer-ty.rs:6:25: 6:31
+                                         // mir::Constant
+                                         // + span: ui/cast/cast-to-infer-ty.rs:6:25: 6:31
+                                         // + literal: Const { ty: *const i32, val: Value(Scalar(0x0000000000000000)) }
+        _4 = const {0x0 as *const i32};  // scope 1 at ui/cast/cast-to-infer-ty.rs:7:13: 7:14
+                                         // mir::Constant
+                                         // + span: ui/cast/cast-to-infer-ty.rs:7:13: 7:14
+                                         // + literal: Const { ty: *const i32, val: Value(Scalar(0x0000000000000000)) }
+        _3 = ptr::const_ptr::<impl *const i32>::is_null(move _4) -> bb1; // scope 1 at ui/cast/cast-to-infer-ty.rs:7:13: 7:24
+                                         // mir::Constant
+                                         // + span: ui/cast/cast-to-infer-ty.rs:7:15: 7:22
+                                         // + literal: Const { ty: fn(*const i32) -> bool {ptr::const_ptr::<impl *const i32>::is_null}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = Not(move _3);               // scope 1 at ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+        switchInt(move _2) -> [0: bb3, otherwise: bb2]; // scope 1 at ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+    }
+
+    bb2: {
+        _5 = core::panicking::panic(const "assertion failed: i.is_null()"); // scope 1 at ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+                                         // mir::Constant
+                                         // + span: ui/cast/cast-to-infer-ty.rs:7:5: 7:25
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/cast/cast-to-infer-ty.rs:8:2: 8:2
+    }
+}

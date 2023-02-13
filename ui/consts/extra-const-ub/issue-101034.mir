@@ -1,0 +1,48 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+Foo::baa::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:7:16: 7:17
+
+    bb0: {
+        _0 = const 1_usize;              // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:7:16: 7:17
+        return;                          // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:7:16: 7:17
+    }
+}
+
+const FOOMP: Foo = {
+    let mut _0: Foo;                     // return place in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:10:14: 10:17
+    let mut _1: [u32; 1];                // in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:10: 12:17
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:10: 12:17
+        _1 = [const 69_u32; 1];          // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:10: 12:17
+        _0 = Foo { bar: const 0_u8, baa: move _1 }; // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:10:20: 13:2
+        StorageDead(_1);                 // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:13:1: 13:2
+        return;                          // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:10:1: 13:3
+    }
+}
+
+FOOMP::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:15: 12:16
+
+    bb0: {
+        _0 = const 1_usize;              // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:15: 12:16
+        return;                          // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:12:15: 12:16
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:15:11: 15:11
+    let _1: Foo;                         // in scope 0 at ui/consts/extra-const-ub/issue-101034.rs:16:9: 16:13
+    scope 1 {
+        debug _val => _1;                // in scope 1 at ui/consts/extra-const-ub/issue-101034.rs:16:9: 16:13
+    }
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:16:16: 16:21
+                                         // mir::Constant
+                                         // + span: ui/consts/extra-const-ub/issue-101034.rs:16:16: 16:21
+                                         // + literal: Const { ty: Foo, val: Unevaluated(FOOMP, [], None) }
+        return;                          // scope 0 at ui/consts/extra-const-ub/issue-101034.rs:17:2: 17:2
+    }
+}

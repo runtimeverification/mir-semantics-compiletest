@@ -1,0 +1,108 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:8:29: 8:29
+    let _1: [u8; SIZE];                  // in scope 0 at ui/const-generics/issues/issue-61422.rs:9:9: 9:12
+    scope 1 {
+        debug arr => _1;                 // in scope 1 at ui/const-generics/issues/issue-61422.rs:9:9: 9:12
+    }
+    scope 2 {
+        scope 3 {
+            debug array => _2;           // in scope 3 at ui/const-generics/issues/issue-61422.rs:11:13: 11:18
+        }
+        scope 4 {
+            let _2: [u8; SIZE];          // in scope 4 at ui/const-generics/issues/issue-61422.rs:11:13: 11:18
+        }
+    }
+
+    bb0: {
+        _2 = uninitialized::<[u8; SIZE]>() -> bb1; // scope 4 at ui/const-generics/issues/issue-61422.rs:11:33: 11:53
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-61422.rs:11:33: 11:51
+                                         // + literal: Const { ty: unsafe fn() -> [u8; SIZE] {uninitialized::<[u8; SIZE]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = _2;                         // scope 3 at ui/const-generics/issues/issue-61422.rs:12:9: 12:14
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:14:2: 14:2
+    }
+}
+
+foo::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:11:25: 11:29
+
+    bb0: {
+        _0 = const SIZE;                 // scope 0 at ui/const-generics/issues/issue-61422.rs:11:25: 11:29
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:11:25: 11:29
+    }
+}
+
+foo::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:9:19: 9:23
+
+    bb0: {
+        _0 = const SIZE;                 // scope 0 at ui/const-generics/issues/issue-61422.rs:9:19: 9:23
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:9:19: 9:23
+    }
+}
+
+fn bar() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:16:29: 16:29
+    let _1: [u8; SIZE];                  // in scope 0 at ui/const-generics/issues/issue-61422.rs:17:9: 17:12
+    let mut _3: std::mem::MaybeUninit<[u8; SIZE]>; // in scope 0 at ui/const-generics/issues/issue-61422.rs:18:33: 18:59
+    scope 1 {
+        debug arr => _1;                 // in scope 1 at ui/const-generics/issues/issue-61422.rs:17:9: 17:12
+    }
+    scope 2 {
+        let _2: [u8; SIZE];              // in scope 2 at ui/const-generics/issues/issue-61422.rs:18:13: 18:18
+        scope 3 {
+            debug array => _2;           // in scope 3 at ui/const-generics/issues/issue-61422.rs:18:13: 18:18
+        }
+    }
+
+    bb0: {
+        _3 = MaybeUninit::<[u8; SIZE]>::uninit() -> bb1; // scope 2 at ui/const-generics/issues/issue-61422.rs:18:33: 18:59
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-61422.rs:18:33: 18:57
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn() -> MaybeUninit<[u8; SIZE]> {MaybeUninit::<[u8; SIZE]>::uninit}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = MaybeUninit::<[u8; SIZE]>::assume_init(move _3) -> bb2; // scope 2 at ui/const-generics/issues/issue-61422.rs:18:33: 18:73
+                                         // mir::Constant
+                                         // + span: ui/const-generics/issues/issue-61422.rs:18:60: 18:71
+                                         // + literal: Const { ty: unsafe fn(MaybeUninit<[u8; SIZE]>) -> [u8; SIZE] {MaybeUninit::<[u8; SIZE]>::assume_init}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _1 = _2;                         // scope 3 at ui/const-generics/issues/issue-61422.rs:19:9: 19:14
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:21:2: 21:2
+    }
+}
+
+bar::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:18:25: 18:29
+
+    bb0: {
+        _0 = const SIZE;                 // scope 0 at ui/const-generics/issues/issue-61422.rs:18:25: 18:29
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:18:25: 18:29
+    }
+}
+
+bar::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:17:19: 17:23
+
+    bb0: {
+        _0 = const SIZE;                 // scope 0 at ui/const-generics/issues/issue-61422.rs:17:19: 17:23
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:17:19: 17:23
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-61422.rs:24:11: 24:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/issues/issue-61422.rs:24:13: 24:13
+    }
+}

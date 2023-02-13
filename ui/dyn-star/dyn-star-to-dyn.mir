@@ -1,0 +1,54 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:6:11: 6:11
+    let _1: dyn* std::marker::Send;      // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:9: 7:10
+    let mut _2: &();                     // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+    let mut _4: std::boxed::Box<dyn std::marker::Send>; // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:41
+    let mut _5: std::boxed::Box<dyn* std::marker::Send>; // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:24
+    let mut _6: dyn* std::marker::Send;  // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:8:22: 8:23
+    let mut _7: &();                     // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:7:9: 7:10
+        let _3: std::boxed::Box<dyn std::marker::Send>; // in scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:8:9: 8:10
+        scope 2 {
+            debug x => _3;               // in scope 2 at ui/dyn-star/dyn-star-to-dyn.rs:8:9: 8:10
+        }
+    }
+
+    bb0: {
+        _7 = const _;                    // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+                                         // mir::Constant
+                                         // + span: ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[0])) }
+        _2 = _7;                         // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+        _1 = move _2 as dyn* std::marker::Send (DynStar); // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+        _6 = move _1;                    // scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:8:22: 8:23
+        _5 = Box::<dyn* Send>::new(move _6) -> bb1; // scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:24
+                                         // mir::Constant
+                                         // + span: ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:21
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(dyn* Send) -> Box<dyn* Send> {Box::<dyn* Send>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = move _5 as std::boxed::Box<dyn std::marker::Send> (Pointer(Unsize)); // scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:24
+        _3 = move _4;                    // scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:8:13: 8:41
+        drop(_3) -> bb2;                 // scope 1 at ui/dyn-star/dyn-star-to-dyn.rs:9:1: 9:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:9:2: 9:2
+    }
+}
+
+promoted[0] in main: &() = {
+    let mut _0: &();                     // return place in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+    let mut _1: ();                      // in scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:25: 7:27
+
+    bb0: {
+        _1 = ();                         // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:25: 7:27
+        _0 = &_1;                        // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+        return;                          // scope 0 at ui/dyn-star/dyn-star-to-dyn.rs:7:24: 7:27
+    }
+}

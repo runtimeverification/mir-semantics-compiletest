@@ -1,0 +1,76 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:28:11: 28:11
+    let _1: outer_mod::dyn::dyn;         // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:34:5: 34:24
+    let _2: (std::boxed::Box<dyn Trait>, std::boxed::Box<dyn Trait>); // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:38:5: 38:24
+
+    bb0: {
+        _1 = dyn() -> bb1;               // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:34:5: 34:24
+                                         // mir::Constant
+                                         // + span: ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:34:5: 34:22
+                                         // + literal: Const { ty: fn() -> outer_mod::dyn::dyn {dyn}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = boxed() -> bb2;             // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:38:5: 38:24
+                                         // mir::Constant
+                                         // + span: ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:38:5: 38:22
+                                         // + literal: Const { ty: fn() -> (Box<(dyn Trait + 'static)>, Box<(dyn Trait + 'static)>) {boxed}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        drop(_2) -> bb3;                 // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:38:24: 38:25
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:39:2: 39:2
+    }
+}
+
+fn dyn() -> outer_mod::dyn::dyn {
+    let mut _0: outer_mod::dyn::dyn;     // return place in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:52:23: 52:48
+
+    bb0: {
+        return;                          // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:64:6: 64:6
+    }
+}
+
+fn boxed() -> (Box<dyn Trait>, Box<dyn Trait>) {
+    let mut _0: (std::boxed::Box<dyn Trait>, std::boxed::Box<dyn Trait>); // return place in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:49:24: 49:57
+    let mut _1: std::boxed::Box<dyn Trait>; // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:10: 76:21
+    let mut _2: std::boxed::Box<u32>;    // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:10: 76:21
+    let mut _3: std::boxed::Box<dyn Trait>; // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:23: 76:34
+    let mut _4: std::boxed::Box<u32>;    // in scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:23: 76:34
+
+    bb0: {
+        _2 = Box::<u32>::new(const 1_u32) -> bb1; // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:10: 76:21
+                                         // mir::Constant
+                                         // + span: ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:10: 76:18
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(u32) -> Box<u32> {Box::<u32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = move _2 as std::boxed::Box<dyn Trait> (Pointer(Unsize)); // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:10: 76:21
+        _4 = Box::<u32>::new(const 2_u32) -> [return: bb2, unwind: bb3]; // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:23: 76:34
+                                         // mir::Constant
+                                         // + span: ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:23: 76:31
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(u32) -> Box<u32> {Box::<u32>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = move _4 as std::boxed::Box<dyn Trait> (Pointer(Unsize)); // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:23: 76:34
+        _0 = (move _1, move _3);         // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:9: 76:35
+        return;                          // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:77:6: 77:6
+    }
+
+    bb3 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:76:34: 76:35
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/dyn-keyword/dyn-2015-edition-keyword-ident-lint_fixed.rs:68:5: 77:6
+    }
+}

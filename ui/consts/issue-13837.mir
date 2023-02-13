@@ -1,0 +1,40 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+TestStruct::x::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-13837.rs:6:23: 6:24
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/issue-13837.rs:6:23: 6:24
+        return;                          // scope 0 at ui/consts/issue-13837.rs:6:23: 6:24
+    }
+}
+
+static TEST_VALUE: TestStruct = {
+    let mut _0: TestStruct;              // return place in scope 0 at ui/consts/issue-13837.rs:11:21: 11:31
+    let mut _1: *const [isize; 2];       // in scope 0 at ui/consts/issue-13837.rs:11:48: 11:75
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-13837.rs:11:48: 11:75
+        _1 = const 4660_usize as *const [isize; 2] (PointerFromExposedAddress); // scope 0 at ui/consts/issue-13837.rs:11:48: 11:75
+        _0 = TestStruct { x: move _1 };  // scope 0 at ui/consts/issue-13837.rs:11:34: 11:76
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-13837.rs:11:75: 11:76
+        return;                          // scope 0 at ui/consts/issue-13837.rs:11:1: 11:77
+    }
+}
+
+TEST_VALUE::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-13837.rs:11:73: 11:74
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/issue-13837.rs:11:73: 11:74
+        return;                          // scope 0 at ui/consts/issue-13837.rs:11:73: 11:74
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-13837.rs:13:11: 13:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-13837.rs:13:13: 13:13
+    }
+}

@@ -1,0 +1,154 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/mir/mir_codegen_critical_edge.rs:20:1: 20:21>::next(_1: &mut Foo<A, B>) -> Option<<A as Iterator>::Item> {
+    debug self => _1;                    // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:24:13: 24:22
+    let mut _0: std::option::Option<<A as std::iter::Iterator>::Item>; // return place in scope 0 at ui/mir/mir_codegen_critical_edge.rs:24:27: 24:42
+    let mut _2: isize;                   // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:13: 26:24
+    let mut _3: std::option::Option<<A as std::iter::Iterator>::Item>; // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+    let mut _4: &mut A;                  // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+    let mut _5: isize;                   // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:27:23: 27:31
+    let _6: std::option::Option<<A as std::iter::Iterator>::Item>; // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:27:17: 27:20
+    let mut _7: State;                   // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:29:34: 29:45
+    let mut _8: &mut B;                  // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:30:21: 30:34
+    let mut _9: &mut A;                  // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:33:29: 33:42
+    let mut _10: &mut B;                 // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:34:28: 34:41
+    let mut _11: bool;                   // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+    scope 1 {
+        debug elt => _6;                 // in scope 1 at ui/mir/mir_codegen_critical_edge.rs:27:17: 27:20
+    }
+
+    bb0: {
+        _11 = const false;               // scope 0 at ui/mir/mir_codegen_critical_edge.rs:25:15: 25:25
+        _2 = discriminant(((*_1).0: State)); // scope 0 at ui/mir/mir_codegen_critical_edge.rs:25:15: 25:25
+        switchInt(move _2) -> [0: bb3, 1: bb9, 2: bb1, otherwise: bb2]; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:25:9: 25:25
+    }
+
+    bb1: {
+        _10 = &mut ((*_1).2: B);         // scope 0 at ui/mir/mir_codegen_critical_edge.rs:34:28: 34:41
+        _0 = <B as Iterator>::next(move _10) -> bb10; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:34:28: 34:41
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:34:35: 34:39
+                                         // + literal: Const { ty: for<'a> fn(&'a mut B) -> Option<<B as Iterator>::Item> {<B as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        unreachable;                     // scope 0 at ui/mir/mir_codegen_critical_edge.rs:25:15: 25:25
+    }
+
+    bb3: {
+        _4 = &mut ((*_1).1: A);          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+        _11 = const true;                // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+        _3 = <A as Iterator>::next(move _4) -> bb4; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:26:41: 26:45
+                                         // + literal: Const { ty: for<'a> fn(&'a mut A) -> Option<<A as Iterator>::Item> {<A as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _5 = discriminant(_3);           // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+        switchInt(move _5) -> [0: bb5, 1: bb7, otherwise: bb6]; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:28: 26:47
+    }
+
+    bb5: {
+        _7 = const State::Back;          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:29:34: 29:45
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:29:34: 29:45
+                                         // + literal: Const { ty: State, val: Value(Scalar(0x02)) }
+        ((*_1).0: State) = move _7;      // scope 0 at ui/mir/mir_codegen_critical_edge.rs:29:21: 29:45
+        _8 = &mut ((*_1).2: B);          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:30:21: 30:34
+        _0 = <B as Iterator>::next(move _8) -> [return: bb15, unwind: bb11]; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:30:21: 30:34
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:30:28: 30:32
+                                         // + literal: Const { ty: for<'a> fn(&'a mut B) -> Option<<B as Iterator>::Item> {<B as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        unreachable;                     // scope 0 at ui/mir/mir_codegen_critical_edge.rs:26:34: 26:47
+    }
+
+    bb7: {
+        _11 = const false;               // scope 0 at ui/mir/mir_codegen_critical_edge.rs:27:17: 27:20
+        _6 = move _3;                    // scope 0 at ui/mir/mir_codegen_critical_edge.rs:27:17: 27:20
+        _0 = move _6;                    // scope 1 at ui/mir/mir_codegen_critical_edge.rs:27:35: 27:38
+        goto -> bb14;                    // scope 0 at ui/mir/mir_codegen_critical_edge.rs:27:37: 27:38
+    }
+
+    bb8: {
+        _11 = const false;               // scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+        goto -> bb10;                    // scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+    }
+
+    bb9: {
+        _9 = &mut ((*_1).1: A);          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:33:29: 33:42
+        _0 = <A as Iterator>::next(move _9) -> bb10; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:33:29: 33:42
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:33:36: 33:40
+                                         // + literal: Const { ty: for<'a> fn(&'a mut A) -> Option<<A as Iterator>::Item> {<A as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        return;                          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:36:6: 36:6
+    }
+
+    bb11 (cleanup): {
+        drop(_3) -> bb12;                // scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+    }
+
+    bb12 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:24:5: 36:6
+    }
+
+    bb13: {
+        drop(_3) -> bb8;                 // scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+    }
+
+    bb14: {
+        switchInt(_11) -> [0: bb8, otherwise: bb13]; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:32:13: 32:14
+    }
+
+    bb15: {
+        goto -> bb14;                    // scope 0 at ui/mir/mir_codegen_critical_edge.rs:30:21: 30:34
+    }
+}
+
+fn do_stuff(_1: Foo<Box<dyn Iterator<Item = u32>>, Box<dyn Iterator<Item = u32>>>) -> () {
+    debug f => _1;                       // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:40:17: 40:22
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_codegen_critical_edge.rs:40:87: 40:87
+    let _2: std::option::Option<u32>;    // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:41:9: 41:11
+    let mut _3: &mut Foo<std::boxed::Box<dyn std::iter::Iterator<Item = u32>>, std::boxed::Box<dyn std::iter::Iterator<Item = u32>>>; // in scope 0 at ui/mir/mir_codegen_critical_edge.rs:41:14: 41:22
+    scope 1 {
+        debug _x => _2;                  // in scope 1 at ui/mir/mir_codegen_critical_edge.rs:41:9: 41:11
+    }
+
+    bb0: {
+        _3 = &mut _1;                    // scope 0 at ui/mir/mir_codegen_critical_edge.rs:41:14: 41:22
+        _2 = Foo::<Box<dyn Iterator<Item = u32>>, Box<dyn Iterator<Item = u32>>>::next(move _3) -> [return: bb1, unwind: bb3]; // scope 0 at ui/mir/mir_codegen_critical_edge.rs:41:14: 41:22
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_codegen_critical_edge.rs:41:16: 41:20
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo<Box<dyn Iterator<Item = u32>>, Box<dyn Iterator<Item = u32>>>) -> Option<<Box<dyn Iterator<Item = u32>> as Iterator>::Item> {Foo::<Box<dyn Iterator<Item = u32>>, Box<dyn Iterator<Item = u32>>>::next}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/mir/mir_codegen_critical_edge.rs:42:1: 42:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:42:2: 42:2
+    }
+
+    bb3 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/mir/mir_codegen_critical_edge.rs:42:1: 42:2
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:40:1: 42:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_codegen_critical_edge.rs:44:11: 44:11
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir_codegen_critical_edge.rs:44:13: 44:13
+    }
+}

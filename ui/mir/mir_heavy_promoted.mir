@@ -1,0 +1,156 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const TEST_DATA: [u8; 33554432] = {
+    let mut _0: [u8; 33554432];          // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:4:18: 4:40
+
+    bb0: {
+        _0 = [const 42_u8; 33554432];    // scope 0 at ui/mir/mir_heavy_promoted.rs:4:43: 4:65
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:4:1: 4:66
+    }
+}
+
+TEST_DATA::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+    let mut _1: usize;                   // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+    let mut _2: (usize, bool);           // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+    let mut _3: (usize, bool);           // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+        _2 = CheckedMul(const 32_usize, const 1024_usize); // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const 32_usize, const 1024_usize) -> bb1; // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+    }
+
+    bb1: {
+        _1 = move (_2.0: usize);         // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:32
+        _3 = CheckedMul(_1, const 1024_usize); // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 1024_usize) -> bb2; // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+    }
+
+    bb2: {
+        _0 = move (_3.0: usize);         // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+        StorageDead(_1);                 // scope 0 at ui/mir/mir_heavy_promoted.rs:4:38: 4:39
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:4:23: 4:39
+    }
+}
+
+TEST_DATA::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+    let mut _1: usize;                   // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+    let mut _2: (usize, bool);           // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+    let mut _3: (usize, bool);           // in scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+        _2 = CheckedMul(const 32_usize, const 1024_usize); // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const 32_usize, const 1024_usize) -> bb1; // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+    }
+
+    bb1: {
+        _1 = move (_2.0: usize);         // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:57
+        _3 = CheckedMul(_1, const 1024_usize); // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 1024_usize) -> bb2; // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+    }
+
+    bb2: {
+        _0 = move (_3.0: usize);         // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+        StorageDead(_1);                 // scope 0 at ui/mir/mir_heavy_promoted.rs:4:63: 4:64
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:4:48: 4:64
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:9:11: 9:11
+    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _3: &[&str];                 // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+    let mut _4: &[&str; 2];              // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+    let _5: &[&str; 2];                  // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _7: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _8: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _9: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _10: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _11: &usize;                 // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let _12: &usize;                     // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let _13: usize;                      // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _14: &[u8];                  // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _15: &[u8; 33554432];        // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _16: &[u8; 33554432];        // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _17: &[&str; 2];             // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+
+    bb0: {
+        _17 = const _;                   // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[1])) }
+        _5 = _17;                        // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+        _4 = _5;                         // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+        _16 = const _;                   // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+                                         // + literal: Const { ty: &[u8; 33554432], val: Unevaluated(main, [], Some(promoted[0])) }
+        _15 = _16;                       // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        _14 = move _15 as &[u8] (Pointer(Unsize)); // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        _13 = Len((*_14));               // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        _12 = &_13;                      // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        _11 = _12;                       // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        _10 = core::fmt::ArgumentV1::<'_>::new_display::<usize>(move _11) -> bb1; // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: for<'b> fn(&'b usize) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<usize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _9 = [move _10];                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _8 = &_9;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _1 = _print(move _2) -> bb3;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:11:2: 11:2
+    }
+}
+
+promoted[0] in main: &[u8; 33554432] = {
+    let mut _0: &[u8; 33554432];         // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    let mut _1: [u8; 33554432];          // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:29
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:29
+        _0 = &_1;                        // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:10:20: 10:35
+    }
+}
+
+promoted[1] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+    let mut _1: [&str; 2];               // in scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+
+    bb0: {
+        _1 = [const "", const "\n"];     // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+        return;                          // scope 0 at ui/mir/mir_heavy_promoted.rs:10:14: 10:18
+    }
+}

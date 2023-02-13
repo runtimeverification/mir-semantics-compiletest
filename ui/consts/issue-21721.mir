@@ -1,0 +1,69 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-21721.rs:3:11: 3:11
+    let _1: *const u8;                   // in scope 0 at ui/consts/issue-21721.rs:5:9: 5:12
+    let mut _2: *const *const u8;        // in scope 0 at ui/consts/issue-21721.rs:6:10: 6:49
+    let mut _3: *const std::option::Option<((), &u8)>; // in scope 0 at ui/consts/issue-21721.rs:6:11: 6:28
+    let mut _4: *const std::option::Option<((), &u8)>; // in scope 0 at ui/consts/issue-21721.rs:6:11: 6:28
+    let _5: &std::option::Option<((), &u8)>; // in scope 0 at ui/consts/issue-21721.rs:6:11: 6:16
+    let _6: &std::option::Option<((), &u8)>; // in scope 0 at ui/consts/issue-21721.rs:6:12: 6:16
+    let mut _7: bool;                    // in scope 0 at ui/consts/issue-21721.rs:8:5: 8:27
+    let mut _8: bool;                    // in scope 0 at ui/consts/issue-21721.rs:8:13: 8:26
+    let mut _9: *const u8;               // in scope 0 at ui/consts/issue-21721.rs:8:13: 8:16
+    let mut _10: !;                      // in scope 0 at ui/consts/issue-21721.rs:8:5: 8:27
+    scope 1 {
+        debug ptr => _1;                 // in scope 1 at ui/consts/issue-21721.rs:5:9: 5:12
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _6 = const {alloc1: &Option<((), &u8)>}; // scope 2 at ui/consts/issue-21721.rs:6:12: 6:16
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-21721.rs:6:12: 6:16
+                                         // + literal: Const { ty: &Option<((), &u8)>, val: Value(Scalar(alloc1)) }
+        _5 = _6;                         // scope 2 at ui/consts/issue-21721.rs:6:11: 6:16
+        _4 = &raw const (*_5);           // scope 2 at ui/consts/issue-21721.rs:6:11: 6:16
+        _3 = _4;                         // scope 2 at ui/consts/issue-21721.rs:6:11: 6:28
+        _2 = move _3 as *const *const u8 (PtrToPtr); // scope 2 at ui/consts/issue-21721.rs:6:10: 6:49
+        _1 = (*_2);                      // scope 2 at ui/consts/issue-21721.rs:6:9: 6:49
+        _9 = _1;                         // scope 1 at ui/consts/issue-21721.rs:8:13: 8:16
+        _8 = ptr::const_ptr::<impl *const u8>::is_null(move _9) -> bb1; // scope 1 at ui/consts/issue-21721.rs:8:13: 8:26
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-21721.rs:8:17: 8:24
+                                         // + literal: Const { ty: fn(*const u8) -> bool {ptr::const_ptr::<impl *const u8>::is_null}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _7 = Not(move _8);               // scope 1 at ui/consts/issue-21721.rs:8:5: 8:27
+        switchInt(move _7) -> [0: bb3, otherwise: bb2]; // scope 1 at ui/consts/issue-21721.rs:8:5: 8:27
+    }
+
+    bb2: {
+        _10 = core::panicking::panic(const "assertion failed: ptr.is_null()"); // scope 1 at ui/consts/issue-21721.rs:8:5: 8:27
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-21721.rs:8:5: 8:27
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/consts/issue-21721.rs:9:2: 9:2
+    }
+}
+
+alloc1 (static: NONE, size: 8, align: 8) {
+    00 00 00 00 00 00 00 00                         │ ........
+}
+
+static NONE: Option<((), &u8)> = {
+    let mut _0: std::option::Option<((), &u8)>; // return place in scope 0 at ui/consts/issue-21721.rs:4:18: 4:43
+
+    bb0: {
+        _0 = Option::<((), &u8)>::None;  // scope 0 at ui/consts/issue-21721.rs:4:46: 4:50
+        return;                          // scope 0 at ui/consts/issue-21721.rs:4:5: 4:51
+    }
+}

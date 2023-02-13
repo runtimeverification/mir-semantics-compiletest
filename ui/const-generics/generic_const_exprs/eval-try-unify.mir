@@ -1,0 +1,105 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const <impl at ui/const-generics/generic_const_exprs/eval-try-unify.rs:10:1: 10:20>::ASSOC: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:11:18: 11:23
+
+    bb0: {
+        _0 = const 17_usize;             // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:11:26: 11:28
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:11:5: 11:29
+    }
+}
+
+const <impl at ui/const-generics/generic_const_exprs/eval-try-unify.rs:13:1: 13:21>::ASSOC: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:14:18: 14:23
+
+    bb0: {
+        _0 = const 13_usize;             // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:14:26: 14:28
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:14:5: 14:29
+    }
+}
+
+fn uses_assoc_type() -> [u8; N + T::ASSOC] {
+    let mut _0: [u8; N + T::ASSOC];      // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:53: 18:71
+
+    bb0: {
+        _0 = [const 0_u8; N + T::ASSOC]; // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:5: 19:22
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:20:2: 20:2
+    }
+}
+
+uses_assoc_type::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+
+    bb0: {
+        _1 = CheckedAdd(const N, const _); // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const _) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:18:58: 18:70
+    }
+}
+
+uses_assoc_type::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+
+    bb0: {
+        _1 = CheckedAdd(const N, const _); // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const _) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:19:9: 19:21
+    }
+}
+
+fn only_generic_n() -> [u8; N + 13] {
+    let mut _0: [u8; N + 13];            // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:40: 22:52
+
+    bb0: {
+        _0 = uses_assoc_type::<u16, N>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:23:5: 23:32
+                                         // mir::Constant
+                                         // + span: ui/const-generics/generic_const_exprs/eval-try-unify.rs:23:5: 23:30
+                                         // + literal: Const { ty: fn() -> [u8; N + T::ASSOC] {uses_assoc_type::<u16, N>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:24:2: 24:2
+    }
+}
+
+only_generic_n::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+
+    bb0: {
+        _1 = CheckedAdd(const N, const 13_usize); // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 13_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:22:45: 22:51
+    }
+}
+
+only_generic_n::{constant#1}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:23:28: 23:29
+
+    bb0: {
+        _0 = const N;                    // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:23:28: 23:29
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:23:28: 23:29
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:26:11: 26:11
+
+    bb0: {
+        return;                          // scope 0 at ui/const-generics/generic_const_exprs/eval-try-unify.rs:26:13: 26:13
+    }
+}

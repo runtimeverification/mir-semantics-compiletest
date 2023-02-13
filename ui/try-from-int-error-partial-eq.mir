@@ -1,0 +1,56 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/try-from-int-error-partial-eq.rs:8:11: 8:11
+    let _1: u32;                         // in scope 0 at ui/try-from-int-error-partial-eq.rs:9:9: 9:10
+    let mut _3: u32;                     // in scope 0 at ui/try-from-int-error-partial-eq.rs:10:55: 10:56
+    let _4: bool;                        // in scope 0 at ui/try-from-int-error-partial-eq.rs:11:5: 11:17
+    let mut _5: &std::result::Result<u8, std::num::TryFromIntError>; // in scope 0 at ui/try-from-int-error-partial-eq.rs:11:5: 11:6
+    let mut _6: &std::result::Result<u8, std::num::TryFromIntError>; // in scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/try-from-int-error-partial-eq.rs:9:9: 9:10
+        let _2: std::result::Result<u8, std::num::TryFromIntError>; // in scope 1 at ui/try-from-int-error-partial-eq.rs:10:9: 10:10
+        scope 2 {
+            debug y => _2;               // in scope 2 at ui/try-from-int-error-partial-eq.rs:10:9: 10:10
+            let mut _7: &std::result::Result<u8, std::num::TryFromIntError>; // in scope 2 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+        }
+    }
+
+    bb0: {
+        _1 = const 125_u32;              // scope 0 at ui/try-from-int-error-partial-eq.rs:9:18: 9:21
+        _3 = const 125_u32;              // scope 1 at ui/try-from-int-error-partial-eq.rs:10:55: 10:56
+        _2 = <u8 as TryFrom<u32>>::try_from(move _3) -> bb1; // scope 1 at ui/try-from-int-error-partial-eq.rs:10:42: 10:57
+                                         // mir::Constant
+                                         // + span: ui/try-from-int-error-partial-eq.rs:10:42: 10:54
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(u32) -> Result<u8, <u8 as TryFrom<u32>>::Error> {<u8 as TryFrom<u32>>::try_from}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = &_2;                        // scope 2 at ui/try-from-int-error-partial-eq.rs:11:5: 11:6
+        _7 = const _;                    // scope 2 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+                                         // mir::Constant
+                                         // + span: ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+                                         // + literal: Const { ty: &Result<u8, TryFromIntError>, val: Unevaluated(main, [], Some(promoted[0])) }
+        _6 = _7;                         // scope 2 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+        _4 = <Result<u8, TryFromIntError> as PartialEq>::eq(move _5, move _6) -> bb2; // scope 2 at ui/try-from-int-error-partial-eq.rs:11:5: 11:17
+                                         // mir::Constant
+                                         // + span: ui/try-from-int-error-partial-eq.rs:11:5: 11:17
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Result<u8, TryFromIntError>, &'b Result<u8, TryFromIntError>) -> bool {<Result<u8, TryFromIntError> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/try-from-int-error-partial-eq.rs:12:2: 12:2
+    }
+}
+
+promoted[0] in main: &Result<u8, TryFromIntError> = {
+    let mut _0: &std::result::Result<u8, std::num::TryFromIntError>; // return place in scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+    let mut _1: std::result::Result<u8, std::num::TryFromIntError>; // in scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+
+    bb0: {
+        _1 = Result::<u8, TryFromIntError>::Ok(const 125_u8); // scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+        _0 = &_1;                        // scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+        return;                          // scope 0 at ui/try-from-int-error-partial-eq.rs:11:10: 11:17
+    }
+}

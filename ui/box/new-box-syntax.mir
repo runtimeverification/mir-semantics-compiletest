@@ -1,0 +1,95 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/box/new-box-syntax.rs:18:15: 18:15
+    let _1: std::boxed::Box<isize>;      // in scope 0 at ui/box/new-box-syntax.rs:19:9: 19:10
+    let mut _3: isize;                   // in scope 0 at ui/box/new-box-syntax.rs:20:34: 20:39
+    let mut _5: i32;                     // in scope 0 at ui/box/new-box-syntax.rs:21:22: 21:27
+    let mut _7: Structure;               // in scope 0 at ui/box/new-box-syntax.rs:23:38: 26:6
+    scope 1 {
+        debug y => _1;                   // in scope 1 at ui/box/new-box-syntax.rs:19:9: 19:10
+        let _2: std::boxed::Box<isize>;  // in scope 1 at ui/box/new-box-syntax.rs:20:9: 20:10
+        scope 2 {
+            debug b => _2;               // in scope 2 at ui/box/new-box-syntax.rs:20:9: 20:10
+            let _4: std::boxed::Box<i32>; // in scope 2 at ui/box/new-box-syntax.rs:21:9: 21:10
+            scope 3 {
+                debug c => _4;           // in scope 3 at ui/box/new-box-syntax.rs:21:9: 21:10
+                let _6: std::boxed::Box<Structure>; // in scope 3 at ui/box/new-box-syntax.rs:23:9: 23:10
+                scope 4 {
+                    debug s => _6;       // in scope 4 at ui/box/new-box-syntax.rs:23:9: 23:10
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = Box::<isize>::new(const 2_isize) -> bb1; // scope 0 at ui/box/new-box-syntax.rs:19:25: 19:36
+                                         // mir::Constant
+                                         // + span: ui/box/new-box-syntax.rs:19:25: 19:33
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = const 3_isize;              // scope 1 at ui/box/new-box-syntax.rs:20:34: 20:39
+        _2 = Box::<isize>::new(move _3) -> [return: bb2, unwind: bb11]; // scope 1 at ui/box/new-box-syntax.rs:20:25: 20:40
+                                         // mir::Constant
+                                         // + span: ui/box/new-box-syntax.rs:20:25: 20:33
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = const 7_i32;                // scope 2 at ui/box/new-box-syntax.rs:21:22: 21:27
+        _4 = Box::<i32>::new(move _5) -> [return: bb3, unwind: bb10]; // scope 2 at ui/box/new-box-syntax.rs:21:13: 21:28
+                                         // mir::Constant
+                                         // + span: ui/box/new-box-syntax.rs:21:13: 21:21
+                                         // + user_ty: UserType(6)
+                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _7 = Structure { x: const 3_isize, y: const 4_isize }; // scope 3 at ui/box/new-box-syntax.rs:23:38: 26:6
+        _6 = Box::<Structure>::new(move _7) -> [return: bb4, unwind: bb9]; // scope 3 at ui/box/new-box-syntax.rs:23:29: 26:7
+                                         // mir::Constant
+                                         // + span: ui/box/new-box-syntax.rs:23:29: 23:37
+                                         // + user_ty: UserType(8)
+                                         // + literal: Const { ty: fn(Structure) -> Box<Structure> {Box::<Structure>::new}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_6) -> [return: bb5, unwind: bb9]; // scope 3 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb5: {
+        drop(_4) -> [return: bb6, unwind: bb10]; // scope 2 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb6: {
+        drop(_2) -> [return: bb7, unwind: bb11]; // scope 1 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb7: {
+        drop(_1) -> bb8;                 // scope 0 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb8: {
+        return;                          // scope 0 at ui/box/new-box-syntax.rs:27:2: 27:2
+    }
+
+    bb9 (cleanup): {
+        drop(_4) -> bb10;                // scope 2 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb10 (cleanup): {
+        drop(_2) -> bb11;                // scope 1 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb11 (cleanup): {
+        drop(_1) -> bb12;                // scope 0 at ui/box/new-box-syntax.rs:27:1: 27:2
+    }
+
+    bb12 (cleanup): {
+        resume;                          // scope 0 at ui/box/new-box-syntax.rs:18:1: 27:2
+    }
+}

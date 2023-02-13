@@ -1,0 +1,118 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/dropck/cleanup-arm-conditional.rs:16:1: 16:10>::get_x(_1: &Test) -> Option<Box<isize>> {
+    debug self => _1;                    // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:17:14: 17:19
+    let mut _0: std::option::Option<std::boxed::Box<isize>>; // return place in scope 0 at ui/dropck/cleanup-arm-conditional.rs:17:24: 17:42
+    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:18:14: 18:30
+    let mut _3: isize;                   // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:18:23: 18:29
+
+    bb0: {
+        _3 = ((*_1).0: isize);           // scope 0 at ui/dropck/cleanup-arm-conditional.rs:18:23: 18:29
+        _2 = Box::<isize>::new(move _3) -> bb1; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:18:14: 18:30
+                                         // mir::Constant
+                                         // + span: ui/dropck/cleanup-arm-conditional.rs:18:14: 18:22
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = Option::<Box<isize>>::Some(move _2); // scope 0 at ui/dropck/cleanup-arm-conditional.rs:18:9: 18:31
+        return;                          // scope 0 at ui/dropck/cleanup-arm-conditional.rs:19:6: 19:6
+    }
+}
+
+fn do_something(_1: &Test) -> isize {
+    debug t => _1;                       // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:22:17: 22:18
+    let mut _0: isize;                   // return place in scope 0 at ui/dropck/cleanup-arm-conditional.rs:22:30: 22:35
+    let mut _2: bool;                    // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:46
+    let mut _3: &std::option::Option<std::boxed::Box<isize>>; // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:46
+    let _4: std::option::Option<std::boxed::Box<isize>>; // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:36
+    let mut _5: &Test;                   // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:36
+    let mut _6: isize;                   // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:16
+    let mut _7: (isize, bool);           // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:20
+
+    bb0: {
+        switchInt(((*_1).0: isize)) -> [2: bb2, otherwise: bb1]; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:28:5: 28:12
+    }
+
+    bb1: {
+        _0 = const 22_isize;             // scope 0 at ui/dropck/cleanup-arm-conditional.rs:32:16: 32:18
+        goto -> bb9;                     // scope 0 at ui/dropck/cleanup-arm-conditional.rs:32:16: 32:18
+    }
+
+    bb2: {
+        _5 = _1;                         // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:36
+        _4 = Test::get_x(move _5) -> bb3; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:36
+                                         // mir::Constant
+                                         // + span: ui/dropck/cleanup-arm-conditional.rs:29:29: 29:34
+                                         // + literal: Const { ty: for<'a> fn(&'a Test) -> Option<Box<isize>> {Test::get_x}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _3 = &_4;                        // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:46
+        _2 = Option::<Box<isize>>::is_some(move _3) -> [return: bb4, unwind: bb10]; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:46
+                                         // mir::Constant
+                                         // + span: ui/dropck/cleanup-arm-conditional.rs:29:37: 29:44
+                                         // + literal: Const { ty: for<'a> fn(&'a Option<Box<isize>>) -> bool {Option::<Box<isize>>::is_some}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        switchInt(move _2) -> [0: bb7, otherwise: bb5]; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:27: 29:46
+    }
+
+    bb5: {
+        drop(_4) -> bb6;                 // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:45: 29:46
+    }
+
+    bb6: {
+        _6 = ((*_1).0: isize);           // scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:16
+        _7 = CheckedMul(_6, const 2_isize); // scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:20
+        assert(!move (_7.1: bool), "attempt to compute `{} * {}`, which would overflow", move _6, const 2_isize) -> bb8; // scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:20
+    }
+
+    bb7: {
+        drop(_4) -> bb1;                 // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:45: 29:46
+    }
+
+    bb8: {
+        _0 = move (_7.0: isize);         // scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:13: 30:20
+        goto -> bb9;                     // scope 0 at ui/dropck/cleanup-arm-conditional.rs:30:19: 30:20
+    }
+
+    bb9: {
+        return;                          // scope 0 at ui/dropck/cleanup-arm-conditional.rs:34:2: 34:2
+    }
+
+    bb10 (cleanup): {
+        drop(_4) -> bb11;                // scope 0 at ui/dropck/cleanup-arm-conditional.rs:29:45: 29:46
+    }
+
+    bb11 (cleanup): {
+        resume;                          // scope 0 at ui/dropck/cleanup-arm-conditional.rs:22:1: 34:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/dropck/cleanup-arm-conditional.rs:36:15: 36:15
+    let _1: Test;                        // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:37:9: 37:10
+    let _2: isize;                       // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:38:5: 38:21
+    let mut _3: &Test;                   // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:38:18: 38:20
+    let _4: &Test;                       // in scope 0 at ui/dropck/cleanup-arm-conditional.rs:38:18: 38:20
+    scope 1 {
+        debug t => _1;                   // in scope 1 at ui/dropck/cleanup-arm-conditional.rs:37:9: 37:10
+    }
+
+    bb0: {
+        _1 = Test { x: const 1_isize };  // scope 0 at ui/dropck/cleanup-arm-conditional.rs:37:13: 37:26
+        _4 = &_1;                        // scope 1 at ui/dropck/cleanup-arm-conditional.rs:38:18: 38:20
+        _3 = _4;                         // scope 1 at ui/dropck/cleanup-arm-conditional.rs:38:18: 38:20
+        _2 = do_something(move _3) -> bb1; // scope 1 at ui/dropck/cleanup-arm-conditional.rs:38:5: 38:21
+                                         // mir::Constant
+                                         // + span: ui/dropck/cleanup-arm-conditional.rs:38:5: 38:17
+                                         // + literal: Const { ty: for<'a> fn(&'a Test) -> isize {do_something}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/dropck/cleanup-arm-conditional.rs:39:2: 39:2
+    }
+}

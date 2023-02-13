@@ -1,0 +1,137 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn match_ref(_1: Option<isize>) -> isize {
+    debug v => _1;                       // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:5:14: 5:15
+    let mut _0: isize;                   // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:5:35: 5:40
+    let mut _2: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:7:7: 7:18
+    let _3: &isize;                      // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:7:12: 7:17
+    scope 1 {
+        debug i => _3;                   // in scope 1 at ui/borrowck/borrowck-pat-enum.rs:7:12: 7:17
+    }
+
+    bb0: {
+        _2 = discriminant(_1);           // scope 0 at ui/borrowck/borrowck-pat-enum.rs:6:11: 6:12
+        switchInt(move _2) -> [0: bb1, 1: bb3, otherwise: bb2]; // scope 0 at ui/borrowck/borrowck-pat-enum.rs:6:5: 6:12
+    }
+
+    bb1: {
+        _0 = const 0_isize;              // scope 0 at ui/borrowck/borrowck-pat-enum.rs:10:16: 10:17
+        goto -> bb4;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:10:16: 10:17
+    }
+
+    bb2: {
+        unreachable;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:6:11: 6:12
+    }
+
+    bb3: {
+        _3 = &((_1 as Some).0: isize);   // scope 0 at ui/borrowck/borrowck-pat-enum.rs:7:12: 7:17
+        _0 = (*_3);                      // scope 1 at ui/borrowck/borrowck-pat-enum.rs:8:9: 8:11
+        goto -> bb4;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:9:7: 9:8
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:12:2: 12:2
+    }
+}
+
+fn match_ref_unused(_1: Option<isize>) -> () {
+    debug v => _1;                       // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:14:21: 14:22
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:14:39: 14:39
+    let mut _2: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:16:7: 16:14
+
+    bb0: {
+        _2 = discriminant(_1);           // scope 0 at ui/borrowck/borrowck-pat-enum.rs:15:11: 15:12
+        switchInt(move _2) -> [0: bb2, 1: bb2, otherwise: bb1]; // scope 0 at ui/borrowck/borrowck-pat-enum.rs:15:5: 15:12
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:15:11: 15:12
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:19:2: 19:2
+    }
+}
+
+fn impure(_1: isize) -> () {
+    debug _i => _1;                      // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:21:11: 21:13
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:21:22: 21:22
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:22:2: 22:2
+    }
+}
+
+fn match_imm_reg(_1: &Option<isize>) -> () {
+    debug v => _1;                       // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:24:18: 24:19
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:24:37: 24:37
+    let mut _2: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:26:7: 26:18
+    let _3: &isize;                      // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:26:12: 26:17
+    let mut _4: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:26:30: 26:32
+    scope 1 {
+        debug i => _3;                   // in scope 1 at ui/borrowck/borrowck-pat-enum.rs:26:12: 26:17
+    }
+
+    bb0: {
+        _2 = discriminant((*_1));        // scope 0 at ui/borrowck/borrowck-pat-enum.rs:25:11: 25:13
+        switchInt(move _2) -> [0: bb3, 1: bb2, otherwise: bb1]; // scope 0 at ui/borrowck/borrowck-pat-enum.rs:25:5: 25:13
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:25:11: 25:13
+    }
+
+    bb2: {
+        _3 = &(((*_1) as Some).0: isize); // scope 0 at ui/borrowck/borrowck-pat-enum.rs:26:12: 26:17
+        _4 = (*_3);                      // scope 1 at ui/borrowck/borrowck-pat-enum.rs:26:30: 26:32
+        _0 = impure(move _4) -> bb3;     // scope 1 at ui/borrowck/borrowck-pat-enum.rs:26:23: 26:33
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-pat-enum.rs:26:23: 26:29
+                                         // + literal: Const { ty: fn(isize) {impure}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:29:2: 29:2
+    }
+}
+
+fn match_mut_reg(_1: &mut Option<isize>) -> () {
+    debug v => _1;                       // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:31:18: 31:19
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:31:41: 31:41
+    let mut _2: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:33:7: 33:18
+    let _3: &isize;                      // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:33:12: 33:17
+    let mut _4: isize;                   // in scope 0 at ui/borrowck/borrowck-pat-enum.rs:33:30: 33:32
+    scope 1 {
+        debug i => _3;                   // in scope 1 at ui/borrowck/borrowck-pat-enum.rs:33:12: 33:17
+    }
+
+    bb0: {
+        _2 = discriminant((*_1));        // scope 0 at ui/borrowck/borrowck-pat-enum.rs:32:11: 32:13
+        switchInt(move _2) -> [0: bb3, 1: bb2, otherwise: bb1]; // scope 0 at ui/borrowck/borrowck-pat-enum.rs:32:5: 32:13
+    }
+
+    bb1: {
+        unreachable;                     // scope 0 at ui/borrowck/borrowck-pat-enum.rs:32:11: 32:13
+    }
+
+    bb2: {
+        _3 = &(((*_1) as Some).0: isize); // scope 0 at ui/borrowck/borrowck-pat-enum.rs:33:12: 33:17
+        _4 = (*_3);                      // scope 1 at ui/borrowck/borrowck-pat-enum.rs:33:30: 33:32
+        _0 = impure(move _4) -> bb3;     // scope 1 at ui/borrowck/borrowck-pat-enum.rs:33:23: 33:33
+                                         // mir::Constant
+                                         // + span: ui/borrowck/borrowck-pat-enum.rs:33:23: 33:29
+                                         // + literal: Const { ty: fn(isize) {impure}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:36:2: 36:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-pat-enum.rs:38:15: 38:15
+
+    bb0: {
+        return;                          // scope 0 at ui/borrowck/borrowck-pat-enum.rs:39:2: 39:2
+    }
+}

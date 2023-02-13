@@ -1,0 +1,51 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:3:11: 3:11
+
+    bb0: {
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:3:13: 3:13
+    }
+}
+
+fn nth(_1: &mut I, _2: usize) -> impl FnMut() -> Option<<I as Iterator>::Item> + '_ {
+    debug iter => _1;                    // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:5:21: 5:25
+    debug step => _2;                    // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:5:35: 5:39
+    let mut _0: impl FnMut() -> std::option::Option<<I as std::iter::Iterator>::Item> + '_; // return place in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:5:51: 5:87
+
+    bb0: {
+        _0 = [closure@ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:5: 6:12] { iter: move _1, step: _2 }; // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:5: 6:27
+                                         // closure
+                                         // + def_id: DefId(0:6 ~ lifetime_inference[d2cd]::nth::{closure#0})
+                                         // + substs: [
+                                         //     I,
+                                         //     i16,
+                                         //     extern "rust-call" fn(()) -> std::option::Option<<I as std::iter::Iterator>::Item>,
+                                         //     (&mut I, usize),
+                                         // ]
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:7:2: 7:2
+    }
+}
+
+fn nth::{closure#0}(_1: &mut [closure@ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:5: 6:12]) -> Option<<I as Iterator>::Item> {
+    debug iter => ((*_1).0: &mut I);     // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:5:21: 5:25
+    debug step => ((*_1).1: usize);      // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:5:35: 5:39
+    let mut _0: std::option::Option<<I as std::iter::Iterator>::Item>; // return place in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:13: 6:13
+    let mut _2: &mut I;                  // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:13: 6:27
+    let mut _3: usize;                   // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:22: 6:26
+    let mut _4: &mut I;                  // in scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:5: 6:27
+
+    bb0: {
+        _4 = deref_copy ((*_1).0: &mut I); // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:13: 6:27
+        _2 = &mut (*_4);                 // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:13: 6:27
+        _3 = ((*_1).1: usize);           // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:22: 6:26
+        _0 = <I as Iterator>::nth(move _2, move _3) -> bb1; // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:13: 6:27
+                                         // mir::Constant
+                                         // + span: ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:18: 6:21
+                                         // + literal: Const { ty: for<'a> fn(&'a mut I, usize) -> Option<<I as Iterator>::Item> {<I as Iterator>::nth}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/lifetime_inference.rs:6:27: 6:27
+    }
+}

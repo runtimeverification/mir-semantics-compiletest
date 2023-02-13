@@ -1,0 +1,115 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:9:1: 9:9>::baz(_1: Foo, _2: Baz) -> Baz {
+    debug self => _1;                    // in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:10:16: 10:20
+    debug v => _2;                       // in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:10:22: 10:23
+    let mut _0: Baz;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:10:33: 10:36
+    let mut _3: [closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12]; // in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:9: 11:15
+    let mut _4: ();                      // in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:9: 11:17
+
+    bb0: {
+        _3 = [closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12] { v: move _2 }; // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:9: 11:15
+                                         // closure
+                                         // + def_id: DefId(0:14 ~ issue_92724_needsdrop_query_cycle[eebe]::{impl#0}::baz::{closure#0})
+                                         // + substs: [
+                                         //     i32,
+                                         //     extern "rust-call" fn(()) -> Baz,
+                                         //     (Baz,),
+                                         // ]
+        _0 = <[closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12] as FnOnce<()>>::call_once(move _3, move _4) -> [return: bb1, unwind: bb3]; // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:9: 11:17
+                                         // mir::Constant
+                                         // + span: ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:9: 11:15
+                                         // + literal: Const { ty: extern "rust-call" fn([closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12], ()) -> <[closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12] as FnOnce<()>>::Output {<[closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12] as FnOnce<()>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:12:5: 12:6
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:12:6: 12:6
+    }
+
+    bb3 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:12:5: 12:6
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:10:5: 12:6
+    }
+}
+
+fn <impl at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:9:1: 9:9>::baz::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:10: 11:12]) -> Baz {
+    debug v => (_1.0: Baz);              // in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:10:22: 10:23
+    let mut _0: Baz;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:13: 11:13
+
+    bb0: {
+        _0 = move (_1.0: Baz);           // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:13: 11:14
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:11:15: 11:15
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:14:11: 14:11
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:14:13: 14:13
+    }
+}
+
+fn Foo(_1: Bar) -> Foo {
+    let mut _0: Foo;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+
+    bb0: {
+        _0 = Foo(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: Bar) -> Foo {
+    let mut _0: Foo;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+
+    bb0: {
+        _0 = Foo(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:5:1: 5:15
+    }
+}
+
+fn Bar(_1: Baz) -> Bar {
+    let mut _0: Bar;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+
+    bb0: {
+        _0 = Bar(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+    }
+}
+
+// MIR FOR CTFE
+fn Bar(_1: Baz) -> Bar {
+    let mut _0: Bar;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+
+    bb0: {
+        _0 = Bar(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:6:1: 6:15
+    }
+}
+
+fn Baz(_1: Vec<Foo>) -> Baz {
+    let mut _0: Baz;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+
+    bb0: {
+        _0 = Baz(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+    }
+}
+
+// MIR FOR CTFE
+fn Baz(_1: Vec<Foo>) -> Baz {
+    let mut _0: Baz;                     // return place in scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+
+    bb0: {
+        _0 = Baz(move _1);               // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+        return;                          // scope 0 at ui/closures/2229_closure_analysis/issue-92724-needsdrop-query-cycle.rs:7:1: 7:15
+    }
+}

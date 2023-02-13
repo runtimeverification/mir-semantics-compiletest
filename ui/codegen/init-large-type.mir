@@ -1,0 +1,75 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const SIZE: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/codegen/init-large-type.rs:16:13: 16:18
+    let mut _1: (usize, bool);           // in scope 0 at ui/codegen/init-large-type.rs:16:21: 16:32
+
+    bb0: {
+        _1 = CheckedMul(const 1024_usize, const 1024_usize); // scope 0 at ui/codegen/init-large-type.rs:16:21: 16:32
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1024_usize, const 1024_usize) -> bb1; // scope 0 at ui/codegen/init-large-type.rs:16:21: 16:32
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/codegen/init-large-type.rs:16:21: 16:32
+        return;                          // scope 0 at ui/codegen/init-large-type.rs:16:1: 16:33
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/codegen/init-large-type.rs:18:11: 18:11
+    let _1: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/codegen/init-large-type.rs:20:5: 22:14
+    let mut _2: std::thread::JoinHandle<()>; // in scope 0 at ui/codegen/init-large-type.rs:20:5: 22:7
+    let mut _3: [closure@ui/codegen/init-large-type.rs:20:19: 20:21]; // in scope 0 at ui/codegen/init-large-type.rs:20:19: 22:6
+
+    bb0: {
+        _2 = spawn::<[closure@ui/codegen/init-large-type.rs:20:19: 20:21], ()>(move _3) -> bb1; // scope 0 at ui/codegen/init-large-type.rs:20:5: 22:7
+                                         // mir::Constant
+                                         // + span: ui/codegen/init-large-type.rs:20:5: 20:18
+                                         // + literal: Const { ty: fn([closure@ui/codegen/init-large-type.rs:20:19: 20:21]) -> JoinHandle<()> {spawn::<[closure@ui/codegen/init-large-type.rs:20:19: 20:21], ()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = JoinHandle::<()>::join(move _2) -> bb2; // scope 0 at ui/codegen/init-large-type.rs:20:5: 22:14
+                                         // mir::Constant
+                                         // + span: ui/codegen/init-large-type.rs:22:8: 22:12
+                                         // + literal: Const { ty: fn(JoinHandle<()>) -> Result<(), Box<(dyn Any + Send + 'static)>> {JoinHandle::<()>::join}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        drop(_1) -> bb3;                 // scope 0 at ui/codegen/init-large-type.rs:22:14: 22:15
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/codegen/init-large-type.rs:23:2: 23:2
+    }
+}
+
+fn main::{closure#0}(_1: [closure@ui/codegen/init-large-type.rs:20:19: 20:21]) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/codegen/init-large-type.rs:20:22: 20:22
+    let _2: [u8; 1048576];               // in scope 0 at ui/codegen/init-large-type.rs:21:13: 21:20
+    scope 1 {
+        debug _memory => _2;             // in scope 1 at ui/codegen/init-large-type.rs:21:13: 21:20
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _2 = zeroed::<[u8; 1048576]>() -> bb1; // scope 2 at ui/codegen/init-large-type.rs:21:44: 21:57
+                                         // mir::Constant
+                                         // + span: ui/codegen/init-large-type.rs:21:44: 21:55
+                                         // + literal: Const { ty: unsafe fn() -> [u8; 1048576] {zeroed::<[u8; 1048576]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/codegen/init-large-type.rs:22:6: 22:6
+    }
+}
+
+main::{closure#0}::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/codegen/init-large-type.rs:21:27: 21:31
+
+    bb0: {
+        _0 = const _;                    // scope 0 at ui/codegen/init-large-type.rs:21:27: 21:31
+        return;                          // scope 0 at ui/codegen/init-large-type.rs:21:27: 21:31
+    }
+}

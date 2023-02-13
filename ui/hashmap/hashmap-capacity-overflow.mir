@@ -1,0 +1,72 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:8:11: 8:11
+    let _1: usize;                       // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:9: 9:18
+    let mut _2: usize;                   // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:34: 9:62
+    let mut _3: bool;                    // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:21: 9:62
+    let mut _5: usize;                   // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:67
+    let mut _6: usize;                   // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:61
+    let mut _7: (usize, bool);           // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:67
+    let _8: std::option::Option<u64>;    // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:11:5: 11:19
+    let mut _9: &mut std::collections::HashMap<u64, u64>; // in scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:11:5: 11:19
+    scope 1 {
+        debug threshold => _1;           // in scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:9:9: 9:18
+        let mut _4: std::collections::HashMap<u64, u64>; // in scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:9: 10:14
+        scope 2 {
+            debug h => _4;               // in scope 2 at ui/hashmap/hashmap-capacity-overflow.rs:10:9: 10:14
+        }
+    }
+
+    bb0: {
+        _2 = std::mem::size_of::<(u64, u64, u64)>() -> bb1; // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:34: 9:62
+                                         // mir::Constant
+                                         // + span: ui/hashmap/hashmap-capacity-overflow.rs:9:34: 9:60
+                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<(u64, u64, u64)>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = Eq(_2, const 0_usize);      // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:21: 9:62
+        assert(!move _3, "attempt to divide `{}` by zero", const _) -> bb2; // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:21: 9:62
+    }
+
+    bb2: {
+        _1 = Div(const _, move _2);      // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:9:21: 9:62
+        _6 = _1;                         // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:61
+        _7 = CheckedAdd(_6, const 100_usize); // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:67
+        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", move _6, const 100_usize) -> bb3; // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:67
+    }
+
+    bb3: {
+        _5 = move (_7.0: usize);         // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:52: 10:67
+        _4 = HashMap::<u64, u64>::with_capacity(move _5) -> bb4; // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:10:17: 10:68
+                                         // mir::Constant
+                                         // + span: ui/hashmap/hashmap-capacity-overflow.rs:10:17: 10:51
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(usize) -> HashMap<u64, u64> {HashMap::<u64, u64>::with_capacity}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _9 = &mut _4;                    // scope 2 at ui/hashmap/hashmap-capacity-overflow.rs:11:5: 11:19
+        _8 = HashMap::<u64, u64>::insert(move _9, const 0_u64, const 0_u64) -> [return: bb5, unwind: bb7]; // scope 2 at ui/hashmap/hashmap-capacity-overflow.rs:11:5: 11:19
+                                         // mir::Constant
+                                         // + span: ui/hashmap/hashmap-capacity-overflow.rs:11:7: 11:13
+                                         // + literal: Const { ty: for<'a> fn(&'a mut HashMap<u64, u64>, u64, u64) -> Option<u64> {HashMap::<u64, u64>::insert}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        drop(_4) -> bb6;                 // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:12:1: 12:2
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:12:2: 12:2
+    }
+
+    bb7 (cleanup): {
+        drop(_4) -> bb8;                 // scope 1 at ui/hashmap/hashmap-capacity-overflow.rs:12:1: 12:2
+    }
+
+    bb8 (cleanup): {
+        resume;                          // scope 0 at ui/hashmap/hashmap-capacity-overflow.rs:8:1: 12:2
+    }
+}

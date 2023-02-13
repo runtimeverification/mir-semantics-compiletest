@@ -1,0 +1,30 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn do_call(_1: *mut Params<F, R>) -> () {
+    debug params => _1;                  // in scope 0 at ui/union/issue-99375.rs:13:36: 13:42
+    let mut _0: ();                      // return place in scope 0 at ui/union/issue-99375.rs:14:1: 14:1
+    let mut _2: R;                       // in scope 0 at ui/union/issue-99375.rs:18:29: 18:51
+    let mut _3: &F;                      // in scope 0 at ui/union/issue-99375.rs:18:29: 18:49
+    let mut _4: ();                      // in scope 0 at ui/union/issue-99375.rs:18:29: 18:51
+
+    bb0: {
+        _3 = &((*_1).0: F);              // scope 0 at ui/union/issue-99375.rs:18:29: 18:49
+        _2 = <F as Fn<()>>::call(move _3, move _4) -> bb1; // scope 0 at ui/union/issue-99375.rs:18:29: 18:51
+                                         // mir::Constant
+                                         // + span: ui/union/issue-99375.rs:18:29: 18:49
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a F, ()) -> <F as FnOnce<()>>::Output {<F as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        (((*_1).1: URes<R>).1: R) = move _2; // scope 0 at ui/union/issue-99375.rs:18:5: 18:51
+        return;                          // scope 0 at ui/union/issue-99375.rs:19:2: 19:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/union/issue-99375.rs:21:11: 21:11
+
+    bb0: {
+        return;                          // scope 0 at ui/union/issue-99375.rs:21:13: 21:13
+    }
+}

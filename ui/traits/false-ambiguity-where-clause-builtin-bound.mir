@@ -1,0 +1,37 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: Option<K>) -> () {
+    debug x => _1;                       // in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:8:11: 8:12
+    let mut _0: ();                      // return place in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:9:5: 9:5
+    let _2: std::option::Option<K>;      // in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:11:9: 11:11
+    scope 1 {
+        debug _y => _2;                  // in scope 1 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:11:9: 11:11
+    }
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:11:14: 11:15
+        drop(_2) -> bb1;                 // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:12:1: 12:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:12:2: 12:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:14:11: 14:11
+    let _1: ();                          // in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:15:5: 15:18
+    let mut _2: std::option::Option<i32>; // in scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:15:9: 15:17
+
+    bb0: {
+        _2 = Option::<i32>::Some(const 22_i32); // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:15:9: 15:17
+        _1 = foo::<i32>(move _2) -> bb1; // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:15:5: 15:18
+                                         // mir::Constant
+                                         // + span: ui/traits/false-ambiguity-where-clause-builtin-bound.rs:15:5: 15:8
+                                         // + literal: Const { ty: fn(Option<i32>) {foo::<i32>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/false-ambiguity-where-clause-builtin-bound.rs:16:2: 16:2
+    }
+}

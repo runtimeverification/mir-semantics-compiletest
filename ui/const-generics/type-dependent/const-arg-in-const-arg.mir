@@ -1,0 +1,196 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:8:1: 8:9>::foo(_1: &Foo) -> usize {
+    debug self => _1;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:9:28: 9:33
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:9:38: 9:43
+    let _2: &Foo;                        // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:10:13: 10:14
+    let mut _3: usize;                   // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:13
+    let mut _4: &Foo;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:13
+    let mut _5: (usize, bool);           // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:17
+    scope 1 {
+        debug f => _2;                   // in scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:10:13: 10:14
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:10:17: 10:21
+        _4 = _2;                         // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:13
+        _3 = Foo::bar::<7>(move _4) -> bb1; // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:13
+                                         // mir::Constant
+                                         // + span: ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:11: 11:14
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: for<'a> fn(&'a Foo) -> usize {Foo::bar::<7>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = CheckedAdd(_3, const N);    // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:17
+        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, const N) -> bb2; // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:17
+    }
+
+    bb2: {
+        _0 = move (_5.0: usize);         // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:9: 14:17
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:15:6: 15:6
+    }
+}
+
+<impl at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:8:1: 8:9>::foo::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:17: 14:10
+    let _1: Foo;                         // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:12:17: 12:18
+    let mut _2: &Foo;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:13: 13:25
+    scope 1 {
+        debug f => _1;                   // in scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:12:17: 12:18
+    }
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:12:17: 12:18
+        _1 = Foo;                        // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:12:21: 12:24
+        StorageLive(_2);                 // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:13: 13:25
+        _2 = &_1;                        // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:13: 13:25
+        ConstEvalCounter;                // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:13: 13:25
+        _0 = Foo::bar::<7>(move _2) -> bb1; // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:13: 13:25
+                                         // mir::Constant
+                                         // + span: ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:15: 13:18
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: for<'a> fn(&'a Foo) -> usize {Foo::bar::<7>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        StorageDead(_2);                 // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:24: 13:25
+        StorageDead(_1);                 // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:14:9: 14:10
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:11:17: 14:10
+    }
+}
+
+<impl at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:8:1: 8:9>::foo::{constant#0}::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:21: 13:22
+
+    bb0: {
+        _0 = const 7_usize;              // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:21: 13:22
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:13:21: 13:22
+    }
+}
+
+fn <impl at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:8:1: 8:9>::bar(_1: &Foo) -> usize {
+    debug self => _1;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:17:34: 17:39
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:17:44: 17:49
+
+    bb0: {
+        _0 = const M;                    // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:18:9: 18:10
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:19:6: 19:6
+    }
+}
+
+// MIR FOR CTFE
+fn <impl at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:8:1: 8:9>::bar(_1: &Foo) -> usize {
+    debug self => _1;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:17:34: 17:39
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:17:44: 17:49
+
+    bb0: {
+        _0 = const M;                    // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:18:9: 18:10
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:19:6: 19:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:22:11: 22:11
+    let _1: Foo;                         // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:23:9: 23:10
+    let mut _2: (&usize, &usize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _3: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _4: usize;                       // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:16: 25:29
+    let mut _5: &Foo;                    // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:16: 25:29
+    let mut _6: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _11: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _12: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _16: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _17: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _18: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _19: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    scope 1 {
+        debug f => _1;                   // in scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:23:9: 23:10
+        let _7: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        let _8: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let mut _21: &usize;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        scope 2 {
+            debug left_val => _7;        // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+            debug right_val => _8;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+            let _13: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            scope 3 {
+                debug kind => _13;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            }
+        }
+    }
+
+    bb0: {
+        _5 = &_1;                        // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:16: 25:29
+        _4 = Foo::foo::<13>(move _5) -> bb1; // scope 1 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:16: 25:29
+                                         // mir::Constant
+                                         // + span: ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:18: 25:21
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: for<'a> fn(&'a Foo) -> usize {Foo::foo::<13>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = &_4;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _21 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[0])) }
+        _6 = _21;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _2 = (move _3, move _6);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _7 = (_2.0: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _8 = (_2.1: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _11 = (*_7);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _12 = const 20_usize;            // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _10 = Eq(move _11, move _12);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _9 = Not(move _10);              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _9) -> [0: bb3, otherwise: bb2]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb2: {
+        _13 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _15 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _17 = _7;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _16 = _17;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _19 = _8;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _18 = _19;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _20 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _14 = core::panicking::assert_failed::<usize, usize>(move _15, move _16, move _18, move _20); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:26:2: 26:2
+    }
+}
+
+promoted[0] in main: &usize = {
+    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: usize;                   // in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:31: 25:33
+
+    bb0: {
+        _1 = const 20_usize;             // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:31: 25:33
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+main::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:24: 25:26
+
+    bb0: {
+        _0 = const 13_usize;             // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:24: 25:26
+        return;                          // scope 0 at ui/const-generics/type-dependent/const-arg-in-const-arg.rs:25:24: 25:26
+    }
+}

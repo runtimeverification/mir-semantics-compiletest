@@ -1,0 +1,1009 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn identity_coercion(_1: &dyn Fn(u32) -> u32 + Send) -> &dyn Fn(u32) -> u32 {
+    debug x => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:7:22: 7:23
+    let mut _0: &dyn std::ops::Fn(u32) -> u32; // return place in scope 0 at ui/mir/mir_coercions.rs:7:56: 7:73
+    let mut _2: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+    let _3: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+    let mut _4: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+
+    bb0: {
+        _4 = _1;                         // scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+        _3 = move _4 as &dyn std::ops::Fn(u32) -> u32 (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+        _2 = _3;                         // scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+        _0 = move _2 as &dyn std::ops::Fn(u32) -> u32 (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:8:5: 8:6
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:9:2: 9:2
+    }
+}
+
+fn fn_coercions(_1: &fn(u32) -> u32) -> (unsafe fn(u32) -> u32, &dyn Fn(u32) -> u32 + Send) {
+    debug f => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:10:17: 10:18
+    let mut _0: (unsafe fn(u32) -> u32, &dyn std::ops::Fn(u32) -> u32 + std::marker::Send); // return place in scope 0 at ui/mir/mir_coercions.rs:11:5: 12:33
+    let mut _2: unsafe fn(u32) -> u32;   // in scope 0 at ui/mir/mir_coercions.rs:14:6: 14:8
+    let mut _3: fn(u32) -> u32;          // in scope 0 at ui/mir/mir_coercions.rs:14:6: 14:8
+    let mut _4: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:14:10: 14:11
+    let mut _5: &fn(u32) -> u32;         // in scope 0 at ui/mir/mir_coercions.rs:14:10: 14:11
+
+    bb0: {
+        _3 = (*_1);                      // scope 0 at ui/mir/mir_coercions.rs:14:6: 14:8
+        _2 = move _3 as unsafe fn(u32) -> u32 (Pointer(UnsafeFnPointer)); // scope 0 at ui/mir/mir_coercions.rs:14:6: 14:8
+        _5 = _1;                         // scope 0 at ui/mir/mir_coercions.rs:14:10: 14:11
+        _4 = move _5 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:14:10: 14:11
+        _0 = (move _2, move _4);         // scope 0 at ui/mir/mir_coercions.rs:14:5: 14:12
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:15:2: 15:2
+    }
+}
+
+fn simple_array_coercion(_1: &[u8; 3]) -> &[u8] {
+    debug x => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:17:26: 17:27
+    let mut _0: &[u8];                   // return place in scope 0 at ui/mir/mir_coercions.rs:17:42: 17:47
+    let mut _2: &[u8; 3];                // in scope 0 at ui/mir/mir_coercions.rs:17:50: 17:51
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/mir/mir_coercions.rs:17:50: 17:51
+        _0 = move _2 as &[u8] (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:17:50: 17:51
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:17:53: 17:53
+    }
+}
+
+simple_array_coercion::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_coercions.rs:17:35: 17:36
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/mir/mir_coercions.rs:17:35: 17:36
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:17:35: 17:36
+    }
+}
+
+fn square(_1: u32) -> u32 {
+    debug a => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:19:11: 19:12
+    let mut _0: u32;                     // return place in scope 0 at ui/mir/mir_coercions.rs:19:22: 19:25
+    let mut _2: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:19:28: 19:29
+    let mut _3: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:19:32: 19:33
+    let mut _4: (u32, bool);             // in scope 0 at ui/mir/mir_coercions.rs:19:28: 19:33
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/mir/mir_coercions.rs:19:28: 19:29
+        _3 = _1;                         // scope 0 at ui/mir/mir_coercions.rs:19:32: 19:33
+        _4 = CheckedMul(_2, _3);         // scope 0 at ui/mir/mir_coercions.rs:19:28: 19:33
+        assert(!move (_4.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, move _3) -> bb1; // scope 0 at ui/mir/mir_coercions.rs:19:28: 19:33
+    }
+
+    bb1: {
+        _0 = move (_4.0: u32);           // scope 0 at ui/mir/mir_coercions.rs:19:28: 19:33
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:19:35: 19:35
+    }
+}
+
+fn <impl at ui/mir/mir_coercions.rs:21:10: 21:19>::eq(_1: &PtrWrapper<'_, T>, _2: &PtrWrapper<'_, T>) -> bool {
+    debug self => _1;                    // in scope 0 at ui/mir/mir_coercions.rs:21:10: 21:19
+    debug other => _2;                   // in scope 0 at ui/mir/mir_coercions.rs:21:10: 21:19
+    let mut _0: bool;                    // return place in scope 0 at ui/mir/mir_coercions.rs:21:10: 21:19
+    let mut _3: bool;                    // in scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    let mut _4: bool;                    // in scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    let mut _5: bool;                    // in scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+    let mut _6: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+    let mut _7: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+    let mut _8: bool;                    // in scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    let mut _9: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    let mut _10: u32;                    // in scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    let mut _11: bool;                   // in scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    let mut _12: &();                    // in scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    let mut _13: &();                    // in scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    let mut _14: bool;                   // in scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+    let mut _15: &&T;                    // in scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+    let mut _16: &&T;                    // in scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+
+    bb0: {
+        _6 = ((*_1).0: u32);             // scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+        _7 = ((*_2).0: u32);             // scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+        _5 = Eq(move _6, move _7);       // scope 0 at ui/mir/mir_coercions.rs:22:37: 22:40
+        switchInt(move _5) -> [0: bb7, otherwise: bb8]; // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+        goto -> bb3;                     // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+    }
+
+    bb2: {
+        _15 = &((*_1).3: &T);            // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+        _16 = &((*_2).3: &T);            // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+        _14 = <&T as PartialEq>::eq(move _15, move _16) -> bb11; // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:22:51: 22:56
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &T, &'b &T) -> bool {<&T as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:21:19: 21:19
+    }
+
+    bb4: {
+        _3 = const false;                // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+        goto -> bb6;                     // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    }
+
+    bb5: {
+        _12 = &((*_1).2: ());            // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+        _13 = &((*_2).2: ());            // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+        _11 = <() as PartialEq>::eq(move _12, move _13) -> bb10; // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:22:47: 22:49
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a (), &'b ()) -> bool {<() as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        switchInt(move _3) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+    }
+
+    bb7: {
+        _4 = const false;                // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+        goto -> bb9;                     // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    }
+
+    bb8: {
+        _9 = ((*_1).1: u32);             // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+        _10 = ((*_2).1: u32);            // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+        _8 = Eq(move _9, move _10);      // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+        _4 = move _8;                    // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+        goto -> bb9;                     // scope 0 at ui/mir/mir_coercions.rs:22:42: 22:45
+    }
+
+    bb9: {
+        switchInt(move _4) -> [0: bb4, otherwise: bb5]; // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    }
+
+    bb10: {
+        _3 = move _11;                   // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+        goto -> bb6;                     // scope 0 at ui/mir/mir_coercions.rs:22:47: 22:49
+    }
+
+    bb11: {
+        _0 = move _14;                   // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+        goto -> bb3;                     // scope 0 at ui/mir/mir_coercions.rs:22:51: 22:56
+    }
+}
+
+fn <impl at ui/mir/mir_coercions.rs:21:20: 21:22>::assert_receiver_is_total_eq(_1: &PtrWrapper<'_, T>) -> () {
+    debug self => _1;                    // in scope 0 at ui/mir/mir_coercions.rs:21:20: 21:22
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_coercions.rs:21:20: 21:22
+    scope 1 {
+        scope 2 {
+            scope 3 {
+            }
+        }
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:21:22: 21:22
+    }
+}
+
+fn coerce_ptr_wrapper(_1: PtrWrapper<'_, [u8; 3]>) -> PtrWrapper<'_, [u8]> {
+    debug p => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:30:23: 30:24
+    let mut _0: PtrWrapper<'_, [u8]>;    // return place in scope 0 at ui/mir/mir_coercions.rs:30:50: 30:66
+    let mut _2: PtrWrapper<'_, [u8; 3]>; // in scope 0 at ui/mir/mir_coercions.rs:31:5: 31:6
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/mir/mir_coercions.rs:31:5: 31:6
+        _0 = move _2 as PtrWrapper<'_, [u8]> (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:31:5: 31:6
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:32:2: 32:2
+    }
+}
+
+coerce_ptr_wrapper::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_coercions.rs:30:42: 30:43
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/mir/mir_coercions.rs:30:42: 30:43
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:30:42: 30:43
+    }
+}
+
+fn coerce_triv_ptr_wrapper(_1: TrivPtrWrapper<'_, [u8; 3]>) -> TrivPtrWrapper<'_, [u8]> {
+    debug p => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:34:28: 34:29
+    let mut _0: TrivPtrWrapper<'_, [u8]>; // return place in scope 0 at ui/mir/mir_coercions.rs:34:59: 34:79
+    let mut _2: TrivPtrWrapper<'_, [u8; 3]>; // in scope 0 at ui/mir/mir_coercions.rs:35:5: 35:6
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/mir/mir_coercions.rs:35:5: 35:6
+        _0 = move _2 as TrivPtrWrapper<'_, [u8]> (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:35:5: 35:6
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:36:2: 36:2
+    }
+}
+
+coerce_triv_ptr_wrapper::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_coercions.rs:34:51: 34:52
+
+    bb0: {
+        _0 = const 3_usize;              // scope 0 at ui/mir/mir_coercions.rs:34:51: 34:52
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:34:51: 34:52
+    }
+}
+
+fn coerce_fat_ptr_wrapper(_1: PtrWrapper<'_, dyn Fn(u32) -> u32 + Send>) -> PtrWrapper<'_, dyn Fn(u32) -> u32> {
+    debug p => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:38:27: 38:28
+    let mut _0: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>; // return place in scope 0 at ui/mir/mir_coercions.rs:39:30: 39:60
+    let mut _2: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>; // in scope 0 at ui/mir/mir_coercions.rs:40:5: 40:6
+    let mut _3: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send>; // in scope 0 at ui/mir/mir_coercions.rs:40:5: 40:6
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/mir/mir_coercions.rs:40:5: 40:6
+        _2 = move _3 as PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32> (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:40:5: 40:6
+        _0 = move _2 as PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32> (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:40:5: 40:6
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:41:2: 41:2
+    }
+}
+
+fn coerce_ptr_wrapper_poly(_1: PtrWrapper<'_, T>) -> PtrWrapper<'_, Trait> {
+    debug p => _1;                       // in scope 0 at ui/mir/mir_coercions.rs:43:50: 43:51
+    let mut _0: PtrWrapper<'_, Trait>;   // return place in scope 0 at ui/mir/mir_coercions.rs:44:53: 44:74
+    let mut _2: PtrWrapper<'_, T>;       // in scope 0 at ui/mir/mir_coercions.rs:47:5: 47:6
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/mir/mir_coercions.rs:47:5: 47:6
+        _0 = move _2 as PtrWrapper<'_, Trait> (Pointer(Unsize)); // scope 0 at ui/mir/mir_coercions.rs:47:5: 47:6
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:48:2: 48:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_coercions.rs:50:11: 50:11
+    let _1: [u8; 3];                     // in scope 0 at ui/mir/mir_coercions.rs:51:9: 51:10
+    let mut _5: (unsafe fn(u32) -> u32, &dyn std::ops::Fn(u32) -> u32 + std::marker::Send); // in scope 0 at ui/mir/mir_coercions.rs:53:17: 53:44
+    let mut _6: &fn(u32) -> u32;         // in scope 0 at ui/mir/mir_coercions.rs:53:30: 53:43
+    let _7: &fn(u32) -> u32;             // in scope 0 at ui/mir/mir_coercions.rs:53:30: 53:43
+    let mut _8: (&usize, &usize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _9: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _10: usize;                      // in scope 0 at ui/mir/mir_coercions.rs:54:16: 54:26
+    let mut _11: unsafe fn(u32) -> u32;  // in scope 0 at ui/mir/mir_coercions.rs:54:16: 54:17
+    let mut _12: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _13: usize;                      // in scope 0 at ui/mir/mir_coercions.rs:54:28: 54:43
+    let mut _14: fn(u32) -> u32;         // in scope 0 at ui/mir/mir_coercions.rs:54:28: 54:34
+    let mut _17: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _18: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _19: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _20: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _22: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _23: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _24: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _25: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _26: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _27: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _28: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _29: (&u32, &u32);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _30: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _31: u32;                        // in scope 0 at ui/mir/mir_coercions.rs:55:16: 55:20
+    let mut _32: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:55:16: 55:17
+    let mut _33: (u32,);                 // in scope 0 at ui/mir/mir_coercions.rs:55:16: 55:20
+    let mut _34: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _37: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _38: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _39: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _40: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _42: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _43: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _44: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _45: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _46: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _47: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _48: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _49: (&u32, &u32);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _50: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _51: u32;                        // in scope 0 at ui/mir/mir_coercions.rs:56:16: 56:39
+    let mut _52: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:56:16: 56:36
+    let _53: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:56:16: 56:36
+    let mut _54: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:56:34: 56:35
+    let mut _55: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:56:34: 56:35
+    let mut _56: (u32,);                 // in scope 0 at ui/mir/mir_coercions.rs:56:16: 56:39
+    let mut _57: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _60: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _61: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _62: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _63: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _65: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _66: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _67: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _68: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _69: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _70: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _71: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _72: (&&[u8], &&[u8; 3]);    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _73: &&[u8];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _74: &[u8];                      // in scope 0 at ui/mir/mir_coercions.rs:58:16: 58:41
+    let mut _75: &[u8; 3];               // in scope 0 at ui/mir/mir_coercions.rs:58:38: 58:40
+    let _76: &[u8; 3];                   // in scope 0 at ui/mir/mir_coercions.rs:58:38: 58:40
+    let mut _77: &&[u8; 3];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _78: &[u8; 3];                   // in scope 0 at ui/mir/mir_coercions.rs:58:43: 58:45
+    let mut _81: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _82: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _83: &&[u8];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _84: &&[u8; 3];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _86: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _87: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _88: &&[u8];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _89: &&[u8];                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _90: &&[u8; 3];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _91: &&[u8; 3];                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _92: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _94: PtrWrapper<'_, [u8; 3]>; // in scope 0 at ui/mir/mir_coercions.rs:59:32: 59:53
+    let mut _95: ();                     // in scope 0 at ui/mir/mir_coercions.rs:59:47: 59:49
+    let mut _96: &[u8; 3];               // in scope 0 at ui/mir/mir_coercions.rs:59:50: 59:52
+    let _97: &[u8; 3];                   // in scope 0 at ui/mir/mir_coercions.rs:59:50: 59:52
+    let mut _98: bool;                   // in scope 0 at ui/mir/mir_coercions.rs:60:5: 60:60
+    let mut _99: bool;                   // in scope 0 at ui/mir/mir_coercions.rs:60:13: 60:59
+    let mut _100: &PtrWrapper<'_, [u8]>; // in scope 0 at ui/mir/mir_coercions.rs:60:13: 60:14
+    let mut _101: &PtrWrapper<'_, [u8]>; // in scope 0 at ui/mir/mir_coercions.rs:60:18: 60:59
+    let _102: PtrWrapper<'_, [u8]>;      // in scope 0 at ui/mir/mir_coercions.rs:60:18: 60:59
+    let mut _103: PtrWrapper<'_, [u8; 3]>; // in scope 0 at ui/mir/mir_coercions.rs:60:18: 60:39
+    let mut _104: ();                    // in scope 0 at ui/mir/mir_coercions.rs:60:33: 60:35
+    let mut _105: &[u8; 3];              // in scope 0 at ui/mir/mir_coercions.rs:60:36: 60:38
+    let _106: &[u8; 3];                  // in scope 0 at ui/mir/mir_coercions.rs:60:36: 60:38
+    let mut _107: !;                     // in scope 0 at ui/mir/mir_coercions.rs:60:5: 60:60
+    let mut _109: TrivPtrWrapper<'_, [u8; 3]>; // in scope 0 at ui/mir/mir_coercions.rs:62:37: 62:55
+    let mut _110: &[u8; 3];              // in scope 0 at ui/mir/mir_coercions.rs:62:52: 62:54
+    let _111: &[u8; 3];                  // in scope 0 at ui/mir/mir_coercions.rs:62:52: 62:54
+    let mut _112: (&&&[u8], &&[u8; 3]);  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _113: &&&[u8];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _114: &&[u8];                    // in scope 0 at ui/mir/mir_coercions.rs:63:16: 63:20
+    let mut _115: &&[u8; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _116: &[u8; 3];                  // in scope 0 at ui/mir/mir_coercions.rs:63:22: 63:24
+    let mut _119: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _120: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _121: &&&[u8];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _122: &&[u8; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _124: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _125: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _126: &&&[u8];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _127: &&&[u8];                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _128: &&[u8; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _129: &&[u8; 3];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _130: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _132: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send>; // in scope 0 at ui/mir/mir_coercions.rs:65:36: 65:68
+    let mut _133: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send>; // in scope 0 at ui/mir/mir_coercions.rs:65:36: 65:68
+    let mut _134: ();                    // in scope 0 at ui/mir/mir_coercions.rs:65:51: 65:53
+    let mut _135: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 0 at ui/mir/mir_coercions.rs:65:54: 65:67
+    let mut _136: &fn(u32) -> u32;       // in scope 0 at ui/mir/mir_coercions.rs:65:54: 65:67
+    let _137: &fn(u32) -> u32;           // in scope 0 at ui/mir/mir_coercions.rs:65:54: 65:67
+    let mut _138: (&u32, &u32);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _139: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _140: u32;                       // in scope 0 at ui/mir/mir_coercions.rs:66:16: 66:24
+    let mut _141: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:66:16: 66:21
+    let mut _142: (u32,);                // in scope 0 at ui/mir/mir_coercions.rs:66:16: 66:24
+    let mut _143: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _146: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _147: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _148: u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _149: u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _151: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _152: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _153: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _154: &u32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _155: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _156: &u32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _157: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _159: PtrWrapper<'_, fn(u32) -> u32>; // in scope 0 at ui/mir/mir_coercions.rs:69:33: 69:65
+    let mut _160: ();                    // in scope 0 at ui/mir/mir_coercions.rs:69:48: 69:50
+    let mut _161: &fn(u32) -> u32;       // in scope 0 at ui/mir/mir_coercions.rs:69:51: 69:64
+    let _162: &fn(u32) -> u32;           // in scope 0 at ui/mir/mir_coercions.rs:69:51: 69:64
+    let mut _163: (&u32, &u32);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _164: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _165: u32;                       // in scope 0 at ui/mir/mir_coercions.rs:70:16: 70:24
+    let mut _166: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:70:16: 70:21
+    let mut _167: (u32,);                // in scope 0 at ui/mir/mir_coercions.rs:70:16: 70:24
+    let mut _168: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _171: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _172: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _173: u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _174: u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _176: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _177: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _178: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _179: &u32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _180: &u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _181: &u32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _182: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _187: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:65:9: 65:10
+    let mut _188: &dyn std::ops::Fn(u32) -> u32; // in scope 0 at ui/mir/mir_coercions.rs:68:9: 68:10
+    scope 1 {
+        debug a => _1;                   // in scope 1 at ui/mir/mir_coercions.rs:51:9: 51:10
+        let _2: fn(u32) -> u32;          // in scope 1 at ui/mir/mir_coercions.rs:52:9: 52:21
+        scope 2 {
+            debug square_local => _2;    // in scope 2 at ui/mir/mir_coercions.rs:52:9: 52:21
+            let _3: unsafe fn(u32) -> u32; // in scope 2 at ui/mir/mir_coercions.rs:53:10: 53:11
+            let _4: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send; // in scope 2 at ui/mir/mir_coercions.rs:53:12: 53:13
+            scope 3 {
+                debug f => _3;           // in scope 3 at ui/mir/mir_coercions.rs:53:10: 53:11
+                debug g => _4;           // in scope 3 at ui/mir/mir_coercions.rs:53:12: 53:13
+                let _15: &usize;         // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                let _16: &usize;         // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                let _35: &u32;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                let _36: &u32;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                let _58: &u32;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                let _59: &u32;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                let _79: &&[u8];         // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                let _80: &&[u8; 3];      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                let _93: PtrWrapper<'_, [u8]>; // in scope 3 at ui/mir/mir_coercions.rs:59:9: 59:10
+                let mut _185: &u32;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                let mut _186: &u32;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                scope 4 {
+                    debug left_val => _15; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    debug right_val => _16; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    let _21: core::panicking::AssertKind; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    scope 5 {
+                        debug kind => _21; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    }
+                }
+                scope 6 {
+                    debug left_val => _35; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    debug right_val => _36; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    let _41: core::panicking::AssertKind; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    scope 7 {
+                        debug kind => _41; // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    }
+                }
+                scope 8 {
+                    debug left_val => _58; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    debug right_val => _59; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    let _64: core::panicking::AssertKind; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    scope 9 {
+                        debug kind => _64; // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    }
+                }
+                scope 10 {
+                    debug left_val => _79; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    debug right_val => _80; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    let _85: core::panicking::AssertKind; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    scope 11 {
+                        debug kind => _85; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    }
+                }
+                scope 12 {
+                    debug w => _93;      // in scope 12 at ui/mir/mir_coercions.rs:59:9: 59:10
+                    let _108: TrivPtrWrapper<'_, [u8]>; // in scope 12 at ui/mir/mir_coercions.rs:62:9: 62:10
+                    scope 13 {
+                        debug w => _108; // in scope 13 at ui/mir/mir_coercions.rs:62:9: 62:10
+                        let _117: &&&[u8]; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                        let _118: &&[u8; 3]; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                        let _131: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>; // in scope 13 at ui/mir/mir_coercions.rs:65:9: 65:10
+                        scope 14 {
+                            debug left_val => _117; // in scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                            debug right_val => _118; // in scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                            let _123: core::panicking::AssertKind; // in scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                            scope 15 {
+                                debug kind => _123; // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                            }
+                        }
+                        scope 16 {
+                            debug z => _131; // in scope 16 at ui/mir/mir_coercions.rs:65:9: 65:10
+                            let _144: &u32; // in scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                            let _145: &u32; // in scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                            let _158: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>; // in scope 16 at ui/mir/mir_coercions.rs:68:9: 68:10
+                            let mut _184: &u32; // in scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                            scope 17 {
+                                debug left_val => _144; // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                                debug right_val => _145; // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                                let _150: core::panicking::AssertKind; // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                scope 18 {
+                                    debug kind => _150; // in scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                }
+                            }
+                            scope 19 {
+                                debug z => _158; // in scope 19 at ui/mir/mir_coercions.rs:68:9: 68:10
+                                let _169: &u32; // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                                let _170: &u32; // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                                let mut _183: &u32; // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                scope 20 {
+                                    debug left_val => _169; // in scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                                    debug right_val => _170; // in scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                                    let _175: core::panicking::AssertKind; // in scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                    scope 21 {
+                                        debug kind => _175; // in scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = [const 0_u8, const 1_u8, const 2_u8]; // scope 0 at ui/mir/mir_coercions.rs:51:13: 51:20
+        _2 = square as fn(u32) -> u32 (Pointer(ReifyFnPointer)); // scope 1 at ui/mir/mir_coercions.rs:52:41: 52:47
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:52:41: 52:47
+                                         // + literal: Const { ty: fn(u32) -> u32 {square}, val: Value(<ZST>) }
+        _7 = &_2;                        // scope 2 at ui/mir/mir_coercions.rs:53:30: 53:43
+        _6 = _7;                         // scope 2 at ui/mir/mir_coercions.rs:53:30: 53:43
+        _5 = fn_coercions(move _6) -> bb1; // scope 2 at ui/mir/mir_coercions.rs:53:17: 53:44
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:53:17: 53:29
+                                         // + literal: Const { ty: for<'a> fn(&'a fn(u32) -> u32) -> (unsafe fn(u32) -> u32, &'a (dyn Fn(u32) -> u32 + Send + 'a)) {fn_coercions}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = (_5.0: unsafe fn(u32) -> u32); // scope 2 at ui/mir/mir_coercions.rs:53:10: 53:11
+        _4 = (_5.1: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send); // scope 2 at ui/mir/mir_coercions.rs:53:12: 53:13
+        _11 = _3;                        // scope 3 at ui/mir/mir_coercions.rs:54:16: 54:17
+        _10 = move _11 as usize (PointerExposeAddress); // scope 3 at ui/mir/mir_coercions.rs:54:16: 54:26
+        _9 = &_10;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _14 = square as fn(u32) -> u32 (Pointer(ReifyFnPointer)); // scope 3 at ui/mir/mir_coercions.rs:54:28: 54:34
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:54:28: 54:34
+                                         // + literal: Const { ty: fn(u32) -> u32 {square}, val: Value(<ZST>) }
+        _13 = move _14 as usize (PointerExposeAddress); // scope 3 at ui/mir/mir_coercions.rs:54:28: 54:43
+        _12 = &_13;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _8 = (move _9, move _12);        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _15 = (_8.0: &usize);            // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _16 = (_8.1: &usize);            // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _19 = (*_15);                    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _20 = (*_16);                    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _18 = Eq(move _19, move _20);    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _17 = Not(move _18);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _17) -> [0: bb3, otherwise: bb2]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb2: {
+        _21 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _23 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _25 = _15;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _24 = _25;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _27 = _16;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _26 = _27;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _28 = Option::<Arguments<'_>>::None; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _22 = core::panicking::assert_failed::<usize, usize>(move _23, move _24, move _26, move _28); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _32 = _4;                        // scope 3 at ui/mir/mir_coercions.rs:55:16: 55:17
+        _33 = const (4_u32,);            // scope 3 at ui/mir/mir_coercions.rs:55:16: 55:20
+        _31 = <dyn Fn(u32) -> u32 + Send as Fn<(u32,)>>::call(move _32, move _33) -> bb4; // scope 3 at ui/mir/mir_coercions.rs:55:16: 55:20
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:55:16: 55:17
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a dyn Fn(u32) -> u32 + Send, (u32,)) -> <dyn Fn(u32) -> u32 + Send as FnOnce<(u32,)>>::Output {<dyn Fn(u32) -> u32 + Send as Fn<(u32,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _30 = &_31;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _186 = const _;                  // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[3])) }
+        _34 = _186;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _29 = (move _30, move _34);      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _35 = (_29.0: &u32);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _36 = (_29.1: &u32);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _39 = (*_35);                    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _40 = const 16_u32;              // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _38 = Eq(move _39, move _40);    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _37 = Not(move _38);             // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _37) -> [0: bb6, otherwise: bb5]; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb5: {
+        _41 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _43 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _45 = _35;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _44 = _45;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _47 = _36;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _46 = _47;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _48 = Option::<Arguments<'_>>::None; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _42 = core::panicking::assert_failed::<u32, u32>(move _43, move _44, move _46, move _48); // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _55 = _4;                        // scope 3 at ui/mir/mir_coercions.rs:56:34: 56:35
+        _54 = move _55 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (Pointer(Unsize)); // scope 3 at ui/mir/mir_coercions.rs:56:34: 56:35
+        _53 = identity_coercion(move _54) -> bb7; // scope 3 at ui/mir/mir_coercions.rs:56:16: 56:36
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:56:16: 56:33
+                                         // + literal: Const { ty: for<'a> fn(&'a (dyn Fn(u32) -> u32 + Send + 'a)) -> &'a (dyn Fn(u32) -> u32 + 'a) {identity_coercion}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _52 = _53;                       // scope 3 at ui/mir/mir_coercions.rs:56:16: 56:36
+        _56 = const (5_u32,);            // scope 3 at ui/mir/mir_coercions.rs:56:16: 56:39
+        _51 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(move _52, move _56) -> bb8; // scope 3 at ui/mir/mir_coercions.rs:56:16: 56:39
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:56:16: 56:36
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a dyn Fn(u32) -> u32, (u32,)) -> <dyn Fn(u32) -> u32 as FnOnce<(u32,)>>::Output {<dyn Fn(u32) -> u32 as Fn<(u32,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _50 = &_51;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _185 = const _;                  // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[2])) }
+        _57 = _185;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _49 = (move _50, move _57);      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _58 = (_49.0: &u32);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _59 = (_49.1: &u32);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _62 = (*_58);                    // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _63 = const 25_u32;              // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _61 = Eq(move _62, move _63);    // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _60 = Not(move _61);             // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _60) -> [0: bb10, otherwise: bb9]; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb9: {
+        _64 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _66 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _68 = _58;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _67 = _68;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _70 = _59;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _69 = _70;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _71 = Option::<Arguments<'_>>::None; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _65 = core::panicking::assert_failed::<u32, u32>(move _66, move _67, move _69, move _71); // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        _76 = &_1;                       // scope 3 at ui/mir/mir_coercions.rs:58:38: 58:40
+        _75 = _76;                       // scope 3 at ui/mir/mir_coercions.rs:58:38: 58:40
+        _74 = simple_array_coercion(move _75) -> bb11; // scope 3 at ui/mir/mir_coercions.rs:58:16: 58:41
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:58:16: 58:37
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8; 3]) -> &'a [u8] {simple_array_coercion}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _73 = &_74;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _78 = &_1;                       // scope 3 at ui/mir/mir_coercions.rs:58:43: 58:45
+        _77 = &_78;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _72 = (move _73, move _77);      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _79 = (_72.0: &&[u8]);           // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _80 = (_72.1: &&[u8; 3]);        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _83 = _79;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _84 = _80;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _82 = <&[u8] as PartialEq<&[u8; 3]>>::eq(move _83, move _84) -> bb12; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &[u8], &'b &[u8; 3]) -> bool {<&[u8] as PartialEq<&[u8; 3]>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _81 = Not(move _82);             // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _81) -> [0: bb14, otherwise: bb13]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb13: {
+        _85 = const core::panicking::AssertKind::Eq; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _87 = const core::panicking::AssertKind::Eq; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _89 = _79;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _88 = _89;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _91 = _80;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _90 = _91;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _92 = Option::<Arguments<'_>>::None; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _86 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _87, move _88, move _90, move _92); // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &[u8], &'b &[u8; 3], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&[u8], &[u8; 3]>}, val: Value(<ZST>) }
+    }
+
+    bb14: {
+        _97 = &_1;                       // scope 3 at ui/mir/mir_coercions.rs:59:50: 59:52
+        _96 = _97;                       // scope 3 at ui/mir/mir_coercions.rs:59:50: 59:52
+        _94 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, move _95, move _96); // scope 3 at ui/mir/mir_coercions.rs:59:32: 59:53
+        _93 = coerce_ptr_wrapper(move _94) -> bb15; // scope 3 at ui/mir/mir_coercions.rs:59:13: 59:54
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:59:13: 59:31
+                                         // + literal: Const { ty: for<'a> fn(PtrWrapper<'a, [u8; 3]>) -> PtrWrapper<'a, [u8]> {coerce_ptr_wrapper}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _100 = &_93;                     // scope 12 at ui/mir/mir_coercions.rs:60:13: 60:14
+        _106 = &_1;                      // scope 12 at ui/mir/mir_coercions.rs:60:36: 60:38
+        _105 = _106;                     // scope 12 at ui/mir/mir_coercions.rs:60:36: 60:38
+        _103 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, move _104, move _105); // scope 12 at ui/mir/mir_coercions.rs:60:18: 60:39
+        _102 = move _103 as PtrWrapper<'_, [u8]> (Pointer(Unsize)); // scope 12 at ui/mir/mir_coercions.rs:60:18: 60:39
+        _101 = &_102;                    // scope 12 at ui/mir/mir_coercions.rs:60:18: 60:59
+        _99 = <PtrWrapper<'_, [u8]> as PartialEq>::eq(move _100, move _101) -> bb16; // scope 12 at ui/mir/mir_coercions.rs:60:13: 60:59
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:60:13: 60:59
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a PtrWrapper<'_, [u8]>, &'b PtrWrapper<'_, [u8]>) -> bool {<PtrWrapper<'_, [u8]> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _98 = Not(move _99);             // scope 12 at ui/mir/mir_coercions.rs:60:5: 60:60
+        switchInt(move _98) -> [0: bb18, otherwise: bb17]; // scope 12 at ui/mir/mir_coercions.rs:60:5: 60:60
+    }
+
+    bb17: {
+        _107 = core::panicking::panic(const "assertion failed: w == PtrWrapper(2, 3, (), &a) as PtrWrapper<[u8]>"); // scope 12 at ui/mir/mir_coercions.rs:60:5: 60:60
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:60:5: 60:60
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb18: {
+        _111 = &_1;                      // scope 12 at ui/mir/mir_coercions.rs:62:52: 62:54
+        _110 = _111;                     // scope 12 at ui/mir/mir_coercions.rs:62:52: 62:54
+        _109 = TrivPtrWrapper::<'_, [u8; 3]>(move _110); // scope 12 at ui/mir/mir_coercions.rs:62:37: 62:55
+        _108 = coerce_triv_ptr_wrapper(move _109) -> bb19; // scope 12 at ui/mir/mir_coercions.rs:62:13: 62:56
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:62:13: 62:36
+                                         // + literal: Const { ty: for<'a> fn(TrivPtrWrapper<'a, [u8; 3]>) -> TrivPtrWrapper<'a, [u8]> {coerce_triv_ptr_wrapper}, val: Value(<ZST>) }
+    }
+
+    bb19: {
+        _114 = &(_108.0: &[u8]);         // scope 13 at ui/mir/mir_coercions.rs:63:16: 63:20
+        _113 = &_114;                    // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _116 = &_1;                      // scope 13 at ui/mir/mir_coercions.rs:63:22: 63:24
+        _115 = &_116;                    // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _112 = (move _113, move _115);   // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _117 = (_112.0: &&&[u8]);        // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _118 = (_112.1: &&[u8; 3]);      // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _121 = _117;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _122 = _118;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _120 = <&&[u8] as PartialEq<&[u8; 3]>>::eq(move _121, move _122) -> bb20; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &&[u8], &'b &[u8; 3]) -> bool {<&&[u8] as PartialEq<&[u8; 3]>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb20: {
+        _119 = Not(move _120);           // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _119) -> [0: bb22, otherwise: bb21]; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb21: {
+        _123 = const core::panicking::AssertKind::Eq; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _125 = const core::panicking::AssertKind::Eq; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _127 = _117;                     // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _126 = _127;                     // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _129 = _118;                     // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _128 = _129;                     // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _130 = Option::<Arguments<'_>>::None; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _124 = core::panicking::assert_failed::<&&[u8], &[u8; 3]>(move _125, move _126, move _128, move _130); // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &&[u8], &'b &[u8; 3], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&&[u8], &[u8; 3]>}, val: Value(<ZST>) }
+    }
+
+    bb22: {
+        _137 = &_2;                      // scope 13 at ui/mir/mir_coercions.rs:65:54: 65:67
+        _136 = _137;                     // scope 13 at ui/mir/mir_coercions.rs:65:54: 65:67
+        _135 = move _136 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (Pointer(Unsize)); // scope 13 at ui/mir/mir_coercions.rs:65:54: 65:67
+        _133 = PtrWrapper::<'_, dyn Fn(u32) -> u32 + Send>(const 2_u32, const 3_u32, move _134, move _135); // scope 13 at ui/mir/mir_coercions.rs:65:36: 65:68
+        _132 = move _133 as PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send> (Pointer(Unsize)); // scope 13 at ui/mir/mir_coercions.rs:65:36: 65:68
+        _131 = coerce_fat_ptr_wrapper(move _132) -> bb23; // scope 13 at ui/mir/mir_coercions.rs:65:13: 65:69
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:65:13: 65:35
+                                         // + literal: Const { ty: for<'a> fn(PtrWrapper<'a, (dyn Fn(u32) -> u32 + Send + 'a)>) -> PtrWrapper<'a, (dyn Fn(u32) -> u32 + 'a)> {coerce_fat_ptr_wrapper}, val: Value(<ZST>) }
+    }
+
+    bb23: {
+        _187 = deref_copy (_131.3: &dyn std::ops::Fn(u32) -> u32); // scope 16 at ui/mir/mir_coercions.rs:66:16: 66:21
+        _141 = _187;                     // scope 16 at ui/mir/mir_coercions.rs:66:16: 66:21
+        _142 = const (6_u32,);           // scope 16 at ui/mir/mir_coercions.rs:66:16: 66:24
+        _140 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(move _141, move _142) -> bb24; // scope 16 at ui/mir/mir_coercions.rs:66:16: 66:24
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:66:16: 66:21
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a dyn Fn(u32) -> u32, (u32,)) -> <dyn Fn(u32) -> u32 as FnOnce<(u32,)>>::Output {<dyn Fn(u32) -> u32 as Fn<(u32,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb24: {
+        _139 = &_140;                    // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _184 = const _;                  // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[1])) }
+        _143 = _184;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _138 = (move _139, move _143);   // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _144 = (_138.0: &u32);           // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _145 = (_138.1: &u32);           // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _148 = (*_144);                  // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _149 = const 36_u32;             // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _147 = Eq(move _148, move _149); // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _146 = Not(move _147);           // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _146) -> [0: bb26, otherwise: bb25]; // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb25: {
+        _150 = const core::panicking::AssertKind::Eq; // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _152 = const core::panicking::AssertKind::Eq; // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _154 = _144;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _153 = _154;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _156 = _145;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _155 = _156;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _157 = Option::<Arguments<'_>>::None; // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _151 = core::panicking::assert_failed::<u32, u32>(move _152, move _153, move _155, move _157); // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb26: {
+        _162 = &_2;                      // scope 16 at ui/mir/mir_coercions.rs:69:51: 69:64
+        _161 = _162;                     // scope 16 at ui/mir/mir_coercions.rs:69:51: 69:64
+        _159 = PtrWrapper::<'_, fn(u32) -> u32>(const 2_u32, const 3_u32, move _160, move _161); // scope 16 at ui/mir/mir_coercions.rs:69:33: 69:65
+        _158 = coerce_ptr_wrapper_poly::<'_, fn(u32) -> u32, dyn Fn(u32) -> u32>(move _159) -> bb27; // scope 16 at ui/mir/mir_coercions.rs:69:9: 69:66
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:69:9: 69:32
+                                         // + literal: Const { ty: fn(PtrWrapper<'_, fn(u32) -> u32>) -> PtrWrapper<'_, dyn Fn(u32) -> u32> {coerce_ptr_wrapper_poly::<'_, fn(u32) -> u32, dyn Fn(u32) -> u32>}, val: Value(<ZST>) }
+    }
+
+    bb27: {
+        _188 = deref_copy (_158.3: &dyn std::ops::Fn(u32) -> u32); // scope 19 at ui/mir/mir_coercions.rs:70:16: 70:21
+        _166 = _188;                     // scope 19 at ui/mir/mir_coercions.rs:70:16: 70:21
+        _167 = const (6_u32,);           // scope 19 at ui/mir/mir_coercions.rs:70:16: 70:24
+        _165 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(move _166, move _167) -> bb28; // scope 19 at ui/mir/mir_coercions.rs:70:16: 70:24
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_coercions.rs:70:16: 70:21
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a dyn Fn(u32) -> u32, (u32,)) -> <dyn Fn(u32) -> u32 as FnOnce<(u32,)>>::Output {<dyn Fn(u32) -> u32 as Fn<(u32,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb28: {
+        _164 = &_165;                    // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _183 = const _;                  // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[0])) }
+        _168 = _183;                     // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _163 = (move _164, move _168);   // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _169 = (_163.0: &u32);           // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _170 = (_163.1: &u32);           // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _173 = (*_169);                  // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _174 = const 36_u32;             // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _172 = Eq(move _173, move _174); // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _171 = Not(move _172);           // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _171) -> [0: bb30, otherwise: bb29]; // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb29: {
+        _175 = const core::panicking::AssertKind::Eq; // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _177 = const core::panicking::AssertKind::Eq; // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _179 = _169;                     // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _178 = _179;                     // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _181 = _170;                     // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _180 = _181;                     // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _182 = Option::<Arguments<'_>>::None; // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _176 = core::panicking::assert_failed::<u32, u32>(move _177, move _178, move _180, move _182); // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb30: {
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:71:2: 71:2
+    }
+}
+
+promoted[0] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:70:26: 70:28
+
+    bb0: {
+        _1 = const 36_u32;               // scope 0 at ui/mir/mir_coercions.rs:70:26: 70:28
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[1] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:66:26: 66:28
+
+    bb0: {
+        _1 = const 36_u32;               // scope 0 at ui/mir/mir_coercions.rs:66:26: 66:28
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[2] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:56:41: 56:43
+
+    bb0: {
+        _1 = const 25_u32;               // scope 0 at ui/mir/mir_coercions.rs:56:41: 56:43
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[3] in main: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: u32;                     // in scope 0 at ui/mir/mir_coercions.rs:55:22: 55:24
+
+    bb0: {
+        _1 = const 16_u32;               // scope 0 at ui/mir/mir_coercions.rs:55:22: 55:24
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+fn PtrWrapper(_1: u32, _2: u32, _3: (), _4: &T) -> PtrWrapper<'_, T> {
+    let mut _0: PtrWrapper<'_, T>;       // return place in scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+
+    bb0: {
+        _0 = PtrWrapper::<'_, T>(move _1, move _2, move _3, move _4); // scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+    }
+}
+
+// MIR FOR CTFE
+fn PtrWrapper(_1: u32, _2: u32, _3: (), _4: &T) -> PtrWrapper<'_, T> {
+    let mut _0: PtrWrapper<'_, T>;       // return place in scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+
+    bb0: {
+        _0 = PtrWrapper::<'_, T>(move _1, move _2, move _3, move _4); // scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:22:1: 22:36
+    }
+}
+
+fn TrivPtrWrapper(_1: &T) -> TrivPtrWrapper<'_, T> {
+    let mut _0: TrivPtrWrapper<'_, T>;   // return place in scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+
+    bb0: {
+        _0 = TrivPtrWrapper::<'_, T>(move _1); // scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+    }
+}
+
+// MIR FOR CTFE
+fn TrivPtrWrapper(_1: &T) -> TrivPtrWrapper<'_, T> {
+    let mut _0: TrivPtrWrapper<'_, T>;   // return place in scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+
+    bb0: {
+        _0 = TrivPtrWrapper::<'_, T>(move _1); // scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+        return;                          // scope 0 at ui/mir/mir_coercions.rs:26:1: 26:40
+    }
+}

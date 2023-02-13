@@ -1,0 +1,115 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:21:1: 21:24>::new(_1: <T as Container<'_>>::Root) -> Test<'_, T> {
+    debug root => _1;                    // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:22:12: 22:16
+    let mut _0: Test<'_, T>;             // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:22:36: 22:47
+    let mut _2: <T as Container<'_>>::Root; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:24:19: 24:23
+    let mut _3: std::marker::PhantomData<&mut &mut ()>; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:25:21: 25:32
+
+    bb0: {
+        _2 = move _1;                    // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:24:19: 24:23
+        _0 = Test::<'_, T> { root: move _2, marker: move _3 }; // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:23:9: 26:10
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:27:6: 27:6
+    }
+}
+
+fn <impl at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:21:1: 21:24>::with_mut(_1: &mut Test<'_, T>, _2: F) -> R {
+    debug self => _1;                    // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:29:23: 29:32
+    debug f => _2;                       // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:29:34: 29:35
+    let mut _0: R;                       // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:29:43: 29:44
+    let mut _3: F;                       // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:10
+    let mut _4: (&mut <T as Container<'_>>::Root,); // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:53
+    let mut _5: &mut <T as Container<'_>>::Root; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:20: 31:50
+    let mut _6: &mut <T as Container<'_>>::Root; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:20: 31:50
+    let mut _7: &mut <T as Container<'_>>::Root; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:35: 31:49
+    let mut _8: bool;                    // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:52: 31:53
+    scope 1 {
+    }
+
+    bb0: {
+        _8 = const false;                // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:10
+        _8 = const true;                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:10
+        _3 = move _2;                    // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:10
+        _7 = &mut ((*_1).0: <T as Container<'_>>::Root); // scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:35: 31:49
+        _6 = transmute::<&mut <T as Container<'_>>::Root, &mut <T as Container<'_>>::Root>(move _7) -> bb1; // scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:20: 31:50
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:20: 31:34
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&mut <T as Container<'_>>::Root) -> &mut <T as Container<'_>>::Root {transmute::<&mut <T as Container<'_>>::Root, &mut <T as Container<'_>>::Root>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = &mut (*_6);                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:20: 31:50
+        _4 = (move _5,);                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:53
+        _8 = const false;                // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:53
+        _0 = <F as FnOnce<(&mut <T as Container<'_>>::Root,)>>::call_once(move _3, move _4) -> [return: bb2, unwind: bb5]; // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:53
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:9: 31:10
+                                         // + literal: Const { ty: extern "rust-call" fn(F, (&mut <T as Container<'_>>::Root,)) -> <F as FnOnce<(&mut <T as Container<'_>>::Root,)>>::Output {<F as FnOnce<(&mut <T as Container<'_>>::Root,)>>::call_once}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = const false;                // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:52: 31:53
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:32:6: 32:6
+    }
+
+    bb3 (cleanup): {
+        resume;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:29:5: 32:6
+    }
+
+    bb4 (cleanup): {
+        drop(_3) -> bb3;                 // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:52: 31:53
+    }
+
+    bb5 (cleanup): {
+        switchInt(_8) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:31:52: 31:53
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:35:11: 35:11
+    let _1: &str;                        // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:36:9: 36:12
+    let mut _3: &str;                    // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:42: 37:45
+    let _4: ();                          // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:5: 38:27
+    let mut _5: &mut Test<'_, &str>;     // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:5: 38:27
+    let mut _6: [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:22]; // in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:26
+    scope 1 {
+        debug val => _1;                 // in scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:36:9: 36:12
+        let mut _2: Test<'_, &str>;      // in scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:9: 37:17
+        scope 2 {
+            debug test => _2;            // in scope 2 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:9: 37:17
+        }
+    }
+
+    bb0: {
+        _1 = const "root";               // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:36:15: 36:21
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:36:15: 36:21
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = _1;                         // scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:42: 37:45
+        _2 = Test::<'_, &str>::new(move _3) -> bb1; // scope 1 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:32: 37:46
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:37:32: 37:41
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn(<&str as Container<'_>>::Root) -> Test<'_, &str> {Test::<'_, &str>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = &mut _2;                    // scope 2 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:5: 38:27
+        _4 = Test::<'_, &str>::with_mut::<[closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:22], ()>(move _5, move _6) -> bb2; // scope 2 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:5: 38:27
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:10: 38:18
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Test<'_, &str>, [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:22]) {Test::<'_, &str>::with_mut::<[closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:22], ()>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:39:2: 39:2
+    }
+}
+
+fn main::{closure#0}(_1: [closure@ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:19: 38:22], _2: &mut &str) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:23: 38:23
+
+    bb0: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/normalize-under-binder/issue-62529-4.rs:38:26: 38:26
+    }
+}

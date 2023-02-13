@@ -1,0 +1,54 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn hide(_1: T) -> impl Sized {
+    debug t => _1;                       // in scope 0 at ui/impl-trait/wf-eval-order.rs:9:12: 9:13
+    let mut _0: impl Sized;              // return place in scope 0 at ui/impl-trait/wf-eval-order.rs:9:21: 9:31
+
+    bb0: {
+        _0 = move _1;                    // scope 0 at ui/impl-trait/wf-eval-order.rs:10:5: 10:6
+        return;                          // scope 0 at ui/impl-trait/wf-eval-order.rs:11:2: 11:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/wf-eval-order.rs:29:11: 29:11
+    let _1: impl Sized;                  // in scope 0 at ui/impl-trait/wf-eval-order.rs:38:9: 38:10
+    let mut _2: X<i32>;                  // in scope 0 at ui/impl-trait/wf-eval-order.rs:38:18: 38:22
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/impl-trait/wf-eval-order.rs:38:9: 38:10
+    }
+
+    bb0: {
+        _2 = const X::<i32>(0_i32);      // scope 0 at ui/impl-trait/wf-eval-order.rs:38:18: 38:22
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/wf-eval-order.rs:38:18: 38:22
+                                         // + literal: Const { ty: X<i32>, val: Value(Scalar(0x00000000)) }
+        _1 = hide::<X<i32>>(move _2) -> bb1; // scope 0 at ui/impl-trait/wf-eval-order.rs:38:13: 38:23
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/wf-eval-order.rs:38:13: 38:17
+                                         // + literal: Const { ty: fn(X<i32>) -> impl Sized {hide::<X<i32>>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/wf-eval-order.rs:39:2: 39:2
+    }
+}
+
+fn X(_1: T) -> X<T> {
+    let mut _0: X<T>;                    // return place in scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+
+    bb0: {
+        _0 = X::<T>(move _1);            // scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+        return;                          // scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+    }
+}
+
+// MIR FOR CTFE
+fn X(_1: T) -> X<T> {
+    let mut _0: X<T>;                    // return place in scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+
+    bb0: {
+        _0 = X::<T>(move _1);            // scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+        return;                          // scope 0 at ui/impl-trait/wf-eval-order.rs:5:1: 5:15
+    }
+}

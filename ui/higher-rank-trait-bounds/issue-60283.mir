@@ -1,0 +1,44 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: T, _2: F) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:12:1: 12:1
+
+    bb0: {
+        drop(_2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:16:1: 16:2
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:16:1: 16:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:16:2: 16:2
+    }
+
+    bb3 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:16:1: 16:2
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:11:1: 16:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:18:11: 18:11
+    let mut _1: ();                      // in scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:19:9: 19:11
+
+    bb0: {
+        _0 = foo::<(), fn(()) {std::mem::drop::<()>}>(move _1, std::mem::drop::<()>) -> bb1; // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:19:5: 19:18
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/issue-60283.rs:19:5: 19:8
+                                         // + literal: Const { ty: fn((), fn(()) {std::mem::drop::<()>}) {foo::<(), fn(()) {std::mem::drop::<()>}>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/higher-rank-trait-bounds/issue-60283.rs:19:13: 19:17
+                                         // + literal: Const { ty: fn(()) {std::mem::drop::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/higher-rank-trait-bounds/issue-60283.rs:20:2: 20:2
+    }
+}

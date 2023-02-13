@@ -1,0 +1,100 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:3:15: 3:15
+    let _1: fn();                        // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:4:9: 4:11
+    scope 1 {
+        debug _x => _1;                  // in scope 1 at ui/mir/mir-inlining/ice-issue-68347.rs:4:9: 4:11
+    }
+
+    bb0: {
+        _1 = handle_debug_column as fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:4:20: 4:39
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-68347.rs:4:20: 4:39
+                                         // + literal: Const { ty: fn() {handle_debug_column}, val: Value(<ZST>) }
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:5:2: 5:2
+    }
+}
+
+fn handle_debug_column() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:7:26: 7:26
+    let _1: impl Sampler;                // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:8:9: 8:16
+    let mut _3: &impl Sampler;           // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 12:6
+    let _4: ();                          // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:10
+    let mut _5: &[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17]; // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:8
+    let mut _6: ();                      // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:10
+    scope 1 {
+        debug sampler => _1;             // in scope 1 at ui/mir/mir-inlining/ice-issue-68347.rs:8:9: 8:16
+        let _2: [closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17]; // in scope 1 at ui/mir/mir-inlining/ice-issue-68347.rs:10:9: 10:12
+        scope 2 {
+            debug foo => _2;             // in scope 2 at ui/mir/mir-inlining/ice-issue-68347.rs:10:9: 10:12
+        }
+    }
+
+    bb0: {
+        _1 = sample_columns() -> bb1;    // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:8:19: 8:35
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-68347.rs:8:19: 8:33
+                                         // + literal: Const { ty: fn() -> impl Sampler {sample_columns}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = &_1;                        // scope 1 at ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 12:6
+        _2 = [closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] { sampler: move _3 }; // scope 1 at ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 12:6
+                                         // closure
+                                         // + def_id: DefId(0:5 ~ ice_issue_68347[43cd]::handle_debug_column::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn(()),
+                                         //     (&impl Sampler,),
+                                         // ]
+        _5 = &_2;                        // scope 2 at ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:8
+        _4 = <[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] as Fn<()>>::call(move _5, move _6) -> bb2; // scope 2 at ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:10
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-68347.rs:13:5: 13:8
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17], ()) -> <[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] as FnOnce<()>>::Output {<[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:14:2: 14:2
+    }
+}
+
+fn handle_debug_column::{closure#0}(_1: &[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17]) -> () {
+    debug sampler => (*((*_1).0: &impl Sampler)); // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:8:9: 8:16
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:10:18: 10:18
+    let _2: ();                          // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:11:9: 11:24
+    let mut _3: &impl Sampler;           // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:11:9: 11:24
+    let mut _4: &impl Sampler;           // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 12:6
+
+    bb0: {
+        _4 = deref_copy ((*_1).0: &impl Sampler); // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:11:9: 11:24
+        _3 = _4;                         // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:11:9: 11:24
+        _2 = <impl Sampler as Sampler>::get(move _3, const 17_i32) -> bb1; // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:11:9: 11:24
+                                         // mir::Constant
+                                         // + span: ui/mir/mir-inlining/ice-issue-68347.rs:11:17: 11:20
+                                         // + literal: Const { ty: for<'a> fn(&'a impl Sampler, i32) {<impl Sampler as Sampler>::get}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:12:6: 12:6
+    }
+}
+
+fn sample_columns() -> impl Sampler {
+    let mut _0: impl Sampler;            // return place in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:16:24: 16:36
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:18:2: 18:2
+    }
+}
+
+fn <impl at ui/mir/mir-inlining/ice-issue-68347.rs:26:1: 26:27>::get(_1: &ColumnGen, _2: i32) -> () {
+    debug self => _1;                    // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:27:12: 27:17
+    debug _index => _2;                  // in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:27:19: 27:25
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:27:32: 27:32
+
+    bb0: {
+        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-68347.rs:27:34: 27:34
+    }
+}

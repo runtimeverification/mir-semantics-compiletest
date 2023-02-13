@@ -1,0 +1,57 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn a() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-61752.rs:13:16: 13:16
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-61752.rs:13:37: 13:37
+    }
+}
+
+fn b() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-61752.rs:15:16: 15:16
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-61752.rs:15:46: 15:46
+    }
+}
+
+fn c() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-61752.rs:18:26: 18:26
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-61752.rs:18:47: 18:47
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-61752.rs:20:11: 20:11
+    let _1: ();                          // in scope 0 at ui/associated-type-bounds/issue-61752.rs:21:5: 21:14
+    let _2: ();                          // in scope 0 at ui/associated-type-bounds/issue-61752.rs:22:5: 22:14
+    let _3: ();                          // in scope 0 at ui/associated-type-bounds/issue-61752.rs:23:5: 23:14
+
+    bb0: {
+        _1 = a::<()>() -> bb1;           // scope 0 at ui/associated-type-bounds/issue-61752.rs:21:5: 21:14
+                                         // mir::Constant
+                                         // + span: ui/associated-type-bounds/issue-61752.rs:21:5: 21:12
+                                         // + literal: Const { ty: fn() {a::<()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = b::<()>() -> bb2;           // scope 0 at ui/associated-type-bounds/issue-61752.rs:22:5: 22:14
+                                         // mir::Constant
+                                         // + span: ui/associated-type-bounds/issue-61752.rs:22:5: 22:12
+                                         // + literal: Const { ty: fn() {b::<()>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = c::<()>() -> bb3;           // scope 0 at ui/associated-type-bounds/issue-61752.rs:23:5: 23:14
+                                         // mir::Constant
+                                         // + span: ui/associated-type-bounds/issue-61752.rs:23:5: 23:12
+                                         // + literal: Const { ty: fn() {c::<()>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/associated-type-bounds/issue-61752.rs:24:2: 24:2
+    }
+}

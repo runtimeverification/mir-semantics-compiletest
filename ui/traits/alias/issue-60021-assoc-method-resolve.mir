@@ -1,0 +1,57 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn SomeTrait::map(_1: &Self) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:6:12: 6:17
+    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:6:19: 6:19
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:6:21: 6:21
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:13:11: 13:11
+    let _1: std::option::Option<i32>;    // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:14:9: 14:10
+    let _2: std::option::Option<i32>;    // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:5: 16:26
+    let mut _3: std::option::Option<i32>; // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:17: 16:18
+    let mut _4: [closure@ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:23]; // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:25
+    let _5: ();                          // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:5: 18:23
+    let mut _6: &std::option::Option<i32>; // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:20: 18:22
+    let _7: &std::option::Option<i32>;   // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:20: 18:22
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:14:9: 14:10
+    }
+
+    bb0: {
+        _1 = Option::<i32>::Some(const 123_i32); // scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:14:13: 14:22
+        _3 = _1;                         // scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:17: 16:18
+        _2 = Option::<i32>::map::<i32, [closure@ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:23]>(move _3, move _4) -> bb1; // scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:5: 16:26
+                                         // mir::Constant
+                                         // + span: ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:5: 16:16
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Option<i32>, [closure@ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:23]) -> Option<i32> {Option::<i32>::map::<i32, [closure@ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:23]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _7 = &_1;                        // scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:20: 18:22
+        _6 = _7;                         // scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:20: 18:22
+        _5 = <Option<i32> as SomeTrait>::map(move _6) -> bb2; // scope 1 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:5: 18:23
+                                         // mir::Constant
+                                         // + span: ui/traits/alias/issue-60021-assoc-method-resolve.rs:18:5: 18:19
+                                         // + literal: Const { ty: for<'a> fn(&'a Option<i32>) {<Option<i32> as SomeTrait>::map}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:19:2: 19:2
+    }
+}
+
+fn main::{closure#0}(_1: [closure@ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:20: 16:23], _2: i32) -> i32 {
+    debug z => _2;                       // in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:21: 16:22
+    let mut _0: i32;                     // return place in scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:24: 16:24
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:24: 16:25
+        return;                          // scope 0 at ui/traits/alias/issue-60021-assoc-method-resolve.rs:16:25: 16:25
+    }
+}

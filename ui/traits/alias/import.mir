@@ -1,0 +1,48 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn inner::<impl at ui/traits/alias/import.rs:12:5: 12:21>::foo(_1: &Qux) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/alias/import.rs:13:16: 13:21
+    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/import.rs:13:23: 13:23
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/alias/import.rs:13:25: 13:25
+    }
+}
+
+fn two::<impl at ui/traits/alias/import.rs:24:5: 24:18>::foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/import.rs:25:18: 25:18
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/alias/import.rs:25:20: 25:20
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/import.rs:35:11: 35:11
+    let _1: inner::Qux;                  // in scope 0 at ui/traits/alias/import.rs:36:9: 36:10
+    let _2: ();                          // in scope 0 at ui/traits/alias/import.rs:37:5: 37:12
+    let mut _3: &inner::Qux;             // in scope 0 at ui/traits/alias/import.rs:37:5: 37:12
+    let _4: ();                          // in scope 0 at ui/traits/alias/import.rs:39:5: 39:14
+    scope 1 {
+        debug q => _1;                   // in scope 1 at ui/traits/alias/import.rs:36:9: 36:10
+    }
+
+    bb0: {
+        _3 = &_1;                        // scope 1 at ui/traits/alias/import.rs:37:5: 37:12
+        _2 = <Qux as Foo>::foo(move _3) -> bb1; // scope 1 at ui/traits/alias/import.rs:37:5: 37:12
+                                         // mir::Constant
+                                         // + span: ui/traits/alias/import.rs:37:7: 37:10
+                                         // + literal: Const { ty: for<'a> fn(&'a Qux) {<Qux as Foo>::foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = <u8 as A>::foo() -> bb2;    // scope 1 at ui/traits/alias/import.rs:39:5: 39:14
+                                         // mir::Constant
+                                         // + span: ui/traits/alias/import.rs:39:5: 39:12
+                                         // + literal: Const { ty: fn() {<u8 as A>::foo}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/traits/alias/import.rs:40:2: 40:2
+    }
+}

@@ -1,0 +1,93 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: G, _2: Box<F>) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-68025.rs:4:1: 4:1
+
+    bb0: {
+        drop(_2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/closures/issue-68025.rs:8:1: 8:2
+    }
+
+    bb1: {
+        drop(_1) -> bb2;                 // scope 0 at ui/closures/issue-68025.rs:8:1: 8:2
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/issue-68025.rs:8:2: 8:2
+    }
+
+    bb3 (cleanup): {
+        drop(_1) -> bb4;                 // scope 0 at ui/closures/issue-68025.rs:8:1: 8:2
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/closures/issue-68025.rs:3:1: 8:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-68025.rs:10:11: 10:11
+    let _1: ();                          // in scope 0 at ui/closures/issue-68025.rs:11:5: 11:37
+    let mut _2: [closure@ui/closures/issue-68025.rs:11:9: 11:12]; // in scope 0 at ui/closures/issue-68025.rs:11:9: 11:19
+    let mut _3: std::boxed::Box<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>; // in scope 0 at ui/closures/issue-68025.rs:11:21: 11:36
+    let mut _4: [closure@ui/closures/issue-68025.rs:11:30: 11:32]; // in scope 0 at ui/closures/issue-68025.rs:11:30: 11:35
+
+    bb0: {
+        _3 = Box::<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>::new(move _4) -> bb1; // scope 0 at ui/closures/issue-68025.rs:11:21: 11:36
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-68025.rs:11:21: 11:29
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn([closure@ui/closures/issue-68025.rs:11:30: 11:32]) -> Box<[closure@ui/closures/issue-68025.rs:11:30: 11:32]> {Box::<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = foo::<[closure@ui/closures/issue-68025.rs:11:30: 11:32], [closure@ui/closures/issue-68025.rs:11:9: 11:12]>(move _2, move _3) -> bb2; // scope 0 at ui/closures/issue-68025.rs:11:5: 11:37
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-68025.rs:11:5: 11:8
+                                         // + literal: Const { ty: fn([closure@ui/closures/issue-68025.rs:11:9: 11:12], Box<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>) {foo::<[closure@ui/closures/issue-68025.rs:11:30: 11:32], [closure@ui/closures/issue-68025.rs:11:9: 11:12]>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/issue-68025.rs:12:2: 12:2
+    }
+}
+
+fn main::{closure#0}(_1: &[closure@ui/closures/issue-68025.rs:11:9: 11:12], _2: Box<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>) -> () {
+    debug f => _2;                       // in scope 0 at ui/closures/issue-68025.rs:11:10: 11:11
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-68025.rs:11:13: 11:13
+    let mut _3: &[closure@ui/closures/issue-68025.rs:11:30: 11:32]; // in scope 0 at ui/closures/issue-68025.rs:11:13: 11:17
+    let mut _4: ();                      // in scope 0 at ui/closures/issue-68025.rs:11:13: 11:19
+    let mut _5: *const [closure@ui/closures/issue-68025.rs:11:30: 11:32]; // in scope 0 at ui/closures/issue-68025.rs:11:10: 11:11
+
+    bb0: {
+        _5 = (((_2.0: std::ptr::Unique<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>).0: std::ptr::NonNull<[closure@ui/closures/issue-68025.rs:11:30: 11:32]>).0: *const [closure@ui/closures/issue-68025.rs:11:30: 11:32]); // scope 0 at ui/closures/issue-68025.rs:11:13: 11:17
+        _3 = &(*_5);                     // scope 0 at ui/closures/issue-68025.rs:11:13: 11:17
+        _0 = <[closure@ui/closures/issue-68025.rs:11:30: 11:32] as Fn<()>>::call(move _3, move _4) -> [return: bb1, unwind: bb3]; // scope 0 at ui/closures/issue-68025.rs:11:13: 11:19
+                                         // mir::Constant
+                                         // + span: ui/closures/issue-68025.rs:11:13: 11:17
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/closures/issue-68025.rs:11:30: 11:32], ()) -> <[closure@ui/closures/issue-68025.rs:11:30: 11:32] as FnOnce<()>>::Output {<[closure@ui/closures/issue-68025.rs:11:30: 11:32] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_2) -> bb2;                 // scope 0 at ui/closures/issue-68025.rs:11:18: 11:19
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/closures/issue-68025.rs:11:19: 11:19
+    }
+
+    bb3 (cleanup): {
+        drop(_2) -> bb4;                 // scope 0 at ui/closures/issue-68025.rs:11:18: 11:19
+    }
+
+    bb4 (cleanup): {
+        resume;                          // scope 0 at ui/closures/issue-68025.rs:11:9: 11:19
+    }
+}
+
+fn main::{closure#1}(_1: &[closure@ui/closures/issue-68025.rs:11:30: 11:32]) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-68025.rs:11:33: 11:33
+
+    bb0: {
+        return;                          // scope 0 at ui/closures/issue-68025.rs:11:35: 11:35
+    }
+}

@@ -1,0 +1,83 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+static mut x: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/consts/issue-47789.rs:4:15: 4:27
+    let _1: &u32;                        // in scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+    let _2: u32;                         // in scope 0 at ui/consts/issue-47789.rs:4:31: 4:32
+    let mut _3: &u32;                    // in scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+        _3 = const _;                    // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-47789.rs:4:30: 4:32
+                                         // + literal: Const { ty: &u32, val: Unevaluated(x, [], Some(promoted[0])) }
+        _1 = &(*_3);                     // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+        _0 = &(*_1);                     // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-47789.rs:4:31: 4:32
+        return;                          // scope 0 at ui/consts/issue-47789.rs:4:1: 4:33
+    }
+}
+
+promoted[0] in x: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+    let mut _1: u32;                     // in scope 0 at ui/consts/issue-47789.rs:4:31: 4:32
+
+    bb0: {
+        _1 = const 0_u32;                // scope 0 at ui/consts/issue-47789.rs:4:31: 4:32
+        _0 = &_1;                        // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+        return;                          // scope 0 at ui/consts/issue-47789.rs:4:30: 4:32
+    }
+}
+
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-47789.rs:6:10: 6:10
+    let mut _1: &u32;                    // in scope 0 at ui/consts/issue-47789.rs:7:18: 7:20
+    let _2: &u32;                        // in scope 0 at ui/consts/issue-47789.rs:7:18: 7:20
+    let mut _3: *mut &u32;               // in scope 0 at ui/consts/issue-47789.rs:7:14: 7:15
+    scope 1 {
+        let mut _4: &u32;                // in scope 1 at ui/consts/issue-47789.rs:7:18: 7:20
+    }
+
+    bb0: {
+        _4 = const _;                    // scope 1 at ui/consts/issue-47789.rs:7:18: 7:20
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-47789.rs:7:18: 7:20
+                                         // + literal: Const { ty: &u32, val: Unevaluated(foo, [], Some(promoted[0])) }
+        _2 = _4;                         // scope 1 at ui/consts/issue-47789.rs:7:18: 7:20
+        _1 = _2;                         // scope 1 at ui/consts/issue-47789.rs:7:18: 7:20
+        _3 = const {alloc1: *mut &u32};  // scope 1 at ui/consts/issue-47789.rs:7:14: 7:15
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-47789.rs:7:14: 7:15
+                                         // + literal: Const { ty: *mut &u32, val: Value(Scalar(alloc1)) }
+        (*_3) = move _1;                 // scope 1 at ui/consts/issue-47789.rs:7:14: 7:20
+        return;                          // scope 0 at ui/consts/issue-47789.rs:8:2: 8:2
+    }
+}
+
+alloc1 (static: x, size: 8, align: 8) {
+    ╾───────alloc4────────╼                         │ ╾──────╼
+}
+
+alloc4 (size: 4, align: 4) {
+    00 00 00 00                                     │ ....
+}
+
+promoted[0] in foo: &u32 = {
+    let mut _0: &u32;                    // return place in scope 0 at ui/consts/issue-47789.rs:7:18: 7:20
+    let mut _1: u32;                     // in scope 0 at ui/consts/issue-47789.rs:7:19: 7:20
+
+    bb0: {
+        _1 = const 1_u32;                // scope 0 at ui/consts/issue-47789.rs:7:19: 7:20
+        _0 = &_1;                        // scope 0 at ui/consts/issue-47789.rs:7:18: 7:20
+        return;                          // scope 0 at ui/consts/issue-47789.rs:7:18: 7:20
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-47789.rs:10:11: 10:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/issue-47789.rs:10:14: 10:14
+    }
+}

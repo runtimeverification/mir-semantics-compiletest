@@ -1,0 +1,25 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/str/str-escape.rs:2:11: 2:11
+    let _1: &str;                        // in scope 0 at ui/str/str-escape.rs:3:9: 3:10
+    scope 1 {
+        debug s => _1;                   // in scope 1 at ui/str/str-escape.rs:3:9: 3:10
+        let _2: &str;                    // in scope 1 at ui/str/str-escape.rs:7:9: 7:10
+        scope 2 {
+            debug s => _2;               // in scope 2 at ui/str/str-escape.rs:7:9: 7:10
+        }
+    }
+
+    bb0: {
+        _1 = const "";                   // scope 0 at ui/str/str-escape.rs:3:13: 5:15
+                                         // mir::Constant
+                                         // + span: ui/str/str-escape.rs:3:13: 5:15
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = const "foo\u{a0}          bar\n             "; // scope 1 at ui/str/str-escape.rs:7:13: 9:15
+                                         // mir::Constant
+                                         // + span: ui/str/str-escape.rs:7:13: 9:15
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        return;                          // scope 0 at ui/str/str-escape.rs:11:2: 11:2
+    }
+}

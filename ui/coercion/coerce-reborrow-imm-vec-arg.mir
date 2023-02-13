@@ -1,0 +1,117 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn sum(_1: &[isize]) -> isize {
+    debug x => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:5:8: 5:9
+    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:6:9: 6:16
+    let mut _2: std::slice::Iter<'_, isize>; // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    let mut _3: &[isize];                // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    let mut _5: std::option::Option<&isize>; // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    let mut _6: &mut std::slice::Iter<'_, isize>; // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    let mut _7: &mut std::slice::Iter<'_, isize>; // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    let mut _8: isize;                   // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:5: 7:30
+    let mut _10: isize;                  // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:25: 7:27
+    let mut _11: (isize, bool);          // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:18: 7:27
+    scope 1 {
+        debug sum => _0;                 // in scope 1 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:6:9: 6:16
+        let mut _4: std::slice::Iter<'_, isize>; // in scope 1 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        scope 2 {
+            debug iter => _4;            // in scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+            let _9: &isize;              // in scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:9: 7:10
+            scope 3 {
+                debug y => _9;           // in scope 3 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:9: 7:10
+            }
+        }
+    }
+
+    bb0: {
+        _0 = const 0_isize;              // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:6:19: 6:20
+        _3 = _1;                         // scope 1 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        _2 = <&[isize] as IntoIterator>::into_iter(move _3) -> bb1; // scope 1 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+                                         // + literal: Const { ty: fn(&[isize]) -> <&[isize] as IntoIterator>::IntoIter {<&[isize] as IntoIterator>::into_iter}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = move _2;                    // scope 1 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        goto -> bb2;                     // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:5: 7:30
+    }
+
+    bb2: {
+        _7 = &mut _4;                    // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        _6 = &mut (*_7);                 // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        _5 = <std::slice::Iter<'_, isize> as Iterator>::next(move _6) -> bb3; // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+                                         // + literal: Const { ty: for<'a> fn(&'a mut std::slice::Iter<'_, isize>) -> Option<<std::slice::Iter<'_, isize> as Iterator>::Item> {<std::slice::Iter<'_, isize> as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _8 = discriminant(_5);           // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+        switchInt(move _8) -> [0: bb6, 1: bb4, otherwise: bb5]; // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    }
+
+    bb4: {
+        _9 = ((_5 as Some).0: &isize);   // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:9: 7:10
+        _10 = (*_9);                     // scope 3 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:25: 7:27
+        _11 = CheckedAdd(_0, _10);       // scope 3 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:18: 7:27
+        assert(!move (_11.1: bool), "attempt to compute `{} + {}`, which would overflow", _0, move _10) -> bb7; // scope 3 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:18: 7:27
+    }
+
+    bb5: {
+        unreachable;                     // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:14: 7:15
+    }
+
+    bb6: {
+        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:9:2: 9:2
+    }
+
+    bb7: {
+        _0 = move (_11.0: isize);        // scope 3 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:18: 7:27
+        goto -> bb2;                     // scope 2 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:7:5: 7:30
+    }
+}
+
+fn sum_mut(_1: &mut [isize]) -> isize {
+    debug y => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:11:12: 11:13
+    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:11:32: 11:37
+    let mut _2: &[isize];                // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:12:9: 12:10
+
+    bb0: {
+        _2 = &(*_1);                     // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:12:9: 12:10
+        _0 = sum(move _2) -> bb1;        // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:12:5: 12:11
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-reborrow-imm-vec-arg.rs:12:5: 12:8
+                                         // + literal: Const { ty: for<'a> fn(&'a [isize]) -> isize {sum}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:13:2: 13:2
+    }
+}
+
+fn sum_imm(_1: &[isize]) -> isize {
+    debug y => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:15:12: 15:13
+    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:15:28: 15:33
+    let mut _2: &[isize];                // in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:16:9: 16:10
+
+    bb0: {
+        _2 = _1;                         // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:16:9: 16:10
+        _0 = sum(move _2) -> bb1;        // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:16:5: 16:11
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-reborrow-imm-vec-arg.rs:16:5: 16:8
+                                         // + literal: Const { ty: for<'a> fn(&'a [isize]) -> isize {sum}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:17:2: 17:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:19:15: 19:15
+
+    bb0: {
+        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-vec-arg.rs:19:17: 19:17
+    }
+}

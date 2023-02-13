@@ -1,0 +1,823 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/traits/inheritance/repeated-supertrait.rs:15:1: 15:28>::same_as(_1: &i64, _2: i64) -> bool {
+    debug self => _1;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:16: 16:21
+    debug t => _2;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:23: 16:24
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:34: 16:38
+    let mut _3: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:41: 16:46
+    let mut _4: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:50: 16:51
+
+    bb0: {
+        _3 = (*_1);                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:41: 16:46
+        _4 = _2;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:50: 16:51
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:41: 16:51
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:16:53: 16:53
+    }
+}
+
+fn <impl at ui/traits/inheritance/repeated-supertrait.rs:19:1: 19:28>::same_as(_1: &i64, _2: u64) -> bool {
+    debug self => _1;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:16: 20:21
+    debug t => _2;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:23: 20:24
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:34: 20:38
+    let mut _3: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:41: 20:46
+    let mut _4: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:50: 20:60
+    let mut _5: u64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:51: 20:52
+
+    bb0: {
+        _3 = (*_1);                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:41: 20:46
+        _5 = _2;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:51: 20:52
+        _4 = move _5 as i64 (IntToInt);  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:50: 20:60
+        _0 = Eq(move _3, move _4);       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:41: 20:60
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:20:62: 20:62
+    }
+}
+
+fn with_obj(_1: &dyn CompareToInts) -> bool {
+    debug c => _1;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:25:13: 25:14
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:25:39: 25:43
+    let mut _2: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:22
+    let mut _3: &dyn CompareToInts;      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:22
+    let mut _4: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:26: 26:43
+    let mut _5: &dyn CompareToInts;      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:26: 26:43
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:22
+        _2 = <dyn CompareToInts as CompareTo<i64>>::same_as(move _3, const 22_i64) -> bb4; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:22
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:26:7: 26:14
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn CompareToInts, i64) -> bool {<dyn CompareToInts as CompareTo<i64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:43
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:43
+    }
+
+    bb2: {
+        _5 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:26: 26:43
+        _4 = <dyn CompareToInts as CompareTo<u64>>::same_as(move _5, const 22_u64) -> bb5; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:26: 26:43
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:26:28: 26:35
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn CompareToInts, u64) -> bool {<dyn CompareToInts as CompareTo<u64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:27:2: 27:2
+    }
+
+    bb4: {
+        switchInt(move _2) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:43
+    }
+
+    bb5: {
+        _0 = move _4;                    // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:43
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:26:5: 26:43
+    }
+}
+
+fn with_trait(_1: &C) -> bool {
+    debug c => _1;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:29:32: 29:33
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:29:42: 29:46
+    let mut _2: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:22
+    let mut _3: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:22
+    let mut _4: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:26: 30:43
+    let mut _5: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:26: 30:43
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:22
+        _2 = <C as CompareTo<i64>>::same_as(move _3, const 22_i64) -> bb4; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:22
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:30:7: 30:14
+                                         // + literal: Const { ty: for<'a> fn(&'a C, i64) -> bool {<C as CompareTo<i64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:43
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:43
+    }
+
+    bb2: {
+        _5 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:26: 30:43
+        _4 = <C as CompareTo<u64>>::same_as(move _5, const 22_u64) -> bb5; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:26: 30:43
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:30:28: 30:35
+                                         // + literal: Const { ty: for<'a> fn(&'a C, u64) -> bool {<C as CompareTo<u64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:31:2: 31:2
+    }
+
+    bb4: {
+        switchInt(move _2) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:43
+    }
+
+    bb5: {
+        _0 = move _4;                    // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:43
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:30:5: 30:43
+    }
+}
+
+fn with_ufcs1(_1: &C) -> bool {
+    debug c => _1;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:33:32: 33:33
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:33:42: 33:46
+    let mut _2: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:44
+    let mut _3: &dyn CompareToInts;      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:34: 34:35
+    let mut _4: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:34: 34:35
+    let mut _5: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:48: 34:87
+    let mut _6: &dyn CompareToInts;      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:77: 34:78
+    let mut _7: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:77: 34:78
+
+    bb0: {
+        _4 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:34: 34:35
+        _3 = move _4 as &dyn CompareToInts (Pointer(Unsize)); // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:34: 34:35
+        _2 = <dyn CompareToInts as CompareTo<i64>>::same_as(move _3, const 22_i64) -> bb4; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:44
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:33
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn CompareToInts, i64) -> bool {<dyn CompareToInts as CompareTo<i64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:87
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:87
+    }
+
+    bb2: {
+        _7 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:77: 34:78
+        _6 = move _7 as &dyn CompareToInts (Pointer(Unsize)); // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:77: 34:78
+        _5 = <dyn CompareToInts as CompareTo<u64>>::same_as(move _6, const 22_u64) -> bb5; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:48: 34:87
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:34:48: 34:76
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn CompareToInts, u64) -> bool {<dyn CompareToInts as CompareTo<u64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:35:2: 35:2
+    }
+
+    bb4: {
+        switchInt(move _2) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:87
+    }
+
+    bb5: {
+        _0 = move _5;                    // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:87
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:34:5: 34:87
+    }
+}
+
+fn with_ufcs2(_1: &C) -> bool {
+    debug c => _1;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:37:32: 37:33
+    let mut _0: bool;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:37:42: 37:46
+    let mut _2: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:34
+    let mut _3: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:24: 38:25
+    let mut _4: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:38: 38:67
+    let mut _5: &C;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:57: 38:58
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:24: 38:25
+        _2 = <C as CompareTo<i64>>::same_as(move _3, const 22_i64) -> bb4; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:34
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:23
+                                         // + literal: Const { ty: for<'a> fn(&'a C, i64) -> bool {<C as CompareTo<i64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = const false;                // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:67
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:67
+    }
+
+    bb2: {
+        _5 = _1;                         // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:57: 38:58
+        _4 = <C as CompareTo<u64>>::same_as(move _5, const 22_u64) -> bb5; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:38: 38:67
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:38:38: 38:56
+                                         // + literal: Const { ty: for<'a> fn(&'a C, u64) -> bool {<C as CompareTo<u64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:39:2: 39:2
+    }
+
+    bb4: {
+        switchInt(move _2) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:67
+    }
+
+    bb5: {
+        _0 = move _4;                    // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:67
+        goto -> bb3;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:38:5: 38:67
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:41:11: 41:11
+    let mut _1: (&bool, &bool);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _2: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _3: bool;                        // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+    let mut _4: &i64;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+    let mut _5: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _6: &bool;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _7: &bool;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _13: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _14: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _15: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _16: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _17: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _18: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _19: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _20: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _21: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _22: bool;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+    let mut _23: &i64;                   // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+    let mut _24: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _25: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _26: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _27: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _28: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _29: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _30: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _32: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _33: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _34: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _35: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _36: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _37: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _38: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _39: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _40: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _41: bool;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:16: 44:31
+    let mut _42: &i64;                   // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+    let _43: &i64;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+    let mut _44: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _45: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _46: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _47: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _48: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _49: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _50: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _52: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _53: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _54: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _55: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _56: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _57: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _58: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _59: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _60: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _61: bool;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:16: 45:29
+    let mut _62: &dyn CompareToInts;     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    let mut _63: &i64;                   // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    let _64: &i64;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    let mut _65: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _66: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _67: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _68: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _69: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _70: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _71: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _73: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _74: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _75: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _76: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _77: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _78: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _79: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _80: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _81: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _82: bool;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:16: 46:31
+    let mut _83: &i64;                   // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+    let _84: &i64;                       // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+    let mut _85: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _86: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _87: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _88: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _89: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _90: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _91: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _93: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _94: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _95: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _96: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _97: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _98: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _99: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _100: (&bool, &bool);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _101: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _102: bool;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:16: 47:31
+    let mut _103: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+    let _104: &i64;                      // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+    let mut _105: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _106: &bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _107: &bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _108: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _109: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _110: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _111: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _113: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _114: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _115: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _116: &bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _117: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _118: &bool;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _119: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _120: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _121: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+    let mut _122: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _123: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+    let mut _124: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _125: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    let mut _126: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _127: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+    let mut _128: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _129: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+    let mut _130: &bool;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _131: &i64;                  // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+    scope 1 {
+        debug left_val => _6;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _7;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _12: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 2 {
+            debug kind => _12;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 3 {
+        debug left_val => _25;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _26;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _31: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 4 {
+            debug kind => _31;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 5 {
+        debug left_val => _45;           // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _46;          // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _51: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 6 {
+            debug kind => _51;           // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 7 {
+        debug left_val => _66;           // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _67;          // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _72: core::panicking::AssertKind; // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 8 {
+            debug kind => _72;           // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 9 {
+        debug left_val => _86;           // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _87;          // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _92: core::panicking::AssertKind; // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 10 {
+            debug kind => _92;           // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+    scope 11 {
+        debug left_val => _106;          // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _107;         // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _112: core::panicking::AssertKind; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 12 {
+            debug kind => _112;          // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+
+    bb0: {
+        _131 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[11])) }
+        _4 = _131;                       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+        _3 = <i64 as CompareTo<i64>>::same_as(move _4, const 22_i64) -> bb1; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:42:23: 42:30
+                                         // + literal: Const { ty: for<'a> fn(&'a i64, i64) -> bool {<i64 as CompareTo<i64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _130 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[10])) }
+        _5 = _130;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = (move _2, move _5);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _6 = (_1.0: &bool);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _7 = (_1.1: &bool);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _10 = (*_6);                     // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _11 = const true;                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _9 = Eq(move _10, move _11);     // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _8 = Not(move _9);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _8) -> [0: bb3, otherwise: bb2]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb2: {
+        _12 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _14 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _16 = _6;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _15 = _16;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _18 = _7;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _17 = _18;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _19 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _13 = core::panicking::assert_failed::<bool, bool>(move _14, move _15, move _17, move _19); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _129 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[9])) }
+        _23 = _129;                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+        _22 = <i64 as CompareTo<u64>>::same_as(move _23, const 22_u64) -> bb4; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:43:23: 43:30
+                                         // + literal: Const { ty: for<'a> fn(&'a i64, u64) -> bool {<i64 as CompareTo<u64>>::same_as}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _21 = &_22;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _128 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[8])) }
+        _24 = _128;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _20 = (move _21, move _24);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _25 = (_20.0: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _26 = (_20.1: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _29 = (*_25);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _30 = const true;                // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _28 = Eq(move _29, move _30);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _27 = Not(move _28);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _27) -> [0: bb6, otherwise: bb5]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb5: {
+        _31 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _33 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _35 = _25;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _34 = _35;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _37 = _26;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _36 = _37;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _38 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _32 = core::panicking::assert_failed::<bool, bool>(move _33, move _34, move _36, move _38); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _127 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[7])) }
+        _43 = _127;                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+        _42 = _43;                       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+        _41 = with_trait::<i64>(move _42) -> bb7; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:16: 44:31
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:44:16: 44:26
+                                         // + literal: Const { ty: for<'a> fn(&'a i64) -> bool {with_trait::<i64>}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _40 = &_41;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _126 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[6])) }
+        _44 = _126;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _39 = (move _40, move _44);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _45 = (_39.0: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _46 = (_39.1: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _49 = (*_45);                    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _50 = const true;                // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _48 = Eq(move _49, move _50);    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _47 = Not(move _48);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _47) -> [0: bb9, otherwise: bb8]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb8: {
+        _51 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _53 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _55 = _45;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _54 = _55;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _57 = _46;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _56 = _57;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _58 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _52 = core::panicking::assert_failed::<bool, bool>(move _53, move _54, move _56, move _58); // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        _125 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[5])) }
+        _64 = _125;                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+        _63 = _64;                       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+        _62 = move _63 as &dyn CompareToInts (Pointer(Unsize)); // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+        _61 = with_obj(move _62) -> bb10; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:16: 45:29
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:45:16: 45:24
+                                         // + literal: Const { ty: for<'a> fn(&'a (dyn CompareToInts + 'a)) -> bool {with_obj}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        _60 = &_61;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _124 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[4])) }
+        _65 = _124;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _59 = (move _60, move _65);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _66 = (_59.0: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _67 = (_59.1: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _70 = (*_66);                    // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _71 = const true;                // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _69 = Eq(move _70, move _71);    // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _68 = Not(move _69);             // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _68) -> [0: bb12, otherwise: bb11]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb11: {
+        _72 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _74 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _76 = _66;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _75 = _76;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _78 = _67;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _77 = _78;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _79 = Option::<Arguments<'_>>::None; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _73 = core::panicking::assert_failed::<bool, bool>(move _74, move _75, move _77, move _79); // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _123 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[3])) }
+        _84 = _123;                      // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+        _83 = _84;                       // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+        _82 = with_ufcs1::<i64>(move _83) -> bb13; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:16: 46:31
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:46:16: 46:26
+                                         // + literal: Const { ty: for<'a> fn(&'a i64) -> bool {with_ufcs1::<i64>}, val: Value(<ZST>) }
+    }
+
+    bb13: {
+        _81 = &_82;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _122 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[2])) }
+        _85 = _122;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _80 = (move _81, move _85);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _86 = (_80.0: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _87 = (_80.1: &bool);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _90 = (*_86);                    // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _91 = const true;                // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _89 = Eq(move _90, move _91);    // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _88 = Not(move _89);             // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _88) -> [0: bb15, otherwise: bb14]; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb14: {
+        _92 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _94 = const core::panicking::AssertKind::Eq; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _96 = _86;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _95 = _96;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _98 = _87;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _97 = _98;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _99 = Option::<Arguments<'_>>::None; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _93 = core::panicking::assert_failed::<bool, bool>(move _94, move _95, move _97, move _99); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _121 = const _;                  // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[1])) }
+        _104 = _121;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+        _103 = _104;                     // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+        _102 = with_ufcs2::<i64>(move _103) -> bb16; // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:16: 47:31
+                                         // mir::Constant
+                                         // + span: ui/traits/inheritance/repeated-supertrait.rs:47:16: 47:26
+                                         // + literal: Const { ty: for<'a> fn(&'a i64) -> bool {with_ufcs2::<i64>}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _101 = &_102;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _120 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[0])) }
+        _105 = _120;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _100 = (move _101, move _105);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _106 = (_100.0: &bool);          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _107 = (_100.1: &bool);          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _110 = (*_106);                  // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _111 = const true;               // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _109 = Eq(move _110, move _111); // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+        _108 = Not(move _109);           // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _108) -> [0: bb18, otherwise: bb17]; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb17: {
+        _112 = const core::panicking::AssertKind::Eq; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _114 = const core::panicking::AssertKind::Eq; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _116 = _106;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _115 = _116;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _118 = _107;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _117 = _118;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _119 = Option::<Arguments<'_>>::None; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _113 = core::panicking::assert_failed::<bool, bool>(move _114, move _115, move _117, move _119); // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+    }
+
+    bb18: {
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:48:2: 48:2
+    }
+}
+
+promoted[0] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:33: 47:37
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:33: 47:37
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[1] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:28: 47:30
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:28: 47:30
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:47:27: 47:30
+    }
+}
+
+promoted[2] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:33: 46:37
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:33: 46:37
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[3] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:28: 46:30
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:28: 46:30
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:46:27: 46:30
+    }
+}
+
+promoted[4] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:31: 45:35
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:31: 45:35
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[5] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:26: 45:28
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:26: 45:28
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:45:25: 45:28
+    }
+}
+
+promoted[6] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:33: 44:37
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:33: 44:37
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[7] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:28: 44:30
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:28: 44:30
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:44:27: 44:30
+    }
+}
+
+promoted[8] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:40: 43:44
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:40: 43:44
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[9] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:22
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:22
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:43:16: 43:38
+    }
+}
+
+promoted[10] in main: &bool = {
+    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: bool;                    // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:40: 42:44
+
+    bb0: {
+        _1 = const true;                 // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:40: 42:44
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+promoted[11] in main: &i64 = {
+    let mut _0: &i64;                    // return place in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+    let mut _1: i64;                     // in scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:22
+
+    bb0: {
+        _1 = const 22_i64;               // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:22
+        _0 = &_1;                        // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+        return;                          // scope 0 at ui/traits/inheritance/repeated-supertrait.rs:42:16: 42:38
+    }
+}

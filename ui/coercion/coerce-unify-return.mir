@@ -1,0 +1,58 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/coercion/coerce-unify-return.rs:8:1: 8:9>::foo(_1: Foo, _2: T) -> Option<T> {
+    debug self => _1;                    // in scope 0 at ui/coercion/coerce-unify-return.rs:9:15: 9:19
+    debug x => _2;                       // in scope 0 at ui/coercion/coerce-unify-return.rs:9:21: 9:22
+    let mut _0: std::option::Option<T>;  // return place in scope 0 at ui/coercion/coerce-unify-return.rs:9:30: 9:39
+    let mut _3: T;                       // in scope 0 at ui/coercion/coerce-unify-return.rs:9:47: 9:48
+
+    bb0: {
+        _3 = move _2;                    // scope 0 at ui/coercion/coerce-unify-return.rs:9:47: 9:48
+        _0 = Option::<T>::Some(move _3); // scope 0 at ui/coercion/coerce-unify-return.rs:9:42: 9:49
+        return;                          // scope 0 at ui/coercion/coerce-unify-return.rs:9:51: 9:51
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/coercion/coerce-unify-return.rs:12:15: 12:15
+    let mut _1: std::option::Option<fn()>; // in scope 0 at ui/coercion/coerce-unify-return.rs:14:27: 14:40
+    let mut _2: Foo;                     // in scope 0 at ui/coercion/coerce-unify-return.rs:14:27: 14:30
+    let mut _3: fn();                    // in scope 0 at ui/coercion/coerce-unify-return.rs:14:35: 14:39
+    let mut _4: std::option::Option<fn()>; // in scope 0 at ui/coercion/coerce-unify-return.rs:18:27: 18:45
+    let mut _5: Foo;                     // in scope 0 at ui/coercion/coerce-unify-return.rs:18:27: 18:30
+    let mut _6: fn();                    // in scope 0 at ui/coercion/coerce-unify-return.rs:18:40: 18:44
+    scope 1 {
+        scope 2 {
+            scope 3 {
+                scope 4 {
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _3 = main as fn() (Pointer(ReifyFnPointer)); // scope 1 at ui/coercion/coerce-unify-return.rs:14:35: 14:39
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-unify-return.rs:14:35: 14:39
+                                         // + literal: Const { ty: fn() {main}, val: Value(<ZST>) }
+        _1 = Foo::foo::<fn()>(move _2, move _3) -> bb1; // scope 1 at ui/coercion/coerce-unify-return.rs:14:27: 14:40
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-unify-return.rs:14:31: 14:34
+                                         // + literal: Const { ty: fn(Foo, fn()) -> Option<fn()> {Foo::foo::<fn()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = main as fn() (Pointer(ReifyFnPointer)); // scope 3 at ui/coercion/coerce-unify-return.rs:18:40: 18:44
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-unify-return.rs:18:40: 18:44
+                                         // + literal: Const { ty: fn() {main}, val: Value(<ZST>) }
+        _4 = Foo::foo::<fn()>(move _5, move _6) -> bb2; // scope 3 at ui/coercion/coerce-unify-return.rs:18:27: 18:45
+                                         // mir::Constant
+                                         // + span: ui/coercion/coerce-unify-return.rs:18:31: 18:34
+                                         // + literal: Const { ty: fn(Foo, fn()) -> Option<fn()> {Foo::foo::<fn()>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/coercion/coerce-unify-return.rs:19:2: 19:2
+    }
+}

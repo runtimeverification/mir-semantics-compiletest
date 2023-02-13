@@ -1,0 +1,832 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn mk_rec(_1: A, _2: B) -> Rec<A, B> {
+    debug a => _1;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:20:16: 20:17
+    debug b => _2;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:20:22: 20:23
+    let mut _0: Rec<A, B>;               // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:20:31: 20:39
+    let mut _3: Tag<A, B>;               // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:21: 21:33
+    let mut _4: A;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:31: 21:32
+    let mut _5: Tag<A, B>;               // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:45: 21:57
+    let mut _6: B;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:55: 21:56
+
+    bb0: {
+        _4 = move _1;                    // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:31: 21:32
+        _3 = Tag::<A, B>::VarA(move _4); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:21: 21:33
+        _6 = move _2;                    // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:55: 21:56
+        _5 = Tag::<A, B>::VarB(move _6); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:45: 21:57
+        _0 = Rec::<A, B> { chA: const 0_u8, tA: move _3, chB: const 1_u8, tB: move _5 }; // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:21:5: 21:59
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:22:2: 22:2
+    }
+}
+
+fn is_aligned(_1: usize, _2: &A) -> bool {
+    debug amnt => _1;                    // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:24:18: 24:22
+    debug u => _2;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:24:31: 24:32
+    let mut _0: bool;                    // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:24:41: 24:45
+    let _3: usize;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:25:9: 25:10
+    let mut _4: &A;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:25:44: 25:45
+    let mut _5: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:26:12: 26:26
+    let mut _6: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:26:13: 26:14
+    let mut _7: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:26:17: 26:25
+    let mut _8: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:26:18: 26:22
+    let mut _9: (usize, bool);           // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:26:17: 26:25
+    scope 1 {
+        debug p => _3;                   // in scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:25:9: 25:10
+    }
+    scope 2 {
+    }
+
+    bb0: {
+        _4 = _2;                         // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:25:44: 25:45
+        _3 = transmute::<&A, usize>(move _4) -> bb1; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:25:29: 25:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:25:29: 25:43
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&A) -> usize {transmute::<&A, usize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = _3;                         // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:13: 26:14
+        _8 = _1;                         // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:18: 26:22
+        _9 = CheckedSub(_8, const 1_usize); // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:17: 26:25
+        assert(!move (_9.1: bool), "attempt to compute `{} - {}`, which would overflow", move _8, const 1_usize) -> bb2; // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:17: 26:25
+    }
+
+    bb2: {
+        _7 = move (_9.0: usize);         // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:17: 26:25
+        _5 = BitAnd(move _6, move _7);   // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:12: 26:26
+        _0 = Eq(move _5, const 0_usize); // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:26:12: 26:31
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:27:2: 27:2
+    }
+}
+
+fn variant_data_is_aligned(_1: usize, _2: &Tag<A, B>) -> bool {
+    debug amnt => _1;                    // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:29:33: 29:37
+    debug u => _2;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:29:46: 29:47
+    let mut _0: bool;                    // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:29:63: 29:67
+    let mut _3: isize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:31:8: 31:24
+    let _4: &A;                          // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:31:18: 31:23
+    let mut _5: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:31:39: 31:43
+    let mut _6: &A;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:31:45: 31:46
+    let _7: &B;                          // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:32:18: 32:23
+    let mut _8: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:32:39: 32:43
+    let mut _9: &B;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:32:45: 32:46
+    scope 1 {
+        debug a => _4;                   // in scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:31:18: 31:23
+    }
+    scope 2 {
+        debug b => _7;                   // in scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:32:18: 32:23
+    }
+
+    bb0: {
+        _3 = discriminant((*_2));        // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:30:11: 30:12
+        switchInt(move _3) -> [0: bb3, 1: bb1, otherwise: bb2]; // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:30:5: 30:12
+    }
+
+    bb1: {
+        _7 = &(((*_2) as VarB).0: B);    // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:32:18: 32:23
+        _8 = _1;                         // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:32:39: 32:43
+        _9 = _7;                         // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:32:45: 32:46
+        _0 = is_aligned::<B>(move _8, move _9) -> bb4; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:32:28: 32:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:32:28: 32:38
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a B) -> bool {is_aligned::<B>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        unreachable;                     // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:30:11: 30:12
+    }
+
+    bb3: {
+        _4 = &(((*_2) as VarA).0: A);    // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:31:18: 31:23
+        _5 = _1;                         // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:31:39: 31:43
+        _6 = _4;                         // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:31:45: 31:46
+        _0 = is_aligned::<A>(move _5, move _6) -> bb4; // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:31:28: 31:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:31:28: 31:38
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a A) -> bool {is_aligned::<A>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:34:2: 34:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:36:15: 36:15
+    let _1: usize;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:37:9: 37:18
+    let mut _3: bool;                    // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+    let mut _4: bool;                    // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:13: 39:41
+    let mut _5: usize;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:24: 39:33
+    let mut _6: &Tag<u64, u64>;          // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:35: 39:40
+    let _7: &Tag<u64, u64>;              // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:35: 39:40
+    let mut _8: !;                       // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+    let mut _9: bool;                    // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+    let mut _10: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:13: 40:54
+    let mut _11: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:37: 40:46
+    let mut _12: &Tag<u64, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:48: 40:53
+    let _13: &Tag<u64, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:48: 40:53
+    let mut _14: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+    let mut _15: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+    let mut _16: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:13: 41:41
+    let mut _17: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:24: 41:33
+    let mut _18: &Tag<u64, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:35: 41:40
+    let _19: &Tag<u64, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:35: 41:40
+    let mut _20: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+    let mut _21: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+    let mut _22: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:13: 42:54
+    let mut _23: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:37: 42:46
+    let mut _24: &Tag<u64, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:48: 42:53
+    let _25: &Tag<u64, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:48: 42:53
+    let mut _26: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+    let mut _28: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+    let mut _29: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:13: 45:41
+    let mut _30: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:24: 45:33
+    let mut _31: &Tag<u64, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:35: 45:40
+    let _32: &Tag<u64, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:35: 45:40
+    let mut _33: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+    let mut _34: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+    let mut _35: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:13: 46:54
+    let mut _36: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:37: 46:46
+    let mut _37: &Tag<u64, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:48: 46:53
+    let _38: &Tag<u64, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:48: 46:53
+    let mut _39: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+    let mut _40: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+    let mut _41: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:13: 47:41
+    let mut _42: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:24: 47:33
+    let mut _43: &Tag<u64, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:35: 47:40
+    let _44: &Tag<u64, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:35: 47:40
+    let mut _45: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+    let mut _46: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+    let mut _47: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:48:13: 48:46
+    let mut _48: &Tag<u64, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:48:40: 48:45
+    let _49: &Tag<u64, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:48:40: 48:45
+    let mut _50: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+    let mut _52: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+    let mut _53: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:13: 51:41
+    let mut _54: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:24: 51:33
+    let mut _55: &Tag<u32, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:35: 51:40
+    let _56: &Tag<u32, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:35: 51:40
+    let mut _57: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+    let mut _58: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+    let mut _59: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:52:13: 52:46
+    let mut _60: &Tag<u32, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:52:40: 52:45
+    let _61: &Tag<u32, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:52:40: 52:45
+    let mut _62: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+    let mut _63: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+    let mut _64: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:13: 53:41
+    let mut _65: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:24: 53:33
+    let mut _66: &Tag<u32, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:35: 53:40
+    let _67: &Tag<u32, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:35: 53:40
+    let mut _68: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+    let mut _69: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+    let mut _70: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:13: 54:54
+    let mut _71: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:37: 54:46
+    let mut _72: &Tag<u32, u64>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:48: 54:53
+    let _73: &Tag<u32, u64>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:48: 54:53
+    let mut _74: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+    let mut _76: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+    let mut _77: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:57:13: 57:33
+    let mut _78: &Tag<u32, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:57:27: 57:32
+    let _79: &Tag<u32, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:57:27: 57:32
+    let mut _80: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+    let mut _81: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+    let mut _82: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:58:13: 58:46
+    let mut _83: &Tag<u32, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:58:40: 58:45
+    let _84: &Tag<u32, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:58:40: 58:45
+    let mut _85: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+    let mut _86: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+    let mut _87: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:59:13: 59:33
+    let mut _88: &Tag<u32, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:59:27: 59:32
+    let _89: &Tag<u32, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:59:27: 59:32
+    let mut _90: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+    let mut _91: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+    let mut _92: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:60:13: 60:46
+    let mut _93: &Tag<u32, u32>;         // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:60:40: 60:45
+    let _94: &Tag<u32, u32>;             // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:60:40: 60:45
+    let mut _95: !;                      // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+    let mut _97: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+    let mut _98: bool;                   // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:13: 63:41
+    let mut _99: usize;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:24: 63:33
+    let mut _100: &Tag<f64, f64>;        // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:35: 63:40
+    let _101: &Tag<f64, f64>;            // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:35: 63:40
+    let mut _102: !;                     // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+    let mut _103: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+    let mut _104: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:13: 64:54
+    let mut _105: usize;                 // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:37: 64:46
+    let mut _106: &Tag<f64, f64>;        // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:48: 64:53
+    let _107: &Tag<f64, f64>;            // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:48: 64:53
+    let mut _108: !;                     // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+    let mut _109: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+    let mut _110: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:13: 65:41
+    let mut _111: usize;                 // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:24: 65:33
+    let mut _112: &Tag<f64, f64>;        // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:35: 65:40
+    let _113: &Tag<f64, f64>;            // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:35: 65:40
+    let mut _114: !;                     // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+    let mut _115: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+    let mut _116: bool;                  // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:13: 66:54
+    let mut _117: usize;                 // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:37: 66:46
+    let mut _118: &Tag<f64, f64>;        // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:48: 66:53
+    let _119: &Tag<f64, f64>;            // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:48: 66:53
+    let mut _120: !;                     // in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+    scope 1 {
+        debug u64_align => _1;           // in scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:37:9: 37:18
+        let _2: Rec<u64, u64>;           // in scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:38:9: 38:10
+        scope 2 {
+            debug x => _2;               // in scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:38:9: 38:10
+            let _27: Rec<u64, u32>;      // in scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:44:9: 44:10
+            scope 3 {
+                debug x => _27;          // in scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:44:9: 44:10
+                let _51: Rec<u32, u64>;  // in scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:50:9: 50:10
+                scope 4 {
+                    debug x => _51;      // in scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:50:9: 50:10
+                    let _75: Rec<u32, u32>; // in scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:56:9: 56:10
+                    scope 5 {
+                        debug x => _75;  // in scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:56:9: 56:10
+                        let _96: Rec<f64, f64>; // in scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:62:9: 62:10
+                        scope 6 {
+                            debug x => _96; // in scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:62:9: 62:10
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = std::mem::min_align_of::<u64>() -> bb1; // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:37:21: 37:52
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:37:21: 37:50
+                                         // + literal: Const { ty: fn() -> usize {std::mem::min_align_of::<u64>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = mk_rec::<u64, u64>(const 22_u64, const 23_u64) -> bb2; // scope 1 at ui/struct-enums/tag-align-dyn-variants.rs:38:13: 38:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:38:13: 38:19
+                                         // + literal: Const { ty: fn(u64, u64) -> Rec<u64, u64> {mk_rec::<u64, u64>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = _1;                         // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:24: 39:33
+        _7 = &(_2.1: Tag<u64, u64>);     // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:35: 39:40
+        _6 = _7;                         // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:35: 39:40
+        _4 = is_aligned::<Tag<u64, u64>>(move _5, move _6) -> bb3; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:13: 39:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:39:13: 39:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u64>) -> bool {is_aligned::<Tag<u64, u64>>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _3 = Not(move _4);               // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+        switchInt(move _3) -> [0: bb5, otherwise: bb4]; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+    }
+
+    bb4: {
+        _8 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tA)"); // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:39:5: 39:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb5: {
+        _11 = _1;                        // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:37: 40:46
+        _13 = &(_2.1: Tag<u64, u64>);    // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:48: 40:53
+        _12 = _13;                       // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:48: 40:53
+        _10 = variant_data_is_aligned::<u64, u64>(move _11, move _12) -> bb6; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:13: 40:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:40:13: 40:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u64>) -> bool {variant_data_is_aligned::<u64, u64>}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _9 = Not(move _10);              // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+        switchInt(move _9) -> [0: bb8, otherwise: bb7]; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+    }
+
+    bb7: {
+        _14 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tA)"); // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:40:5: 40:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb8: {
+        _17 = _1;                        // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:24: 41:33
+        _19 = &(_2.3: Tag<u64, u64>);    // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:35: 41:40
+        _18 = _19;                       // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:35: 41:40
+        _16 = is_aligned::<Tag<u64, u64>>(move _17, move _18) -> bb9; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:13: 41:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:41:13: 41:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u64>) -> bool {is_aligned::<Tag<u64, u64>>}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        _15 = Not(move _16);             // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+        switchInt(move _15) -> [0: bb11, otherwise: bb10]; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+    }
+
+    bb10: {
+        _20 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tB)"); // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:41:5: 41:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb11: {
+        _23 = _1;                        // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:37: 42:46
+        _25 = &(_2.3: Tag<u64, u64>);    // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:48: 42:53
+        _24 = _25;                       // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:48: 42:53
+        _22 = variant_data_is_aligned::<u64, u64>(move _23, move _24) -> bb12; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:13: 42:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:42:13: 42:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u64>) -> bool {variant_data_is_aligned::<u64, u64>}, val: Value(<ZST>) }
+    }
+
+    bb12: {
+        _21 = Not(move _22);             // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+        switchInt(move _21) -> [0: bb14, otherwise: bb13]; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+    }
+
+    bb13: {
+        _26 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tB)"); // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:42:5: 42:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb14: {
+        _27 = mk_rec::<u64, u32>(const 22_u64, const 23_u32) -> bb15; // scope 2 at ui/struct-enums/tag-align-dyn-variants.rs:44:13: 44:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:44:13: 44:19
+                                         // + literal: Const { ty: fn(u64, u32) -> Rec<u64, u32> {mk_rec::<u64, u32>}, val: Value(<ZST>) }
+    }
+
+    bb15: {
+        _30 = _1;                        // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:24: 45:33
+        _32 = &(_27.1: Tag<u64, u32>);   // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:35: 45:40
+        _31 = _32;                       // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:35: 45:40
+        _29 = is_aligned::<Tag<u64, u32>>(move _30, move _31) -> bb16; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:13: 45:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:45:13: 45:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u32>) -> bool {is_aligned::<Tag<u64, u32>>}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _28 = Not(move _29);             // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+        switchInt(move _28) -> [0: bb18, otherwise: bb17]; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+    }
+
+    bb17: {
+        _33 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tA)"); // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:45:5: 45:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb18: {
+        _36 = _1;                        // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:37: 46:46
+        _38 = &(_27.1: Tag<u64, u32>);   // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:48: 46:53
+        _37 = _38;                       // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:48: 46:53
+        _35 = variant_data_is_aligned::<u64, u32>(move _36, move _37) -> bb19; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:13: 46:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:46:13: 46:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u32>) -> bool {variant_data_is_aligned::<u64, u32>}, val: Value(<ZST>) }
+    }
+
+    bb19: {
+        _34 = Not(move _35);             // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+        switchInt(move _34) -> [0: bb21, otherwise: bb20]; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+    }
+
+    bb20: {
+        _39 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tA)"); // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:46:5: 46:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb21: {
+        _42 = _1;                        // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:24: 47:33
+        _44 = &(_27.3: Tag<u64, u32>);   // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:35: 47:40
+        _43 = _44;                       // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:35: 47:40
+        _41 = is_aligned::<Tag<u64, u32>>(move _42, move _43) -> bb22; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:13: 47:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:47:13: 47:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u32>) -> bool {is_aligned::<Tag<u64, u32>>}, val: Value(<ZST>) }
+    }
+
+    bb22: {
+        _40 = Not(move _41);             // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+        switchInt(move _40) -> [0: bb24, otherwise: bb23]; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+    }
+
+    bb23: {
+        _45 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tB)"); // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:47:5: 47:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb24: {
+        _49 = &(_27.3: Tag<u64, u32>);   // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:40: 48:45
+        _48 = _49;                       // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:40: 48:45
+        _47 = variant_data_is_aligned::<u64, u32>(const 4_usize, move _48) -> bb25; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:13: 48:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:48:13: 48:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u64, u32>) -> bool {variant_data_is_aligned::<u64, u32>}, val: Value(<ZST>) }
+    }
+
+    bb25: {
+        _46 = Not(move _47);             // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+        switchInt(move _46) -> [0: bb27, otherwise: bb26]; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+    }
+
+    bb26: {
+        _50 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(4, &x.tB)"); // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:48:5: 48:47
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb27: {
+        _51 = mk_rec::<u32, u64>(const 22_u32, const 23_u64) -> bb28; // scope 3 at ui/struct-enums/tag-align-dyn-variants.rs:50:13: 50:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:50:13: 50:19
+                                         // + literal: Const { ty: fn(u32, u64) -> Rec<u32, u64> {mk_rec::<u32, u64>}, val: Value(<ZST>) }
+    }
+
+    bb28: {
+        _54 = _1;                        // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:24: 51:33
+        _56 = &(_51.1: Tag<u32, u64>);   // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:35: 51:40
+        _55 = _56;                       // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:35: 51:40
+        _53 = is_aligned::<Tag<u32, u64>>(move _54, move _55) -> bb29; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:13: 51:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:51:13: 51:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u64>) -> bool {is_aligned::<Tag<u32, u64>>}, val: Value(<ZST>) }
+    }
+
+    bb29: {
+        _52 = Not(move _53);             // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+        switchInt(move _52) -> [0: bb31, otherwise: bb30]; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+    }
+
+    bb30: {
+        _57 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tA)"); // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:51:5: 51:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb31: {
+        _61 = &(_51.1: Tag<u32, u64>);   // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:40: 52:45
+        _60 = _61;                       // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:40: 52:45
+        _59 = variant_data_is_aligned::<u32, u64>(const 4_usize, move _60) -> bb32; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:13: 52:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:52:13: 52:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u64>) -> bool {variant_data_is_aligned::<u32, u64>}, val: Value(<ZST>) }
+    }
+
+    bb32: {
+        _58 = Not(move _59);             // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+        switchInt(move _58) -> [0: bb34, otherwise: bb33]; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+    }
+
+    bb33: {
+        _62 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(4, &x.tA)"); // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:52:5: 52:47
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb34: {
+        _65 = _1;                        // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:24: 53:33
+        _67 = &(_51.3: Tag<u32, u64>);   // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:35: 53:40
+        _66 = _67;                       // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:35: 53:40
+        _64 = is_aligned::<Tag<u32, u64>>(move _65, move _66) -> bb35; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:13: 53:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:53:13: 53:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u64>) -> bool {is_aligned::<Tag<u32, u64>>}, val: Value(<ZST>) }
+    }
+
+    bb35: {
+        _63 = Not(move _64);             // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+        switchInt(move _63) -> [0: bb37, otherwise: bb36]; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+    }
+
+    bb36: {
+        _68 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tB)"); // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:53:5: 53:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb37: {
+        _71 = _1;                        // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:37: 54:46
+        _73 = &(_51.3: Tag<u32, u64>);   // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:48: 54:53
+        _72 = _73;                       // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:48: 54:53
+        _70 = variant_data_is_aligned::<u32, u64>(move _71, move _72) -> bb38; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:13: 54:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:54:13: 54:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u64>) -> bool {variant_data_is_aligned::<u32, u64>}, val: Value(<ZST>) }
+    }
+
+    bb38: {
+        _69 = Not(move _70);             // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+        switchInt(move _69) -> [0: bb40, otherwise: bb39]; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+    }
+
+    bb39: {
+        _74 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tB)"); // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:54:5: 54:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb40: {
+        _75 = mk_rec::<u32, u32>(const 22_u32, const 23_u32) -> bb41; // scope 4 at ui/struct-enums/tag-align-dyn-variants.rs:56:13: 56:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:56:13: 56:19
+                                         // + literal: Const { ty: fn(u32, u32) -> Rec<u32, u32> {mk_rec::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb41: {
+        _79 = &(_75.1: Tag<u32, u32>);   // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:27: 57:32
+        _78 = _79;                       // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:27: 57:32
+        _77 = is_aligned::<Tag<u32, u32>>(const 4_usize, move _78) -> bb42; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:13: 57:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:57:13: 57:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u32>) -> bool {is_aligned::<Tag<u32, u32>>}, val: Value(<ZST>) }
+    }
+
+    bb42: {
+        _76 = Not(move _77);             // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+        switchInt(move _76) -> [0: bb44, otherwise: bb43]; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+    }
+
+    bb43: {
+        _80 = core::panicking::panic(const "assertion failed: is_aligned(4, &x.tA)"); // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:57:5: 57:34
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb44: {
+        _84 = &(_75.1: Tag<u32, u32>);   // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:40: 58:45
+        _83 = _84;                       // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:40: 58:45
+        _82 = variant_data_is_aligned::<u32, u32>(const 4_usize, move _83) -> bb45; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:13: 58:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:58:13: 58:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u32>) -> bool {variant_data_is_aligned::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb45: {
+        _81 = Not(move _82);             // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+        switchInt(move _81) -> [0: bb47, otherwise: bb46]; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+    }
+
+    bb46: {
+        _85 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(4, &x.tA)"); // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:58:5: 58:47
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb47: {
+        _89 = &(_75.3: Tag<u32, u32>);   // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:27: 59:32
+        _88 = _89;                       // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:27: 59:32
+        _87 = is_aligned::<Tag<u32, u32>>(const 4_usize, move _88) -> bb48; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:13: 59:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:59:13: 59:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u32>) -> bool {is_aligned::<Tag<u32, u32>>}, val: Value(<ZST>) }
+    }
+
+    bb48: {
+        _86 = Not(move _87);             // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+        switchInt(move _86) -> [0: bb50, otherwise: bb49]; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+    }
+
+    bb49: {
+        _90 = core::panicking::panic(const "assertion failed: is_aligned(4, &x.tB)"); // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:59:5: 59:34
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb50: {
+        _94 = &(_75.3: Tag<u32, u32>);   // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:40: 60:45
+        _93 = _94;                       // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:40: 60:45
+        _92 = variant_data_is_aligned::<u32, u32>(const 4_usize, move _93) -> bb51; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:13: 60:46
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:60:13: 60:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<u32, u32>) -> bool {variant_data_is_aligned::<u32, u32>}, val: Value(<ZST>) }
+    }
+
+    bb51: {
+        _91 = Not(move _92);             // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+        switchInt(move _91) -> [0: bb53, otherwise: bb52]; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+    }
+
+    bb52: {
+        _95 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(4, &x.tB)"); // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:60:5: 60:47
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb53: {
+        _96 = mk_rec::<f64, f64>(const 22f64, const 23f64) -> bb54; // scope 5 at ui/struct-enums/tag-align-dyn-variants.rs:62:13: 62:33
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:62:13: 62:19
+                                         // + literal: Const { ty: fn(f64, f64) -> Rec<f64, f64> {mk_rec::<f64, f64>}, val: Value(<ZST>) }
+    }
+
+    bb54: {
+        _99 = _1;                        // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:24: 63:33
+        _101 = &(_96.1: Tag<f64, f64>);  // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:35: 63:40
+        _100 = _101;                     // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:35: 63:40
+        _98 = is_aligned::<Tag<f64, f64>>(move _99, move _100) -> bb55; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:13: 63:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:63:13: 63:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<f64, f64>) -> bool {is_aligned::<Tag<f64, f64>>}, val: Value(<ZST>) }
+    }
+
+    bb55: {
+        _97 = Not(move _98);             // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+        switchInt(move _97) -> [0: bb57, otherwise: bb56]; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+    }
+
+    bb56: {
+        _102 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tA)"); // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:63:5: 63:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb57: {
+        _105 = _1;                       // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:37: 64:46
+        _107 = &(_96.1: Tag<f64, f64>);  // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:48: 64:53
+        _106 = _107;                     // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:48: 64:53
+        _104 = variant_data_is_aligned::<f64, f64>(move _105, move _106) -> bb58; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:13: 64:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:64:13: 64:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<f64, f64>) -> bool {variant_data_is_aligned::<f64, f64>}, val: Value(<ZST>) }
+    }
+
+    bb58: {
+        _103 = Not(move _104);           // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+        switchInt(move _103) -> [0: bb60, otherwise: bb59]; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+    }
+
+    bb59: {
+        _108 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tA)"); // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:64:5: 64:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb60: {
+        _111 = _1;                       // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:24: 65:33
+        _113 = &(_96.3: Tag<f64, f64>);  // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:35: 65:40
+        _112 = _113;                     // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:35: 65:40
+        _110 = is_aligned::<Tag<f64, f64>>(move _111, move _112) -> bb61; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:13: 65:41
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:65:13: 65:23
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<f64, f64>) -> bool {is_aligned::<Tag<f64, f64>>}, val: Value(<ZST>) }
+    }
+
+    bb61: {
+        _109 = Not(move _110);           // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+        switchInt(move _109) -> [0: bb63, otherwise: bb62]; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+    }
+
+    bb62: {
+        _114 = core::panicking::panic(const "assertion failed: is_aligned(u64_align, &x.tB)"); // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:65:5: 65:42
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb63: {
+        _117 = _1;                       // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:37: 66:46
+        _119 = &(_96.3: Tag<f64, f64>);  // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:48: 66:53
+        _118 = _119;                     // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:48: 66:53
+        _116 = variant_data_is_aligned::<f64, f64>(move _117, move _118) -> bb64; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:13: 66:54
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:66:13: 66:36
+                                         // + literal: Const { ty: for<'a> fn(usize, &'a Tag<f64, f64>) -> bool {variant_data_is_aligned::<f64, f64>}, val: Value(<ZST>) }
+    }
+
+    bb64: {
+        _115 = Not(move _116);           // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+        switchInt(move _115) -> [0: bb66, otherwise: bb65]; // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+    }
+
+    bb65: {
+        _120 = core::panicking::panic(const "assertion failed: variant_data_is_aligned(u64_align, &x.tB)"); // scope 6 at ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+                                         // mir::Constant
+                                         // + span: ui/struct-enums/tag-align-dyn-variants.rs:66:5: 66:55
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb66: {
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:67:2: 67:2
+    }
+}
+
+fn Tag::VarA(_1: A) -> Tag<A, B> {
+    let mut _0: Tag<A, B>;               // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+
+    bb0: {
+        _0 = Tag::<A, B>::VarA(move _1); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+    }
+}
+
+// MIR FOR CTFE
+fn Tag::VarA(_1: A) -> Tag<A, B> {
+    let mut _0: Tag<A, B>;               // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+
+    bb0: {
+        _0 = Tag::<A, B>::VarA(move _1); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:9:5: 9:9
+    }
+}
+
+fn Tag::VarB(_1: B) -> Tag<A, B> {
+    let mut _0: Tag<A, B>;               // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+
+    bb0: {
+        _0 = Tag::<A, B>::VarB(move _1); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+    }
+}
+
+// MIR FOR CTFE
+fn Tag::VarB(_1: B) -> Tag<A, B> {
+    let mut _0: Tag<A, B>;               // return place in scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+
+    bb0: {
+        _0 = Tag::<A, B>::VarB(move _1); // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+        return;                          // scope 0 at ui/struct-enums/tag-align-dyn-variants.rs:10:5: 10:9
+    }
+}

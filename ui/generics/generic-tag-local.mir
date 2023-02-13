@@ -1,0 +1,36 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generics/generic-tag-local.rs:8:15: 8:15
+    let _1: clam<i32>;                   // in scope 0 at ui/generics/generic-tag-local.rs:8:21: 8:23
+    scope 1 {
+        debug _c => _1;                  // in scope 1 at ui/generics/generic-tag-local.rs:8:21: 8:23
+    }
+
+    bb0: {
+        _1 = const clam::<i32>::a(3_i32); // scope 0 at ui/generics/generic-tag-local.rs:8:26: 8:36
+                                         // mir::Constant
+                                         // + span: ui/generics/generic-tag-local.rs:8:26: 8:36
+                                         // + literal: Const { ty: clam<i32>, val: Value(Scalar(0x00000003)) }
+        return;                          // scope 0 at ui/generics/generic-tag-local.rs:8:39: 8:39
+    }
+}
+
+fn clam::a(_1: T) -> clam<T> {
+    let mut _0: clam<T>;                 // return place in scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+
+    bb0: {
+        _0 = clam::<T>::a(move _1);      // scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+        return;                          // scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+    }
+}
+
+// MIR FOR CTFE
+fn clam::a(_1: T) -> clam<T> {
+    let mut _0: clam<T>;                 // return place in scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+
+    bb0: {
+        _0 = clam::<T>::a(move _1);      // scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+        return;                          // scope 0 at ui/generics/generic-tag-local.rs:6:16: 6:17
+    }
+}

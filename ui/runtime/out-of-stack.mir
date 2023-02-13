@@ -1,0 +1,1064 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn black_box(_1: T) -> () {
+    debug dummy => _1;                   // in scope 0 at ui/runtime/out-of-stack.rs:23:21: 23:26
+    let mut _0: ();                      // return place in scope 0 at ui/runtime/out-of-stack.rs:23:31: 23:31
+    let _2: T;                           // in scope 0 at ui/runtime/out-of-stack.rs:23:33: 23:66
+    let mut _3: T;                       // in scope 0 at ui/runtime/out-of-stack.rs:23:60: 23:65
+
+    bb0: {
+        _3 = move _1;                    // scope 0 at ui/runtime/out-of-stack.rs:23:60: 23:65
+        _2 = std::intrinsics::black_box::<T>(move _3) -> bb1; // scope 0 at ui/runtime/out-of-stack.rs:23:33: 23:66
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:23:33: 23:59
+                                         // + literal: Const { ty: extern "rust-intrinsic" fn(T) -> T {std::intrinsics::black_box::<T>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_2) -> bb2;                 // scope 0 at ui/runtime/out-of-stack.rs:23:66: 23:67
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:23:69: 23:69
+    }
+}
+
+fn silent_recurse() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/runtime/out-of-stack.rs:25:21: 25:21
+    let _1: [u8; 1000];                  // in scope 0 at ui/runtime/out-of-stack.rs:26:9: 26:12
+    let _2: ();                          // in scope 0 at ui/runtime/out-of-stack.rs:27:5: 27:19
+    let mut _3: [u8; 1000];              // in scope 0 at ui/runtime/out-of-stack.rs:27:15: 27:18
+    let _4: ();                          // in scope 0 at ui/runtime/out-of-stack.rs:28:5: 28:21
+    scope 1 {
+        debug buf => _1;                 // in scope 1 at ui/runtime/out-of-stack.rs:26:9: 26:12
+    }
+
+    bb0: {
+        _1 = [const 0_u8; 1000];         // scope 0 at ui/runtime/out-of-stack.rs:26:15: 26:26
+        _3 = _1;                         // scope 1 at ui/runtime/out-of-stack.rs:27:15: 27:18
+        _2 = black_box::<[u8; 1000]>(move _3) -> bb1; // scope 1 at ui/runtime/out-of-stack.rs:27:5: 27:19
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:27:5: 27:14
+                                         // + literal: Const { ty: fn([u8; 1000]) {black_box::<[u8; 1000]>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _4 = silent_recurse() -> bb2;    // scope 1 at ui/runtime/out-of-stack.rs:28:5: 28:21
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:28:5: 28:19
+                                         // + literal: Const { ty: fn() {silent_recurse}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:29:2: 29:2
+    }
+}
+
+silent_recurse::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/runtime/out-of-stack.rs:26:21: 26:25
+
+    bb0: {
+        _0 = const 1000_usize;           // scope 0 at ui/runtime/out-of-stack.rs:26:21: 26:25
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:26:21: 26:25
+    }
+}
+
+fn loud_recurse() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/runtime/out-of-stack.rs:31:19: 31:19
+    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _3: &[&str];                 // in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+    let mut _4: &[&str; 1];              // in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+    let _5: &[&str; 1];                  // in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _7: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _8: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _9: ();                          // in scope 0 at ui/runtime/out-of-stack.rs:33:5: 33:19
+    let _10: ();                         // in scope 0 at ui/runtime/out-of-stack.rs:34:5: 34:18
+    let mut _11: ();                     // in scope 0 at ui/runtime/out-of-stack.rs:34:15: 34:17
+    let mut _12: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _13: &[&str; 1];             // in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+
+    bb0: {
+        _13 = const _;                   // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:32:14: 32:22
+                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(loud_recurse, [], Some(promoted[1])) }
+        _5 = _13;                        // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+        _4 = _5;                         // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+        _12 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(loud_recurse, [], Some(promoted[0])) }
+        _8 = _12;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = _print(move _2) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _9 = loud_recurse() -> bb3;      // scope 0 at ui/runtime/out-of-stack.rs:33:5: 33:19
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:33:5: 33:17
+                                         // + literal: Const { ty: fn() {loud_recurse}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _10 = black_box::<()>(move _11) -> bb4; // scope 0 at ui/runtime/out-of-stack.rs:34:5: 34:18
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:34:5: 34:14
+                                         // + literal: Const { ty: fn(()) {black_box::<()>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:35:2: 35:2
+    }
+}
+
+promoted[0] in loud_recurse: &[core::fmt::ArgumentV1<'_>; 0] = {
+    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+
+    bb0: {
+        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    }
+}
+
+promoted[1] in loud_recurse: &[&str; 1] = {
+    let mut _0: &[&str; 1];              // return place in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+    let mut _1: [&str; 1];               // in scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+
+    bb0: {
+        _1 = [const "hello!\n"];         // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:32:14: 32:22
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:32:14: 32:22
+    }
+}
+
+fn check_status(_1: ExitStatus) -> () {
+    debug status => _1;                  // in scope 0 at ui/runtime/out-of-stack.rs:38:17: 38:23
+    let mut _0: ();                      // return place in scope 0 at ui/runtime/out-of-stack.rs:39:1: 39:1
+    let mut _2: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:42:5: 42:31
+    let mut _3: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:42:13: 42:30
+    let mut _4: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:42:14: 42:30
+    let mut _5: &std::process::ExitStatus; // in scope 0 at ui/runtime/out-of-stack.rs:42:14: 42:30
+    let mut _6: !;                       // in scope 0 at ui/runtime/out-of-stack.rs:42:5: 42:31
+    let mut _7: (&std::option::Option<i32>, &std::option::Option<i32>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _8: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _9: std::option::Option<i32>;    // in scope 0 at ui/runtime/out-of-stack.rs:43:16: 43:31
+    let mut _10: &std::process::ExitStatus; // in scope 0 at ui/runtime/out-of-stack.rs:43:16: 43:31
+    let mut _11: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _12: &std::option::Option<i32>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+    let _13: &std::option::Option<i32>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _16: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _17: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _19: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _20: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _21: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _22: &std::option::Option<i32>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _23: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _24: &std::option::Option<i32>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _25: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _26: &std::option::Option<i32>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    scope 1 {
+        debug left_val => _12;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        debug right_val => _13;          // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        let _18: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        scope 2 {
+            debug kind => _18;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        }
+    }
+
+    bb0: {
+        _5 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:42:14: 42:30
+        _4 = ExitStatus::success(move _5) -> bb1; // scope 0 at ui/runtime/out-of-stack.rs:42:14: 42:30
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:42:21: 42:28
+                                         // + literal: Const { ty: for<'a> fn(&'a ExitStatus) -> bool {ExitStatus::success}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = Not(move _4);               // scope 0 at ui/runtime/out-of-stack.rs:42:13: 42:30
+        _2 = Not(move _3);               // scope 0 at ui/runtime/out-of-stack.rs:42:5: 42:31
+        switchInt(move _2) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/runtime/out-of-stack.rs:42:5: 42:31
+    }
+
+    bb2: {
+        _6 = core::panicking::panic(const "assertion failed: !status.success()"); // scope 0 at ui/runtime/out-of-stack.rs:42:5: 42:31
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:42:5: 42:31
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb3: {
+        _10 = &_1;                       // scope 0 at ui/runtime/out-of-stack.rs:43:16: 43:31
+        _9 = <ExitStatus as ExitStatusExt>::signal(move _10) -> bb4; // scope 0 at ui/runtime/out-of-stack.rs:43:16: 43:31
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:43:23: 43:29
+                                         // + literal: Const { ty: for<'a> fn(&'a ExitStatus) -> Option<i32> {<ExitStatus as ExitStatusExt>::signal}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _8 = &_9;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _26 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                         // + literal: Const { ty: &Option<i32>, val: Unevaluated(check_status, [], Some(promoted[0])) }
+        _11 = _26;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _7 = (move _8, move _11);        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _12 = (_7.0: &std::option::Option<i32>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _13 = (_7.1: &std::option::Option<i32>); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _16 = _12;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _17 = _13;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _15 = <Option<i32> as PartialEq>::eq(move _16, move _17) -> bb5; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Option<i32>, &'b Option<i32>) -> bool {<Option<i32> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _14 = Not(move _15);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _14) -> [0: bb7, otherwise: bb6]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb6: {
+        _18 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _20 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _22 = _12;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _21 = _22;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _24 = _13;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _23 = _24;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _25 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _19 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _20, move _21, move _23, move _25); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Option<i32>, &'b Option<i32>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Option<i32>, Option<i32>>}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:44:2: 44:2
+    }
+}
+
+promoted[0] in check_status: &Option<i32> = {
+    let mut _0: &std::option::Option<i32>; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _1: std::option::Option<i32>; // in scope 0 at ui/runtime/out-of-stack.rs:43:33: 43:52
+
+    bb0: {
+        _1 = Option::<i32>::Some(const _); // scope 0 at ui/runtime/out-of-stack.rs:43:33: 43:52
+        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/runtime/out-of-stack.rs:53:11: 53:11
+    let _1: std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:54:9: 54:13
+    let mut _2: std::env::Args;          // in scope 0 at ui/runtime/out-of-stack.rs:54:29: 54:40
+    let mut _3: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:55:8: 55:45
+    let mut _4: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:55:8: 55:22
+    let mut _5: usize;                   // in scope 0 at ui/runtime/out-of-stack.rs:55:8: 55:18
+    let mut _6: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:55:8: 55:18
+    let mut _7: bool;                    // in scope 0 at ui/runtime/out-of-stack.rs:55:26: 55:45
+    let mut _8: &std::string::String;    // in scope 0 at ui/runtime/out-of-stack.rs:55:26: 55:33
+    let _9: &std::string::String;        // in scope 0 at ui/runtime/out-of-stack.rs:55:26: 55:33
+    let mut _10: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:55:26: 55:30
+    let mut _11: &&str;                  // in scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+    let _12: ();                         // in scope 0 at ui/runtime/out-of-stack.rs:56:9: 56:25
+    let mut _13: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:57:15: 57:50
+    let mut _14: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:57:15: 57:29
+    let mut _15: usize;                  // in scope 0 at ui/runtime/out-of-stack.rs:57:15: 57:25
+    let mut _16: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:57:15: 57:25
+    let mut _17: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:57:33: 57:50
+    let mut _18: &std::string::String;   // in scope 0 at ui/runtime/out-of-stack.rs:57:33: 57:40
+    let _19: &std::string::String;       // in scope 0 at ui/runtime/out-of-stack.rs:57:33: 57:40
+    let mut _20: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:57:33: 57:37
+    let mut _21: &&str;                  // in scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+    let _22: ();                         // in scope 0 at ui/runtime/out-of-stack.rs:58:9: 58:23
+    let mut _23: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:59:15: 59:59
+    let mut _24: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:59:15: 59:29
+    let mut _25: usize;                  // in scope 0 at ui/runtime/out-of-stack.rs:59:15: 59:25
+    let mut _26: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:59:15: 59:25
+    let mut _27: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:59:33: 59:59
+    let mut _28: &std::string::String;   // in scope 0 at ui/runtime/out-of-stack.rs:59:33: 59:40
+    let _29: &std::string::String;       // in scope 0 at ui/runtime/out-of-stack.rs:59:33: 59:40
+    let mut _30: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:59:33: 59:37
+    let mut _31: &&str;                  // in scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+    let _32: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/runtime/out-of-stack.rs:60:9: 60:45
+    let mut _33: std::thread::JoinHandle<()>; // in scope 0 at ui/runtime/out-of-stack.rs:60:9: 60:38
+    let mut _34: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:61:15: 61:57
+    let mut _35: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:61:15: 61:29
+    let mut _36: usize;                  // in scope 0 at ui/runtime/out-of-stack.rs:61:15: 61:25
+    let mut _37: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:61:15: 61:25
+    let mut _38: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:61:33: 61:57
+    let mut _39: &std::string::String;   // in scope 0 at ui/runtime/out-of-stack.rs:61:33: 61:40
+    let _40: &std::string::String;       // in scope 0 at ui/runtime/out-of-stack.rs:61:33: 61:40
+    let mut _41: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:61:33: 61:37
+    let mut _42: &&str;                  // in scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+    let _43: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/runtime/out-of-stack.rs:62:9: 62:43
+    let mut _44: std::thread::JoinHandle<()>; // in scope 0 at ui/runtime/out-of-stack.rs:62:9: 62:36
+    let mut _46: std::boxed::Box<[&str]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _47: std::boxed::Box<[&str; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _48: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _49: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _50: *mut u8;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _51: std::boxed::Box<[&str; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _52: &str;                   // in scope 0 at ui/runtime/out-of-stack.rs:66:13: 66:26
+    let _53: &str;                       // in scope 0 at ui/runtime/out-of-stack.rs:66:13: 66:26
+    let mut _54: std::vec::IntoIter<&str>; // in scope 0 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    let mut _55: std::vec::Vec<&str>;    // in scope 0 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    let mut _57: std::option::Option<&str>; // in scope 0 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    let mut _58: &mut std::vec::IntoIter<&str>; // in scope 0 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    let mut _59: &mut std::vec::IntoIter<&str>; // in scope 0 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    let mut _60: isize;                  // in scope 0 at ui/runtime/out-of-stack.rs:76:9: 86:10
+    let _62: ();                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+    let mut _63: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _64: &[&str];                // in scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+    let mut _65: &[&str; 2];             // in scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+    let _66: &[&str; 2];                 // in scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+    let mut _67: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _68: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _69: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let _70: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+    let mut _71: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/runtime/out-of-stack.rs:77:37: 77:41
+    let mut _72: &&str;                  // in scope 0 at ui/runtime/out-of-stack.rs:77:37: 77:41
+    let _73: &&str;                      // in scope 0 at ui/runtime/out-of-stack.rs:77:37: 77:41
+    let mut _75: std::result::Result<std::process::Output, std::io::Error>; // in scope 0 at ui/runtime/out-of-stack.rs:79:26: 79:67
+    let mut _76: &mut std::process::Command; // in scope 0 at ui/runtime/out-of-stack.rs:79:26: 79:67
+    let mut _77: &mut std::process::Command; // in scope 0 at ui/runtime/out-of-stack.rs:79:26: 79:58
+    let mut _78: &mut std::process::Command; // in scope 0 at ui/runtime/out-of-stack.rs:79:26: 79:58
+    let mut _79: std::process::Command;  // in scope 0 at ui/runtime/out-of-stack.rs:79:26: 79:48
+    let mut _80: &std::string::String;   // in scope 0 at ui/runtime/out-of-stack.rs:79:39: 79:47
+    let _81: &std::string::String;       // in scope 0 at ui/runtime/out-of-stack.rs:79:40: 79:47
+    let mut _82: &std::vec::Vec<std::string::String>; // in scope 0 at ui/runtime/out-of-stack.rs:79:40: 79:44
+    let mut _83: &str;                   // in scope 0 at ui/runtime/out-of-stack.rs:79:53: 79:57
+    let _84: ();                         // in scope 0 at ui/runtime/out-of-stack.rs:81:13: 81:40
+    let mut _85: std::process::ExitStatus; // in scope 0 at ui/runtime/out-of-stack.rs:81:26: 81:39
+    let mut _87: &[u8];                  // in scope 0 at ui/runtime/out-of-stack.rs:83:49: 83:63
+    let _88: &[u8];                      // in scope 0 at ui/runtime/out-of-stack.rs:83:49: 83:63
+    let mut _89: &std::vec::Vec<u8>;     // in scope 0 at ui/runtime/out-of-stack.rs:83:49: 83:63
+    let _90: &std::vec::Vec<u8>;         // in scope 0 at ui/runtime/out-of-stack.rs:83:49: 83:63
+    let mut _91: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:84:13: 85:59
+    let mut _92: bool;                   // in scope 0 at ui/runtime/out-of-stack.rs:84:21: 84:63
+    let mut _93: &str;                   // in scope 0 at ui/runtime/out-of-stack.rs:84:21: 84:63
+    let _94: &str;                       // in scope 0 at ui/runtime/out-of-stack.rs:84:21: 84:63
+    let mut _95: &std::borrow::Cow<'_, str>; // in scope 0 at ui/runtime/out-of-stack.rs:84:21: 84:63
+    let mut _96: !;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:9: 29:74
+    let mut _97: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+    let mut _98: &[&str];                // in scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+    let mut _99: &[&str; 1];             // in scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+    let _100: &[&str; 1];                // in scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+    let mut _101: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+    let mut _102: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+    let _103: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+    let _104: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+    let mut _105: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/runtime/out-of-stack.rs:85:53: 85:58
+    let mut _106: &std::borrow::Cow<'_, str>; // in scope 0 at ui/runtime/out-of-stack.rs:85:53: 85:58
+    let _107: &std::borrow::Cow<'_, str>; // in scope 0 at ui/runtime/out-of-stack.rs:85:53: 85:58
+    let mut _114: bool;                  // in scope 0 at ui/runtime/out-of-stack.rs:87:5: 87:6
+    let mut _115: *const [&str; 2];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    scope 1 {
+        debug args => _1;                // in scope 1 at ui/runtime/out-of-stack.rs:54:9: 54:13
+        let mut _45: std::vec::Vec<&str>; // in scope 1 at ui/runtime/out-of-stack.rs:64:13: 64:22
+        let mut _110: &&str;             // in scope 1 at ui/runtime/out-of-stack.rs:61:44: 61:57
+        let mut _111: &&str;             // in scope 1 at ui/runtime/out-of-stack.rs:59:44: 59:59
+        let mut _112: &&str;             // in scope 1 at ui/runtime/out-of-stack.rs:57:44: 57:50
+        let mut _113: &&str;             // in scope 1 at ui/runtime/out-of-stack.rs:55:37: 55:45
+        scope 2 {
+            debug modes => _45;          // in scope 2 at ui/runtime/out-of-stack.rs:64:13: 64:22
+            let mut _56: std::vec::IntoIter<&str>; // in scope 2 at ui/runtime/out-of-stack.rs:76:21: 76:26
+            scope 4 {
+                debug iter => _56;       // in scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+                let _61: &str;           // in scope 4 at ui/runtime/out-of-stack.rs:76:13: 76:17
+                scope 5 {
+                    debug mode => _61;   // in scope 5 at ui/runtime/out-of-stack.rs:76:13: 76:17
+                    let _74: std::process::Output; // in scope 5 at ui/runtime/out-of-stack.rs:79:17: 79:23
+                    let mut _109: &[&str; 2]; // in scope 5 at ui/runtime/out-of-stack.rs:77:22: 77:35
+                    scope 6 {
+                        debug silent => _74; // in scope 6 at ui/runtime/out-of-stack.rs:79:17: 79:23
+                        let _86: std::borrow::Cow<'_, str>; // in scope 6 at ui/runtime/out-of-stack.rs:83:17: 83:22
+                        scope 7 {
+                            debug error => _86; // in scope 7 at ui/runtime/out-of-stack.rs:83:17: 83:22
+                            let mut _108: &[&str; 1]; // in scope 7 at ui/runtime/out-of-stack.rs:85:21: 85:51
+                        }
+                    }
+                }
+            }
+        }
+        scope 3 {
+        }
+    }
+
+    bb0: {
+        _114 = const false;              // scope 0 at ui/runtime/out-of-stack.rs:54:9: 54:13
+        _2 = args() -> bb1;              // scope 0 at ui/runtime/out-of-stack.rs:54:29: 54:40
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:54:29: 54:38
+                                         // + literal: Const { ty: fn() -> Args {args}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> bb2; // scope 0 at ui/runtime/out-of-stack.rs:54:29: 54:50
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:54:41: 54:48
+                                         // + literal: Const { ty: fn(Args) -> Vec<String> {<Args as Iterator>::collect::<Vec<String>>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _6 = &_1;                        // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:18
+        _5 = Vec::<String>::len(move _6) -> [return: bb6, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:18
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:55:13: 55:16
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>) -> usize {Vec::<String>::len}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _3 = const false;                // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+        goto -> bb5;                     // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+    }
+
+    bb4: {
+        _10 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:55:26: 55:30
+        _9 = <Vec<String> as Index<usize>>::index(move _10, const 1_usize) -> [return: bb7, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:55:26: 55:33
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:55:26: 55:33
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>, usize) -> &'a <Vec<String> as Index<usize>>::Output {<Vec<String> as Index<usize>>::index}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        switchInt(move _3) -> [0: bb10, otherwise: bb9]; // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+    }
+
+    bb6: {
+        _4 = Gt(move _5, const 1_usize); // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:22
+        switchInt(move _4) -> [0: bb3, otherwise: bb4]; // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+    }
+
+    bb7: {
+        _8 = _9;                         // scope 1 at ui/runtime/out-of-stack.rs:55:26: 55:33
+        _113 = const _;                  // scope 1 at ui/runtime/out-of-stack.rs:55:37: 55:45
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:55:37: 55:45
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[5])) }
+        _11 = _113;                      // scope 1 at ui/runtime/out-of-stack.rs:55:37: 55:45
+        _7 = <String as PartialEq<&str>>::eq(move _8, move _11) -> [return: bb8, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:55:26: 55:45
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:55:26: 55:45
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _3 = move _7;                    // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+        goto -> bb5;                     // scope 1 at ui/runtime/out-of-stack.rs:55:8: 55:45
+    }
+
+    bb9: {
+        _12 = silent_recurse() -> [return: bb77, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:56:9: 56:25
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:56:9: 56:23
+                                         // + literal: Const { ty: fn() {silent_recurse}, val: Value(<ZST>) }
+    }
+
+    bb10: {
+        _16 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:25
+        _15 = Vec::<String>::len(move _16) -> [return: bb14, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:25
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:57:20: 57:23
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>) -> usize {Vec::<String>::len}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        _13 = const false;               // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+        goto -> bb13;                    // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+    }
+
+    bb12: {
+        _20 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:57:33: 57:37
+        _19 = <Vec<String> as Index<usize>>::index(move _20, const 1_usize) -> [return: bb15, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:57:33: 57:40
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:57:33: 57:40
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>, usize) -> &'a <Vec<String> as Index<usize>>::Output {<Vec<String> as Index<usize>>::index}, val: Value(<ZST>) }
+    }
+
+    bb13: {
+        switchInt(move _13) -> [0: bb18, otherwise: bb17]; // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+    }
+
+    bb14: {
+        _14 = Gt(move _15, const 1_usize); // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:29
+        switchInt(move _14) -> [0: bb11, otherwise: bb12]; // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+    }
+
+    bb15: {
+        _18 = _19;                       // scope 1 at ui/runtime/out-of-stack.rs:57:33: 57:40
+        _112 = const _;                  // scope 1 at ui/runtime/out-of-stack.rs:57:44: 57:50
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:57:44: 57:50
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[4])) }
+        _21 = _112;                      // scope 1 at ui/runtime/out-of-stack.rs:57:44: 57:50
+        _17 = <String as PartialEq<&str>>::eq(move _18, move _21) -> [return: bb16, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:57:33: 57:50
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:57:33: 57:50
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb16: {
+        _13 = move _17;                  // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+        goto -> bb13;                    // scope 1 at ui/runtime/out-of-stack.rs:57:15: 57:50
+    }
+
+    bb17: {
+        _22 = loud_recurse() -> [return: bb78, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:58:9: 58:23
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:58:9: 58:21
+                                         // + literal: Const { ty: fn() {loud_recurse}, val: Value(<ZST>) }
+    }
+
+    bb18: {
+        _26 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:25
+        _25 = Vec::<String>::len(move _26) -> [return: bb22, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:25
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:59:20: 59:23
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>) -> usize {Vec::<String>::len}, val: Value(<ZST>) }
+    }
+
+    bb19: {
+        _23 = const false;               // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+        goto -> bb21;                    // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+    }
+
+    bb20: {
+        _30 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:59:33: 59:37
+        _29 = <Vec<String> as Index<usize>>::index(move _30, const 1_usize) -> [return: bb23, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:59:33: 59:40
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:59:33: 59:40
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>, usize) -> &'a <Vec<String> as Index<usize>>::Output {<Vec<String> as Index<usize>>::index}, val: Value(<ZST>) }
+    }
+
+    bb21: {
+        switchInt(move _23) -> [0: bb28, otherwise: bb25]; // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+    }
+
+    bb22: {
+        _24 = Gt(move _25, const 1_usize); // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:29
+        switchInt(move _24) -> [0: bb19, otherwise: bb20]; // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+    }
+
+    bb23: {
+        _28 = _29;                       // scope 1 at ui/runtime/out-of-stack.rs:59:33: 59:40
+        _111 = const _;                  // scope 1 at ui/runtime/out-of-stack.rs:59:44: 59:59
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:59:44: 59:59
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[3])) }
+        _31 = _111;                      // scope 1 at ui/runtime/out-of-stack.rs:59:44: 59:59
+        _27 = <String as PartialEq<&str>>::eq(move _28, move _31) -> [return: bb24, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:59:33: 59:59
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:59:33: 59:59
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb24: {
+        _23 = move _27;                  // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+        goto -> bb21;                    // scope 1 at ui/runtime/out-of-stack.rs:59:15: 59:59
+    }
+
+    bb25: {
+        _33 = spawn::<fn() {silent_recurse}, ()>(silent_recurse) -> [return: bb26, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:60:9: 60:38
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:60:9: 60:22
+                                         // + literal: Const { ty: fn(fn() {silent_recurse}) -> JoinHandle<()> {spawn::<fn() {silent_recurse}, ()>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:60:23: 60:37
+                                         // + literal: Const { ty: fn() {silent_recurse}, val: Value(<ZST>) }
+    }
+
+    bb26: {
+        _32 = JoinHandle::<()>::join(move _33) -> [return: bb27, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:60:9: 60:45
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:60:39: 60:43
+                                         // + literal: Const { ty: fn(JoinHandle<()>) -> Result<(), Box<(dyn Any + Send + 'static)>> {JoinHandle::<()>::join}, val: Value(<ZST>) }
+    }
+
+    bb27: {
+        drop(_32) -> [return: bb67, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:60:45: 60:46
+    }
+
+    bb28: {
+        _37 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:25
+        _36 = Vec::<String>::len(move _37) -> [return: bb32, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:25
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:61:20: 61:23
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>) -> usize {Vec::<String>::len}, val: Value(<ZST>) }
+    }
+
+    bb29: {
+        _34 = const false;               // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+        goto -> bb31;                    // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+    }
+
+    bb30: {
+        _41 = &_1;                       // scope 1 at ui/runtime/out-of-stack.rs:61:33: 61:37
+        _40 = <Vec<String> as Index<usize>>::index(move _41, const 1_usize) -> [return: bb33, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:61:33: 61:40
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:61:33: 61:40
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>, usize) -> &'a <Vec<String> as Index<usize>>::Output {<Vec<String> as Index<usize>>::index}, val: Value(<ZST>) }
+    }
+
+    bb31: {
+        switchInt(move _34) -> [0: bb38, otherwise: bb35]; // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+    }
+
+    bb32: {
+        _35 = Gt(move _36, const 1_usize); // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:29
+        switchInt(move _35) -> [0: bb29, otherwise: bb30]; // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+    }
+
+    bb33: {
+        _39 = _40;                       // scope 1 at ui/runtime/out-of-stack.rs:61:33: 61:40
+        _110 = const _;                  // scope 1 at ui/runtime/out-of-stack.rs:61:44: 61:57
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:61:44: 61:57
+                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[2])) }
+        _42 = _110;                      // scope 1 at ui/runtime/out-of-stack.rs:61:44: 61:57
+        _38 = <String as PartialEq<&str>>::eq(move _39, move _42) -> [return: bb34, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:61:33: 61:57
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:61:33: 61:57
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+    }
+
+    bb34: {
+        _34 = move _38;                  // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+        goto -> bb31;                    // scope 1 at ui/runtime/out-of-stack.rs:61:15: 61:57
+    }
+
+    bb35: {
+        _44 = spawn::<fn() {loud_recurse}, ()>(loud_recurse) -> [return: bb36, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:62:9: 62:36
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:62:9: 62:22
+                                         // + literal: Const { ty: fn(fn() {loud_recurse}) -> JoinHandle<()> {spawn::<fn() {loud_recurse}, ()>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:62:23: 62:35
+                                         // + literal: Const { ty: fn() {loud_recurse}, val: Value(<ZST>) }
+    }
+
+    bb36: {
+        _43 = JoinHandle::<()>::join(move _44) -> [return: bb37, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:62:9: 62:43
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:62:37: 62:41
+                                         // + literal: Const { ty: fn(JoinHandle<()>) -> Result<(), Box<(dyn Any + Send + 'static)>> {JoinHandle::<()>::join}, val: Value(<ZST>) }
+    }
+
+    bb37: {
+        drop(_43) -> [return: bb67, unwind: bb73]; // scope 1 at ui/runtime/out-of-stack.rs:62:43: 62:44
+    }
+
+    bb38: {
+        _48 = const 32_usize;            // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _49 = const 8_usize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _50 = alloc::alloc::exchange_malloc(move _48, move _49) -> [return: bb39, unwind: bb73]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+    }
+
+    bb39: {
+        _51 = ShallowInitBox(move _50, [&str; 2]); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _53 = const "loud-thread";       // scope 1 at ui/runtime/out-of-stack.rs:66:13: 66:26
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:66:13: 66:26
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _52 = _53;                       // scope 1 at ui/runtime/out-of-stack.rs:66:13: 66:26
+        _115 = (((_51.0: std::ptr::Unique<[&str; 2]>).0: std::ptr::NonNull<[&str; 2]>).0: *const [&str; 2]); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        (*_115) = [const "silent-thread", move _52]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:65:13: 65:28
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _47 = move _51;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _46 = move _47 as std::boxed::Box<[&str]> (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _45 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _46) -> [return: bb40, unwind: bb73]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn(Box<[&str]>) -> Vec<&str> {slice::<impl [&str]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb40: {
+        _114 = const true;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:53:9: 53:10
+        _114 = const false;              // scope 2 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        _55 = move _45;                  // scope 2 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        _54 = <Vec<&str> as IntoIterator>::into_iter(move _55) -> [return: bb41, unwind: bb76]; // scope 2 at ui/runtime/out-of-stack.rs:76:21: 76:26
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:76:21: 76:26
+                                         // + literal: Const { ty: fn(Vec<&str>) -> <Vec<&str> as IntoIterator>::IntoIter {<Vec<&str> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+    }
+
+    bb41: {
+        _56 = move _54;                  // scope 2 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        goto -> bb42;                    // scope 4 at ui/runtime/out-of-stack.rs:76:9: 86:10
+    }
+
+    bb42: {
+        _59 = &mut _56;                  // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        _58 = &mut (*_59);               // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        _57 = <std::vec::IntoIter<&str> as Iterator>::next(move _58) -> [return: bb43, unwind: bb72]; // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:76:21: 76:26
+                                         // + literal: Const { ty: for<'a> fn(&'a mut std::vec::IntoIter<&str>) -> Option<<std::vec::IntoIter<&str> as Iterator>::Item> {<std::vec::IntoIter<&str> as Iterator>::next}, val: Value(<ZST>) }
+    }
+
+    bb43: {
+        _60 = discriminant(_57);         // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+        switchInt(move _60) -> [0: bb46, 1: bb44, otherwise: bb45]; // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    }
+
+    bb44: {
+        _61 = ((_57 as Some).0: &str);   // scope 4 at ui/runtime/out-of-stack.rs:76:13: 76:17
+        _109 = const _;                  // scope 5 at ui/runtime/out-of-stack.rs:77:22: 77:35
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:77:22: 77:35
+                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[1])) }
+        _66 = _109;                      // scope 5 at ui/runtime/out-of-stack.rs:77:22: 77:35
+        _65 = _66;                       // scope 5 at ui/runtime/out-of-stack.rs:77:22: 77:35
+        _64 = move _65 as &[&str] (Pointer(Unsize)); // scope 5 at ui/runtime/out-of-stack.rs:77:22: 77:35
+        _73 = &_61;                      // scope 5 at ui/runtime/out-of-stack.rs:77:37: 77:41
+        _72 = _73;                       // scope 5 at ui/runtime/out-of-stack.rs:77:37: 77:41
+        _71 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _72) -> [return: bb47, unwind: bb72]; // scope 5 at ui/runtime/out-of-stack.rs:77:37: 77:41
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:77:37: 77:41
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb45: {
+        unreachable;                     // scope 4 at ui/runtime/out-of-stack.rs:76:21: 76:26
+    }
+
+    bb46: {
+        drop(_56) -> [return: bb66, unwind: bb76]; // scope 2 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb47: {
+        _70 = [move _71];                // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _69 = &_70;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _68 = _69;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _67 = move _68 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+        _63 = Arguments::<'_>::new_v1(move _64, move _67) -> [return: bb48, unwind: bb72]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb48: {
+        _62 = _print(move _63) -> [return: bb49, unwind: bb72]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+    }
+
+    bb49: {
+        _82 = &_1;                       // scope 5 at ui/runtime/out-of-stack.rs:79:40: 79:44
+        _81 = <Vec<String> as Index<usize>>::index(move _82, const 0_usize) -> [return: bb50, unwind: bb72]; // scope 5 at ui/runtime/out-of-stack.rs:79:40: 79:47
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:79:40: 79:47
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<String>, usize) -> &'a <Vec<String> as Index<usize>>::Output {<Vec<String> as Index<usize>>::index}, val: Value(<ZST>) }
+    }
+
+    bb50: {
+        _80 = _81;                       // scope 5 at ui/runtime/out-of-stack.rs:79:39: 79:47
+        _79 = Command::new::<&String>(move _80) -> [return: bb51, unwind: bb72]; // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:48
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:79:26: 79:38
+                                         // + user_ty: UserType(5)
+                                         // + literal: Const { ty: fn(&String) -> Command {Command::new::<&String>}, val: Value(<ZST>) }
+    }
+
+    bb51: {
+        _78 = &mut _79;                  // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:58
+        _83 = _61;                       // scope 5 at ui/runtime/out-of-stack.rs:79:53: 79:57
+        _77 = Command::arg::<&str>(move _78, move _83) -> [return: bb52, unwind: bb71]; // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:58
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:79:49: 79:52
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Command, &str) -> &'a mut Command {Command::arg::<&str>}, val: Value(<ZST>) }
+    }
+
+    bb52: {
+        _76 = &mut (*_77);               // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:67
+        _75 = Command::output(move _76) -> [return: bb53, unwind: bb71]; // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:67
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:79:59: 79:65
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Command) -> Result<Output, std::io::Error> {Command::output}, val: Value(<ZST>) }
+    }
+
+    bb53: {
+        _74 = Result::<Output, std::io::Error>::unwrap(move _75) -> [return: bb54, unwind: bb71]; // scope 5 at ui/runtime/out-of-stack.rs:79:26: 79:76
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:79:68: 79:74
+                                         // + literal: Const { ty: fn(Result<Output, std::io::Error>) -> Output {Result::<Output, std::io::Error>::unwrap}, val: Value(<ZST>) }
+    }
+
+    bb54: {
+        drop(_79) -> [return: bb55, unwind: bb70]; // scope 5 at ui/runtime/out-of-stack.rs:79:76: 79:77
+    }
+
+    bb55: {
+        _85 = (_74.0: std::process::ExitStatus); // scope 6 at ui/runtime/out-of-stack.rs:81:26: 81:39
+        _84 = check_status(move _85) -> [return: bb56, unwind: bb70]; // scope 6 at ui/runtime/out-of-stack.rs:81:13: 81:40
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:81:13: 81:25
+                                         // + literal: Const { ty: fn(ExitStatus) {check_status}, val: Value(<ZST>) }
+    }
+
+    bb56: {
+        _90 = &(_74.2: std::vec::Vec<u8>); // scope 6 at ui/runtime/out-of-stack.rs:83:49: 83:63
+        _89 = _90;                       // scope 6 at ui/runtime/out-of-stack.rs:83:49: 83:63
+        _88 = <Vec<u8> as Deref>::deref(move _89) -> [return: bb57, unwind: bb70]; // scope 6 at ui/runtime/out-of-stack.rs:83:49: 83:63
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:83:49: 83:63
+                                         // + literal: Const { ty: for<'a> fn(&'a Vec<u8>) -> &'a <Vec<u8> as Deref>::Target {<Vec<u8> as Deref>::deref}, val: Value(<ZST>) }
+    }
+
+    bb57: {
+        _87 = _88;                       // scope 6 at ui/runtime/out-of-stack.rs:83:49: 83:63
+        _86 = String::from_utf8_lossy(move _87) -> [return: bb58, unwind: bb70]; // scope 6 at ui/runtime/out-of-stack.rs:83:25: 83:64
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:83:25: 83:48
+                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> Cow<'a, str> {String::from_utf8_lossy}, val: Value(<ZST>) }
+    }
+
+    bb58: {
+        _95 = &_86;                      // scope 7 at ui/runtime/out-of-stack.rs:84:21: 84:63
+        _94 = <Cow<'_, str> as Deref>::deref(move _95) -> [return: bb59, unwind: bb69]; // scope 7 at ui/runtime/out-of-stack.rs:84:21: 84:63
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:84:21: 84:63
+                                         // + literal: Const { ty: for<'a> fn(&'a Cow<'_, str>) -> &'a <Cow<'_, str> as Deref>::Target {<Cow<'_, str> as Deref>::deref}, val: Value(<ZST>) }
+    }
+
+    bb59: {
+        _93 = _94;                       // scope 7 at ui/runtime/out-of-stack.rs:84:21: 84:63
+        _92 = core::str::<impl str>::contains::<'_, &str>(move _93, const "has overflowed its stack") -> [return: bb60, unwind: bb69]; // scope 7 at ui/runtime/out-of-stack.rs:84:21: 84:63
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:84:27: 84:35
+                                         // + literal: Const { ty: fn(&str, &str) -> bool {core::str::<impl str>::contains::<'_, &str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:84:36: 84:62
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb60: {
+        _91 = Not(move _92);             // scope 7 at ui/runtime/out-of-stack.rs:84:13: 85:59
+        switchInt(move _91) -> [0: bb64, otherwise: bb61]; // scope 7 at ui/runtime/out-of-stack.rs:84:13: 85:59
+    }
+
+    bb61: {
+        _108 = const _;                  // scope 7 at ui/runtime/out-of-stack.rs:85:21: 85:51
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:85:21: 85:51
+                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[0])) }
+        _100 = _108;                     // scope 7 at ui/runtime/out-of-stack.rs:85:21: 85:51
+        _99 = _100;                      // scope 7 at ui/runtime/out-of-stack.rs:85:21: 85:51
+        _98 = move _99 as &[&str] (Pointer(Unsize)); // scope 7 at ui/runtime/out-of-stack.rs:85:21: 85:51
+        _107 = &_86;                     // scope 7 at ui/runtime/out-of-stack.rs:85:53: 85:58
+        _106 = _107;                     // scope 7 at ui/runtime/out-of-stack.rs:85:53: 85:58
+        _105 = core::fmt::ArgumentV1::<'_>::new_display::<Cow<'_, str>>(move _106) -> [return: bb62, unwind: bb69]; // scope 7 at ui/runtime/out-of-stack.rs:85:53: 85:58
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:85:53: 85:58
+                                         // + user_ty: UserType(7)
+                                         // + literal: Const { ty: for<'b> fn(&'b Cow<'_, str>) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<Cow<'_, str>>}, val: Value(<ZST>) }
+    }
+
+    bb62: {
+        _104 = [move _105];              // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+        _103 = &_104;                    // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+        _102 = _103;                     // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+        _101 = move _102 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+        _97 = Arguments::<'_>::new_v1(move _98, move _101) -> [return: bb63, unwind: bb69]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:31: 29:73
+                                         // + user_ty: UserType(6)
+                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+    }
+
+    bb63: {
+        _96 = panic_fmt(move _97) -> bb69; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:9: 29:74
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:29:9: 29:30
+                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) -> ! {panic_fmt}, val: Value(<ZST>) }
+    }
+
+    bb64: {
+        drop(_86) -> [return: bb65, unwind: bb70]; // scope 6 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb65: {
+        drop(_74) -> [return: bb42, unwind: bb72]; // scope 5 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb66: {
+        _114 = const false;              // scope 1 at ui/runtime/out-of-stack.rs:87:5: 87:6
+        goto -> bb67;                    // scope 1 at ui/runtime/out-of-stack.rs:61:12: 87:6
+    }
+
+    bb67: {
+        drop(_1) -> bb68;                // scope 0 at ui/runtime/out-of-stack.rs:88:1: 88:2
+    }
+
+    bb68: {
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:88:2: 88:2
+    }
+
+    bb69 (cleanup): {
+        drop(_86) -> bb70;               // scope 6 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb70 (cleanup): {
+        drop(_74) -> bb72;               // scope 5 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb71 (cleanup): {
+        drop(_79) -> bb72;               // scope 5 at ui/runtime/out-of-stack.rs:79:76: 79:77
+    }
+
+    bb72 (cleanup): {
+        drop(_56) -> bb76;               // scope 2 at ui/runtime/out-of-stack.rs:86:9: 86:10
+    }
+
+    bb73 (cleanup): {
+        drop(_1) -> bb74;                // scope 0 at ui/runtime/out-of-stack.rs:88:1: 88:2
+    }
+
+    bb74 (cleanup): {
+        resume;                          // scope 0 at ui/runtime/out-of-stack.rs:53:1: 88:2
+    }
+
+    bb75 (cleanup): {
+        drop(_45) -> bb73;               // scope 1 at ui/runtime/out-of-stack.rs:87:5: 87:6
+    }
+
+    bb76 (cleanup): {
+        switchInt(_114) -> [0: bb73, otherwise: bb75]; // scope 1 at ui/runtime/out-of-stack.rs:87:5: 87:6
+    }
+
+    bb77: {
+        goto -> bb67;                    // scope 1 at ui/runtime/out-of-stack.rs:56:9: 56:25
+    }
+
+    bb78: {
+        goto -> bb67;                    // scope 1 at ui/runtime/out-of-stack.rs:58:9: 58:23
+    }
+}
+
+promoted[0] in main: &[&str; 1] = {
+    let mut _0: &[&str; 1];              // return place in scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+    let mut _1: [&str; 1];               // in scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+
+    bb0: {
+        _1 = [const "missing overflow message: "]; // scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:85:21: 85:51
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:85:21: 85:51
+    }
+}
+
+promoted[1] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];              // return place in scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+    let mut _1: [&str; 2];               // in scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+
+    bb0: {
+        _1 = [const "testing: ", const "\n"]; // scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:77:22: 77:35
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:77:22: 77:35
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:77:22: 77:35
+    }
+}
+
+promoted[2] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+    let mut _1: &str;                    // in scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+
+    bb0: {
+        _1 = const "loud-thread";        // scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:61:44: 61:57
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:61:44: 61:57
+    }
+}
+
+promoted[3] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+    let mut _1: &str;                    // in scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+
+    bb0: {
+        _1 = const "silent-thread";      // scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:59:44: 59:59
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:59:44: 59:59
+    }
+}
+
+promoted[4] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+    let mut _1: &str;                    // in scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+
+    bb0: {
+        _1 = const "loud";               // scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:57:44: 57:50
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:57:44: 57:50
+    }
+}
+
+promoted[5] in main: &&str = {
+    let mut _0: &&str;                   // return place in scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+    let mut _1: &str;                    // in scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+
+    bb0: {
+        _1 = const "silent";             // scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+                                         // mir::Constant
+                                         // + span: ui/runtime/out-of-stack.rs:55:37: 55:45
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _0 = &_1;                        // scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+        return;                          // scope 0 at ui/runtime/out-of-stack.rs:55:37: 55:45
+    }
+}

@@ -1,0 +1,28 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/type-use-i1-versus-i8.rs:6:15: 6:15
+    let _2: ();                          // in scope 0 at ui/type-use-i1-versus-i8.rs:10:9: 10:34
+    let mut _3: *mut bool;               // in scope 0 at ui/type-use-i1-versus-i8.rs:10:20: 10:26
+    let mut _4: &mut bool;               // in scope 0 at ui/type-use-i1-versus-i8.rs:10:20: 10:26
+    scope 1 {
+        let mut _1: bool;                // in scope 1 at ui/type-use-i1-versus-i8.rs:8:13: 8:18
+        scope 2 {
+            debug x => _1;               // in scope 2 at ui/type-use-i1-versus-i8.rs:8:13: 8:18
+        }
+    }
+
+    bb0: {
+        _1 = const false;                // scope 1 at ui/type-use-i1-versus-i8.rs:8:27: 8:32
+        _4 = &mut _1;                    // scope 2 at ui/type-use-i1-versus-i8.rs:10:20: 10:26
+        _3 = &raw mut (*_4);             // scope 2 at ui/type-use-i1-versus-i8.rs:10:20: 10:26
+        _2 = std::ptr::write::<bool>(move _3, const false) -> bb1; // scope 2 at ui/type-use-i1-versus-i8.rs:10:9: 10:34
+                                         // mir::Constant
+                                         // + span: ui/type-use-i1-versus-i8.rs:10:9: 10:19
+                                         // + literal: Const { ty: unsafe fn(*mut bool, bool) {std::ptr::write::<bool>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/type-use-i1-versus-i8.rs:12:2: 12:2
+    }
+}

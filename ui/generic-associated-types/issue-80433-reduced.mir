@@ -1,0 +1,46 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/generic-associated-types/issue-80433-reduced.rs:10:1: 10:19>::test_mut(_1: &mut E) -> usize {
+    debug self => _1;                    // in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:12:17: 12:26
+    let mut _0: usize;                   // return place in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:12:31: 12:52
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+
+    bb0: {
+        _2 = core::panicking::panic(const "not yet implemented"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn test_simpler(_1: impl TestMut<Output<'a> = usize>) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:17:58: 17:58
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:17:59: 17:60
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:17:60: 17:60
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:19:11: 19:11
+    let _1: ();                          // in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:20:5: 20:23
+    let mut _2: E;                       // in scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:20:18: 20:22
+
+    bb0: {
+        _1 = test_simpler::<'_, E>(move _2) -> bb1; // scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:20:5: 20:23
+                                         // mir::Constant
+                                         // + span: ui/generic-associated-types/issue-80433-reduced.rs:20:5: 20:17
+                                         // + literal: Const { ty: fn(E) {test_simpler::<'_, E>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/generic-associated-types/issue-80433-reduced.rs:21:2: 21:2
+    }
+}

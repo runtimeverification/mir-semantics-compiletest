@@ -1,0 +1,37 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:7:15: 7:15
+    let _1: [isize; 6];                  // in scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:9: 10:11
+    scope 1 {
+        debug _v => _1;                  // in scope 1 at ui/consts/const-expr-in-fixed-length-vec.rs:10:9: 10:11
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:12:2: 12:2
+    }
+}
+
+const FOO: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:9:16: 9:21
+
+    bb0: {
+        _0 = const 2_usize;              // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:9:24: 9:25
+        return;                          // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:9:5: 9:26
+    }
+}
+
+main::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+    let mut _1: (usize, bool);           // in scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+
+    bb0: {
+        _1 = CheckedMul(const _, const 3_usize); // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const _, const 3_usize) -> bb1; // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+    }
+
+    bb1: {
+        _0 = move (_1.0: usize);         // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+        return;                          // scope 0 at ui/consts/const-expr-in-fixed-length-vec.rs:10:21: 10:26
+    }
+}

@@ -1,0 +1,83 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn Parser::parse_mode(_1: &Self, _2: <Self as Parser>::PartialState) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-67684.rs:23:52: 23:52
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/associated-types/issue-67684.rs:24:9: 24:16
+    }
+
+    bb1: {
+        goto -> bb1;                     // scope 0 at ui/associated-types/issue-67684.rs:24:9: 24:16
+    }
+}
+
+fn expr() -> impl Parser {
+    let mut _0: impl Parser;             // return place in scope 0 at ui/associated-types/issue-67684.rs:47:17: 47:28
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-types/issue-67684.rs:52:2: 52:2
+    }
+}
+
+fn parse_mode_impl() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-67684.rs:55:1: 55:1
+    let mut _1: &impl Parser;            // in scope 0 at ui/associated-types/issue-67684.rs:59:24: 59:36
+    let _2: &impl Parser;                // in scope 0 at ui/associated-types/issue-67684.rs:59:24: 59:36
+    let _3: impl Parser;                 // in scope 0 at ui/associated-types/issue-67684.rs:59:25: 59:36
+    let mut _4: <impl Parser as Parser>::PartialState; // in scope 0 at ui/associated-types/issue-67684.rs:59:38: 59:56
+
+    bb0: {
+        _3 = expr::<A>() -> bb1;         // scope 0 at ui/associated-types/issue-67684.rs:59:25: 59:36
+                                         // mir::Constant
+                                         // + span: ui/associated-types/issue-67684.rs:59:25: 59:34
+                                         // + literal: Const { ty: fn() -> impl Parser {expr::<A>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = &_3;                        // scope 0 at ui/associated-types/issue-67684.rs:59:24: 59:36
+        _1 = _2;                         // scope 0 at ui/associated-types/issue-67684.rs:59:24: 59:36
+        _4 = <<impl Parser as Parser>::PartialState as Default>::default() -> bb2; // scope 0 at ui/associated-types/issue-67684.rs:59:38: 59:56
+                                         // mir::Constant
+                                         // + span: ui/associated-types/issue-67684.rs:59:38: 59:54
+                                         // + literal: Const { ty: fn() -> <impl Parser as Parser>::PartialState {<<impl Parser as Parser>::PartialState as Default>::default}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _0 = <impl Parser as Parser>::parse_mode(move _1, move _4) -> bb3; // scope 0 at ui/associated-types/issue-67684.rs:59:5: 59:57
+                                         // mir::Constant
+                                         // + span: ui/associated-types/issue-67684.rs:59:5: 59:23
+                                         // + literal: Const { ty: for<'a> fn(&'a impl Parser, <impl Parser as Parser>::PartialState) {<impl Parser as Parser>::parse_mode}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/associated-types/issue-67684.rs:60:2: 60:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-67684.rs:62:11: 62:11
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-types/issue-67684.rs:62:13: 62:13
+    }
+}
+
+fn AndThen(_1: PhantomData<(A, B)>) -> AndThen<A, B> {
+    let mut _0: AndThen<A, B>;           // return place in scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+
+    bb0: {
+        _0 = AndThen::<A, B>(move _1);   // scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+        return;                          // scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+    }
+}
+
+// MIR FOR CTFE
+fn AndThen(_1: PhantomData<(A, B)>) -> AndThen<A, B> {
+    let mut _0: AndThen<A, B>;           // return place in scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+
+    bb0: {
+        _0 = AndThen::<A, B>(move _1);   // scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+        return;                          // scope 0 at ui/associated-types/issue-67684.rs:37:1: 37:21
+    }
+}

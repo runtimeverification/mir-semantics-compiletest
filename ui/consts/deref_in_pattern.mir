@@ -1,0 +1,38 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const A: [u8; 4] = {
+    let mut _0: [u8; 4];                 // return place in scope 0 at ui/consts/deref_in_pattern.rs:5:10: 5:17
+    let mut _1: &[u8; 4];                // in scope 0 at ui/consts/deref_in_pattern.rs:5:21: 5:28
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/deref_in_pattern.rs:5:21: 5:28
+        _1 = const b"fooo";              // scope 0 at ui/consts/deref_in_pattern.rs:5:21: 5:28
+                                         // mir::Constant
+                                         // + span: ui/consts/deref_in_pattern.rs:5:21: 5:28
+                                         // + literal: Const { ty: &[u8; 4], val: Value(Scalar(alloc1)) }
+        _0 = (*_1);                      // scope 0 at ui/consts/deref_in_pattern.rs:5:20: 5:28
+        StorageDead(_1);                 // scope 0 at ui/consts/deref_in_pattern.rs:5:27: 5:28
+        return;                          // scope 0 at ui/consts/deref_in_pattern.rs:5:1: 5:29
+    }
+}
+
+alloc1 (size: 4, align: 1) {
+    66 6f 6f 6f                                     │ fooo
+}
+
+A::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/deref_in_pattern.rs:5:15: 5:16
+
+    bb0: {
+        _0 = const 4_usize;              // scope 0 at ui/consts/deref_in_pattern.rs:5:15: 5:16
+        return;                          // scope 0 at ui/consts/deref_in_pattern.rs:5:15: 5:16
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/deref_in_pattern.rs:7:11: 7:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/deref_in_pattern.rs:12:2: 12:2
+    }
+}

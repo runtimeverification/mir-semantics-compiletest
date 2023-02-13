@@ -1,0 +1,120 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/associated-types/associated-types-sugar-path.rs:14:1: 14:19>::boo(_1: &isize) -> usize {
+    debug self => _1;                    // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:16:12: 16:17
+    let mut _0: usize;                   // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:16:22: 16:27
+
+    bb0: {
+        _0 = const 5_usize;              // scope 0 at ui/associated-types/associated-types-sugar-path.rs:17:9: 17:10
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:18:6: 18:6
+    }
+}
+
+fn bar(_1: T, _2: <T as Foo>::A) -> <T as Foo>::A {
+    debug a => _1;                       // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:22:20: 22:21
+    debug x => _2;                       // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:22:26: 22:27
+    let mut _0: <T as Foo>::A;           // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:22:38: 22:42
+    let mut _3: <T as Foo>::A;           // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:23:19: 23:26
+    let mut _4: &T;                      // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:23:19: 23:26
+    scope 1 {
+    }
+
+    bb0: {
+        _4 = &_1;                        // scope 0 at ui/associated-types/associated-types-sugar-path.rs:23:19: 23:26
+        _3 = <T as Foo>::boo(move _4) -> [return: bb1, unwind: bb4]; // scope 0 at ui/associated-types/associated-types-sugar-path.rs:23:19: 23:26
+                                         // mir::Constant
+                                         // + span: ui/associated-types/associated-types-sugar-path.rs:23:21: 23:24
+                                         // + literal: Const { ty: for<'a> fn(&'a T) -> <T as Foo>::A {<T as Foo>::boo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        drop(_3) -> [return: bb2, unwind: bb4]; // scope 0 at ui/associated-types/associated-types-sugar-path.rs:23:26: 23:27
+    }
+
+    bb2: {
+        _0 = move _2;                    // scope 1 at ui/associated-types/associated-types-sugar-path.rs:24:5: 24:6
+        drop(_1) -> bb3;                 // scope 0 at ui/associated-types/associated-types-sugar-path.rs:25:1: 25:2
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:25:2: 25:2
+    }
+
+    bb4 (cleanup): {
+        drop(_2) -> bb5;                 // scope 0 at ui/associated-types/associated-types-sugar-path.rs:25:1: 25:2
+    }
+
+    bb5 (cleanup): {
+        drop(_1) -> bb6;                 // scope 0 at ui/associated-types/associated-types-sugar-path.rs:25:1: 25:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:22:1: 25:2
+    }
+}
+
+fn C::g(_1: &Self) -> () {
+    debug self => _1;                    // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:30:10: 30:15
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:30:17: 30:17
+
+    bb0: {
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:30:20: 30:20
+    }
+}
+
+fn <impl at ui/associated-types/associated-types-sugar-path.rs:33:1: 33:24>::f() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:34:12: 34:12
+    let _1: <T as Foo>::A;               // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:35:13: 35:14
+    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    scope 1 {
+        debug x => _1;                   // in scope 1 at ui/associated-types/associated-types-sugar-path.rs:35:13: 35:14
+    }
+
+    bb0: {
+        _2 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
+                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:39:15: 39:15
+    let _1: usize;                       // in scope 0 at ui/associated-types/associated-types-sugar-path.rs:40:9: 40:10
+    scope 1 {
+        debug z => _1;                   // in scope 1 at ui/associated-types/associated-types-sugar-path.rs:40:9: 40:10
+    }
+
+    bb0: {
+        _1 = bar::<isize>(const 2_isize, const 4_usize) -> bb1; // scope 0 at ui/associated-types/associated-types-sugar-path.rs:40:20: 40:29
+                                         // mir::Constant
+                                         // + span: ui/associated-types/associated-types-sugar-path.rs:40:20: 40:23
+                                         // + literal: Const { ty: fn(isize, <isize as Foo>::A) -> <isize as Foo>::A {bar::<isize>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:41:2: 41:2
+    }
+}
+
+fn B(_1: X) -> B<X> {
+    let mut _0: B<X>;                    // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+
+    bb0: {
+        _0 = B::<X>(move _1);            // scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+    }
+}
+
+// MIR FOR CTFE
+fn B(_1: X) -> B<X> {
+    let mut _0: B<X>;                    // return place in scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+
+    bb0: {
+        _0 = B::<X>(move _1);            // scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+        return;                          // scope 0 at ui/associated-types/associated-types-sugar-path.rs:32:1: 32:12
+    }
+}

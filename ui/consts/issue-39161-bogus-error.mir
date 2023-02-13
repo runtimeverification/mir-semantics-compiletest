@@ -1,0 +1,55 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-39161-bogus-error.rs:8:11: 8:11
+    let _1: X;                           // in scope 0 at ui/consts/issue-39161-bogus-error.rs:11:9: 11:12
+    scope 1 {
+        debug _x2 => _1;                 // in scope 1 at ui/consts/issue-39161-bogus-error.rs:11:9: 11:12
+    }
+
+    bb0: {
+        _1 = X { a: const 1_i32, b: const 2_i32 }; // scope 0 at ui/consts/issue-39161-bogus-error.rs:11:15: 11:37
+        return;                          // scope 0 at ui/consts/issue-39161-bogus-error.rs:13:2: 13:2
+    }
+}
+
+const DX: X = {
+    let mut _0: X;                       // return place in scope 0 at ui/consts/issue-39161-bogus-error.rs:9:15: 9:16
+
+    bb0: {
+        _0 = X { a: const 0_i32, b: const 0_i32 }; // scope 0 at ui/consts/issue-39161-bogus-error.rs:9:19: 9:35
+        return;                          // scope 0 at ui/consts/issue-39161-bogus-error.rs:9:5: 9:36
+    }
+}
+
+const _X1: X = {
+    let mut _0: X;                       // return place in scope 0 at ui/consts/issue-39161-bogus-error.rs:10:16: 10:17
+    let mut _1: X;                       // in scope 0 at ui/consts/issue-39161-bogus-error.rs:10:32: 10:34
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-39161-bogus-error.rs:10:32: 10:34
+        _1 = const _;                    // scope 0 at ui/consts/issue-39161-bogus-error.rs:10:32: 10:34
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-39161-bogus-error.rs:10:32: 10:34
+                                         // + literal: Const { ty: X, val: Unevaluated(DX, [], None) }
+        _0 = X { a: const 1_i32, b: (_1.1: i32) }; // scope 0 at ui/consts/issue-39161-bogus-error.rs:10:20: 10:36
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-39161-bogus-error.rs:10:35: 10:36
+        return;                          // scope 0 at ui/consts/issue-39161-bogus-error.rs:10:5: 10:37
+    }
+}
+
+const _X3: X = {
+    let mut _0: X;                       // return place in scope 0 at ui/consts/issue-39161-bogus-error.rs:12:16: 12:17
+    let mut _1: X;                       // in scope 0 at ui/consts/issue-39161-bogus-error.rs:12:38: 12:40
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/issue-39161-bogus-error.rs:12:38: 12:40
+        _1 = const _;                    // scope 0 at ui/consts/issue-39161-bogus-error.rs:12:38: 12:40
+                                         // mir::Constant
+                                         // + span: ui/consts/issue-39161-bogus-error.rs:12:38: 12:40
+                                         // + literal: Const { ty: X, val: Unevaluated(DX, [], None) }
+        _0 = X { a: const 1_i32, b: const 2_i32 }; // scope 0 at ui/consts/issue-39161-bogus-error.rs:12:20: 12:42
+        StorageDead(_1);                 // scope 0 at ui/consts/issue-39161-bogus-error.rs:12:41: 12:42
+        return;                          // scope 0 at ui/consts/issue-39161-bogus-error.rs:12:5: 12:43
+    }
+}

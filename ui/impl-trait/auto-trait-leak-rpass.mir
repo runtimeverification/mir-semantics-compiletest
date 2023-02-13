@@ -1,0 +1,143 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn before() -> impl FnMut(i32) {
+    let mut _0: impl FnMut(i32);         // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:4:16: 4:31
+    let mut _1: std::boxed::Box<i32>;    // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:5:9: 5:14
+    scope 1 {
+        debug p => _1;                   // in scope 1 at ui/impl-trait/auto-trait-leak-rpass.rs:5:9: 5:14
+    }
+
+    bb0: {
+        _1 = Box::<i32>::new(const 0_i32) -> bb1; // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:5:17: 5:28
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:5:17: 5:25
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = [closure@ui/impl-trait/auto-trait-leak-rpass.rs:6:5: 6:13] { p: move _1 }; // scope 1 at ui/impl-trait/auto-trait-leak-rpass.rs:6:5: 6:20
+                                         // closure
+                                         // + def_id: DefId(0:4 ~ auto_trait_leak_rpass[4035]::before::{closure#0})
+                                         // + substs: [
+                                         //     i16,
+                                         //     extern "rust-call" fn((i32,)),
+                                         //     (std::boxed::Box<i32>,),
+                                         // ]
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:7:2: 7:2
+    }
+}
+
+fn before::{closure#0}(_1: &mut [closure@ui/impl-trait/auto-trait-leak-rpass.rs:6:5: 6:13], _2: i32) -> () {
+    debug x => _2;                       // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:11: 6:12
+    debug p => ((*_1).0: std::boxed::Box<i32>); // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:5:9: 5:14
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:14: 6:14
+    let mut _3: i32;                     // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:19: 6:20
+    let mut _4: std::boxed::Box<i32>;    // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:5: 6:20
+    let mut _5: *const i32;              // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:5: 6:20
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:19: 6:20
+        _4 = deref_copy ((*_1).0: std::boxed::Box<i32>); // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:14: 6:20
+        _5 = (((_4.0: std::ptr::Unique<i32>).0: std::ptr::NonNull<i32>).0: *const i32); // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:14: 6:20
+        (*_5) = move _3;                 // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:14: 6:20
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:6:20: 6:20
+    }
+}
+
+fn send(_1: T) -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:9:24: 9:24
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:9:25: 9:26
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:9:26: 9:26
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:11:11: 11:11
+    let _1: ();                          // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:12:5: 12:19
+    let mut _2: impl FnMut(i32);         // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:12:10: 12:18
+    let _3: ();                          // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:13:5: 13:18
+    let mut _4: impl FnMut(i32);         // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:13:10: 13:17
+
+    bb0: {
+        _2 = before() -> bb1;            // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:12:10: 12:18
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:12:10: 12:16
+                                         // + literal: Const { ty: fn() -> impl FnMut(i32) {before}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _1 = send::<impl FnMut(i32)>(move _2) -> bb2; // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:12:5: 12:19
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:12:5: 12:9
+                                         // + literal: Const { ty: fn(impl FnMut(i32)) {send::<impl FnMut(i32)>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _4 = after() -> bb3;             // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:13:10: 13:17
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:13:10: 13:15
+                                         // + literal: Const { ty: fn() -> impl FnMut(i32) {after}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _3 = send::<impl FnMut(i32)>(move _4) -> bb4; // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:13:5: 13:18
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:13:5: 13:9
+                                         // + literal: Const { ty: fn(impl FnMut(i32)) {send::<impl FnMut(i32)>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:14:2: 14:2
+    }
+}
+
+fn after() -> impl FnMut(i32) {
+    let mut _0: impl FnMut(i32);         // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:18:15: 18:30
+    let mut _1: std::boxed::Box<i32>;    // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:19:9: 19:14
+    scope 1 {
+        debug p => _1;                   // in scope 1 at ui/impl-trait/auto-trait-leak-rpass.rs:19:9: 19:14
+    }
+
+    bb0: {
+        _1 = Box::<i32>::new(const 0_i32) -> bb1; // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:19:17: 19:28
+                                         // mir::Constant
+                                         // + span: ui/impl-trait/auto-trait-leak-rpass.rs:19:17: 19:25
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = [closure@ui/impl-trait/auto-trait-leak-rpass.rs:20:5: 20:13] { p: move _1 }; // scope 1 at ui/impl-trait/auto-trait-leak-rpass.rs:20:5: 20:20
+                                         // closure
+                                         // + def_id: DefId(0:9 ~ auto_trait_leak_rpass[4035]::after::{closure#0})
+                                         // + substs: [
+                                         //     i16,
+                                         //     extern "rust-call" fn((i32,)),
+                                         //     (std::boxed::Box<i32>,),
+                                         // ]
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:21:2: 21:2
+    }
+}
+
+fn after::{closure#0}(_1: &mut [closure@ui/impl-trait/auto-trait-leak-rpass.rs:20:5: 20:13], _2: i32) -> () {
+    debug x => _2;                       // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:11: 20:12
+    debug p => ((*_1).0: std::boxed::Box<i32>); // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:19:9: 19:14
+    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:14: 20:14
+    let mut _3: i32;                     // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:19: 20:20
+    let mut _4: std::boxed::Box<i32>;    // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:5: 20:20
+    let mut _5: *const i32;              // in scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:5: 20:20
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:19: 20:20
+        _4 = deref_copy ((*_1).0: std::boxed::Box<i32>); // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:14: 20:20
+        _5 = (((_4.0: std::ptr::Unique<i32>).0: std::ptr::NonNull<i32>).0: *const i32); // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:14: 20:20
+        (*_5) = move _3;                 // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:14: 20:20
+        return;                          // scope 0 at ui/impl-trait/auto-trait-leak-rpass.rs:20:20: 20:20
+    }
+}

@@ -1,0 +1,81 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/inference/issue-36053.rs:11:1: 11:32>::next(_1: &mut Thing<'_>) -> Option<&str> {
+    debug self => _1;                    // in scope 0 at ui/inference/issue-36053.rs:13:13: 13:22
+    let mut _0: std::option::Option<&str>; // return place in scope 0 at ui/inference/issue-36053.rs:13:27: 13:42
+
+    bb0: {
+        _0 = Option::<&str>::None;       // scope 0 at ui/inference/issue-36053.rs:14:9: 14:13
+        return;                          // scope 0 at ui/inference/issue-36053.rs:15:6: 15:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/inference/issue-36053.rs:20:11: 20:11
+    let _1: usize;                       // in scope 0 at ui/inference/issue-36053.rs:21:5: 21:50
+    let mut _2: std::iter::Filter<std::iter::Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]>; // in scope 0 at ui/inference/issue-36053.rs:21:5: 21:42
+    let mut _3: std::iter::Fuse<Thing<'_>>; // in scope 0 at ui/inference/issue-36053.rs:21:5: 21:25
+    let mut _4: Thing<'_>;               // in scope 0 at ui/inference/issue-36053.rs:21:5: 21:18
+    let mut _5: &str;                    // in scope 0 at ui/inference/issue-36053.rs:21:11: 21:17
+    let _6: &str;                        // in scope 0 at ui/inference/issue-36053.rs:21:11: 21:17
+    let mut _7: [closure@ui/inference/issue-36053.rs:21:33: 21:36]; // in scope 0 at ui/inference/issue-36053.rs:21:33: 21:41
+
+    bb0: {
+        _6 = const "test";               // scope 0 at ui/inference/issue-36053.rs:21:11: 21:17
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-36053.rs:21:11: 21:17
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _5 = _6;                         // scope 0 at ui/inference/issue-36053.rs:21:11: 21:17
+        _4 = Thing::<'_>(move _5);       // scope 0 at ui/inference/issue-36053.rs:21:5: 21:18
+        _3 = <Thing<'_> as Iterator>::fuse(move _4) -> bb1; // scope 0 at ui/inference/issue-36053.rs:21:5: 21:25
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-36053.rs:21:19: 21:23
+                                         // + literal: Const { ty: fn(Thing<'_>) -> Fuse<Thing<'_>> {<Thing<'_> as Iterator>::fuse}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = <Fuse<Thing<'_>> as Iterator>::filter::<[closure@ui/inference/issue-36053.rs:21:33: 21:36]>(move _3, move _7) -> bb2; // scope 0 at ui/inference/issue-36053.rs:21:5: 21:42
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-36053.rs:21:26: 21:32
+                                         // + literal: Const { ty: fn(Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]) -> Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]> {<Fuse<Thing<'_>> as Iterator>::filter::<[closure@ui/inference/issue-36053.rs:21:33: 21:36]>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _1 = <Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]> as Iterator>::count(move _2) -> bb3; // scope 0 at ui/inference/issue-36053.rs:21:5: 21:50
+                                         // mir::Constant
+                                         // + span: ui/inference/issue-36053.rs:21:43: 21:48
+                                         // + literal: Const { ty: fn(Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]>) -> usize {<Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]> as Iterator>::count}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/inference/issue-36053.rs:22:2: 22:2
+    }
+}
+
+fn main::{closure#0}(_1: &mut [closure@ui/inference/issue-36053.rs:21:33: 21:36], _2: &&str) -> bool {
+    let mut _0: bool;                    // return place in scope 0 at ui/inference/issue-36053.rs:21:37: 21:37
+
+    bb0: {
+        _0 = const true;                 // scope 0 at ui/inference/issue-36053.rs:21:37: 21:41
+        return;                          // scope 0 at ui/inference/issue-36053.rs:21:41: 21:41
+    }
+}
+
+fn Thing(_1: &str) -> Thing<'_> {
+    let mut _0: Thing<'_>;               // return place in scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+
+    bb0: {
+        _0 = Thing::<'_>(move _1);       // scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+        return;                          // scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+    }
+}
+
+// MIR FOR CTFE
+fn Thing(_1: &str) -> Thing<'_> {
+    let mut _0: Thing<'_>;               // return place in scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+
+    bb0: {
+        _0 = Thing::<'_>(move _1);       // scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+        return;                          // scope 0 at ui/inference/issue-36053.rs:10:1: 10:17
+    }
+}

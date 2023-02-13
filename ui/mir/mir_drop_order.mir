@@ -1,0 +1,778 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/mir/mir_drop_order.rs:12:1: 12:33>::drop(_1: &mut DropLogger<'_>) -> () {
+    debug self => _1;                    // in scope 0 at ui/mir/mir_drop_order.rs:13:13: 13:22
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_drop_order.rs:13:24: 13:24
+    let _2: ();                          // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+    let mut _3: &mut std::vec::Vec<usize>; // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+    let mut _4: &mut std::vec::Vec<usize>; // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+    let mut _5: &mut std::cell::RefMut<'_, std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+    let mut _6: std::cell::RefMut<'_, std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:32
+    let mut _7: &std::cell::RefCell<std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:32
+    let mut _8: usize;                   // in scope 0 at ui/mir/mir_drop_order.rs:14:38: 14:45
+    let mut _9: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:13:13: 13:22
+
+    bb0: {
+        _9 = deref_copy ((*_1).1: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>); // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:32
+        _7 = &((*_9).0: std::cell::RefCell<std::vec::Vec<usize>>); // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:32
+        _6 = RefCell::<Vec<usize>>::borrow_mut(move _7) -> bb1; // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:32
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:14:20: 14:30
+                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<Vec<usize>>) -> RefMut<'a, Vec<usize>> {RefCell::<Vec<usize>>::borrow_mut}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = &mut _6;                    // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+        _4 = <RefMut<'_, Vec<usize>> as DerefMut>::deref_mut(move _5) -> [return: bb2, unwind: bb5]; // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:14:9: 14:46
+                                         // + literal: Const { ty: for<'a> fn(&'a mut RefMut<'_, Vec<usize>>) -> &'a mut <RefMut<'_, Vec<usize>> as Deref>::Target {<RefMut<'_, Vec<usize>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = &mut (*_4);                 // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+        _8 = ((*_1).0: usize);           // scope 0 at ui/mir/mir_drop_order.rs:14:38: 14:45
+        _2 = Vec::<usize>::push(move _3, move _8) -> [return: bb3, unwind: bb5]; // scope 0 at ui/mir/mir_drop_order.rs:14:9: 14:46
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:14:33: 14:37
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<usize>, usize) {Vec::<usize>::push}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_6) -> bb4;                 // scope 0 at ui/mir/mir_drop_order.rs:14:46: 14:47
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/mir/mir_drop_order.rs:15:6: 15:6
+    }
+
+    bb5 (cleanup): {
+        drop(_6) -> bb6;                 // scope 0 at ui/mir/mir_drop_order.rs:14:46: 14:47
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_drop_order.rs:13:5: 15:6
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_drop_order.rs:21:11: 21:11
+    let _1: std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:22:9: 22:12
+    let mut _2: std::cell::RefCell<std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:22:39: 22:59
+    let mut _3: std::vec::Vec<usize>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+    let mut _5: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:23:13: 23:50
+    let mut _7: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:24:15: 28:6
+    let mut _9: DropLogger<'_>;          // in scope 0 at ui/mir/mir_drop_order.rs:31:19: 31:23
+    let mut _10: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:31:19: 31:20
+    let mut _11: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:31:19: 31:23
+    let mut _12: &DropLogger<'_>;        // in scope 0 at ui/mir/mir_drop_order.rs:31:25: 31:30
+    let _13: DropLogger<'_>;             // in scope 0 at ui/mir/mir_drop_order.rs:31:26: 31:30
+    let mut _14: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:31:26: 31:27
+    let mut _15: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:31:26: 31:30
+    let mut _16: DropLogger<'_>;         // in scope 0 at ui/mir/mir_drop_order.rs:31:32: 31:36
+    let mut _17: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:31:32: 31:33
+    let mut _18: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:31:32: 31:36
+    let mut _19: &DropLogger<'_>;        // in scope 0 at ui/mir/mir_drop_order.rs:31:38: 31:43
+    let _20: DropLogger<'_>;             // in scope 0 at ui/mir/mir_drop_order.rs:31:39: 31:43
+    let mut _21: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:31:39: 31:40
+    let mut _22: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:31:39: 31:43
+    let mut _23: (&std::vec::Vec<usize>, &std::vec::Vec<usize>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _24: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _25: std::vec::Vec<usize>;       // in scope 0 at ui/mir/mir_drop_order.rs:33:20: 33:25
+    let mut _26: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]; // in scope 0 at ui/mir/mir_drop_order.rs:33:20: 33:23
+    let mut _27: ();                     // in scope 0 at ui/mir/mir_drop_order.rs:33:20: 33:25
+    let mut _28: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _29: std::vec::Vec<usize>;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+    let mut _32: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _33: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _34: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _35: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _37: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _38: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _39: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _40: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _41: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _42: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _43: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _44: (&std::vec::Vec<usize>, &std::vec::Vec<usize>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _45: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _46: std::vec::Vec<usize>;       // in scope 0 at ui/mir/mir_drop_order.rs:38:16: 38:21
+    let mut _47: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]; // in scope 0 at ui/mir/mir_drop_order.rs:38:16: 38:19
+    let mut _48: ();                     // in scope 0 at ui/mir/mir_drop_order.rs:38:16: 38:21
+    let mut _49: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _50: std::vec::Vec<usize>;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+    let mut _51: std::boxed::Box<[usize]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _52: std::boxed::Box<[usize; 4]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _53: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _54: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _55: *mut u8;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _56: std::boxed::Box<[usize; 4]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _59: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _60: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _61: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _62: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _64: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _65: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _66: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _67: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _68: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _69: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _70: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _71: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/mir/mir_drop_order.rs:40:13: 42:7
+    let mut _72: [closure@ui/mir/mir_drop_order.rs:40:38: 40:40]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    let mut _73: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    let mut _74: (&std::vec::Vec<usize>, &std::vec::Vec<usize>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+    let mut _75: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let _76: std::vec::Vec<usize>;       // in scope 0 at ui/mir/mir_drop_order.rs:47:16: 47:21
+    let mut _77: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]; // in scope 0 at ui/mir/mir_drop_order.rs:47:16: 47:19
+    let mut _78: ();                     // in scope 0 at ui/mir/mir_drop_order.rs:47:16: 47:21
+    let mut _79: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let _80: std::vec::Vec<usize>;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+    let mut _81: std::boxed::Box<[usize]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _82: std::boxed::Box<[usize; 4]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _83: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _84: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _85: *mut u8;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _86: std::boxed::Box<[usize; 4]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _89: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    let mut _90: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+    let mut _91: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+    let mut _92: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+    let _94: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+    let mut _95: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+    let mut _96: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let _97: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+    let mut _98: &std::vec::Vec<usize>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let _99: &std::vec::Vec<usize>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+    let mut _100: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _101: *const [usize; 4];     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _102: *const [usize; 4];     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    scope 1 {
+        debug log => _1;                 // in scope 1 at ui/mir/mir_drop_order.rs:22:9: 22:12
+        let _4: [closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 1 at ui/mir/mir_drop_order.rs:23:9: 23:10
+        scope 2 {
+            debug d => _4;               // in scope 2 at ui/mir/mir_drop_order.rs:23:9: 23:10
+            let _6: [closure@ui/mir/mir_drop_order.rs:24:15: 24:27]; // in scope 2 at ui/mir/mir_drop_order.rs:24:9: 24:12
+            scope 3 {
+                debug get => _6;         // in scope 3 at ui/mir/mir_drop_order.rs:24:9: 24:12
+                let _8: (DropLogger<'_>, &DropLogger<'_>, DropLogger<'_>, &DropLogger<'_>); // in scope 3 at ui/mir/mir_drop_order.rs:31:13: 31:15
+                let _57: &std::vec::Vec<usize>; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                let _58: &std::vec::Vec<usize>; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                scope 4 {
+                    debug _x => _8;      // in scope 4 at ui/mir/mir_drop_order.rs:31:13: 31:15
+                    let _30: &std::vec::Vec<usize>; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    let _31: &std::vec::Vec<usize>; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    scope 5 {
+                        debug left_val => _30; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                        debug right_val => _31; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                        let _36: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                        scope 6 {
+                            debug kind => _36; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                        }
+                    }
+                }
+                scope 7 {
+                }
+                scope 8 {
+                    debug left_val => _57; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    debug right_val => _58; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    let _63: core::panicking::AssertKind; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    scope 9 {
+                        debug kind => _63; // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    }
+                }
+                scope 10 {
+                    let _87: &std::vec::Vec<usize>; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                    let _88: &std::vec::Vec<usize>; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                    scope 11 {
+                    }
+                    scope 12 {
+                        debug left_val => _87; // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+                        debug right_val => _88; // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+                        let _93: core::panicking::AssertKind; // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                        scope 13 {
+                            debug kind => _93; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _3 = Vec::<usize>::new() -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:57
+                                         // + user_ty: UserType(1)
+                                         // + literal: Const { ty: fn() -> Vec<usize> {Vec::<usize>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = RefCell::<Vec<usize>>::new(move _3) -> bb2; // scope 0 at ui/mir/mir_drop_order.rs:22:39: 22:59
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:22:39: 22:51
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn(Vec<usize>) -> RefCell<Vec<usize>> {RefCell::<Vec<usize>>::new}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _1 = AssertUnwindSafe::<RefCell<Vec<usize>>>(move _2); // scope 0 at ui/mir/mir_drop_order.rs:22:15: 22:60
+        _5 = &_1;                        // scope 1 at ui/mir/mir_drop_order.rs:23:13: 23:50
+        _4 = [closure@ui/mir/mir_drop_order.rs:23:13: 23:17] { log: move _5 }; // scope 1 at ui/mir/mir_drop_order.rs:23:13: 23:50
+                                         // closure
+                                         // + def_id: DefId(0:15 ~ mir_drop_order[b00b]::main::{closure#0})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn((usize,)) -> DropLogger<'_>,
+                                         //     (&std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>,),
+                                         // ]
+        _7 = &_1;                        // scope 2 at ui/mir/mir_drop_order.rs:24:15: 28:6
+        _6 = [closure@ui/mir/mir_drop_order.rs:24:15: 24:27] { log: move _7 }; // scope 2 at ui/mir/mir_drop_order.rs:24:15: 28:6
+                                         // closure
+                                         // + def_id: DefId(0:16 ~ mir_drop_order[b00b]::main::{closure#1})
+                                         // + substs: [
+                                         //     i8,
+                                         //     extern "rust-call" fn(()) -> std::vec::Vec<usize>,
+                                         //     (&std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>,),
+                                         // ]
+        _10 = &_4;                       // scope 3 at ui/mir/mir_drop_order.rs:31:19: 31:20
+        _11 = const (0_usize,);          // scope 3 at ui/mir/mir_drop_order.rs:31:19: 31:23
+        _9 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _10, move _11) -> [return: bb3, unwind: bb48]; // scope 3 at ui/mir/mir_drop_order.rs:31:19: 31:23
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:31:19: 31:20
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _14 = &_4;                       // scope 3 at ui/mir/mir_drop_order.rs:31:26: 31:27
+        _15 = const (1_usize,);          // scope 3 at ui/mir/mir_drop_order.rs:31:26: 31:30
+        _13 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _14, move _15) -> [return: bb4, unwind: bb47]; // scope 3 at ui/mir/mir_drop_order.rs:31:26: 31:30
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:31:26: 31:27
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _12 = &_13;                      // scope 3 at ui/mir/mir_drop_order.rs:31:25: 31:30
+        _17 = &_4;                       // scope 3 at ui/mir/mir_drop_order.rs:31:32: 31:33
+        _18 = const (2_usize,);          // scope 3 at ui/mir/mir_drop_order.rs:31:32: 31:36
+        _16 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _17, move _18) -> [return: bb5, unwind: bb45]; // scope 3 at ui/mir/mir_drop_order.rs:31:32: 31:36
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:31:32: 31:33
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb5: {
+        _21 = &_4;                       // scope 3 at ui/mir/mir_drop_order.rs:31:39: 31:40
+        _22 = const (3_usize,);          // scope 3 at ui/mir/mir_drop_order.rs:31:39: 31:43
+        _20 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _21, move _22) -> [return: bb6, unwind: bb44]; // scope 3 at ui/mir/mir_drop_order.rs:31:39: 31:43
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:31:39: 31:40
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb6: {
+        _19 = &_20;                      // scope 3 at ui/mir/mir_drop_order.rs:31:38: 31:43
+        _8 = (move _9, move _12, move _16, move _19); // scope 3 at ui/mir/mir_drop_order.rs:31:18: 31:44
+        _26 = &_6;                       // scope 4 at ui/mir/mir_drop_order.rs:33:20: 33:23
+        _25 = <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call(move _26, move _27) -> [return: bb7, unwind: bb42]; // scope 4 at ui/mir/mir_drop_order.rs:33:20: 33:25
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:33:20: 33:23
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:24:15: 24:27], ()) -> <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as FnOnce<()>>::Output {<[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb7: {
+        _24 = &_25;                      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _29 = Vec::<usize>::new() -> [return: bb8, unwind: bb41]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:57
+                                         // + user_ty: UserType(2)
+                                         // + literal: Const { ty: fn() -> Vec<usize> {Vec::<usize>::new}, val: Value(<ZST>) }
+    }
+
+    bb8: {
+        _28 = &_29;                      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _23 = (move _24, move _28);      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _30 = (_23.0: &std::vec::Vec<usize>); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _31 = (_23.1: &std::vec::Vec<usize>); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _34 = _30;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _35 = _31;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _33 = <Vec<usize> as PartialEq>::eq(move _34, move _35) -> [return: bb9, unwind: bb40]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Vec<usize>, &'b Vec<usize>) -> bool {<Vec<usize> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb9: {
+        _32 = Not(move _33);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _32) -> [0: bb11, otherwise: bb10]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb10: {
+        _36 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _38 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _40 = _30;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _39 = _40;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _42 = _31;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _41 = _42;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _43 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _37 = core::panicking::assert_failed::<Vec<usize>, Vec<usize>>(move _38, move _39, move _41, move _43) -> bb40; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Vec<usize>, &'b Vec<usize>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Vec<usize>, Vec<usize>>}, val: Value(<ZST>) }
+    }
+
+    bb11: {
+        drop(_29) -> [return: bb12, unwind: bb41]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb12: {
+        drop(_25) -> [return: bb13, unwind: bb42]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb13: {
+        drop(_8) -> [return: bb14, unwind: bb43]; // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb14: {
+        drop(_20) -> [return: bb15, unwind: bb46]; // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb15: {
+        drop(_13) -> [return: bb16, unwind: bb48]; // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb16: {
+        _47 = &_6;                       // scope 3 at ui/mir/mir_drop_order.rs:38:16: 38:19
+        _46 = <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call(move _47, move _48) -> [return: bb17, unwind: bb48]; // scope 3 at ui/mir/mir_drop_order.rs:38:16: 38:21
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:38:16: 38:19
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:24:15: 24:27], ()) -> <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as FnOnce<()>>::Output {<[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb17: {
+        _45 = &_46;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _53 = const 32_usize;            // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _54 = const 8_usize;             // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _55 = alloc::alloc::exchange_malloc(move _53, move _54) -> [return: bb18, unwind: bb39]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+    }
+
+    bb18: {
+        _56 = ShallowInitBox(move _55, [usize; 4]); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _101 = (((_56.0: std::ptr::Unique<[usize; 4]>).0: std::ptr::NonNull<[usize; 4]>).0: *const [usize; 4]); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        (*_101) = [const 0_usize, const 2_usize, const 3_usize, const 1_usize]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        _52 = move _56;                  // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _51 = move _52 as std::boxed::Box<[usize]> (Pointer(Unsize)); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _50 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _51) -> [return: bb19, unwind: bb39]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
+                                         // + user_ty: UserType(3)
+                                         // + literal: Const { ty: fn(Box<[usize]>) -> Vec<usize> {slice::<impl [usize]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb19: {
+        _49 = &_50;                      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _44 = (move _45, move _49);      // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _57 = (_44.0: &std::vec::Vec<usize>); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _58 = (_44.1: &std::vec::Vec<usize>); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _61 = _57;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _62 = _58;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _60 = <Vec<usize> as PartialEq>::eq(move _61, move _62) -> [return: bb20, unwind: bb38]; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Vec<usize>, &'b Vec<usize>) -> bool {<Vec<usize> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb20: {
+        _59 = Not(move _60);             // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _59) -> [0: bb22, otherwise: bb21]; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb21: {
+        _63 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _65 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _67 = _57;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _66 = _67;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _69 = _58;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _68 = _69;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _70 = Option::<Arguments<'_>>::None; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _64 = core::panicking::assert_failed::<Vec<usize>, Vec<usize>>(move _65, move _66, move _68, move _70) -> bb38; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Vec<usize>, &'b Vec<usize>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Vec<usize>, Vec<usize>>}, val: Value(<ZST>) }
+    }
+
+    bb22: {
+        drop(_50) -> [return: bb23, unwind: bb39]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb23: {
+        drop(_46) -> [return: bb24, unwind: bb48]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb24: {
+        _73 = &_4;                       // scope 3 at ui/mir/mir_drop_order.rs:40:38: 42:6
+        _72 = [closure@ui/mir/mir_drop_order.rs:40:38: 40:40] { d: move _73 }; // scope 3 at ui/mir/mir_drop_order.rs:40:38: 42:6
+                                         // closure
+                                         // + def_id: DefId(0:17 ~ mir_drop_order[b00b]::main::{closure#2})
+                                         // + substs: [
+                                         //     i32,
+                                         //     extern "rust-call" fn(()),
+                                         //     (&[closure@ui/mir/mir_drop_order.rs:23:13: 23:17],),
+                                         // ]
+        _71 = catch_unwind::<[closure@ui/mir/mir_drop_order.rs:40:38: 40:40], ()>(move _72) -> [return: bb25, unwind: bb48]; // scope 3 at ui/mir/mir_drop_order.rs:40:13: 42:7
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:40:13: 40:37
+                                         // + literal: Const { ty: fn([closure@ui/mir/mir_drop_order.rs:40:38: 40:40]) -> Result<(), Box<(dyn Any + Send + 'static)>> {catch_unwind::<[closure@ui/mir/mir_drop_order.rs:40:38: 40:40], ()>}, val: Value(<ZST>) }
+    }
+
+    bb25: {
+        drop(_71) -> [return: bb26, unwind: bb48]; // scope 3 at ui/mir/mir_drop_order.rs:42:7: 42:8
+    }
+
+    bb26: {
+        _77 = &_6;                       // scope 10 at ui/mir/mir_drop_order.rs:47:16: 47:19
+        _76 = <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call(move _77, move _78) -> [return: bb27, unwind: bb48]; // scope 10 at ui/mir/mir_drop_order.rs:47:16: 47:21
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:47:16: 47:19
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:24:15: 24:27], ()) -> <[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as FnOnce<()>>::Output {<[closure@ui/mir/mir_drop_order.rs:24:15: 24:27] as Fn<()>>::call}, val: Value(<ZST>) }
+    }
+
+    bb27: {
+        _75 = &_76;                      // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _83 = const 32_usize;            // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _84 = const 8_usize;             // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _85 = alloc::alloc::exchange_malloc(move _83, move _84) -> [return: bb28, unwind: bb37]; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+    }
+
+    bb28: {
+        _86 = ShallowInitBox(move _85, [usize; 4]); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _102 = (((_86.0: std::ptr::Unique<[usize; 4]>).0: std::ptr::NonNull<[usize; 4]>).0: *const [usize; 4]); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        (*_102) = [const 6_usize, const 4_usize, const 7_usize, const 5_usize]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
+        _82 = move _86;                  // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _81 = move _82 as std::boxed::Box<[usize]> (Pointer(Unsize)); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+        _80 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _81) -> [return: bb29, unwind: bb37]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
+                                         // + user_ty: UserType(4)
+                                         // + literal: Const { ty: fn(Box<[usize]>) -> Vec<usize> {slice::<impl [usize]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+    }
+
+    bb29: {
+        _79 = &_80;                      // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _74 = (move _75, move _79);      // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
+        _87 = (_74.0: &std::vec::Vec<usize>); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
+        _88 = (_74.1: &std::vec::Vec<usize>); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        _91 = _87;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
+        _92 = _88;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
+        _90 = <Vec<usize> as PartialEq>::eq(move _91, move _92) -> [return: bb30, unwind: bb36]; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
+                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Vec<usize>, &'b Vec<usize>) -> bool {<Vec<usize> as PartialEq>::eq}, val: Value(<ZST>) }
+    }
+
+    bb30: {
+        _89 = Not(move _90);             // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        switchInt(move _89) -> [0: bb32, otherwise: bb31]; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+    }
+
+    bb31: {
+        _93 = const core::panicking::AssertKind::Eq; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _95 = const core::panicking::AssertKind::Eq; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
+                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
+        _97 = _87;                       // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _96 = _97;                       // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
+        _99 = _88;                       // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _98 = _99;                       // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
+        _100 = Option::<Arguments<'_>>::None; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+        _94 = core::panicking::assert_failed::<Vec<usize>, Vec<usize>>(move _95, move _96, move _98, move _100) -> bb36; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
+                                         // mir::Constant
+                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
+                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Vec<usize>, &'b Vec<usize>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Vec<usize>, Vec<usize>>}, val: Value(<ZST>) }
+    }
+
+    bb32: {
+        drop(_80) -> [return: bb33, unwind: bb37]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb33: {
+        drop(_76) -> [return: bb34, unwind: bb48]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb34: {
+        drop(_1) -> bb35;                // scope 0 at ui/mir/mir_drop_order.rs:48:1: 48:2
+    }
+
+    bb35: {
+        return;                          // scope 0 at ui/mir/mir_drop_order.rs:48:2: 48:2
+    }
+
+    bb36 (cleanup): {
+        drop(_80) -> bb37;               // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb37 (cleanup): {
+        drop(_76) -> bb48;               // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb38 (cleanup): {
+        drop(_50) -> bb39;               // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb39 (cleanup): {
+        drop(_46) -> bb48;               // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb40 (cleanup): {
+        drop(_29) -> bb41;               // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb41 (cleanup): {
+        drop(_25) -> bb42;               // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+    }
+
+    bb42 (cleanup): {
+        drop(_8) -> bb43;                // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb43 (cleanup): {
+        drop(_20) -> bb46;               // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb44 (cleanup): {
+        drop(_16) -> bb45;               // scope 3 at ui/mir/mir_drop_order.rs:31:43: 31:44
+    }
+
+    bb45 (cleanup): {
+        drop(_9) -> bb46;                // scope 3 at ui/mir/mir_drop_order.rs:31:43: 31:44
+    }
+
+    bb46 (cleanup): {
+        drop(_13) -> bb48;               // scope 3 at ui/mir/mir_drop_order.rs:34:5: 34:6
+    }
+
+    bb47 (cleanup): {
+        drop(_9) -> bb48;                // scope 3 at ui/mir/mir_drop_order.rs:31:43: 31:44
+    }
+
+    bb48 (cleanup): {
+        drop(_1) -> bb49;                // scope 0 at ui/mir/mir_drop_order.rs:48:1: 48:2
+    }
+
+    bb49 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_drop_order.rs:21:1: 48:2
+    }
+}
+
+fn main::{closure#0}(_1: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17], _2: usize) -> DropLogger<'_> {
+    debug id => _2;                      // in scope 0 at ui/mir/mir_drop_order.rs:23:14: 23:16
+    debug log => (*((*_1).0: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>)); // in scope 0 at ui/mir/mir_drop_order.rs:22:9: 22:12
+    let mut _0: DropLogger<'_>;          // return place in scope 0 at ui/mir/mir_drop_order.rs:23:18: 23:18
+    let mut _3: usize;                   // in scope 0 at ui/mir/mir_drop_order.rs:23:35: 23:37
+    let mut _4: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:23:44: 23:48
+    let _5: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:23:44: 23:48
+    let mut _6: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:23:13: 23:50
+
+    bb0: {
+        _3 = _2;                         // scope 0 at ui/mir/mir_drop_order.rs:23:35: 23:37
+        _6 = deref_copy ((*_1).0: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>); // scope 0 at ui/mir/mir_drop_order.rs:23:44: 23:48
+        _5 = _6;                         // scope 0 at ui/mir/mir_drop_order.rs:23:44: 23:48
+        _4 = _5;                         // scope 0 at ui/mir/mir_drop_order.rs:23:44: 23:48
+        _0 = DropLogger::<'_> { id: move _3, log: move _4 }; // scope 0 at ui/mir/mir_drop_order.rs:23:18: 23:50
+        return;                          // scope 0 at ui/mir/mir_drop_order.rs:23:50: 23:50
+    }
+}
+
+fn main::{closure#1}(_1: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]) -> Vec<usize> {
+    debug log => (*((*_1).0: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>)); // in scope 0 at ui/mir/mir_drop_order.rs:22:9: 22:12
+    let mut _0: std::vec::Vec<usize>;    // return place in scope 0 at ui/mir/mir_drop_order.rs:24:21: 24:27
+    let mut _2: std::cell::RefMut<'_, std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:25:13: 25:18
+    let mut _3: &std::cell::RefCell<std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:25:21: 25:39
+    let mut _5: &mut std::vec::Vec<usize>; // in scope 0 at ui/mir/mir_drop_order.rs:26:17: 26:28
+    let mut _6: &mut std::vec::Vec<usize>; // in scope 0 at ui/mir/mir_drop_order.rs:26:17: 26:28
+    let mut _7: &mut std::cell::RefMut<'_, std::vec::Vec<usize>>; // in scope 0 at ui/mir/mir_drop_order.rs:26:17: 26:28
+    let mut _8: std::ops::RangeFull;     // in scope 0 at ui/mir/mir_drop_order.rs:26:25: 26:27
+    let mut _9: std::vec::Drain<'_, usize>; // in scope 0 at ui/mir/mir_drop_order.rs:27:9: 27:10
+    let mut _10: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>; // in scope 0 at ui/mir/mir_drop_order.rs:24:15: 28:6
+    scope 1 {
+        debug m => _2;                   // in scope 1 at ui/mir/mir_drop_order.rs:25:13: 25:18
+        let _4: std::vec::Drain<'_, usize>; // in scope 1 at ui/mir/mir_drop_order.rs:26:13: 26:14
+        scope 2 {
+            debug n => _4;               // in scope 2 at ui/mir/mir_drop_order.rs:26:13: 26:14
+        }
+    }
+
+    bb0: {
+        _10 = deref_copy ((*_1).0: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>); // scope 0 at ui/mir/mir_drop_order.rs:25:21: 25:39
+        _3 = &((*_10).0: std::cell::RefCell<std::vec::Vec<usize>>); // scope 0 at ui/mir/mir_drop_order.rs:25:21: 25:39
+        _2 = RefCell::<Vec<usize>>::borrow_mut(move _3) -> bb1; // scope 0 at ui/mir/mir_drop_order.rs:25:21: 25:39
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:25:27: 25:37
+                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<Vec<usize>>) -> RefMut<'a, Vec<usize>> {RefCell::<Vec<usize>>::borrow_mut}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _7 = &mut _2;                    // scope 1 at ui/mir/mir_drop_order.rs:26:17: 26:28
+        _6 = <RefMut<'_, Vec<usize>> as DerefMut>::deref_mut(move _7) -> [return: bb2, unwind: bb6]; // scope 1 at ui/mir/mir_drop_order.rs:26:17: 26:28
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:26:17: 26:28
+                                         // + literal: Const { ty: for<'a> fn(&'a mut RefMut<'_, Vec<usize>>) -> &'a mut <RefMut<'_, Vec<usize>> as Deref>::Target {<RefMut<'_, Vec<usize>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _5 = &mut (*_6);                 // scope 1 at ui/mir/mir_drop_order.rs:26:17: 26:28
+        _4 = Vec::<usize>::drain::<RangeFull>(move _5, move _8) -> [return: bb3, unwind: bb6]; // scope 1 at ui/mir/mir_drop_order.rs:26:17: 26:28
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:26:19: 26:24
+                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<usize>, RangeFull) -> std::vec::Drain<'a, usize> {Vec::<usize>::drain::<RangeFull>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _9 = move _4;                    // scope 2 at ui/mir/mir_drop_order.rs:27:9: 27:10
+        _0 = <std::vec::Drain<'_, usize> as Iterator>::collect::<Vec<usize>>(move _9) -> [return: bb4, unwind: bb6]; // scope 2 at ui/mir/mir_drop_order.rs:27:9: 27:20
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:27:11: 27:18
+                                         // + literal: Const { ty: fn(std::vec::Drain<'_, usize>) -> Vec<usize> {<std::vec::Drain<'_, usize> as Iterator>::collect::<Vec<usize>>}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        drop(_2) -> bb5;                 // scope 0 at ui/mir/mir_drop_order.rs:28:5: 28:6
+    }
+
+    bb5: {
+        return;                          // scope 0 at ui/mir/mir_drop_order.rs:28:6: 28:6
+    }
+
+    bb6 (cleanup): {
+        drop(_2) -> bb7;                 // scope 0 at ui/mir/mir_drop_order.rs:28:5: 28:6
+    }
+
+    bb7 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_drop_order.rs:24:15: 28:6
+    }
+}
+
+fn main::{closure#2}(_1: [closure@ui/mir/mir_drop_order.rs:40:38: 40:40]) -> () {
+    debug d => (*(_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17])); // in scope 0 at ui/mir/mir_drop_order.rs:23:9: 23:10
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_drop_order.rs:40:41: 40:41
+    let mut _2: DropLogger<'_>;          // in scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:14
+    let mut _3: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:11
+    let mut _4: (usize,);                // in scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:14
+    let _5: DropLogger<'_>;              // in scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:21
+    let mut _6: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:18
+    let mut _7: (usize,);                // in scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:21
+    let mut _8: DropLogger<'_>;          // in scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:27
+    let mut _9: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:24
+    let mut _10: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:27
+    let _11: DropLogger<'_>;             // in scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:34
+    let mut _12: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:31
+    let mut _13: (usize,);               // in scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:34
+    let mut _14: !;                      // in scope 0 at ui/mir/mir_drop_order.rs:41:36: 41:69
+    let mut _15: InjectedFailure;        // in scope 0 at ui/mir/mir_drop_order.rs:41:53: 41:68
+    let mut _16: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    let mut _17: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    let mut _18: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    let mut _19: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]; // in scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+
+    bb0: {
+        _16 = deref_copy (_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]); // scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:11
+        _3 = _16;                        // scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:11
+        _4 = const (4_usize,);           // scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:14
+        _2 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/mir/mir_drop_order.rs:41:10: 41:14
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:41:10: 41:11
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _17 = deref_copy (_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]); // scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:18
+        _6 = _17;                        // scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:18
+        _7 = const (5_usize,);           // scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:21
+        _5 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _6, move _7) -> [return: bb2, unwind: bb11]; // scope 0 at ui/mir/mir_drop_order.rs:41:17: 41:21
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:41:17: 41:18
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _18 = deref_copy (_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]); // scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:24
+        _9 = _18;                        // scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:24
+        _10 = const (6_usize,);          // scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:27
+        _8 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _9, move _10) -> [return: bb3, unwind: bb9]; // scope 0 at ui/mir/mir_drop_order.rs:41:23: 41:27
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:41:23: 41:24
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _19 = deref_copy (_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]); // scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:31
+        _12 = _19;                       // scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:31
+        _13 = const (7_usize,);          // scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:34
+        _11 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(move _12, move _13) -> [return: bb4, unwind: bb8]; // scope 0 at ui/mir/mir_drop_order.rs:41:30: 41:34
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:41:30: 41:31
+                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/mir/mir_drop_order.rs:23:13: 23:17], (usize,)) -> <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as FnOnce<(usize,)>>::Output {<[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        _14 = panic_any::<InjectedFailure>(move _15) -> bb5; // scope 0 at ui/mir/mir_drop_order.rs:41:36: 41:69
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_drop_order.rs:41:36: 41:52
+                                         // + literal: Const { ty: fn(InjectedFailure) -> ! {panic_any::<InjectedFailure>}, val: Value(<ZST>) }
+    }
+
+    bb5 (cleanup): {
+        drop(_8) -> bb6;                 // scope 0 at ui/mir/mir_drop_order.rs:41:69: 41:70
+    }
+
+    bb6 (cleanup): {
+        drop(_2) -> bb7;                 // scope 0 at ui/mir/mir_drop_order.rs:41:69: 41:70
+    }
+
+    bb7 (cleanup): {
+        drop(_11) -> bb10;               // scope 0 at ui/mir/mir_drop_order.rs:41:70: 41:71
+    }
+
+    bb8 (cleanup): {
+        drop(_8) -> bb9;                 // scope 0 at ui/mir/mir_drop_order.rs:41:69: 41:70
+    }
+
+    bb9 (cleanup): {
+        drop(_2) -> bb10;                // scope 0 at ui/mir/mir_drop_order.rs:41:69: 41:70
+    }
+
+    bb10 (cleanup): {
+        drop(_5) -> bb12;                // scope 0 at ui/mir/mir_drop_order.rs:41:70: 41:71
+    }
+
+    bb11 (cleanup): {
+        drop(_2) -> bb12;                // scope 0 at ui/mir/mir_drop_order.rs:41:69: 41:70
+    }
+
+    bb12 (cleanup): {
+        resume;                          // scope 0 at ui/mir/mir_drop_order.rs:40:38: 42:6
+    }
+}

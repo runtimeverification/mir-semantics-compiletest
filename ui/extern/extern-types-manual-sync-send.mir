@@ -1,0 +1,41 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn assert_sync() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/extern/extern-types-manual-sync-send.rs:13:36: 13:36
+
+    bb0: {
+        return;                          // scope 0 at ui/extern/extern-types-manual-sync-send.rs:13:38: 13:38
+    }
+}
+
+fn assert_send() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/extern/extern-types-manual-sync-send.rs:14:36: 14:36
+
+    bb0: {
+        return;                          // scope 0 at ui/extern/extern-types-manual-sync-send.rs:14:38: 14:38
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/extern/extern-types-manual-sync-send.rs:16:11: 16:11
+    let _1: ();                          // in scope 0 at ui/extern/extern-types-manual-sync-send.rs:17:5: 17:23
+    let _2: ();                          // in scope 0 at ui/extern/extern-types-manual-sync-send.rs:18:5: 18:23
+
+    bb0: {
+        _1 = assert_sync::<A>() -> bb1;  // scope 0 at ui/extern/extern-types-manual-sync-send.rs:17:5: 17:23
+                                         // mir::Constant
+                                         // + span: ui/extern/extern-types-manual-sync-send.rs:17:5: 17:21
+                                         // + literal: Const { ty: fn() {assert_sync::<A>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = assert_send::<A>() -> bb2;  // scope 0 at ui/extern/extern-types-manual-sync-send.rs:18:5: 18:23
+                                         // mir::Constant
+                                         // + span: ui/extern/extern-types-manual-sync-send.rs:18:5: 18:21
+                                         // + literal: Const { ty: fn() {assert_send::<A>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/extern/extern-types-manual-sync-send.rs:19:2: 19:2
+    }
+}

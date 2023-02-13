@@ -1,0 +1,65 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn as_trait(_1: &Type<A>) -> &dyn Trait<A> {
+    debug t => _1;                       // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:17:16: 17:17
+    let mut _0: &dyn Trait<A>;           // return place in scope 0 at ui/traits/infer-from-object-issue-26952.rs:17:32: 17:45
+
+    bb0: {
+        goto -> bb1;                     // scope 0 at ui/traits/infer-from-object-issue-26952.rs:17:48: 17:57
+    }
+
+    bb1: {
+        goto -> bb1;                     // scope 0 at ui/traits/infer-from-object-issue-26952.rs:17:48: 17:57
+    }
+}
+
+fn want(_1: &T) -> () {
+    debug t => _1;                       // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:19:30: 19:31
+    let mut _0: ();                      // return place in scope 0 at ui/traits/infer-from-object-issue-26952.rs:19:37: 19:37
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/infer-from-object-issue-26952.rs:19:40: 19:40
+    }
+}
+
+fn call(_1: Type<A>) -> () {
+    debug p => _1;                       // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:21:12: 21:13
+    let mut _0: ();                      // return place in scope 0 at ui/traits/infer-from-object-issue-26952.rs:21:24: 21:24
+    let _2: &dyn Trait<A>;               // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:9: 22:10
+    let mut _3: &Type<A>;                // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:22: 22:24
+    let _4: &Type<A>;                    // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:22: 22:24
+    let _5: ();                          // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:23:5: 23:12
+    let mut _6: &dyn Trait<A>;           // in scope 0 at ui/traits/infer-from-object-issue-26952.rs:23:10: 23:11
+    scope 1 {
+        debug q => _2;                   // in scope 1 at ui/traits/infer-from-object-issue-26952.rs:22:9: 22:10
+    }
+
+    bb0: {
+        _4 = &_1;                        // scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:22: 22:24
+        _3 = _4;                         // scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:22: 22:24
+        _2 = as_trait::<A>(move _3) -> bb1; // scope 0 at ui/traits/infer-from-object-issue-26952.rs:22:13: 22:25
+                                         // mir::Constant
+                                         // + span: ui/traits/infer-from-object-issue-26952.rs:22:13: 22:21
+                                         // + literal: Const { ty: for<'a> fn(&'a Type<A>) -> &'a (dyn Trait<A> + 'a) {as_trait::<A>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _6 = _2;                         // scope 1 at ui/traits/infer-from-object-issue-26952.rs:23:10: 23:11
+        _5 = want::<A, dyn Trait<A>>(move _6) -> bb2; // scope 1 at ui/traits/infer-from-object-issue-26952.rs:23:5: 23:12
+                                         // mir::Constant
+                                         // + span: ui/traits/infer-from-object-issue-26952.rs:23:5: 23:9
+                                         // + literal: Const { ty: for<'a> fn(&'a dyn Trait<A>) {want::<A, dyn Trait<A>>}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        return;                          // scope 0 at ui/traits/infer-from-object-issue-26952.rs:24:2: 24:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/infer-from-object-issue-26952.rs:26:11: 26:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/infer-from-object-issue-26952.rs:26:14: 26:14
+    }
+}

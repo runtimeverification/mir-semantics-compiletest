@@ -1,0 +1,61 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/numbers-arithmetic/floatlits.rs:5:15: 5:15
+    let _1: f64;                         // in scope 0 at ui/numbers-arithmetic/floatlits.rs:6:9: 6:10
+    let mut _2: bool;                    // in scope 0 at ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+    let mut _3: bool;                    // in scope 0 at ui/numbers-arithmetic/floatlits.rs:8:13: 8:25
+    let mut _4: f64;                     // in scope 0 at ui/numbers-arithmetic/floatlits.rs:8:14: 8:15
+    let mut _5: !;                       // in scope 0 at ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+    let mut _7: bool;                    // in scope 0 at ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+    let mut _8: bool;                    // in scope 0 at ui/numbers-arithmetic/floatlits.rs:11:13: 11:26
+    let mut _9: f64;                     // in scope 0 at ui/numbers-arithmetic/floatlits.rs:11:14: 11:15
+    let mut _10: !;                      // in scope 0 at ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+    scope 1 {
+        debug f => _1;                   // in scope 1 at ui/numbers-arithmetic/floatlits.rs:6:9: 6:10
+        let _6: f64;                     // in scope 1 at ui/numbers-arithmetic/floatlits.rs:9:9: 9:10
+        scope 2 {
+            debug g => _6;               // in scope 2 at ui/numbers-arithmetic/floatlits.rs:9:9: 9:10
+        }
+    }
+
+    bb0: {
+        _1 = const 4.9999999999989999f64; // scope 0 at ui/numbers-arithmetic/floatlits.rs:6:13: 6:30
+        _4 = _1;                         // scope 1 at ui/numbers-arithmetic/floatlits.rs:8:14: 8:15
+        _3 = Lt(move _4, const 5f64);    // scope 1 at ui/numbers-arithmetic/floatlits.rs:8:13: 8:25
+        _2 = Not(move _3);               // scope 1 at ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 1 at ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+    }
+
+    bb1: {
+        _5 = core::panicking::panic(const "assertion failed: (f < 5.0f64)"); // scope 1 at ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+                                         // mir::Constant
+                                         // + span: ui/numbers-arithmetic/floatlits.rs:8:5: 8:26
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        _6 = const 4.9000000000100002E-10f64; // scope 1 at ui/numbers-arithmetic/floatlits.rs:9:13: 9:33
+        _9 = _6;                         // scope 2 at ui/numbers-arithmetic/floatlits.rs:11:14: 11:15
+        _8 = Lt(move _9, const 5.0000000000000001E-9f64); // scope 2 at ui/numbers-arithmetic/floatlits.rs:11:13: 11:26
+        _7 = Not(move _8);               // scope 2 at ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+        switchInt(move _7) -> [0: bb4, otherwise: bb3]; // scope 2 at ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+    }
+
+    bb3: {
+        _10 = core::panicking::panic(const "assertion failed: (g < 5e-9f64)"); // scope 2 at ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+                                         // mir::Constant
+                                         // + span: ui/numbers-arithmetic/floatlits.rs:11:5: 11:27
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/numbers-arithmetic/floatlits.rs:12:2: 12:2
+    }
+}

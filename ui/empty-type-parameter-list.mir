@@ -1,0 +1,59 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/empty-type-parameter-list.rs:10:12: 10:12
+
+    bb0: {
+        return;                          // scope 0 at ui/empty-type-parameter-list.rs:10:14: 10:14
+    }
+}
+
+fn bar() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/empty-type-parameter-list.rs:11:10: 11:10
+
+    bb0: {
+        return;                          // scope 0 at ui/empty-type-parameter-list.rs:11:12: 11:12
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/empty-type-parameter-list.rs:13:11: 13:11
+    let _1: ();                          // in scope 0 at ui/empty-type-parameter-list.rs:18:5: 18:10
+    let _2: ();                          // in scope 0 at ui/empty-type-parameter-list.rs:19:5: 19:14
+    let _3: ();                          // in scope 0 at ui/empty-type-parameter-list.rs:22:5: 22:14
+    scope 1 {
+        scope 2 {
+            scope 3 {
+                scope 4 {
+                    scope 5 {
+                    }
+                }
+            }
+        }
+    }
+
+    bb0: {
+        _1 = foo() -> bb1;               // scope 4 at ui/empty-type-parameter-list.rs:18:5: 18:10
+                                         // mir::Constant
+                                         // + span: ui/empty-type-parameter-list.rs:18:5: 18:8
+                                         // + literal: Const { ty: fn() {foo}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _2 = foo() -> bb2;               // scope 4 at ui/empty-type-parameter-list.rs:19:5: 19:14
+                                         // mir::Constant
+                                         // + span: ui/empty-type-parameter-list.rs:19:5: 19:12
+                                         // + literal: Const { ty: fn() {foo}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _3 = bar() -> bb3;               // scope 4 at ui/empty-type-parameter-list.rs:22:5: 22:14
+                                         // mir::Constant
+                                         // + span: ui/empty-type-parameter-list.rs:22:5: 22:12
+                                         // + literal: Const { ty: fn() {bar}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        return;                          // scope 0 at ui/empty-type-parameter-list.rs:24:2: 24:2
+    }
+}

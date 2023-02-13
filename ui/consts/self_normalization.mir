@@ -1,0 +1,69 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn testfn(_1: &mut [(); 0]) -> () {
+    debug _arr => _1;                    // in scope 0 at ui/consts/self_normalization.rs:3:11: 3:15
+    let mut _0: ();                      // return place in scope 0 at ui/consts/self_normalization.rs:3:31: 3:31
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/self_normalization.rs:3:33: 3:33
+    }
+}
+
+testfn::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization.rs:3:27: 3:28
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization.rs:3:27: 3:28
+        return;                          // scope 0 at ui/consts/self_normalization.rs:3:27: 3:28
+    }
+}
+
+<impl at ui/consts/self_normalization.rs:9:1: 9:27>::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization.rs:9:25: 9:26
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization.rs:9:25: 9:26
+        return;                          // scope 0 at ui/consts/self_normalization.rs:9:25: 9:26
+    }
+}
+
+fn <impl at ui/consts/self_normalization.rs:9:1: 9:27>::method() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/self_normalization.rs:10:17: 10:17
+    let mut _1: [(); 0];                 // in scope 0 at ui/consts/self_normalization.rs:11:13: 11:20
+    let _2: ();                          // in scope 0 at ui/consts/self_normalization.rs:12:9: 12:25
+    let mut _3: &mut [(); 0];            // in scope 0 at ui/consts/self_normalization.rs:12:16: 12:24
+    let mut _4: &mut [(); 0];            // in scope 0 at ui/consts/self_normalization.rs:12:16: 12:24
+    scope 1 {
+        debug arr => _1;                 // in scope 1 at ui/consts/self_normalization.rs:11:13: 11:20
+    }
+
+    bb0: {
+        _4 = &mut _1;                    // scope 1 at ui/consts/self_normalization.rs:12:16: 12:24
+        _3 = &mut (*_4);                 // scope 1 at ui/consts/self_normalization.rs:12:16: 12:24
+        _2 = testfn(move _3) -> bb1;     // scope 1 at ui/consts/self_normalization.rs:12:9: 12:25
+                                         // mir::Constant
+                                         // + span: ui/consts/self_normalization.rs:12:9: 12:15
+                                         // + literal: Const { ty: for<'a> fn(&'a mut [(); 0]) {testfn}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/consts/self_normalization.rs:13:6: 13:6
+    }
+}
+
+<impl at ui/consts/self_normalization.rs:9:1: 9:27>::method::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization.rs:11:34: 11:35
+
+    bb0: {
+        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization.rs:11:34: 11:35
+        return;                          // scope 0 at ui/consts/self_normalization.rs:11:34: 11:35
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/self_normalization.rs:16:11: 16:11
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/self_normalization.rs:16:13: 16:13
+    }
+}

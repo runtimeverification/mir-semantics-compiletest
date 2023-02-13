@@ -1,0 +1,64 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn do_stuff(_1: &impl FooBuilder) -> () {
+    debug foo => _1;                     // in scope 0 at ui/traits/issue-70944.rs:16:17: 16:20
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-70944.rs:16:40: 16:40
+    let _2: &<impl FooBuilder as FooBuilder>::Inner; // in scope 0 at ui/traits/issue-70944.rs:17:9: 17:14
+    let mut _3: &impl FooBuilder;        // in scope 0 at ui/traits/issue-70944.rs:17:17: 17:28
+    let _4: &<<impl FooBuilder as FooBuilder>::Inner as std::ops::Index<KeyA>>::Output; // in scope 0 at ui/traits/issue-70944.rs:18:6: 18:17
+    let mut _5: &<impl FooBuilder as FooBuilder>::Inner; // in scope 0 at ui/traits/issue-70944.rs:18:6: 18:11
+    let mut _6: KeyA;                    // in scope 0 at ui/traits/issue-70944.rs:18:12: 18:16
+    let _7: &<<impl FooBuilder as FooBuilder>::Inner as std::ops::Index<KeyB>>::Output; // in scope 0 at ui/traits/issue-70944.rs:19:6: 19:17
+    let mut _8: &<impl FooBuilder as FooBuilder>::Inner; // in scope 0 at ui/traits/issue-70944.rs:19:6: 19:11
+    let mut _9: KeyB;                    // in scope 0 at ui/traits/issue-70944.rs:19:12: 19:16
+    let _10: &<<impl FooBuilder as FooBuilder>::Inner as std::ops::Index<KeyC>>::Output; // in scope 0 at ui/traits/issue-70944.rs:20:6: 20:17
+    let mut _11: &<impl FooBuilder as FooBuilder>::Inner; // in scope 0 at ui/traits/issue-70944.rs:20:6: 20:11
+    let mut _12: KeyC;                   // in scope 0 at ui/traits/issue-70944.rs:20:12: 20:16
+    scope 1 {
+        debug inner => _2;               // in scope 1 at ui/traits/issue-70944.rs:17:9: 17:14
+    }
+
+    bb0: {
+        _3 = _1;                         // scope 0 at ui/traits/issue-70944.rs:17:17: 17:28
+        _2 = <impl FooBuilder as FooBuilder>::inner(move _3) -> bb1; // scope 0 at ui/traits/issue-70944.rs:17:17: 17:28
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-70944.rs:17:21: 17:26
+                                         // + literal: Const { ty: for<'a> fn(&'a impl FooBuilder) -> &'a <impl FooBuilder as FooBuilder>::Inner {<impl FooBuilder as FooBuilder>::inner}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _5 = _2;                         // scope 1 at ui/traits/issue-70944.rs:18:6: 18:11
+        _4 = <<impl FooBuilder as FooBuilder>::Inner as Index<KeyA>>::index(move _5, move _6) -> bb2; // scope 1 at ui/traits/issue-70944.rs:18:6: 18:17
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-70944.rs:18:6: 18:17
+                                         // + literal: Const { ty: for<'a> fn(&'a <impl FooBuilder as FooBuilder>::Inner, KeyA) -> &'a <<impl FooBuilder as FooBuilder>::Inner as Index<KeyA>>::Output {<<impl FooBuilder as FooBuilder>::Inner as Index<KeyA>>::index}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = _2;                         // scope 1 at ui/traits/issue-70944.rs:19:6: 19:11
+        _7 = <<impl FooBuilder as FooBuilder>::Inner as Index<KeyB>>::index(move _8, move _9) -> bb3; // scope 1 at ui/traits/issue-70944.rs:19:6: 19:17
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-70944.rs:19:6: 19:17
+                                         // + literal: Const { ty: for<'a> fn(&'a <impl FooBuilder as FooBuilder>::Inner, KeyB) -> &'a <<impl FooBuilder as FooBuilder>::Inner as Index<KeyB>>::Output {<<impl FooBuilder as FooBuilder>::Inner as Index<KeyB>>::index}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        _11 = _2;                        // scope 1 at ui/traits/issue-70944.rs:20:6: 20:11
+        _10 = <<impl FooBuilder as FooBuilder>::Inner as Index<KeyC>>::index(move _11, move _12) -> bb4; // scope 1 at ui/traits/issue-70944.rs:20:6: 20:17
+                                         // mir::Constant
+                                         // + span: ui/traits/issue-70944.rs:20:6: 20:17
+                                         // + literal: Const { ty: for<'a> fn(&'a <impl FooBuilder as FooBuilder>::Inner, KeyC) -> &'a <<impl FooBuilder as FooBuilder>::Inner as Index<KeyC>>::Output {<<impl FooBuilder as FooBuilder>::Inner as Index<KeyC>>::index}, val: Value(<ZST>) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/traits/issue-70944.rs:21:2: 21:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-70944.rs:23:11: 23:11
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/issue-70944.rs:23:13: 23:13
+    }
+}

@@ -1,0 +1,37 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+Foo::A::{constant#0}: u32 = {
+    let mut _0: u32;                     // return place in scope 0 at ui/enum-discriminant/issue-90038.rs:6:9: 6:10
+
+    bb0: {
+        _0 = const 2_u32;                // scope 0 at ui/enum-discriminant/issue-90038.rs:6:9: 6:10
+        return;                          // scope 0 at ui/enum-discriminant/issue-90038.rs:6:9: 6:10
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/enum-discriminant/issue-90038.rs:16:11: 16:11
+
+    bb0: {
+        return;                          // scope 0 at ui/enum-discriminant/issue-90038.rs:21:2: 21:2
+    }
+}
+
+fn Bar::A(_1: Foo) -> Bar {
+    let mut _0: Bar;                     // return place in scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+
+    bb0: {
+        _0 = Bar::A(move _1);            // scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+        return;                          // scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+    }
+}
+
+// MIR FOR CTFE
+fn Bar::A(_1: Foo) -> Bar {
+    let mut _0: Bar;                     // return place in scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+
+    bb0: {
+        _0 = Bar::A(move _1);            // scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+        return;                          // scope 0 at ui/enum-discriminant/issue-90038.rs:10:5: 10:6
+    }
+}

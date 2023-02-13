@@ -1,0 +1,66 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+const C: &[u8; 5] = {
+    let mut _0: &[u8; 5];                // return place in scope 0 at ui/mir/mir_indexing_oob_2.rs:5:10: 5:26
+
+    bb0: {
+        _0 = const b"hello";             // scope 0 at ui/mir/mir_indexing_oob_2.rs:5:29: 5:37
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_indexing_oob_2.rs:5:29: 5:37
+                                         // + literal: Const { ty: &[u8; 5], val: Value(Scalar(alloc1)) }
+        return;                          // scope 0 at ui/mir/mir_indexing_oob_2.rs:5:1: 5:38
+    }
+}
+
+alloc1 (size: 5, align: 1) {
+    68 65 6c 6c 6f                                  │ hello
+}
+
+C::{constant#0}: usize = {
+    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir_indexing_oob_2.rs:5:24: 5:25
+
+    bb0: {
+        _0 = const 5_usize;              // scope 0 at ui/mir/mir_indexing_oob_2.rs:5:24: 5:25
+        return;                          // scope 0 at ui/mir/mir_indexing_oob_2.rs:5:24: 5:25
+    }
+}
+
+fn test() -> u8 {
+    let mut _0: u8;                      // return place in scope 0 at ui/mir/mir_indexing_oob_2.rs:8:14: 8:16
+    let mut _1: &[u8; 5];                // in scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:6
+    let _2: usize;                       // in scope 0 at ui/mir/mir_indexing_oob_2.rs:9:7: 9:9
+    let mut _3: usize;                   // in scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+    let mut _4: bool;                    // in scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+
+    bb0: {
+        _1 = const _;                    // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:6
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_indexing_oob_2.rs:9:5: 9:6
+                                         // + literal: Const { ty: &[u8; 5], val: Unevaluated(C, [], None) }
+        _2 = const 10_usize;             // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:7: 9:9
+        _3 = const 5_usize;              // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+        _4 = const false;                // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1; // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+    }
+
+    bb1: {
+        _0 = (*_1)[_2];                  // scope 0 at ui/mir/mir_indexing_oob_2.rs:9:5: 9:10
+        return;                          // scope 0 at ui/mir/mir_indexing_oob_2.rs:10:2: 10:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_indexing_oob_2.rs:12:11: 12:11
+    let _1: u8;                          // in scope 0 at ui/mir/mir_indexing_oob_2.rs:13:5: 13:11
+
+    bb0: {
+        _1 = test() -> bb1;              // scope 0 at ui/mir/mir_indexing_oob_2.rs:13:5: 13:11
+                                         // mir::Constant
+                                         // + span: ui/mir/mir_indexing_oob_2.rs:13:5: 13:9
+                                         // + literal: Const { ty: fn() -> u8 {test}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/mir/mir_indexing_oob_2.rs:14:2: 14:2
+    }
+}

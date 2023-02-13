@@ -1,0 +1,49 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/self/self_lifetime.rs:6:1: 6:17>::foo(_1: &Foo<'_>) -> &() {
+    debug self => _1;                    // in scope 0 at ui/self/self_lifetime.rs:7:16: 7:20
+    let mut _0: &();                     // return place in scope 0 at ui/self/self_lifetime.rs:7:16: 7:20
+
+    bb0: {
+        _0 = deref_copy ((*_1).0: &());  // scope 0 at ui/self/self_lifetime.rs:7:44: 7:50
+        return;                          // scope 0 at ui/self/self_lifetime.rs:7:52: 7:52
+    }
+}
+
+fn <impl at ui/self/self_lifetime.rs:11:1: 11:11>::bar(_1: &Foo<'_>, _2: &()) -> &() {
+    debug self => _1;                    // in scope 0 at ui/self/self_lifetime.rs:12:16: 12:20
+    debug arg => _2;                     // in scope 0 at ui/self/self_lifetime.rs:12:30: 12:33
+    let mut _0: &();                     // return place in scope 0 at ui/self/self_lifetime.rs:12:46: 12:49
+
+    bb0: {
+        _0 = _2;                         // scope 0 at ui/self/self_lifetime.rs:12:52: 12:55
+        return;                          // scope 0 at ui/self/self_lifetime.rs:12:57: 12:57
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/self/self_lifetime.rs:15:11: 15:11
+
+    bb0: {
+        return;                          // scope 0 at ui/self/self_lifetime.rs:15:13: 15:13
+    }
+}
+
+fn Foo(_1: &()) -> Foo<'_> {
+    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+
+    bb0: {
+        _0 = Foo::<'_>(move _1);         // scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+        return;                          // scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+    }
+}
+
+// MIR FOR CTFE
+fn Foo(_1: &()) -> Foo<'_> {
+    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+
+    bb0: {
+        _0 = Foo::<'_>(move _1);         // scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+        return;                          // scope 0 at ui/self/self_lifetime.rs:5:1: 5:15
+    }
+}

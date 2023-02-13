@@ -1,0 +1,119 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foopy() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-extern-function.rs:4:23: 4:23
+
+    bb0: {
+        return;                          // scope 0 at ui/consts/const-extern-function.rs:4:25: 4:25
+    }
+}
+
+static f: extern "C" fn() = {
+    let mut _0: extern "C" fn();         // return place in scope 0 at ui/consts/const-extern-function.rs:6:11: 6:26
+
+    bb0: {
+        _0 = foopy as extern "C" fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/consts/const-extern-function.rs:6:29: 6:34
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:6:29: 6:34
+                                         // + literal: Const { ty: extern "C" fn() {foopy}, val: Value(<ZST>) }
+        return;                          // scope 0 at ui/consts/const-extern-function.rs:6:1: 6:35
+    }
+}
+
+static s: S = {
+    let mut _0: S;                       // return place in scope 0 at ui/consts/const-extern-function.rs:7:11: 7:12
+    let mut _1: extern "C" fn();         // in scope 0 at ui/consts/const-extern-function.rs:7:22: 7:27
+
+    bb0: {
+        StorageLive(_1);                 // scope 0 at ui/consts/const-extern-function.rs:7:22: 7:27
+        _1 = foopy as extern "C" fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/consts/const-extern-function.rs:7:22: 7:27
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:7:22: 7:27
+                                         // + literal: Const { ty: extern "C" fn() {foopy}, val: Value(<ZST>) }
+        _0 = S { f: move _1 };           // scope 0 at ui/consts/const-extern-function.rs:7:15: 7:29
+        StorageDead(_1);                 // scope 0 at ui/consts/const-extern-function.rs:7:28: 7:29
+        return;                          // scope 0 at ui/consts/const-extern-function.rs:7:1: 7:30
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/consts/const-extern-function.rs:13:15: 13:15
+    let mut _1: bool;                    // in scope 0 at ui/consts/const-extern-function.rs:14:5: 14:43
+    let mut _2: bool;                    // in scope 0 at ui/consts/const-extern-function.rs:14:13: 14:42
+    let mut _3: extern "C" fn();         // in scope 0 at ui/consts/const-extern-function.rs:14:13: 14:37
+    let mut _4: extern "C" fn();         // in scope 0 at ui/consts/const-extern-function.rs:14:41: 14:42
+    let mut _5: &extern "C" fn();        // in scope 0 at ui/consts/const-extern-function.rs:14:41: 14:42
+    let mut _6: !;                       // in scope 0 at ui/consts/const-extern-function.rs:14:5: 14:43
+    let mut _7: bool;                    // in scope 0 at ui/consts/const-extern-function.rs:15:5: 15:22
+    let mut _8: bool;                    // in scope 0 at ui/consts/const-extern-function.rs:15:13: 15:21
+    let mut _9: extern "C" fn();         // in scope 0 at ui/consts/const-extern-function.rs:15:13: 15:14
+    let mut _10: &extern "C" fn();       // in scope 0 at ui/consts/const-extern-function.rs:15:13: 15:14
+    let mut _11: extern "C" fn();        // in scope 0 at ui/consts/const-extern-function.rs:15:18: 15:21
+    let mut _12: &S;                     // in scope 0 at ui/consts/const-extern-function.rs:15:18: 15:19
+    let mut _13: !;                      // in scope 0 at ui/consts/const-extern-function.rs:15:5: 15:22
+
+    bb0: {
+        _3 = foopy as extern "C" fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/consts/const-extern-function.rs:14:13: 14:18
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:14:13: 14:18
+                                         // + literal: Const { ty: extern "C" fn() {foopy}, val: Value(<ZST>) }
+        _5 = const {alloc1: &extern "C" fn()}; // scope 0 at ui/consts/const-extern-function.rs:14:41: 14:42
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:14:41: 14:42
+                                         // + literal: Const { ty: &extern "C" fn(), val: Value(Scalar(alloc1)) }
+        _4 = (*_5);                      // scope 0 at ui/consts/const-extern-function.rs:14:41: 14:42
+        _2 = Eq(move _3, move _4);       // scope 0 at ui/consts/const-extern-function.rs:14:13: 14:42
+        _1 = Not(move _2);               // scope 0 at ui/consts/const-extern-function.rs:14:5: 14:43
+        switchInt(move _1) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/consts/const-extern-function.rs:14:5: 14:43
+    }
+
+    bb1: {
+        _6 = core::panicking::panic(const "assertion failed: foopy as extern \\\"C\\\" fn() == f"); // scope 0 at ui/consts/const-extern-function.rs:14:5: 14:43
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:14:5: 14:43
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb2: {
+        _10 = const {alloc1: &extern "C" fn()}; // scope 0 at ui/consts/const-extern-function.rs:15:13: 15:14
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:15:13: 15:14
+                                         // + literal: Const { ty: &extern "C" fn(), val: Value(Scalar(alloc1)) }
+        _9 = (*_10);                     // scope 0 at ui/consts/const-extern-function.rs:15:13: 15:14
+        _12 = const {alloc2: &S};        // scope 0 at ui/consts/const-extern-function.rs:15:18: 15:19
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:15:18: 15:19
+                                         // + literal: Const { ty: &S, val: Value(Scalar(alloc2)) }
+        _11 = ((*_12).0: extern "C" fn()); // scope 0 at ui/consts/const-extern-function.rs:15:18: 15:21
+        _8 = Eq(move _9, move _11);      // scope 0 at ui/consts/const-extern-function.rs:15:13: 15:21
+        _7 = Not(move _8);               // scope 0 at ui/consts/const-extern-function.rs:15:5: 15:22
+        switchInt(move _7) -> [0: bb4, otherwise: bb3]; // scope 0 at ui/consts/const-extern-function.rs:15:5: 15:22
+    }
+
+    bb3: {
+        _13 = core::panicking::panic(const "assertion failed: f == s.f"); // scope 0 at ui/consts/const-extern-function.rs:15:5: 15:22
+                                         // mir::Constant
+                                         // + span: ui/consts/const-extern-function.rs:15:5: 15:22
+                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
+                                         // mir::Constant
+                                         // + span: no-location
+                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/consts/const-extern-function.rs:16:2: 16:2
+    }
+}
+
+alloc2 (static: s, size: 8, align: 8) {
+    ╾───────alloc4────────╼                         │ ╾──────╼
+}
+
+alloc4 (fn: foopy)
+
+alloc1 (static: f, size: 8, align: 8) {
+    ╾───────alloc4────────╼                         │ ╾──────╼
+}

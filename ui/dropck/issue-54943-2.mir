@@ -1,0 +1,47 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn foo(_1: T) -> () {
+    debug _t => _1;                      // in scope 0 at ui/dropck/issue-54943-2.rs:7:11: 7:13
+    let mut _0: ();                      // return place in scope 0 at ui/dropck/issue-54943-2.rs:7:18: 7:18
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/dropck/issue-54943-2.rs:8:1: 8:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/dropck/issue-54943-2.rs:8:2: 8:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/dropck/issue-54943-2.rs:10:11: 10:11
+    let _1: std::string::String;         // in scope 0 at ui/dropck/issue-54943-2.rs:14:10: 14:12
+    let _2: main::A<'_, &str>;           // in scope 0 at ui/dropck/issue-54943-2.rs:14:14: 14:16
+    scope 1 {
+        debug a1 => _1;                  // in scope 1 at ui/dropck/issue-54943-2.rs:14:10: 14:12
+        debug a2 => _2;                  // in scope 1 at ui/dropck/issue-54943-2.rs:14:14: 14:16
+    }
+
+    bb0: {
+        return;                          // scope 0 at ui/dropck/issue-54943-2.rs:16:2: 16:2
+    }
+}
+
+fn A(_1: &B) -> A<'_, B> {
+    let mut _0: main::A<'_, B>;          // return place in scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+
+    bb0: {
+        _0 = A::<'_, B>(move _1);        // scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+        return;                          // scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+    }
+}
+
+// MIR FOR CTFE
+fn A(_1: &B) -> A<'_, B> {
+    let mut _0: main::A<'_, B>;          // return place in scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+
+    bb0: {
+        _0 = A::<'_, B>(move _1);        // scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+        return;                          // scope 0 at ui/dropck/issue-54943-2.rs:13:5: 13:24
+    }
+}

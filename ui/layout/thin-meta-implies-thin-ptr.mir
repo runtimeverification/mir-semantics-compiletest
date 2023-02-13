@@ -1,0 +1,29 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:7:11: 7:11
+
+    bb0: {
+        return;                          // scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:7:13: 7:13
+    }
+}
+
+fn foo(_1: *const T) -> *const () {
+    debug t => _1;                       // in scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:9:26: 9:27
+    let mut _0: *const ();               // return place in scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:9:42: 9:51
+    let mut _2: *const T;                // in scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:10:34: 10:35
+    scope 1 {
+    }
+
+    bb0: {
+        _2 = _1;                         // scope 1 at ui/layout/thin-meta-implies-thin-ptr.rs:10:34: 10:35
+        _0 = transmute::<*const T, *const ()>(move _2) -> bb1; // scope 1 at ui/layout/thin-meta-implies-thin-ptr.rs:10:14: 10:36
+                                         // mir::Constant
+                                         // + span: ui/layout/thin-meta-implies-thin-ptr.rs:10:14: 10:33
+                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(*const T) -> *const () {transmute::<*const T, *const ()>}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/layout/thin-meta-implies-thin-ptr.rs:11:2: 11:2
+    }
+}

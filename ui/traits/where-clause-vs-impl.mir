@@ -1,0 +1,116 @@
+// WARNING: This output format is intended for human consumers only
+// and is subject to change without notice. Knock yourself out.
+fn <impl at ui/traits/where-clause-vs-impl.rs:21:1: 21:32>::foo(_1: &mut F, _2: M) -> () {
+    debug self => _1;                    // in scope 0 at ui/traits/where-clause-vs-impl.rs:22:12: 22:21
+    debug msg => _2;                     // in scope 0 at ui/traits/where-clause-vs-impl.rs:22:23: 22:26
+    let mut _0: ();                      // return place in scope 0 at ui/traits/where-clause-vs-impl.rs:22:31: 22:31
+
+    bb0: {
+        drop(_2) -> bb1;                 // scope 0 at ui/traits/where-clause-vs-impl.rs:23:5: 23:6
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:23:6: 23:6
+    }
+}
+
+fn <impl at ui/traits/where-clause-vs-impl.rs:30:1: 30:40>::clone(_1: &Both<M, F>) -> Both<M, F> {
+    debug self => _1;                    // in scope 0 at ui/traits/where-clause-vs-impl.rs:31:14: 31:19
+    let mut _0: Both<M, F>;              // return place in scope 0 at ui/traits/where-clause-vs-impl.rs:31:24: 31:34
+    let mut _2: std::rc::Rc<(M, F)>;     // in scope 0 at ui/traits/where-clause-vs-impl.rs:32:23: 32:41
+    let mut _3: &std::rc::Rc<(M, F)>;    // in scope 0 at ui/traits/where-clause-vs-impl.rs:32:23: 32:41
+
+    bb0: {
+        _3 = &((*_1).0: std::rc::Rc<(M, F)>); // scope 0 at ui/traits/where-clause-vs-impl.rs:32:23: 32:41
+        _2 = <Rc<(M, F)> as Clone>::clone(move _3) -> bb1; // scope 0 at ui/traits/where-clause-vs-impl.rs:32:23: 32:41
+                                         // mir::Constant
+                                         // + span: ui/traits/where-clause-vs-impl.rs:32:34: 32:39
+                                         // + literal: Const { ty: for<'a> fn(&'a Rc<(M, F)>) -> Rc<(M, F)> {<Rc<(M, F)> as Clone>::clone}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _0 = Both::<M, F> { inner: move _2 }; // scope 0 at ui/traits/where-clause-vs-impl.rs:32:9: 32:43
+        return;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:33:6: 33:6
+    }
+}
+
+fn repro1(_1: Both<M, F>) -> () {
+    debug _both => _1;                   // in scope 0 at ui/traits/where-clause-vs-impl.rs:36:25: 36:30
+    let mut _0: ();                      // return place in scope 0 at ui/traits/where-clause-vs-impl.rs:36:44: 36:44
+
+    bb0: {
+        drop(_1) -> bb1;                 // scope 0 at ui/traits/where-clause-vs-impl.rs:37:1: 37:2
+    }
+
+    bb1: {
+        return;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:37:2: 37:2
+    }
+}
+
+fn repro2(_1: M, _2: F) -> () {
+    debug msg => _1;                     // in scope 0 at ui/traits/where-clause-vs-impl.rs:39:25: 39:28
+    debug foo => _2;                     // in scope 0 at ui/traits/where-clause-vs-impl.rs:39:33: 39:36
+    let mut _0: ();                      // return place in scope 0 at ui/traits/where-clause-vs-impl.rs:39:41: 39:41
+    let _3: Both<M, F>;                  // in scope 0 at ui/traits/where-clause-vs-impl.rs:40:9: 40:13
+    let mut _4: std::rc::Rc<(M, F)>;     // in scope 0 at ui/traits/where-clause-vs-impl.rs:40:30: 40:49
+    let mut _5: (M, F);                  // in scope 0 at ui/traits/where-clause-vs-impl.rs:40:38: 40:48
+    let mut _6: M;                       // in scope 0 at ui/traits/where-clause-vs-impl.rs:40:39: 40:42
+    let mut _7: F;                       // in scope 0 at ui/traits/where-clause-vs-impl.rs:40:44: 40:47
+    let _8: ();                          // in scope 0 at ui/traits/where-clause-vs-impl.rs:41:5: 41:25
+    let mut _9: Both<M, F>;              // in scope 0 at ui/traits/where-clause-vs-impl.rs:41:12: 41:24
+    let mut _10: &Both<M, F>;            // in scope 0 at ui/traits/where-clause-vs-impl.rs:41:12: 41:24
+    scope 1 {
+        debug both => _3;                // in scope 1 at ui/traits/where-clause-vs-impl.rs:40:9: 40:13
+    }
+
+    bb0: {
+        _6 = move _1;                    // scope 0 at ui/traits/where-clause-vs-impl.rs:40:39: 40:42
+        _7 = move _2;                    // scope 0 at ui/traits/where-clause-vs-impl.rs:40:44: 40:47
+        _5 = (move _6, move _7);         // scope 0 at ui/traits/where-clause-vs-impl.rs:40:38: 40:48
+        _4 = Rc::<(M, F)>::new(move _5) -> bb1; // scope 0 at ui/traits/where-clause-vs-impl.rs:40:30: 40:49
+                                         // mir::Constant
+                                         // + span: ui/traits/where-clause-vs-impl.rs:40:30: 40:37
+                                         // + user_ty: UserType(0)
+                                         // + literal: Const { ty: fn((M, F)) -> Rc<(M, F)> {Rc::<(M, F)>::new}, val: Value(<ZST>) }
+    }
+
+    bb1: {
+        _3 = Both::<M, F> { inner: move _4 }; // scope 0 at ui/traits/where-clause-vs-impl.rs:40:16: 40:51
+        _10 = &_3;                       // scope 1 at ui/traits/where-clause-vs-impl.rs:41:12: 41:24
+        _9 = <Both<M, F> as Clone>::clone(move _10) -> [return: bb2, unwind: bb5]; // scope 1 at ui/traits/where-clause-vs-impl.rs:41:12: 41:24
+                                         // mir::Constant
+                                         // + span: ui/traits/where-clause-vs-impl.rs:41:17: 41:22
+                                         // + literal: Const { ty: for<'a> fn(&'a Both<M, F>) -> Both<M, F> {<Both<M, F> as Clone>::clone}, val: Value(<ZST>) }
+    }
+
+    bb2: {
+        _8 = repro1::<M, F>(move _9) -> [return: bb3, unwind: bb5]; // scope 1 at ui/traits/where-clause-vs-impl.rs:41:5: 41:25
+                                         // mir::Constant
+                                         // + span: ui/traits/where-clause-vs-impl.rs:41:5: 41:11
+                                         // + literal: Const { ty: fn(Both<M, F>) {repro1::<M, F>}, val: Value(<ZST>) }
+    }
+
+    bb3: {
+        drop(_3) -> bb4;                 // scope 0 at ui/traits/where-clause-vs-impl.rs:42:1: 42:2
+    }
+
+    bb4: {
+        return;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:42:2: 42:2
+    }
+
+    bb5 (cleanup): {
+        drop(_3) -> bb6;                 // scope 0 at ui/traits/where-clause-vs-impl.rs:42:1: 42:2
+    }
+
+    bb6 (cleanup): {
+        resume;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:39:1: 42:2
+    }
+}
+
+fn main() -> () {
+    let mut _0: ();                      // return place in scope 0 at ui/traits/where-clause-vs-impl.rs:44:15: 44:15
+
+    bb0: {
+        return;                          // scope 0 at ui/traits/where-clause-vs-impl.rs:45:2: 45:2
+    }
+}
