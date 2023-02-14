@@ -1,6 +1,6 @@
 # Rust UI Tests
 
-This suite consists of single-file Rust programs taken from [the Rust compiler](https://github.com/rust-lang/rust/tree/master/tests/ui)'s test suite and their [MIR](https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md) representations generated using `rustc`. 
+This suite consists of single-file Rust programs taken from [the Rust compiler](https://github.com/rust-lang/rust/tree/master/tests/ui)'s test suite and their [MIR](https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md) representations generated using `rustc`. Expected outputs are stored in `<test-name>.run.stdout` and `<test-name>.run.stderr`. If these files do not exist, the output should be empty.
 
 ## How to use tests
 
