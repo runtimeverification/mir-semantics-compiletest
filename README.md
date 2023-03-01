@@ -34,3 +34,10 @@ Some test cases may require specific Rust editions or additional compiler flags.
 | ui/*.rs | default | |
 
 See [Makefile](./Makefile) for exact recipes.
+
+### Rust toolchain version
+
+```
+nightly-x86_64-unknown-linux-gnu (default)
+rustc 1.69.0-nightly (bd39bbb4b 2023-02-07)
+```
