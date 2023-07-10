@@ -6,7 +6,7 @@ default: ui-mir
 clean: clean-mir
 
 RUSTC:=rustc
-RUSTC_OPTIONS=-C overflow-checks=off
+RUSTC_OPTIONS=-C overflow-checks=off -Zmir-enable-passes=-ConstDebugInfo
 
 UI_RS=$(shell find ui -name '*.rs')
 UI_MIR=$(patsubst %.rs,%.mir,${UI_RS})
