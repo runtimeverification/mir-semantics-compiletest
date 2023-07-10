@@ -1,199 +1,146 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn mut_tuple() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:10:16: 10:16
-    let mut _1: (i32, i32);              // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:11:9: 11:14
-    let mut _3: &mut (i32, i32);         // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:15: 13:21
-    let mut _5: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-    let _6: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:8
-    let mut _7: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19]; // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:6
-    let mut _8: ();                      // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:8
-    let mut _9: &mut (i32, i32);         // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:9: 13:11
+    let mut _0: ();
+    let mut _1: (i32, i32);
+    let mut _3: &mut (i32, i32);
+    let mut _5: &mut (&mut (i32, i32), i32);
+    let _6: ();
+    let mut _7: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19];
     scope 1 {
-        debug t => _1;                   // in scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:11:9: 11:14
-        let _2: (&mut (i32, i32), i32);  // in scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:9: 13:11
+        debug t => _1;
+        let _2: (&mut (i32, i32), i32);
         scope 2 {
-            debug t1 => _2;              // in scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:9: 13:11
-            let mut _4: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19]; // in scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:9: 15:14
+            debug t1 => _2;
+            let mut _4: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19];
             scope 3 {
-                debug c => _4;           // in scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:9: 15:14
+                debug c => _4;
             }
         }
     }
 
     bb0: {
-        _1 = (const 10_i32, const 10_i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:11:17: 11:25
-        _3 = &mut _1;                    // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:15: 13:21
-        _2 = (move _3, const 10_i32);    // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:14: 13:26
-        _9 = deref_copy (_2.0: &mut (i32, i32)); // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-        _5 = &mut ((*_9).0: i32);        // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-        _4 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] { t1: move _5 }; // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-                                         // closure
-                                         // + def_id: DefId(0:4 ~ mut_ref_struct_mem[13e9]::mut_tuple::{closure#0})
-                                         // + substs: [
-                                         //     i16,
-                                         //     extern "rust-call" fn(()),
-                                         //     (&mut i32,),
-                                         // ]
-        _7 = &mut _4;                    // scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:6
-        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] as FnMut<()>>::call_mut(move _7, move _8) -> bb1; // scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:8
-                                         // mir::Constant
-                                         // + span: ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:20:5: 20:6
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19], ()) -> <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] as FnOnce<()>>::Output {<[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] as FnMut<()>>::call_mut}, val: Value(<ZST>) }
+        _1 = (const 10_i32, const 10_i32);
+        _3 = &mut _1;
+        _2 = (move _3, const 10_i32);
+        _5 = &mut _2;
+        _4 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] { t1: move _5 };
+        _7 = &mut _4;
+        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19] as FnMut<()>>::call_mut(move _7, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:21:2: 21:2
+        return;
     }
 }
 
 fn mut_tuple::{closure#0}(_1: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 15:19]) -> () {
-    debug t1__0__0 => (*((*_1).0: &mut i32)); // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:13:9: 13:11
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:20: 15:20
-    let mut _2: (i32, bool);             // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-    let mut _3: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-    let mut _4: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
-    let mut _5: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:15:17: 18:6
+    debug t1 => (*((*_1).0: &mut (&mut (i32, i32), i32)));
+    let mut _0: ();
+    let mut _2: &mut (&mut (i32, i32), i32);
+    let mut _3: &mut (i32, i32);
+    let mut _4: &mut (&mut (i32, i32), i32);
+    let mut _5: &mut (i32, i32);
 
     bb0: {
-        _3 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-        _2 = CheckedAdd((*_3), const 10_i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-        _4 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 10_i32) -> bb1; // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-    }
-
-    bb1: {
-        _5 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-        (*_5) = move (_2.0: i32);        // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:17:9: 17:21
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:18:6: 18:6
+        _2 = deref_copy ((*_1).0: &mut (&mut (i32, i32), i32));
+        _3 = deref_copy ((*_2).0: &mut (i32, i32));
+        _4 = deref_copy ((*_1).0: &mut (&mut (i32, i32), i32));
+        _5 = deref_copy ((*_4).0: &mut (i32, i32));
+        ((*_3).0: i32) = Add(((*_5).0: i32), const 10_i32);
+        return;
     }
 }
 
 fn mut_tuple_nested() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:23:23: 23:23
-    let mut _1: (i32, i32);              // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:24:9: 24:14
-    let mut _3: &mut (i32, i32);         // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:15: 26:21
-    let mut _5: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 35:6
-    let _6: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:8
-    let mut _7: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19]; // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:6
-    let mut _8: ();                      // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:8
-    let mut _9: &mut (i32, i32);         // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:9: 26:11
+    let mut _0: ();
+    let mut _1: (i32, i32);
+    let mut _3: &mut (i32, i32);
+    let mut _5: &mut (&mut (i32, i32), i32);
+    let _6: ();
+    let mut _7: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19];
     scope 1 {
-        debug t => _1;                   // in scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:24:9: 24:14
-        let _2: (&mut (i32, i32), i32);  // in scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:9: 26:11
+        debug t => _1;
+        let _2: (&mut (i32, i32), i32);
         scope 2 {
-            debug t1 => _2;              // in scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:9: 26:11
-            let mut _4: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19]; // in scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:9: 28:14
+            debug t1 => _2;
+            let mut _4: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19];
             scope 3 {
-                debug c => _4;           // in scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:9: 28:14
+                debug c => _4;
             }
         }
     }
 
     bb0: {
-        _1 = (const 10_i32, const 10_i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:24:17: 24:25
-        _3 = &mut _1;                    // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:15: 26:21
-        _2 = (move _3, const 10_i32);    // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:14: 26:26
-        _9 = deref_copy (_2.0: &mut (i32, i32)); // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 35:6
-        _5 = &mut ((*_9).0: i32);        // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 35:6
-        _4 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] { t1: move _5 }; // scope 2 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 35:6
-                                         // closure
-                                         // + def_id: DefId(0:6 ~ mut_ref_struct_mem[13e9]::mut_tuple_nested::{closure#0})
-                                         // + substs: [
-                                         //     i16,
-                                         //     extern "rust-call" fn(()),
-                                         //     (&mut i32,),
-                                         // ]
-        _7 = &mut _4;                    // scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:6
-        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] as FnMut<()>>::call_mut(move _7, move _8) -> bb1; // scope 3 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:8
-                                         // mir::Constant
-                                         // + span: ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:37:5: 37:6
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19], ()) -> <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] as FnOnce<()>>::Output {<[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] as FnMut<()>>::call_mut}, val: Value(<ZST>) }
+        _1 = (const 10_i32, const 10_i32);
+        _3 = &mut _1;
+        _2 = (move _3, const 10_i32);
+        _5 = &mut _2;
+        _4 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] { t1: move _5 };
+        _7 = &mut _4;
+        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19] as FnMut<()>>::call_mut(move _7, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:38:2: 38:2
+        return;
     }
 }
 
 fn mut_tuple_nested::{closure#0}(_1: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 28:19]) -> () {
-    debug t1__0__0 => (*((*_1).0: &mut i32)); // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:9: 26:11
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:20: 28:20
-    let mut _2: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23]; // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:13: 29:18
-    let mut _3: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-    let _4: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:12
-    let mut _5: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23]; // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:10
-    let mut _6: ();                      // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:12
-    let mut _7: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:28:17: 35:6
+    debug t1 => (*((*_1).0: &mut (&mut (i32, i32), i32)));
+    let mut _0: ();
+    let mut _2: [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23];
+    let _3: ();
+    let mut _4: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23];
+    let mut _5: &mut (&mut (i32, i32), i32);
     scope 1 {
-        debug c => _2;                   // in scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:13: 29:18
+        debug c => _2;
     }
 
     bb0: {
-        _7 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-        _3 = &mut (*_7);                 // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-        _2 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] { t1: move _3 }; // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-                                         // closure
-                                         // + def_id: DefId(0:7 ~ mut_ref_struct_mem[13e9]::mut_tuple_nested::{closure#0}::{closure#0})
-                                         // + substs: [
-                                         //     i16,
-                                         //     extern "rust-call" fn(()),
-                                         //     (&mut i32,),
-                                         // ]
-        _5 = &mut _2;                    // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:10
-        _4 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] as FnMut<()>>::call_mut(move _5, move _6) -> bb1; // scope 1 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:12
-                                         // mir::Constant
-                                         // + span: ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:34:9: 34:10
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23], ()) -> <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] as FnOnce<()>>::Output {<[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] as FnMut<()>>::call_mut}, val: Value(<ZST>) }
+        _5 = deref_copy ((*_1).0: &mut (&mut (i32, i32), i32));
+        _2 = [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] { t1: _5 };
+        _4 = &mut _2;
+        _3 = <[closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23] as FnMut<()>>::call_mut(move _4, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:35:6: 35:6
+        return;
     }
 }
 
 fn mut_tuple_nested::{closure#0}::{closure#0}(_1: &mut [closure@ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 29:23]) -> () {
-    debug t1__0__0 => (*((*_1).0: &mut i32)); // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:26:9: 26:11
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:24: 29:24
-    let mut _2: (i32, bool);             // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-    let mut _3: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-    let mut _4: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
-    let mut _5: &mut i32;                // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:29:21: 32:10
+    debug t1 => (*((*_1).0: &mut (&mut (i32, i32), i32)));
+    let mut _0: ();
+    let mut _2: &mut (&mut (i32, i32), i32);
+    let mut _3: &mut (i32, i32);
+    let mut _4: &mut (&mut (i32, i32), i32);
+    let mut _5: &mut (i32, i32);
 
     bb0: {
-        _3 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-        _2 = CheckedAdd((*_3), const 10_i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-        _4 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 10_i32) -> bb1; // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-    }
-
-    bb1: {
-        _5 = deref_copy ((*_1).0: &mut i32); // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-        (*_5) = move (_2.0: i32);        // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:31:13: 31:25
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:32:10: 32:10
+        _2 = deref_copy ((*_1).0: &mut (&mut (i32, i32), i32));
+        _3 = deref_copy ((*_2).0: &mut (i32, i32));
+        _4 = deref_copy ((*_1).0: &mut (&mut (i32, i32), i32));
+        _5 = deref_copy ((*_4).0: &mut (i32, i32));
+        ((*_3).0: i32) = Add(((*_5).0: i32), const 10_i32);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:40:11: 40:11
-    let _1: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:41:5: 41:16
-    let _2: ();                          // in scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:42:5: 42:23
+    let mut _0: ();
+    let _1: ();
+    let _2: ();
 
     bb0: {
-        _1 = mut_tuple() -> bb1;         // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:41:5: 41:16
-                                         // mir::Constant
-                                         // + span: ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:41:5: 41:14
-                                         // + literal: Const { ty: fn() {mut_tuple}, val: Value(<ZST>) }
+        _1 = mut_tuple() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = mut_tuple_nested() -> bb2;  // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:42:5: 42:23
-                                         // mir::Constant
-                                         // + span: ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:42:5: 42:21
-                                         // + literal: Const { ty: fn() {mut_tuple_nested}, val: Value(<ZST>) }
+        _2 = mut_tuple_nested() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/closures/2229_closure_analysis/run_pass/mut_ref_struct_mem.rs:43:2: 43:2
+        return;
     }
 }

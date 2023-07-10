@@ -1,30 +1,27 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static FOO: Foo = {
-    let mut _0: Foo;                     // return place in scope 0 at ui/consts/static-cycle-error.rs:7:13: 7:16
-    let mut _1: std::option::Option<&Foo>; // in scope 0 at ui/consts/static-cycle-error.rs:8:10: 8:20
-    let mut _2: &Foo;                    // in scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-    let _3: &Foo;                        // in scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-    let _4: &Foo;                        // in scope 0 at ui/consts/static-cycle-error.rs:8:16: 8:19
+    let mut _0: Foo;
+    let mut _1: std::option::Option<&Foo>;
+    let mut _2: &Foo;
+    let _3: &Foo;
+    let _4: &Foo;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/static-cycle-error.rs:8:10: 8:20
-        StorageLive(_2);                 // scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-        StorageLive(_3);                 // scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-        StorageLive(_4);                 // scope 0 at ui/consts/static-cycle-error.rs:8:16: 8:19
-        _4 = const {alloc1: &Foo};       // scope 0 at ui/consts/static-cycle-error.rs:8:16: 8:19
-                                         // mir::Constant
-                                         // + span: ui/consts/static-cycle-error.rs:8:16: 8:19
-                                         // + literal: Const { ty: &Foo, val: Value(Scalar(alloc1)) }
-        _3 = &(*_4);                     // scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-        _2 = &(*_3);                     // scope 0 at ui/consts/static-cycle-error.rs:8:15: 8:19
-        _1 = Option::<&Foo>::Some(move _2); // scope 0 at ui/consts/static-cycle-error.rs:8:10: 8:20
-        StorageDead(_2);                 // scope 0 at ui/consts/static-cycle-error.rs:8:19: 8:20
-        _0 = Foo { foo: move _1 };       // scope 0 at ui/consts/static-cycle-error.rs:7:19: 9:2
-        StorageDead(_4);                 // scope 0 at ui/consts/static-cycle-error.rs:9:1: 9:2
-        StorageDead(_3);                 // scope 0 at ui/consts/static-cycle-error.rs:9:1: 9:2
-        StorageDead(_1);                 // scope 0 at ui/consts/static-cycle-error.rs:9:1: 9:2
-        return;                          // scope 0 at ui/consts/static-cycle-error.rs:7:1: 9:3
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = const {alloc1: &Foo};
+        _3 = &(*_4);
+        _2 = &(*_3);
+        _1 = Option::<&Foo>::Some(move _2);
+        StorageDead(_2);
+        _0 = Foo { foo: move _1 };
+        StorageDead(_4);
+        StorageDead(_3);
+        StorageDead(_1);
+        return;
     }
 }
 
@@ -33,9 +30,9 @@ alloc1 (static: FOO, size: 8, align: 8) {
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/static-cycle-error.rs:11:11: 11:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/static-cycle-error.rs:11:13: 11:13
+        return;
     }
 }

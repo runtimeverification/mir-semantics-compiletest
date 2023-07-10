@@ -1,219 +1,142 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:11:1: 11:22>::add1(_1: &mut usize) -> usize {
-    debug self => _1;                    // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:12:13: 12:22
-    let mut _0: usize;                   // return place in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:12:27: 12:32
-    let mut _2: (usize, bool);           // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:13:9: 13:19
+    debug self => _1;
+    let mut _0: usize;
 
     bb0: {
-        _2 = CheckedAdd((*_1), const 1_usize); // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:13:9: 13:19
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_1), const 1_usize) -> bb1; // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:13:9: 13:19
-    }
-
-    bb1: {
-        (*_1) = move (_2.0: usize);      // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:13:9: 13:19
-        _0 = (*_1);                      // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:14:9: 14:14
-        return;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:15:6: 15:6
+        (*_1) = Add((*_1), const 1_usize);
+        _0 = (*_1);
+        return;
     }
 }
 
 fn add_one(_1: &mut dyn* AddOne) -> usize {
-    debug i => _1;                       // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:18:12: 18:13
-    let mut _0: usize;                   // return place in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:18:43: 18:48
-    let mut _2: &mut dyn* AddOne;        // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:19:5: 19:13
+    debug i => _1;
+    let mut _0: usize;
 
     bb0: {
-        _2 = &mut (*_1);                 // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:19:5: 19:13
-        _0 = <dyn* AddOne as AddOne>::add1(move _2) -> bb1; // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:19:5: 19:13
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:19:7: 19:11
-                                         // + literal: Const { ty: for<'a> fn(&'a mut dyn* AddOne) -> usize {<dyn* AddOne as AddOne>::add1}, val: Value(<ZST>) }
+        _0 = <dyn* AddOne as AddOne>::add1(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:20:2: 20:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:22:11: 22:11
-    let mut _1: dyn* AddOne;             // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:23:9: 23:14
-    let mut _2: dyn* AddOne;             // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:23:17: 23:39
-    let _3: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _4: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _5: &[&str];                 // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-    let mut _6: &[&str; 2];              // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-    let _7: &[&str; 2];                  // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-    let mut _8: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _9: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _10: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _11: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _12: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-    let mut _13: &usize;                 // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-    let _14: &usize;                     // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-    let _15: usize;                      // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-    let mut _16: &mut dyn* AddOne;       // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:28: 25:34
-    let mut _17: &mut dyn* AddOne;       // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:28: 25:34
-    let _18: ();                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _19: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _20: &[&str];                // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-    let mut _21: &[&str; 2];             // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-    let _22: &[&str; 2];                 // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-    let mut _23: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _24: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _25: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _26: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _27: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-    let mut _28: &usize;                 // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-    let _29: &usize;                     // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-    let _30: usize;                      // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-    let mut _31: &mut dyn* AddOne;       // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:28: 26:34
-    let mut _32: &mut dyn* AddOne;       // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:28: 26:34
+    let mut _0: ();
+    let mut _1: dyn* AddOne;
+    let mut _2: dyn* AddOne;
+    let _3: ();
+    let mut _4: std::fmt::Arguments<'_>;
+    let mut _5: &[&str];
+    let mut _6: &[core::fmt::rt::Argument<'_>];
+    let _7: &[core::fmt::rt::Argument<'_>; 1];
+    let _8: [core::fmt::rt::Argument<'_>; 1];
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let _10: &usize;
+    let _11: usize;
+    let mut _12: &mut dyn* AddOne;
+    let _13: ();
+    let mut _14: std::fmt::Arguments<'_>;
+    let mut _15: &[&str];
+    let mut _16: &[core::fmt::rt::Argument<'_>];
+    let _17: &[core::fmt::rt::Argument<'_>; 1];
+    let _18: [core::fmt::rt::Argument<'_>; 1];
+    let mut _19: core::fmt::rt::Argument<'_>;
+    let _20: &usize;
+    let _21: usize;
+    let mut _22: &mut dyn* AddOne;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:23:9: 23:14
-        let mut _33: &[&str; 2];         // in scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-        let mut _34: &[&str; 2];         // in scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
+        debug x => _1;
+        let mut _23: &[&str; 2];
+        let mut _24: &[&str; 2];
     }
 
     bb0: {
-        _2 = const 42_usize as dyn* AddOne (DynStar); // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:23:17: 23:24
-        _1 = move _2;                    // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:23:17: 23:39
-        _34 = const _;                   // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[1])) }
-        _7 = _34;                        // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-        _6 = _7;                         // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-        _5 = move _6 as &[&str] (Pointer(Unsize)); // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-        _17 = &mut _1;                   // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:28: 25:34
-        _16 = &mut (*_17);               // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:28: 25:34
-        _15 = add_one(move _16) -> [return: bb1, unwind: bb10]; // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:27
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut (dyn* AddOne + 'b)) -> usize {add_one}, val: Value(<ZST>) }
+        _2 = const 42_usize as dyn* AddOne (DynStar);
+        _1 = move _2;
+        _24 = const _;
+        _5 = _24 as &[&str] (Pointer(Unsize));
+        _12 = &mut _1;
+        _11 = add_one(_12) -> [return: bb1, unwind: bb10];
     }
 
     bb1: {
-        _14 = &_15;                      // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-        _13 = _14;                       // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-        _12 = core::fmt::ArgumentV1::<'_>::new_display::<usize>(move _13) -> [return: bb2, unwind: bb10]; // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:20: 25:35
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: for<'b> fn(&'b usize) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<usize>}, val: Value(<ZST>) }
+        _10 = &_11;
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_10) -> [return: bb2, unwind: bb10];
     }
 
     bb2: {
-        _11 = [move _12];                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _10 = &_11;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _9 = _10;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _8 = move _9 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb10]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _8 = [move _9];
+        _7 = &_8;
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _6) -> [return: bb3, unwind: bb10];
     }
 
     bb3: {
-        _3 = _print(move _4) -> [return: bb4, unwind: bb10]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _3 = _print(move _4) -> [return: bb4, unwind: bb10];
     }
 
     bb4: {
-        _33 = const _;                   // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
-        _22 = _33;                       // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-        _21 = _22;                       // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-        _20 = move _21 as &[&str] (Pointer(Unsize)); // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-        _32 = &mut _1;                   // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:28: 26:34
-        _31 = &mut (*_32);               // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:28: 26:34
-        _30 = add_one(move _31) -> [return: bb5, unwind: bb10]; // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:27
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut (dyn* AddOne + 'b)) -> usize {add_one}, val: Value(<ZST>) }
+        _23 = const _;
+        _15 = _23 as &[&str] (Pointer(Unsize));
+        _22 = &mut _1;
+        _21 = add_one(_22) -> [return: bb5, unwind: bb10];
     }
 
     bb5: {
-        _29 = &_30;                      // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-        _28 = _29;                       // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-        _27 = core::fmt::ArgumentV1::<'_>::new_display::<usize>(move _28) -> [return: bb6, unwind: bb10]; // scope 1 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:20: 26:35
-                                         // + user_ty: UserType(4)
-                                         // + literal: Const { ty: for<'b> fn(&'b usize) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<usize>}, val: Value(<ZST>) }
+        _20 = &_21;
+        _19 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_20) -> [return: bb6, unwind: bb10];
     }
 
     bb6: {
-        _26 = [move _27];                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _25 = &_26;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _24 = _25;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _23 = move _24 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> [return: bb7, unwind: bb10]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(3)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _18 = [move _19];
+        _17 = &_18;
+        _16 = _17 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _14 = Arguments::<'_>::new_v1(move _15, move _16) -> [return: bb7, unwind: bb10];
     }
 
     bb7: {
-        _18 = _print(move _19) -> [return: bb8, unwind: bb10]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _13 = _print(move _14) -> [return: bb8, unwind: bb10];
     }
 
     bb8: {
-        drop(_1) -> bb9;                 // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:27:1: 27:2
+        drop(_1) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        return;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:27:2: 27:2
+        return;
     }
 
     bb10 (cleanup): {
-        drop(_1) -> bb11;                // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:27:1: 27:2
+        drop(_1) -> [return: bb11, unwind terminate];
     }
 
     bb11 (cleanup): {
-        resume;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:22:1: 27:2
+        resume;
     }
 }
 
 promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-    let mut _1: [&str; 2];               // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
-        return;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:26:14: 26:18
+        _1 = [const "", const "\n"];
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-    let mut _1: [&str; 2];               // in scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
-        return;                          // scope 0 at ui/dyn-star/dont-unsize-coerce-dyn-star.rs:25:14: 25:18
+        _1 = [const "", const "\n"];
+        _0 = &_1;
+        return;
     }
 }

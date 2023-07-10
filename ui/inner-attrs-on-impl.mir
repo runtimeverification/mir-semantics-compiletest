@@ -1,62 +1,48 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/inner-attrs-on-impl.rs:11:1: 11:9>::method(_1: &Foo) -> bool {
-    debug self => _1;                    // in scope 0 at ui/inner-attrs-on-impl.rs:18:15: 18:20
-    let mut _0: bool;                    // return place in scope 0 at ui/inner-attrs-on-impl.rs:18:25: 18:29
+    debug self => _1;
+    let mut _0: bool;
 
     bb0: {
-        _0 = const true;                 // scope 0 at ui/inner-attrs-on-impl.rs:18:32: 18:36
-        return;                          // scope 0 at ui/inner-attrs-on-impl.rs:18:38: 18:38
+        _0 = const true;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/inner-attrs-on-impl.rs:22:15: 22:15
-    let mut _1: bool;                    // in scope 0 at ui/inner-attrs-on-impl.rs:23:5: 23:26
-    let mut _2: bool;                    // in scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-    let mut _3: &Foo;                    // in scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-    let mut _4: !;                       // in scope 0 at ui/inner-attrs-on-impl.rs:23:5: 23:26
-    let mut _5: &Foo;                    // in scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
+    let mut _0: ();
+    let mut _1: bool;
+    let mut _2: bool;
+    let mut _3: !;
+    let mut _4: &Foo;
 
     bb0: {
-        _5 = const _;                    // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-                                         // mir::Constant
-                                         // + span: ui/inner-attrs-on-impl.rs:23:13: 23:25
-                                         // + literal: Const { ty: &Foo, val: Unevaluated(main, [], Some(promoted[0])) }
-        _3 = _5;                         // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-        _2 = Foo::method(move _3) -> bb1; // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-                                         // mir::Constant
-                                         // + span: ui/inner-attrs-on-impl.rs:23:17: 23:23
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo) -> bool {Foo::method}, val: Value(<ZST>) }
+        _4 = const _;
+        _2 = Foo::method(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Not(move _2);               // scope 0 at ui/inner-attrs-on-impl.rs:23:5: 23:26
-        switchInt(move _1) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/inner-attrs-on-impl.rs:23:5: 23:26
+        _1 = Not(move _2);
+        switchInt(move _1) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _4 = core::panicking::panic(const "assertion failed: Foo.method()"); // scope 0 at ui/inner-attrs-on-impl.rs:23:5: 23:26
-                                         // mir::Constant
-                                         // + span: ui/inner-attrs-on-impl.rs:23:5: 23:26
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = core::panicking::panic(const "assertion failed: Foo.method()") -> unwind continue;
     }
 
     bb3: {
-        return;                          // scope 0 at ui/inner-attrs-on-impl.rs:24:2: 24:2
+        return;
     }
 }
 
 promoted[0] in main: &Foo = {
-    let mut _0: &Foo;                    // return place in scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-    let mut _1: Foo;                     // in scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:16
+    let mut _0: &Foo;
+    let mut _1: Foo;
 
     bb0: {
-        _1 = Foo;                        // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:16
-        _0 = &_1;                        // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
-        return;                          // scope 0 at ui/inner-attrs-on-impl.rs:23:13: 23:25
+        _1 = Foo;
+        _0 = &_1;
+        return;
     }
 }

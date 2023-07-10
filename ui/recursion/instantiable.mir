@@ -1,43 +1,40 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/recursion/instantiable.rs:15:15: 15:15
-    let _1: foo;                         // in scope 0 at ui/recursion/instantiable.rs:16:9: 16:11
-    let mut _2: X;                       // in scope 0 at ui/recursion/instantiable.rs:16:18: 16:44
-    let mut _3: *const foo;              // in scope 0 at ui/recursion/instantiable.rs:16:32: 16:43
+    let mut _0: ();
+    let _1: foo;
+    let mut _2: X;
+    let mut _3: *const foo;
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/recursion/instantiable.rs:16:9: 16:11
+        debug _x => _1;
     }
 
     bb0: {
-        _3 = null::<foo>() -> bb1;       // scope 0 at ui/recursion/instantiable.rs:16:32: 16:43
-                                         // mir::Constant
-                                         // + span: ui/recursion/instantiable.rs:16:32: 16:41
-                                         // + literal: Const { ty: fn() -> *const foo {null::<foo>}, val: Value(<ZST>) }
+        _3 = null::<foo>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = X { x: const 0_usize, nxt: move _3 }; // scope 0 at ui/recursion/instantiable.rs:16:18: 16:44
-        _1 = foo(move _2);               // scope 0 at ui/recursion/instantiable.rs:16:14: 16:45
-        return;                          // scope 0 at ui/recursion/instantiable.rs:17:2: 17:2
+        _2 = X { x: const 0_usize, nxt: move _3 };
+        _1 = foo(move _2);
+        return;
     }
 }
 
 fn foo(_1: X) -> foo {
-    let mut _0: foo;                     // return place in scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
+    let mut _0: foo;
 
     bb0: {
-        _0 = foo(move _1);               // scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
-        return;                          // scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
+        _0 = foo(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo(_1: X) -> foo {
-    let mut _0: foo;                     // return place in scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
+    let mut _0: foo;
 
     bb0: {
-        _0 = foo(move _1);               // scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
-        return;                          // scope 0 at ui/recursion/instantiable.rs:11:1: 11:11
+        _0 = foo(move _1);
+        return;
     }
 }

@@ -1,95 +1,66 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/unwind-abort.rs:6:27: 6:27
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: ();
+    let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-    }
-
-    bb1 (cleanup): {
-        abort;                           // scope 0 at ui/consts/unwind-abort.rs:6:1: 8:2
+        _1 = begin_panic::<&str>(const "explicit panic") -> unwind terminate;
     }
 }
 
 // MIR FOR CTFE
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/unwind-abort.rs:6:27: 6:27
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: ();
+    let mut _1: !;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-        ConstEvalCounter;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-        _1 = begin_panic::<&str>(const "explicit panic") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-    }
-
-    bb1 (cleanup): {
-        abort;                           // scope 0 at ui/consts/unwind-abort.rs:6:1: 8:2
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = begin_panic::<&str>(const "explicit panic") -> unwind terminate;
     }
 }
 
 fn bar() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/unwind-abort.rs:10:16: 10:16
-    let _1: ();                          // in scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = foo() -> bb1;               // scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
-                                         // mir::Constant
-                                         // + span: ui/consts/unwind-abort.rs:11:5: 11:8
-                                         // + literal: Const { ty: extern "C" fn() {foo}, val: Value(<ZST>) }
+        _1 = foo() -> [return: bb1, unwind unreachable];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/unwind-abort.rs:12:2: 12:2
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn bar() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/unwind-abort.rs:10:16: 10:16
-    let _1: ();                          // in scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
-        ConstEvalCounter;                // scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
-        _1 = foo() -> bb1;               // scope 0 at ui/consts/unwind-abort.rs:11:5: 11:10
-                                         // mir::Constant
-                                         // + span: ui/consts/unwind-abort.rs:11:5: 11:8
-                                         // + literal: Const { ty: extern "C" fn() {foo}, val: Value(<ZST>) }
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = foo() -> [return: bb1, unwind unreachable];
     }
 
     bb1: {
-        StorageDead(_1);                 // scope 0 at ui/consts/unwind-abort.rs:11:10: 11:11
-        _0 = const ();                   // scope 0 at ui/consts/unwind-abort.rs:10:16: 12:2
-        return;                          // scope 0 at ui/consts/unwind-abort.rs:12:2: 12:2
+        StorageDead(_1);
+        _0 = const ();
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/unwind-abort.rs:14:11: 14:11
-    let _1: ();                          // in scope 0 at ui/consts/unwind-abort.rs:15:5: 15:10
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = bar() -> bb1;               // scope 0 at ui/consts/unwind-abort.rs:15:5: 15:10
-                                         // mir::Constant
-                                         // + span: ui/consts/unwind-abort.rs:15:5: 15:8
-                                         // + literal: Const { ty: fn() {bar}, val: Value(<ZST>) }
+        _1 = bar() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/unwind-abort.rs:16:2: 16:2
+        return;
     }
 }

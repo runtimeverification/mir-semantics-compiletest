@@ -1,329 +1,258 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Iter::for_each(_1: Self, _2: F) -> () {
-    debug self => _1;                    // in scope 0 at ui/generic-associated-types/issue-76826.rs:8:20: 8:28
-    debug f => _2;                       // in scope 0 at ui/generic-associated-types/issue-76826.rs:8:30: 8:35
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:9:9: 9:9
-    let mut _3: std::option::Option<<Self as Iter>::Item<'_>>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:11:32: 11:43
-    let mut _4: &mut Self;               // in scope 0 at ui/generic-associated-types/issue-76826.rs:11:32: 11:43
-    let mut _5: isize;                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:11:19: 11:29
-    let _7: ();                          // in scope 0 at ui/generic-associated-types/issue-76826.rs:12:13: 12:20
-    let mut _8: &mut F;                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:12:13: 12:14
-    let mut _9: (<Self as Iter>::Item<'_>,); // in scope 0 at ui/generic-associated-types/issue-76826.rs:12:13: 12:20
-    let mut _10: <Self as Iter>::Item<'_>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:12:15: 12:19
+    debug self => _1;
+    debug f => _2;
+    let mut _0: ();
+    let mut _3: std::option::Option<<Self as Iter>::Item<'_>>;
+    let mut _4: &mut Self;
+    let mut _5: isize;
+    let _7: ();
+    let mut _8: &mut F;
+    let mut _9: (<Self as Iter>::Item<'_>,);
     scope 1 {
-        debug item => _6;                // in scope 1 at ui/generic-associated-types/issue-76826.rs:11:24: 11:28
-        let _6: <Self as Iter>::Item<'_>; // in scope 1 at ui/generic-associated-types/issue-76826.rs:11:24: 11:28
+        debug item => _6;
+        let _6: <Self as Iter>::Item<'_>;
     }
 
     bb0: {
-        goto -> bb1;                     // scope 0 at ui/generic-associated-types/issue-76826.rs:11:9: 13:10
+        goto -> bb1;
     }
 
     bb1: {
-        _4 = &mut _1;                    // scope 1 at ui/generic-associated-types/issue-76826.rs:11:32: 11:43
-        _3 = <Self as Iter>::next(move _4) -> [return: bb2, unwind: bb8]; // scope 1 at ui/generic-associated-types/issue-76826.rs:11:32: 11:43
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:11:37: 11:41
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Self) -> Option<<Self as Iter>::Item<'a>> {<Self as Iter>::next}, val: Value(<ZST>) }
+        _4 = &mut _1;
+        _3 = <Self as Iter>::next(move _4) -> [return: bb2, unwind: bb8];
     }
 
     bb2: {
-        _5 = discriminant(_3);           // scope 1 at ui/generic-associated-types/issue-76826.rs:11:19: 11:29
-        switchInt(move _5) -> [1: bb3, otherwise: bb4]; // scope 1 at ui/generic-associated-types/issue-76826.rs:11:19: 11:29
+        _5 = discriminant(_3);
+        switchInt(move _5) -> [1: bb3, otherwise: bb4];
     }
 
     bb3: {
-        _6 = move ((_3 as Some).0: <Self as Iter>::Item<'_>); // scope 1 at ui/generic-associated-types/issue-76826.rs:11:24: 11:28
-        _8 = &mut _2;                    // scope 1 at ui/generic-associated-types/issue-76826.rs:12:13: 12:14
-        _10 = move _6;                   // scope 1 at ui/generic-associated-types/issue-76826.rs:12:15: 12:19
-        _9 = (move _10,);                // scope 1 at ui/generic-associated-types/issue-76826.rs:12:13: 12:20
-        _7 = <F as FnMut<(<Self as Iter>::Item<'_>,)>>::call_mut(move _8, move _9) -> [return: bb11, unwind: bb8]; // scope 1 at ui/generic-associated-types/issue-76826.rs:12:13: 12:20
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:12:13: 12:14
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut F, (<Self as Iter>::Item<'_>,)) -> <F as FnOnce<(<Self as Iter>::Item<'_>,)>>::Output {<F as FnMut<(<Self as Iter>::Item<'_>,)>>::call_mut}, val: Value(<ZST>) }
+        _6 = move ((_3 as Some).0: <Self as Iter>::Item<'_>);
+        _8 = &mut _2;
+        _9 = (move _6,);
+        _7 = <F as FnMut<(<Self as Iter>::Item<'_>,)>>::call_mut(move _8, move _9) -> [return: bb11, unwind: bb8];
     }
 
     bb4: {
-        drop(_3) -> [return: bb5, unwind: bb8]; // scope 0 at ui/generic-associated-types/issue-76826.rs:13:9: 13:10
+        drop(_3) -> [return: bb5, unwind: bb8];
     }
 
     bb5: {
-        drop(_2) -> [return: bb6, unwind: bb9]; // scope 0 at ui/generic-associated-types/issue-76826.rs:14:5: 14:6
+        drop(_2) -> [return: bb6, unwind: bb9];
     }
 
     bb6: {
-        drop(_1) -> bb7;                 // scope 0 at ui/generic-associated-types/issue-76826.rs:14:5: 14:6
+        drop(_1) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:14:6: 14:6
+        return;
     }
 
     bb8 (cleanup): {
-        drop(_2) -> bb9;                 // scope 0 at ui/generic-associated-types/issue-76826.rs:14:5: 14:6
+        drop(_2) -> [return: bb9, unwind terminate];
     }
 
     bb9 (cleanup): {
-        drop(_1) -> bb10;                // scope 0 at ui/generic-associated-types/issue-76826.rs:14:5: 14:6
+        drop(_1) -> [return: bb10, unwind terminate];
     }
 
     bb10 (cleanup): {
-        resume;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:8:5: 14:6
+        resume;
     }
 
     bb11: {
-        goto -> bb1;                     // scope 1 at ui/generic-associated-types/issue-76826.rs:12:13: 12:20
+        goto -> bb1;
     }
 }
 
 fn <impl at ui/generic-associated-types/issue-76826.rs:23:1: 23:19>::new(_1: Vec<T>, _2: usize) -> Windows<T> {
-    debug items => _1;                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:24:16: 24:21
-    debug len => _2;                     // in scope 0 at ui/generic-associated-types/issue-76826.rs:24:31: 24:34
-    let mut _0: Windows<T>;              // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:24:46: 24:50
-    let mut _3: std::vec::Vec<T>;        // in scope 0 at ui/generic-associated-types/issue-76826.rs:25:16: 25:21
-    let mut _4: usize;                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:25:33: 25:36
+    debug items => _1;
+    debug len => _2;
+    let mut _0: Windows<T>;
 
     bb0: {
-        _3 = move _1;                    // scope 0 at ui/generic-associated-types/issue-76826.rs:25:16: 25:21
-        _4 = _2;                         // scope 0 at ui/generic-associated-types/issue-76826.rs:25:33: 25:36
-        _0 = Windows::<T> { items: move _3, start: const 0_usize, len: move _4 }; // scope 0 at ui/generic-associated-types/issue-76826.rs:25:9: 25:38
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:26:6: 26:6
+        _0 = Windows::<T> { items: move _1, start: const 0_usize, len: _2 };
+        return;
     }
 }
 
 fn <impl at ui/generic-associated-types/issue-76826.rs:29:1: 29:28>::next(_1: &mut Windows<T>) -> Option<&mut [T]> {
-    debug self => _1;                    // in scope 0 at ui/generic-associated-types/issue-76826.rs:32:17: 32:29
-    let mut _0: std::option::Option<&mut [T]>; // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:32:34: 32:56
-    let _2: &mut [T];                    // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:13: 33:18
-    let mut _3: std::ops::ControlFlow<std::option::Option<std::convert::Infallible>, &mut [T]>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-    let mut _4: std::option::Option<&mut [T]>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-    let mut _5: &mut [T];                // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-    let mut _6: &mut [T];                // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-    let mut _7: &mut std::vec::Vec<T>;   // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-    let mut _8: std::ops::Range<usize>;  // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:40: 33:73
-    let mut _9: usize;                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:40: 33:50
-    let mut _10: usize;                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:73
-    let mut _11: usize;                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:62
-    let mut _12: usize;                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:65: 33:73
-    let mut _13: (usize, bool);          // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:73
-    let mut _14: isize;                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:74: 33:75
-    let _15: std::option::Option<std::convert::Infallible>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:74: 33:75
-    let mut _16: std::option::Option<std::convert::Infallible>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:74: 33:75
-    let _17: &mut [T];                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-    let mut _18: (usize, bool);          // in scope 0 at ui/generic-associated-types/issue-76826.rs:34:9: 34:24
-    let mut _19: &mut [T];               // in scope 0 at ui/generic-associated-types/issue-76826.rs:35:14: 35:19
+    debug self => _1;
+    let mut _0: std::option::Option<&mut [T]>;
+    let mut _2: std::ops::ControlFlow<std::option::Option<std::convert::Infallible>, &mut [T]>;
+    let mut _3: std::option::Option<&mut [T]>;
+    let mut _4: &mut [T];
+    let mut _5: &mut [T];
+    let mut _6: &mut std::vec::Vec<T>;
+    let mut _7: std::ops::Range<usize>;
+    let mut _8: usize;
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: isize;
+    let _13: &mut [T];
     scope 1 {
-        debug slice => _2;               // in scope 1 at ui/generic-associated-types/issue-76826.rs:33:13: 33:18
+        debug slice => _13;
     }
     scope 2 {
-        debug residual => _15;           // in scope 2 at ui/generic-associated-types/issue-76826.rs:33:74: 33:75
+        debug residual => const Option::<Infallible>::None;
         scope 3 {
         }
     }
     scope 4 {
-        debug val => _17;                // in scope 4 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
+        debug val => _13;
         scope 5 {
         }
     }
 
     bb0: {
-        _7 = &mut ((*_1).0: std::vec::Vec<T>); // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-        _6 = <Vec<T> as DerefMut>::deref_mut(move _7) -> bb1; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<T>) -> &'a mut <Vec<T> as Deref>::Target {<Vec<T> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _6 = &mut ((*_1).0: std::vec::Vec<T>);
+        _5 = <Vec<T> as DerefMut>::deref_mut(move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = &mut (*_6);                 // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-        _9 = ((*_1).1: usize);           // scope 0 at ui/generic-associated-types/issue-76826.rs:33:40: 33:50
-        _11 = ((*_1).1: usize);          // scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:62
-        _12 = ((*_1).2: usize);          // scope 0 at ui/generic-associated-types/issue-76826.rs:33:65: 33:73
-        _13 = CheckedAdd(_11, _12);      // scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:73
-        assert(!move (_13.1: bool), "attempt to compute `{} + {}`, which would overflow", move _11, move _12) -> bb2; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:73
+        _4 = _5;
+        _8 = ((*_1).1: usize);
+        _10 = ((*_1).1: usize);
+        _11 = ((*_1).2: usize);
+        _9 = Add(move _10, move _11);
+        _7 = std::ops::Range::<usize> { start: move _8, end: move _9 };
+        _3 = core::slice::<impl [T]>::get_mut::<std::ops::Range<usize>>(move _4, move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = move (_13.0: usize);       // scope 0 at ui/generic-associated-types/issue-76826.rs:33:52: 33:73
-        _8 = std::ops::Range::<usize> { start: move _9, end: move _10 }; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:40: 33:73
-        _4 = core::slice::<impl [T]>::get_mut::<std::ops::Range<usize>>(move _5, move _8) -> bb3; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:74
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:33:32: 33:39
-                                         // + literal: Const { ty: for<'a> fn(&'a mut [T], std::ops::Range<usize>) -> Option<&'a mut <std::ops::Range<usize> as SliceIndex<[T]>>::Output> {core::slice::<impl [T]>::get_mut::<std::ops::Range<usize>>}, val: Value(<ZST>) }
+        _2 = <Option<&mut [T]> as Try>::branch(move _3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _3 = <Option<&mut [T]> as Try>::branch(move _4) -> bb4; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-                                         // + literal: Const { ty: fn(Option<&mut [T]>) -> ControlFlow<<Option<&mut [T]> as Try>::Residual, <Option<&mut [T]> as Try>::Output> {<Option<&mut [T]> as Try>::branch}, val: Value(<ZST>) }
+        _12 = discriminant(_2);
+        switchInt(move _12) -> [0: bb4, 1: bb6, otherwise: bb5];
     }
 
     bb4: {
-        _14 = discriminant(_3);          // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-        switchInt(move _14) -> [0: bb5, 1: bb7, otherwise: bb6]; // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
+        _13 = move ((_2 as Continue).0: &mut [T]);
+        ((*_1).1: usize) = Add(((*_1).1: usize), const 1_usize);
+        _0 = Option::<&mut [T]>::Some(_13);
+        goto -> bb7;
     }
 
     bb5: {
-        _17 = move ((_3 as Continue).0: &mut [T]); // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-        _2 = move _17;                   // scope 5 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-        _18 = CheckedAdd(((*_1).1: usize), const 1_usize); // scope 1 at ui/generic-associated-types/issue-76826.rs:34:9: 34:24
-        assert(!move (_18.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).1: usize), const 1_usize) -> bb8; // scope 1 at ui/generic-associated-types/issue-76826.rs:34:9: 34:24
+        unreachable;
     }
 
     bb6: {
-        unreachable;                     // scope 0 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
+        _0 = <Option<&mut [T]> as FromResidual<Option<Infallible>>>::from_residual(const Option::<Infallible>::None) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _0 = <Option<&mut [T]> as FromResidual<Option<Infallible>>>::from_residual(move _16) -> bb9; // scope 3 at ui/generic-associated-types/issue-76826.rs:33:21: 33:75
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:33:74: 33:75
-                                         // + literal: Const { ty: fn(Option<Infallible>) -> Option<&mut [T]> {<Option<&mut [T]> as FromResidual<Option<Infallible>>>::from_residual}, val: Value(<ZST>) }
-    }
-
-    bb8: {
-        ((*_1).1: usize) = move (_18.0: usize); // scope 1 at ui/generic-associated-types/issue-76826.rs:34:9: 34:24
-        _19 = &mut (*_2);                // scope 1 at ui/generic-associated-types/issue-76826.rs:35:14: 35:19
-        _0 = Option::<&mut [T]>::Some(move _19); // scope 1 at ui/generic-associated-types/issue-76826.rs:35:9: 35:20
-        goto -> bb9;                     // scope 0 at ui/generic-associated-types/issue-76826.rs:36:6: 36:6
-    }
-
-    bb9: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:36:6: 36:6
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:39:11: 39:11
-    let _1: ();                          // in scope 0 at ui/generic-associated-types/issue-76826.rs:40:5: 41:51
-    let mut _2: Windows<i32>;            // in scope 0 at ui/generic-associated-types/issue-76826.rs:40:5: 40:41
-    let mut _3: std::vec::Vec<i32>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-    let mut _4: std::boxed::Box<[i32]>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _5: std::boxed::Box<[i32; 5]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _6: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _7: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _8: *mut u8;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _9: std::boxed::Box<[i32; 5]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _10: [closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]; // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:19: 41:50
-    let mut _11: *const [i32; 5];        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _0: ();
+    let _1: ();
+    let mut _2: Windows<i32>;
+    let mut _3: std::vec::Vec<i32>;
+    let mut _4: std::boxed::Box<[i32]>;
+    let mut _5: usize;
+    let mut _6: usize;
+    let mut _7: *mut u8;
+    let mut _8: std::boxed::Box<[i32; 5]>;
+    let mut _9: *const [i32; 5];
+    let mut _10: *const ();
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: usize;
+    let mut _15: bool;
     scope 1 {
     }
 
     bb0: {
-        _6 = const 20_usize;             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _7 = const 4_usize;              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _8 = alloc::alloc::exchange_malloc(move _6, move _7) -> bb1; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+        _5 = SizeOf([i32; 5]);
+        _6 = AlignOf([i32; 5]);
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _9 = ShallowInitBox(move _8, [i32; 5]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _11 = (((_9.0: std::ptr::Unique<[i32; 5]>).0: std::ptr::NonNull<[i32; 5]>).0: *const [i32; 5]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        (*_11) = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        _5 = move _9;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _4 = move _5 as std::boxed::Box<[i32]> (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _3 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _4) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Box<[i32]>) -> Vec<i32> {slice::<impl [i32]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+        _8 = ShallowInitBox(move _7, [i32; 5]);
+        _9 = (((_8.0: std::ptr::Unique<[i32; 5]>).0: std::ptr::NonNull<[i32; 5]>).0: *const [i32; 5]);
+        _10 = _9 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(i32);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb5, unwind unreachable];
     }
 
     bb2: {
-        _2 = Windows::<i32>::new(move _3, const 3_usize) -> bb3; // scope 0 at ui/generic-associated-types/issue-76826.rs:40:5: 40:41
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:40:5: 40:17
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Vec<i32>, usize) -> Windows<i32> {Windows::<i32>::new}, val: Value(<ZST>) }
+        _2 = Windows::<i32>::new(move _3, const 3_usize) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _1 = <Windows<i32> as Iter>::for_each::<[closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]>(move _2, move _10) -> bb4; // scope 0 at ui/generic-associated-types/issue-76826.rs:40:5: 41:51
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:41:10: 41:18
-                                         // + literal: Const { ty: fn(Windows<i32>, [closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]) {<Windows<i32> as Iter>::for_each::<[closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]>}, val: Value(<ZST>) }
+        _1 = <Windows<i32> as Iter>::for_each::<[closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]>(move _2, const ZeroSized: [closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26]) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:42:2: 42:2
+        return;
+    }
+
+    bb5: {
+        (*_9) = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32];
+        _4 = move _8 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _3 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _4) -> [return: bb2, unwind continue];
     }
 }
 
 fn main::{closure#0}(_1: &mut [closure@ui/generic-associated-types/issue-76826.rs:41:19: 41:26], _2: &mut [i32]) -> () {
-    debug slice => _2;                   // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:20: 41:25
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:41:27: 41:27
-    let _3: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _4: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _5: &[&str];                 // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-    let mut _6: &[&str; 2];              // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-    let _7: &[&str; 2];                  // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-    let mut _8: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _9: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _10: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _11: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _12: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-    let mut _13: &&mut [i32];            // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-    let _14: &&mut [i32];                // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-    let mut _15: &[&str; 2];             // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
+    debug slice => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: std::fmt::Arguments<'_>;
+    let mut _5: &[&str];
+    let mut _6: &[core::fmt::rt::Argument<'_>];
+    let _7: &[core::fmt::rt::Argument<'_>; 1];
+    let _8: [core::fmt::rt::Argument<'_>; 1];
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let _10: &&mut [i32];
+    let mut _11: &[&str; 2];
 
     bb0: {
-        _15 = const _;                   // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main::{closure#0}, [<closure_kind>, <closure_signature>, <upvars>], Some(promoted[0])) }
-        _7 = _15;                        // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-        _6 = _7;                         // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-        _5 = move _6 as &[&str] (Pointer(Unsize)); // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-        _14 = &_2;                       // scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-        _13 = _14;                       // scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-        _12 = core::fmt::ArgumentV1::<'_>::new_debug::<&mut [i32]>(move _13) -> bb1; // scope 0 at ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:41:44: 41:49
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: for<'b> fn(&'b &mut [i32]) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_debug::<&mut [i32]>}, val: Value(<ZST>) }
+        _11 = const _;
+        _5 = _11 as &[&str] (Pointer(Unsize));
+        _10 = &_2;
+        _9 = core::fmt::rt::Argument::<'_>::new_debug::<&mut [i32]>(_10) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _11 = [move _12];                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _10 = &_11;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _9 = _10;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _8 = move _9 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _8 = [move _9];
+        _7 = &_8;
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _6) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = _print(move _4) -> bb3;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _3 = _print(move _4) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:41:50: 41:50
+        return;
     }
 }
 
 promoted[0] in main::{closure#0}: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-    let mut _1: [&str; 2];               // in scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
-        return;                          // scope 0 at ui/generic-associated-types/issue-76826.rs:41:36: 41:42
+        _1 = [const "", const "\n"];
+        _0 = &_1;
+        return;
     }
 }

@@ -1,122 +1,90 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: F) -> () {
-    debug blk => _1;                     // in scope 0 at ui/closures/once-move-out-on-heap.rs:8:20: 8:23
-    let mut _0: ();                      // return place in scope 0 at ui/closures/once-move-out-on-heap.rs:8:28: 8:28
-    let _2: ();                          // in scope 0 at ui/closures/once-move-out-on-heap.rs:9:5: 9:10
-    let mut _3: F;                       // in scope 0 at ui/closures/once-move-out-on-heap.rs:9:5: 9:8
-    let mut _4: ();                      // in scope 0 at ui/closures/once-move-out-on-heap.rs:9:5: 9:10
+    debug blk => _1;
+    let mut _0: ();
+    let _2: ();
 
     bb0: {
-        _3 = move _1;                    // scope 0 at ui/closures/once-move-out-on-heap.rs:9:5: 9:8
-        _2 = <F as FnOnce<()>>::call_once(move _3, move _4) -> bb1; // scope 0 at ui/closures/once-move-out-on-heap.rs:9:5: 9:10
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:9:5: 9:8
-                                         // + literal: Const { ty: extern "rust-call" fn(F, ()) -> <F as FnOnce<()>>::Output {<F as FnOnce<()>>::call_once}, val: Value(<ZST>) }
+        _2 = <F as FnOnce<()>>::call_once(move _1, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/closures/once-move-out-on-heap.rs:10:2: 10:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/once-move-out-on-heap.rs:12:15: 12:15
-    let _1: std::sync::Arc<bool>;        // in scope 0 at ui/closures/once-move-out-on-heap.rs:13:9: 13:10
-    let _2: ();                          // in scope 0 at ui/closures/once-move-out-on-heap.rs:14:5: 17:7
-    let mut _3: [closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]; // in scope 0 at ui/closures/once-move-out-on-heap.rs:14:9: 17:6
+    let mut _0: ();
+    let _1: std::sync::Arc<bool>;
+    let _2: ();
+    let mut _3: [closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15];
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/closures/once-move-out-on-heap.rs:13:9: 13:10
+        debug x => _1;
     }
 
     bb0: {
-        _1 = Arc::<bool>::new(const true) -> bb1; // scope 0 at ui/closures/once-move-out-on-heap.rs:13:13: 13:27
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:13:13: 13:21
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(bool) -> Arc<bool> {Arc::<bool>::new}, val: Value(<ZST>) }
+        _1 = Arc::<bool>::new(const true) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = [closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15] { x: move _1 }; // scope 1 at ui/closures/once-move-out-on-heap.rs:14:9: 17:6
-                                         // closure
-                                         // + def_id: DefId(0:7 ~ once_move_out_on_heap[8bf4]::main::{closure#0})
-                                         // + substs: [
-                                         //     i32,
-                                         //     extern "rust-call" fn(()),
-                                         //     (std::sync::Arc<bool>,),
-                                         // ]
-        _2 = foo::<[closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]>(move _3) -> bb2; // scope 1 at ui/closures/once-move-out-on-heap.rs:14:5: 17:7
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:14:5: 14:8
-                                         // + literal: Const { ty: fn([closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]) {foo::<[closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]>}, val: Value(<ZST>) }
+        _3 = [closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15] { x: move _1 };
+        _2 = foo::<[closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]>(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/closures/once-move-out-on-heap.rs:18:2: 18:2
+        return;
     }
 }
 
 fn main::{closure#0}(_1: [closure@ui/closures/once-move-out-on-heap.rs:14:9: 14:15]) -> () {
-    debug x => (_1.0: std::sync::Arc<bool>); // in scope 0 at ui/closures/once-move-out-on-heap.rs:13:9: 13:10
-    let mut _0: ();                      // return place in scope 0 at ui/closures/once-move-out-on-heap.rs:14:16: 14:16
-    let mut _2: bool;                    // in scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-    let mut _3: bool;                    // in scope 0 at ui/closures/once-move-out-on-heap.rs:15:17: 15:19
-    let mut _4: &bool;                   // in scope 0 at ui/closures/once-move-out-on-heap.rs:15:17: 15:19
-    let mut _5: &std::sync::Arc<bool>;   // in scope 0 at ui/closures/once-move-out-on-heap.rs:15:18: 15:19
-    let mut _6: !;                       // in scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-    let _7: ();                          // in scope 0 at ui/closures/once-move-out-on-heap.rs:16:9: 16:16
-    let mut _8: std::sync::Arc<bool>;    // in scope 0 at ui/closures/once-move-out-on-heap.rs:16:14: 16:15
-    let mut _9: bool;                    // in scope 0 at ui/closures/once-move-out-on-heap.rs:17:5: 17:6
+    debug x => (_1.0: std::sync::Arc<bool>);
+    let mut _0: ();
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: &bool;
+    let mut _5: &std::sync::Arc<bool>;
+    let mut _6: !;
+    let _7: ();
+    let mut _8: std::sync::Arc<bool>;
+    let mut _9: bool;
 
     bb0: {
-        _9 = const false;                // scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-        _9 = const true;                 // scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-        _5 = &(_1.0: std::sync::Arc<bool>); // scope 0 at ui/closures/once-move-out-on-heap.rs:15:18: 15:19
-        _4 = <Arc<bool> as Deref>::deref(move _5) -> [return: bb1, unwind: bb7]; // scope 0 at ui/closures/once-move-out-on-heap.rs:15:17: 15:19
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:15:17: 15:19
-                                         // + literal: Const { ty: for<'a> fn(&'a Arc<bool>) -> &'a <Arc<bool> as Deref>::Target {<Arc<bool> as Deref>::deref}, val: Value(<ZST>) }
+        _9 = const false;
+        _9 = const true;
+        _5 = &(_1.0: std::sync::Arc<bool>);
+        _4 = <Arc<bool> as Deref>::deref(move _5) -> [return: bb1, unwind: bb7];
     }
 
     bb1: {
-        _3 = (*_4);                      // scope 0 at ui/closures/once-move-out-on-heap.rs:15:17: 15:19
-        _2 = Not(move _3);               // scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-        switchInt(move _2) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
+        _3 = (*_4);
+        _2 = Not(move _3);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _6 = core::panicking::panic(const "assertion failed: *x") -> bb7; // scope 0 at ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:15:9: 15:20
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _6 = core::panicking::panic(const "assertion failed: *x") -> bb7;
     }
 
     bb3: {
-        _9 = const false;                // scope 0 at ui/closures/once-move-out-on-heap.rs:16:14: 16:15
-        _8 = move (_1.0: std::sync::Arc<bool>); // scope 0 at ui/closures/once-move-out-on-heap.rs:16:14: 16:15
-        _7 = std::mem::drop::<Arc<bool>>(move _8) -> [return: bb4, unwind: bb7]; // scope 0 at ui/closures/once-move-out-on-heap.rs:16:9: 16:16
-                                         // mir::Constant
-                                         // + span: ui/closures/once-move-out-on-heap.rs:16:9: 16:13
-                                         // + literal: Const { ty: fn(Arc<bool>) {std::mem::drop::<Arc<bool>>}, val: Value(<ZST>) }
+        _9 = const false;
+        _8 = move (_1.0: std::sync::Arc<bool>);
+        _7 = std::mem::drop::<Arc<bool>>(move _8) -> [return: bb4, unwind: bb7];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/closures/once-move-out-on-heap.rs:17:6: 17:6
+        return;
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/closures/once-move-out-on-heap.rs:14:9: 17:6
+        resume;
     }
 
     bb6 (cleanup): {
-        drop((_1.0: std::sync::Arc<bool>)) -> bb5; // scope 0 at ui/closures/once-move-out-on-heap.rs:17:5: 17:6
+        drop((_1.0: std::sync::Arc<bool>)) -> [return: bb5, unwind terminate];
     }
 
     bb7 (cleanup): {
-        switchInt(_9) -> [0: bb5, otherwise: bb6]; // scope 0 at ui/closures/once-move-out-on-heap.rs:17:5: 17:6
+        switchInt(_9) -> [0: bb5, otherwise: bb6];
     }
 }

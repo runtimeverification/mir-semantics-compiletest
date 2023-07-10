@@ -1,63 +1,49 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn negate(_1: &isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:5:11: 5:12
-    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:5:25: 5:30
-    let mut _2: isize;                   // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:6: 6:8
-    let mut _3: bool;                    // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:5: 6:8
+    debug x => _1;
+    let mut _0: isize;
+    let mut _2: isize;
 
     bb0: {
-        _2 = (*_1);                      // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:6: 6:8
-        _3 = Eq(_2, const isize::MIN);   // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:5: 6:8
-        assert(!move _3, "attempt to negate `{}`, which would overflow", _2) -> bb1; // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:5: 6:8
-    }
-
-    bb1: {
-        _0 = Neg(move _2);               // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:6:5: 6:8
-        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:7:2: 7:2
+        _2 = (*_1);
+        _0 = Neg(move _2);
+        return;
     }
 }
 
 fn negate_mut(_1: &mut isize) -> isize {
-    debug y => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:9:15: 9:16
-    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:9:33: 9:38
-    let mut _2: &isize;                  // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:10:12: 10:13
+    debug y => _1;
+    let mut _0: isize;
+    let mut _2: &isize;
 
     bb0: {
-        _2 = &(*_1);                     // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:10:12: 10:13
-        _0 = negate(move _2) -> bb1;     // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:10:5: 10:14
-                                         // mir::Constant
-                                         // + span: ui/coercion/coerce-reborrow-imm-ptr-arg.rs:10:5: 10:11
-                                         // + literal: Const { ty: for<'a> fn(&'a isize) -> isize {negate}, val: Value(<ZST>) }
+        _2 = &(*_1);
+        _0 = negate(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:11:2: 11:2
+        return;
     }
 }
 
 fn negate_imm(_1: &isize) -> isize {
-    debug y => _1;                       // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:13:15: 13:16
-    let mut _0: isize;                   // return place in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:13:29: 13:34
-    let mut _2: &isize;                  // in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:14:12: 14:13
+    debug y => _1;
+    let mut _0: isize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:14:12: 14:13
-        _0 = negate(move _2) -> bb1;     // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:14:5: 14:14
-                                         // mir::Constant
-                                         // + span: ui/coercion/coerce-reborrow-imm-ptr-arg.rs:14:5: 14:11
-                                         // + literal: Const { ty: for<'a> fn(&'a isize) -> isize {negate}, val: Value(<ZST>) }
+        _0 = negate(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:15:2: 15:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:17:15: 17:15
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/coercion/coerce-reborrow-imm-ptr-arg.rs:17:17: 17:17
+        return;
     }
 }

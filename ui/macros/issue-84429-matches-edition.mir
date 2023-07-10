@@ -1,14 +1,33 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/macros/issue-84429-matches-edition.rs:7:11: 7:11
-    let _1: bool;                        // in scope 0 at ui/macros/issue-84429-matches-edition.rs:8:9: 8:11
+    let mut _0: ();
+    let _1: bool;
+    let mut _2: u8;
+    let mut _3: bool;
+    let mut _4: bool;
     scope 1 {
-        debug _b => _1;                  // in scope 1 at ui/macros/issue-84429-matches-edition.rs:8:9: 8:11
+        debug _b => _1;
     }
 
     bb0: {
-        _1 = const true;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:345:48: 345:52
-        return;                          // scope 0 at ui/macros/issue-84429-matches-edition.rs:9:2: 9:2
+        _2 = const 51_u8;
+        _3 = Le(const 48_u8, _2);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _4 = Le(_2, const 57_u8);
+        _1 = _4;
+        goto -> bb3;
+    }
+
+    bb2: {
+        _1 = const false;
+        goto -> bb3;
+    }
+
+    bb3: {
+        return;
     }
 }

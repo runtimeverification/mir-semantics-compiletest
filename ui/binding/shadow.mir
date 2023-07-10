@@ -1,23 +1,41 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: Vec<isize>) -> () {
-    debug c => _1;                       // in scope 0 at ui/binding/shadow.rs:5:8: 5:9
-    let mut _0: ();                      // return place in scope 0 at ui/binding/shadow.rs:5:24: 5:24
-    let _2: isize;                       // in scope 0 at ui/binding/shadow.rs:6:9: 6:10
+    debug c => _1;
+    let mut _0: ();
+    let _2: isize;
+    let mut _4: t<isize>;
+    let mut _5: isize;
+    let mut _6: std::slice::Iter<'_, isize>;
+    let mut _7: &std::vec::Vec<isize>;
+    let mut _9: std::option::Option<&isize>;
+    let mut _10: &mut std::slice::Iter<'_, isize>;
+    let mut _11: isize;
+    let _13: ();
+    let mut _14: std::fmt::Arguments<'_>;
+    let mut _15: &[&str];
+    let mut _16: &[core::fmt::rt::Argument<'_>];
+    let _17: &[core::fmt::rt::Argument<'_>; 1];
+    let _18: [core::fmt::rt::Argument<'_>; 1];
+    let mut _19: core::fmt::rt::Argument<'_>;
+    let _20: &isize;
+    let _22: ();
+    let mut _23: &mut std::vec::Vec<isize>;
     scope 1 {
-        debug a => _2;                   // in scope 1 at ui/binding/shadow.rs:6:9: 6:10
-        let mut _3: std::vec::Vec<isize>; // in scope 1 at ui/binding/shadow.rs:7:9: 7:14
+        debug a => const 5_isize;
+        let mut _3: std::vec::Vec<isize>;
         scope 2 {
-            debug b => _3;               // in scope 2 at ui/binding/shadow.rs:7:9: 7:14
-            let mut _4: std::slice::Iter<'_, isize>; // in scope 2 at ui/binding/shadow.rs:12:23: 12:25
+            debug b => _3;
+            let mut _8: std::slice::Iter<'_, isize>;
             scope 3 {
-                debug iter => _4;        // in scope 3 at ui/binding/shadow.rs:12:23: 12:25
-                let _5: &isize;          // in scope 3 at ui/binding/shadow.rs:12:17: 12:19
+                debug iter => _8;
+                let _12: &isize;
                 scope 4 {
-                    debug _i => _5;      // in scope 4 at ui/binding/shadow.rs:12:17: 12:19
-                    let _6: isize;       // in scope 4 at ui/binding/shadow.rs:14:21: 14:22
+                    debug _i => _12;
+                    let _21: isize;
+                    let mut _24: &[&str; 2];
                     scope 5 {
-                        debug a => _6;   // in scope 5 at ui/binding/shadow.rs:14:21: 14:22
+                        debug a => const 17_isize;
                     }
                 }
             }
@@ -25,177 +43,197 @@ fn foo(_1: Vec<isize>) -> () {
     }
 
     bb0: {
-        _2 = const 5_isize;              // scope 0 at ui/binding/shadow.rs:6:20: 6:21
-        _3 = Vec::<isize>::new() -> [return: bb1, unwind: bb4]; // scope 1 at ui/binding/shadow.rs:7:29: 7:39
-                                         // mir::Constant
-                                         // + span: ui/binding/shadow.rs:7:29: 7:37
-                                         // + user_ty: UserType(3)
-                                         // + literal: Const { ty: fn() -> Vec<isize> {Vec::<isize>::new}, val: Value(<ZST>) }
+        _2 = const 5_isize;
+        _3 = Vec::<isize>::new() -> [return: bb1, unwind: bb15];
     }
 
     bb1: {
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 1 at ui/binding/shadow.rs:20:1: 20:2
+        _4 = t::<isize>::none;
+        _5 = discriminant(_4);
+        switchInt(move _5) -> [1: bb2, otherwise: bb11];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/binding/shadow.rs:20:1: 20:2
+        _7 = &_1;
+        _6 = <&Vec<isize> as IntoIterator>::into_iter(move _7) -> [return: bb3, unwind: bb14];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/shadow.rs:20:2: 20:2
+        _8 = move _6;
+        goto -> bb4;
     }
 
-    bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/binding/shadow.rs:20:1: 20:2
+    bb4: {
+        _10 = &mut _8;
+        _9 = <std::slice::Iter<'_, isize> as Iterator>::next(_10) -> [return: bb5, unwind: bb14];
     }
 
-    bb5 (cleanup): {
-        resume;                          // scope 0 at ui/binding/shadow.rs:5:1: 20:2
+    bb5: {
+        _11 = discriminant(_9);
+        switchInt(move _11) -> [0: bb11, 1: bb6, otherwise: bb7];
+    }
+
+    bb6: {
+        _12 = ((_9 as Some).0: &isize);
+        _24 = const _;
+        _15 = _24 as &[&str] (Pointer(Unsize));
+        _20 = &_2;
+        _19 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_20) -> [return: bb8, unwind: bb14];
+    }
+
+    bb7: {
+        unreachable;
+    }
+
+    bb8: {
+        _18 = [move _19];
+        _17 = &_18;
+        _16 = _17 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _14 = Arguments::<'_>::new_v1(move _15, move _16) -> [return: bb9, unwind: bb14];
+    }
+
+    bb9: {
+        _13 = _print(move _14) -> [return: bb10, unwind: bb14];
+    }
+
+    bb10: {
+        _21 = const 17_isize;
+        _23 = &mut _3;
+        _22 = Vec::<isize>::push(move _23, _21) -> [return: bb17, unwind: bb14];
+    }
+
+    bb11: {
+        drop(_3) -> [return: bb12, unwind: bb15];
+    }
+
+    bb12: {
+        drop(_1) -> [return: bb13, unwind continue];
+    }
+
+    bb13: {
+        return;
+    }
+
+    bb14 (cleanup): {
+        drop(_3) -> [return: bb15, unwind terminate];
+    }
+
+    bb15 (cleanup): {
+        drop(_1) -> [return: bb16, unwind terminate];
+    }
+
+    bb16 (cleanup): {
+        resume;
+    }
+
+    bb17: {
+        goto -> bb4;
     }
 }
 
 promoted[0] in foo: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/binding/shadow.rs:13:26: 13:30
-    let mut _1: [&str; 2];               // in scope 0 at ui/binding/shadow.rs:13:26: 13:30
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/binding/shadow.rs:13:26: 13:30
-                                         // mir::Constant
-                                         // + span: ui/binding/shadow.rs:13:26: 13:30
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/binding/shadow.rs:13:26: 13:30
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/binding/shadow.rs:13:26: 13:30
-        return;                          // scope 0 at ui/binding/shadow.rs:13:26: 13:30
+        _1 = [const "", const "\n"];
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/shadow.rs:24:15: 24:15
-    let _1: i32;                         // in scope 0 at ui/binding/shadow.rs:24:21: 24:22
-    let mut _3: (i32, bool);             // in scope 0 at ui/binding/shadow.rs:24:37: 24:43
-    let mut _4: (&i32, &i32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _5: &i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _6: &i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _11: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _12: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _16: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _17: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _18: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _19: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let _21: ();                         // in scope 0 at ui/binding/shadow.rs:24:64: 24:79
-    let mut _22: std::vec::Vec<isize>;   // in scope 0 at ui/binding/shadow.rs:24:68: 24:78
+    let mut _0: ();
+    let _1: i32;
+    let mut _3: (&i32, &i32);
+    let mut _4: &i32;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: i32;
+    let mut _10: i32;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let _14: ();
+    let mut _15: std::vec::Vec<isize>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/binding/shadow.rs:24:21: 24:22
-        let _2: i32;                     // in scope 1 at ui/binding/shadow.rs:24:33: 24:34
+        debug x => const 10_i32;
+        let _2: i32;
         scope 2 {
-            debug x => _2;               // in scope 2 at ui/binding/shadow.rs:24:33: 24:34
-            let _7: &i32;                // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _8: &i32;                // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _23: &i32;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug x => _2;
+            let _5: &i32;
+            let _6: &i32;
+            let mut _16: &i32;
             scope 3 {
-                debug left_val => _7;    // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _8;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _13: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _5;
+                debug right_val => _6;
+                let _11: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _13;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _11;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = const 10_i32;               // scope 0 at ui/binding/shadow.rs:24:25: 24:27
-        _3 = const (30_i32, false);      // scope 1 at ui/binding/shadow.rs:24:37: 24:43
-        _2 = move (_3.0: i32);           // scope 1 at ui/binding/shadow.rs:24:37: 24:43
-        _5 = &_2;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _23 = const _;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _6 = _23;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _4 = (move _5, move _6);         // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _7 = (_4.0: &i32);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _8 = (_4.1: &i32);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _11 = (*_7);                     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _12 = const 30_i32;              // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _10 = Eq(move _11, move _12);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _9 = Not(move _10);              // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _9) -> [0: bb2, otherwise: bb1]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _1 = const 10_i32;
+        _2 = Add(_1, const 20_i32);
+        _4 = &_2;
+        _16 = const _;
+        _3 = (move _4, _16);
+        _5 = (_3.0: &i32);
+        _6 = (_3.1: &i32);
+        _9 = (*_5);
+        _10 = (*_6);
+        _8 = Eq(move _9, move _10);
+        _7 = Not(move _8);
+        switchInt(move _7) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _13 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _17 = _7;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _16 = _17;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _8;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = _19;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _14 = core::panicking::assert_failed::<i32, i32>(move _15, move _16, move _18, move _20); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<i32, i32>(move _11, _5, _6, move _13) -> unwind continue;
     }
 
     bb2: {
-        _22 = Vec::<isize>::new() -> bb3; // scope 2 at ui/binding/shadow.rs:24:68: 24:78
-                                         // mir::Constant
-                                         // + span: ui/binding/shadow.rs:24:68: 24:76
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> Vec<isize> {Vec::<isize>::new}, val: Value(<ZST>) }
+        _15 = Vec::<isize>::new() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _21 = foo(move _22) -> bb4;      // scope 2 at ui/binding/shadow.rs:24:64: 24:79
-                                         // mir::Constant
-                                         // + span: ui/binding/shadow.rs:24:64: 24:67
-                                         // + literal: Const { ty: fn(Vec<isize>) {foo}, val: Value(<ZST>) }
+        _14 = foo(move _15) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/binding/shadow.rs:24:82: 24:82
+        return;
     }
 }
 
 promoted[0] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i32;                     // in scope 0 at ui/binding/shadow.rs:24:59: 24:61
+    let mut _0: &i32;
+    let mut _1: i32;
 
     bb0: {
-        _1 = const 30_i32;               // scope 0 at ui/binding/shadow.rs:24:59: 24:61
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 30_i32;
+        _0 = &_1;
+        return;
     }
 }
 
 fn t::some(_1: T) -> t<T> {
-    let mut _0: t<T>;                    // return place in scope 0 at ui/binding/shadow.rs:22:19: 22:23
+    let mut _0: t<T>;
 
     bb0: {
-        _0 = t::<T>::some(move _1);      // scope 0 at ui/binding/shadow.rs:22:19: 22:23
-        return;                          // scope 0 at ui/binding/shadow.rs:22:19: 22:23
+        _0 = t::<T>::some(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn t::some(_1: T) -> t<T> {
-    let mut _0: t<T>;                    // return place in scope 0 at ui/binding/shadow.rs:22:19: 22:23
+    let mut _0: t<T>;
 
     bb0: {
-        _0 = t::<T>::some(move _1);      // scope 0 at ui/binding/shadow.rs:22:19: 22:23
-        return;                          // scope 0 at ui/binding/shadow.rs:22:19: 22:23
+        _0 = t::<T>::some(move _1);
+        return;
     }
 }

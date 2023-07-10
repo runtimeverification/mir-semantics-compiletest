@@ -1,306 +1,284 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn add(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:8:14: 8:15
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:8:22: 8:23
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:8:33: 8:36
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:9:5: 9:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-    let mut _5: (u32, bool);             // in scope 0 at ui/consts/const-fn.rs:9:5: 9:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:9:5: 9:6
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-        _5 = CheckedAdd(_3, _4);         // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-    }
-
-    bb1: {
-        _0 = move (_5.0: u32);           // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:10:2: 10:2
+        _0 = Add(_1, _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn add(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:8:14: 8:15
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:8:22: 8:23
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:8:33: 8:36
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:9:5: 9:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-    let mut _5: (u32, bool);             // in scope 0 at ui/consts/const-fn.rs:9:5: 9:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
+    let mut _3: u32;
+    let mut _4: u32;
 
     bb0: {
-        StorageLive(_3);                 // scope 0 at ui/consts/const-fn.rs:9:5: 9:6
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:9:5: 9:6
-        StorageLive(_4);                 // scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-        _5 = CheckedAdd(_3, _4);         // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-    }
-
-    bb1: {
-        _0 = move (_5.0: u32);           // scope 0 at ui/consts/const-fn.rs:9:5: 9:10
-        StorageDead(_4);                 // scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-        StorageDead(_3);                 // scope 0 at ui/consts/const-fn.rs:9:9: 9:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:10:2: 10:2
+        StorageLive(_3);
+        _3 = _1;
+        StorageLive(_4);
+        _4 = _2;
+        _0 = Add(move _3, move _4);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
     }
 }
 
 fn sub(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:12:14: 12:15
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:12:22: 12:23
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:12:33: 12:36
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:13:5: 13:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-    let mut _5: (u32, bool);             // in scope 0 at ui/consts/const-fn.rs:13:5: 13:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:13:5: 13:6
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-        _5 = CheckedSub(_3, _4);         // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-        assert(!move (_5.1: bool), "attempt to compute `{} - {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-    }
-
-    bb1: {
-        _0 = move (_5.0: u32);           // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:14:2: 14:2
+        _0 = Sub(_1, _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn sub(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:12:14: 12:15
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:12:22: 12:23
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:12:33: 12:36
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:13:5: 13:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-    let mut _5: (u32, bool);             // in scope 0 at ui/consts/const-fn.rs:13:5: 13:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
+    let mut _3: u32;
+    let mut _4: u32;
 
     bb0: {
-        StorageLive(_3);                 // scope 0 at ui/consts/const-fn.rs:13:5: 13:6
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:13:5: 13:6
-        StorageLive(_4);                 // scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-        _5 = CheckedSub(_3, _4);         // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-        assert(!move (_5.1: bool), "attempt to compute `{} - {}`, which would overflow", move _3, move _4) -> bb1; // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-    }
-
-    bb1: {
-        _0 = move (_5.0: u32);           // scope 0 at ui/consts/const-fn.rs:13:5: 13:10
-        StorageDead(_4);                 // scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-        StorageDead(_3);                 // scope 0 at ui/consts/const-fn.rs:13:9: 13:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:14:2: 14:2
+        StorageLive(_3);
+        _3 = _1;
+        StorageLive(_4);
+        _4 = _2;
+        _0 = Sub(move _3, move _4);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
     }
 }
 
 fn div(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:16:21: 16:22
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:16:29: 16:30
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:16:40: 16:43
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:17:5: 17:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-    let mut _5: bool;                    // in scope 0 at ui/consts/const-fn.rs:17:5: 17:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
+    let mut _3: bool;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:17:5: 17:6
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-        _5 = Eq(_4, const 0_u32);        // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
-        assert(!move _5, "attempt to divide `{}` by zero", _3) -> bb1; // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
+        _3 = Eq(_2, const 0_u32);
+        assert(!move _3, "attempt to divide `{}` by zero", _1) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Div(move _3, move _4);      // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:18:2: 18:2
+        _0 = Div(_1, _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn div(_1: u32, _2: u32) -> u32 {
-    debug x => _1;                       // in scope 0 at ui/consts/const-fn.rs:16:21: 16:22
-    debug y => _2;                       // in scope 0 at ui/consts/const-fn.rs:16:29: 16:30
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:16:40: 16:43
-    let mut _3: u32;                     // in scope 0 at ui/consts/const-fn.rs:17:5: 17:6
-    let mut _4: u32;                     // in scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-    let mut _5: bool;                    // in scope 0 at ui/consts/const-fn.rs:17:5: 17:10
+    debug x => _1;
+    debug y => _2;
+    let mut _0: u32;
+    let mut _3: u32;
+    let mut _4: u32;
+    let mut _5: bool;
 
     bb0: {
-        StorageLive(_3);                 // scope 0 at ui/consts/const-fn.rs:17:5: 17:6
-        _3 = _1;                         // scope 0 at ui/consts/const-fn.rs:17:5: 17:6
-        StorageLive(_4);                 // scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-        _4 = _2;                         // scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-        _5 = Eq(_4, const 0_u32);        // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
-        assert(!move _5, "attempt to divide `{}` by zero", _3) -> bb1; // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
+        StorageLive(_3);
+        _3 = _1;
+        StorageLive(_4);
+        _4 = _2;
+        _5 = Eq(_4, const 0_u32);
+        assert(!move _5, "attempt to divide `{}` by zero", _3) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Div(move _3, move _4);      // scope 0 at ui/consts/const-fn.rs:17:5: 17:10
-        StorageDead(_4);                 // scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-        StorageDead(_3);                 // scope 0 at ui/consts/const-fn.rs:17:9: 17:10
-        return;                          // scope 0 at ui/consts/const-fn.rs:18:2: 18:2
+        _0 = Div(move _3, move _4);
+        StorageDead(_4);
+        StorageDead(_3);
+        return;
     }
 }
 
 fn generic(_1: T) -> T {
-    debug t => _1;                       // in scope 0 at ui/consts/const-fn.rs:20:21: 20:22
-    let mut _0: T;                       // return place in scope 0 at ui/consts/const-fn.rs:20:30: 20:31
+    debug t => _1;
+    let mut _0: T;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/consts/const-fn.rs:21:5: 21:6
-        return;                          // scope 0 at ui/consts/const-fn.rs:22:2: 22:2
+        _0 = move _1;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn generic(_1: T) -> T {
-    debug t => _1;                       // in scope 0 at ui/consts/const-fn.rs:20:21: 20:22
-    let mut _0: T;                       // return place in scope 0 at ui/consts/const-fn.rs:20:30: 20:31
+    debug t => _1;
+    let mut _0: T;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/consts/const-fn.rs:21:5: 21:6
-        return;                          // scope 0 at ui/consts/const-fn.rs:22:2: 22:2
+        _0 = move _1;
+        return;
     }
 }
 
 fn generic_arr(_1: [T; 1]) -> T {
-    debug t => _1;                       // in scope 0 at ui/consts/const-fn.rs:24:31: 24:32
-    let mut _0: T;                       // return place in scope 0 at ui/consts/const-fn.rs:24:45: 24:46
-    let _2: usize;                       // in scope 0 at ui/consts/const-fn.rs:25:7: 25:8
+    debug t => _1;
+    let mut _0: T;
+    let _2: usize;
+    let mut _3: usize;
+    let mut _4: bool;
 
     bb0: {
-        _2 = const 0_usize;              // scope 0 at ui/consts/const-fn.rs:25:7: 25:8
-        _0 = _1[_2];                     // scope 0 at ui/consts/const-fn.rs:25:5: 25:9
-        return;                          // scope 0 at ui/consts/const-fn.rs:26:2: 26:2
+        _2 = const 0_usize;
+        _3 = const 1_usize;
+        _4 = Lt(_2, _3);
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = _1[_2];
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn generic_arr(_1: [T; 1]) -> T {
-    debug t => _1;                       // in scope 0 at ui/consts/const-fn.rs:24:31: 24:32
-    let mut _0: T;                       // return place in scope 0 at ui/consts/const-fn.rs:24:45: 24:46
-    let _2: usize;                       // in scope 0 at ui/consts/const-fn.rs:25:7: 25:8
-    let mut _3: usize;                   // in scope 0 at ui/consts/const-fn.rs:25:5: 25:9
-    let mut _4: bool;                    // in scope 0 at ui/consts/const-fn.rs:25:5: 25:9
+    debug t => _1;
+    let mut _0: T;
+    let _2: usize;
+    let mut _3: usize;
+    let mut _4: bool;
 
     bb0: {
-        StorageLive(_2);                 // scope 0 at ui/consts/const-fn.rs:25:7: 25:8
-        _2 = const 0_usize;              // scope 0 at ui/consts/const-fn.rs:25:7: 25:8
-        _3 = Len(_1);                    // scope 0 at ui/consts/const-fn.rs:25:5: 25:9
-        _4 = Lt(_2, _3);                 // scope 0 at ui/consts/const-fn.rs:25:5: 25:9
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1; // scope 0 at ui/consts/const-fn.rs:25:5: 25:9
+        StorageLive(_2);
+        _2 = const 0_usize;
+        _3 = Len(_1);
+        _4 = Lt(_2, _3);
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = _1[_2];                     // scope 0 at ui/consts/const-fn.rs:25:5: 25:9
-        StorageDead(_2);                 // scope 0 at ui/consts/const-fn.rs:26:1: 26:2
-        return;                          // scope 0 at ui/consts/const-fn.rs:26:2: 26:2
+        _0 = _1[_2];
+        StorageDead(_2);
+        return;
     }
 }
 
 generic_arr::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn.rs:24:38: 24:39
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/const-fn.rs:24:38: 24:39
-        return;                          // scope 0 at ui/consts/const-fn.rs:24:38: 24:39
+        _0 = const 1_usize;
+        return;
     }
 }
 
 const SUM: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:28:12: 28:15
+    let mut _0: u32;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn.rs:28:18: 28:29
-        _0 = add(const 44_u32, const 22_u32) -> bb1; // scope 0 at ui/consts/const-fn.rs:28:18: 28:29
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:28:18: 28:21
-                                         // + literal: Const { ty: fn(u32, u32) -> u32 {add}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = add(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-fn.rs:28:1: 28:30
+        return;
     }
 }
 
 const DIFF: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:29:13: 29:16
+    let mut _0: u32;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn.rs:29:19: 29:30
-        _0 = sub(const 44_u32, const 22_u32) -> bb1; // scope 0 at ui/consts/const-fn.rs:29:19: 29:30
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:29:19: 29:22
-                                         // + literal: Const { ty: fn(u32, u32) -> u32 {sub}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = sub(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-fn.rs:29:1: 29:31
+        return;
     }
 }
 
 const DIV: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/consts/const-fn.rs:30:12: 30:15
+    let mut _0: u32;
     scope 1 {
     }
 
     bb0: {
-        ConstEvalCounter;                // scope 1 at ui/consts/const-fn.rs:30:25: 30:36
-        _0 = div(const 44_u32, const 22_u32) -> bb1; // scope 1 at ui/consts/const-fn.rs:30:25: 30:36
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:30:25: 30:28
-                                         // + literal: Const { ty: unsafe fn(u32, u32) -> u32 {div}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = div(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-fn.rs:30:1: 30:38
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-fn.rs:32:11: 32:11
-    let mut _1: (&u32, &u32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _3: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _4: &u32;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _5: &u32;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _7: (&u32, &u32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _8: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _9: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _10: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _11: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _13: (&u32, &u32);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _14: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _15: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _16: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _17: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _19: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _20: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _21: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _22: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _23: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _24: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let mut _0: ();
+    let mut _1: (&u32, &u32);
+    let _2: &u32;
+    let _3: &u32;
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: u32;
+    let mut _7: u32;
+    let _9: !;
+    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: !;
+    let mut _14: (&u32, &u32);
+    let _15: &u32;
+    let _16: &u32;
+    let mut _17: bool;
+    let mut _18: bool;
+    let mut _19: u32;
+    let mut _20: u32;
+    let _22: !;
+    let mut _23: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _24: (&u32, &u32);
+    let _25: &u32;
+    let _26: &u32;
+    let mut _27: bool;
+    let mut _28: bool;
+    let mut _29: u32;
+    let mut _30: u32;
+    let _32: !;
+    let mut _33: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _34: &u32;
+    let mut _35: &u32;
+    let mut _36: &u32;
+    let mut _37: &u32;
+    let mut _38: &u32;
+    let mut _39: &u32;
     scope 1 {
-        debug left_val => _4;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _5;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _6: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _2;
+        debug right_val => _3;
+        let _8: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _6;            // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _8;
         }
     }
     scope 3 {
-        debug left_val => _10;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _11;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _12: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _15;
+        debug right_val => _16;
+        let _21: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _12;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _21;
         }
     }
     scope 5 {
-        debug left_val => _16;           // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _17;          // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _18: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _25;
+        debug right_val => _26;
+        let _31: core::panicking::AssertKind;
         scope 6 {
-            debug kind => _18;           // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _31;
         }
     }
     scope 7 {
@@ -311,167 +289,186 @@ fn main() -> () {
     }
 
     bb0: {
-        _24 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[5])) }
-        _2 = _24;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _23 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[4])) }
-        _3 = _23;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _3);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _4 = (_1.0: &u32);               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _5 = (_1.1: &u32);               // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _22 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[3])) }
-        _8 = _22;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _21 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[2])) }
-        _9 = _21;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _7 = (move _8, move _9);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _10 = (_7.0: &u32);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _11 = (_7.1: &u32);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _20 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[1])) }
-        _14 = _20;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _19 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _15 = _19;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _13 = (move _14, move _15);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _16 = (_13.0: &u32);             // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _17 = (_13.1: &u32);             // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        return;                          // scope 0 at ui/consts/const-fn.rs:42:2: 42:2
+        _39 = const _;
+        _38 = const _;
+        _1 = (_39, _38);
+        _2 = (_1.0: &u32);
+        _3 = (_1.1: &u32);
+        _6 = (*_2);
+        _7 = (*_3);
+        _5 = Eq(move _6, move _7);
+        _4 = Not(move _5);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _8 = core::panicking::AssertKind::Eq;
+        _10 = Option::<Arguments<'_>>::None;
+        _9 = core::panicking::assert_failed::<u32, u32>(move _8, _2, _3, move _10) -> unwind continue;
+    }
+
+    bb2: {
+        _12 = Ne(const _, const 88_u32);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        _13 = core::panicking::panic(const "assertion failed: SUM != 88") -> unwind continue;
+    }
+
+    bb4: {
+        _37 = const _;
+        _36 = const _;
+        _14 = (_37, _36);
+        _15 = (_14.0: &u32);
+        _16 = (_14.1: &u32);
+        _19 = (*_15);
+        _20 = (*_16);
+        _18 = Eq(move _19, move _20);
+        _17 = Not(move _18);
+        switchInt(move _17) -> [0: bb6, otherwise: bb5];
+    }
+
+    bb5: {
+        _21 = core::panicking::AssertKind::Eq;
+        _23 = Option::<Arguments<'_>>::None;
+        _22 = core::panicking::assert_failed::<u32, u32>(move _21, _15, _16, move _23) -> unwind continue;
+    }
+
+    bb6: {
+        _35 = const _;
+        _34 = const _;
+        _24 = (_35, _34);
+        _25 = (_24.0: &u32);
+        _26 = (_24.1: &u32);
+        _29 = (*_25);
+        _30 = (*_26);
+        _28 = Eq(move _29, move _30);
+        _27 = Not(move _28);
+        switchInt(move _27) -> [0: bb8, otherwise: bb7];
+    }
+
+    bb7: {
+        _31 = core::panicking::AssertKind::Eq;
+        _33 = Option::<Arguments<'_>>::None;
+        _32 = core::panicking::assert_failed::<u32, u32>(move _31, _25, _26, move _33) -> unwind continue;
+    }
+
+    bb8: {
+        return;
     }
 }
 
 promoted[0] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:37:21: 37:22
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 2_u32;                // scope 0 at ui/consts/const-fn.rs:37:21: 37:22
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 2_u32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:37:16: 37:19
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/const-fn.rs:37:16: 37:19
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[2] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:36:22: 36:24
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 22_u32;               // scope 0 at ui/consts/const-fn.rs:36:22: 36:24
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 22_u32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[3] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:36:16: 36:20
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/const-fn.rs:36:16: 36:20
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[4] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:33:21: 33:23
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 66_u32;               // scope 0 at ui/consts/const-fn.rs:33:21: 33:23
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 66_u32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[5] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:33:16: 33:19
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/const-fn.rs:33:16: 33:19
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn.rs:39:27: 39:48
-    let mut _1: u32;                     // in scope 0 at ui/consts/const-fn.rs:39:27: 39:39
+    let mut _0: usize;
+    let mut _1: u32;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-fn.rs:39:27: 39:39
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn.rs:39:27: 39:39
-        _1 = sub(const 100_u32, const 99_u32) -> bb1; // scope 0 at ui/consts/const-fn.rs:39:27: 39:39
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:39:27: 39:30
-                                         // + literal: Const { ty: fn(u32, u32) -> u32 {sub}, val: Value(<ZST>) }
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = sub(const 100_u32, const 99_u32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move _1 as usize (IntToInt); // scope 0 at ui/consts/const-fn.rs:39:27: 39:48
-        StorageDead(_1);                 // scope 0 at ui/consts/const-fn.rs:39:47: 39:48
-        return;                          // scope 0 at ui/consts/const-fn.rs:39:27: 39:48
+        _0 = move _1 as usize (IntToInt);
+        StorageDead(_1);
+        return;
     }
 }
 
 main::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn.rs:40:27: 40:37
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn.rs:40:27: 40:37
-        _0 = generic::<usize>(const 1_usize) -> bb1; // scope 0 at ui/consts/const-fn.rs:40:27: 40:37
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:40:27: 40:34
-                                         // + literal: Const { ty: fn(usize) -> usize {generic::<usize>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = generic::<usize>(const 1_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-fn.rs:40:27: 40:37
+        return;
     }
 }
 
 main::{constant#2}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-fn.rs:41:27: 41:43
-    let mut _1: [usize; 1];              // in scope 0 at ui/consts/const-fn.rs:41:39: 41:42
+    let mut _0: usize;
+    let mut _1: [usize; 1];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-fn.rs:41:39: 41:42
-        _1 = [const 1_usize];            // scope 0 at ui/consts/const-fn.rs:41:39: 41:42
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn.rs:41:27: 41:43
-        _0 = generic_arr::<usize>(move _1) -> bb1; // scope 0 at ui/consts/const-fn.rs:41:27: 41:43
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn.rs:41:27: 41:38
-                                         // + literal: Const { ty: fn([usize; 1]) -> usize {generic_arr::<usize>}, val: Value(<ZST>) }
+        StorageLive(_1);
+        _1 = [const 1_usize];
+        ConstEvalCounter;
+        _0 = generic_arr::<usize>(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        StorageDead(_1);                 // scope 0 at ui/consts/const-fn.rs:41:42: 41:43
-        return;                          // scope 0 at ui/consts/const-fn.rs:41:27: 41:43
+        StorageDead(_1);
+        return;
     }
 }

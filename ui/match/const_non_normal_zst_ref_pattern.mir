@@ -1,47 +1,40 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 const FOO: isize = {
-    let mut _0: isize;                   // return place in scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:3:12: 3:17
+    let mut _0: isize;
 
     bb0: {
-        _0 = const 10_isize;             // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:3:20: 3:22
-        return;                          // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:3:1: 3:23
+        _0 = const 10_isize;
+        return;
     }
 }
 
 const ZST: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:4:12: 4:15
+    let mut _0: &();
     scope 1 {
     }
 
     bb0: {
-        ConstEvalCounter;                // scope 1 at ui/match/const_non_normal_zst_ref_pattern.rs:4:27: 4:51
-        _0 = transmute::<isize, &()>(const _) -> bb1; // scope 1 at ui/match/const_non_normal_zst_ref_pattern.rs:4:27: 4:51
-                                         // mir::Constant
-                                         // + span: ui/match/const_non_normal_zst_ref_pattern.rs:4:27: 4:46
-                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(isize) -> &() {transmute::<isize, &()>}, val: Value(<ZST>) }
-    }
-
-    bb1: {
-        return;                          // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:4:1: 4:54
+        _0 = const _ as &() (Transmute);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:5:11: 5:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:9:2: 9:2
+        return;
     }
 }
 
 promoted[0] in main: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:6:11: 6:14
-    let mut _1: ();                      // in scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:6:12: 6:14
+    let mut _0: &();
+    let mut _1: ();
 
     bb0: {
-        _1 = ();                         // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:6:12: 6:14
-        _0 = &_1;                        // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:6:11: 6:14
-        return;                          // scope 0 at ui/match/const_non_normal_zst_ref_pattern.rs:6:11: 6:14
+        _1 = ();
+        _0 = &_1;
+        return;
     }
 }

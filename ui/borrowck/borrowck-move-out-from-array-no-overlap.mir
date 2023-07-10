@@ -1,498 +1,456 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn array() -> [(String, String); 3] {
-    let mut _0: [(std::string::String, std::string::String); 3]; // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:3:15: 3:36
+    let mut _0: [(std::string::String, std::string::String); 3];
 
     bb0: {
-        _0 = <[(String, String); 3] as Default>::default() -> bb1; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:4:5: 4:23
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:4:5: 4:21
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {<[(String, String); 3] as Default>::default}, val: Value(<ZST>) }
+        _0 = <[(String, String); 3] as Default>::default() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:5:2: 5:2
+        return;
     }
 }
 
 array::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:3:34: 3:35
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 3_usize;              // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:3:34: 3:35
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:3:34: 3:35
+        _0 = const 3_usize;
+        return;
     }
 }
 
 fn move_out_from_begin_and_one_from_end() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:9:43: 9:43
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:10:9: 10:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:10:9: 10:10
-        let _2: (std::string::String, std::string::String); // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:11:16: 11:18
+        debug a => _1;
+        let _2: (std::string::String, std::string::String);
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:11:16: 11:18
-            let _3: (std::string::String, std::string::String); // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:12:14: 12:16
+            debug _x => _2;
+            let _3: (std::string::String, std::string::String);
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:12:14: 12:16
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:10:13: 10:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:10:13: 10:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[2 of 3];            // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:11:16: 11:18
-        _3 = move _1[1 of 3];            // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:12:14: 12:16
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:1: 13:2
+        _2 = move _1[2 of 3];
+        _3 = move _1[1 of 3];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:1: 13:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop(_1[0 of 3]) -> bb6;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:1: 13:2
+        drop(_1[0..1]) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:1: 13:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:9:1: 13:2
+        resume;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:2: 13:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop(_1[0 of 3]) -> bb5;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:13:1: 13:2
+        drop(_1[0..1]) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_from_begin_field_and_end_field() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:15:46: 15:46
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:16:9: 16:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:16:9: 16:10
-        let _2: std::string::String;     // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:17:17: 17:19
+        debug a => _1;
+        let _2: std::string::String;
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:17:17: 17:19
-            let _3: std::string::String; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:18:18: 18:20
+            debug _x => _2;
+            let _3: std::string::String;
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:18:18: 18:20
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:16:13: 16:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:16:13: 16:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_1[2 of 3].0: std::string::String); // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:17:17: 17:19
-        _3 = move (_1[2 of 3].1: std::string::String); // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:18:18: 18:20
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+        _2 = move (_1[2 of 3].0: std::string::String);
+        _3 = move (_1[2 of 3].1: std::string::String);
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb10]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop(_1[0 of 3]) -> [return: bb8, unwind: bb6]; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+        drop(_1[0..2]) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb10;                // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:15:1: 19:2
+        resume;
     }
 
-    bb6 (cleanup): {
-        drop(_1[1 of 3]) -> bb5;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+    bb6: {
+        return;
     }
 
-    bb7: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:2: 19:2
-    }
-
-    bb8: {
-        drop(_1[1 of 3]) -> bb7;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
-    }
-
-    bb9 (cleanup): {
-        drop(_1[1 of 3]) -> bb5;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
-    }
-
-    bb10 (cleanup): {
-        drop(_1[0 of 3]) -> bb9;         // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:19:1: 19:2
+    bb7 (cleanup): {
+        drop(_1[0..2]) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_by_const_index_and_subslice() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:23:43: 23:43
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:24:9: 24:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:24:9: 24:10
-        let _2: (std::string::String, std::string::String); // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:25:10: 25:12
+        debug a => _1;
+        let _2: (std::string::String, std::string::String);
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:25:10: 25:12
-            let _3: [(std::string::String, std::string::String); 2]; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:26:13: 26:15
+            debug _x => _2;
+            let _3: [(std::string::String, std::string::String); 2];
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:26:13: 26:15
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:24:13: 24:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:24:13: 24:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[0 of 3];            // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:25:10: 25:12
-        _3 = move _1[1..3];              // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:26:13: 26:15
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:27:1: 27:2
+        _2 = move _1[0 of 3];
+        _3 = move _1[1..3];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> bb3;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:27:1: 27:2
+        drop(_2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:27:2: 27:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb5;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:27:1: 27:2
+        drop(_2) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:23:1: 27:2
+        resume;
     }
 }
 
 fn move_out_by_const_index_end_and_subslice() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:29:47: 29:47
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:30:9: 30:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:30:9: 30:10
-        let _2: (std::string::String, std::string::String); // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:31:14: 31:16
+        debug a => _1;
+        let _2: (std::string::String, std::string::String);
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:31:14: 31:16
-            let _3: [(std::string::String, std::string::String); 2]; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:32:10: 32:12
+            debug _x => _2;
+            let _3: [(std::string::String, std::string::String); 2];
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:32:10: 32:12
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:30:13: 30:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:30:13: 30:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[2 of 3];            // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:31:14: 31:16
-        _3 = move _1[0..2];              // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:32:10: 32:12
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:33:1: 33:2
+        _2 = move _1[2 of 3];
+        _3 = move _1[0..2];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> bb3;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:33:1: 33:2
+        drop(_2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:33:2: 33:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb5;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:33:1: 33:2
+        drop(_2) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:29:1: 33:2
+        resume;
     }
 }
 
 fn move_out_by_const_index_field_and_subslice() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:35:49: 35:49
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:36:9: 36:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:36:9: 36:10
-        let _2: std::string::String;     // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:37:11: 37:13
+        debug a => _1;
+        let _2: std::string::String;
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:37:11: 37:13
-            let _3: [(std::string::String, std::string::String); 2]; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:38:13: 38:15
+            debug _x => _2;
+            let _3: [(std::string::String, std::string::String); 2];
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:38:13: 38:15
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:36:13: 36:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:36:13: 36:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_1[0 of 3].0: std::string::String); // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:37:11: 37:13
-        _3 = move _1[1..3];              // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:38:13: 38:15
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:1: 39:2
+        _2 = move (_1[0 of 3].0: std::string::String);
+        _3 = move _1[1..3];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:1: 39:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop((_1[0 of 3].1: std::string::String)) -> bb6; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:1: 39:2
+        drop((_1[0 of 3].1: std::string::String)) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:1: 39:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:35:1: 39:2
+        resume;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:2: 39:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop((_1[0 of 3].1: std::string::String)) -> bb5; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:39:1: 39:2
+        drop((_1[0 of 3].1: std::string::String)) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_by_const_index_end_field_and_subslice() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:41:53: 41:53
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:42:9: 42:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:42:9: 42:10
-        let _2: std::string::String;     // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:43:15: 43:17
+        debug a => _1;
+        let _2: std::string::String;
         scope 2 {
-            debug _x => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:43:15: 43:17
-            let _3: [(std::string::String, std::string::String); 2]; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:44:10: 44:12
+            debug _x => _2;
+            let _3: [(std::string::String, std::string::String); 2];
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:44:10: 44:12
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:42:13: 42:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:42:13: 42:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_1[2 of 3].0: std::string::String); // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:43:15: 43:17
-        _3 = move _1[0..2];              // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:44:10: 44:12
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:1: 45:2
+        _2 = move (_1[2 of 3].0: std::string::String);
+        _3 = move _1[0..2];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:1: 45:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop((_1[2 of 3].1: std::string::String)) -> bb6; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:1: 45:2
+        drop((_1[2 of 3].1: std::string::String)) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:1: 45:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:41:1: 45:2
+        resume;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:2: 45:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop((_1[2 of 3].1: std::string::String)) -> bb5; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:45:1: 45:2
+        drop((_1[2 of 3].1: std::string::String)) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_by_const_subslice_and_index_field() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:47:49: 47:49
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:48:9: 48:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:48:9: 48:10
-        let _2: [(std::string::String, std::string::String); 2]; // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:49:13: 49:15
+        debug a => _1;
+        let _2: [(std::string::String, std::string::String); 2];
         scope 2 {
-            debug _y => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:49:13: 49:15
-            let _3: std::string::String; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:50:11: 50:13
+            debug _y => _2;
+            let _3: std::string::String;
             scope 3 {
-                debug _x => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:50:11: 50:13
+                debug _x => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:48:13: 48:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:48:13: 48:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[1..3];              // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:49:13: 49:15
-        _3 = move (_1[0 of 3].0: std::string::String); // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:50:11: 50:13
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:1: 51:2
+        _2 = move _1[1..3];
+        _3 = move (_1[0 of 3].0: std::string::String);
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:1: 51:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop((_1[0 of 3].1: std::string::String)) -> bb6; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:1: 51:2
+        drop((_1[0 of 3].1: std::string::String)) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:1: 51:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:47:1: 51:2
+        resume;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:2: 51:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop((_1[0 of 3].1: std::string::String)) -> bb5; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:51:1: 51:2
+        drop((_1[0 of 3].1: std::string::String)) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_by_const_subslice_and_end_index_field() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:53:53: 53:53
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:54:9: 54:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:54:9: 54:10
-        let _2: [(std::string::String, std::string::String); 2]; // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:55:10: 55:12
+        debug a => _1;
+        let _2: [(std::string::String, std::string::String); 2];
         scope 2 {
-            debug _y => _2;              // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:55:10: 55:12
-            let _3: std::string::String; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:56:15: 56:17
+            debug _y => _2;
+            let _3: std::string::String;
             scope 3 {
-                debug _x => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:56:15: 56:17
+                debug _x => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:54:13: 54:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:54:13: 54:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[0..2];              // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:55:10: 55:12
-        _3 = move (_1[2 of 3].0: std::string::String); // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:56:15: 56:17
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:1: 57:2
+        _2 = move _1[0..2];
+        _3 = move (_1[2 of 3].0: std::string::String);
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:1: 57:2
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop((_1[2 of 3].1: std::string::String)) -> bb6; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:1: 57:2
+        drop((_1[2 of 3].1: std::string::String)) -> [return: bb6, unwind continue];
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:1: 57:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:53:1: 57:2
+        resume;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:2: 57:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop((_1[2 of 3].1: std::string::String)) -> bb5; // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:57:1: 57:2
+        drop((_1[2 of 3].1: std::string::String)) -> [return: bb5, unwind terminate];
     }
 }
 
 fn move_out_by_subslice_and_subslice() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:61:40: 61:40
-    let _1: [(std::string::String, std::string::String); 3]; // in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:62:9: 62:10
+    let mut _0: ();
+    let _1: [(std::string::String, std::string::String); 3];
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:62:9: 62:10
-        let _2: [(std::string::String, std::string::String); 1]; // in scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:63:10: 63:11
+        debug a => _1;
+        let _2: [(std::string::String, std::string::String); 1];
         scope 2 {
-            debug x => _2;               // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:63:10: 63:11
-            let _3: [(std::string::String, std::string::String); 2]; // in scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:64:13: 64:15
+            debug x => _2;
+            let _3: [(std::string::String, std::string::String); 2];
             scope 3 {
-                debug _y => _3;          // in scope 3 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:64:13: 64:15
+                debug _y => _3;
             }
         }
     }
 
     bb0: {
-        _1 = array() -> bb1;             // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:62:13: 62:20
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:62:13: 62:18
-                                         // + literal: Const { ty: fn() -> [(String, String); 3] {array}, val: Value(<ZST>) }
+        _1 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1[0..1];              // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:63:10: 63:11
-        _3 = move _1[1..3];              // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:64:13: 64:15
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 2 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:65:1: 65:2
+        _2 = move _1[0..1];
+        _3 = move _1[1..3];
+        drop(_3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_2) -> bb3;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:65:1: 65:2
+        drop(_2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:65:2: 65:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb5;                 // scope 1 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:65:1: 65:2
+        drop(_2) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:61:1: 65:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:67:11: 67:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/borrowck/borrowck-move-out-from-array-no-overlap.rs:67:13: 67:13
+        return;
     }
 }

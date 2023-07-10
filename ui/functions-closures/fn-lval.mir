@@ -1,41 +1,35 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: fn(isize) -> isize) -> () {
-    debug _f => _1;                      // in scope 0 at ui/functions-closures/fn-lval.rs:7:8: 7:10
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-lval.rs:7:32: 7:32
+    debug _f => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/functions-closures/fn-lval.rs:7:35: 7:35
+        return;
     }
 }
 
 fn id(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-lval.rs:9:7: 9:8
-    let mut _0: isize;                   // return place in scope 0 at ui/functions-closures/fn-lval.rs:9:20: 9:25
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/functions-closures/fn-lval.rs:9:35: 9:36
-        return;                          // scope 0 at ui/functions-closures/fn-lval.rs:9:39: 9:39
+        _0 = _1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-lval.rs:11:15: 11:15
-    let _1: ();                          // in scope 0 at ui/functions-closures/fn-lval.rs:11:17: 11:24
-    let mut _2: fn(isize) -> isize;      // in scope 0 at ui/functions-closures/fn-lval.rs:11:21: 11:23
+    let mut _0: ();
+    let _1: ();
+    let mut _2: fn(isize) -> isize;
 
     bb0: {
-        _2 = id as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 0 at ui/functions-closures/fn-lval.rs:11:21: 11:23
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-lval.rs:11:21: 11:23
-                                         // + literal: Const { ty: fn(isize) -> isize {id}, val: Value(<ZST>) }
-        _1 = foo(move _2) -> bb1;        // scope 0 at ui/functions-closures/fn-lval.rs:11:17: 11:24
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-lval.rs:11:17: 11:20
-                                         // + literal: Const { ty: fn(fn(isize) -> isize) {foo}, val: Value(<ZST>) }
+        _2 = id as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _1 = foo(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/fn-lval.rs:11:27: 11:27
+        return;
     }
 }

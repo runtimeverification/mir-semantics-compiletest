@@ -1,61 +1,55 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: Zst) -> Zst {
-    debug val => _1;                     // in scope 0 at ui/consts/const-fn-zst-args.rs:8:14: 8:17
-    let mut _0: Zst;                     // return place in scope 0 at ui/consts/const-fn-zst-args.rs:8:27: 8:30
+    debug val => const Zst {{  }};
+    let mut _0: Zst;
 
     bb0: {
-        return;                          // scope 0 at ui/consts/const-fn-zst-args.rs:8:38: 8:38
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo(_1: Zst) -> Zst {
-    debug val => _1;                     // in scope 0 at ui/consts/const-fn-zst-args.rs:8:14: 8:17
-    let mut _0: Zst;                     // return place in scope 0 at ui/consts/const-fn-zst-args.rs:8:27: 8:30
+    debug val => _1;
+    let mut _0: Zst;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/consts/const-fn-zst-args.rs:8:33: 8:36
-        return;                          // scope 0 at ui/consts/const-fn-zst-args.rs:8:38: 8:38
+        _0 = move _1;
+        return;
     }
 }
 
 const FOO: Zst = {
-    let mut _0: Zst;                     // return place in scope 0 at ui/consts/const-fn-zst-args.rs:10:12: 10:15
-    let mut _1: Zst;                     // in scope 0 at ui/consts/const-fn-zst-args.rs:10:22: 10:28
+    let mut _0: Zst;
+    let mut _1: Zst;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-fn-zst-args.rs:10:22: 10:28
-        _1 = Zst;                        // scope 0 at ui/consts/const-fn-zst-args.rs:10:22: 10:28
-        ConstEvalCounter;                // scope 0 at ui/consts/const-fn-zst-args.rs:10:18: 10:29
-        _0 = foo(move _1) -> bb1;        // scope 0 at ui/consts/const-fn-zst-args.rs:10:18: 10:29
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn-zst-args.rs:10:18: 10:21
-                                         // + literal: Const { ty: fn(Zst) -> Zst {foo}, val: Value(<ZST>) }
+        StorageLive(_1);
+        _1 = Zst;
+        ConstEvalCounter;
+        _0 = foo(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        StorageDead(_1);                 // scope 0 at ui/consts/const-fn-zst-args.rs:10:28: 10:29
-        return;                          // scope 0 at ui/consts/const-fn-zst-args.rs:10:1: 10:30
+        StorageDead(_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-fn-zst-args.rs:12:11: 12:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/const-fn-zst-args.rs:14:2: 14:2
+        return;
     }
 }
 
 const _: Zst = {
-    let mut _0: Zst;                     // return place in scope 0 at ui/consts/const-fn-zst-args.rs:13:14: 13:17
+    let mut _0: Zst;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/consts/const-fn-zst-args.rs:13:20: 13:23
-                                         // mir::Constant
-                                         // + span: ui/consts/const-fn-zst-args.rs:13:20: 13:23
-                                         // + literal: Const { ty: Zst, val: Unevaluated(FOO, [], None) }
-        return;                          // scope 0 at ui/consts/const-fn-zst-args.rs:13:5: 13:24
+        _0 = const _;
+        return;
     }
 }

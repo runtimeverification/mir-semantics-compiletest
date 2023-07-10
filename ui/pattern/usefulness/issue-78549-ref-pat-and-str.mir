@@ -1,64 +1,58 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:4:11: 4:11
-    let mut _1: &str;                    // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:5:11: 5:16
-    let mut _2: bool;                    // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:6:9: 6:14
-    let mut _3: (&&str, &str);           // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:11: 21:26
-    let mut _4: &&str;                   // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-    let mut _5: bool;                    // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:22:11: 22:16
-    let mut _6: &&str;                   // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-    let mut _7: &&str;                   // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:11: 21:26
+    let mut _0: ();
+    let mut _1: &str;
+    let mut _2: bool;
+    let mut _3: (&str, i32, &str);
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: (&&str, &str);
+    let mut _7: bool;
+    let mut _8: &&str;
+    let mut _9: &&str;
 
     bb0: {
-        _1 = const "foo";                // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:5:11: 5:16
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:5:11: 5:16
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _2 = <str as PartialEq>::eq(_1, const "foo") -> bb1; // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:6:9: 6:14
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:6:9: 6:14
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:6:9: 6:14
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _1 = const "foo";
+        _2 = <str as PartialEq>::eq(_1, const "foo") -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _6 = const _;                    // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
-        _4 = _6;                         // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-        _3 = (move _4, const "bar");     // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:11: 21:26
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:20: 21:25
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _7 = deref_copy (_3.0: &&str);   // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:22:11: 22:16
-        _5 = <str as PartialEq>::eq((*_7), const "foo") -> bb2; // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:22:11: 22:16
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:22:11: 22:16
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:22:11: 22:16
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = (const "foo", const 0_i32, const "bar");
+        switchInt((_3.1: i32)) -> [0: bb5, otherwise: bb2];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:25:2: 25:2
+        _4 = <str as PartialEq>::eq((_3.0: &str), const "foo") -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        switchInt(move _4) -> [0: bb5, otherwise: bb4];
+    }
+
+    bb4: {
+        _5 = <str as PartialEq>::eq((_3.2: &str), const "bar") -> [return: bb5, unwind continue];
+    }
+
+    bb5: {
+        _8 = const _;
+        _6 = (_8, const "bar");
+        _9 = deref_copy (_6.0: &&str);
+        _7 = <str as PartialEq>::eq((*_9), const "foo") -> [return: bb6, unwind continue];
+    }
+
+    bb6: {
+        return;
     }
 }
 
 promoted[0] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-    let mut _1: &str;                    // in scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:13: 21:18
+    let mut _0: &&str;
+    let mut _1: &str;
 
     bb0: {
-        _1 = const "foo";                // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:13: 21:18
-                                         // mir::Constant
-                                         // + span: ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:13: 21:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
-        return;                          // scope 0 at ui/pattern/usefulness/issue-78549-ref-pat-and-str.rs:21:12: 21:18
+        _1 = const "foo";
+        _0 = &_1;
+        return;
     }
 }

@@ -1,79 +1,86 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
-fn <impl at ui/self/arbitrary_self_types_trait.rs:9:1: 9:24>::trait_method(_1: &Box<Rc<Vec<i32>>>) -> &[i32] {
-    debug self => _1;                    // in scope 0 at ui/self/arbitrary_self_types_trait.rs:10:25: 10:29
-    let mut _0: &[i32];                  // return place in scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-    let mut _2: &std::vec::Vec<i32>;     // in scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-    let _3: &std::vec::Vec<i32>;         // in scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-    let _4: &std::vec::Vec<i32>;         // in scope 0 at ui/self/arbitrary_self_types_trait.rs:11:10: 11:17
-    let mut _5: &std::rc::Rc<std::vec::Vec<i32>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:11:11: 11:17
-    let mut _6: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:10:25: 10:29
-    let mut _7: *const std::rc::Rc<std::vec::Vec<i32>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:10:25: 10:29
+fn <impl at ui/self/arbitrary_self_types_trait.rs:10:1: 10:24>::trait_method(_1: &Box<Rc<Vec<i32>>>) -> &[i32] {
+    debug self => _1;
+    let mut _0: &[i32];
+    let _2: &[i32];
+    let _3: &std::vec::Vec<i32>;
+    let _4: &std::vec::Vec<i32>;
+    let mut _5: &std::rc::Rc<std::vec::Vec<i32>>;
+    let mut _6: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
+    let mut _7: *const std::rc::Rc<std::vec::Vec<i32>>;
+    let mut _8: *const ();
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
 
     bb0: {
-        _6 = deref_copy (*_1);           // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:11: 11:17
-        _7 = (((_6.0: std::ptr::Unique<std::rc::Rc<std::vec::Vec<i32>>>).0: std::ptr::NonNull<std::rc::Rc<std::vec::Vec<i32>>>).0: *const std::rc::Rc<std::vec::Vec<i32>>); // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:11: 11:17
-        _5 = &(*_7);                     // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:11: 11:17
-        _4 = <Rc<Vec<i32>> as Deref>::deref(move _5) -> bb1; // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:10: 11:17
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_trait.rs:11:10: 11:17
-                                         // + literal: Const { ty: for<'a> fn(&'a Rc<Vec<i32>>) -> &'a <Rc<Vec<i32>> as Deref>::Target {<Rc<Vec<i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _6 = deref_copy (*_1);
+        _7 = (((_6.0: std::ptr::Unique<std::rc::Rc<std::vec::Vec<i32>>>).0: std::ptr::NonNull<std::rc::Rc<std::vec::Vec<i32>>>).0: *const std::rc::Rc<std::vec::Vec<i32>>);
+        _8 = _7 as *const () (PtrToPtr);
+        _9 = _8 as usize (Transmute);
+        _10 = AlignOf(std::rc::Rc<std::vec::Vec<i32>>);
+        _11 = Sub(_10, const 1_usize);
+        _12 = BitAnd(_9, _11);
+        _13 = Eq(_12, const 0_usize);
+        assert(_13, "misaligned pointer dereference: address must be a multiple of {} but is {}", _10, _9) -> [success: bb3, unwind unreachable];
     }
 
     bb1: {
-        _3 = _4;                         // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-        _2 = _3;                         // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-        _0 = <Vec<i32> as Deref>::deref(move _2) -> bb2; // scope 0 at ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_trait.rs:11:9: 11:17
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<i32>) -> &'a <Vec<i32> as Deref>::Target {<Vec<i32> as Deref>::deref}, val: Value(<ZST>) }
+        _3 = _4;
+        _2 = <Vec<i32> as Deref>::deref(_3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/self/arbitrary_self_types_trait.rs:12:6: 12:6
+        _0 = _2;
+        return;
+    }
+
+    bb3: {
+        _5 = &(*_7);
+        _4 = <Rc<Vec<i32>> as Deref>::deref(move _5) -> [return: bb1, unwind continue];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/arbitrary_self_types_trait.rs:15:11: 15:11
-    let _1: std::vec::Vec<i32>;          // in scope 0 at ui/self/arbitrary_self_types_trait.rs:16:9: 16:10
-    let mut _2: std::boxed::Box<[i32]>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _3: std::boxed::Box<[i32; 3]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _4: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _5: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _6: *mut u8;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _7: std::boxed::Box<[i32; 3]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _8: (&&[i32; 3], &&[i32]);   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _9: &&[i32; 3];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _10: &&[i32];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _11: &[i32];                     // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:61
-    let mut _12: &std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:61
-    let _13: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:46
-    let mut _14: std::rc::Rc<std::vec::Vec<i32>>; // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:35: 18:45
-    let mut _15: std::vec::Vec<i32>;     // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:43: 18:44
-    let mut _18: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _19: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _20: &&[i32; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _21: &&[i32];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _23: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _24: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _25: &&[i32; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _26: &&[i32; 3];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _27: &&[i32];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _28: &&[i32];                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _29: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _31: *const [i32; 3];        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _0: ();
+    let _1: std::vec::Vec<i32>;
+    let mut _2: std::boxed::Box<[i32]>;
+    let mut _3: usize;
+    let mut _4: usize;
+    let mut _5: *mut u8;
+    let mut _6: std::boxed::Box<[i32; 3]>;
+    let mut _7: (&&[i32; 3], &&[i32]);
+    let mut _8: &&[i32];
+    let _9: &[i32];
+    let mut _10: &std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
+    let _11: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
+    let mut _12: std::rc::Rc<std::vec::Vec<i32>>;
+    let mut _13: std::vec::Vec<i32>;
+    let mut _16: bool;
+    let mut _17: bool;
+    let _19: !;
+    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _22: *const [i32; 3];
+    let mut _23: *const ();
+    let mut _24: usize;
+    let mut _25: usize;
+    let mut _26: usize;
+    let mut _27: usize;
+    let mut _28: bool;
     scope 1 {
-        debug v => _1;                   // in scope 1 at ui/self/arbitrary_self_types_trait.rs:16:9: 16:10
-        let _16: &&[i32; 3];             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _17: &&[i32];                // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _30: &&[i32; 3];         // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        debug v => _1;
+        let _14: &&[i32; 3];
+        let _15: &&[i32];
+        let mut _21: &&[i32; 3];
         scope 3 {
-            debug left_val => _16;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _17;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _22: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _14;
+            debug right_val => _15;
+            let _18: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _22;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _18;
             }
         }
     }
@@ -81,121 +88,89 @@ fn main() -> () {
     }
 
     bb0: {
-        _4 = const 12_usize;             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _5 = const 4_usize;              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+        _3 = SizeOf([i32; 3]);
+        _4 = AlignOf([i32; 3]);
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = ShallowInitBox(move _6, [i32; 3]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _31 = (((_7.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        (*_31) = [const 1_i32, const 2_i32, const 3_i32]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        _3 = move _7;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _2 = move _3 as std::boxed::Box<[i32]> (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Box<[i32]>) -> Vec<i32> {slice::<impl [i32]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+        _6 = ShallowInitBox(move _5, [i32; 3]);
+        _22 = (((_6.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]);
+        _23 = _22 as *const () (PtrToPtr);
+        _24 = _23 as usize (Transmute);
+        _25 = AlignOf(i32);
+        _26 = Sub(_25, const 1_usize);
+        _27 = BitAnd(_24, _26);
+        _28 = Eq(_27, const 0_usize);
+        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb12, unwind unreachable];
     }
 
     bb2: {
-        _30 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &&[i32; 3], val: Unevaluated(main, [], Some(promoted[0])) }
-        _9 = _30;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _15 = move _1;                   // scope 1 at ui/self/arbitrary_self_types_trait.rs:18:43: 18:44
-        _14 = Rc::<Vec<i32>>::new(move _15) -> bb3; // scope 1 at ui/self/arbitrary_self_types_trait.rs:18:35: 18:45
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_trait.rs:18:35: 18:42
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(Vec<i32>) -> Rc<Vec<i32>> {Rc::<Vec<i32>>::new}, val: Value(<ZST>) }
+        _21 = const _;
+        _13 = move _1;
+        _12 = Rc::<Vec<i32>>::new(move _13) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _13 = Box::<Rc<Vec<i32>>>::new(move _14) -> bb4; // scope 1 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:46
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_trait.rs:18:26: 18:34
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Rc<Vec<i32>>) -> Box<Rc<Vec<i32>>> {Box::<Rc<Vec<i32>>>::new}, val: Value(<ZST>) }
+        _11 = Box::<Rc<Vec<i32>>>::new(move _12) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _12 = &_13;                      // scope 1 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:61
-        _11 = <Vec<i32> as Trait>::trait_method(move _12) -> [return: bb5, unwind: bb10]; // scope 1 at ui/self/arbitrary_self_types_trait.rs:18:26: 18:61
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_trait.rs:18:47: 18:59
-                                         // + literal: Const { ty: for<'a> fn(&'a Box<Rc<Vec<i32>>>) -> &'a [i32] {<Vec<i32> as Trait>::trait_method}, val: Value(<ZST>) }
+        _10 = &_11;
+        _9 = <Vec<i32> as Trait>::trait_method(move _10) -> [return: bb5, unwind: bb10];
     }
 
     bb5: {
-        _10 = &_11;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _8 = (move _9, move _10);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _16 = (_8.0: &&[i32; 3]);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _17 = (_8.1: &&[i32]);           // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _20 = _16;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _21 = _17;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _19 = <&[i32; 3] as PartialEq<&[i32]>>::eq(move _20, move _21) -> [return: bb6, unwind: bb10]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &[i32; 3], &'b &[i32]) -> bool {<&[i32; 3] as PartialEq<&[i32]>>::eq}, val: Value(<ZST>) }
+        _8 = &_9;
+        _7 = (_21, move _8);
+        _14 = (_7.0: &&[i32; 3]);
+        _15 = (_7.1: &&[i32]);
+        _17 = <&[i32; 3] as PartialEq<&[i32]>>::eq(_14, _15) -> [return: bb6, unwind: bb10];
     }
 
     bb6: {
-        _18 = Not(move _19);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _18) -> [0: bb8, otherwise: bb7]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _16 = Not(move _17);
+        switchInt(move _16) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _22 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _24 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _26 = _16;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _25 = _26;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _28 = _17;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _27 = _28;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _29 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _23 = core::panicking::assert_failed::<&[i32; 3], &[i32]>(move _24, move _25, move _27, move _29) -> bb10; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &[i32; 3], &'b &[i32], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&[i32; 3], &[i32]>}, val: Value(<ZST>) }
+        _18 = core::panicking::AssertKind::Eq;
+        _20 = Option::<Arguments<'_>>::None;
+        _19 = core::panicking::assert_failed::<&[i32; 3], &[i32]>(move _18, _14, _15, move _20) -> bb10;
     }
 
     bb8: {
-        drop(_13) -> bb9;                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_11) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        return;                          // scope 0 at ui/self/arbitrary_self_types_trait.rs:19:2: 19:2
+        return;
     }
 
     bb10 (cleanup): {
-        drop(_13) -> bb11;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_11) -> [return: bb11, unwind terminate];
     }
 
     bb11 (cleanup): {
-        resume;                          // scope 0 at ui/self/arbitrary_self_types_trait.rs:15:1: 19:2
+        resume;
+    }
+
+    bb12: {
+        (*_22) = [const 1_i32, const 2_i32, const 3_i32];
+        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
     }
 }
 
 promoted[0] in main: &&[i32; 3] = {
-    let mut _0: &&[i32; 3];              // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: &[i32; 3];               // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:16: 18:24
-    let mut _2: [i32; 3];                // in scope 0 at ui/self/arbitrary_self_types_trait.rs:18:17: 18:24
+    let mut _0: &&[i32; 3];
+    let mut _1: &[i32; 3];
+    let mut _2: [i32; 3];
 
     bb0: {
-        _2 = [const 1_i32, const 2_i32, const 3_i32]; // scope 0 at ui/self/arbitrary_self_types_trait.rs:18:17: 18:24
-        _1 = &_2;                        // scope 0 at ui/self/arbitrary_self_types_trait.rs:18:16: 18:24
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _2 = [const 1_i32, const 2_i32, const 3_i32];
+        _1 = &_2;
+        _0 = &_1;
+        return;
     }
 }

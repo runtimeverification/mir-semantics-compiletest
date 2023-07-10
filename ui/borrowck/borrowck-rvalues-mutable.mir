@@ -1,278 +1,196 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/borrowck/borrowck-rvalues-mutable.rs:7:1: 7:13>::new(_1: usize) -> Counter {
-    debug v => _1;                       // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:8:12: 8:13
-    let mut _0: Counter;                 // return place in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:8:25: 8:32
-    let mut _2: usize;                   // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:9:25: 9:26
+    debug v => _1;
+    let mut _0: Counter;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:9:25: 9:26
-        _0 = Counter { value: move _2 }; // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:9:9: 9:27
-        return;                          // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:10:6: 10:6
+        _0 = Counter { value: _1 };
+        return;
     }
 }
 
 fn <impl at ui/borrowck/borrowck-rvalues-mutable.rs:7:1: 7:13>::inc(_1: &mut Counter) -> &mut Counter {
-    debug self => _1;                    // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:12:16: 12:28
-    let mut _0: &mut Counter;            // return place in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:12:33: 12:48
-    let mut _2: &mut Counter;            // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:14:9: 14:13
-    let mut _3: (usize, bool);           // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:13:9: 13:24
+    debug self => _1;
+    let mut _0: &mut Counter;
 
     bb0: {
-        _3 = CheckedAdd(((*_1).0: usize), const 1_usize); // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:13:9: 13:24
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).0: usize), const 1_usize) -> bb1; // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:13:9: 13:24
-    }
-
-    bb1: {
-        ((*_1).0: usize) = move (_3.0: usize); // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:13:9: 13:24
-        _2 = &mut (*_1);                 // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:14:9: 14:13
-        _0 = &mut (*_2);                 // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:14:9: 14:13
-        return;                          // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:15:6: 15:6
+        ((*_1).0: usize) = Add(((*_1).0: usize), const 1_usize);
+        _0 = _1;
+        return;
     }
 }
 
 fn <impl at ui/borrowck/borrowck-rvalues-mutable.rs:7:1: 7:13>::get(_1: &Counter) -> usize {
-    debug self => _1;                    // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:17:12: 17:17
-    let mut _0: usize;                   // return place in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:17:22: 17:27
+    debug self => _1;
+    let mut _0: usize;
 
     bb0: {
-        _0 = ((*_1).0: usize);           // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:18:9: 18:19
-        return;                          // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:19:6: 19:6
+        _0 = ((*_1).0: usize);
+        return;
     }
 }
 
 fn <impl at ui/borrowck/borrowck-rvalues-mutable.rs:7:1: 7:13>::get_and_inc(_1: &mut Counter) -> usize {
-    debug self => _1;                    // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:21:20: 21:29
-    let mut _0: usize;                   // return place in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:22:13: 22:14
-    let mut _2: (usize, bool);           // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:23:9: 23:24
+    debug self => _1;
+    let mut _0: usize;
     scope 1 {
-        debug v => _0;                   // in scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:22:13: 22:14
+        debug v => _0;
     }
 
     bb0: {
-        _0 = ((*_1).0: usize);           // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:22:17: 22:27
-        _2 = CheckedAdd(((*_1).0: usize), const 1_usize); // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:23:9: 23:24
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).0: usize), const 1_usize) -> bb1; // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:23:9: 23:24
-    }
-
-    bb1: {
-        ((*_1).0: usize) = move (_2.0: usize); // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:23:9: 23:24
-        return;                          // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:25:6: 25:6
+        _0 = ((*_1).0: usize);
+        ((*_1).0: usize) = Add(((*_1).0: usize), const 1_usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:28:15: 28:15
-    let _1: usize;                       // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:9: 29:10
-    let mut _2: &mut Counter;            // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:43
-    let mut _3: Counter;                 // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:29
-    let mut _4: (&usize, &usize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _5: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _6: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _11: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _12: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _16: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _17: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _18: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _19: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _22: &Counter;               // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:47
-    let _23: &mut Counter;               // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:41
-    let mut _24: &mut Counter;           // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:41
-    let mut _25: &mut Counter;           // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:35
-    let mut _26: &mut Counter;           // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:35
-    let mut _27: Counter;                // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:29
-    let mut _28: (&usize, &usize);       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _29: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _30: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _33: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _34: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _35: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _36: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _38: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _39: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _40: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _41: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _42: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _43: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _44: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: usize;
+    let mut _2: &mut Counter;
+    let mut _3: Counter;
+    let mut _4: (&usize, &usize);
+    let mut _5: &usize;
+    let mut _8: bool;
+    let mut _9: bool;
+    let mut _10: usize;
+    let mut _11: usize;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _16: &Counter;
+    let _17: &mut Counter;
+    let mut _18: &mut Counter;
+    let mut _19: &mut Counter;
+    let mut _20: &mut Counter;
+    let mut _21: Counter;
+    let mut _22: (&usize, &usize);
+    let mut _23: &usize;
+    let mut _26: bool;
+    let mut _27: bool;
+    let mut _28: usize;
+    let mut _29: usize;
+    let _31: !;
+    let mut _32: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug v => _1;                   // in scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:29:9: 29:10
-        let _7: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _8: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _21: usize;                  // in scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:9: 32:10
-        let mut _46: &usize;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug v => _1;
+        let _6: &usize;
+        let _7: &usize;
+        let _15: usize;
+        let mut _34: &usize;
         scope 2 {
-            debug left_val => _7;        // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _8;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _13: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _6;
+            debug right_val => _7;
+            let _12: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _13;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _12;
             }
         }
         scope 4 {
-            debug v => _21;              // in scope 4 at ui/borrowck/borrowck-rvalues-mutable.rs:32:9: 32:10
-            let _31: &usize;             // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _32: &usize;             // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _45: &usize;         // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug v => _15;
+            let _24: &usize;
+            let _25: &usize;
+            let mut _33: &usize;
             scope 5 {
-                debug left_val => _31;   // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _32;  // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _37: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _24;
+                debug right_val => _25;
+                let _30: core::panicking::AssertKind;
                 scope 6 {
-                    debug kind => _37;   // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _30;
                 }
             }
         }
     }
 
     bb0: {
-        _3 = Counter::new(const 22_usize) -> bb1; // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:29
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:25
-                                         // + literal: Const { ty: fn(usize) -> Counter {Counter::new}, val: Value(<ZST>) }
+        _3 = Counter::new(const 22_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &mut _3;                    // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:43
-        _1 = Counter::get_and_inc(move _2) -> bb2; // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:29:13: 29:43
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:29:30: 29:41
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Counter) -> usize {Counter::get_and_inc}, val: Value(<ZST>) }
+        _2 = &mut _3;
+        _1 = Counter::get_and_inc(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = &_1;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _46 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[1])) }
-        _6 = _46;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _4 = (move _5, move _6);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _7 = (_4.0: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _8 = (_4.1: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _11 = (*_7);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _12 = const 22_usize;            // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _10 = Eq(move _11, move _12);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _9 = Not(move _10);              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _9) -> [0: bb4, otherwise: bb3]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _5 = &_1;
+        _34 = const _;
+        _4 = (move _5, _34);
+        _6 = (_4.0: &usize);
+        _7 = (_4.1: &usize);
+        _10 = (*_6);
+        _11 = (*_7);
+        _9 = Eq(move _10, move _11);
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _13 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _17 = _7;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _16 = _17;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _8;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = _19;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _14 = core::panicking::assert_failed::<usize, usize>(move _15, move _16, move _18, move _20); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
     }
 
     bb4: {
-        _27 = Counter::new(const 22_usize) -> bb5; // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:29
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:25
-                                         // + literal: Const { ty: fn(usize) -> Counter {Counter::new}, val: Value(<ZST>) }
+        _21 = Counter::new(const 22_usize) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _26 = &mut _27;                  // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:35
-        _25 = Counter::inc(move _26) -> bb6; // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:35
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:32:30: 32:33
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Counter) -> &'a mut Counter {Counter::inc}, val: Value(<ZST>) }
+        _20 = &mut _21;
+        _19 = Counter::inc(move _20) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _24 = &mut (*_25);               // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:41
-        _23 = Counter::inc(move _24) -> bb7; // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:41
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:32:36: 32:39
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Counter) -> &'a mut Counter {Counter::inc}, val: Value(<ZST>) }
+        _18 = _19;
+        _17 = Counter::inc(move _18) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _22 = &(*_23);                   // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:47
-        _21 = Counter::get(move _22) -> bb8; // scope 1 at ui/borrowck/borrowck-rvalues-mutable.rs:32:13: 32:47
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-rvalues-mutable.rs:32:42: 32:45
-                                         // + literal: Const { ty: for<'a> fn(&'a Counter) -> usize {Counter::get}, val: Value(<ZST>) }
+        _16 = &(*_17);
+        _15 = Counter::get(move _16) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _29 = &_21;                      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _45 = const _;                   // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _30 = _45;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _28 = (move _29, move _30);      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _31 = (_28.0: &usize);           // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _32 = (_28.1: &usize);           // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _35 = (*_31);                    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _36 = const 24_usize;            // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _34 = Eq(move _35, move _36);    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _33 = Not(move _34);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _33) -> [0: bb10, otherwise: bb9]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _23 = &_15;
+        _33 = const _;
+        _22 = (move _23, _33);
+        _24 = (_22.0: &usize);
+        _25 = (_22.1: &usize);
+        _28 = (*_24);
+        _29 = (*_25);
+        _27 = Eq(move _28, move _29);
+        _26 = Not(move _27);
+        switchInt(move _26) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _37 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _39 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _41 = _31;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _40 = _41;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _43 = _32;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _42 = _43;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _44 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _38 = core::panicking::assert_failed::<usize, usize>(move _39, move _40, move _42, move _44); // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+        _30 = core::panicking::AssertKind::Eq;
+        _32 = Option::<Arguments<'_>>::None;
+        _31 = core::panicking::assert_failed::<usize, usize>(move _30, _24, _25, move _32) -> unwind continue;
     }
 
     bb10: {
-        return;                          // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:34:2: 34:2
+        return;
     }
 }
 
 promoted[0] in main: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: usize;                   // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:33:19: 33:21
+    let mut _0: &usize;
+    let mut _1: usize;
 
     bb0: {
-        _1 = const 24_usize;             // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:33:19: 33:21
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 24_usize;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: usize;                   // in scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:30:19: 30:21
+    let mut _0: &usize;
+    let mut _1: usize;
 
     bb0: {
-        _1 = const 22_usize;             // scope 0 at ui/borrowck/borrowck-rvalues-mutable.rs:30:19: 30:21
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 22_usize;
+        _0 = &_1;
+        return;
     }
 }

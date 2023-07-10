@@ -1,239 +1,215 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/impl-trait/issues/issue-104815.rs:9:1: 9:10>::new() -> Data {
-    let mut _0: Data;                    // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:10:17: 10:21
-    let mut _1: std::vec::Vec<It>;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-    let mut _2: std::boxed::Box<[It]>;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _3: std::boxed::Box<[It; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _4: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _5: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _6: *mut u8;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _7: std::boxed::Box<[It; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _0: Data;
+    let mut _1: std::vec::Vec<It>;
+    let mut _2: std::boxed::Box<[It]>;
+    let mut _3: usize;
+    let mut _4: usize;
+    let mut _5: *mut u8;
+    let mut _6: std::boxed::Box<[It; 2]>;
+    let mut _7: *const [It; 2];
+    let mut _8: *const ();
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
     scope 1 {
     }
 
     bb0: {
-        _4 = const 0_usize;              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _5 = const 1_usize;              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+        _3 = SizeOf([It; 2]);
+        _4 = AlignOf([It; 2]);
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = ShallowInitBox(move _6, [It; 2]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _3 = move _7;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _2 = move _3 as std::boxed::Box<[It]> (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _1 = slice::<impl [It]>::into_vec::<std::alloc::Global>(move _2) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Box<[It]>) -> Vec<It> {slice::<impl [It]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+        _6 = ShallowInitBox(move _5, [It; 2]);
+        _7 = (((_6.0: std::ptr::Unique<[It; 2]>).0: std::ptr::NonNull<[It; 2]>).0: *const [It; 2]);
+        _8 = _7 as *const () (PtrToPtr);
+        _9 = _8 as usize (Transmute);
+        _10 = AlignOf(It);
+        _11 = Sub(_10, const 1_usize);
+        _12 = BitAnd(_9, _11);
+        _13 = Eq(_12, const 0_usize);
+        assert(_13, "misaligned pointer dereference: address must be a multiple of {} but is {}", _10, _9) -> [success: bb3, unwind unreachable];
     }
 
     bb2: {
-        _0 = Data { items: move _1 };    // scope 0 at ui/impl-trait/issues/issue-104815.rs:11:9: 13:10
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:14:6: 14:6
+        _0 = Data { items: move _1 };
+        return;
+    }
+
+    bb3: {
+        _2 = move _6 as std::boxed::Box<[It]> (Pointer(Unsize));
+        _1 = slice::<impl [It]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
     }
 }
 
 fn <impl at ui/impl-trait/issues/issue-104815.rs:9:1: 9:10>::content(_1: &Data) -> impl Iterator<Item = &It> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:16:16: 16:21
-    let mut _0: impl std::iter::Iterator<Item = &It>; // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:16:26: 16:51
-    let mut _2: &[It];                   // in scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-    let _3: &[It];                       // in scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-    let mut _4: &std::vec::Vec<It>;      // in scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
+    debug self => _1;
+    let mut _0: impl std::iter::Iterator<Item = &It>;
+    let mut _2: &[It];
+    let _3: &[It];
+    let mut _4: &std::vec::Vec<It>;
 
     bb0: {
-        _4 = &((*_1).0: std::vec::Vec<It>); // scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-        _3 = <Vec<It> as Deref>::deref(move _4) -> bb1; // scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<It>) -> &'a <Vec<It> as Deref>::Target {<Vec<It> as Deref>::deref}, val: Value(<ZST>) }
+        _4 = &((*_1).0: std::vec::Vec<It>);
+        _3 = <Vec<It> as Deref>::deref(move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = _3;                         // scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-        _0 = core::slice::<impl [It]>::iter(move _2) -> bb2; // scope 0 at ui/impl-trait/issues/issue-104815.rs:17:9: 17:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:17:20: 17:24
-                                         // + literal: Const { ty: for<'a> fn(&'a [It]) -> std::slice::Iter<'a, It> {core::slice::<impl [It]>::iter}, val: Value(<ZST>) }
+        _2 = _3;
+        _0 = core::slice::<impl [It]>::iter(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:18:6: 18:6
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/issues/issue-104815.rs:26:1: 26:23>::new(_1: &str, _2: R) -> Container<'_> {
-    debug name => _1;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:27:30: 27:34
-    debug resolver => _2;                // in scope 0 at ui/impl-trait/issues/issue-104815.rs:27:42: 27:50
-    let mut _0: Container<'_>;           // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:27:58: 27:62
-    let mut _3: std::string::String;     // in scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-    let mut _5: std::boxed::Box<dyn Resolver>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:30:23: 30:41
-    let mut _6: std::boxed::Box<R>;      // in scope 0 at ui/impl-trait/issues/issue-104815.rs:30:23: 30:41
-    let mut _7: R;                       // in scope 0 at ui/impl-trait/issues/issue-104815.rs:30:32: 30:40
-    let mut _8: bool;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:32:5: 32:6
+    debug name => _1;
+    debug resolver => _2;
+    let mut _0: Container<'_>;
+    let mut _3: std::string::String;
+    let mut _4: std::boxed::Box<dyn Resolver>;
+    let mut _5: std::boxed::Box<R>;
+    let mut _6: R;
+    let mut _7: bool;
 
     bb0: {
-        _8 = const false;                // scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-        _8 = const true;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-        _4 = _1;                         // scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-        _3 = <str as ToOwned>::to_owned(move _4) -> [return: bb1, unwind: bb6]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:29:19: 29:34
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:29:24: 29:32
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> <str as ToOwned>::Owned {<str as ToOwned>::to_owned}, val: Value(<ZST>) }
+        _7 = const false;
+        _7 = const true;
+        _3 = <str as ToOwned>::to_owned(_1) -> [return: bb1, unwind: bb6];
     }
 
     bb1: {
-        _8 = const false;                // scope 0 at ui/impl-trait/issues/issue-104815.rs:30:32: 30:40
-        _7 = move _2;                    // scope 0 at ui/impl-trait/issues/issue-104815.rs:30:32: 30:40
-        _6 = Box::<R>::new(move _7) -> [return: bb2, unwind: bb3]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:30:23: 30:41
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:30:23: 30:31
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(R) -> Box<R> {Box::<R>::new}, val: Value(<ZST>) }
+        _7 = const false;
+        _6 = move _2;
+        _5 = Box::<R>::new(move _6) -> [return: bb2, unwind: bb3];
     }
 
     bb2: {
-        _5 = move _6 as std::boxed::Box<dyn Resolver> (Pointer(Unsize)); // scope 0 at ui/impl-trait/issues/issue-104815.rs:30:23: 30:41
-        _0 = Container::<'_> { name: move _3, resolver: move _5 }; // scope 0 at ui/impl-trait/issues/issue-104815.rs:28:9: 31:10
-                                         // adt
-                                         // + user_ty: UserType(1)
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:32:6: 32:6
+        _4 = move _5 as std::boxed::Box<dyn Resolver> (Pointer(Unsize));
+        _0 = Container::<'_> { name: move _3, resolver: move _4 };
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_3) -> bb6;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:31:9: 31:10
+        drop(_3) -> [return: bb6, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:27:5: 32:6
+        resume;
     }
 
     bb5 (cleanup): {
-        drop(_2) -> bb4;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:32:5: 32:6
+        drop(_2) -> [return: bb4, unwind terminate];
     }
 
     bb6 (cleanup): {
-        switchInt(_8) -> [0: bb4, otherwise: bb5]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:32:5: 32:6
+        switchInt(_7) -> [0: bb4, otherwise: bb5];
     }
 }
 
 fn get(_1: impl Iterator<Item = &'a It>) -> impl Resolver + '_ {
-    debug items => _1;                   // in scope 0 at ui/impl-trait/issues/issue-104815.rs:41:12: 41:21
-    let mut _0: impl Resolver + '_;      // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:41:56: 41:74
-    let mut _2: std::option::Option<&It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:42:5: 42:17
-    let mut _3: &mut impl Iterator<Item = &'a It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:42:5: 42:17
+    debug items => _1;
+    let mut _0: impl Resolver + '_;
+    let mut _2: std::option::Option<&It>;
+    let mut _3: &mut impl Iterator<Item = &'a It>;
 
     bb0: {
-        _3 = &mut _1;                    // scope 0 at ui/impl-trait/issues/issue-104815.rs:42:5: 42:17
-        _2 = <impl Iterator<Item = &'a It> as Iterator>::next(move _3) -> [return: bb1, unwind: bb4]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:42:5: 42:17
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:42:11: 42:15
-                                         // + literal: Const { ty: for<'a> fn(&'a mut impl Iterator<Item = &'a It>) -> Option<<impl Iterator<Item = &'a It> as Iterator>::Item> {<impl Iterator<Item = &'a It> as Iterator>::next}, val: Value(<ZST>) }
+        _3 = &mut _1;
+        _2 = <impl Iterator<Item = &'a It> as Iterator>::next(move _3) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _0 = Option::<&It>::unwrap(move _2) -> [return: bb2, unwind: bb4]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:42:5: 42:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:42:18: 42:24
-                                         // + literal: Const { ty: fn(Option<&It>) -> &It {Option::<&It>::unwrap}, val: Value(<ZST>) }
+        _0 = Option::<&It>::unwrap(move _2) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:43:1: 43:2
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:43:2: 43:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:43:1: 43:2
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:41:1: 43:2
+        resume;
     }
 }
 
 fn get2(_1: impl Iterator<Item = &'a It>) -> impl Resolver + '_ {
-    debug items => _1;                   // in scope 0 at ui/impl-trait/issues/issue-104815.rs:45:21: 45:30
-    let mut _0: impl Resolver + '_;      // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:45:65: 45:83
-    let mut _2: std::option::Option<&It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:46:5: 46:17
-    let mut _3: &mut impl Iterator<Item = &'a It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:46:5: 46:17
+    debug items => _1;
+    let mut _0: impl Resolver + '_;
+    let mut _2: std::option::Option<&It>;
+    let mut _3: &mut impl Iterator<Item = &'a It>;
 
     bb0: {
-        _3 = &mut _1;                    // scope 0 at ui/impl-trait/issues/issue-104815.rs:46:5: 46:17
-        _2 = <impl Iterator<Item = &'a It> as Iterator>::next(move _3) -> [return: bb1, unwind: bb4]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:46:5: 46:17
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:46:11: 46:15
-                                         // + literal: Const { ty: for<'a> fn(&'a mut impl Iterator<Item = &'a It>) -> Option<<impl Iterator<Item = &'a It> as Iterator>::Item> {<impl Iterator<Item = &'a It> as Iterator>::next}, val: Value(<ZST>) }
+        _3 = &mut _1;
+        _2 = <impl Iterator<Item = &'a It> as Iterator>::next(move _3) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _0 = Option::<&It>::unwrap(move _2) -> [return: bb2, unwind: bb4]; // scope 0 at ui/impl-trait/issues/issue-104815.rs:46:5: 46:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:46:18: 46:24
-                                         // + literal: Const { ty: fn(Option<&It>) -> &It {Option::<&It>::unwrap}, val: Value(<ZST>) }
+        _0 = Option::<&It>::unwrap(move _2) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:47:1: 47:2
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:47:2: 47:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/impl-trait/issues/issue-104815.rs:47:1: 47:2
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:45:1: 47:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:49:11: 49:11
-    let _1: Data;                        // in scope 0 at ui/impl-trait/issues/issue-104815.rs:50:9: 50:13
-    let mut _3: impl std::iter::Iterator<Item = &It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:51:24: 51:38
-    let mut _4: &Data;                   // in scope 0 at ui/impl-trait/issues/issue-104815.rs:51:24: 51:38
-    let mut _5: std::vec::Vec<std::string::String>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 57:29
-    let mut _6: std::iter::Map<std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 56:25
-    let mut _7: std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 55:48
-    let mut _8: std::slice::Iter<'_, &str>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-    let mut _9: &[&str];                 // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-    let mut _10: &[&str; 2];             // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-    let mut _11: [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:14: 55:47
-    let mut _12: &impl Resolver + '_;    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:14: 55:47
-    let mut _13: [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:56:14: 56:24
-    let mut _15: impl std::iter::Iterator<Item = &It>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:59:25: 59:39
-    let mut _16: &Data;                  // in scope 0 at ui/impl-trait/issues/issue-104815.rs:59:25: 59:39
-    let mut _17: std::vec::Vec<std::string::String>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 65:29
-    let mut _18: std::iter::Map<std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 64:25
-    let mut _19: std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 63:48
-    let mut _20: std::slice::Iter<'_, &str>; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-    let mut _21: &[&str];                // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-    let mut _22: &[&str; 2];             // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-    let mut _23: [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:14: 63:47
-    let mut _24: &impl Resolver + '_;    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:14: 63:47
-    let mut _25: [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]; // in scope 0 at ui/impl-trait/issues/issue-104815.rs:64:14: 64:24
+    let mut _0: ();
+    let _1: Data;
+    let mut _3: impl std::iter::Iterator<Item = &It>;
+    let mut _4: &Data;
+    let mut _5: std::vec::Vec<std::string::String>;
+    let mut _6: std::iter::Map<std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>;
+    let mut _7: std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>;
+    let mut _8: std::slice::Iter<'_, &str>;
+    let mut _9: &[&str];
+    let mut _10: [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18];
+    let mut _11: &impl Resolver + '_;
+    let mut _13: impl std::iter::Iterator<Item = &It>;
+    let mut _14: &Data;
+    let mut _15: std::vec::Vec<std::string::String>;
+    let mut _16: std::iter::Map<std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>;
+    let mut _17: std::iter::Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>;
+    let mut _18: std::slice::Iter<'_, &str>;
+    let mut _19: &[&str];
+    let mut _20: [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18];
+    let mut _21: &impl Resolver + '_;
     scope 1 {
-        debug data => _1;                // in scope 1 at ui/impl-trait/issues/issue-104815.rs:50:9: 50:13
-        let _2: impl Resolver + '_;      // in scope 1 at ui/impl-trait/issues/issue-104815.rs:51:9: 51:17
+        debug data => _1;
+        let _2: impl Resolver + '_;
         scope 2 {
-            debug resolver => _2;        // in scope 2 at ui/impl-trait/issues/issue-104815.rs:51:9: 51:17
-            let mut _27: &[&str; 2];     // in scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
+            debug resolver => _2;
+            let mut _23: &[&str; 2];
             scope 3 {
-                let _14: impl Resolver + '_; // in scope 3 at ui/impl-trait/issues/issue-104815.rs:59:9: 59:17
+                let _12: impl Resolver + '_;
                 scope 4 {
-                    debug resolver => _14; // in scope 4 at ui/impl-trait/issues/issue-104815.rs:59:9: 59:17
-                    let mut _26: &[&str; 2]; // in scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
+                    debug resolver => _12;
+                    let mut _22: &[&str; 2];
                     scope 5 {
                     }
                 }
@@ -242,277 +218,186 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Data::new() -> bb1;         // scope 0 at ui/impl-trait/issues/issue-104815.rs:50:16: 50:27
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:50:16: 50:25
-                                         // + literal: Const { ty: fn() -> Data {Data::new}, val: Value(<ZST>) }
+        _1 = Data::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = &_1;                        // scope 1 at ui/impl-trait/issues/issue-104815.rs:51:24: 51:38
-        _3 = Data::content(move _4) -> [return: bb2, unwind: bb17]; // scope 1 at ui/impl-trait/issues/issue-104815.rs:51:24: 51:38
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:51:29: 51:36
-                                         // + literal: Const { ty: for<'a> fn(&'a Data) -> impl Iterator<Item = &'a It> {Data::content}, val: Value(<ZST>) }
+        _4 = &_1;
+        _3 = Data::content(move _4) -> [return: bb2, unwind: bb17];
     }
 
     bb2: {
-        _2 = get::<'_, impl Iterator<Item = &It>>(move _3) -> [return: bb3, unwind: bb17]; // scope 1 at ui/impl-trait/issues/issue-104815.rs:51:20: 51:39
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:51:20: 51:23
-                                         // + literal: Const { ty: fn(impl Iterator<Item = &It>) -> impl Resolver + '_ {get::<'_, impl Iterator<Item = &It>>}, val: Value(<ZST>) }
+        _2 = get::<'_, impl Iterator<Item = &It>>(move _3) -> [return: bb3, unwind: bb17];
     }
 
     bb3: {
-        _27 = const _;                   // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[1])) }
-        _10 = _27;                       // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-        _9 = move _10 as &[&str] (Pointer(Unsize)); // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-        _8 = core::slice::<impl [&str]>::iter(move _9) -> [return: bb4, unwind: bb17]; // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:54:10: 54:14
-                                         // + literal: Const { ty: for<'a> fn(&'a [&str]) -> std::slice::Iter<'a, &str> {core::slice::<impl [&str]>::iter}, val: Value(<ZST>) }
+        _23 = const _;
+        _9 = _23 as &[&str] (Pointer(Unsize));
+        _8 = core::slice::<impl [&str]>::iter(move _9) -> [return: bb4, unwind: bb17];
     }
 
     bb4: {
-        _12 = &_2;                       // scope 2 at ui/impl-trait/issues/issue-104815.rs:55:14: 55:47
-        _11 = [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18] { resolver: move _12 }; // scope 2 at ui/impl-trait/issues/issue-104815.rs:55:14: 55:47
-                                         // closure
-                                         // + def_id: DefId(0:28 ~ issue_104815[123f]::main::{closure#0})
-                                         // + substs: [
-                                         //     i16,
-                                         //     extern "rust-call" fn((&&str,)) -> Container<'_>,
-                                         //     (&impl Resolver + '_,),
-                                         // ]
-        _7 = <std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>(move _8, move _11) -> [return: bb5, unwind: bb17]; // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 55:48
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:55:10: 55:13
-                                         // + literal: Const { ty: fn(std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]) -> Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]> {<std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>}, val: Value(<ZST>) }
+        _11 = &_2;
+        _10 = [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18] { resolver: move _11 };
+        _7 = <std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>(move _8, move _10) -> [return: bb5, unwind: bb17];
     }
 
     bb5: {
-        _6 = <Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>(move _7, move _13) -> [return: bb6, unwind: bb17]; // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 56:25
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:56:10: 56:13
-                                         // + literal: Const { ty: fn(Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]) -> Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]> {<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>}, val: Value(<ZST>) }
+        _6 = <Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>(move _7, const ZeroSized: [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]) -> [return: bb6, unwind: bb17];
     }
 
     bb6: {
-        _5 = <Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]> as Iterator>::collect::<Vec<String>>(move _6) -> [return: bb7, unwind: bb17]; // scope 2 at ui/impl-trait/issues/issue-104815.rs:53:13: 57:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:57:10: 57:17
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]>) -> Vec<String> {<Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]> as Iterator>::collect::<Vec<String>>}, val: Value(<ZST>) }
+        _5 = <Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17]> as Iterator>::collect::<Vec<String>>(move _6) -> [return: bb7, unwind: bb17];
     }
 
     bb7: {
-        drop(_5) -> [return: bb8, unwind: bb17]; // scope 2 at ui/impl-trait/issues/issue-104815.rs:57:29: 57:30
+        drop(_5) -> [return: bb8, unwind: bb17];
     }
 
     bb8: {
-        _16 = &_1;                       // scope 3 at ui/impl-trait/issues/issue-104815.rs:59:25: 59:39
-        _15 = Data::content(move _16) -> [return: bb9, unwind: bb17]; // scope 3 at ui/impl-trait/issues/issue-104815.rs:59:25: 59:39
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:59:30: 59:37
-                                         // + literal: Const { ty: for<'a> fn(&'a Data) -> impl Iterator<Item = &'a It> {Data::content}, val: Value(<ZST>) }
+        _14 = &_1;
+        _13 = Data::content(move _14) -> [return: bb9, unwind: bb17];
     }
 
     bb9: {
-        _14 = get2::<'_, '_, impl Iterator<Item = &It>>(move _15) -> [return: bb10, unwind: bb17]; // scope 3 at ui/impl-trait/issues/issue-104815.rs:59:20: 59:40
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:59:20: 59:24
-                                         // + literal: Const { ty: fn(impl Iterator<Item = &It>) -> impl Resolver + '_ {get2::<'_, '_, impl Iterator<Item = &It>>}, val: Value(<ZST>) }
+        _12 = get2::<'_, '_, impl Iterator<Item = &It>>(move _13) -> [return: bb10, unwind: bb17];
     }
 
     bb10: {
-        _26 = const _;                   // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
-        _22 = _26;                       // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-        _21 = move _22 as &[&str] (Pointer(Unsize)); // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-        _20 = core::slice::<impl [&str]>::iter(move _21) -> [return: bb11, unwind: bb17]; // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:62:10: 62:14
-                                         // + literal: Const { ty: for<'a> fn(&'a [&str]) -> std::slice::Iter<'a, &str> {core::slice::<impl [&str]>::iter}, val: Value(<ZST>) }
+        _22 = const _;
+        _19 = _22 as &[&str] (Pointer(Unsize));
+        _18 = core::slice::<impl [&str]>::iter(move _19) -> [return: bb11, unwind: bb17];
     }
 
     bb11: {
-        _24 = &_14;                      // scope 4 at ui/impl-trait/issues/issue-104815.rs:63:14: 63:47
-        _23 = [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18] { resolver: move _24 }; // scope 4 at ui/impl-trait/issues/issue-104815.rs:63:14: 63:47
-                                         // closure
-                                         // + def_id: DefId(0:30 ~ issue_104815[123f]::main::{closure#2})
-                                         // + substs: [
-                                         //     i16,
-                                         //     extern "rust-call" fn((&&str,)) -> Container<'_>,
-                                         //     (&impl Resolver + '_,),
-                                         // ]
-        _19 = <std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>(move _20, move _23) -> [return: bb12, unwind: bb17]; // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 63:48
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:63:10: 63:13
-                                         // + literal: Const { ty: fn(std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]) -> Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]> {<std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>}, val: Value(<ZST>) }
+        _21 = &_12;
+        _20 = [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18] { resolver: move _21 };
+        _17 = <std::slice::Iter<'_, &str> as Iterator>::map::<Container<'_>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>(move _18, move _20) -> [return: bb12, unwind: bb17];
     }
 
     bb12: {
-        _18 = <Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>(move _19, move _25) -> [return: bb13, unwind: bb17]; // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 64:25
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:64:10: 64:13
-                                         // + literal: Const { ty: fn(Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]) -> Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]> {<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>}, val: Value(<ZST>) }
+        _16 = <Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]> as Iterator>::map::<String, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>(move _17, const ZeroSized: [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]) -> [return: bb13, unwind: bb17];
     }
 
     bb13: {
-        _17 = <Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]> as Iterator>::collect::<Vec<String>>(move _18) -> [return: bb14, unwind: bb17]; // scope 4 at ui/impl-trait/issues/issue-104815.rs:61:13: 65:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:65:10: 65:17
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]>) -> Vec<String> {<Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]> as Iterator>::collect::<Vec<String>>}, val: Value(<ZST>) }
+        _15 = <Map<Map<std::slice::Iter<'_, &str>, [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18]>, [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17]> as Iterator>::collect::<Vec<String>>(move _16) -> [return: bb14, unwind: bb17];
     }
 
     bb14: {
-        drop(_17) -> [return: bb15, unwind: bb17]; // scope 4 at ui/impl-trait/issues/issue-104815.rs:65:29: 65:30
+        drop(_15) -> [return: bb15, unwind: bb17];
     }
 
     bb15: {
-        drop(_1) -> bb16;                // scope 0 at ui/impl-trait/issues/issue-104815.rs:66:1: 66:2
+        drop(_1) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:66:2: 66:2
+        return;
     }
 
     bb17 (cleanup): {
-        drop(_1) -> bb18;                // scope 0 at ui/impl-trait/issues/issue-104815.rs:66:1: 66:2
+        drop(_1) -> [return: bb18, unwind terminate];
     }
 
     bb18 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:49:1: 66:2
+        resume;
     }
 }
 
 promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-    let mut _1: [&str; 2];               // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 61:23
-    let mut _2: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:19: 61:22
-    let mut _3: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:61:19: 61:22
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
+    let mut _2: &str;
+    let mut _3: &str;
 
     bb0: {
-        _3 = const "b";                  // scope 0 at ui/impl-trait/issues/issue-104815.rs:61:19: 61:22
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:61:19: 61:22
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _2 = &(*_3);                     // scope 0 at ui/impl-trait/issues/issue-104815.rs:61:19: 61:22
-        _1 = [const "a", move _2];       // scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 61:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:61:14: 61:17
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:61:13: 62:16
+        _3 = const "b";
+        _2 = &(*_3);
+        _1 = [const "a", move _2];
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-    let mut _1: [&str; 2];               // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 53:23
-    let mut _2: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:19: 53:22
-    let mut _3: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:53:19: 53:22
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
+    let mut _2: &str;
+    let mut _3: &str;
 
     bb0: {
-        _3 = const "b";                  // scope 0 at ui/impl-trait/issues/issue-104815.rs:53:19: 53:22
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:53:19: 53:22
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _2 = &(*_3);                     // scope 0 at ui/impl-trait/issues/issue-104815.rs:53:19: 53:22
-        _1 = [const "a", move _2];       // scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 53:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:53:14: 53:17
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:53:13: 54:16
+        _3 = const "b";
+        _2 = &(*_3);
+        _1 = [const "a", move _2];
+        _0 = &_1;
+        return;
     }
 }
 
 fn main::{closure#0}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:55:14: 55:18], _2: &&str) -> Container<'_> {
-    debug resolver => (*((*_1).0: &impl Resolver + '_)); // in scope 0 at ui/impl-trait/issues/issue-104815.rs:51:9: 51:17
-    let mut _0: Container<'_>;           // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:19: 55:19
-    let _3: &str;                        // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:16: 55:17
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:34: 55:35
-    let mut _5: &impl Resolver + '_;     // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:37: 55:46
-    let mut _6: &impl Resolver + '_;     // in scope 0 at ui/impl-trait/issues/issue-104815.rs:55:14: 55:47
+    debug resolver => (*((*_1).0: &impl Resolver + '_));
+    let mut _0: Container<'_>;
+    let _3: &str;
+    let mut _4: &impl Resolver + '_;
     scope 1 {
-        debug n => _3;                   // in scope 1 at ui/impl-trait/issues/issue-104815.rs:55:16: 55:17
+        debug n => _3;
     }
 
     bb0: {
-        _3 = (*_2);                      // scope 0 at ui/impl-trait/issues/issue-104815.rs:55:16: 55:17
-        _4 = _3;                         // scope 1 at ui/impl-trait/issues/issue-104815.rs:55:34: 55:35
-        _6 = deref_copy ((*_1).0: &impl Resolver + '_); // scope 1 at ui/impl-trait/issues/issue-104815.rs:55:37: 55:46
-        _5 = _6;                         // scope 1 at ui/impl-trait/issues/issue-104815.rs:55:37: 55:46
-        _0 = Container::<'_>::new::<&impl Resolver + '_>(move _4, move _5) -> bb1; // scope 1 at ui/impl-trait/issues/issue-104815.rs:55:19: 55:47
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:55:19: 55:33
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: for<'a> fn(&'a str, &impl Resolver + '_) -> Container<'_> {Container::<'_>::new::<&impl Resolver + '_>}, val: Value(<ZST>) }
+        _3 = (*_2);
+        _4 = deref_copy ((*_1).0: &impl Resolver + '_);
+        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:55:47: 55:47
+        return;
     }
 }
 
 fn main::{closure#1}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:56:14: 56:17], _2: Container<'_>) -> String {
-    debug c => _2;                       // in scope 0 at ui/impl-trait/issues/issue-104815.rs:56:15: 56:16
-    let mut _0: std::string::String;     // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:56:18: 56:18
+    debug c => _2;
+    let mut _0: std::string::String;
 
     bb0: {
-        _0 = move (_2.0: std::string::String); // scope 0 at ui/impl-trait/issues/issue-104815.rs:56:18: 56:24
-        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> bb1; // scope 0 at ui/impl-trait/issues/issue-104815.rs:56:23: 56:24
+        _0 = move (_2.0: std::string::String);
+        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:56:24: 56:24
+        return;
     }
 }
 
 fn main::{closure#2}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:63:14: 63:18], _2: &&str) -> Container<'_> {
-    debug resolver => (*((*_1).0: &impl Resolver + '_)); // in scope 0 at ui/impl-trait/issues/issue-104815.rs:59:9: 59:17
-    let mut _0: Container<'_>;           // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:19: 63:19
-    let _3: &str;                        // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:16: 63:17
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:34: 63:35
-    let mut _5: &impl Resolver + '_;     // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:37: 63:46
-    let mut _6: &impl Resolver + '_;     // in scope 0 at ui/impl-trait/issues/issue-104815.rs:63:14: 63:47
+    debug resolver => (*((*_1).0: &impl Resolver + '_));
+    let mut _0: Container<'_>;
+    let _3: &str;
+    let mut _4: &impl Resolver + '_;
     scope 1 {
-        debug n => _3;                   // in scope 1 at ui/impl-trait/issues/issue-104815.rs:63:16: 63:17
+        debug n => _3;
     }
 
     bb0: {
-        _3 = (*_2);                      // scope 0 at ui/impl-trait/issues/issue-104815.rs:63:16: 63:17
-        _4 = _3;                         // scope 1 at ui/impl-trait/issues/issue-104815.rs:63:34: 63:35
-        _6 = deref_copy ((*_1).0: &impl Resolver + '_); // scope 1 at ui/impl-trait/issues/issue-104815.rs:63:37: 63:46
-        _5 = _6;                         // scope 1 at ui/impl-trait/issues/issue-104815.rs:63:37: 63:46
-        _0 = Container::<'_>::new::<&impl Resolver + '_>(move _4, move _5) -> bb1; // scope 1 at ui/impl-trait/issues/issue-104815.rs:63:19: 63:47
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-104815.rs:63:19: 63:33
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: for<'a> fn(&'a str, &impl Resolver + '_) -> Container<'_> {Container::<'_>::new::<&impl Resolver + '_>}, val: Value(<ZST>) }
+        _3 = (*_2);
+        _4 = deref_copy ((*_1).0: &impl Resolver + '_);
+        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:63:47: 63:47
+        return;
     }
 }
 
 fn main::{closure#3}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:64:14: 64:17], _2: Container<'_>) -> String {
-    debug c => _2;                       // in scope 0 at ui/impl-trait/issues/issue-104815.rs:64:15: 64:16
-    let mut _0: std::string::String;     // return place in scope 0 at ui/impl-trait/issues/issue-104815.rs:64:18: 64:18
+    debug c => _2;
+    let mut _0: std::string::String;
 
     bb0: {
-        _0 = move (_2.0: std::string::String); // scope 0 at ui/impl-trait/issues/issue-104815.rs:64:18: 64:24
-        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> bb1; // scope 0 at ui/impl-trait/issues/issue-104815.rs:64:23: 64:24
+        _0 = move (_2.0: std::string::String);
+        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-104815.rs:64:24: 64:24
+        return;
     }
 }

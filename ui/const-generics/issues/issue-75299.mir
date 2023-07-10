@@ -1,56 +1,53 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-75299.rs:3:11: 3:11
-    let _1: [u8; 1];                     // in scope 0 at ui/const-generics/issues/issue-75299.rs:7:9: 7:11
+    let mut _0: ();
+    let _1: [u8; 1];
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/const-generics/issues/issue-75299.rs:7:9: 7:11
+        debug _x => _1;
     }
 
     bb0: {
-        _1 = foo::<1>() -> bb1;          // scope 0 at ui/const-generics/issues/issue-75299.rs:7:14: 7:24
-                                         // mir::Constant
-                                         // + span: ui/const-generics/issues/issue-75299.rs:7:14: 7:22
-                                         // + literal: Const { ty: fn() -> [u8; 1] {foo::<1>}, val: Value(<ZST>) }
+        _1 = foo::<1>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/issues/issue-75299.rs:8:2: 8:2
+        return;
     }
 }
 
 fn foo() -> [u8; N] {
-    let mut _0: [u8; N];                 // return place in scope 0 at ui/const-generics/issues/issue-75299.rs:4:33: 4:40
+    let mut _0: [u8; N];
 
     bb0: {
-        _0 = [const 0_u8; N];            // scope 0 at ui/const-generics/issues/issue-75299.rs:5:9: 5:15
-        return;                          // scope 0 at ui/const-generics/issues/issue-75299.rs:6:6: 6:6
+        _0 = [const 0_u8; N];
+        return;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-75299.rs:4:38: 4:39
+    let mut _0: usize;
 
     bb0: {
-        _0 = const N;                    // scope 0 at ui/const-generics/issues/issue-75299.rs:4:38: 4:39
-        return;                          // scope 0 at ui/const-generics/issues/issue-75299.rs:4:38: 4:39
+        _0 = const N;
+        return;
     }
 }
 
 foo::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-75299.rs:5:13: 5:14
+    let mut _0: usize;
 
     bb0: {
-        _0 = const N;                    // scope 0 at ui/const-generics/issues/issue-75299.rs:5:13: 5:14
-        return;                          // scope 0 at ui/const-generics/issues/issue-75299.rs:5:13: 5:14
+        _0 = const N;
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-75299.rs:7:20: 7:21
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/const-generics/issues/issue-75299.rs:7:20: 7:21
-        return;                          // scope 0 at ui/const-generics/issues/issue-75299.rs:7:20: 7:21
+        _0 = const 1_usize;
+        return;
     }
 }

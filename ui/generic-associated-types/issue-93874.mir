@@ -1,137 +1,107 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/generic-associated-types/issue-93874.rs:9:1: 9:29>::build(_1: IdentityBuild, _2: O) -> O {
-    debug self => _1;                    // in scope 0 at ui/generic-associated-types/issue-93874.rs:11:17: 11:21
-    debug input => _2;                   // in scope 0 at ui/generic-associated-types/issue-93874.rs:11:23: 11:28
-    let mut _0: O;                       // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:11:36: 11:51
+    debug self => const IdentityBuild;
+    debug input => _2;
+    let mut _0: O;
 
     bb0: {
-        _0 = move _2;                    // scope 0 at ui/generic-associated-types/issue-93874.rs:12:9: 12:14
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:13:6: 13:6
+        _0 = move _2;
+        return;
     }
 }
 
 fn a() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:16:8: 16:8
-    let _1: u8;                          // in scope 0 at ui/generic-associated-types/issue-93874.rs:17:9: 17:11
-    let mut _2: IdentityBuild;           // in scope 0 at ui/generic-associated-types/issue-93874.rs:17:18: 17:31
+    let mut _0: ();
+    let _1: u8;
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/generic-associated-types/issue-93874.rs:17:9: 17:11
+        debug _x => _1;
     }
 
     bb0: {
-        _1 = <IdentityBuild as Build>::build::<u8>(move _2, const 10_u8) -> bb1; // scope 0 at ui/generic-associated-types/issue-93874.rs:17:18: 17:41
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:17:32: 17:37
-                                         // + literal: Const { ty: fn(IdentityBuild, u8) -> <IdentityBuild as Build>::Output<u8> {<IdentityBuild as Build>::build::<u8>}, val: Value(<ZST>) }
+        _1 = <IdentityBuild as Build>::build::<u8>(const IdentityBuild, const 10_u8) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:18:2: 18:2
+        return;
     }
 }
 
 fn b() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:20:8: 20:8
-    let _1: std::vec::Vec<u8>;           // in scope 0 at ui/generic-associated-types/issue-93874.rs:21:9: 21:11
-    let mut _2: IdentityBuild;           // in scope 0 at ui/generic-associated-types/issue-93874.rs:21:23: 21:36
-    let mut _3: std::vec::Vec<u8>;       // in scope 0 at ui/generic-associated-types/issue-93874.rs:21:43: 21:53
+    let mut _0: ();
+    let _1: std::vec::Vec<u8>;
+    let mut _2: std::vec::Vec<u8>;
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/generic-associated-types/issue-93874.rs:21:9: 21:11
+        debug _x => _1;
     }
 
     bb0: {
-        _3 = Vec::<u8>::new() -> bb1;    // scope 0 at ui/generic-associated-types/issue-93874.rs:21:43: 21:53
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:21:43: 21:51
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn() -> Vec<u8> {Vec::<u8>::new}, val: Value(<ZST>) }
+        _2 = Vec::<u8>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = <IdentityBuild as Build>::build::<Vec<u8>>(move _2, move _3) -> bb2; // scope 0 at ui/generic-associated-types/issue-93874.rs:21:23: 21:54
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:21:37: 21:42
-                                         // + literal: Const { ty: fn(IdentityBuild, Vec<u8>) -> <IdentityBuild as Build>::Output<Vec<u8>> {<IdentityBuild as Build>::build::<Vec<u8>>}, val: Value(<ZST>) }
+        _1 = <IdentityBuild as Build>::build::<Vec<u8>>(const IdentityBuild, move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/generic-associated-types/issue-93874.rs:22:1: 22:2
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:22:2: 22:2
+        return;
     }
 }
 
 fn c() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:24:8: 24:8
-    let mut _1: [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]; // in scope 0 at ui/generic-associated-types/issue-93874.rs:25:9: 25:14
-    let mut _2: IdentityBuild;           // in scope 0 at ui/generic-associated-types/issue-93874.rs:25:17: 25:30
-    let mut _3: [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]; // in scope 0 at ui/generic-associated-types/issue-93874.rs:25:37: 25:42
-    let _4: ();                          // in scope 0 at ui/generic-associated-types/issue-93874.rs:26:5: 26:10
-    let mut _5: &[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]; // in scope 0 at ui/generic-associated-types/issue-93874.rs:26:5: 26:8
-    let mut _6: ();                      // in scope 0 at ui/generic-associated-types/issue-93874.rs:26:5: 26:10
+    let mut _0: ();
+    let mut _1: [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39];
+    let _2: ();
+    let mut _3: &[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39];
     scope 1 {
-        debug f => _1;                   // in scope 1 at ui/generic-associated-types/issue-93874.rs:25:9: 25:14
+        debug f => const ZeroSized: [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39];
     }
 
     bb0: {
-        _1 = <IdentityBuild as Build>::build::<[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]>(move _2, move _3) -> bb1; // scope 0 at ui/generic-associated-types/issue-93874.rs:25:17: 25:43
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:25:31: 25:36
-                                         // + literal: Const { ty: fn(IdentityBuild, [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]) -> <IdentityBuild as Build>::Output<[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]> {<IdentityBuild as Build>::build::<[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]>}, val: Value(<ZST>) }
+        _1 = <IdentityBuild as Build>::build::<[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]>(const IdentityBuild, const ZeroSized: [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = &_1;                        // scope 1 at ui/generic-associated-types/issue-93874.rs:26:5: 26:8
-        _4 = <[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39] as Fn<()>>::call(move _5, move _6) -> bb2; // scope 1 at ui/generic-associated-types/issue-93874.rs:26:5: 26:10
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:26:5: 26:8
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a [closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39], ()) -> <[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39] as FnOnce<()>>::Output {<[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39] as Fn<()>>::call}, val: Value(<ZST>) }
+        _3 = &_1;
+        _2 = <[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39] as Fn<()>>::call(move _3, const ()) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:27:2: 27:2
+        return;
     }
 }
 
 fn c::{closure#0}(_1: &[closure@ui/generic-associated-types/issue-93874.rs:25:37: 25:39]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:25:40: 25:40
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:25:42: 25:42
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93874.rs:29:15: 29:15
-    let _1: ();                          // in scope 0 at ui/generic-associated-types/issue-93874.rs:30:5: 30:8
-    let _2: ();                          // in scope 0 at ui/generic-associated-types/issue-93874.rs:31:5: 31:8
-    let _3: ();                          // in scope 0 at ui/generic-associated-types/issue-93874.rs:32:5: 32:8
+    let mut _0: ();
+    let _1: ();
+    let _2: ();
+    let _3: ();
 
     bb0: {
-        _1 = a() -> bb1;                 // scope 0 at ui/generic-associated-types/issue-93874.rs:30:5: 30:8
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:30:5: 30:6
-                                         // + literal: Const { ty: fn() {a}, val: Value(<ZST>) }
+        _1 = a() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = b() -> bb2;                 // scope 0 at ui/generic-associated-types/issue-93874.rs:31:5: 31:8
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:31:5: 31:6
-                                         // + literal: Const { ty: fn() {b}, val: Value(<ZST>) }
+        _2 = b() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = c() -> bb3;                 // scope 0 at ui/generic-associated-types/issue-93874.rs:32:5: 32:8
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93874.rs:32:5: 32:6
-                                         // + literal: Const { ty: fn() {c}, val: Value(<ZST>) }
+        _3 = c() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93874.rs:33:2: 33:2
+        return;
     }
 }

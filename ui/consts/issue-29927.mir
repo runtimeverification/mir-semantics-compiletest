@@ -1,46 +1,43 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927.rs:6:17: 6:22
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 5_usize;              // scope 0 at ui/consts/issue-29927.rs:7:5: 7:6
-        return;                          // scope 0 at ui/consts/issue-29927.rs:8:2: 8:2
+        _0 = const 5_usize;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn f() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927.rs:6:17: 6:22
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 5_usize;              // scope 0 at ui/consts/issue-29927.rs:7:5: 7:6
-        return;                          // scope 0 at ui/consts/issue-29927.rs:8:2: 8:2
+        _0 = const 5_usize;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-29927.rs:9:11: 9:11
+    let mut _0: ();
     scope 1 {
     }
 
     bb0: {
-        return;                          // scope 0 at ui/consts/issue-29927.rs:11:2: 11:2
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-29927.rs:10:17: 10:20
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/issue-29927.rs:10:17: 10:20
-        _0 = f() -> bb1;                 // scope 0 at ui/consts/issue-29927.rs:10:17: 10:20
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-29927.rs:10:17: 10:18
-                                         // + literal: Const { ty: fn() -> usize {f}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = f() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/issue-29927.rs:10:17: 10:20
+        return;
     }
 }

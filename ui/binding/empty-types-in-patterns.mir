@@ -1,23 +1,18 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: !) -> () {
-    debug z => _1;                       // in scope 0 at ui/binding/empty-types-in-patterns.rs:11:8: 11:9
-    let mut _0: ();                      // return place in scope 0 at ui/binding/empty-types-in-patterns.rs:11:14: 11:14
-    let _2: std::result::Result<!, !>;   // in scope 0 at ui/binding/empty-types-in-patterns.rs:12:9: 12:10
+    debug z => const ZeroSized: !;
+    let mut _0: ();
     scope 1 {
-        debug x => _2;                   // in scope 1 at ui/binding/empty-types-in-patterns.rs:12:9: 12:10
-        let _3: !;                       // in scope 1 at ui/binding/empty-types-in-patterns.rs:14:12: 14:14
+        debug x => const Result::<!, !>::Ok(ZeroSized: !);
         scope 2 {
-            debug _y => _3;              // in scope 2 at ui/binding/empty-types-in-patterns.rs:14:12: 14:14
-            let _4: !;                   // in scope 2 at ui/binding/empty-types-in-patterns.rs:15:13: 15:15
+            debug _y => const ZeroSized: !;
             scope 3 {
-                debug _y => _4;          // in scope 3 at ui/binding/empty-types-in-patterns.rs:15:13: 15:15
-                let _5: [!; 1];          // in scope 3 at ui/binding/empty-types-in-patterns.rs:17:9: 17:10
+                debug _y => const ZeroSized: !;
                 scope 4 {
-                    debug x => _5;       // in scope 4 at ui/binding/empty-types-in-patterns.rs:17:9: 17:10
-                    let _6: !;           // in scope 4 at ui/binding/empty-types-in-patterns.rs:21:10: 21:11
+                    debug x => const [ZeroSized: !];
                     scope 5 {
-                        debug q => _6;   // in scope 5 at ui/binding/empty-types-in-patterns.rs:21:10: 21:11
+                        debug q => const ZeroSized: !;
                     }
                 }
             }
@@ -25,220 +20,193 @@ fn foo(_1: !) -> () {
     }
 
     bb0: {
-        unreachable;                     // scope 0 at ui/binding/empty-types-in-patterns.rs:12:30: 12:31
+        unreachable;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/binding/empty-types-in-patterns.rs:17:17: 17:18
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/binding/empty-types-in-patterns.rs:17:17: 17:18
-        return;                          // scope 0 at ui/binding/empty-types-in-patterns.rs:17:17: 17:18
+        _0 = const 1_usize;
+        return;
     }
 }
 
 fn bar(_1: &[!]) -> () {
-    debug nevers => _1;                  // in scope 0 at ui/binding/empty-types-in-patterns.rs:25:8: 25:14
-    let mut _0: ();                      // return place in scope 0 at ui/binding/empty-types-in-patterns.rs:25:22: 25:22
-    let mut _2: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-    let mut _3: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-    let mut _4: bool;                    // in scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-    let mut _5: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-    let mut _6: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-    let mut _7: bool;                    // in scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-    let mut _8: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-    let mut _9: usize;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-    let mut _10: bool;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-    let mut _11: usize;                  // in scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
-    let mut _12: usize;                  // in scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
-    let mut _13: bool;                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
+    debug nevers => _1;
+    let mut _0: ();
+    let mut _2: usize;
+    let mut _3: usize;
+    let mut _4: bool;
+    let mut _5: usize;
+    let mut _6: usize;
+    let mut _7: bool;
+    let mut _8: usize;
+    let mut _9: usize;
+    let mut _10: bool;
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
 
     bb0: {
-        _2 = Len((*_1));                 // scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-        _3 = const 0_usize;              // scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-        _4 = Eq(move _2, move _3);       // scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
-        switchInt(move _4) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/binding/empty-types-in-patterns.rs:27:10: 27:12
+        _2 = Len((*_1));
+        _3 = const 0_usize;
+        _4 = Eq(move _2, move _3);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _11 = Len((*_1));                // scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
-        _12 = const 0_usize;             // scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
-        _13 = Eq(move _11, move _12);    // scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
-        switchInt(move _13) -> [0: bb3, otherwise: bb6]; // scope 0 at ui/binding/empty-types-in-patterns.rs:31:10: 31:12
+        _11 = Len((*_1));
+        _12 = const 0_usize;
+        _13 = Eq(move _11, move _12);
+        switchInt(move _13) -> [0: bb3, otherwise: bb5];
     }
 
     bb2: {
-        unreachable;                     // scope 0 at ui/binding/empty-types-in-patterns.rs:26:11: 26:17
+        unreachable;
     }
 
     bb3: {
-        _8 = Len((*_1));                 // scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-        _9 = const 1_usize;              // scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-        _10 = Eq(move _8, move _9);      // scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
-        switchInt(move _10) -> [0: bb4, otherwise: bb6]; // scope 0 at ui/binding/empty-types-in-patterns.rs:32:10: 32:13
+        _8 = Len((*_1));
+        _9 = const 1_usize;
+        _10 = Eq(move _8, move _9);
+        switchInt(move _10) -> [0: bb4, otherwise: bb5];
     }
 
     bb4: {
-        _5 = Len((*_1));                 // scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-        _6 = const 3_usize;              // scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-        _7 = Ge(move _5, move _6);       // scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
-        switchInt(move _7) -> [0: bb5, otherwise: bb6]; // scope 0 at ui/binding/empty-types-in-patterns.rs:33:10: 33:23
+        _5 = Len((*_1));
+        _6 = const 3_usize;
+        _7 = Ge(move _5, move _6);
+        switchInt(move _7) -> [0: bb2, otherwise: bb5];
     }
 
     bb5: {
-        unreachable;                     // scope 0 at ui/binding/empty-types-in-patterns.rs:30:11: 30:17
-    }
-
-    bb6: {
-        return;                          // scope 0 at ui/binding/empty-types-in-patterns.rs:35:2: 35:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/empty-types-in-patterns.rs:37:11: 37:11
-    let _1: std::result::Result<u32, !>; // in scope 0 at ui/binding/empty-types-in-patterns.rs:38:9: 38:10
-    let mut _3: (&u32, &u32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _4: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _5: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _10: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _11: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _13: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _14: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _15: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _16: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _17: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _18: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let _25: ();                         // in scope 0 at ui/binding/empty-types-in-patterns.rs:58:5: 58:13
-    let mut _26: &[!];                   // in scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-    let mut _27: &[!; 0];                // in scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-    let _28: &[!; 0];                    // in scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
+    let mut _0: ();
+    let _1: std::result::Result<u32, !>;
+    let mut _3: (&u32, &u32);
+    let mut _4: &u32;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: u32;
+    let mut _10: u32;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _17: isize;
+    let mut _19: !;
+    let _20: ();
+    let mut _21: &[!];
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/binding/empty-types-in-patterns.rs:38:9: 38:10
-        let _2: u32;                     // in scope 1 at ui/binding/empty-types-in-patterns.rs:39:12: 39:13
+        debug x => _1;
+        let _2: u32;
         scope 2 {
-            debug y => _2;               // in scope 2 at ui/binding/empty-types-in-patterns.rs:39:12: 39:13
-            let _6: &u32;                // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _7: &u32;                // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _20: u32;                // in scope 2 at ui/binding/empty-types-in-patterns.rs:44:12: 44:13
-            let _21: u32;                // in scope 2 at ui/binding/empty-types-in-patterns.rs:48:12: 48:13
-            let _22: !;                  // in scope 2 at ui/binding/empty-types-in-patterns.rs:49:13: 49:14
-            let _23: std::result::Result<u32, &!>; // in scope 2 at ui/binding/empty-types-in-patterns.rs:52:9: 52:10
-            let mut _30: &u32;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+            debug y => _2;
+            let _5: &u32;
+            let _6: &u32;
+            let _14: u32;
+            let _15: u32;
+            let _16: std::result::Result<u32, &!>;
+            let mut _23: &u32;
             scope 3 {
-                debug left_val => _6;    // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _7;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _12: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _5;
+                debug right_val => _6;
+                let _11: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _12;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _11;
                 }
             }
             scope 5 {
-                debug y => _20;          // in scope 5 at ui/binding/empty-types-in-patterns.rs:44:12: 44:13
+                debug y => _14;
             }
             scope 6 {
-                debug y => _21;          // in scope 6 at ui/binding/empty-types-in-patterns.rs:48:12: 48:13
+                debug y => _15;
             }
             scope 7 {
-                debug e => _22;          // in scope 7 at ui/binding/empty-types-in-patterns.rs:49:13: 49:14
+                debug e => const ZeroSized: !;
             }
             scope 8 {
-                debug x => _23;          // in scope 8 at ui/binding/empty-types-in-patterns.rs:52:9: 52:10
-                let _24: u32;            // in scope 8 at ui/binding/empty-types-in-patterns.rs:54:12: 54:13
-                let mut _29: &[!; 0];    // in scope 8 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
+                debug x => _16;
+                let _18: u32;
+                let mut _22: &[!; 0];
                 scope 9 {
-                    debug y => _24;      // in scope 9 at ui/binding/empty-types-in-patterns.rs:54:12: 54:13
+                    debug y => _18;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = const Result::<u32, !>::Ok(123_u32); // scope 0 at ui/binding/empty-types-in-patterns.rs:38:29: 38:36
-                                         // mir::Constant
-                                         // + span: ui/binding/empty-types-in-patterns.rs:38:29: 38:36
-                                         // + literal: Const { ty: Result<u32, !>, val: Value(Scalar(0x0000007b)) }
-        _2 = ((_1 as Ok).0: u32);        // scope 1 at ui/binding/empty-types-in-patterns.rs:39:12: 39:13
-        _30 = const _;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[1])) }
-        _4 = _30;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _5 = &_2;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _3 = (move _4, move _5);         // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _6 = (_3.0: &u32);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _7 = (_3.1: &u32);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _10 = const 123_u32;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _11 = (*_7);                     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _9 = Eq(move _10, move _11);     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _8 = Not(move _9);               // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _8) -> [0: bb2, otherwise: bb1]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _1 = Result::<u32, !>::Ok(const 123_u32);
+        _2 = ((_1 as Ok).0: u32);
+        _23 = const _;
+        _4 = &_2;
+        _3 = (_23, move _4);
+        _5 = (_3.0: &u32);
+        _6 = (_3.1: &u32);
+        _9 = (*_5);
+        _10 = (*_6);
+        _8 = Eq(move _9, move _10);
+        _7 = Not(move _8);
+        switchInt(move _7) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _12 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _14 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _16 = _6;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _15 = _16;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _18 = _7;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _17 = _18;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _19 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _13 = core::panicking::assert_failed::<u32, u32>(move _14, move _15, move _17, move _19); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<u32, u32>(move _11, _5, _6, move _13) -> unwind continue;
     }
 
     bb2: {
-        _20 = ((_1 as Ok).0: u32);       // scope 2 at ui/binding/empty-types-in-patterns.rs:44:12: 44:13
-        _21 = ((_1 as Ok).0: u32);       // scope 2 at ui/binding/empty-types-in-patterns.rs:48:12: 48:13
-        _23 = Result::<u32, &!>::Ok(const 123_u32); // scope 2 at ui/binding/empty-types-in-patterns.rs:52:30: 52:37
-        _24 = ((_23 as Ok).0: u32);      // scope 8 at ui/binding/empty-types-in-patterns.rs:54:12: 54:13
-        _29 = const _;                   // scope 8 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-                                         // mir::Constant
-                                         // + span: ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-                                         // + literal: Const { ty: &[!; 0], val: Unevaluated(main, [], Some(promoted[0])) }
-        _28 = _29;                       // scope 8 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-        _27 = _28;                       // scope 8 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-        _26 = move _27 as &[!] (Pointer(Unsize)); // scope 8 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-        _25 = bar(move _26) -> bb3;      // scope 8 at ui/binding/empty-types-in-patterns.rs:58:5: 58:13
-                                         // mir::Constant
-                                         // + span: ui/binding/empty-types-in-patterns.rs:58:5: 58:8
-                                         // + literal: Const { ty: for<'a> fn(&'a [!]) {bar}, val: Value(<ZST>) }
+        _14 = ((_1 as Ok).0: u32);
+        _15 = ((_1 as Ok).0: u32);
+        _16 = Result::<u32, &!>::Ok(const 123_u32);
+        _17 = discriminant(_16);
+        switchInt(move _17) -> [0: bb4, 1: bb5, otherwise: bb3];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/empty-types-in-patterns.rs:59:2: 59:2
+        unreachable;
+    }
+
+    bb4: {
+        _18 = ((_16 as Ok).0: u32);
+        _22 = const _;
+        _21 = _22 as &[!] (Pointer(Unsize));
+        _20 = bar(move _21) -> [return: bb6, unwind continue];
+    }
+
+    bb5: {
+        _19 = core::panicking::panic(const "not implemented") -> unwind continue;
+    }
+
+    bb6: {
+        return;
     }
 }
 
 promoted[0] in main: &[!; 0] = {
-    let mut _0: &[!; 0];                 // return place in scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-    let mut _1: [!; 0];                  // in scope 0 at ui/binding/empty-types-in-patterns.rs:58:10: 58:12
+    let mut _0: &[!; 0];
+    let mut _1: [!; 0];
 
     bb0: {
-        _1 = [];                         // scope 0 at ui/binding/empty-types-in-patterns.rs:58:10: 58:12
-        _0 = &_1;                        // scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
-        return;                          // scope 0 at ui/binding/empty-types-in-patterns.rs:58:9: 58:12
+        _1 = [];
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: u32;                     // in scope 0 at ui/binding/empty-types-in-patterns.rs:41:16: 41:19
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 123_u32;              // scope 0 at ui/binding/empty-types-in-patterns.rs:41:16: 41:19
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const 123_u32;
+        _0 = &_1;
+        return;
     }
 }

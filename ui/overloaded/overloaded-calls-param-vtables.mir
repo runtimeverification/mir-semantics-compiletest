@@ -1,123 +1,100 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/overloaded/overloaded-calls-param-vtables.rs:14:1: 14:52>::call(_1: &G<A>, _2: (A,)) -> i32 {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:15:32: 15:37
-    let mut _0: i32;                     // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:15:56: 15:59
-    let _3: A;                           // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:15:40: 15:43
-    let mut _4: A;                       // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:16:9: 16:12
+    debug self => _1;
+    let mut _0: i32;
+    let _3: A;
     scope 1 {
-        debug arg => _3;                 // in scope 1 at ui/overloaded/overloaded-calls-param-vtables.rs:15:40: 15:43
+        debug arg => _3;
     }
 
     bb0: {
-        _3 = move (_2.0: A);             // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:15:40: 15:43
-        _4 = move _3;                    // scope 1 at ui/overloaded/overloaded-calls-param-vtables.rs:16:9: 16:12
-        _0 = <A as Add<i32>>::add(move _4, const 1_i32) -> bb1; // scope 1 at ui/overloaded/overloaded-calls-param-vtables.rs:16:9: 16:19
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-calls-param-vtables.rs:16:13: 16:16
-                                         // + literal: Const { ty: fn(A, i32) -> <A as Add<i32>>::Output {<A as Add<i32>>::add}, val: Value(<ZST>) }
+        _3 = move (_2.0: A);
+        _0 = <A as Add<i32>>::add(move _3, const 1_i32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:17:6: 17:6
+        return;
     }
 }
 
 fn <impl at ui/overloaded/overloaded-calls-param-vtables.rs:20:1: 20:55>::call_mut(_1: &mut G<A>, _2: (A,)) -> i32 {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:36: 21:45
-    debug args => _2;                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:47: 21:51
-    let mut _0: i32;                     // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:62: 21:65
-    let mut _3: &G<A>;                   // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:68: 21:83
-    let mut _4: (A,);                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:78: 21:82
+    debug self => _1;
+    debug args => _2;
+    let mut _0: i32;
+    let mut _3: &G<A>;
 
     bb0: {
-        _3 = &(*_1);                     // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:68: 21:83
-        _4 = move _2;                    // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:78: 21:82
-        _0 = <G<A> as Fn<(A,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:68: 21:83
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-calls-param-vtables.rs:21:73: 21:77
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a G<A>, (A,)) -> <G<A> as FnOnce<(A,)>>::Output {<G<A> as Fn<(A,)>>::call}, val: Value(<ZST>) }
+        _3 = &(*_1);
+        _0 = <G<A> as Fn<(A,)>>::call(move _3, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:21:85: 21:85
+        return;
     }
 }
 
 fn <impl at ui/overloaded/overloaded-calls-param-vtables.rs:24:1: 24:56>::call_once(_1: G<A>, _2: (A,)) -> i32 {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:37: 26:41
-    debug args => _2;                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:43: 26:47
-    let mut _0: i32;                     // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:58: 26:61
-    let mut _3: &G<A>;                   // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:64: 26:79
-    let mut _4: (A,);                    // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:74: 26:78
+    debug self => const ZeroSized: G<A>;
+    debug args => _2;
+    let mut _0: i32;
+    let mut _3: &G<A>;
 
     bb0: {
-        _3 = &_1;                        // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:64: 26:79
-        _4 = move _2;                    // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:74: 26:78
-        _0 = <G<A> as Fn<(A,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:64: 26:79
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-calls-param-vtables.rs:26:69: 26:73
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a G<A>, (A,)) -> <G<A> as FnOnce<(A,)>>::Output {<G<A> as Fn<(A,)>>::call}, val: Value(<ZST>) }
+        _3 = &_1;
+        _0 = <G<A> as Fn<(A,)>>::call(move _3, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:26:81: 26:81
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:29:11: 29:11
-    let _1: i32;                         // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:24
-    let mut _2: &G<i32>;                 // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-    let mut _3: (i32,);                  // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:24
-    let mut _4: &G<i32>;                 // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
+    let mut _0: ();
+    let _1: i32;
+    let mut _2: (i32,);
+    let mut _3: &G<i32>;
 
     bb0: {
-        _4 = const _;                    // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-                                         // + literal: Const { ty: &G<i32>, val: Unevaluated(main, [], Some(promoted[0])) }
-        _2 = _4;                         // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-        _3 = const (1_i32,);             // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:24
-        _1 = <G<i32> as Fn<(i32,)>>::call(move _2, move _3) -> bb1; // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:24
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a G<i32>, (i32,)) -> <G<i32> as FnOnce<(i32,)>>::Output {<G<i32> as Fn<(i32,)>>::call}, val: Value(<ZST>) }
+        _3 = const _;
+        _2 = (const 1_i32,);
+        _1 = <G<i32> as Fn<(i32,)>>::call(_3, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:32:2: 32:2
+        return;
     }
 }
 
 promoted[0] in main: &G<i32> = {
-    let mut _0: &G<i32>;                 // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-    let mut _1: G<i32>;                  // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-    let mut _2: std::marker::PhantomData<i32>; // in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:8: 31:19
+    let mut _0: &G<i32>;
+    let mut _1: G<i32>;
+    let mut _2: std::marker::PhantomData<i32>;
 
     bb0: {
-        _2 = PhantomData::<i32>;         // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:8: 31:19
-        _1 = G::<i32>(move _2);          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-        _0 = &_1;                        // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:31:5: 31:21
+        _2 = PhantomData::<i32>;
+        _1 = G::<i32>(move _2);
+        _0 = &_1;
+        return;
     }
 }
 
 fn G(_1: PhantomData<A>) -> G<A> {
-    let mut _0: G<A>;                    // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
+    let mut _0: G<A>;
 
     bb0: {
-        _0 = G::<A>(move _1);            // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
+        _0 = G::<A>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn G(_1: PhantomData<A>) -> G<A> {
-    let mut _0: G<A>;                    // return place in scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
+    let mut _0: G<A>;
 
     bb0: {
-        _0 = G::<A>(move _1);            // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
-        return;                          // scope 0 at ui/overloaded/overloaded-calls-param-vtables.rs:12:1: 12:12
+        _0 = G::<A>(move _1);
+        return;
     }
 }

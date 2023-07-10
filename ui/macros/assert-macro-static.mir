@@ -1,16 +1,20 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/macros/assert-macro-static.rs:5:11: 5:11
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
+    let mut _0: ();
+    let mut _1: bool;
+    let _2: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "test-assert-static"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/macros/assert-macro-static.rs:6:20: 6:40
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _1 = Not(const false);
+        switchInt(move _1) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _2 = begin_panic::<&str>(const "test-assert-static") -> unwind continue;
+    }
+
+    bb2: {
+        return;
     }
 }

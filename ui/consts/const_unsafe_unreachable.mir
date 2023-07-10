@@ -1,124 +1,125 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: bool) -> bool {
-    debug x => _1;                       // in scope 0 at ui/consts/const_unsafe_unreachable.rs:3:21: 3:22
-    let mut _0: bool;                    // return place in scope 0 at ui/consts/const_unsafe_unreachable.rs:3:33: 3:37
-    let mut _2: !;                       // in scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
+    debug x => _1;
+    let mut _0: bool;
+    let mut _2: !;
 
     bb0: {
-        switchInt(_1) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/consts/const_unsafe_unreachable.rs:4:5: 4:12
+        switchInt(_1) -> [0: bb1, otherwise: bb2];
     }
 
     bb1: {
-        _2 = unreachable_unchecked();    // scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
-                                         // mir::Constant
-                                         // + span: ui/consts/const_unsafe_unreachable.rs:6:18: 6:50
-                                         // + literal: Const { ty: unsafe fn() -> ! {unreachable_unchecked}, val: Value(<ZST>) }
+        _2 = unreachable_unchecked() -> unwind continue;
     }
 
     bb2: {
-        _0 = const true;                 // scope 0 at ui/consts/const_unsafe_unreachable.rs:5:17: 5:21
-        return;                          // scope 0 at ui/consts/const_unsafe_unreachable.rs:8:2: 8:2
+        _0 = const true;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo(_1: bool) -> bool {
-    debug x => _1;                       // in scope 0 at ui/consts/const_unsafe_unreachable.rs:3:21: 3:22
-    let mut _0: bool;                    // return place in scope 0 at ui/consts/const_unsafe_unreachable.rs:3:33: 3:37
-    let mut _2: !;                       // in scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
+    debug x => _1;
+    let mut _0: bool;
+    let mut _2: !;
 
     bb0: {
-        switchInt(_1) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/consts/const_unsafe_unreachable.rs:4:5: 4:12
+        switchInt(_1) -> [0: bb1, otherwise: bb2];
     }
 
     bb1: {
-        StorageLive(_2);                 // scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
-        ConstEvalCounter;                // scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
-        _2 = unreachable_unchecked();    // scope 0 at ui/consts/const_unsafe_unreachable.rs:6:18: 6:52
-                                         // mir::Constant
-                                         // + span: ui/consts/const_unsafe_unreachable.rs:6:18: 6:50
-                                         // + literal: Const { ty: unsafe fn() -> ! {unreachable_unchecked}, val: Value(<ZST>) }
+        StorageLive(_2);
+        ConstEvalCounter;
+        _2 = unreachable_unchecked() -> unwind continue;
     }
 
     bb2: {
-        _0 = const true;                 // scope 0 at ui/consts/const_unsafe_unreachable.rs:5:17: 5:21
-        return;                          // scope 0 at ui/consts/const_unsafe_unreachable.rs:8:2: 8:2
+        _0 = const true;
+        return;
     }
 }
 
 const BAR: bool = {
-    let mut _0: bool;                    // return place in scope 0 at ui/consts/const_unsafe_unreachable.rs:10:12: 10:16
+    let mut _0: bool;
     scope 1 {
     }
 
     bb0: {
-        ConstEvalCounter;                // scope 1 at ui/consts/const_unsafe_unreachable.rs:10:28: 10:37
-        _0 = foo(const true) -> bb1;     // scope 1 at ui/consts/const_unsafe_unreachable.rs:10:28: 10:37
-                                         // mir::Constant
-                                         // + span: ui/consts/const_unsafe_unreachable.rs:10:28: 10:31
-                                         // + literal: Const { ty: unsafe fn(bool) -> bool {foo}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = foo(const true) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const_unsafe_unreachable.rs:10:1: 10:40
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const_unsafe_unreachable.rs:12:11: 12:11
-    let mut _1: (&bool, &bool);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _3: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _4: &bool;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _5: &bool;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _7: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _8: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let mut _0: ();
+    let mut _1: (&bool, &bool);
+    let _2: &bool;
+    let _3: &bool;
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: bool;
+    let mut _7: bool;
+    let _9: !;
+    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _11: &bool;
+    let mut _12: &bool;
     scope 1 {
-        debug left_val => _4;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _5;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _6: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _2;
+        debug right_val => _3;
+        let _8: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _6;            // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _8;
         }
     }
 
     bb0: {
-        _8 = const _;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[1])) }
-        _2 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _7 = const _;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[0])) }
-        _3 = _7;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _3);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _4 = (_1.0: &bool);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _5 = (_1.1: &bool);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        return;                          // scope 0 at ui/consts/const_unsafe_unreachable.rs:14:2: 14:2
+        _12 = const _;
+        _11 = const _;
+        _1 = (_12, _11);
+        _2 = (_1.0: &bool);
+        _3 = (_1.1: &bool);
+        _6 = (*_2);
+        _7 = (*_3);
+        _5 = Eq(move _6, move _7);
+        _4 = Not(move _5);
+        switchInt(move _4) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _8 = core::panicking::AssertKind::Eq;
+        _10 = Option::<Arguments<'_>>::None;
+        _9 = core::panicking::assert_failed::<bool, bool>(move _8, _2, _3, move _10) -> unwind continue;
+    }
+
+    bb2: {
+        return;
     }
 }
 
 promoted[0] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: bool;                    // in scope 0 at ui/consts/const_unsafe_unreachable.rs:13:21: 13:25
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const true;                 // scope 0 at ui/consts/const_unsafe_unreachable.rs:13:21: 13:25
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const true;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: bool;                    // in scope 0 at ui/consts/const_unsafe_unreachable.rs:13:16: 13:19
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/const_unsafe_unreachable.rs:13:16: 13:19
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }

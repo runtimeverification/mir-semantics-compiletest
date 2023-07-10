@@ -1,178 +1,150 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn ret_int_i() -> isize {
-    let mut _0: isize;                   // return place in scope 0 at ui/output-slot-variants.rs:14:19: 14:24
+    let mut _0: isize;
 
     bb0: {
-        _0 = const 10_isize;             // scope 0 at ui/output-slot-variants.rs:14:27: 14:29
-        return;                          // scope 0 at ui/output-slot-variants.rs:14:31: 14:31
+        _0 = const 10_isize;
+        return;
     }
 }
 
 fn ret_ext_i() -> Box<isize> {
-    let mut _0: std::boxed::Box<isize>;  // return place in scope 0 at ui/output-slot-variants.rs:16:19: 16:29
+    let mut _0: std::boxed::Box<isize>;
 
     bb0: {
-        _0 = Box::<isize>::new(const 10_isize) -> bb1; // scope 0 at ui/output-slot-variants.rs:16:32: 16:44
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:16:32: 16:40
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _0 = Box::<isize>::new(const 10_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/output-slot-variants.rs:16:46: 16:46
+        return;
     }
 }
 
 fn ret_int_rec() -> A {
-    let mut _0: A;                       // return place in scope 0 at ui/output-slot-variants.rs:18:21: 18:22
+    let mut _0: A;
 
     bb0: {
-        _0 = A { a: const 10_isize, b: const 10_isize }; // scope 0 at ui/output-slot-variants.rs:18:25: 18:41
-        return;                          // scope 0 at ui/output-slot-variants.rs:18:43: 18:43
+        _0 = A { a: const 10_isize, b: const 10_isize };
+        return;
     }
 }
 
 fn ret_ext_rec() -> Box<A> {
-    let mut _0: std::boxed::Box<A>;      // return place in scope 0 at ui/output-slot-variants.rs:20:21: 20:27
-    let mut _1: A;                       // in scope 0 at ui/output-slot-variants.rs:20:39: 20:55
+    let mut _0: std::boxed::Box<A>;
+    let mut _1: A;
 
     bb0: {
-        _1 = A { a: const 10_isize, b: const 10_isize }; // scope 0 at ui/output-slot-variants.rs:20:39: 20:55
-        _0 = Box::<A>::new(move _1) -> bb1; // scope 0 at ui/output-slot-variants.rs:20:30: 20:56
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:20:30: 20:38
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(A) -> Box<A> {Box::<A>::new}, val: Value(<ZST>) }
+        _1 = A { a: const 10_isize, b: const 10_isize };
+        _0 = Box::<A>::new(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/output-slot-variants.rs:20:58: 20:58
+        return;
     }
 }
 
 fn ret_ext_mem() -> Abox {
-    let mut _0: Abox;                    // return place in scope 0 at ui/output-slot-variants.rs:22:21: 22:25
-    let mut _1: std::boxed::Box<isize>;  // in scope 0 at ui/output-slot-variants.rs:22:37: 22:49
-    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/output-slot-variants.rs:22:54: 22:66
+    let mut _0: Abox;
+    let mut _1: std::boxed::Box<isize>;
+    let mut _2: std::boxed::Box<isize>;
 
     bb0: {
-        _1 = Box::<isize>::new(const 10_isize) -> bb1; // scope 0 at ui/output-slot-variants.rs:22:37: 22:49
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:22:37: 22:45
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _1 = Box::<isize>::new(const 10_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Box::<isize>::new(const 10_isize) -> [return: bb2, unwind: bb3]; // scope 0 at ui/output-slot-variants.rs:22:54: 22:66
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:22:54: 22:62
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _2 = Box::<isize>::new(const 10_isize) -> [return: bb2, unwind: bb3];
     }
 
     bb2: {
-        _0 = Abox { a: move _1, b: move _2 }; // scope 0 at ui/output-slot-variants.rs:22:28: 22:68
-        return;                          // scope 0 at ui/output-slot-variants.rs:22:70: 22:70
+        _0 = Abox { a: move _1, b: move _2 };
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/output-slot-variants.rs:22:67: 22:68
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/output-slot-variants.rs:22:1: 22:70
+        resume;
     }
 }
 
 fn ret_ext_ext_mem() -> Box<Abox> {
-    let mut _0: std::boxed::Box<Abox>;   // return place in scope 0 at ui/output-slot-variants.rs:24:25: 24:34
-    let mut _1: Abox;                    // in scope 0 at ui/output-slot-variants.rs:24:46: 24:85
-    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/output-slot-variants.rs:24:54: 24:66
-    let mut _3: std::boxed::Box<isize>;  // in scope 0 at ui/output-slot-variants.rs:24:71: 24:83
+    let mut _0: std::boxed::Box<Abox>;
+    let mut _1: Abox;
+    let mut _2: std::boxed::Box<isize>;
+    let mut _3: std::boxed::Box<isize>;
 
     bb0: {
-        _2 = Box::<isize>::new(const 10_isize) -> bb1; // scope 0 at ui/output-slot-variants.rs:24:54: 24:66
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:24:54: 24:62
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _2 = Box::<isize>::new(const 10_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = Box::<isize>::new(const 10_isize) -> [return: bb2, unwind: bb4]; // scope 0 at ui/output-slot-variants.rs:24:71: 24:83
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:24:71: 24:79
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _3 = Box::<isize>::new(const 10_isize) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        _1 = Abox { a: move _2, b: move _3 }; // scope 0 at ui/output-slot-variants.rs:24:46: 24:85
-        _0 = Box::<Abox>::new(move _1) -> bb3; // scope 0 at ui/output-slot-variants.rs:24:37: 24:86
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:24:37: 24:45
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Abox) -> Box<Abox> {Box::<Abox>::new}, val: Value(<ZST>) }
+        _1 = Abox { a: move _2, b: move _3 };
+        _0 = Box::<Abox>::new(move _1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/output-slot-variants.rs:24:88: 24:88
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb5;                 // scope 0 at ui/output-slot-variants.rs:24:84: 24:85
+        drop(_2) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/output-slot-variants.rs:24:1: 24:88
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/output-slot-variants.rs:26:15: 26:15
-    let mut _1: isize;                   // in scope 0 at ui/output-slot-variants.rs:27:9: 27:18
-    let mut _7: isize;                   // in scope 0 at ui/output-slot-variants.rs:33:13: 33:24
-    let mut _8: isize;                   // in scope 0 at ui/output-slot-variants.rs:35:13: 35:24
-    let mut _9: isize;                   // in scope 0 at ui/output-slot-variants.rs:37:13: 37:24
-    let mut _10: std::boxed::Box<isize>; // in scope 0 at ui/output-slot-variants.rs:39:13: 39:24
-    let mut _11: std::boxed::Box<isize>; // in scope 0 at ui/output-slot-variants.rs:41:13: 41:24
-    let mut _12: std::boxed::Box<isize>; // in scope 0 at ui/output-slot-variants.rs:43:13: 43:24
-    let mut _13: A;                      // in scope 0 at ui/output-slot-variants.rs:45:15: 45:28
-    let mut _14: A;                      // in scope 0 at ui/output-slot-variants.rs:47:15: 47:28
-    let mut _15: A;                      // in scope 0 at ui/output-slot-variants.rs:49:15: 49:28
-    let mut _16: std::boxed::Box<A>;     // in scope 0 at ui/output-slot-variants.rs:51:15: 51:28
-    let mut _17: std::boxed::Box<A>;     // in scope 0 at ui/output-slot-variants.rs:53:15: 53:28
-    let mut _18: std::boxed::Box<A>;     // in scope 0 at ui/output-slot-variants.rs:55:15: 55:28
-    let mut _19: Abox;                   // in scope 0 at ui/output-slot-variants.rs:57:15: 57:28
-    let mut _20: Abox;                   // in scope 0 at ui/output-slot-variants.rs:59:15: 59:28
-    let mut _21: Abox;                   // in scope 0 at ui/output-slot-variants.rs:61:15: 61:28
-    let mut _22: std::boxed::Box<Abox>;  // in scope 0 at ui/output-slot-variants.rs:63:19: 63:36
-    let mut _23: std::boxed::Box<Abox>;  // in scope 0 at ui/output-slot-variants.rs:65:19: 65:36
-    let mut _24: std::boxed::Box<Abox>;  // in scope 0 at ui/output-slot-variants.rs:67:19: 67:36
-    let mut _25: bool;                   // in scope 0 at ui/output-slot-variants.rs:69:1: 69:2
-    let mut _26: bool;                   // in scope 0 at ui/output-slot-variants.rs:69:1: 69:2
-    let mut _27: bool;                   // in scope 0 at ui/output-slot-variants.rs:69:1: 69:2
-    let mut _28: bool;                   // in scope 0 at ui/output-slot-variants.rs:69:1: 69:2
+    let mut _0: ();
+    let mut _1: isize;
+    let mut _7: isize;
+    let mut _8: isize;
+    let mut _9: isize;
+    let mut _10: std::boxed::Box<isize>;
+    let mut _11: std::boxed::Box<isize>;
+    let mut _12: std::boxed::Box<isize>;
+    let mut _13: A;
+    let mut _14: A;
+    let mut _15: A;
+    let mut _16: std::boxed::Box<A>;
+    let mut _17: std::boxed::Box<A>;
+    let mut _18: std::boxed::Box<A>;
+    let mut _19: Abox;
+    let mut _20: Abox;
+    let mut _21: Abox;
+    let mut _22: std::boxed::Box<Abox>;
+    let mut _23: std::boxed::Box<Abox>;
+    let mut _24: std::boxed::Box<Abox>;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: bool;
+    let mut _28: bool;
     scope 1 {
-        debug int_i => _1;               // in scope 1 at ui/output-slot-variants.rs:27:9: 27:18
-        let mut _2: std::boxed::Box<isize>; // in scope 1 at ui/output-slot-variants.rs:28:9: 28:18
+        debug int_i => _1;
+        let mut _2: std::boxed::Box<isize>;
         scope 2 {
-            debug ext_i => _2;           // in scope 2 at ui/output-slot-variants.rs:28:9: 28:18
-            let mut _3: A;               // in scope 2 at ui/output-slot-variants.rs:29:9: 29:20
+            debug ext_i => _2;
+            let mut _3: A;
             scope 3 {
-                debug int_rec => _3;     // in scope 3 at ui/output-slot-variants.rs:29:9: 29:20
-                let mut _4: std::boxed::Box<A>; // in scope 3 at ui/output-slot-variants.rs:30:9: 30:20
+                debug int_rec => _3;
+                let mut _4: std::boxed::Box<A>;
                 scope 4 {
-                    debug ext_rec => _4; // in scope 4 at ui/output-slot-variants.rs:30:9: 30:20
-                    let mut _5: Abox;    // in scope 4 at ui/output-slot-variants.rs:31:9: 31:20
+                    debug ext_rec => _4;
+                    let mut _5: Abox;
                     scope 5 {
-                        debug ext_mem => _5; // in scope 5 at ui/output-slot-variants.rs:31:9: 31:20
-                        let mut _6: std::boxed::Box<Abox>; // in scope 5 at ui/output-slot-variants.rs:32:9: 32:24
+                        debug ext_mem => _5;
+                        let mut _6: std::boxed::Box<Abox>;
                         scope 6 {
-                            debug ext_ext_mem => _6; // in scope 6 at ui/output-slot-variants.rs:32:9: 32:24
+                            debug ext_ext_mem => _6;
                         }
                     }
                 }
@@ -181,302 +153,248 @@ fn main() -> () {
     }
 
     bb0: {
-        _26 = const false;               // scope 0 at ui/output-slot-variants.rs:27:9: 27:18
-        _28 = const false;               // scope 0 at ui/output-slot-variants.rs:27:9: 27:18
-        _27 = const false;               // scope 0 at ui/output-slot-variants.rs:27:9: 27:18
-        _25 = const false;               // scope 0 at ui/output-slot-variants.rs:27:9: 27:18
-        _7 = ret_int_i() -> [return: bb1, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:33:13: 33:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:33:13: 33:22
-                                         // + literal: Const { ty: fn() -> isize {ret_int_i}, val: Value(<ZST>) }
+        _28 = const false;
+        _27 = const false;
+        _26 = const false;
+        _25 = const false;
+        _7 = ret_int_i() -> [return: bb1, unwind: bb42];
     }
 
     bb1: {
-        _1 = move _7;                    // scope 6 at ui/output-slot-variants.rs:33:5: 33:24
-        _8 = ret_int_i() -> [return: bb2, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:35:13: 35:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:35:13: 35:22
-                                         // + literal: Const { ty: fn() -> isize {ret_int_i}, val: Value(<ZST>) }
+        _1 = move _7;
+        _8 = ret_int_i() -> [return: bb2, unwind: bb42];
     }
 
     bb2: {
-        _1 = move _8;                    // scope 6 at ui/output-slot-variants.rs:35:5: 35:24
-        _9 = ret_int_i() -> [return: bb3, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:37:13: 37:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:37:13: 37:22
-                                         // + literal: Const { ty: fn() -> isize {ret_int_i}, val: Value(<ZST>) }
+        _1 = move _8;
+        _9 = ret_int_i() -> [return: bb3, unwind: bb42];
     }
 
     bb3: {
-        _1 = move _9;                    // scope 6 at ui/output-slot-variants.rs:37:5: 37:24
-        _10 = ret_ext_i() -> [return: bb23, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:39:13: 39:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:39:13: 39:22
-                                         // + literal: Const { ty: fn() -> Box<isize> {ret_ext_i}, val: Value(<ZST>) }
+        _1 = move _9;
+        _10 = ret_ext_i() -> [return: bb4, unwind: bb42];
     }
 
     bb4: {
-        drop(_2) -> [return: bb25, unwind: bb24]; // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
+        _28 = const true;
+        _2 = move _10;
+        _11 = ret_ext_i() -> [return: bb5, unwind: bb42];
     }
 
     bb5: {
-        drop(_2) -> [return: bb27, unwind: bb26]; // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
+        drop(_2) -> [return: bb6, unwind: bb7];
     }
 
     bb6: {
-        _3 = move _13;                   // scope 6 at ui/output-slot-variants.rs:45:5: 45:28
-        _14 = ret_int_rec() -> [return: bb7, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:47:15: 47:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:47:15: 47:26
-                                         // + literal: Const { ty: fn() -> A {ret_int_rec}, val: Value(<ZST>) }
+        _28 = const true;
+        _2 = move _11;
+        _12 = ret_ext_i() -> [return: bb8, unwind: bb42];
     }
 
-    bb7: {
-        _3 = move _14;                   // scope 6 at ui/output-slot-variants.rs:47:5: 47:28
-        _15 = ret_int_rec() -> [return: bb8, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:49:15: 49:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:49:15: 49:26
-                                         // + literal: Const { ty: fn() -> A {ret_int_rec}, val: Value(<ZST>) }
+    bb7 (cleanup): {
+        _28 = const true;
+        _2 = move _11;
+        goto -> bb42;
     }
 
     bb8: {
-        _3 = move _15;                   // scope 6 at ui/output-slot-variants.rs:49:5: 49:28
-        _16 = ret_ext_rec() -> [return: bb28, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:51:15: 51:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:51:15: 51:26
-                                         // + literal: Const { ty: fn() -> Box<A> {ret_ext_rec}, val: Value(<ZST>) }
+        drop(_2) -> [return: bb9, unwind: bb10];
     }
 
     bb9: {
-        drop(_4) -> [return: bb30, unwind: bb29]; // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
+        _28 = const true;
+        _2 = move _12;
+        _13 = ret_int_rec() -> [return: bb11, unwind: bb42];
     }
 
-    bb10: {
-        drop(_4) -> [return: bb32, unwind: bb31]; // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
+    bb10 (cleanup): {
+        _28 = const true;
+        _2 = move _12;
+        goto -> bb42;
     }
 
     bb11: {
-        _26 = const true;                // scope 6 at ui/output-slot-variants.rs:57:5: 57:12
-        _5 = move _19;                   // scope 6 at ui/output-slot-variants.rs:57:5: 57:12
-        _20 = ret_ext_mem() -> [return: bb12, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:59:15: 59:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:59:15: 59:26
-                                         // + literal: Const { ty: fn() -> Abox {ret_ext_mem}, val: Value(<ZST>) }
+        _3 = move _13;
+        _14 = ret_int_rec() -> [return: bb12, unwind: bb42];
     }
 
     bb12: {
-        drop(_5) -> [return: bb34, unwind: bb33]; // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
+        _3 = move _14;
+        _15 = ret_int_rec() -> [return: bb13, unwind: bb42];
     }
 
     bb13: {
-        drop(_5) -> [return: bb36, unwind: bb35]; // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
+        _3 = move _15;
+        _16 = ret_ext_rec() -> [return: bb14, unwind: bb42];
     }
 
     bb14: {
-        _25 = const true;                // scope 6 at ui/output-slot-variants.rs:63:5: 63:16
-        _6 = move _22;                   // scope 6 at ui/output-slot-variants.rs:63:5: 63:16
-        _23 = ret_ext_ext_mem() -> [return: bb15, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:65:19: 65:36
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:65:19: 65:34
-                                         // + literal: Const { ty: fn() -> Box<Abox> {ret_ext_ext_mem}, val: Value(<ZST>) }
+        _27 = const true;
+        _4 = move _16;
+        _17 = ret_ext_rec() -> [return: bb15, unwind: bb42];
     }
 
     bb15: {
-        drop(_6) -> [return: bb38, unwind: bb37]; // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
+        drop(_4) -> [return: bb16, unwind: bb17];
     }
 
     bb16: {
-        drop(_6) -> [return: bb40, unwind: bb39]; // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
+        _27 = const true;
+        _4 = move _17;
+        _18 = ret_ext_rec() -> [return: bb18, unwind: bb42];
     }
 
-    bb17: {
-        _25 = const false;               // scope 5 at ui/output-slot-variants.rs:69:1: 69:2
-        drop(_5) -> [return: bb18, unwind: bb45]; // scope 4 at ui/output-slot-variants.rs:69:1: 69:2
+    bb17 (cleanup): {
+        _27 = const true;
+        _4 = move _17;
+        goto -> bb42;
     }
 
     bb18: {
-        _26 = const false;               // scope 4 at ui/output-slot-variants.rs:69:1: 69:2
-        drop(_4) -> [return: bb19, unwind: bb47]; // scope 3 at ui/output-slot-variants.rs:69:1: 69:2
+        drop(_4) -> [return: bb19, unwind: bb20];
     }
 
     bb19: {
-        _27 = const false;               // scope 3 at ui/output-slot-variants.rs:69:1: 69:2
-        drop(_2) -> bb20;                // scope 1 at ui/output-slot-variants.rs:69:1: 69:2
+        _27 = const true;
+        _4 = move _18;
+        _19 = ret_ext_mem() -> [return: bb21, unwind: bb42];
     }
 
-    bb20: {
-        _28 = const false;               // scope 1 at ui/output-slot-variants.rs:69:1: 69:2
-        return;                          // scope 0 at ui/output-slot-variants.rs:69:2: 69:2
+    bb20 (cleanup): {
+        _27 = const true;
+        _4 = move _18;
+        goto -> bb42;
     }
 
-    bb21 (cleanup): {
-        switchInt(_26) -> [0: bb45, otherwise: bb43]; // scope 4 at ui/output-slot-variants.rs:69:1: 69:2
+    bb21: {
+        _26 = const true;
+        _5 = move _19;
+        _20 = ret_ext_mem() -> [return: bb22, unwind: bb42];
     }
 
-    bb22 (cleanup): {
-        resume;                          // scope 0 at ui/output-slot-variants.rs:26:1: 69:2
+    bb22: {
+        drop(_5) -> [return: bb23, unwind: bb24];
     }
 
     bb23: {
-        _28 = const true;                // scope 6 at ui/output-slot-variants.rs:39:5: 39:10
-        _2 = move _10;                   // scope 6 at ui/output-slot-variants.rs:39:5: 39:10
-        _11 = ret_ext_i() -> [return: bb4, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:41:13: 41:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:41:13: 41:22
-                                         // + literal: Const { ty: fn() -> Box<isize> {ret_ext_i}, val: Value(<ZST>) }
+        _26 = const true;
+        _5 = move _20;
+        _21 = ret_ext_mem() -> [return: bb25, unwind: bb42];
     }
 
     bb24 (cleanup): {
-        _28 = const true;                // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
-        _2 = move _11;                   // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
+        _26 = const true;
+        _5 = move _20;
+        goto -> bb42;
     }
 
     bb25: {
-        _28 = const true;                // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
-        _2 = move _11;                   // scope 6 at ui/output-slot-variants.rs:41:5: 41:10
-        _12 = ret_ext_i() -> [return: bb5, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:43:13: 43:24
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:43:13: 43:22
-                                         // + literal: Const { ty: fn() -> Box<isize> {ret_ext_i}, val: Value(<ZST>) }
+        drop(_5) -> [return: bb26, unwind: bb27];
     }
 
-    bb26 (cleanup): {
-        _28 = const true;                // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
-        _2 = move _12;                   // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
+    bb26: {
+        _26 = const true;
+        _5 = move _21;
+        _22 = ret_ext_ext_mem() -> [return: bb28, unwind: bb42];
     }
 
-    bb27: {
-        _28 = const true;                // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
-        _2 = move _12;                   // scope 6 at ui/output-slot-variants.rs:43:5: 43:10
-        _13 = ret_int_rec() -> [return: bb6, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:45:15: 45:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:45:15: 45:26
-                                         // + literal: Const { ty: fn() -> A {ret_int_rec}, val: Value(<ZST>) }
+    bb27 (cleanup): {
+        _26 = const true;
+        _5 = move _21;
+        goto -> bb42;
     }
 
     bb28: {
-        _27 = const true;                // scope 6 at ui/output-slot-variants.rs:51:5: 51:12
-        _4 = move _16;                   // scope 6 at ui/output-slot-variants.rs:51:5: 51:12
-        _17 = ret_ext_rec() -> [return: bb9, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:53:15: 53:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:53:15: 53:26
-                                         // + literal: Const { ty: fn() -> Box<A> {ret_ext_rec}, val: Value(<ZST>) }
+        _25 = const true;
+        _6 = move _22;
+        _23 = ret_ext_ext_mem() -> [return: bb29, unwind: bb42];
     }
 
-    bb29 (cleanup): {
-        _27 = const true;                // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
-        _4 = move _17;                   // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
+    bb29: {
+        drop(_6) -> [return: bb30, unwind: bb31];
     }
 
     bb30: {
-        _27 = const true;                // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
-        _4 = move _17;                   // scope 6 at ui/output-slot-variants.rs:53:5: 53:12
-        _18 = ret_ext_rec() -> [return: bb10, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:55:15: 55:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:55:15: 55:26
-                                         // + literal: Const { ty: fn() -> Box<A> {ret_ext_rec}, val: Value(<ZST>) }
+        _25 = const true;
+        _6 = move _23;
+        _24 = ret_ext_ext_mem() -> [return: bb32, unwind: bb42];
     }
 
     bb31 (cleanup): {
-        _27 = const true;                // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
-        _4 = move _18;                   // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
+        _25 = const true;
+        _6 = move _23;
+        goto -> bb42;
     }
 
     bb32: {
-        _27 = const true;                // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
-        _4 = move _18;                   // scope 6 at ui/output-slot-variants.rs:55:5: 55:12
-        _19 = ret_ext_mem() -> [return: bb11, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:57:15: 57:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:57:15: 57:26
-                                         // + literal: Const { ty: fn() -> Abox {ret_ext_mem}, val: Value(<ZST>) }
+        drop(_6) -> [return: bb33, unwind: bb34];
     }
 
-    bb33 (cleanup): {
-        _26 = const true;                // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
-        _5 = move _20;                   // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
+    bb33: {
+        _25 = const true;
+        _6 = move _24;
+        drop(_6) -> [return: bb35, unwind: bb39];
     }
 
-    bb34: {
-        _26 = const true;                // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
-        _5 = move _20;                   // scope 6 at ui/output-slot-variants.rs:59:5: 59:12
-        _21 = ret_ext_mem() -> [return: bb13, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:61:15: 61:28
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:61:15: 61:26
-                                         // + literal: Const { ty: fn() -> Abox {ret_ext_mem}, val: Value(<ZST>) }
+    bb34 (cleanup): {
+        _25 = const true;
+        _6 = move _24;
+        goto -> bb42;
     }
 
-    bb35 (cleanup): {
-        _26 = const true;                // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
-        _5 = move _21;                   // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
+    bb35: {
+        _25 = const false;
+        drop(_5) -> [return: bb36, unwind: bb45];
     }
 
     bb36: {
-        _26 = const true;                // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
-        _5 = move _21;                   // scope 6 at ui/output-slot-variants.rs:61:5: 61:12
-        _22 = ret_ext_ext_mem() -> [return: bb14, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:63:19: 63:36
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:63:19: 63:34
-                                         // + literal: Const { ty: fn() -> Box<Abox> {ret_ext_ext_mem}, val: Value(<ZST>) }
+        _26 = const false;
+        drop(_4) -> [return: bb37, unwind: bb47];
     }
 
-    bb37 (cleanup): {
-        _25 = const true;                // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
-        _6 = move _23;                   // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
+    bb37: {
+        _27 = const false;
+        drop(_2) -> [return: bb38, unwind continue];
     }
 
     bb38: {
-        _25 = const true;                // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
-        _6 = move _23;                   // scope 6 at ui/output-slot-variants.rs:65:5: 65:16
-        _24 = ret_ext_ext_mem() -> [return: bb16, unwind: bb42]; // scope 6 at ui/output-slot-variants.rs:67:19: 67:36
-                                         // mir::Constant
-                                         // + span: ui/output-slot-variants.rs:67:19: 67:34
-                                         // + literal: Const { ty: fn() -> Box<Abox> {ret_ext_ext_mem}, val: Value(<ZST>) }
+        _28 = const false;
+        return;
     }
 
     bb39 (cleanup): {
-        _25 = const true;                // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
-        _6 = move _24;                   // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
-        goto -> bb42;                    // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
+        switchInt(_26) -> [0: bb45, otherwise: bb43];
     }
 
-    bb40: {
-        _25 = const true;                // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
-        _6 = move _24;                   // scope 6 at ui/output-slot-variants.rs:67:5: 67:16
-        drop(_6) -> [return: bb17, unwind: bb21]; // scope 5 at ui/output-slot-variants.rs:69:1: 69:2
+    bb40 (cleanup): {
+        resume;
     }
 
     bb41 (cleanup): {
-        drop(_6) -> bb21;                // scope 5 at ui/output-slot-variants.rs:69:1: 69:2
+        drop(_6) -> [return: bb39, unwind terminate];
     }
 
     bb42 (cleanup): {
-        switchInt(_25) -> [0: bb21, otherwise: bb41]; // scope 5 at ui/output-slot-variants.rs:69:1: 69:2
+        switchInt(_25) -> [0: bb39, otherwise: bb41];
     }
 
     bb43 (cleanup): {
-        drop(_5) -> bb45;                // scope 4 at ui/output-slot-variants.rs:69:1: 69:2
+        drop(_5) -> [return: bb45, unwind terminate];
     }
 
     bb44 (cleanup): {
-        drop(_4) -> bb47;                // scope 3 at ui/output-slot-variants.rs:69:1: 69:2
+        drop(_4) -> [return: bb47, unwind terminate];
     }
 
     bb45 (cleanup): {
-        switchInt(_27) -> [0: bb47, otherwise: bb44]; // scope 3 at ui/output-slot-variants.rs:69:1: 69:2
+        switchInt(_27) -> [0: bb47, otherwise: bb44];
     }
 
     bb46 (cleanup): {
-        drop(_2) -> bb22;                // scope 1 at ui/output-slot-variants.rs:69:1: 69:2
+        drop(_2) -> [return: bb40, unwind terminate];
     }
 
     bb47 (cleanup): {
-        switchInt(_28) -> [0: bb22, otherwise: bb46]; // scope 1 at ui/output-slot-variants.rs:69:1: 69:2
+        switchInt(_28) -> [0: bb40, otherwise: bb46];
     }
 }

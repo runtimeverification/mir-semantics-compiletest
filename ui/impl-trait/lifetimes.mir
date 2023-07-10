@@ -1,733 +1,624 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn any_lifetime() -> &u32 {
-    let mut _0: &u32;                    // return place in scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
-    let mut _1: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
+    let mut _0: &u32;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:8:36: 8:38
-                                         // + literal: Const { ty: &u32, val: Unevaluated(any_lifetime, [ReErased], Some(promoted[0])) }
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:8:40: 8:40
+        _0 = const _;
+        return;
     }
 }
 
 promoted[0] in any_lifetime: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
-    let mut _1: u32;                     // in scope 0 at ui/impl-trait/lifetimes.rs:8:37: 8:38
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 5_u32;                // scope 0 at ui/impl-trait/lifetimes.rs:8:37: 8:38
-        _0 = &_1;                        // scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:8:36: 8:38
+        _1 = const 5_u32;
+        _0 = &_1;
+        return;
     }
 }
 
 fn static_lifetime() -> &u32 {
-    let mut _0: &u32;                    // return place in scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
-    let mut _1: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
+    let mut _0: &u32;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:10:40: 10:42
-                                         // + literal: Const { ty: &u32, val: Unevaluated(static_lifetime, [], Some(promoted[0])) }
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:10:44: 10:44
+        _0 = const _;
+        return;
     }
 }
 
 promoted[0] in static_lifetime: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
-    let mut _1: u32;                     // in scope 0 at ui/impl-trait/lifetimes.rs:10:41: 10:42
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 5_u32;                // scope 0 at ui/impl-trait/lifetimes.rs:10:41: 10:42
-        _0 = &_1;                        // scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:10:40: 10:42
+        _1 = const 5_u32;
+        _0 = &_1;
+        return;
     }
 }
 
 fn any_lifetime_as_static_impl_trait() -> impl Debug {
-    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/impl-trait/lifetimes.rs:12:43: 12:53
+    let mut _0: impl std::fmt::Debug;
 
     bb0: {
-        _0 = any_lifetime::<'_>() -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:13:5: 13:19
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:13:5: 13:17
-                                         // + literal: Const { ty: fn() -> &u32 {any_lifetime::<'_>}, val: Value(<ZST>) }
+        _0 = any_lifetime::<'_>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:14:2: 14:2
+        return;
     }
 }
 
 fn lifetimes_as_static_impl_trait() -> impl Debug {
-    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/impl-trait/lifetimes.rs:16:40: 16:50
+    let mut _0: impl std::fmt::Debug;
 
     bb0: {
-        _0 = static_lifetime() -> bb1;   // scope 0 at ui/impl-trait/lifetimes.rs:17:5: 17:22
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:17:5: 17:20
-                                         // + literal: Const { ty: fn() -> &'static u32 {static_lifetime}, val: Value(<ZST>) }
+        _0 = static_lifetime() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:18:2: 18:2
+        return;
     }
 }
 
 fn no_params_or_lifetimes_is_static() -> impl Debug + 'static {
-    let mut _0: impl std::fmt::Debug + 'static; // return place in scope 0 at ui/impl-trait/lifetimes.rs:20:42: 20:62
+    let mut _0: impl std::fmt::Debug + 'static;
 
     bb0: {
-        _0 = lifetimes_as_static_impl_trait() -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:21:5: 21:37
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:21:5: 21:35
-                                         // + literal: Const { ty: fn() -> impl Debug {lifetimes_as_static_impl_trait}, val: Value(<ZST>) }
+        _0 = lifetimes_as_static_impl_trait() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:22:2: 22:2
+        return;
     }
 }
 
 fn static_input_type_is_static(_1: T) -> impl Debug + 'static {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:24:52: 24:53
-    let mut _0: impl std::fmt::Debug + 'static; // return place in scope 0 at ui/impl-trait/lifetimes.rs:24:61: 24:81
+    debug x => _1;
+    let mut _0: impl std::fmt::Debug + 'static;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/impl-trait/lifetimes.rs:24:84: 24:85
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:24:87: 24:87
+        _0 = move _1;
+        return;
     }
 }
 
 fn type_outlives_reference_lifetime(_1: &T) -> impl Debug + '_ {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:26:51: 26:52
-    let mut _0: impl std::fmt::Debug + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:26:64: 26:79
+    debug x => _1;
+    let mut _0: impl std::fmt::Debug + '_;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:26:82: 26:83
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:26:85: 26:85
+        _0 = _1;
+        return;
     }
 }
 
 fn type_outlives_reference_lifetime_elided(_1: &T) -> impl Debug + '_ {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:27:54: 27:55
-    let mut _0: impl std::fmt::Debug + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:27:64: 27:79
+    debug x => _1;
+    let mut _0: impl std::fmt::Debug + '_;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:27:82: 27:83
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:27:85: 27:85
+        _0 = _1;
+        return;
     }
 }
 
 fn simple_type_hrtb() -> impl for<'a> SingleRegionTrait<'a> {
-    let mut _0: impl for<'a> SingleRegionTrait<'a>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:34:30: 34:64
+    let mut _0: impl for<'a> SingleRegionTrait<'a>;
 
     bb0: {
-        _0 = const 5_u32;                // scope 0 at ui/impl-trait/lifetimes.rs:34:67: 34:68
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:34:70: 34:70
+        _0 = const 5_u32;
+        return;
     }
 }
 
 fn elision_single_region_trait(_1: &u32) -> impl SingleRegionTrait<'_> {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:35:32: 35:33
-    let mut _0: impl SingleRegionTrait<'_>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:35:44: 35:66
+    debug x => _1;
+    let mut _0: impl SingleRegionTrait<'_>;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:35:69: 35:70
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:35:72: 35:72
+        _0 = _1;
+        return;
     }
 }
 
 fn elision_single_region_struct(_1: SingleRegionStruct<'_>) -> impl Into<SingleRegionStruct<'_>> {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:36:33: 36:34
-    let mut _0: impl std::convert::Into<SingleRegionStruct<'_>>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:36:59: 36:88
+    debug x => _1;
+    let mut _0: impl std::convert::Into<SingleRegionStruct<'_>>;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/impl-trait/lifetimes.rs:36:91: 36:92
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:36:94: 36:94
+        _0 = move _1;
+        return;
     }
 }
 
 fn closure_hrtb() -> impl for<'a> Fn(&'a u32) {
-    let mut _0: impl for<'a> Fn(&'a u32); // return place in scope 0 at ui/impl-trait/lifetimes.rs:38:22: 38:46
+    let mut _0: impl for<'a> Fn(&'a u32);
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:38:57: 38:57
+        return;
     }
 }
 
 fn closure_hrtb::{closure#0}(_1: &[closure@ui/impl-trait/lifetimes.rs:38:49: 38:52], _2: &u32) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/lifetimes.rs:38:53: 38:53
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:38:55: 38:55
+        return;
     }
 }
 
 fn closure_hr_elided() -> impl for<'a> Fn(&'a u32) {
-    let mut _0: impl for<'a> Fn(&'a u32); // return place in scope 0 at ui/impl-trait/lifetimes.rs:39:27: 39:40
+    let mut _0: impl for<'a> Fn(&'a u32);
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:39:51: 39:51
+        return;
     }
 }
 
 fn closure_hr_elided::{closure#0}(_1: &[closure@ui/impl-trait/lifetimes.rs:39:43: 39:46], _2: &u32) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/lifetimes.rs:39:47: 39:47
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:39:49: 39:49
+        return;
     }
 }
 
 fn closure_hr_elided_return() -> impl for<'a> Fn(&'a u32) -> for<'a> &'a u32 {
-    let mut _0: impl for<'a> Fn(&'a u32) -> for<'a> &'a u32; // return place in scope 0 at ui/impl-trait/lifetimes.rs:40:34: 40:55
+    let mut _0: impl for<'a> Fn(&'a u32) -> for<'a> &'a u32;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:40:65: 40:65
+        return;
     }
 }
 
 fn closure_hr_elided_return::{closure#0}(_1: &[closure@ui/impl-trait/lifetimes.rs:40:58: 40:61], _2: &u32) -> &u32 {
-    debug x => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:40:59: 40:60
-    let mut _0: &u32;                    // return place in scope 0 at ui/impl-trait/lifetimes.rs:40:62: 40:62
+    debug x => _2;
+    let mut _0: &u32;
 
     bb0: {
-        _0 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:40:62: 40:63
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:40:63: 40:63
+        _0 = _2;
+        return;
     }
 }
 
 fn closure_pass_through_elided_return(_1: impl Fn(&u32) -> &u32) -> impl for<'a> Fn(&'a u32) -> for<'a> &'a u32 {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:41:39: 41:40
-    let mut _0: impl for<'a> Fn(&'a u32) -> for<'a> &'a u32; // return place in scope 0 at ui/impl-trait/lifetimes.rs:41:68: 41:89
+    debug x => _1;
+    let mut _0: impl for<'a> Fn(&'a u32) -> for<'a> &'a u32;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/impl-trait/lifetimes.rs:41:92: 41:93
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:41:95: 41:95
+        _0 = move _1;
+        return;
     }
 }
 
 fn closure_pass_through_reference_elided(_1: &impl Fn(&u32) -> &u32) -> &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32 {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:42:42: 42:43
-    let mut _0: &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32; // return place in scope 0 at ui/impl-trait/lifetimes.rs:42:72: 42:94
+    debug x => _1;
+    let mut _0: &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:42:97: 42:98
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:42:100: 42:100
+        _0 = _1;
+        return;
     }
 }
 
 fn nested_lifetime(_1: &str) -> impl Iterator<Item = impl Iterator<Item = i32> + '_> + '_ {
-    debug input => _1;                   // in scope 0 at ui/impl-trait/lifetimes.rs:44:24: 44:29
-    let mut _0: impl std::iter::Iterator<Item = impl std::iter::Iterator<Item = i32> + '_> + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:45:8: 45:65
-    let mut _2: std::str::Lines<'_>;     // in scope 0 at ui/impl-trait/lifetimes.rs:47:5: 47:18
-    let mut _3: &str;                    // in scope 0 at ui/impl-trait/lifetimes.rs:47:5: 47:18
-    let mut _4: [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]; // in scope 0 at ui/impl-trait/lifetimes.rs:47:23: 49:6
+    debug input => _1;
+    let mut _0: impl std::iter::Iterator<Item = impl std::iter::Iterator<Item = i32> + '_> + '_;
+    let mut _2: std::str::Lines<'_>;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:47:5: 47:18
-        _2 = core::str::<impl str>::lines(move _3) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:47:5: 47:18
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:47:11: 47:16
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> std::str::Lines<'a> {core::str::<impl str>::lines}, val: Value(<ZST>) }
+        _2 = core::str::<impl str>::lines(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = <std::str::Lines<'_> as Iterator>::map::<Map<SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>, [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]>(move _2, move _4) -> bb2; // scope 0 at ui/impl-trait/lifetimes.rs:47:5: 49:7
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:47:19: 47:22
-                                         // + literal: Const { ty: fn(std::str::Lines<'_>, [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]) -> Map<std::str::Lines<'_>, [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]> {<std::str::Lines<'_> as Iterator>::map::<Map<SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>, [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]>}, val: Value(<ZST>) }
+        _0 = <std::str::Lines<'_> as Iterator>::map::<Map<SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>, [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]>(move _2, const ZeroSized: [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29]) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:50:2: 50:2
+        return;
     }
 }
 
 fn nested_lifetime::{closure#0}(_1: &mut [closure@ui/impl-trait/lifetimes.rs:47:23: 47:29], _2: &str) -> Map<SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]> {
-    debug line => _2;                    // in scope 0 at ui/impl-trait/lifetimes.rs:47:24: 47:28
-    let mut _0: std::iter::Map<std::str::SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:47:30: 47:30
-    let mut _3: std::str::SplitWhitespace<'_>; // in scope 0 at ui/impl-trait/lifetimes.rs:48:9: 48:32
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/lifetimes.rs:48:9: 48:32
-    let mut _5: [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]; // in scope 0 at ui/impl-trait/lifetimes.rs:48:37: 48:65
+    debug line => _2;
+    let mut _0: std::iter::Map<std::str::SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>;
+    let mut _3: std::str::SplitWhitespace<'_>;
 
     bb0: {
-        _4 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:48:9: 48:32
-        _3 = core::str::<impl str>::split_whitespace(move _4) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:48:9: 48:32
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:48:14: 48:30
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> SplitWhitespace<'a> {core::str::<impl str>::split_whitespace}, val: Value(<ZST>) }
+        _3 = core::str::<impl str>::split_whitespace(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = <SplitWhitespace<'_> as Iterator>::map::<i32, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>(move _3, move _5) -> bb2; // scope 0 at ui/impl-trait/lifetimes.rs:48:9: 48:66
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:48:33: 48:36
-                                         // + literal: Const { ty: fn(SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]) -> Map<SplitWhitespace<'_>, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]> {<SplitWhitespace<'_> as Iterator>::map::<i32, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>}, val: Value(<ZST>) }
+        _0 = <SplitWhitespace<'_> as Iterator>::map::<i32, [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]>(move _3, const ZeroSized: [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43]) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:49:6: 49:6
+        return;
     }
 }
 
 fn nested_lifetime::{closure#0}::{closure#0}(_1: &mut [closure@ui/impl-trait/lifetimes.rs:48:37: 48:43], _2: &str) -> i32 {
-    debug cell => _2;                    // in scope 0 at ui/impl-trait/lifetimes.rs:48:38: 48:42
-    let mut _0: i32;                     // return place in scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:44
-    let mut _3: std::result::Result<i32, std::num::ParseIntError>; // in scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:56
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:56
+    debug cell => _2;
+    let mut _0: i32;
+    let mut _3: std::result::Result<i32, std::num::ParseIntError>;
 
     bb0: {
-        _4 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:56
-        _3 = core::str::<impl str>::parse::<i32>(move _4) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:56
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:48:49: 48:54
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> Result<i32, <i32 as FromStr>::Err> {core::str::<impl str>::parse::<i32>}, val: Value(<ZST>) }
+        _3 = core::str::<impl str>::parse::<i32>(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Result::<i32, ParseIntError>::unwrap(move _3) -> bb2; // scope 0 at ui/impl-trait/lifetimes.rs:48:44: 48:65
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:48:57: 48:63
-                                         // + literal: Const { ty: fn(Result<i32, ParseIntError>) -> i32 {Result::<i32, ParseIntError>::unwrap}, val: Value(<ZST>) }
+        _0 = Result::<i32, ParseIntError>::unwrap(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:48:65: 48:65
+        return;
     }
 }
 
 fn pass_through_elision(_1: &u32) -> impl Into<&u32> {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:52:25: 52:26
-    let mut _0: impl std::convert::Into<&u32>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:52:37: 52:52
+    debug x => _1;
+    let mut _0: impl std::convert::Into<&u32>;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:52:55: 52:56
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:52:58: 52:58
+        _0 = _1;
+        return;
     }
 }
 
 fn pass_through_elision_with_fn_ptr(_1: &for<'a> fn(&'a u32) -> &'a u32) -> impl Into<&for<'a> fn(&'a u32) -> &'a u32> {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:53:37: 53:38
-    let mut _0: impl std::convert::Into<&for<'a> fn(&'a u32) -> &'a u32>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:53:62: 53:90
+    debug x => _1;
+    let mut _0: impl std::convert::Into<&for<'a> fn(&'a u32) -> &'a u32>;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:53:93: 53:94
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:53:96: 53:96
+        _0 = _1;
+        return;
     }
 }
 
 fn pass_through_elision_with_fn_path(_1: &T) -> &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32 {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:56:5: 56:6
-    let mut _0: &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32; // return place in scope 0 at ui/impl-trait/lifetimes.rs:57:6: 57:28
+    debug x => _1;
+    let mut _0: &impl for<'a> Fn(&'a u32) -> for<'a> &'a u32;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:57:31: 57:32
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:57:34: 57:34
+        _0 = _1;
+        return;
     }
 }
 
 fn foo(_1: &impl Debug) -> &impl Debug {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:59:8: 59:9
-    let mut _0: &impl std::fmt::Debug;   // return place in scope 0 at ui/impl-trait/lifetimes.rs:59:27: 59:38
+    debug x => _1;
+    let mut _0: &impl std::fmt::Debug;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:59:41: 59:42
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:59:44: 59:44
+        _0 = _1;
+        return;
     }
 }
 
 fn foo_explicit_lifetime(_1: &impl Debug) -> &impl Debug {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:60:30: 60:31
-    let mut _0: &impl std::fmt::Debug;   // return place in scope 0 at ui/impl-trait/lifetimes.rs:60:52: 60:66
+    debug x => _1;
+    let mut _0: &impl std::fmt::Debug;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:60:69: 60:70
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:60:72: 60:72
+        _0 = _1;
+        return;
     }
 }
 
 fn foo_explicit_arg(_1: &T) -> &impl Debug {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:61:31: 61:32
-    let mut _0: &impl std::fmt::Debug;   // return place in scope 0 at ui/impl-trait/lifetimes.rs:61:41: 61:52
+    debug x => _1;
+    let mut _0: &impl std::fmt::Debug;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:61:55: 61:56
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:61:58: 61:58
+        _0 = _1;
+        return;
     }
 }
 
 fn mixed_lifetimes() -> impl for<'b> Fn(&'b &u32) {
-    let mut _0: impl for<'b> Fn(&'b &u32); // return place in scope 0 at ui/impl-trait/lifetimes.rs:63:29: 63:57
+    let mut _0: impl for<'b> Fn(&'b &u32);
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:63:68: 63:68
+        return;
     }
 }
 
 fn mixed_lifetimes::{closure#0}(_1: &[closure@ui/impl-trait/lifetimes.rs:63:60: 63:63], _2: &&u32) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/lifetimes.rs:63:64: 63:64
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:63:66: 63:66
+        return;
     }
 }
 
 fn mixed_as_static() -> impl Fn(&'static &'static u32) {
-    let mut _0: impl Fn(&'static &'static u32); // return place in scope 0 at ui/impl-trait/lifetimes.rs:64:25: 64:55
+    let mut _0: impl Fn(&'static &'static u32);
 
     bb0: {
-        _0 = mixed_lifetimes::<'_>() -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:64:58: 64:75
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:64:58: 64:73
-                                         // + literal: Const { ty: fn() -> impl for<'b> Fn(&'b &u32) {mixed_lifetimes::<'_>}, val: Value(<ZST>) }
+        _0 = mixed_lifetimes::<'_>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:64:77: 64:77
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:68:10: 68:15>::fmt(_1: &MultiRegionStruct<'_, '_>, _2: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    debug f => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    let mut _0: std::result::Result<(), std::fmt::Error>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    let mut _3: &mut std::fmt::Formatter<'_>; // in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    let _5: &str;                        // in scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-    let mut _6: &dyn std::fmt::Debug;    // in scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-    let mut _7: &&u32;                   // in scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-    let _8: &&u32;                       // in scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-    let mut _9: &dyn std::fmt::Debug;    // in scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-    let mut _10: &&&u32;                 // in scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-    let _11: &&&u32;                     // in scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-    let _12: &&u32;                      // in scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
+    debug self => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let _3: &str;
+    let mut _4: &dyn std::fmt::Debug;
+    let _5: &&u32;
+    let mut _6: &dyn std::fmt::Debug;
+    let _7: &&&u32;
+    let _8: &&u32;
 
     bb0: {
-        _3 = &mut (*_2);                 // scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-        _5 = const "MultiRegionStruct";  // scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:68:10: 68:15
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _4 = _5;                         // scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-        _8 = &((*_1).0: &u32);           // scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-        _7 = _8;                         // scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-        _6 = move _7 as &dyn std::fmt::Debug (Pointer(Unsize)); // scope 0 at ui/impl-trait/lifetimes.rs:69:34: 69:41
-        _12 = &((*_1).1: &u32);          // scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-        _11 = &_12;                      // scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-        _10 = _11;                       // scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-        _9 = move _10 as &dyn std::fmt::Debug (Pointer(Unsize)); // scope 0 at ui/impl-trait/lifetimes.rs:69:43: 69:50
-        _0 = Formatter::<'_>::debug_tuple_field2_finish(move _3, move _4, move _6, move _9) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:68:10: 68:15
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:68:10: 68:15
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: for<'b, 'a, 'c, 'd> fn(&'b mut Formatter<'_>, &'a str, &'c (dyn Debug + 'c), &'d (dyn Debug + 'd)) -> Result<(), std::fmt::Error> {Formatter::<'_>::debug_tuple_field2_finish}, val: Value(<ZST>) }
+        _3 = const "MultiRegionStruct";
+        _5 = &((*_1).0: &u32);
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _8 = &((*_1).1: &u32);
+        _7 = &_8;
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field2_finish(_2, _3, move _4, move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:68:15: 68:15
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:72:10: 72:15>::fmt(_1: &NoRegionStruct, _2: &mut Formatter<'_>) -> Result<(), std::fmt::Error> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-    debug f => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-    let mut _0: std::result::Result<(), std::fmt::Error>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-    let mut _3: &mut std::fmt::Formatter<'_>; // in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-    let mut _4: &str;                    // in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-    let _5: &str;                        // in scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
+    debug self => _1;
+    debug f => _2;
+    let mut _0: std::result::Result<(), std::fmt::Error>;
+    let _3: &str;
 
     bb0: {
-        _3 = &mut (*_2);                 // scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-        _5 = const "NoRegionStruct";     // scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:72:10: 72:15
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _4 = _5;                         // scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-        _0 = Formatter::<'_>::write_str(move _3, move _4) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:72:10: 72:15
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:72:10: 72:15
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut Formatter<'_>, &'b str) -> Result<(), std::fmt::Error> {Formatter::<'_>::write_str}, val: Value(<ZST>) }
+        _3 = const "NoRegionStruct";
+        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:72:15: 72:15
+        return;
     }
 }
 
 fn finds_least_region(_1: &u32, _2: &u32) -> impl MultiRegionTrait<'_, '_> {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:76:35: 76:36
-    debug y => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:76:47: 76:48
-    let mut _0: impl MultiRegionTrait<'_, '_>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:76:62: 76:91
-    let mut _3: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:77:23: 77:24
-    let mut _4: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:77:26: 77:27
+    debug x => _1;
+    debug y => _2;
+    let mut _0: impl MultiRegionTrait<'_, '_>;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:77:23: 77:24
-        _4 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:77:26: 77:27
-        _0 = MultiRegionStruct::<'_, '_>(move _3, move _4); // scope 0 at ui/impl-trait/lifetimes.rs:77:5: 77:28
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:78:2: 78:2
+        _0 = MultiRegionStruct::<'_, '_>(_1, _2);
+        return;
     }
 }
 
 fn finds_explicit_bound(_1: &u32, _2: &u32) -> impl MultiRegionTrait<'_, '_> + '_ {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:81:6: 81:7
-    debug y => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:81:18: 81:19
-    let mut _0: impl MultiRegionTrait<'_, '_> + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:81:33: 81:67
-    let mut _3: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:83:23: 83:24
-    let mut _4: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:83:26: 83:27
+    debug x => _1;
+    debug y => _2;
+    let mut _0: impl MultiRegionTrait<'_, '_> + '_;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:83:23: 83:24
-        _4 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:83:26: 83:27
-        _0 = MultiRegionStruct::<'_, '_>(move _3, move _4); // scope 0 at ui/impl-trait/lifetimes.rs:83:5: 83:28
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:84:2: 84:2
+        _0 = MultiRegionStruct::<'_, '_>(_1, _2);
+        return;
     }
 }
 
 fn finds_explicit_bound_even_without_least_region(_1: &u32, _2: &u32) -> impl MultiRegionTrait<'_, '_> + '_ {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:87:6: 87:7
-    debug y => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:87:18: 87:19
-    let mut _0: impl MultiRegionTrait<'_, '_> + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:87:33: 87:67
+    debug x => _1;
+    debug y => _2;
+    let mut _0: impl MultiRegionTrait<'_, '_> + '_;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:90:2: 90:2
+        return;
     }
 }
 
 fn unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify(_1: &u32, _2: &u32) -> impl Debug {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:101:6: 101:7
-    debug y => _2;                       // in scope 0 at ui/impl-trait/lifetimes.rs:101:18: 101:19
-    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/impl-trait/lifetimes.rs:101:33: 101:43
-    let mut _3: &u32;                    // in scope 0 at ui/impl-trait/lifetimes.rs:105:21: 105:22
+    debug x => _1;
+    debug y => _2;
+    let mut _0: impl std::fmt::Debug;
+    let mut _3: bool;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/impl-trait/lifetimes.rs:105:21: 105:22
-        _0 = unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify::deref(move _3) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:105:15: 105:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:105:15: 105:20
-                                         // + literal: Const { ty: for<'lt> fn(&'lt u32) -> impl Debug {unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify::deref}, val: Value(<ZST>) }
+        _3 = const true;
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:106:2: 106:2
+        _0 = unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify::deref(_1) -> [return: bb3, unwind continue];
+    }
+
+    bb2: {
+        _0 = unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify::deref(_2) -> [return: bb3, unwind continue];
+    }
+
+    bb3: {
+        return;
     }
 }
 
 fn unnamed_lifetimes_arent_contained_in_impl_trait_and_will_unify::deref(_1: &u32) -> impl Debug {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/lifetimes.rs:103:19: 103:20
-    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/impl-trait/lifetimes.rs:103:35: 103:45
+    debug x => _1;
+    let mut _0: impl std::fmt::Debug;
 
     bb0: {
-        _0 = (*_1);                      // scope 0 at ui/impl-trait/lifetimes.rs:103:48: 103:50
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:103:52: 103:52
+        _0 = (*_1);
+        return;
     }
 }
 
 fn can_add_region_bound_to_static_type(_1: &u32) -> impl Debug + '_ {
-    let mut _0: impl std::fmt::Debug + '_; // return place in scope 0 at ui/impl-trait/lifetimes.rs:108:63: 108:78
+    let mut _0: impl std::fmt::Debug + '_;
 
     bb0: {
-        _0 = const 5_i32;                // scope 0 at ui/impl-trait/lifetimes.rs:108:81: 108:82
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:108:84: 108:84
+        _0 = const 5_i32;
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:112:1: 112:34>::iter_doesnt_capture_unnecessary_lifetime(_1: &MyVec) -> impl Iterator<Item = &u8> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/lifetimes.rs:113:53: 113:61
-    let mut _0: impl std::iter::Iterator<Item = &u8>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:113:66: 113:94
-    let mut _2: std::slice::Iter<'_, std::vec::Vec<u8>>; // in scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-    let mut _3: &[std::vec::Vec<u8>];    // in scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-    let _4: &[std::vec::Vec<u8>];        // in scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-    let mut _5: &std::vec::Vec<std::vec::Vec<u8>>; // in scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-    let mut _6: [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]; // in scope 0 at ui/impl-trait/lifetimes.rs:114:32: 114:60
+    debug self => _1;
+    let mut _0: impl std::iter::Iterator<Item = &u8>;
+    let mut _2: std::slice::Iter<'_, std::vec::Vec<u8>>;
+    let mut _3: &[std::vec::Vec<u8>];
+    let _4: &[std::vec::Vec<u8>];
+    let mut _5: &std::vec::Vec<std::vec::Vec<u8>>;
 
     bb0: {
-        _5 = &((*_1).0: std::vec::Vec<std::vec::Vec<u8>>); // scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-        _4 = <Vec<Vec<u8>> as Deref>::deref(move _5) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:114:9: 114:22
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<Vec<u8>>) -> &'a <Vec<Vec<u8>> as Deref>::Target {<Vec<Vec<u8>> as Deref>::deref}, val: Value(<ZST>) }
+        _5 = &((*_1).0: std::vec::Vec<std::vec::Vec<u8>>);
+        _4 = <Vec<Vec<u8>> as Deref>::deref(move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = _4;                         // scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-        _2 = core::slice::<impl [Vec<u8>]>::iter(move _3) -> bb2; // scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:22
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:114:16: 114:20
-                                         // + literal: Const { ty: for<'a> fn(&'a [Vec<u8>]) -> std::slice::Iter<'a, Vec<u8>> {core::slice::<impl [Vec<u8>]>::iter}, val: Value(<ZST>) }
+        _3 = _4;
+        _2 = core::slice::<impl [Vec<u8>]>::iter(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _0 = <std::slice::Iter<'_, Vec<u8>> as Iterator>::flat_map::<std::slice::Iter<'_, u8>, [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]>(move _2, move _6) -> bb3; // scope 0 at ui/impl-trait/lifetimes.rs:114:9: 114:61
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:114:23: 114:31
-                                         // + literal: Const { ty: fn(std::slice::Iter<'_, Vec<u8>>, [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]) -> FlatMap<std::slice::Iter<'_, Vec<u8>>, std::slice::Iter<'_, u8>, [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]> {<std::slice::Iter<'_, Vec<u8>> as Iterator>::flat_map::<std::slice::Iter<'_, u8>, [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]>}, val: Value(<ZST>) }
+        _0 = <std::slice::Iter<'_, Vec<u8>> as Iterator>::flat_map::<std::slice::Iter<'_, u8>, [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]>(move _2, const ZeroSized: [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43]) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:115:6: 115:6
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:112:1: 112:34>::iter_doesnt_capture_unnecessary_lifetime::{closure#0}(_1: &mut [closure@ui/impl-trait/lifetimes.rs:114:32: 114:43], _2: &Vec<u8>) -> std::slice::Iter<'_, u8> {
-    debug inner_vec => _2;               // in scope 0 at ui/impl-trait/lifetimes.rs:114:33: 114:42
-    let mut _0: std::slice::Iter<'_, u8>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:44
-    let mut _3: &[u8];                   // in scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-    let _4: &[u8];                       // in scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-    let mut _5: &std::vec::Vec<u8>;      // in scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
+    debug inner_vec => _2;
+    let mut _0: std::slice::Iter<'_, u8>;
+    let mut _3: &[u8];
+    let _4: &[u8];
 
     bb0: {
-        _5 = _2;                         // scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-        _4 = <Vec<u8> as Deref>::deref(move _5) -> bb1; // scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:114:44: 114:60
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<u8>) -> &'a <Vec<u8> as Deref>::Target {<Vec<u8> as Deref>::deref}, val: Value(<ZST>) }
+        _4 = <Vec<u8> as Deref>::deref(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = _4;                         // scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-        _0 = core::slice::<impl [u8]>::iter(move _3) -> bb2; // scope 0 at ui/impl-trait/lifetimes.rs:114:44: 114:60
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/lifetimes.rs:114:54: 114:58
-                                         // + literal: Const { ty: for<'a> fn(&'a [u8]) -> std::slice::Iter<'a, u8> {core::slice::<impl [u8]>::iter}, val: Value(<ZST>) }
+        _3 = _4;
+        _0 = core::slice::<impl [u8]>::iter(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:114:60: 114:60
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:112:1: 112:34>::generator_doesnt_capture_unnecessary_lifetime() -> impl Sized {
-    let mut _0: impl Sized;              // return place in scope 0 at ui/impl-trait/lifetimes.rs:117:67: 117:77
+    let mut _0: impl Sized;
 
     bb0: {
-        _0 = [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11 (#0)]; // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-                                         // generator
-                                         // + def_id: DefId(0:95 ~ lifetimes[3de0]::{impl#4}::generator_doesnt_capture_unnecessary_lifetime::{closure#0})
-                                         // + substs: [
-                                         //     ReErased,
-                                         //     ReErased,
-                                         //     (),
-                                         //     (),
-                                         //     (),
-                                         //     {()},
-                                         //     (),
-                                         // ]
-                                         // + movability: Movable
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:119:6: 119:6
+        _0 = [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11 (#0)];
+        return;
     }
 }
 
 fn <impl at ui/impl-trait/lifetimes.rs:112:1: 112:34>::generator_doesnt_capture_unnecessary_lifetime::{closure#0}(_1: Pin<&mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]>, _2: ()) -> GeneratorState<(), ()> {
-    let mut _0: std::ops::GeneratorState<(), ()>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-    let mut _3: ();                      // in scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
-    let mut _4: ();                      // in scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:12
-    let mut _5: u32;                     // in scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-    let mut _6: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]; // in scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-    let mut _7: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]; // in scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-    let mut _8: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]; // in scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
+    let mut _0: std::ops::GeneratorState<(), ()>;
+    let mut _3: ();
+    let mut _4: u32;
+    let mut _5: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11];
+    let mut _6: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11];
+    let mut _7: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11];
 
     bb0: {
-        _6 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]); // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-        _5 = discriminant((*_6));        // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-        switchInt(move _5) -> [0: bb1, 1: bb3, 3: bb2, otherwise: bb4]; // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
+        _5 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]);
+        _4 = discriminant((*_5));
+        switchInt(move _4) -> [0: bb1, 1: bb3, 3: bb2, otherwise: bb4];
     }
 
     bb1: {
-        _3 = ();                         // scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
-        _0 = GeneratorState::<(), ()>::Yielded(move _3); // scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
-        _7 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]); // scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
-        discriminant((*_7)) = 3;         // scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:118:12: 118:17
+        _3 = ();
+        _0 = GeneratorState::<(), ()>::Yielded(move _3);
+        _6 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]);
+        discriminant((*_6)) = 3;
+        return;
     }
 
     bb2: {
-        _4 = move _2;                    // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
-        _0 = GeneratorState::<(), ()>::Complete(move _4); // scope 0 at ui/impl-trait/lifetimes.rs:118:17: 118:17
-        _8 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]); // scope 0 at ui/impl-trait/lifetimes.rs:118:17: 118:17
-        discriminant((*_8)) = 1;         // scope 0 at ui/impl-trait/lifetimes.rs:118:17: 118:17
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:118:17: 118:17
+        _0 = GeneratorState::<(), ()>::Complete(move _2);
+        _7 = deref_copy (_1.0: &mut [generator@ui/impl-trait/lifetimes.rs:118:9: 118:11]);
+        discriminant((*_7)) = 1;
+        return;
     }
 
     bb3: {
-        assert(const false, "generator resumed after completion") -> bb3; // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
+        assert(const false, "generator resumed after completion") -> [success: bb3, unwind continue];
     }
 
     bb4: {
-        unreachable;                     // scope 0 at ui/impl-trait/lifetimes.rs:118:9: 118:17
+        unreachable;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/lifetimes.rs:123:11: 123:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:123:13: 123:13
+        return;
     }
 }
 
 fn SingleRegionStruct(_1: &u32) -> SingleRegionStruct<'_> {
-    let mut _0: SingleRegionStruct<'_>;  // return place in scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
+    let mut _0: SingleRegionStruct<'_>;
 
     bb0: {
-        _0 = SingleRegionStruct::<'_>(move _1); // scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
+        _0 = SingleRegionStruct::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn SingleRegionStruct(_1: &u32) -> SingleRegionStruct<'_> {
-    let mut _0: SingleRegionStruct<'_>;  // return place in scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
+    let mut _0: SingleRegionStruct<'_>;
 
     bb0: {
-        _0 = SingleRegionStruct::<'_>(move _1); // scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:32:1: 32:30
+        _0 = SingleRegionStruct::<'_>(move _1);
+        return;
     }
 }
 
 fn MultiRegionStruct(_1: &u32, _2: &u32) -> MultiRegionStruct<'_, '_> {
-    let mut _0: MultiRegionStruct<'_, '_>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
+    let mut _0: MultiRegionStruct<'_, '_>;
 
     bb0: {
-        _0 = MultiRegionStruct::<'_, '_>(move _1, move _2); // scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
+        _0 = MultiRegionStruct::<'_, '_>(move _1, move _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn MultiRegionStruct(_1: &u32, _2: &u32) -> MultiRegionStruct<'_, '_> {
-    let mut _0: MultiRegionStruct<'_, '_>; // return place in scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
+    let mut _0: MultiRegionStruct<'_, '_>;
 
     bb0: {
-        _0 = MultiRegionStruct::<'_, '_>(move _1, move _2); // scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:69:1: 69:33
+        _0 = MultiRegionStruct::<'_, '_>(move _1, move _2);
+        return;
     }
 }
 
 fn MyVec(_1: Vec<Vec<u8>>) -> MyVec {
-    let mut _0: MyVec;                   // return place in scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
+    let mut _0: MyVec;
 
     bb0: {
-        _0 = MyVec(move _1);             // scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
+        _0 = MyVec(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn MyVec(_1: Vec<Vec<u8>>) -> MyVec {
-    let mut _0: MyVec;                   // return place in scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
+    let mut _0: MyVec;
 
     bb0: {
-        _0 = MyVec(move _1);             // scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
-        return;                          // scope 0 at ui/impl-trait/lifetimes.rs:110:1: 110:13
+        _0 = MyVec(move _1);
+        return;
     }
 }

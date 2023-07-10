@@ -1,27 +1,37 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/empty-allocation-rvalue-non-null.rs:6:15: 6:15
-    let _1: ();                          // in scope 0 at ui/empty-allocation-rvalue-non-null.rs:7:9: 7:10
-    let mut _2: std::boxed::Box<()>;     // in scope 0 at ui/empty-allocation-rvalue-non-null.rs:7:14: 7:26
-    let mut _3: ();                      // in scope 0 at ui/empty-allocation-rvalue-non-null.rs:7:23: 7:25
+    let mut _0: ();
+    let mut _1: std::boxed::Box<()>;
+    let mut _2: *const ();
+    let mut _3: usize;
+    let mut _4: usize;
+    let mut _5: usize;
+    let mut _6: usize;
+    let mut _7: bool;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/empty-allocation-rvalue-non-null.rs:7:9: 7:10
+        debug x => const ();
     }
 
     bb0: {
-        _2 = Box::<()>::new(move _3) -> bb1; // scope 0 at ui/empty-allocation-rvalue-non-null.rs:7:14: 7:26
-                                         // mir::Constant
-                                         // + span: ui/empty-allocation-rvalue-non-null.rs:7:14: 7:22
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(()) -> Box<()> {Box::<()>::new}, val: Value(<ZST>) }
+        _1 = Box::<()>::new(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        drop(_2) -> bb2;                 // scope 0 at ui/empty-allocation-rvalue-non-null.rs:7:26: 7:27
+        _2 = (((_1.0: std::ptr::Unique<()>).0: std::ptr::NonNull<()>).0: *const ());
+        _3 = _2 as usize (Transmute);
+        _4 = AlignOf(());
+        _5 = Sub(_4, const 1_usize);
+        _6 = BitAnd(_3, _5);
+        _7 = Eq(_6, const 0_usize);
+        assert(_7, "misaligned pointer dereference: address must be a multiple of {} but is {}", _4, _3) -> [success: bb3, unwind unreachable];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/empty-allocation-rvalue-non-null.rs:8:2: 8:2
+        return;
+    }
+
+    bb3: {
+        drop(_1) -> [return: bb2, unwind continue];
     }
 }

@@ -1,93 +1,83 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/traits/copy-requires-self-wf.rs:3:10: 3:15>::clone(_1: &A<'_, T>) -> A<'_, T> {
-    debug self => _1;                    // in scope 0 at ui/traits/copy-requires-self-wf.rs:3:10: 3:15
-    let mut _0: A<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:3:10: 3:15
-    let mut _2: &T;                      // in scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-    let _3: &T;                          // in scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-    let mut _4: &&T;                     // in scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-    let _5: &&T;                         // in scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
+    debug self => _1;
+    let mut _0: A<'_, T>;
+    let mut _2: &T;
+    let _3: &T;
+    let _4: &&T;
 
     bb0: {
-        _5 = &((*_1).0: &T);             // scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-        _4 = _5;                         // scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-        _3 = <&T as Clone>::clone(move _4) -> bb1; // scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-                                         // mir::Constant
-                                         // + span: ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-                                         // + literal: Const { ty: for<'a> fn(&'a &T) -> &T {<&T as Clone>::clone}, val: Value(<ZST>) }
+        _4 = &((*_1).0: &T);
+        _3 = <&T as Clone>::clone(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = _3;                         // scope 0 at ui/traits/copy-requires-self-wf.rs:4:17: 4:22
-        _0 = A::<'_, T>(move _2);        // scope 0 at ui/traits/copy-requires-self-wf.rs:3:10: 3:15
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:3:15: 3:15
+        _2 = _3;
+        _0 = A::<'_, T>(move _2);
+        return;
     }
 }
 
 fn <impl at ui/traits/copy-requires-self-wf.rs:8:10: 8:15>::clone(_1: &B<'_, T>) -> B<'_, T> {
-    debug self => _1;                    // in scope 0 at ui/traits/copy-requires-self-wf.rs:8:10: 8:15
-    let mut _0: B<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:8:10: 8:15
-    let mut _2: A<'_, T>;                // in scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-    let mut _3: &A<'_, T>;               // in scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-    let _4: &A<'_, T>;                   // in scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
+    debug self => _1;
+    let mut _0: B<'_, T>;
+    let mut _2: A<'_, T>;
+    let _3: &A<'_, T>;
 
     bb0: {
-        _4 = &((*_1).0: A<'_, T>);       // scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-        _3 = _4;                         // scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-        _2 = <A<'_, T> as Clone>::clone(move _3) -> bb1; // scope 0 at ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-                                         // mir::Constant
-                                         // + span: ui/traits/copy-requires-self-wf.rs:9:17: 9:25
-                                         // + literal: Const { ty: for<'a> fn(&'a A<'_, T>) -> A<'_, T> {<A<'_, T> as Clone>::clone}, val: Value(<ZST>) }
+        _3 = &((*_1).0: A<'_, T>);
+        _2 = <A<'_, T> as Clone>::clone(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = B::<'_, T>(move _2);        // scope 0 at ui/traits/copy-requires-self-wf.rs:8:10: 8:15
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:8:15: 8:15
+        _0 = B::<'_, T>(move _2);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:14:11: 14:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:14:13: 14:13
+        return;
     }
 }
 
 fn A(_1: &T) -> A<'_, T> {
-    let mut _0: A<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
+    let mut _0: A<'_, T>;
 
     bb0: {
-        _0 = A::<'_, T>(move _1);        // scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
+        _0 = A::<'_, T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn A(_1: &T) -> A<'_, T> {
-    let mut _0: A<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
+    let mut _0: A<'_, T>;
 
     bb0: {
-        _0 = A::<'_, T>(move _1);        // scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:4:1: 4:16
+        _0 = A::<'_, T>(move _1);
+        return;
     }
 }
 
 fn B(_1: A<'_, T>) -> B<'_, T> {
-    let mut _0: B<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
+    let mut _0: B<'_, T>;
 
     bb0: {
-        _0 = B::<'_, T>(move _1);        // scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
+        _0 = B::<'_, T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn B(_1: A<'_, T>) -> B<'_, T> {
-    let mut _0: B<'_, T>;                // return place in scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
+    let mut _0: B<'_, T>;
 
     bb0: {
-        _0 = B::<'_, T>(move _1);        // scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
-        return;                          // scope 0 at ui/traits/copy-requires-self-wf.rs:9:1: 9:16
+        _0 = B::<'_, T>(move _1);
+        return;
     }
 }

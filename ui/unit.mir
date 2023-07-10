@@ -1,34 +1,29 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f(_1: ()) -> () {
-    debug u => _1;                       // in scope 0 at ui/unit.rs:10:6: 10:7
-    let mut _0: ();                      // return place in scope 0 at ui/unit.rs:10:13: 10:13
+    debug u => const ();
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/unit.rs:10:26: 10:26
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/unit.rs:12:15: 12:15
-    let _1: ();                          // in scope 0 at ui/unit.rs:13:9: 13:11
-    let mut _3: ();                      // in scope 0 at ui/unit.rs:14:24: 14:26
+    let mut _0: ();
     scope 1 {
-        debug u1 => _1;                  // in scope 1 at ui/unit.rs:13:9: 13:11
-        let mut _2: ();                  // in scope 1 at ui/unit.rs:14:9: 14:15
+        debug u1 => const ();
+        let mut _1: ();
         scope 2 {
-            debug u2 => _2;              // in scope 2 at ui/unit.rs:14:9: 14:15
+            debug u2 => const ();
         }
     }
 
     bb0: {
-        _2 = f(move _3) -> bb1;          // scope 1 at ui/unit.rs:14:22: 14:27
-                                         // mir::Constant
-                                         // + span: ui/unit.rs:14:22: 14:23
-                                         // + literal: Const { ty: fn(()) {f}, val: Value(<ZST>) }
+        _1 = f(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/unit.rs:17:2: 17:2
+        return;
     }
 }

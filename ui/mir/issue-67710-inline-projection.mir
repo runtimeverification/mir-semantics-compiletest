@@ -1,37 +1,22 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn parse(_1: ()) -> () {
-    debug version => _1;                 // in scope 0 at ui/mir/issue-67710-inline-projection.rs:7:14: 7:21
-    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-67710-inline-projection.rs:7:27: 7:27
-    let _2: ();                          // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:5: 8:19
-    let mut _3: &u8;                     // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-    let _4: &u8;                         // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-    let mut _5: &[u8];                   // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-    let mut _6: &[u8; 1];                // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-    let _7: &[u8; 1];                    // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-    let mut _8: &u8;                     // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
+    debug version => const ();
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &[u8];
+    let _4: &[u8; 1];
+    let mut _5: &u8;
 
     bb0: {
-        _8 = const _;                    // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-                                         // + literal: Const { ty: &u8, val: Unevaluated(parse, [], Some(promoted[0])) }
-        _4 = _8;                         // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-        _3 = _4;                         // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-        _7 = const b"0";                 // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-                                         // + literal: Const { ty: &[u8; 1], val: Value(Scalar(alloc1)) }
-        _6 = _7;                         // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-        _5 = move _6 as &[u8] (Pointer(Unsize)); // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:14: 8:18
-        _2 = p(move _3, move _5) -> bb1; // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:5: 8:19
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-67710-inline-projection.rs:8:5: 8:6
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a u8, &'b [u8]) {p}, val: Value(<ZST>) }
+        _5 = const _;
+        _4 = const b"0";
+        _3 = _4 as &[u8] (Pointer(Unsize));
+        _2 = p(_5, move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/issue-67710-inline-projection.rs:9:2: 9:2
+        return;
     }
 }
 
@@ -40,49 +25,45 @@ alloc1 (size: 1, align: 1) {
 }
 
 promoted[0] in parse: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-    let mut _1: u8;                      // in scope 0 at ui/mir/issue-67710-inline-projection.rs:8:8: 8:12
+    let mut _0: &u8;
+    let mut _1: u8;
 
     bb0: {
-        _1 = const 46_u8;                // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:8: 8:12
-        _0 = &_1;                        // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
-        return;                          // scope 0 at ui/mir/issue-67710-inline-projection.rs:8:7: 8:12
+        _1 = const 46_u8;
+        _0 = &_1;
+        return;
     }
 }
 
 fn p(_1: &u8, _2: &[u8]) -> () {
-    debug byte => _1;                    // in scope 0 at ui/mir/issue-67710-inline-projection.rs:11:6: 11:10
-    debug s => _2;                       // in scope 0 at ui/mir/issue-67710-inline-projection.rs:11:17: 11:18
-    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-67710-inline-projection.rs:11:27: 11:27
-    let _3: usize;                       // in scope 0 at ui/mir/issue-67710-inline-projection.rs:12:9: 12:10
-    let mut _4: usize;                   // in scope 0 at ui/mir/issue-67710-inline-projection.rs:12:7: 12:11
-    let mut _5: bool;                    // in scope 0 at ui/mir/issue-67710-inline-projection.rs:12:7: 12:11
+    debug byte => _1;
+    debug s => _2;
+    let mut _0: ();
+    let _3: usize;
+    let mut _4: usize;
+    let mut _5: bool;
 
     bb0: {
-        _3 = const 0_usize;              // scope 0 at ui/mir/issue-67710-inline-projection.rs:12:9: 12:10
-        _4 = Len((*_2));                 // scope 0 at ui/mir/issue-67710-inline-projection.rs:12:7: 12:11
-        _5 = Lt(_3, _4);                 // scope 0 at ui/mir/issue-67710-inline-projection.rs:12:7: 12:11
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1; // scope 0 at ui/mir/issue-67710-inline-projection.rs:12:7: 12:11
+        _3 = const 0_usize;
+        _4 = Len((*_2));
+        _5 = Lt(_3, _4);
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/issue-67710-inline-projection.rs:13:2: 13:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-67710-inline-projection.rs:15:11: 15:11
-    let _1: ();                          // in scope 0 at ui/mir/issue-67710-inline-projection.rs:16:5: 16:14
-    let mut _2: ();                      // in scope 0 at ui/mir/issue-67710-inline-projection.rs:16:11: 16:13
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = parse(move _2) -> bb1;      // scope 0 at ui/mir/issue-67710-inline-projection.rs:16:5: 16:14
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-67710-inline-projection.rs:16:5: 16:10
-                                         // + literal: Const { ty: fn(()) {parse}, val: Value(<ZST>) }
+        _1 = parse(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/issue-67710-inline-projection.rs:17:2: 17:2
+        return;
     }
 }

@@ -1,70 +1,58 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/borrowck/two-phase-multiple-activations.rs:11:1: 11:22>::read_to_end(_1: &mut Foo, _2: &mut Vec<u8>) -> Result<usize, std::io::Error> {
-    debug self => _1;                    // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:12:20: 12:29
-    debug _buf => _2;                    // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:12:31: 12:35
-    let mut _0: std::result::Result<usize, std::io::Error>; // return place in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:12:54: 12:67
+    debug self => _1;
+    debug _buf => _2;
+    let mut _0: std::result::Result<usize, std::io::Error>;
 
     bb0: {
-        _0 = Result::<usize, std::io::Error>::Ok(const 4_usize); // scope 0 at ui/borrowck/two-phase-multiple-activations.rs:13:9: 13:14
-        return;                          // scope 0 at ui/borrowck/two-phase-multiple-activations.rs:14:6: 14:6
+        _0 = Result::<usize, std::io::Error>::Ok(const 4_usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:17:11: 17:11
-    let mut _1: Foo;                     // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:18:9: 18:14
-    let _3: usize;                       // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:35
-    let mut _4: std::result::Result<usize, std::io::Error>; // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:26
-    let mut _5: &mut Foo;                // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:26
-    let mut _6: &mut std::vec::Vec<u8>;  // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:20:19: 20:25
-    let mut _7: &mut std::vec::Vec<u8>;  // in scope 0 at ui/borrowck/two-phase-multiple-activations.rs:20:19: 20:25
+    let mut _0: ();
+    let mut _1: Foo;
+    let _3: usize;
+    let mut _4: std::result::Result<usize, std::io::Error>;
+    let mut _5: &mut Foo;
+    let mut _6: &mut std::vec::Vec<u8>;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/borrowck/two-phase-multiple-activations.rs:18:9: 18:14
-        let mut _2: std::vec::Vec<u8>;   // in scope 1 at ui/borrowck/two-phase-multiple-activations.rs:19:9: 19:14
+        debug a => const Foo {{  }};
+        let mut _2: std::vec::Vec<u8>;
         scope 2 {
-            debug v => _2;               // in scope 2 at ui/borrowck/two-phase-multiple-activations.rs:19:9: 19:14
+            debug v => _2;
         }
     }
 
     bb0: {
-        _2 = Vec::<u8>::new() -> bb1;    // scope 1 at ui/borrowck/two-phase-multiple-activations.rs:19:17: 19:27
-                                         // mir::Constant
-                                         // + span: ui/borrowck/two-phase-multiple-activations.rs:19:17: 19:25
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> Vec<u8> {Vec::<u8>::new}, val: Value(<ZST>) }
+        _2 = Vec::<u8>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = &mut _1;                    // scope 2 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:26
-        _7 = &mut _2;                    // scope 2 at ui/borrowck/two-phase-multiple-activations.rs:20:19: 20:25
-        _6 = &mut (*_7);                 // scope 2 at ui/borrowck/two-phase-multiple-activations.rs:20:19: 20:25
-        _4 = <Foo as FakeRead>::read_to_end(move _5, move _6) -> [return: bb2, unwind: bb5]; // scope 2 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:26
-                                         // mir::Constant
-                                         // + span: ui/borrowck/two-phase-multiple-activations.rs:20:7: 20:18
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut Foo, &'b mut Vec<u8>) -> Result<usize, std::io::Error> {<Foo as FakeRead>::read_to_end}, val: Value(<ZST>) }
+        _5 = &mut _1;
+        _6 = &mut _2;
+        _4 = <Foo as FakeRead>::read_to_end(move _5, _6) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        _3 = Result::<usize, std::io::Error>::unwrap(move _4) -> [return: bb3, unwind: bb5]; // scope 2 at ui/borrowck/two-phase-multiple-activations.rs:20:5: 20:35
-                                         // mir::Constant
-                                         // + span: ui/borrowck/two-phase-multiple-activations.rs:20:27: 20:33
-                                         // + literal: Const { ty: fn(Result<usize, std::io::Error>) -> usize {Result::<usize, std::io::Error>::unwrap}, val: Value(<ZST>) }
+        _3 = Result::<usize, std::io::Error>::unwrap(move _4) -> [return: bb3, unwind: bb5];
     }
 
     bb3: {
-        drop(_2) -> bb4;                 // scope 1 at ui/borrowck/two-phase-multiple-activations.rs:21:1: 21:2
+        drop(_2) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/borrowck/two-phase-multiple-activations.rs:21:2: 21:2
+        return;
     }
 
     bb5 (cleanup): {
-        drop(_2) -> bb6;                 // scope 1 at ui/borrowck/two-phase-multiple-activations.rs:21:1: 21:2
+        drop(_2) -> [return: bb6, unwind terminate];
     }
 
     bb6 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/two-phase-multiple-activations.rs:17:1: 21:2
+        resume;
     }
 }

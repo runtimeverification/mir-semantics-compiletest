@@ -1,767 +1,546 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/overloaded/overloaded-autoderef-order.rs:8:16: 8:21>::clone(_1: &DerefWrapper<X, Y>) -> DerefWrapper<X, Y> {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:16: 8:21
-    let mut _0: DerefWrapper<X, Y>;      // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:16: 8:21
-    let mut _2: X;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-    let mut _3: &X;                      // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-    let _4: &X;                          // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-    let mut _5: Y;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-    let mut _6: &Y;                      // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-    let _7: &Y;                          // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
+    debug self => _1;
+    let mut _0: DerefWrapper<X, Y>;
+    let mut _2: X;
+    let _3: &X;
+    let mut _4: Y;
+    let _5: &Y;
 
     bb0: {
-        _4 = &((*_1).0: X);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-        _3 = _4;                         // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-        _2 = <X as Clone>::clone(move _3) -> bb1; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:10:5: 10:9
-                                         // + literal: Const { ty: for<'a> fn(&'a X) -> X {<X as Clone>::clone}, val: Value(<ZST>) }
+        _3 = &((*_1).0: X);
+        _2 = <X as Clone>::clone(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &((*_1).1: Y);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-        _6 = _7;                         // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-        _5 = <Y as Clone>::clone(move _6) -> [return: bb2, unwind: bb3]; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:11:5: 11:9
-                                         // + literal: Const { ty: for<'a> fn(&'a Y) -> Y {<Y as Clone>::clone}, val: Value(<ZST>) }
+        _5 = &((*_1).1: Y);
+        _4 = <Y as Clone>::clone(_5) -> [return: bb2, unwind: bb3];
     }
 
     bb2: {
-        _0 = DerefWrapper::<X, Y> { x: move _2, y: move _5 }; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:16: 8:21
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:21: 8:21
+        _0 = DerefWrapper::<X, Y> { x: move _2, y: move _4 };
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_2) -> bb4;                 // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:20: 8:21
+        drop(_2) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:8:16: 8:21
+        resume;
     }
 }
 
 fn <impl at ui/overloaded/overloaded-autoderef-order.rs:14:1: 14:30>::get_x(_1: DerefWrapper<X, Y>) -> X {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:15:14: 15:18
-    let mut _0: X;                       // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:15:23: 15:24
+    debug self => _1;
+    let mut _0: X;
 
     bb0: {
-        _0 = move (_1.0: X);             // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:16:9: 16:15
-        drop((_1.1: Y)) -> bb1;          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:17:5: 17:6
+        _0 = move (_1.0: X);
+        drop((_1.1: Y)) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:17:6: 17:6
+        return;
     }
 }
 
 fn <impl at ui/overloaded/overloaded-autoderef-order.rs:20:1: 20:40>::deref(_1: &DerefWrapper<X, Y>) -> &Y {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:23:14: 23:19
-    let mut _0: &Y;                      // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:24:9: 24:16
+    debug self => _1;
+    let mut _0: &Y;
 
     bb0: {
-        _0 = &((*_1).1: Y);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:24:9: 24:16
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:25:6: 25:6
+        _0 = &((*_1).1: Y);
+        return;
     }
 }
 
 fn priv_test::<impl at ui/overloaded/overloaded-autoderef-order.rs:31:20: 31:25>::clone(_1: &DerefWrapperHideX<X, Y>) -> DerefWrapperHideX<X, Y> {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:20: 31:25
-    let mut _0: priv_test::DerefWrapperHideX<X, Y>; // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:20: 31:25
-    let mut _2: X;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-    let mut _3: &X;                      // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-    let _4: &X;                          // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-    let mut _5: Y;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-    let mut _6: &Y;                      // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-    let _7: &Y;                          // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
+    debug self => _1;
+    let mut _0: priv_test::DerefWrapperHideX<X, Y>;
+    let mut _2: X;
+    let _3: &X;
+    let mut _4: Y;
+    let _5: &Y;
 
     bb0: {
-        _4 = &((*_1).0: X);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-        _3 = _4;                         // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-        _2 = <X as Clone>::clone(move _3) -> bb1; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:33:9: 33:13
-                                         // + literal: Const { ty: for<'a> fn(&'a X) -> X {<X as Clone>::clone}, val: Value(<ZST>) }
+        _3 = &((*_1).0: X);
+        _2 = <X as Clone>::clone(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &((*_1).1: Y);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-        _6 = _7;                         // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-        _5 = <Y as Clone>::clone(move _6) -> [return: bb2, unwind: bb3]; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:34:9: 34:17
-                                         // + literal: Const { ty: for<'a> fn(&'a Y) -> Y {<Y as Clone>::clone}, val: Value(<ZST>) }
+        _5 = &((*_1).1: Y);
+        _4 = <Y as Clone>::clone(_5) -> [return: bb2, unwind: bb3];
     }
 
     bb2: {
-        _0 = DerefWrapperHideX::<X, Y> { x: move _2, y: move _5 }; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:20: 31:25
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:25: 31:25
+        _0 = DerefWrapperHideX::<X, Y> { x: move _2, y: move _4 };
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_2) -> bb4;                 // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:24: 31:25
+        drop(_2) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:31:20: 31:25
+        resume;
     }
 }
 
 fn priv_test::<impl at ui/overloaded/overloaded-autoderef-order.rs:37:5: 37:39>::new(_1: X, _2: Y) -> DerefWrapperHideX<X, Y> {
-    debug x => _1;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:38:20: 38:21
-    debug y => _2;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:38:26: 38:27
-    let mut _0: priv_test::DerefWrapperHideX<X, Y>; // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:38:35: 38:58
-    let mut _3: X;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:40:20: 40:21
-    let mut _4: Y;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:41:20: 41:21
+    debug x => _1;
+    debug y => _2;
+    let mut _0: priv_test::DerefWrapperHideX<X, Y>;
 
     bb0: {
-        _3 = move _1;                    // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:40:20: 40:21
-        _4 = move _2;                    // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:41:20: 41:21
-        _0 = DerefWrapperHideX::<X, Y> { x: move _3, y: move _4 }; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:39:13: 42:14
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:43:10: 43:10
+        _0 = DerefWrapperHideX::<X, Y> { x: move _1, y: move _2 };
+        return;
     }
 }
 
 fn priv_test::<impl at ui/overloaded/overloaded-autoderef-order.rs:46:5: 46:49>::deref(_1: &DerefWrapperHideX<X, Y>) -> &Y {
-    debug self => _1;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:49:18: 49:23
-    let mut _0: &Y;                      // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:50:13: 50:20
+    debug self => _1;
+    let mut _0: &Y;
 
     bb0: {
-        _0 = &((*_1).1: Y);              // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:50:13: 50:20
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:51:10: 51:10
+        _0 = &((*_1).1: Y);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:55:15: 55:15
-    let _1: DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:56:9: 56:15
-    let mut _2: DerefWrapper<i32, i32>;  // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:56:44: 56:69
-    let mut _3: (&bool, &bool);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _4: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _5: &bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _13: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _14: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _15: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _16: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _17: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _18: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _20: (&i32, &i32);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _21: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _22: &DerefWrapper<i32, i32>;    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:60:16: 60:25
-    let mut _23: &DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:60:18: 60:24
-    let mut _24: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _27: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _28: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _29: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _30: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _32: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _33: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _34: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _35: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _36: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _37: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _38: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _39: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _40: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _41: bool;                       // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:64:16: 64:30
-    let mut _42: DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:64:16: 64:22
-    let mut _43: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _46: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _47: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _48: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _49: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _51: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _52: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _53: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _54: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _55: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _56: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _57: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _58: (&i32, &i32);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _59: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _60: i32;                        // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:33
-    let mut _61: DerefWrapper<i32, i32>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:25
-    let mut _62: &DerefWrapper<i32, i32>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:25
-    let mut _63: &DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:18: 65:24
-    let mut _64: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _67: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _68: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _69: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _70: i32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _72: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _73: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _74: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _75: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _76: &i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _77: &i32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _78: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _79: (&bool, &bool);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _80: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _81: &DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:33
-    let mut _82: &std::rc::Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:31
-    let _83: std::rc::Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:31
-    let mut _84: DerefWrapper<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:24: 68:30
-    let mut _85: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _88: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _89: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _90: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _91: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _93: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _94: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _95: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _96: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _97: &bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _98: &bool;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _99: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _101: DerefWrapper<i32, i32>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:70:63: 70:88
-    let mut _102: (&i32, &i32);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _103: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _104: &DerefWrapper<i32, i32>;   // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:71:16: 71:29
-    let mut _105: &priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:71:16: 71:27
-    let mut _106: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _109: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _110: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _111: i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _112: i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _114: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _115: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _116: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _117: &i32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _118: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _119: &i32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _120: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _121: (&i32, &i32);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _122: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _123: &DerefWrapper<i32, i32>;   // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:72:16: 72:30
-    let mut _124: &priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>; // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:72:18: 72:29
-    let mut _125: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _128: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _129: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _130: i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _131: i32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _133: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _134: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _135: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _136: &i32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _137: &i32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _138: &i32;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _139: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _2: DerefWrapper<i32, i32>;
+    let mut _3: (&bool, &bool);
+    let mut _4: &bool;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: bool;
+    let mut _10: bool;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _14: (&i32, &i32);
+    let mut _15: &i32;
+    let _16: &DerefWrapper<i32, i32>;
+    let mut _17: &DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _20: bool;
+    let mut _21: bool;
+    let mut _22: i32;
+    let mut _23: i32;
+    let _25: !;
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _27: (&bool, &bool);
+    let mut _28: &bool;
+    let _29: bool;
+    let mut _30: DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _33: bool;
+    let mut _34: bool;
+    let mut _35: bool;
+    let mut _36: bool;
+    let _38: !;
+    let mut _39: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _40: (&i32, &i32);
+    let mut _41: &i32;
+    let _42: i32;
+    let mut _43: DerefWrapper<i32, i32>;
+    let mut _44: &DerefWrapper<i32, i32>;
+    let mut _45: &DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _48: bool;
+    let mut _49: bool;
+    let mut _50: i32;
+    let mut _51: i32;
+    let _53: !;
+    let mut _54: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _55: (&bool, &bool);
+    let mut _56: &bool;
+    let _57: &DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _58: &std::rc::Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>>;
+    let _59: std::rc::Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>>;
+    let mut _60: DerefWrapper<bool, DerefWrapper<i32, i32>>;
+    let mut _63: bool;
+    let mut _64: bool;
+    let mut _65: bool;
+    let mut _66: bool;
+    let _68: !;
+    let mut _69: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _71: DerefWrapper<i32, i32>;
+    let mut _72: (&i32, &i32);
+    let mut _73: &i32;
+    let _74: &DerefWrapper<i32, i32>;
+    let mut _75: &priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>;
+    let mut _78: bool;
+    let mut _79: bool;
+    let mut _80: i32;
+    let mut _81: i32;
+    let _83: !;
+    let mut _84: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _85: (&i32, &i32);
+    let mut _86: &i32;
+    let _87: &DerefWrapper<i32, i32>;
+    let mut _88: &priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>;
+    let mut _91: bool;
+    let mut _92: bool;
+    let mut _93: i32;
+    let mut _94: i32;
+    let _96: !;
+    let mut _97: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug nested => _1;              // in scope 1 at ui/overloaded/overloaded-autoderef-order.rs:56:9: 56:15
-        let _6: &bool;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _7: &bool;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _25: &i32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _26: &i32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _44: &bool;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _45: &bool;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _65: &i32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _66: &i32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _86: &bool;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _87: &bool;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _100: priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>; // in scope 1 at ui/overloaded/overloaded-autoderef-order.rs:70:9: 70:20
-        let mut _142: &bool;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        let mut _143: &i32;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        let mut _144: &bool;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        let mut _145: &i32;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        let mut _146: &bool;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug nested => _1;
+        let _5: &bool;
+        let _6: &bool;
+        let _18: &i32;
+        let _19: &i32;
+        let _31: &bool;
+        let _32: &bool;
+        let _46: &i32;
+        let _47: &i32;
+        let _61: &bool;
+        let _62: &bool;
+        let _70: priv_test::DerefWrapperHideX<bool, DerefWrapper<i32, i32>>;
+        let mut _100: &bool;
+        let mut _101: &i32;
+        let mut _102: &bool;
+        let mut _103: &i32;
+        let mut _104: &bool;
         scope 2 {
-            debug left_val => _6;        // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _7;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _12: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _5;
+            debug right_val => _6;
+            let _11: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _12;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _11;
             }
         }
         scope 4 {
-            debug left_val => _25;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _26;      // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _31: core::panicking::AssertKind; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _18;
+            debug right_val => _19;
+            let _24: core::panicking::AssertKind;
             scope 5 {
-                debug kind => _31;       // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _24;
             }
         }
         scope 6 {
-            debug left_val => _44;       // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _45;      // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _50: core::panicking::AssertKind; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _31;
+            debug right_val => _32;
+            let _37: core::panicking::AssertKind;
             scope 7 {
-                debug kind => _50;       // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _37;
             }
         }
         scope 8 {
-            debug left_val => _65;       // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _66;      // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _71: core::panicking::AssertKind; // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _46;
+            debug right_val => _47;
+            let _52: core::panicking::AssertKind;
             scope 9 {
-                debug kind => _71;       // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _52;
             }
         }
         scope 10 {
-            debug left_val => _86;       // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _87;      // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _92: core::panicking::AssertKind; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _61;
+            debug right_val => _62;
+            let _67: core::panicking::AssertKind;
             scope 11 {
-                debug kind => _92;       // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _67;
             }
         }
         scope 12 {
-            debug nested_priv => _100;   // in scope 12 at ui/overloaded/overloaded-autoderef-order.rs:70:9: 70:20
-            let _107: &i32;              // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _108: &i32;              // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _126: &i32;              // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _127: &i32;              // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _140: &i32;          // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-            let mut _141: &i32;          // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug nested_priv => _70;
+            let _76: &i32;
+            let _77: &i32;
+            let _89: &i32;
+            let _90: &i32;
+            let mut _98: &i32;
+            let mut _99: &i32;
             scope 13 {
-                debug left_val => _107;  // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _108; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _113: core::panicking::AssertKind; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _76;
+                debug right_val => _77;
+                let _82: core::panicking::AssertKind;
                 scope 14 {
-                    debug kind => _113;  // in scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _82;
                 }
             }
             scope 15 {
-                debug left_val => _126;  // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _127; // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _132: core::panicking::AssertKind; // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _89;
+                debug right_val => _90;
+                let _95: core::panicking::AssertKind;
                 scope 16 {
-                    debug kind => _132;  // in scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _95;
                 }
             }
         }
     }
 
     bb0: {
-        _2 = DerefWrapper::<i32, i32> { x: const 0_i32, y: const 1_i32 }; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:56:44: 56:69
-        _1 = DerefWrapper::<bool, DerefWrapper<i32, i32>> { x: const true, y: move _2 }; // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:56:18: 56:70
-        _4 = &(_1.0: bool);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _146 = const _;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[6])) }
-        _5 = _146;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _3 = (move _4, move _5);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _6 = (_3.0: &bool);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _7 = (_3.1: &bool);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _10 = (*_6);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _11 = const true;                // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _9 = Eq(move _10, move _11);     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _8 = Not(move _9);               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _8) -> [0: bb2, otherwise: bb1]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _2 = DerefWrapper::<i32, i32> { x: const 0_i32, y: const 1_i32 };
+        _1 = DerefWrapper::<bool, DerefWrapper<i32, i32>> { x: const true, y: move _2 };
+        _4 = &(_1.0: bool);
+        _104 = const _;
+        _3 = (move _4, _104);
+        _5 = (_3.0: &bool);
+        _6 = (_3.1: &bool);
+        _9 = (*_5);
+        _10 = (*_6);
+        _8 = Eq(move _9, move _10);
+        _7 = Not(move _8);
+        switchInt(move _7) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _12 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _14 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _16 = _6;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _15 = _16;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _18 = _7;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _17 = _18;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _19 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _13 = core::panicking::assert_failed::<bool, bool>(move _14, move _15, move _17, move _19); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<bool, bool>(move _11, _5, _6, move _13) -> unwind continue;
     }
 
     bb2: {
-        _23 = &_1;                       // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:60:18: 60:24
-        _22 = <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _23) -> bb3; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:60:16: 60:25
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:60:16: 60:25
-                                         // + literal: Const { ty: for<'a> fn(&'a DerefWrapper<bool, DerefWrapper<i32, i32>>) -> &'a <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::Target {<DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _17 = &_1;
+        _16 = <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _17) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _21 = &((*_22).0: i32);          // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _145 = const _;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[5])) }
-        _24 = _145;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _20 = (move _21, move _24);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _25 = (_20.0: &i32);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _26 = (_20.1: &i32);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _29 = (*_25);                    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _30 = const 0_i32;               // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _28 = Eq(move _29, move _30);    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _27 = Not(move _28);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _27) -> [0: bb5, otherwise: bb4]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _15 = &((*_16).0: i32);
+        _103 = const _;
+        _14 = (move _15, _103);
+        _18 = (_14.0: &i32);
+        _19 = (_14.1: &i32);
+        _22 = (*_18);
+        _23 = (*_19);
+        _21 = Eq(move _22, move _23);
+        _20 = Not(move _21);
+        switchInt(move _20) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _31 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _33 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _35 = _25;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _34 = _35;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _37 = _26;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _36 = _37;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _38 = Option::<Arguments<'_>>::None; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _32 = core::panicking::assert_failed::<i32, i32>(move _33, move _34, move _36, move _38); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+        _24 = core::panicking::AssertKind::Eq;
+        _26 = Option::<Arguments<'_>>::None;
+        _25 = core::panicking::assert_failed::<i32, i32>(move _24, _18, _19, move _26) -> unwind continue;
     }
 
     bb5: {
-        _42 = _1;                        // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:64:16: 64:22
-        _41 = DerefWrapper::<bool, DerefWrapper<i32, i32>>::get_x(move _42) -> bb6; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:64:16: 64:30
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:64:23: 64:28
-                                         // + literal: Const { ty: fn(DerefWrapper<bool, DerefWrapper<i32, i32>>) -> bool {DerefWrapper::<bool, DerefWrapper<i32, i32>>::get_x}, val: Value(<ZST>) }
+        _30 = _1;
+        _29 = DerefWrapper::<bool, DerefWrapper<i32, i32>>::get_x(move _30) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _40 = &_41;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _144 = const _;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[4])) }
-        _43 = _144;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _39 = (move _40, move _43);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _44 = (_39.0: &bool);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _45 = (_39.1: &bool);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _48 = (*_44);                    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _49 = const true;                // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _47 = Eq(move _48, move _49);    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _46 = Not(move _47);             // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _46) -> [0: bb8, otherwise: bb7]; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _28 = &_29;
+        _102 = const _;
+        _27 = (move _28, _102);
+        _31 = (_27.0: &bool);
+        _32 = (_27.1: &bool);
+        _35 = (*_31);
+        _36 = (*_32);
+        _34 = Eq(move _35, move _36);
+        _33 = Not(move _34);
+        switchInt(move _33) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _50 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _52 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _54 = _44;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _53 = _54;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _56 = _45;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _55 = _56;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _57 = Option::<Arguments<'_>>::None; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _51 = core::panicking::assert_failed::<bool, bool>(move _52, move _53, move _55, move _57); // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+        _37 = core::panicking::AssertKind::Eq;
+        _39 = Option::<Arguments<'_>>::None;
+        _38 = core::panicking::assert_failed::<bool, bool>(move _37, _31, _32, move _39) -> unwind continue;
     }
 
     bb8: {
-        _63 = &_1;                       // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:65:18: 65:24
-        _62 = <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _63) -> bb9; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:25
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:25
-                                         // + literal: Const { ty: for<'a> fn(&'a DerefWrapper<bool, DerefWrapper<i32, i32>>) -> &'a <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::Target {<DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _45 = &_1;
+        _44 = <DerefWrapper<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _45) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        _61 = (*_62);                    // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:25
-        _60 = DerefWrapper::<i32, i32>::get_x(move _61) -> bb10; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:65:16: 65:33
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:65:26: 65:31
-                                         // + literal: Const { ty: fn(DerefWrapper<i32, i32>) -> i32 {DerefWrapper::<i32, i32>::get_x}, val: Value(<ZST>) }
+        _43 = (*_44);
+        _42 = DerefWrapper::<i32, i32>::get_x(move _43) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _59 = &_60;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _143 = const _;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[3])) }
-        _64 = _143;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _58 = (move _59, move _64);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _65 = (_58.0: &i32);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _66 = (_58.1: &i32);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _69 = (*_65);                    // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _70 = const 0_i32;               // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _68 = Eq(move _69, move _70);    // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _67 = Not(move _68);             // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _67) -> [0: bb12, otherwise: bb11]; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _41 = &_42;
+        _101 = const _;
+        _40 = (move _41, _101);
+        _46 = (_40.0: &i32);
+        _47 = (_40.1: &i32);
+        _50 = (*_46);
+        _51 = (*_47);
+        _49 = Eq(move _50, move _51);
+        _48 = Not(move _49);
+        switchInt(move _48) -> [0: bb12, otherwise: bb11];
     }
 
     bb11: {
-        _71 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _73 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _75 = _65;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _74 = _75;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _77 = _66;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _76 = _77;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _78 = Option::<Arguments<'_>>::None; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _72 = core::panicking::assert_failed::<i32, i32>(move _73, move _74, move _76, move _78); // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+        _52 = core::panicking::AssertKind::Eq;
+        _54 = Option::<Arguments<'_>>::None;
+        _53 = core::panicking::assert_failed::<i32, i32>(move _52, _46, _47, move _54) -> unwind continue;
     }
 
     bb12: {
-        _84 = _1;                        // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:68:24: 68:30
-        _83 = Rc::<DerefWrapper<bool, DerefWrapper<i32, i32>>>::new(move _84) -> bb13; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:31
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:23
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(DerefWrapper<bool, DerefWrapper<i32, i32>>) -> Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>> {Rc::<DerefWrapper<bool, DerefWrapper<i32, i32>>>::new}, val: Value(<ZST>) }
+        _60 = _1;
+        _59 = Rc::<DerefWrapper<bool, DerefWrapper<i32, i32>>>::new(move _60) -> [return: bb13, unwind continue];
     }
 
     bb13: {
-        _82 = &_83;                      // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:31
-        _81 = <Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>> as Deref>::deref(move _82) -> [return: bb14, unwind: bb25]; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:33
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:68:16: 68:33
-                                         // + literal: Const { ty: for<'a> fn(&'a Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>>) -> &'a <Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>> as Deref>::Target {<Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>> as Deref>::deref}, val: Value(<ZST>) }
+        _58 = &_59;
+        _57 = <Rc<DerefWrapper<bool, DerefWrapper<i32, i32>>> as Deref>::deref(move _58) -> [return: bb14, unwind: bb25];
     }
 
     bb14: {
-        _80 = &((*_81).0: bool);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _142 = const _;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[2])) }
-        _85 = _142;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _79 = (move _80, move _85);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _86 = (_79.0: &bool);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _87 = (_79.1: &bool);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _90 = (*_86);                    // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _91 = const true;                // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _89 = Eq(move _90, move _91);    // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _88 = Not(move _89);             // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _88) -> [0: bb16, otherwise: bb15]; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _56 = &((*_57).0: bool);
+        _100 = const _;
+        _55 = (move _56, _100);
+        _61 = (_55.0: &bool);
+        _62 = (_55.1: &bool);
+        _65 = (*_61);
+        _66 = (*_62);
+        _64 = Eq(move _65, move _66);
+        _63 = Not(move _64);
+        switchInt(move _63) -> [0: bb16, otherwise: bb15];
     }
 
     bb15: {
-        _92 = const core::panicking::AssertKind::Eq; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _94 = const core::panicking::AssertKind::Eq; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _96 = _86;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _95 = _96;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _98 = _87;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _97 = _98;                       // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _99 = Option::<Arguments<'_>>::None; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _93 = core::panicking::assert_failed::<bool, bool>(move _94, move _95, move _97, move _99) -> bb25; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a bool, &'b bool, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<bool, bool>}, val: Value(<ZST>) }
+        _67 = core::panicking::AssertKind::Eq;
+        _69 = Option::<Arguments<'_>>::None;
+        _68 = core::panicking::assert_failed::<bool, bool>(move _67, _61, _62, move _69) -> bb25;
     }
 
     bb16: {
-        drop(_83) -> bb17;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_59) -> [return: bb17, unwind continue];
     }
 
     bb17: {
-        _101 = DerefWrapper::<i32, i32> { x: const 0_i32, y: const 1_i32 }; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:70:63: 70:88
-        _100 = DerefWrapperHideX::<bool, DerefWrapper<i32, i32>>::new(const true, move _101) -> bb18; // scope 1 at ui/overloaded/overloaded-autoderef-order.rs:70:23: 70:89
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:70:23: 70:56
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(bool, DerefWrapper<i32, i32>) -> DerefWrapperHideX<bool, DerefWrapper<i32, i32>> {DerefWrapperHideX::<bool, DerefWrapper<i32, i32>>::new}, val: Value(<ZST>) }
+        _71 = DerefWrapper::<i32, i32> { x: const 0_i32, y: const 1_i32 };
+        _70 = DerefWrapperHideX::<bool, DerefWrapper<i32, i32>>::new(const true, move _71) -> [return: bb18, unwind continue];
     }
 
     bb18: {
-        _105 = &_100;                    // scope 12 at ui/overloaded/overloaded-autoderef-order.rs:71:16: 71:27
-        _104 = <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _105) -> bb19; // scope 12 at ui/overloaded/overloaded-autoderef-order.rs:71:16: 71:29
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:71:16: 71:29
-                                         // + literal: Const { ty: for<'a> fn(&'a DerefWrapperHideX<bool, DerefWrapper<i32, i32>>) -> &'a <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::Target {<DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _75 = &_70;
+        _74 = <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _75) -> [return: bb19, unwind continue];
     }
 
     bb19: {
-        _103 = &((*_104).0: i32);        // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _141 = const _;                  // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[1])) }
-        _106 = _141;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _102 = (move _103, move _106);   // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _107 = (_102.0: &i32);           // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _108 = (_102.1: &i32);           // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _111 = (*_107);                  // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _112 = const 0_i32;              // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _110 = Eq(move _111, move _112); // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _109 = Not(move _110);           // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _109) -> [0: bb21, otherwise: bb20]; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _73 = &((*_74).0: i32);
+        _99 = const _;
+        _72 = (move _73, _99);
+        _76 = (_72.0: &i32);
+        _77 = (_72.1: &i32);
+        _80 = (*_76);
+        _81 = (*_77);
+        _79 = Eq(move _80, move _81);
+        _78 = Not(move _79);
+        switchInt(move _78) -> [0: bb21, otherwise: bb20];
     }
 
     bb20: {
-        _113 = const core::panicking::AssertKind::Eq; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _115 = const core::panicking::AssertKind::Eq; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _117 = _107;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _116 = _117;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _119 = _108;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _118 = _119;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _120 = Option::<Arguments<'_>>::None; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _114 = core::panicking::assert_failed::<i32, i32>(move _115, move _116, move _118, move _120); // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+        _82 = core::panicking::AssertKind::Eq;
+        _84 = Option::<Arguments<'_>>::None;
+        _83 = core::panicking::assert_failed::<i32, i32>(move _82, _76, _77, move _84) -> unwind continue;
     }
 
     bb21: {
-        _124 = &_100;                    // scope 12 at ui/overloaded/overloaded-autoderef-order.rs:72:18: 72:29
-        _123 = <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _124) -> bb22; // scope 12 at ui/overloaded/overloaded-autoderef-order.rs:72:16: 72:30
-                                         // mir::Constant
-                                         // + span: ui/overloaded/overloaded-autoderef-order.rs:72:16: 72:30
-                                         // + literal: Const { ty: for<'a> fn(&'a DerefWrapperHideX<bool, DerefWrapper<i32, i32>>) -> &'a <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::Target {<DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _88 = &_70;
+        _87 = <DerefWrapperHideX<bool, DerefWrapper<i32, i32>> as Deref>::deref(move _88) -> [return: bb22, unwind continue];
     }
 
     bb22: {
-        _122 = &((*_123).0: i32);        // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _140 = const _;                  // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _125 = _140;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _121 = (move _122, move _125);   // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _126 = (_121.0: &i32);           // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _127 = (_121.1: &i32);           // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _130 = (*_126);                  // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _131 = const 0_i32;              // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _129 = Eq(move _130, move _131); // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _128 = Not(move _129);           // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _128) -> [0: bb24, otherwise: bb23]; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _86 = &((*_87).0: i32);
+        _98 = const _;
+        _85 = (move _86, _98);
+        _89 = (_85.0: &i32);
+        _90 = (_85.1: &i32);
+        _93 = (*_89);
+        _94 = (*_90);
+        _92 = Eq(move _93, move _94);
+        _91 = Not(move _92);
+        switchInt(move _91) -> [0: bb24, otherwise: bb23];
     }
 
     bb23: {
-        _132 = const core::panicking::AssertKind::Eq; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _134 = const core::panicking::AssertKind::Eq; // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _136 = _126;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _135 = _136;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _138 = _127;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _137 = _138;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _139 = Option::<Arguments<'_>>::None; // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _133 = core::panicking::assert_failed::<i32, i32>(move _134, move _135, move _137, move _139); // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i32, &'b i32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i32, i32>}, val: Value(<ZST>) }
+        _95 = core::panicking::AssertKind::Eq;
+        _97 = Option::<Arguments<'_>>::None;
+        _96 = core::panicking::assert_failed::<i32, i32>(move _95, _89, _90, move _97) -> unwind continue;
     }
 
     bb24: {
-        return;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:73:2: 73:2
+        return;
     }
 
     bb25 (cleanup): {
-        drop(_83) -> bb26;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_59) -> [return: bb26, unwind terminate];
     }
 
     bb26 (cleanup): {
-        resume;                          // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:55:1: 73:2
+        resume;
     }
 }
 
 promoted[0] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i32;                     // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:72:34: 72:35
+    let mut _0: &i32;
+    let mut _1: i32;
 
     bb0: {
-        _1 = const 0_i32;                // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:72:34: 72:35
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 0_i32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i32;                     // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:71:31: 71:32
+    let mut _0: &i32;
+    let mut _1: i32;
 
     bb0: {
-        _1 = const 0_i32;                // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:71:31: 71:32
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 0_i32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[2] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: bool;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:35: 68:39
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const true;                 // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:68:35: 68:39
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const true;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[3] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i32;                     // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:35: 65:36
+    let mut _0: &i32;
+    let mut _1: i32;
 
     bb0: {
-        _1 = const 0_i32;                // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:65:35: 65:36
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 0_i32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[4] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: bool;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:64:32: 64:36
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const true;                 // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:64:32: 64:36
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const true;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[5] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i32;                     // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:60:29: 60:30
+    let mut _0: &i32;
+    let mut _1: i32;
 
     bb0: {
-        _1 = const 0_i32;                // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:60:29: 60:30
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 0_i32;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[6] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: bool;                    // in scope 0 at ui/overloaded/overloaded-autoderef-order.rs:59:26: 59:30
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const true;                 // scope 0 at ui/overloaded/overloaded-autoderef-order.rs:59:26: 59:30
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const true;
+        _0 = &_1;
+        return;
     }
 }

@@ -1,181 +1,159 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:3:11: 3:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:3:13: 3:13
+        return;
     }
 }
 
 fn unsize(_1: &[u8; 3]) -> &[u8] {
-    debug x => _1;                       // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:17: 5:18
-    let mut _0: &[u8];                   // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:33: 5:38
-    let mut _2: &[u8; 3];                // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
+    debug x => _1;
+    let mut _0: &[u8];
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        _0 = move _2 as &[u8] (Pointer(Unsize)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:44: 5:44
+        _0 = _1 as &[u8] (Pointer(Unsize));
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn unsize(_1: &[u8; 3]) -> &[u8] {
-    debug x => _1;                       // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:17: 5:18
-    let mut _0: &[u8];                   // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:33: 5:38
-    let mut _2: &[u8; 3];                // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
+    debug x => _1;
+    let mut _0: &[u8];
+    let mut _2: &[u8; 3];
 
     bb0: {
-        StorageLive(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        _2 = &(*_1);                     // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        _0 = move _2 as &[u8] (Pointer(Unsize)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        StorageDead(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:41: 5:42
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:44: 5:44
+        StorageLive(_2);
+        _2 = &(*_1);
+        _0 = move _2 as &[u8] (Pointer(Unsize));
+        StorageDead(_2);
+        return;
     }
 }
 
 unsize::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:26: 5:27
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 3_usize;              // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:26: 5:27
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:5:26: 5:27
+        _0 = const 3_usize;
+        return;
     }
 }
 
 fn closure() -> fn() {
-    let mut _0: fn();                    // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:23: 6:27
-    let mut _1: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32]; // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
+    let mut _0: fn();
 
     bb0: {
-        _0 = move _1 as fn() (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:37: 6:37
+        _0 = const ZeroSized: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32] as fn() (Pointer(ClosureFnPointer(Normal)));
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn closure() -> fn() {
-    let mut _0: fn();                    // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:23: 6:27
-    let mut _1: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32]; // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
+    let mut _0: fn();
+    let mut _1: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
-        _1 = [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32]; // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
-                                         // closure
-                                         // + def_id: DefId(0:7 ~ cast_fn[1780]::closure::{closure#0})
-                                         // + substs: [
-                                         //     i8,
-                                         //     extern "rust-call" fn(()),
-                                         //     (),
-                                         // ]
-        _0 = move _1 as fn() (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:30: 6:35
-        StorageDead(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:31: 6:32
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:37: 6:37
+        StorageLive(_1);
+        _1 = [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32];
+        _0 = move _1 as fn() (Pointer(ClosureFnPointer(Normal)));
+        StorageDead(_1);
+        return;
     }
 }
 
 fn closure::{closure#0}(_1: &[closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:33: 6:33
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:6:35: 6:35
+        return;
     }
 }
 
 fn closure2() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:7:21: 7:21
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:9:2: 9:2
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn closure2() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:7:21: 7:21
-    let _1: fn();                        // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:20
-    let mut _2: [closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8]; // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:12
+    let mut _0: ();
+    let _1: fn();
+    let mut _2: [closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:20
-        StorageLive(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:12
-        _2 = [closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8]; // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:12
-                                         // closure
-                                         // + def_id: DefId(0:9 ~ cast_fn[1780]::closure2::{closure#0})
-                                         // + substs: [
-                                         //     i8,
-                                         //     extern "rust-call" fn(()),
-                                         //     (),
-                                         // ]
-        _1 = move _2 as fn() (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:5: 8:12
-        StorageDead(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:7: 8:8
-        StorageDead(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:20: 8:21
-        _0 = const ();                   // scope 0 at ui/consts/min_const_fn/cast_fn.rs:7:21: 9:2
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:9:2: 9:2
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = [closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8];
+        _1 = move _2 as fn() (Pointer(ClosureFnPointer(Normal)));
+        StorageDead(_2);
+        StorageDead(_1);
+        _0 = const ();
+        return;
     }
 }
 
 fn closure2::{closure#0}(_1: &[closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:9: 8:9
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:8:12: 8:12
+        return;
     }
 }
 
 fn reify(_1: fn()) -> unsafe fn() {
-    debug f => _1;                       // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:16: 10:17
-    let mut _0: unsafe fn();             // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:28: 10:39
-    let mut _2: fn();                    // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
+    debug f => _1;
+    let mut _0: unsafe fn();
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        _0 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:45: 10:45
+        _0 = _1 as unsafe fn() (Pointer(UnsafeFnPointer));
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn reify(_1: fn()) -> unsafe fn() {
-    debug f => _1;                       // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:16: 10:17
-    let mut _0: unsafe fn();             // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:28: 10:39
-    let mut _2: fn();                    // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
+    debug f => _1;
+    let mut _0: unsafe fn();
+    let mut _2: fn();
 
     bb0: {
-        StorageLive(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        _2 = _1;                         // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        _0 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        StorageDead(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:42: 10:43
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:10:45: 10:45
+        StorageLive(_2);
+        _2 = _1;
+        _0 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer));
+        StorageDead(_2);
+        return;
     }
 }
 
 fn reify2() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:19: 11:19
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:43: 11:43
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn reify2() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:19: 11:19
-    let _1: unsafe fn();                 // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:40
-    let mut _2: fn();                    // in scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:25
+    let mut _0: ();
+    let _1: unsafe fn();
+    let mut _2: fn();
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:40
-        StorageLive(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:25
-        _2 = main as fn() (Pointer(ReifyFnPointer)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:25
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/cast_fn.rs:11:21: 11:25
-                                         // + literal: Const { ty: fn() {main}, val: Value(<ZST>) }
-        _1 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer)); // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:21: 11:25
-        StorageDead(_2);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:24: 11:25
-        StorageDead(_1);                 // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:40: 11:41
-        _0 = const ();                   // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:19: 11:43
-        return;                          // scope 0 at ui/consts/min_const_fn/cast_fn.rs:11:43: 11:43
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = main as fn() (Pointer(ReifyFnPointer));
+        _1 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer));
+        StorageDead(_2);
+        StorageDead(_1);
+        _0 = const ();
+        return;
     }
 }

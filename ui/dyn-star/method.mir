@@ -1,148 +1,107 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/dyn-star/method.rs:10:1: 10:19>::get(_1: &usize) -> usize {
-    debug self => _1;                    // in scope 0 at ui/dyn-star/method.rs:11:12: 11:17
-    let mut _0: usize;                   // return place in scope 0 at ui/dyn-star/method.rs:11:22: 11:27
+    debug self => _1;
+    let mut _0: usize;
 
     bb0: {
-        _0 = (*_1);                      // scope 0 at ui/dyn-star/method.rs:12:9: 12:14
-        return;                          // scope 0 at ui/dyn-star/method.rs:13:6: 13:6
+        _0 = (*_1);
+        return;
     }
 }
 
 fn invoke_dyn_star(_1: dyn* Foo) -> usize {
-    debug i => _1;                       // in scope 0 at ui/dyn-star/method.rs:16:20: 16:21
-    let mut _0: usize;                   // return place in scope 0 at ui/dyn-star/method.rs:16:36: 16:41
-    let mut _2: &dyn* Foo;               // in scope 0 at ui/dyn-star/method.rs:17:5: 17:12
+    debug i => _1;
+    let mut _0: usize;
+    let mut _2: &dyn* Foo;
 
     bb0: {
-        _2 = &_1;                        // scope 0 at ui/dyn-star/method.rs:17:5: 17:12
-        _0 = <dyn* Foo as Foo>::get(move _2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/dyn-star/method.rs:17:5: 17:12
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:17:7: 17:10
-                                         // + literal: Const { ty: for<'a> fn(&'a dyn* Foo) -> usize {<dyn* Foo as Foo>::get}, val: Value(<ZST>) }
+        _2 = &_1;
+        _0 = <dyn* Foo as Foo>::get(move _2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/dyn-star/method.rs:18:1: 18:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/dyn-star/method.rs:18:2: 18:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/dyn-star/method.rs:18:1: 18:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/dyn-star/method.rs:16:1: 18:2
+        resume;
     }
 }
 
 fn make_and_invoke_dyn_star(_1: usize) -> usize {
-    debug i => _1;                       // in scope 0 at ui/dyn-star/method.rs:20:29: 20:30
-    let mut _0: usize;                   // return place in scope 0 at ui/dyn-star/method.rs:20:42: 20:47
-    let _2: dyn* Foo;                    // in scope 0 at ui/dyn-star/method.rs:21:9: 21:14
-    let mut _3: usize;                   // in scope 0 at ui/dyn-star/method.rs:21:27: 21:28
-    let mut _4: dyn* Foo;                // in scope 0 at ui/dyn-star/method.rs:22:21: 22:26
+    debug i => _1;
+    let mut _0: usize;
+    let _2: dyn* Foo;
     scope 1 {
-        debug dyn_i => _2;               // in scope 1 at ui/dyn-star/method.rs:21:9: 21:14
+        debug dyn_i => _2;
     }
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/dyn-star/method.rs:21:27: 21:28
-        _2 = move _3 as dyn* Foo (DynStar); // scope 0 at ui/dyn-star/method.rs:21:27: 21:28
-        _4 = move _2;                    // scope 1 at ui/dyn-star/method.rs:22:21: 22:26
-        _0 = invoke_dyn_star(move _4) -> bb1; // scope 1 at ui/dyn-star/method.rs:22:5: 22:27
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:22:5: 22:20
-                                         // + literal: Const { ty: fn((dyn* Foo + 'static)) -> usize {invoke_dyn_star}, val: Value(<ZST>) }
+        _2 = _1 as dyn* Foo (DynStar);
+        _0 = invoke_dyn_star(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/dyn-star/method.rs:23:2: 23:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/method.rs:25:11: 25:11
-    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _3: &[&str];                 // in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-    let mut _4: &[&str; 2];              // in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-    let _5: &[&str; 2];                  // in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _7: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _8: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _9: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _10: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-    let mut _11: &usize;                 // in scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-    let _12: &usize;                     // in scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-    let _13: usize;                      // in scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-    let mut _14: &[&str; 2];             // in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let mut _3: &[&str];
+    let mut _4: &[core::fmt::rt::Argument<'_>];
+    let _5: &[core::fmt::rt::Argument<'_>; 1];
+    let _6: [core::fmt::rt::Argument<'_>; 1];
+    let mut _7: core::fmt::rt::Argument<'_>;
+    let _8: &usize;
+    let _9: usize;
+    let mut _10: &[&str; 2];
 
     bb0: {
-        _14 = const _;                   // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:26:14: 26:18
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[0])) }
-        _5 = _14;                        // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-        _4 = _5;                         // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-        _13 = make_and_invoke_dyn_star(const 42_usize) -> bb1; // scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:26:20: 26:44
-                                         // + literal: Const { ty: fn(usize) -> usize {make_and_invoke_dyn_star}, val: Value(<ZST>) }
+        _10 = const _;
+        _3 = _10 as &[&str] (Pointer(Unsize));
+        _9 = make_and_invoke_dyn_star(const 42_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _12 = &_13;                      // scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-        _11 = _12;                       // scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-        _10 = core::fmt::ArgumentV1::<'_>::new_display::<usize>(move _11) -> bb2; // scope 0 at ui/dyn-star/method.rs:26:20: 26:48
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:26:20: 26:48
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: for<'b> fn(&'b usize) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<usize>}, val: Value(<ZST>) }
+        _8 = &_9;
+        _7 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_8) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = [move _10];                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _8 = &_9;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb3; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _6 = [move _7];
+        _5 = &_6;
+        _4 = _5 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _4) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _1 = _print(move _2) -> bb4;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _1 = _print(move _2) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/dyn-star/method.rs:27:2: 27:2
+        return;
     }
 }
 
 promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-    let mut _1: [&str; 2];               // in scope 0 at ui/dyn-star/method.rs:26:14: 26:18
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:26:14: 26:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/method.rs:26:14: 26:18
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
-        return;                          // scope 0 at ui/dyn-star/method.rs:26:14: 26:18
+        _1 = [const "", const "\n"];
+        _0 = &_1;
+        return;
     }
 }

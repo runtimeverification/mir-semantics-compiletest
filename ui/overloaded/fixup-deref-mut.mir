@@ -1,190 +1,186 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/overloaded/fixup-deref-mut.rs:13:1: 13:25>::deref(_1: &Own<T>) -> &T {
-    debug self => _1;                    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:16:18: 16:26
-    let mut _0: &T;                      // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:17:18: 17:30
-    let mut _2: *mut T;                  // in scope 0 at ui/overloaded/fixup-deref-mut.rs:16:18: 16:26
+    debug self => _1;
+    let mut _0: &T;
+    let mut _2: *mut T;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
     }
 
     bb0: {
-        _2 = deref_copy ((*_1).0: *mut T); // scope 1 at ui/overloaded/fixup-deref-mut.rs:17:18: 17:30
-        _0 = &(*_2);                     // scope 1 at ui/overloaded/fixup-deref-mut.rs:17:18: 17:30
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:18:6: 18:6
+        _2 = deref_copy ((*_1).0: *mut T);
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(T);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
+    }
+
+    bb1: {
+        _0 = &(*_2);
+        return;
     }
 }
 
 fn <impl at ui/overloaded/fixup-deref-mut.rs:21:1: 21:28>::deref_mut(_1: &mut Own<T>) -> &mut T {
-    debug self => _1;                    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:22:22: 22:34
-    let mut _0: &mut T;                  // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:22:39: 22:48
-    let mut _2: &mut T;                  // in scope 0 at ui/overloaded/fixup-deref-mut.rs:23:9: 23:36
-    let mut _3: &mut T;                  // in scope 0 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-    let mut _4: &mut T;                  // in scope 0 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-    let mut _5: *mut T;                  // in scope 0 at ui/overloaded/fixup-deref-mut.rs:22:22: 22:34
+    debug self => _1;
+    let mut _0: &mut T;
+    let mut _2: *mut T;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
     }
 
     bb0: {
-        _5 = deref_copy ((*_1).0: *mut T); // scope 1 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-        _4 = &mut (*_5);                 // scope 1 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-        _3 = &mut (*_4);                 // scope 1 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-        _2 = &mut (*_3);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:23:18: 23:34
-        _0 = &mut (*_2);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:23:9: 23:36
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:24:6: 24:6
+        _2 = deref_copy ((*_1).0: *mut T);
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(T);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
+    }
+
+    bb1: {
+        _0 = &mut (*_2);
+        return;
     }
 }
 
 fn <impl at ui/overloaded/fixup-deref-mut.rs:32:1: 32:11>::get(_1: &mut Point) -> (isize, isize) {
-    debug self => _1;                    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:33:12: 33:21
-    let mut _0: (isize, isize);          // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:33:26: 33:40
-    let mut _2: isize;                   // in scope 0 at ui/overloaded/fixup-deref-mut.rs:34:10: 34:16
-    let mut _3: isize;                   // in scope 0 at ui/overloaded/fixup-deref-mut.rs:34:18: 34:24
+    debug self => _1;
+    let mut _0: (isize, isize);
+    let mut _2: isize;
+    let mut _3: isize;
 
     bb0: {
-        _2 = ((*_1).0: isize);           // scope 0 at ui/overloaded/fixup-deref-mut.rs:34:10: 34:16
-        _3 = ((*_1).1: isize);           // scope 0 at ui/overloaded/fixup-deref-mut.rs:34:18: 34:24
-        _0 = (move _2, move _3);         // scope 0 at ui/overloaded/fixup-deref-mut.rs:34:9: 34:25
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:35:6: 35:6
+        _2 = ((*_1).0: isize);
+        _3 = ((*_1).1: isize);
+        _0 = (move _2, move _3);
+        return;
     }
 }
 
 fn test0(_1: Own<Point>) -> () {
-    debug x => _1;                       // in scope 0 at ui/overloaded/fixup-deref-mut.rs:38:10: 38:15
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:38:29: 38:29
-    let mut _2: (isize, isize);          // in scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-    let mut _3: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-    let mut _4: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-    let mut _5: &mut Own<Point>;         // in scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
+    debug x => _1;
+    let mut _0: ();
+    let mut _2: (isize, isize);
+    let mut _3: &mut Point;
+    let mut _4: &mut Point;
+    let mut _5: &mut Own<Point>;
     scope 1 {
     }
 
     bb0: {
-        _5 = &mut _1;                    // scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> bb1; // scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Point>) -> &'a mut <Own<Point> as Deref>::Target {<Own<Point> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _5 = &mut _1;
+        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = &mut (*_4);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-        _2 = Point::get(move _3) -> bb2; // scope 0 at ui/overloaded/fixup-deref-mut.rs:39:13: 39:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:39:15: 39:18
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Point) -> (isize, isize) {Point::get}, val: Value(<ZST>) }
+        _3 = _4;
+        _2 = Point::get(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:40:2: 40:2
+        return;
     }
 }
 
 fn test1(_1: Own<Own<Own<Point>>>) -> () {
-    debug x => _1;                       // in scope 0 at ui/overloaded/fixup-deref-mut.rs:42:10: 42:15
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:42:39: 42:39
-    let mut _2: (isize, isize);          // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _3: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _4: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _5: &mut Own<Point>;         // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _6: &mut Own<Point>;         // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _7: &mut Own<Own<Point>>;    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _8: &mut Own<Own<Point>>;    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-    let mut _9: &mut Own<Own<Own<Point>>>; // in scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
+    debug x => _1;
+    let mut _0: ();
+    let mut _2: (isize, isize);
+    let mut _3: &mut Point;
+    let mut _4: &mut Point;
+    let mut _5: &mut Own<Point>;
+    let mut _6: &mut Own<Point>;
+    let mut _7: &mut Own<Own<Point>>;
+    let mut _8: &mut Own<Own<Point>>;
+    let mut _9: &mut Own<Own<Own<Point>>>;
     scope 1 {
     }
 
     bb0: {
-        _9 = &mut _1;                    // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-        _8 = <Own<Own<Own<Point>>> as DerefMut>::deref_mut(move _9) -> bb1; // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Own<Own<Point>>>) -> &'a mut <Own<Own<Own<Point>>> as Deref>::Target {<Own<Own<Own<Point>>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _9 = &mut _1;
+        _8 = <Own<Own<Own<Point>>> as DerefMut>::deref_mut(move _9) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &mut (*_8);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-        _6 = <Own<Own<Point>> as DerefMut>::deref_mut(move _7) -> bb2; // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Own<Point>>) -> &'a mut <Own<Own<Point>> as Deref>::Target {<Own<Own<Point>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _7 = _8;
+        _6 = <Own<Own<Point>> as DerefMut>::deref_mut(move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = &mut (*_6);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> bb3; // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Point>) -> &'a mut <Own<Point> as Deref>::Target {<Own<Point> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _5 = _6;
+        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _3 = &mut (*_4);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-        _2 = Point::get(move _3) -> bb4; // scope 0 at ui/overloaded/fixup-deref-mut.rs:43:13: 43:20
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:43:15: 43:18
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Point) -> (isize, isize) {Point::get}, val: Value(<ZST>) }
+        _3 = _4;
+        _2 = Point::get(move _3) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:44:2: 44:2
+        return;
     }
 }
 
 fn test2(_1: Own<Own<Own<Point>>>) -> () {
-    debug x => _1;                       // in scope 0 at ui/overloaded/fixup-deref-mut.rs:46:10: 46:15
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:46:39: 46:39
-    let mut _2: (isize, isize);          // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-    let mut _3: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-    let mut _4: &mut Point;              // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-    let mut _5: &mut Own<Point>;         // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-    let mut _6: &mut Own<Point>;         // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:18
-    let mut _7: &mut Own<Own<Point>>;    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:15: 47:17
-    let mut _8: &mut Own<Own<Point>>;    // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:15: 47:17
-    let mut _9: &mut Own<Own<Own<Point>>>; // in scope 0 at ui/overloaded/fixup-deref-mut.rs:47:16: 47:17
+    debug x => _1;
+    let mut _0: ();
+    let mut _2: (isize, isize);
+    let mut _3: &mut Point;
+    let mut _4: &mut Point;
+    let mut _5: &mut Own<Point>;
+    let mut _6: &mut Own<Point>;
+    let mut _7: &mut Own<Own<Point>>;
+    let mut _8: &mut Own<Own<Point>>;
+    let mut _9: &mut Own<Own<Own<Point>>>;
     scope 1 {
     }
 
     bb0: {
-        _9 = &mut _1;                    // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:16: 47:17
-        _8 = <Own<Own<Own<Point>>> as DerefMut>::deref_mut(move _9) -> bb1; // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:15: 47:17
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:47:15: 47:17
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Own<Own<Point>>>) -> &'a mut <Own<Own<Own<Point>>> as Deref>::Target {<Own<Own<Own<Point>>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _9 = &mut _1;
+        _8 = <Own<Own<Own<Point>>> as DerefMut>::deref_mut(move _9) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &mut (*_8);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:15: 47:17
-        _6 = <Own<Own<Point>> as DerefMut>::deref_mut(move _7) -> bb2; // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:18
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:47:13: 47:18
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Own<Point>>) -> &'a mut <Own<Own<Point>> as Deref>::Target {<Own<Own<Point>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _7 = _8;
+        _6 = <Own<Own<Point>> as DerefMut>::deref_mut(move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = &mut (*_6);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> bb3; // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Own<Point>) -> &'a mut <Own<Point> as Deref>::Target {<Own<Point> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _5 = _6;
+        _4 = <Own<Point> as DerefMut>::deref_mut(move _5) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _3 = &mut (*_4);                 // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-        _2 = Point::get(move _3) -> bb4; // scope 0 at ui/overloaded/fixup-deref-mut.rs:47:13: 47:24
-                                         // mir::Constant
-                                         // + span: ui/overloaded/fixup-deref-mut.rs:47:19: 47:22
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Point) -> (isize, isize) {Point::get}, val: Value(<ZST>) }
+        _3 = _4;
+        _2 = Point::get(move _3) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:48:2: 48:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/fixup-deref-mut.rs:50:11: 50:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/overloaded/fixup-deref-mut.rs:50:13: 50:13
+        return;
     }
 }

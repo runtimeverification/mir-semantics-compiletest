@@ -1,24 +1,44 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/expr/if/attrs/builtin-if-attr.rs:3:11: 3:11
+    let mut _0: ();
+    let mut _1: bool;
+    let mut _2: bool;
     scope 1 {
-        let _1: i32;                     // in scope 1 at ui/expr/if/attrs/builtin-if-attr.rs:6:13: 6:14
-        let _2: i32;                     // in scope 1 at ui/expr/if/attrs/builtin-if-attr.rs:8:13: 8:14
-        let _3: i32;                     // in scope 1 at ui/expr/if/attrs/builtin-if-attr.rs:10:13: 10:14
         scope 2 {
-            debug a => _1;               // in scope 2 at ui/expr/if/attrs/builtin-if-attr.rs:6:13: 6:14
+            debug a => const 1_i32;
         }
         scope 3 {
-            debug b => _2;               // in scope 3 at ui/expr/if/attrs/builtin-if-attr.rs:8:13: 8:14
+            debug b => const 1_i32;
         }
         scope 4 {
-            debug c => _3;               // in scope 4 at ui/expr/if/attrs/builtin-if-attr.rs:10:13: 10:14
+            debug c => const 1_i32;
         }
     }
 
     bb0: {
-        _1 = const 1_i32;                // scope 1 at ui/expr/if/attrs/builtin-if-attr.rs:6:17: 6:18
-        return;                          // scope 0 at ui/expr/if/attrs/builtin-if-attr.rs:12:2: 12:2
+        _1 = const true;
+        switchInt(move _1) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        goto -> bb5;
+    }
+
+    bb2: {
+        _2 = const false;
+        switchInt(move _2) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb3: {
+        goto -> bb5;
+    }
+
+    bb4: {
+        goto -> bb5;
+    }
+
+    bb5: {
+        return;
     }
 }

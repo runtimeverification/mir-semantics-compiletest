@@ -1,40 +1,33 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: T) -> T {
-    debug x => _1;                       // in scope 0 at ui/consts/const-bound.rs:8:17: 8:18
-    let mut _0: T;                       // return place in scope 0 at ui/consts/const-bound.rs:8:26: 8:27
+    debug x => _1;
+    let mut _0: T;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/consts/const-bound.rs:8:30: 8:31
-        return;                          // scope 0 at ui/consts/const-bound.rs:8:33: 8:33
+        _0 = move _1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-bound.rs:12:15: 12:15
-    let _1: std::boxed::Box<i32>;        // in scope 0 at ui/consts/const-bound.rs:19:5: 19:21
-    let mut _2: std::boxed::Box<i32>;    // in scope 0 at ui/consts/const-bound.rs:19:9: 19:20
+    let mut _0: ();
+    let _1: std::boxed::Box<i32>;
+    let mut _2: std::boxed::Box<i32>;
 
     bb0: {
-        _2 = Box::<i32>::new(const 1_i32) -> bb1; // scope 0 at ui/consts/const-bound.rs:19:9: 19:20
-                                         // mir::Constant
-                                         // + span: ui/consts/const-bound.rs:19:9: 19:17
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+        _2 = Box::<i32>::new(const 1_i32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = foo::<Box<i32>>(move _2) -> bb2; // scope 0 at ui/consts/const-bound.rs:19:5: 19:21
-                                         // mir::Constant
-                                         // + span: ui/consts/const-bound.rs:19:5: 19:8
-                                         // + literal: Const { ty: fn(Box<i32>) -> Box<i32> {foo::<Box<i32>>}, val: Value(<ZST>) }
+        _1 = foo::<Box<i32>>(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/consts/const-bound.rs:19:21: 19:22
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/consts/const-bound.rs:20:2: 20:2
+        return;
     }
 }

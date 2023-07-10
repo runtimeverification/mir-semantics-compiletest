@@ -1,107 +1,82 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: &bool) -> bool {
-    debug arg => _1;                     // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:7:32: 7:35
-    let mut _0: bool;                    // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:7:55: 7:59
-    let mut _2: &&bool;                  // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-    let mut _3: &&bool;                  // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:10: 8:13
-    let mut _4: &&bool;                  // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
+    debug arg => _1;
+    let mut _0: bool;
+    let mut _2: &&bool;
+    let mut _3: &&bool;
 
     bb0: {
-        _4 = const _;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-                                         // + literal: Const { ty: &&bool, val: Unevaluated(foo, [Const { ty: &bool, kind: Param(B/#0) }], Some(promoted[0])) }
-        _2 = _4;                         // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-        _3 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:10: 8:13
-        _0 = <&bool as PartialEq>::eq(move _2, move _3) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:13
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:13
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &bool, &'b &bool) -> bool {<&bool as PartialEq>::eq}, val: Value(<ZST>) }
+        _3 = const _;
+        _2 = &_1;
+        _0 = <&bool as PartialEq>::eq(_3, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:9:2: 9:2
+        return;
     }
 }
 
 promoted[0] in foo: &&bool = {
-    let mut _0: &&bool;                  // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-    let mut _1: &bool;                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
+    let mut _0: &&bool;
+    let mut _1: &bool;
 
     bb0: {
-        _1 = const B;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-                                         // + literal: Const { ty: &bool, val: Param(B) }
-        _0 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:8:5: 8:6
+        _1 = const B;
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:11:11: 11:11
-    let _1: bool;                        // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:5: 12:29
-    let mut _2: &bool;                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-    let _3: &bool;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-    let mut _4: &bool;                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
+    let mut _0: ();
+    let _1: bool;
+    let mut _2: &bool;
 
     bb0: {
-        _4 = const _;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main, [], Some(promoted[0])) }
-        _3 = _4;                         // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-        _2 = _3;                         // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-        _1 = foo::<&true>(move _2) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:5: 12:29
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:12:5: 12:21
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&'static bool) -> bool {foo::<&true>}, val: Value(<ZST>) }
+        _2 = const _;
+        _1 = foo::<&true>(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:13:2: 13:2
+        return;
     }
 }
 
 promoted[0] in main: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-    let mut _1: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:23: 12:28
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const false;                // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:23: 12:28
-        _0 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:22: 12:28
+        _1 = const false;
+        _0 = &_1;
+        return;
     }
 }
 
 main::{constant#0}: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:11: 12:20
-    let _1: &bool;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-    let _2: bool;                        // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:14: 12:18
-    let mut _3: &bool;                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
+    let mut _0: &bool;
+    let _1: &bool;
+    let _2: bool;
+    let mut _3: &bool;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-        _3 = const _;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-                                         // + literal: Const { ty: &bool, val: Unevaluated(main::{constant#0}, [], Some(promoted[0])) }
-        _1 = &(*_3);                     // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-        _0 = &(*_1);                     // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:19: 12:20
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:11: 12:20
+        StorageLive(_1);
+        _3 = const _;
+        _1 = &(*_3);
+        _0 = &(*_1);
+        StorageDead(_1);
+        return;
     }
 }
 
 promoted[0] in main::{constant#0}: &bool = {
-    let mut _0: &bool;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-    let mut _1: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:14: 12:18
+    let mut _0: &bool;
+    let mut _1: bool;
 
     bb0: {
-        _1 = const true;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:14: 12:18
-        _0 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-100360.rs:12:13: 12:18
+        _1 = const true;
+        _0 = &_1;
+        return;
     }
 }

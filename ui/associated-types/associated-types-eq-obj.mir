@@ -1,55 +1,45 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/associated-types/associated-types-eq-obj.rs:13:1: 13:18>::boo(_1: &char) -> Bar {
-    debug self => _1;                    // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:15:12: 15:17
-    let mut _0: Bar;                     // return place in scope 0 at ui/associated-types/associated-types-eq-obj.rs:15:22: 15:25
+    debug self => _1;
+    let mut _0: Bar;
 
     bb0: {
-        return;                          // scope 0 at ui/associated-types/associated-types-eq-obj.rs:15:33: 15:33
+        return;
     }
 }
 
 fn baz(_1: &dyn Foo<A = Bar>) -> Bar {
-    debug x => _1;                       // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:18:8: 18:9
-    let mut _0: Bar;                     // return place in scope 0 at ui/associated-types/associated-types-eq-obj.rs:18:31: 18:34
-    let mut _2: &dyn Foo<A = Bar>;       // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:19:5: 19:12
+    debug x => _1;
+    let mut _0: Bar;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/associated-types/associated-types-eq-obj.rs:19:5: 19:12
-        _0 = <dyn Foo<A = Bar> as Foo>::boo(move _2) -> bb1; // scope 0 at ui/associated-types/associated-types-eq-obj.rs:19:5: 19:12
-                                         // mir::Constant
-                                         // + span: ui/associated-types/associated-types-eq-obj.rs:19:7: 19:10
-                                         // + literal: Const { ty: for<'a> fn(&'a dyn Foo<A = Bar>) -> <dyn Foo<A = Bar> as Foo>::A {<dyn Foo<A = Bar> as Foo>::boo}, val: Value(<ZST>) }
+        _0 = <dyn Foo<A = Bar> as Foo>::boo(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/associated-types/associated-types-eq-obj.rs:20:2: 20:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/associated-types/associated-types-eq-obj.rs:22:15: 22:15
-    let _1: char;                        // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:23:9: 23:10
-    let _2: Bar;                         // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:24:5: 24:12
-    let mut _3: &dyn Foo<A = Bar>;       // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
-    let mut _4: &char;                   // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
-    let _5: &char;                       // in scope 0 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
+    let mut _0: ();
+    let _1: char;
+    let _2: Bar;
+    let mut _3: &dyn Foo<A = Bar>;
+    let _4: &char;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/associated-types/associated-types-eq-obj.rs:23:9: 23:10
+        debug a => const 'a';
     }
 
     bb0: {
-        _1 = const 'a';                  // scope 0 at ui/associated-types/associated-types-eq-obj.rs:23:13: 23:16
-        _5 = &_1;                        // scope 1 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
-        _4 = _5;                         // scope 1 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
-        _3 = move _4 as &dyn Foo<A = Bar> (Pointer(Unsize)); // scope 1 at ui/associated-types/associated-types-eq-obj.rs:24:9: 24:11
-        _2 = baz(move _3) -> bb1;        // scope 1 at ui/associated-types/associated-types-eq-obj.rs:24:5: 24:12
-                                         // mir::Constant
-                                         // + span: ui/associated-types/associated-types-eq-obj.rs:24:5: 24:8
-                                         // + literal: Const { ty: for<'a> fn(&'a (dyn Foo<A = Bar> + 'a)) -> Bar {baz}, val: Value(<ZST>) }
+        _1 = const 'a';
+        _4 = &_1;
+        _3 = _4 as &dyn Foo<A = Bar> (Pointer(Unsize));
+        _2 = baz(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/associated-types/associated-types-eq-obj.rs:25:2: 25:2
+        return;
     }
 }

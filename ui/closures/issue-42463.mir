@@ -1,147 +1,123 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/closures/issue-42463.rs:9:1: 9:56>::deref(_1: &CheckedDeref<T, F>) -> &T {
-    debug self => _1;                    // in scope 0 at ui/closures/issue-42463.rs:11:14: 11:19
-    let mut _0: &T;                      // return place in scope 0 at ui/closures/issue-42463.rs:13:9: 13:20
-    let mut _2: bool;                    // in scope 0 at ui/closures/issue-42463.rs:12:9: 12:43
-    let mut _3: bool;                    // in scope 0 at ui/closures/issue-42463.rs:12:17: 12:42
-    let mut _4: &F;                      // in scope 0 at ui/closures/issue-42463.rs:12:17: 12:29
-    let mut _5: (&T,);                   // in scope 0 at ui/closures/issue-42463.rs:12:17: 12:42
-    let mut _6: &T;                      // in scope 0 at ui/closures/issue-42463.rs:12:30: 12:41
-    let _7: &T;                          // in scope 0 at ui/closures/issue-42463.rs:12:30: 12:41
-    let mut _8: !;                       // in scope 0 at ui/closures/issue-42463.rs:12:9: 12:43
+    debug self => _1;
+    let mut _0: &T;
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: &F;
+    let mut _5: (&T,);
+    let _6: &T;
+    let mut _7: !;
 
     bb0: {
-        _4 = &((*_1).1: F);              // scope 0 at ui/closures/issue-42463.rs:12:17: 12:29
-        _7 = &((*_1).0: T);              // scope 0 at ui/closures/issue-42463.rs:12:30: 12:41
-        _6 = _7;                         // scope 0 at ui/closures/issue-42463.rs:12:30: 12:41
-        _5 = (move _6,);                 // scope 0 at ui/closures/issue-42463.rs:12:17: 12:42
-        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> bb1; // scope 0 at ui/closures/issue-42463.rs:12:17: 12:42
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:12:17: 12:29
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a F, (&T,)) -> <F as FnOnce<(&T,)>>::Output {<F as Fn<(&T,)>>::call}, val: Value(<ZST>) }
+        _4 = &((*_1).1: F);
+        _6 = &((*_1).0: T);
+        _5 = (_6,);
+        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Not(move _3);               // scope 0 at ui/closures/issue-42463.rs:12:9: 12:43
-        switchInt(move _2) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/closures/issue-42463.rs:12:9: 12:43
+        _2 = Not(move _3);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _8 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)"); // scope 0 at ui/closures/issue-42463.rs:12:9: 12:43
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:12:9: 12:43
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)") -> unwind continue;
     }
 
     bb3: {
-        _0 = &((*_1).0: T);              // scope 0 at ui/closures/issue-42463.rs:13:9: 13:20
-        return;                          // scope 0 at ui/closures/issue-42463.rs:14:6: 14:6
+        _0 = &((*_1).0: T);
+        return;
     }
 }
 
 fn <impl at ui/closures/issue-42463.rs:17:1: 17:59>::deref_mut(_1: &mut CheckedDeref<T, F>) -> &mut T {
-    debug self => _1;                    // in scope 0 at ui/closures/issue-42463.rs:18:18: 18:27
-    let mut _0: &mut T;                  // return place in scope 0 at ui/closures/issue-42463.rs:18:32: 18:38
-    let mut _2: &mut T;                  // in scope 0 at ui/closures/issue-42463.rs:20:9: 20:24
-    let mut _3: bool;                    // in scope 0 at ui/closures/issue-42463.rs:19:9: 19:43
-    let mut _4: bool;                    // in scope 0 at ui/closures/issue-42463.rs:19:17: 19:42
-    let mut _5: &F;                      // in scope 0 at ui/closures/issue-42463.rs:19:17: 19:29
-    let mut _6: (&T,);                   // in scope 0 at ui/closures/issue-42463.rs:19:17: 19:42
-    let mut _7: &T;                      // in scope 0 at ui/closures/issue-42463.rs:19:30: 19:41
-    let _8: &T;                          // in scope 0 at ui/closures/issue-42463.rs:19:30: 19:41
-    let mut _9: !;                       // in scope 0 at ui/closures/issue-42463.rs:19:9: 19:43
-    let mut _10: &mut T;                 // in scope 0 at ui/closures/issue-42463.rs:20:9: 20:24
+    debug self => _1;
+    let mut _0: &mut T;
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: &F;
+    let mut _5: (&T,);
+    let _6: &T;
+    let mut _7: !;
 
     bb0: {
-        _5 = &((*_1).1: F);              // scope 0 at ui/closures/issue-42463.rs:19:17: 19:29
-        _8 = &((*_1).0: T);              // scope 0 at ui/closures/issue-42463.rs:19:30: 19:41
-        _7 = _8;                         // scope 0 at ui/closures/issue-42463.rs:19:30: 19:41
-        _6 = (move _7,);                 // scope 0 at ui/closures/issue-42463.rs:19:17: 19:42
-        _4 = <F as Fn<(&T,)>>::call(move _5, move _6) -> bb1; // scope 0 at ui/closures/issue-42463.rs:19:17: 19:42
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:19:17: 19:29
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a F, (&T,)) -> <F as FnOnce<(&T,)>>::Output {<F as Fn<(&T,)>>::call}, val: Value(<ZST>) }
+        _4 = &((*_1).1: F);
+        _6 = &((*_1).0: T);
+        _5 = (_6,);
+        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = Not(move _4);               // scope 0 at ui/closures/issue-42463.rs:19:9: 19:43
-        switchInt(move _3) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/closures/issue-42463.rs:19:9: 19:43
+        _2 = Not(move _3);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _9 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)"); // scope 0 at ui/closures/issue-42463.rs:19:9: 19:43
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:19:9: 19:43
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)") -> unwind continue;
     }
 
     bb3: {
-        _10 = &mut ((*_1).0: T);         // scope 0 at ui/closures/issue-42463.rs:20:9: 20:24
-        _2 = &mut (*_10);                // scope 0 at ui/closures/issue-42463.rs:20:9: 20:24
-        _0 = &mut (*_2);                 // scope 0 at ui/closures/issue-42463.rs:20:9: 20:24
-        return;                          // scope 0 at ui/closures/issue-42463.rs:21:6: 21:6
+        _0 = &mut ((*_1).0: T);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-42463.rs:25:11: 25:11
-    let mut _1: CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>; // in scope 0 at ui/closures/issue-42463.rs:26:9: 26:14
-    let mut _2: std::vec::Vec<i32>;      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-    let mut _3: std::boxed::Box<[i32]>;  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _4: std::boxed::Box<[i32; 1]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _5: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _6: usize;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _7: *mut u8;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _8: std::boxed::Box<[i32; 1]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _9: [closure@ui/closures/issue-42463.rs:28:16: 28:28]; // in scope 0 at ui/closures/issue-42463.rs:28:16: 28:42
-    let _10: ();                         // in scope 0 at ui/closures/issue-42463.rs:30:5: 30:14
-    let mut _11: &mut std::vec::Vec<i32>; // in scope 0 at ui/closures/issue-42463.rs:30:5: 30:14
-    let mut _12: &mut std::vec::Vec<i32>; // in scope 0 at ui/closures/issue-42463.rs:30:5: 30:14
-    let mut _13: &mut CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>; // in scope 0 at ui/closures/issue-42463.rs:30:5: 30:14
-    let mut _14: (&std::vec::Vec<i32>, &std::vec::Vec<i32>); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _15: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _16: &std::vec::Vec<i32>;        // in scope 0 at ui/closures/issue-42463.rs:31:16: 31:18
-    let mut _17: &CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>; // in scope 0 at ui/closures/issue-42463.rs:31:17: 31:18
-    let mut _18: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _19: std::vec::Vec<i32>;         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-    let mut _20: std::boxed::Box<[i32]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _21: std::boxed::Box<[i32; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _22: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _23: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _24: *mut u8;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _25: std::boxed::Box<[i32; 2]>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _28: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _29: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _30: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _31: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _33: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _34: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _35: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _36: &std::vec::Vec<i32>;        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _37: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _38: &std::vec::Vec<i32>;        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _39: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _40: *const [i32; 1];        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-    let mut _41: *const [i32; 2];        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
+    let mut _0: ();
+    let mut _1: CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>;
+    let mut _2: std::vec::Vec<i32>;
+    let mut _3: std::boxed::Box<[i32]>;
+    let mut _4: usize;
+    let mut _5: usize;
+    let mut _6: *mut u8;
+    let mut _7: std::boxed::Box<[i32; 1]>;
+    let _8: ();
+    let mut _9: &mut std::vec::Vec<i32>;
+    let mut _10: &mut std::vec::Vec<i32>;
+    let mut _11: &mut CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>;
+    let mut _12: (&std::vec::Vec<i32>, &std::vec::Vec<i32>);
+    let mut _13: &std::vec::Vec<i32>;
+    let _14: &std::vec::Vec<i32>;
+    let mut _15: &CheckedDeref<std::vec::Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>;
+    let mut _16: &std::vec::Vec<i32>;
+    let _17: std::vec::Vec<i32>;
+    let mut _18: std::boxed::Box<[i32]>;
+    let mut _19: usize;
+    let mut _20: usize;
+    let mut _21: *mut u8;
+    let mut _22: std::boxed::Box<[i32; 2]>;
+    let mut _25: bool;
+    let mut _26: bool;
+    let _28: !;
+    let mut _29: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _30: *const [i32; 1];
+    let mut _31: *const [i32; 2];
+    let mut _38: *const ();
+    let mut _39: usize;
+    let mut _40: usize;
+    let mut _41: usize;
+    let mut _42: usize;
+    let mut _43: bool;
     scope 1 {
-        debug v => _1;                   // in scope 1 at ui/closures/issue-42463.rs:26:9: 26:14
-        let _26: &std::vec::Vec<i32>;    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _27: &std::vec::Vec<i32>;    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        debug v => _1;
+        let _23: &std::vec::Vec<i32>;
+        let _24: &std::vec::Vec<i32>;
+        let mut _32: *const ();
+        let mut _33: usize;
+        let mut _34: usize;
+        let mut _35: usize;
+        let mut _36: usize;
+        let mut _37: bool;
         scope 3 {
         }
         scope 4 {
-            debug left_val => _26;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _27;      // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _32: core::panicking::AssertKind; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _23;
+            debug right_val => _24;
+            let _27: core::panicking::AssertKind;
             scope 5 {
-                debug kind => _32;       // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _27;
             }
         }
     }
@@ -149,154 +125,125 @@ fn main() -> () {
     }
 
     bb0: {
-        _5 = const 4_usize;              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _6 = const 4_usize;              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+        _4 = SizeOf([i32; 1]);
+        _5 = AlignOf([i32; 1]);
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = ShallowInitBox(move _7, [i32; 1]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _40 = (((_8.0: std::ptr::Unique<[i32; 1]>).0: std::ptr::NonNull<[i32; 1]>).0: *const [i32; 1]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        (*_40) = [const 0_i32];          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        _4 = move _8;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _3 = move _4 as std::boxed::Box<[i32]> (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Box<[i32]>) -> Vec<i32> {slice::<impl [i32]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+        _7 = ShallowInitBox(move _6, [i32; 1]);
+        _30 = (((_7.0: std::ptr::Unique<[i32; 1]>).0: std::ptr::NonNull<[i32; 1]>).0: *const [i32; 1]);
+        _38 = _30 as *const () (PtrToPtr);
+        _39 = _38 as usize (Transmute);
+        _40 = AlignOf(i32);
+        _41 = Sub(_40, const 1_usize);
+        _42 = BitAnd(_39, _41);
+        _43 = Eq(_42, const 0_usize);
+        assert(_43, "misaligned pointer dereference: address must be a multiple of {} but is {}", _40, _39) -> [success: bb17, unwind unreachable];
     }
 
     bb2: {
-        _1 = CheckedDeref::<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> { value: move _2, check: move _9 }; // scope 0 at ui/closures/issue-42463.rs:26:17: 29:6
-        _13 = &mut _1;                   // scope 1 at ui/closures/issue-42463.rs:30:5: 30:14
-        _12 = <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as DerefMut>::deref_mut(move _13) -> [return: bb3, unwind: bb14]; // scope 1 at ui/closures/issue-42463.rs:30:5: 30:14
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:30:5: 30:14
-                                         // + literal: Const { ty: for<'a> fn(&'a mut CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>) -> &'a mut <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as Deref>::Target {<CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _1 = CheckedDeref::<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> { value: move _2, check: const ZeroSized: [closure@ui/closures/issue-42463.rs:28:16: 28:28] };
+        _11 = &mut _1;
+        _10 = <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as DerefMut>::deref_mut(move _11) -> [return: bb3, unwind: bb14];
     }
 
     bb3: {
-        _11 = &mut (*_12);               // scope 1 at ui/closures/issue-42463.rs:30:5: 30:14
-        _10 = Vec::<i32>::push(move _11, const 1_i32) -> [return: bb4, unwind: bb14]; // scope 1 at ui/closures/issue-42463.rs:30:5: 30:14
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:30:7: 30:11
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<i32>, i32) {Vec::<i32>::push}, val: Value(<ZST>) }
+        _9 = _10;
+        _8 = Vec::<i32>::push(move _9, const 1_i32) -> [return: bb4, unwind: bb14];
     }
 
     bb4: {
-        _17 = &_1;                       // scope 1 at ui/closures/issue-42463.rs:31:17: 31:18
-        _16 = <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as Deref>::deref(move _17) -> [return: bb5, unwind: bb14]; // scope 1 at ui/closures/issue-42463.rs:31:16: 31:18
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:31:16: 31:18
-                                         // + literal: Const { ty: for<'a> fn(&'a CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]>) -> &'a <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as Deref>::Target {<CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as Deref>::deref}, val: Value(<ZST>) }
+        _15 = &_1;
+        _14 = <CheckedDeref<Vec<i32>, [closure@ui/closures/issue-42463.rs:28:16: 28:28]> as Deref>::deref(move _15) -> [return: bb5, unwind: bb14];
     }
 
     bb5: {
-        _15 = _16;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _22 = const 8_usize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _23 = const 4_usize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _24 = alloc::alloc::exchange_malloc(move _22, move _23) -> [return: bb6, unwind: bb14]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-                                         // + literal: Const { ty: unsafe fn(usize, usize) -> *mut u8 {alloc::alloc::exchange_malloc}, val: Value(<ZST>) }
+        _13 = _14;
+        _19 = SizeOf([i32; 2]);
+        _20 = AlignOf([i32; 2]);
+        _21 = alloc::alloc::exchange_malloc(move _19, move _20) -> [return: bb6, unwind: bb14];
     }
 
     bb6: {
-        _25 = ShallowInitBox(move _24, [i32; 2]); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _41 = (((_25.0: std::ptr::Unique<[i32; 2]>).0: std::ptr::NonNull<[i32; 2]>).0: *const [i32; 2]); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        (*_41) = [const 0_i32, const 1_i32]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:37: 52:46
-        _21 = move _25;                  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _20 = move _21 as std::boxed::Box<[i32]> (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:52:13: 52:47
-        _19 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _20) -> [return: bb7, unwind: bb14]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 53:10
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:50:36: 50:51
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Box<[i32]>) -> Vec<i32> {slice::<impl [i32]>::into_vec::<std::alloc::Global>}, val: Value(<ZST>) }
+        _22 = ShallowInitBox(move _21, [i32; 2]);
+        _31 = (((_22.0: std::ptr::Unique<[i32; 2]>).0: std::ptr::NonNull<[i32; 2]>).0: *const [i32; 2]);
+        _32 = _31 as *const () (PtrToPtr);
+        _33 = _32 as usize (Transmute);
+        _34 = AlignOf(i32);
+        _35 = Sub(_34, const 1_usize);
+        _36 = BitAnd(_33, _35);
+        _37 = Eq(_36, const 0_usize);
+        assert(_37, "misaligned pointer dereference: address must be a multiple of {} but is {}", _34, _33) -> [success: bb16, unwind unreachable];
     }
 
     bb7: {
-        _18 = &_19;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _14 = (move _15, move _18);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _26 = (_14.0: &std::vec::Vec<i32>); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _27 = (_14.1: &std::vec::Vec<i32>); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _30 = _26;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _31 = _27;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _29 = <Vec<i32> as PartialEq>::eq(move _30, move _31) -> [return: bb8, unwind: bb13]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Vec<i32>, &'b Vec<i32>) -> bool {<Vec<i32> as PartialEq>::eq}, val: Value(<ZST>) }
+        _16 = &_17;
+        _12 = (move _13, move _16);
+        _23 = (_12.0: &std::vec::Vec<i32>);
+        _24 = (_12.1: &std::vec::Vec<i32>);
+        _26 = <Vec<i32> as PartialEq>::eq(_23, _24) -> [return: bb8, unwind: bb13];
     }
 
     bb8: {
-        _28 = Not(move _29);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _28) -> [0: bb10, otherwise: bb9]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _32 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _34 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _36 = _26;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _35 = _36;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _38 = _27;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _37 = _38;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _39 = Option::<Arguments<'_>>::None; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _33 = core::panicking::assert_failed::<Vec<i32>, Vec<i32>>(move _34, move _35, move _37, move _39) -> bb13; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Vec<i32>, &'b Vec<i32>, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Vec<i32>, Vec<i32>>}, val: Value(<ZST>) }
+        _27 = core::panicking::AssertKind::Eq;
+        _29 = Option::<Arguments<'_>>::None;
+        _28 = core::panicking::assert_failed::<Vec<i32>, Vec<i32>>(move _27, _23, _24, move _29) -> bb13;
     }
 
     bb10: {
-        drop(_19) -> [return: bb11, unwind: bb14]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_17) -> [return: bb11, unwind: bb14];
     }
 
     bb11: {
-        drop(_1) -> bb12;                // scope 0 at ui/closures/issue-42463.rs:32:1: 32:2
+        drop(_1) -> [return: bb12, unwind continue];
     }
 
     bb12: {
-        return;                          // scope 0 at ui/closures/issue-42463.rs:32:2: 32:2
+        return;
     }
 
     bb13 (cleanup): {
-        drop(_19) -> bb14;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_17) -> [return: bb14, unwind terminate];
     }
 
     bb14 (cleanup): {
-        drop(_1) -> bb15;                // scope 0 at ui/closures/issue-42463.rs:32:1: 32:2
+        drop(_1) -> [return: bb15, unwind terminate];
     }
 
     bb15 (cleanup): {
-        resume;                          // scope 0 at ui/closures/issue-42463.rs:25:1: 32:2
+        resume;
+    }
+
+    bb16: {
+        (*_31) = [const 0_i32, const 1_i32];
+        _18 = move _22 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _17 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _18) -> [return: bb7, unwind: bb14];
+    }
+
+    bb17: {
+        (*_30) = [const 0_i32];
+        _3 = move _7 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb2, unwind continue];
     }
 }
 
 fn main::{closure#0}(_1: &[closure@ui/closures/issue-42463.rs:28:16: 28:28], _2: &Vec<i32>) -> bool {
-    debug v => _2;                       // in scope 0 at ui/closures/issue-42463.rs:28:17: 28:18
-    let mut _0: bool;                    // return place in scope 0 at ui/closures/issue-42463.rs:28:29: 28:29
-    let mut _3: bool;                    // in scope 0 at ui/closures/issue-42463.rs:28:30: 28:42
-    let mut _4: &std::vec::Vec<i32>;     // in scope 0 at ui/closures/issue-42463.rs:28:30: 28:42
+    debug v => _2;
+    let mut _0: bool;
+    let mut _3: bool;
 
     bb0: {
-        _4 = _2;                         // scope 0 at ui/closures/issue-42463.rs:28:30: 28:42
-        _3 = Vec::<i32>::is_empty(move _4) -> bb1; // scope 0 at ui/closures/issue-42463.rs:28:30: 28:42
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-42463.rs:28:32: 28:40
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<i32>) -> bool {Vec::<i32>::is_empty}, val: Value(<ZST>) }
+        _3 = Vec::<i32>::is_empty(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Not(move _3);               // scope 0 at ui/closures/issue-42463.rs:28:29: 28:42
-        return;                          // scope 0 at ui/closures/issue-42463.rs:28:42: 28:42
+        _0 = Not(move _3);
+        return;
     }
 }

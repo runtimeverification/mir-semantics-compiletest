@@ -1,245 +1,205 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> i64 {
-    let mut _0: i64;                     // return place in scope 0 at ui/consts/issue-37991.rs:3:19: 3:22
+    let mut _0: i64;
 
     bb0: {
-        _0 = const 3_i64;                // scope 0 at ui/consts/issue-37991.rs:4:5: 4:6
-        return;                          // scope 0 at ui/consts/issue-37991.rs:5:2: 5:2
+        _0 = const 3_i64;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo() -> i64 {
-    let mut _0: i64;                     // return place in scope 0 at ui/consts/issue-37991.rs:3:19: 3:22
+    let mut _0: i64;
 
     bb0: {
-        _0 = const 3_i64;                // scope 0 at ui/consts/issue-37991.rs:4:5: 4:6
-        return;                          // scope 0 at ui/consts/issue-37991.rs:5:2: 5:2
+        _0 = const 3_i64;
+        return;
     }
 }
 
 fn bar(_1: i64) -> i64 {
-    debug x => _1;                       // in scope 0 at ui/consts/issue-37991.rs:7:14: 7:15
-    let mut _0: i64;                     // return place in scope 0 at ui/consts/issue-37991.rs:7:25: 7:28
-    let mut _2: i64;                     // in scope 0 at ui/consts/issue-37991.rs:8:5: 8:6
-    let mut _3: (i64, bool);             // in scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
+    debug x => _1;
+    let mut _0: i64;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/consts/issue-37991.rs:8:5: 8:6
-        _3 = CheckedMul(_2, const 2_i64); // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_i64) -> bb1; // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-    }
-
-    bb1: {
-        _0 = move (_3.0: i64);           // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-        return;                          // scope 0 at ui/consts/issue-37991.rs:9:2: 9:2
+        _0 = Mul(_1, const 2_i64);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn bar(_1: i64) -> i64 {
-    debug x => _1;                       // in scope 0 at ui/consts/issue-37991.rs:7:14: 7:15
-    let mut _0: i64;                     // return place in scope 0 at ui/consts/issue-37991.rs:7:25: 7:28
-    let mut _2: i64;                     // in scope 0 at ui/consts/issue-37991.rs:8:5: 8:6
-    let mut _3: (i64, bool);             // in scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
+    debug x => _1;
+    let mut _0: i64;
+    let mut _2: i64;
 
     bb0: {
-        StorageLive(_2);                 // scope 0 at ui/consts/issue-37991.rs:8:5: 8:6
-        _2 = _1;                         // scope 0 at ui/consts/issue-37991.rs:8:5: 8:6
-        _3 = CheckedMul(_2, const 2_i64); // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_i64) -> bb1; // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-    }
-
-    bb1: {
-        _0 = move (_3.0: i64);           // scope 0 at ui/consts/issue-37991.rs:8:5: 8:8
-        StorageDead(_2);                 // scope 0 at ui/consts/issue-37991.rs:8:7: 8:8
-        return;                          // scope 0 at ui/consts/issue-37991.rs:9:2: 9:2
+        StorageLive(_2);
+        _2 = _1;
+        _0 = Mul(move _2, const 2_i64);
+        StorageDead(_2);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-37991.rs:11:11: 11:11
-    let _1: &i64;                        // in scope 0 at ui/consts/issue-37991.rs:12:9: 12:12
-    let _2: i64;                         // in scope 0 at ui/consts/issue-37991.rs:12:16: 12:27
-    let mut _3: i64;                     // in scope 0 at ui/consts/issue-37991.rs:12:17: 12:22
-    let mut _4: (&i64, &i64);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _5: &i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _6: &i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _11: i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _12: i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _16: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _17: &i64;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _18: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _19: &i64;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let _22: i64;                        // in scope 0 at ui/consts/issue-37991.rs:15:17: 15:31
-    let mut _23: i64;                    // in scope 0 at ui/consts/issue-37991.rs:15:18: 15:26
-    let mut _24: i64;                    // in scope 0 at ui/consts/issue-37991.rs:15:22: 15:25
-    let mut _25: (&i64, &i64);           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _26: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _27: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _30: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _31: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _32: i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _33: i64;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _35: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _36: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _37: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _38: &i64;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _39: &i64;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _40: &i64;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _41: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: &i64;
+    let _2: i64;
+    let mut _3: i64;
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: bool;
+    let mut _7: bool;
+    let mut _8: (&i64, &i64);
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: i64;
+    let mut _14: i64;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let _19: i64;
+    let mut _20: i64;
+    let mut _21: i64;
+    let mut _22: bool;
+    let mut _23: bool;
+    let mut _24: bool;
+    let mut _25: bool;
+    let mut _26: (&i64, &i64);
+    let mut _29: bool;
+    let mut _30: bool;
+    let mut _31: i64;
+    let mut _32: i64;
+    let _34: !;
+    let mut _35: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug val => _1;                 // in scope 1 at ui/consts/issue-37991.rs:12:9: 12:12
-        let _7: &i64;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _8: &i64;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _21: &i64;                   // in scope 1 at ui/consts/issue-37991.rs:15:9: 15:13
-        let mut _43: &i64;               // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug val => _1;
+        let _9: &i64;
+        let _10: &i64;
+        let _18: &i64;
+        let mut _37: &i64;
         scope 2 {
-            debug left_val => _7;        // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _8;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _13: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _13;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _15;
             }
         }
         scope 4 {
-            debug val2 => _21;           // in scope 4 at ui/consts/issue-37991.rs:15:9: 15:13
-            let _28: &i64;               // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _29: &i64;               // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _42: &i64;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug val2 => _18;
+            let _27: &i64;
+            let _28: &i64;
+            let mut _36: &i64;
             scope 5 {
-                debug left_val => _28;   // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _29;  // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _34: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _27;
+                debug right_val => _28;
+                let _33: core::panicking::AssertKind;
                 scope 6 {
-                    debug kind => _34;   // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _33;
                 }
             }
         }
     }
 
     bb0: {
-        _3 = foo() -> bb1;               // scope 0 at ui/consts/issue-37991.rs:12:17: 12:22
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-37991.rs:12:17: 12:20
-                                         // + literal: Const { ty: fn() -> i64 {foo}, val: Value(<ZST>) }
+        _3 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Rem(move _3, const 2_i64);  // scope 0 at ui/consts/issue-37991.rs:12:16: 12:27
-        _1 = &_2;                        // scope 0 at ui/consts/issue-37991.rs:12:15: 12:27
-        _5 = _1;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _43 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[1])) }
-        _6 = _43;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _4 = (move _5, move _6);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _7 = (_4.0: &i64);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _8 = (_4.1: &i64);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _11 = (*_7);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _12 = const 1_i64;               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _10 = Eq(move _11, move _12);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _9 = Not(move _10);              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _9) -> [0: bb3, otherwise: bb2]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _4 = Eq(const 2_i64, const 0_i64);
+        assert(!move _4, "attempt to calculate the remainder of `{}` with a divisor of zero", _3) -> [success: bb2, unwind continue];
     }
 
     bb2: {
-        _13 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _17 = _7;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _16 = _17;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _8;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = _19;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _14 = core::panicking::assert_failed::<i64, i64>(move _15, move _16, move _18, move _20); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i64, &'b i64, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i64, i64>}, val: Value(<ZST>) }
+        _5 = Eq(const 2_i64, const -1_i64);
+        _6 = Eq(_3, const i64::MIN);
+        _7 = BitAnd(move _5, move _6);
+        assert(!move _7, "attempt to compute the remainder of `{} % {}`, which would overflow", _3, const 2_i64) -> [success: bb3, unwind continue];
     }
 
     bb3: {
-        _24 = const 2_i64;               // scope 1 at ui/consts/issue-37991.rs:15:22: 15:25
-        _23 = bar(move _24) -> bb4;      // scope 1 at ui/consts/issue-37991.rs:15:18: 15:26
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-37991.rs:15:18: 15:21
-                                         // + literal: Const { ty: fn(i64) -> i64 {bar}, val: Value(<ZST>) }
+        _2 = Rem(move _3, const 2_i64);
+        _1 = &_2;
+        _37 = const _;
+        _8 = (_1, _37);
+        _9 = (_8.0: &i64);
+        _10 = (_8.1: &i64);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _22 = Rem(move _23, const 3_i64); // scope 1 at ui/consts/issue-37991.rs:15:17: 15:31
-        _21 = &_22;                      // scope 1 at ui/consts/issue-37991.rs:15:16: 15:31
-        _26 = _21;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _42 = const _;                   // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &i64, val: Unevaluated(main, [], Some(promoted[0])) }
-        _27 = _42;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _25 = (move _26, move _27);      // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _28 = (_25.0: &i64);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _29 = (_25.1: &i64);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _32 = (*_28);                    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _33 = const 1_i64;               // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _31 = Eq(move _32, move _33);    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _30 = Not(move _31);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _30) -> [0: bb6, otherwise: bb5]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<i64, i64>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb5: {
-        _34 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _36 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _38 = _28;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _37 = _38;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _40 = _29;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _39 = _40;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _41 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _35 = core::panicking::assert_failed::<i64, i64>(move _36, move _37, move _39, move _41); // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a i64, &'b i64, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<i64, i64>}, val: Value(<ZST>) }
+        _21 = Add(const 1_i64, const 1_i64);
+        _20 = bar(move _21) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;                          // scope 0 at ui/consts/issue-37991.rs:17:2: 17:2
+        _22 = Eq(const 3_i64, const 0_i64);
+        assert(!move _22, "attempt to calculate the remainder of `{}` with a divisor of zero", _20) -> [success: bb7, unwind continue];
+    }
+
+    bb7: {
+        _23 = Eq(const 3_i64, const -1_i64);
+        _24 = Eq(_20, const i64::MIN);
+        _25 = BitAnd(move _23, move _24);
+        assert(!move _25, "attempt to compute the remainder of `{} % {}`, which would overflow", _20, const 3_i64) -> [success: bb8, unwind continue];
+    }
+
+    bb8: {
+        _19 = Rem(move _20, const 3_i64);
+        _18 = &_19;
+        _36 = const _;
+        _26 = (_18, _36);
+        _27 = (_26.0: &i64);
+        _28 = (_26.1: &i64);
+        _31 = (*_27);
+        _32 = (*_28);
+        _30 = Eq(move _31, move _32);
+        _29 = Not(move _30);
+        switchInt(move _29) -> [0: bb10, otherwise: bb9];
+    }
+
+    bb9: {
+        _33 = core::panicking::AssertKind::Eq;
+        _35 = Option::<Arguments<'_>>::None;
+        _34 = core::panicking::assert_failed::<i64, i64>(move _33, _27, _28, move _35) -> unwind continue;
+    }
+
+    bb10: {
+        return;
     }
 }
 
 promoted[0] in main: &i64 = {
-    let mut _0: &i64;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i64;                     // in scope 0 at ui/consts/issue-37991.rs:16:23: 16:24
+    let mut _0: &i64;
+    let mut _1: i64;
 
     bb0: {
-        _1 = const 1_i64;                // scope 0 at ui/consts/issue-37991.rs:16:23: 16:24
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 1_i64;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &i64 = {
-    let mut _0: &i64;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: i64;                     // in scope 0 at ui/consts/issue-37991.rs:13:22: 13:23
+    let mut _0: &i64;
+    let mut _1: i64;
 
     bb0: {
-        _1 = const 1_i64;                // scope 0 at ui/consts/issue-37991.rs:13:22: 13:23
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 1_i64;
+        _0 = &_1;
+        return;
     }
 }

@@ -1,157 +1,97 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: myoption<T>) -> isize {
-    debug o => _1;                       // in scope 0 at ui/binding/use-uninit-match.rs:6:11: 6:12
-    let mut _0: isize;                   // return place in scope 0 at ui/binding/use-uninit-match.rs:7:9: 7:14
-    let mut _2: isize;                   // in scope 0 at ui/binding/use-uninit-match.rs:9:9: 9:28
-    let mut _4: (isize, bool);           // in scope 0 at ui/binding/use-uninit-match.rs:10:38: 10:44
+    debug o => _1;
+    let mut _0: isize;
+    let mut _2: isize;
+    let mut _3: isize;
     scope 1 {
-        debug x => _0;                   // in scope 1 at ui/binding/use-uninit-match.rs:7:9: 7:14
-        let _3: T;                       // in scope 1 at ui/binding/use-uninit-match.rs:10:29: 10:31
+        debug x => _2;
+        let _4: T;
         scope 2 {
-            debug _t => _3;              // in scope 2 at ui/binding/use-uninit-match.rs:10:29: 10:31
+            debug _t => _4;
         }
     }
 
     bb0: {
-        _0 = const 5_isize;              // scope 0 at ui/binding/use-uninit-match.rs:7:24: 7:25
-        _2 = discriminant(_1);           // scope 1 at ui/binding/use-uninit-match.rs:8:11: 8:12
-        switchInt(move _2) -> [0: bb4, 1: bb1, otherwise: bb2]; // scope 1 at ui/binding/use-uninit-match.rs:8:5: 8:12
+        _2 = const 5_isize;
+        _3 = discriminant(_1);
+        switchInt(move _3) -> [0: bb3, 1: bb1, otherwise: bb2];
     }
 
     bb1: {
-        _3 = move ((_1 as some).0: T);   // scope 1 at ui/binding/use-uninit-match.rs:10:29: 10:31
-        _4 = CheckedAdd(_0, const 1_isize); // scope 2 at ui/binding/use-uninit-match.rs:10:38: 10:44
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", _0, const 1_isize) -> [success: bb3, unwind: bb5]; // scope 2 at ui/binding/use-uninit-match.rs:10:38: 10:44
+        _4 = move ((_1 as some).0: T);
+        _2 = Add(_2, const 1_isize);
+        drop(_4) -> [return: bb3, unwind continue];
     }
 
     bb2: {
-        unreachable;                     // scope 1 at ui/binding/use-uninit-match.rs:8:11: 8:12
+        unreachable;
     }
 
     bb3: {
-        _0 = move (_4.0: isize);         // scope 2 at ui/binding/use-uninit-match.rs:10:38: 10:44
-        drop(_3) -> bb4;                 // scope 1 at ui/binding/use-uninit-match.rs:10:46: 10:47
-    }
-
-    bb4: {
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:13:2: 13:2
-    }
-
-    bb5 (cleanup): {
-        drop(_3) -> bb6;                 // scope 1 at ui/binding/use-uninit-match.rs:10:46: 10:47
-    }
-
-    bb6 (cleanup): {
-        resume;                          // scope 0 at ui/binding/use-uninit-match.rs:6:1: 13:2
+        _0 = _2;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/use-uninit-match.rs:17:15: 17:15
-    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _3: &[&str];                 // in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-    let mut _4: &[&str; 2];              // in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-    let _5: &[&str; 2];                  // in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _7: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _8: &[core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _9: [core::fmt::ArgumentV1<'_>; 1]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _10: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    let mut _11: &i32;                   // in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    let _12: &i32;                       // in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    let mut _13: &i32;                   // in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    let mut _14: &[&str; 2];             // in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let mut _3: &[&str];
+    let mut _4: &[core::fmt::rt::Argument<'_>];
+    let _5: &[core::fmt::rt::Argument<'_>; 0];
+    let _6: [core::fmt::rt::Argument<'_>; 0];
+    let mut _7: &[&str; 1];
 
     bb0: {
-        _14 = const _;                   // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-                                         // mir::Constant
-                                         // + span: ui/binding/use-uninit-match.rs:17:26: 17:30
-                                         // + literal: Const { ty: &[&str; 2], val: Unevaluated(main, [], Some(promoted[1])) }
-        _5 = _14;                        // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-        _4 = _5;                         // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-        _13 = const _;                   // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-                                         // mir::Constant
-                                         // + span: ui/binding/use-uninit-match.rs:17:32: 17:33
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _12 = _13;                       // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-        _11 = _12;                       // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-        _10 = core::fmt::ArgumentV1::<'_>::new_display::<i32>(move _11) -> bb1; // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-                                         // mir::Constant
-                                         // + span: ui/binding/use-uninit-match.rs:17:32: 17:33
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: for<'b> fn(&'b i32) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<i32>}, val: Value(<ZST>) }
+        _7 = const _;
+        _3 = _7 as &[&str] (Pointer(Unsize));
+        _6 = core::fmt::rt::Argument::<'_>::none() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _9 = [move _10];                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _8 = &_9;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb2; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _5 = &_6;
+        _4 = _5 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _1 = _print(move _2) -> bb3;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _1 = _print(move _2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:17:37: 17:37
+        return;
     }
 }
 
-promoted[0] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    let mut _1: i32;                     // in scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
+promoted[0] in main: &[&str; 1] = {
+    let mut _0: &[&str; 1];
+    let mut _1: [&str; 1];
 
     bb0: {
-        _1 = const 5_i32;                // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-        _0 = &_1;                        // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:17:32: 17:33
-    }
-}
-
-promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];              // return place in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-    let mut _1: [&str; 2];               // in scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-
-    bb0: {
-        _1 = [const "", const "\n"];     // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-                                         // mir::Constant
-                                         // + span: ui/binding/use-uninit-match.rs:17:26: 17:30
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: ui/binding/use-uninit-match.rs:17:26: 17:30
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:17:26: 17:30
+        _1 = [const "5\n"];
+        _0 = &_1;
+        return;
     }
 }
 
 fn myoption::some(_1: T) -> myoption<T> {
-    let mut _0: myoption<T>;             // return place in scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
+    let mut _0: myoption<T>;
 
     bb0: {
-        _0 = myoption::<T>::some(move _1); // scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
+        _0 = myoption::<T>::some(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn myoption::some(_1: T) -> myoption<T> {
-    let mut _0: myoption<T>;             // return place in scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
+    let mut _0: myoption<T>;
 
     bb0: {
-        _0 = myoption::<T>::some(move _1); // scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
-        return;                          // scope 0 at ui/binding/use-uninit-match.rs:15:26: 15:30
+        _0 = myoption::<T>::some(move _1);
+        return;
     }
 }

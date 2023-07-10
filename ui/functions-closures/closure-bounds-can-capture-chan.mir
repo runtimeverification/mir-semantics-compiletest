@@ -1,145 +1,113 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: F) -> () {
-    debug blk => _1;                     // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:6:25: 6:28
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:6:33: 6:33
-    let _2: ();                          // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:10
-    let mut _3: F;                       // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:8
-    let mut _4: ();                      // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:10
+    debug blk => _1;
+    let mut _0: ();
+    let _2: ();
 
     bb0: {
-        _3 = move _1;                    // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:8
-        _2 = <F as FnOnce<()>>::call_once(move _3, move _4) -> bb1; // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:10
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:7:5: 7:8
-                                         // + literal: Const { ty: extern "rust-call" fn(F, ()) -> <F as FnOnce<()>>::Output {<F as FnOnce<()>>::call_once}, val: Value(<ZST>) }
+        _2 = <F as FnOnce<()>>::call_once(move _1, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:8:2: 8:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:10:15: 10:15
-    let _1: std::sync::mpsc::Sender<()>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:10: 11:12
-    let _2: std::sync::mpsc::Receiver<()>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:14: 11:16
-    let mut _3: (std::sync::mpsc::Sender<()>, std::sync::mpsc::Receiver<()>); // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:20: 11:29
-    let _4: ();                          // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:5: 14:7
-    let mut _5: [closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 14:6
-    let _6: ();                          // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:23
-    let mut _7: std::result::Result<(), std::sync::mpsc::RecvError>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:14
-    let mut _8: &std::sync::mpsc::Receiver<()>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:14
-    let mut _9: bool;                    // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
+    let mut _0: ();
+    let _1: std::sync::mpsc::Sender<()>;
+    let _2: std::sync::mpsc::Receiver<()>;
+    let mut _3: (std::sync::mpsc::Sender<()>, std::sync::mpsc::Receiver<()>);
+    let _4: ();
+    let mut _5: [closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16];
+    let _6: ();
+    let mut _7: std::result::Result<(), std::sync::mpsc::RecvError>;
+    let mut _8: &std::sync::mpsc::Receiver<()>;
+    let mut _9: bool;
     scope 1 {
-        debug tx => _1;                  // in scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:10: 11:12
-        debug rx => _2;                  // in scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:14: 11:16
+        debug tx => _1;
+        debug rx => _2;
     }
 
     bb0: {
-        _9 = const false;                // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:20: 11:29
-        _3 = channel::<()>() -> bb1;     // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:20: 11:29
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:11:20: 11:27
-                                         // + literal: Const { ty: fn() -> (Sender<()>, std::sync::mpsc::Receiver<()>) {channel::<()>}, val: Value(<ZST>) }
+        _9 = const false;
+        _3 = channel::<()>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _9 = const true;                 // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:10: 11:12
-        _1 = move (_3.0: std::sync::mpsc::Sender<()>); // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:10: 11:12
-        _2 = move (_3.1: std::sync::mpsc::Receiver<()>); // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:14: 11:16
-        _9 = const false;                // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 14:6
-        _5 = [closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16] { tx: move _1 }; // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 14:6
-                                         // closure
-                                         // + def_id: DefId(0:7 ~ closure_bounds_can_capture_chan[5f00]::main::{closure#0})
-                                         // + substs: [
-                                         //     i32,
-                                         //     extern "rust-call" fn(()),
-                                         //     (std::sync::mpsc::Sender<()>,),
-                                         // ]
-        _4 = foo::<[closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]>(move _5) -> [return: bb2, unwind: bb6]; // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:5: 14:7
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:12:5: 12:8
-                                         // + literal: Const { ty: fn([closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]) {foo::<[closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]>}, val: Value(<ZST>) }
+        _9 = const true;
+        _1 = move (_3.0: std::sync::mpsc::Sender<()>);
+        _2 = move (_3.1: std::sync::mpsc::Receiver<()>);
+        _9 = const false;
+        _5 = [closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16] { tx: move _1 };
+        _4 = foo::<[closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]>(move _5) -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _8 = &_2;                        // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:14
-        _7 = std::sync::mpsc::Receiver::<()>::recv(move _8) -> [return: bb3, unwind: bb6]; // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:14
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:15:8: 15:12
-                                         // + literal: Const { ty: for<'a> fn(&'a std::sync::mpsc::Receiver<()>) -> Result<(), RecvError> {std::sync::mpsc::Receiver::<()>::recv}, val: Value(<ZST>) }
+        _8 = &_2;
+        _7 = std::sync::mpsc::Receiver::<()>::recv(move _8) -> [return: bb3, unwind: bb6];
     }
 
     bb3: {
-        _6 = Result::<(), RecvError>::unwrap(move _7) -> [return: bb4, unwind: bb6]; // scope 1 at ui/functions-closures/closure-bounds-can-capture-chan.rs:15:5: 15:23
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:15:15: 15:21
-                                         // + literal: Const { ty: fn(Result<(), RecvError>) {Result::<(), RecvError>::unwrap}, val: Value(<ZST>) }
+        _6 = Result::<(), RecvError>::unwrap(move _7) -> [return: bb4, unwind: bb6];
     }
 
     bb4: {
-        drop(_2) -> [return: bb5, unwind: bb9]; // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
+        drop(_2) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        _9 = const false;                // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
-        return;                          // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:2: 16:2
+        _9 = const false;
+        return;
     }
 
     bb6 (cleanup): {
-        drop(_2) -> bb9;                 // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
+        drop(_2) -> [return: bb9, unwind terminate];
     }
 
     bb7 (cleanup): {
-        resume;                          // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:10:1: 16:2
+        resume;
     }
 
     bb8 (cleanup): {
-        drop(_1) -> bb7;                 // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
+        drop(_1) -> [return: bb7, unwind terminate];
     }
 
     bb9 (cleanup): {
-        switchInt(_9) -> [0: bb7, otherwise: bb8]; // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:16:1: 16:2
+        switchInt(_9) -> [0: bb7, otherwise: bb8];
     }
 }
 
 fn main::{closure#0}(_1: [closure@ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 12:16]) -> () {
-    debug tx => (_1.0: std::sync::mpsc::Sender<()>); // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:11:10: 11:12
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:17: 12:17
-    let _2: ();                          // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:29
-    let mut _3: std::result::Result<(), std::sync::mpsc::SendError<()>>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:20
-    let mut _4: &std::sync::mpsc::Sender<()>; // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:20
-    let mut _5: ();                      // in scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:17: 13:19
+    debug tx => (_1.0: std::sync::mpsc::Sender<()>);
+    let mut _0: ();
+    let _2: ();
+    let mut _3: std::result::Result<(), std::sync::mpsc::SendError<()>>;
+    let mut _4: &std::sync::mpsc::Sender<()>;
 
     bb0: {
-        _4 = &(_1.0: std::sync::mpsc::Sender<()>); // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:20
-        _3 = Sender::<()>::send(move _4, move _5) -> [return: bb1, unwind: bb4]; // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:20
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:13:12: 13:16
-                                         // + literal: Const { ty: for<'a> fn(&'a Sender<()>, ()) -> Result<(), SendError<()>> {Sender::<()>::send}, val: Value(<ZST>) }
+        _4 = &(_1.0: std::sync::mpsc::Sender<()>);
+        _3 = Sender::<()>::send(move _4, const ()) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _2 = Result::<(), SendError<()>>::unwrap(move _3) -> [return: bb2, unwind: bb4]; // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:13:9: 13:29
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure-bounds-can-capture-chan.rs:13:21: 13:27
-                                         // + literal: Const { ty: fn(Result<(), SendError<()>>) {Result::<(), SendError<()>>::unwrap}, val: Value(<ZST>) }
+        _2 = Result::<(), SendError<()>>::unwrap(move _3) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:14:5: 14:6
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:14:6: 14:6
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:14:5: 14:6
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/functions-closures/closure-bounds-can-capture-chan.rs:12:9: 14:6
+        resume;
     }
 }

@@ -1,96 +1,90 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/const-generics/const_trait_fn-issue-88433.rs:15:1: 15:36>::call_once(_1: Closure, _2: &usize) -> usize {
-    debug self => _1;                    // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:18: 18:22
-    debug arg => _2;                     // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:24: 18:27
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:40: 18:52
+    debug self => const Closure;
+    debug arg => _2;
+    let mut _0: usize;
 
     bb0: {
-        _0 = (*_2);                      // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:19:9: 19:13
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:20:6: 20:6
+        _0 = (*_2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn <impl at ui/const-generics/const_trait_fn-issue-88433.rs:15:1: 15:36>::call_once(_1: Closure, _2: &usize) -> usize {
-    debug self => _1;                    // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:18: 18:22
-    debug arg => _2;                     // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:24: 18:27
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:18:40: 18:52
+    debug self => _1;
+    debug arg => _2;
+    let mut _0: usize;
 
     bb0: {
-        _0 = (*_2);                      // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:19:9: 19:13
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:20:6: 20:6
+        _0 = (*_2);
+        return;
     }
 }
 
 Bug::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:40
-    let mut _1: Closure;                 // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:26
-    let mut _2: &usize;                  // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-    let _3: &usize;                      // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-    let _4: usize;                       // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:38: 23:39
-    let mut _5: &usize;                  // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
+    let mut _0: usize;
+    let mut _1: Closure;
+    let mut _2: &usize;
+    let _3: &usize;
+    let _4: usize;
+    let mut _5: &usize;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:26
-        _1 = Closure;                    // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:26
-        StorageLive(_2);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-        StorageLive(_3);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-        _5 = const _;                    // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-                                         // mir::Constant
-                                         // + span: ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-                                         // + literal: Const { ty: &usize, val: Unevaluated(Bug::{constant#0}, [], Some(promoted[0])) }
-        _3 = &(*_5);                     // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-        _2 = &(*_3);                     // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-        ConstEvalCounter;                // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:40
-        _0 = <Closure as Func<&usize>>::call_once(move _1, move _2) -> bb1; // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:40
-                                         // mir::Constant
-                                         // + span: ui/const-generics/const_trait_fn-issue-88433.rs:23:27: 23:36
-                                         // + literal: Const { ty: fn(Closure, &usize) -> <Closure as Func<&usize>>::Output {<Closure as Func<&usize>>::call_once}, val: Value(<ZST>) }
+        StorageLive(_1);
+        _1 = Closure;
+        StorageLive(_2);
+        StorageLive(_3);
+        _5 = const _;
+        _3 = &(*_5);
+        _2 = &(*_3);
+        ConstEvalCounter;
+        _0 = <Closure as Func<&usize>>::call_once(move _1, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        StorageDead(_3);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:39: 23:40
-        StorageDead(_2);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:39: 23:40
-        StorageDead(_1);                 // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:39: 23:40
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:19: 23:40
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
 promoted[0] in Bug::{constant#0}: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:38: 23:39
+    let mut _0: &usize;
+    let mut _1: usize;
 
     bb0: {
-        _1 = const 0_usize;              // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:38: 23:39
-        _0 = &_1;                        // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:23:37: 23:39
+        _1 = const 0_usize;
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:27:11: 27:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:27:13: 27:13
+        return;
     }
 }
 
 fn Bug::V(_1: T) -> Bug<T> {
-    let mut _0: Bug<T>;                  // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
+    let mut _0: Bug<T>;
 
     bb0: {
-        _0 = Bug::<T>::V(move _1);       // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
+        _0 = Bug::<T>::V(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Bug::V(_1: T) -> Bug<T> {
-    let mut _0: Bug<T>;                  // return place in scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
+    let mut _0: Bug<T>;
 
     bb0: {
-        _0 = Bug::<T>::V(move _1);       // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
-        return;                          // scope 0 at ui/const-generics/const_trait_fn-issue-88433.rs:24:5: 24:6
+        _0 = Bug::<T>::V(move _1);
+        return;
     }
 }

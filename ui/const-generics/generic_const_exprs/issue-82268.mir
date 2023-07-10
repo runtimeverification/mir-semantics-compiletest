@@ -1,442 +1,231 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:13:1: 13:28>::collate(_1: ()) -> ((), ()) {
-    debug self => _1;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:17:16: 17:20
-    let mut _0: ((), ());                // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:17:25: 17:33
+    debug self => const ();
+    let mut _0: ((), ());
 
     bb0: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:19:6: 19:6
+        return;
     }
 }
 
 fn <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:28:1: 28:44>::collate_step(_1: X, _2: (P, F)) -> ((X, P), F) {
-    debug x => _1;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:21: 32:22
-    let mut _0: ((X, P), F);             // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:46: 32:57
-    let _3: P;                           // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:28: 32:29
-    let _4: F;                           // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:31: 32:32
-    let mut _5: (X, P);                  // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:10: 33:16
-    let mut _6: X;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:11: 33:12
-    let mut _7: P;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:14: 33:15
-    let mut _8: F;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:18: 33:19
+    debug x => _1;
+    let mut _0: ((X, P), F);
+    let _3: P;
+    let _4: F;
+    let mut _5: (X, P);
     scope 1 {
-        debug p => _3;                   // in scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:28: 32:29
-        debug f => _4;                   // in scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:31: 32:32
+        debug p => _3;
+        debug f => _4;
     }
 
     bb0: {
-        _3 = move (_2.0: P);             // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:28: 32:29
-        _4 = move (_2.1: F);             // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:32:31: 32:32
-        _6 = move _1;                    // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:11: 33:12
-        _7 = move _3;                    // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:14: 33:15
-        _5 = (move _6, move _7);         // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:10: 33:16
-        _8 = move _4;                    // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:18: 33:19
-        _0 = (move _5, move _8);         // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:33:9: 33:20
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:34:6: 34:6
+        _3 = move (_2.0: P);
+        _4 = move (_2.1: F);
+        _5 = (move _1, move _3);
+        _0 = (move _5, move _4);
+        return;
     }
 }
 
 <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:43:1: 43:60>::{constant#0}: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:19: 45:32
-    let mut _1: (u32, bool);             // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:21: 45:30
+    let mut _0: u32;
+    let mut _1: u32;
+    let mut _2: bool;
 
     bb0: {
-        _1 = CheckedShr(const MASK, const 1_i32); // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:21: 45:30
-        assert(!move (_1.1: bool), "attempt to shift right by `{}`, which would overflow", const 1_i32) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:21: 45:30
+        _1 = const 1_i32 as u32 (IntToInt);
+        _2 = Lt(move _1, const 32_u32);
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: u32);           // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:21: 45:30
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:45:19: 45:32
+        _0 = Shr(const MASK, const 1_i32);
+        return;
     }
 }
 
 <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:43:1: 43:60>::{constant#1}: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:43:55: 43:59
+    let mut _0: u32;
 
     bb0: {
-        _0 = const MASK;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:43:55: 43:59
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:43:55: 43:59
+        _0 = const MASK;
+        return;
     }
 }
 
 <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:43:1: 43:60>::NextOp::{constant#0}: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:33: 47:46
-    let mut _1: (u32, bool);             // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:35: 47:44
+    let mut _0: u32;
+    let mut _1: u32;
+    let mut _2: bool;
 
     bb0: {
-        _1 = CheckedShr(const MASK, const 1_i32); // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:35: 47:44
-        assert(!move (_1.1: bool), "attempt to shift right by `{}`, which would overflow", const 1_i32) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:35: 47:44
+        _1 = const 1_i32 as u32 (IntToInt);
+        _2 = Lt(move _1, const 32_u32);
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: u32);           // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:35: 47:44
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:47:33: 47:46
+        _0 = Shr(const MASK, const 1_i32);
+        return;
     }
 }
 
 fn <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:51:1: 51:53>::collate(_1: (H, T)) -> (<<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Pass, <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Fail) {
-    debug self => _1;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:59:16: 59:20
-    let mut _0: (<<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Pass, <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Fail); // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:59:25: 59:49
-    let mut _2: H;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:73: 60:79
-    let mut _3: (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail); // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:81: 60:97
-    let mut _4: T;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:81: 60:87
-    let mut _5: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:97: 60:98
+    debug self => _1;
+    let mut _0: (<<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Pass, <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Fail);
+    let mut _2: H;
+    let mut _3: (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail);
+    let mut _4: T;
+    let mut _5: bool;
 
     bb0: {
-        _5 = const false;                // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:73: 60:79
-        _5 = const true;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:73: 60:79
-        _2 = move (_1.0: H);             // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:73: 60:79
-        _4 = move (_1.1: T);             // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:81: 60:87
-        _3 = <T as Collate<<Op as CollateOpStep>::NextOp>>::collate(move _4) -> [return: bb1, unwind: bb5]; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:81: 60:97
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:60:88: 60:95
-                                         // + literal: Const { ty: fn(T) -> (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail) {<T as Collate<<Op as CollateOpStep>::NextOp>>::collate}, val: Value(<ZST>) }
+        _5 = const false;
+        _5 = const true;
+        _2 = move (_1.0: H);
+        _4 = move (_1.1: T);
+        _3 = <T as Collate<<Op as CollateOpStep>::NextOp>>::collate(move _4) -> [return: bb1, unwind: bb5];
     }
 
     bb1: {
-        _5 = const false;                // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:9: 60:98
-        _0 = <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::collate_step(move _2, move _3) -> [return: bb2, unwind: bb5]; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:9: 60:98
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:60:9: 60:72
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)) -> (<<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Pass, <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::Fail) {<<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::collate_step}, val: Value(<ZST>) }
+        _5 = const false;
+        _0 = <<Op as CollateOpStep>::Apply as CollateStep<H, (<T as Collate<<Op as CollateOpStep>::NextOp>>::Pass, <T as Collate<<Op as CollateOpStep>::NextOp>>::Fail)>>::collate_step(move _2, move _3) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        _5 = const false;                // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:97: 60:98
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:61:6: 61:6
+        _5 = const false;
+        return;
     }
 
     bb3 (cleanup): {
-        resume;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:59:5: 61:6
+        resume;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb3;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:97: 60:98
+        drop(_2) -> [return: bb3, unwind terminate];
     }
 
     bb5 (cleanup): {
-        switchInt(_5) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:60:97: 60:98
+        switchInt(_5) -> [0: bb3, otherwise: bb4];
     }
 }
 
 fn collate(_1: X) -> (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<CollateOpImpl<MASK>>>::Fail) {
-    debug x => _1;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:64:32: 64:33
-    let mut _0: (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<CollateOpImpl<MASK>>>::Fail); // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:64:41: 64:59
-    let mut _2: X;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:68:5: 68:6
+    debug x => _1;
+    let mut _0: (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<CollateOpImpl<MASK>>>::Fail);
 
     bb0: {
-        _2 = move _1;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:68:5: 68:6
-        _0 = <X as Collate<CollateOpImpl<MASK>>>::collate(move _2) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:68:5: 68:16
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:68:7: 68:14
-                                         // + literal: Const { ty: fn(X) -> (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<CollateOpImpl<MASK>>>::Fail) {<X as Collate<CollateOpImpl<MASK>>>::collate}, val: Value(<ZST>) }
+        _0 = <X as Collate<CollateOpImpl<MASK>>>::collate(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:69:2: 69:2
+        return;
     }
 }
 
 collate::{constant#0}: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:66:30: 66:34
+    let mut _0: u32;
 
     bb0: {
-        _0 = const MASK;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:66:30: 66:34
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:66:30: 66:34
+        _0 = const MASK;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:71:11: 71:11
-    let mut _1: ((&str, (i32, (char, ()))), ()); // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:10: 72:53
-    let mut _2: (&str, (i32, (char, ()))); // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:26: 72:52
-    let mut _3: (i32, (char, ()));       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:36: 72:51
-    let _4: ((&str, (i32, (char, ()))), ()); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
-    let _5: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
-    let mut _6: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _7: &[&str];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-    let mut _8: &[&str; 5];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-    let _9: &[&str; 5];                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-    let mut _10: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _11: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let _12: &[core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let _13: [core::fmt::ArgumentV1<'_>; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _14: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _15: &&str;                  // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let _16: &&str;                      // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _17: core::fmt::ArgumentV1<'_>; // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _18: &u32;                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let _19: &u32;                       // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _20: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-    let mut _21: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-    let _22: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-    let mut _23: core::fmt::ArgumentV1<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-    let mut _24: &&((&str, (i32, (char, ()))), ()); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-    let _25: &&((&str, (i32, (char, ()))), ()); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-    let _26: &((&str, (i32, (char, ()))), ()); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-    let mut _27: &[std::fmt::rt::v1::Argument]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _28: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let _29: &[std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let _30: [std::fmt::rt::v1::Argument; 4]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _31: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _32: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _33: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _34: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _35: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _36: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _37: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _38: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _39: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _40: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _41: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _42: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _43: std::fmt::rt::v1::Argument; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _44: std::fmt::rt::v1::Alignment; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _45: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _46: std::fmt::rt::v1::Count; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-    let mut _47: core::fmt::UnsafeArg;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
+    let mut _0: ();
+    let mut _1: ((&str, (i32, (char, ()))), ());
+    let mut _2: (&str, (i32, (char, ())));
+    let mut _3: (i32, (char, ()));
+    let mut _4: (char, ());
+    let _5: ((&str, (i32, (char, ()))), ());
+    let _6: ();
+    let mut _7: std::fmt::Arguments<'_>;
+    let mut _8: &[&str];
+    let mut _9: &[core::fmt::rt::Argument<'_>];
+    let _10: &[core::fmt::rt::Argument<'_>; 1];
+    let _11: [core::fmt::rt::Argument<'_>; 1];
+    let mut _12: core::fmt::rt::Argument<'_>;
+    let _13: &&((&str, (i32, (char, ()))), ());
+    let _14: &((&str, (i32, (char, ()))), ());
+    let mut _15: &[core::fmt::rt::Placeholder];
+    let _16: &[core::fmt::rt::Placeholder; 1];
+    let _17: [core::fmt::rt::Placeholder; 1];
+    let mut _18: core::fmt::rt::Placeholder;
+    let mut _19: core::fmt::rt::Alignment;
+    let mut _20: core::fmt::rt::Count;
+    let mut _21: core::fmt::rt::Count;
+    let mut _22: core::fmt::rt::UnsafeArg;
     scope 1 {
-        debug tmp => _4;                 // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
-        let mut _48: &&str;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-        let mut _49: &u32;               // in scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        let mut _50: &&str;              // in scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        let mut _51: &[&str; 5];         // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        debug tmp => _5;
+        let mut _23: &[&str; 2];
         scope 2 {
         }
     }
 
     bb0: {
-        _3 = const (42_i32, ('!', ()));  // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:36: 72:51
-        _2 = (const "Hello", move _3);   // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:26: 72:52
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:27: 72:34
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _1 = collate::<(&str, (i32, (char, ()))), 5>(move _2) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:10: 72:53
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:10: 72:25
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn((&str, (i32, (char, ())))) -> (<(&str, (i32, (char, ()))) as Collate<CollateOpImpl<5>>>::Pass, <(&str, (i32, (char, ()))) as Collate<CollateOpImpl<5>>>::Fail) {collate::<(&str, (i32, (char, ()))), 5>}, val: Value(<ZST>) }
+        _4 = (const '!', const ());
+        _3 = (const 42_i32, move _4);
+        _2 = (const "Hello", move _3);
+        _1 = collate::<(&str, (i32, (char, ()))), 5>(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = _1;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:352:13: 352:16
-        _51 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &[&str; 5], val: Unevaluated(main, [], Some(promoted[3])) }
-        _9 = _51;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-        _8 = _9;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-        _7 = move _8 as &[&str] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-        _50 = const _;                   // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[2])) }
-        _16 = _50;                       // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        _15 = _16;                       // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        _14 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _15) -> bb2; // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+        _5 = _1;
+        _23 = const _;
+        _8 = _23 as &[&str] (Pointer(Unsize));
+        _14 = &_5;
+        _13 = &_14;
+        _12 = core::fmt::rt::Argument::<'_>::new_debug::<&((&str, (i32, (char, ()))), ())>(_13) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _49 = const _;                   // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[1])) }
-        _19 = _49;                       // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        _18 = _19;                       // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        _17 = core::fmt::ArgumentV1::<'_>::new_display::<u32>(move _18) -> bb3; // scope 1 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // + user_ty: UserType(3)
-                                         // + literal: Const { ty: for<'b> fn(&'b u32) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<u32>}, val: Value(<ZST>) }
+        _11 = [move _12];
+        _10 = &_11;
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _19 = core::fmt::rt::Alignment::Unknown;
+        _20 = core::fmt::rt::Count::Implied;
+        _21 = core::fmt::rt::Count::Implied;
+        _18 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _19, const 4_u32, move _20, move _21) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _48 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
-        _22 = _48;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-        _21 = _22;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-        _20 = core::fmt::ArgumentV1::<'_>::new_display::<&str>(move _21) -> bb4; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // + user_ty: UserType(4)
-                                         // + literal: Const { ty: for<'b> fn(&'b &str) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_display::<&str>}, val: Value(<ZST>) }
+        _17 = [move _18];
+        _16 = &_17;
+        _15 = _16 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _22 = core::fmt::rt::UnsafeArg::new() -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _26 = &_4;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-        _25 = &_26;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-        _24 = _25;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-        _23 = core::fmt::ArgumentV1::<'_>::new_debug::<&((&str, (i32, (char, ()))), ())>(move _24) -> bb5; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:81: 354:85
-                                         // + user_ty: UserType(5)
-                                         // + literal: Const { ty: for<'b> fn(&'b &((&str, (i32, (char, ()))), ())) -> core::fmt::ArgumentV1<'b> {core::fmt::ArgumentV1::<'_>::new_debug::<&((&str, (i32, (char, ()))), ())>}, val: Value(<ZST>) }
+        _7 = Arguments::<'_>::new_v1_formatted(move _8, move _9, move _15, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _13 = [move _14, move _17, move _20, move _23]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _12 = &_13;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _11 = _12;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _10 = move _11 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _32 = const std::fmt::rt::v1::Alignment::Unknown; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
-        _33 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _34 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _31 = Argument::new(const 0_usize, const ' ', move _32, const 0_u32, move _33, move _34) -> bb6; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
+        _6 = _eprint(move _7) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _36 = const std::fmt::rt::v1::Alignment::Unknown; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
-        _37 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _38 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _35 = Argument::new(const 1_usize, const ' ', move _36, const 0_u32, move _37, move _38) -> bb7; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
-    }
-
-    bb7: {
-        _40 = const std::fmt::rt::v1::Alignment::Unknown; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
-        _41 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _42 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _39 = Argument::new(const 2_usize, const ' ', move _40, const 0_u32, move _41, move _42) -> bb8; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
-    }
-
-    bb8: {
-        _44 = const std::fmt::rt::v1::Alignment::Unknown; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: std::fmt::rt::v1::Alignment, val: Value(Scalar(0x03)) }
-        _45 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _46 = Implied;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _43 = Argument::new(const 3_usize, const ' ', move _44, const 4_u32, move _45, move _46) -> bb9; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: fn(usize, char, std::fmt::rt::v1::Alignment, u32, Count, Count) -> Argument {Argument::new}, val: Value(<ZST>) }
-    }
-
-    bb9: {
-        _30 = [move _31, move _35, move _39, move _43]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _29 = &_30;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _28 = _29;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _27 = move _28 as &[std::fmt::rt::v1::Argument] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-        _47 = core::fmt::UnsafeArg::new() -> bb10; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + literal: Const { ty: unsafe fn() -> core::fmt::UnsafeArg {core::fmt::UnsafeArg::new}, val: Value(<ZST>) }
-    }
-
-    bb10: {
-        _6 = Arguments::<'_>::new_v1_formatted(move _7, move _10, move _27, move _47) -> bb11; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:29: 209:62
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>], &[Argument], core::fmt::UnsafeArg) -> Arguments<'_> {Arguments::<'_>::new_v1_formatted}, val: Value(<ZST>) }
-    }
-
-    bb11: {
-        _5 = _eprint(move _6) -> bb12;   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:63
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:209:9: 209:28
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_eprint}, val: Value(<ZST>) }
-    }
-
-    bb12: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:73:2: 73:2
+        return;
     }
 }
 
-promoted[0] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-    let mut _1: &str;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
+promoted[0] in main: &[&str; 2] = {
+    let mut _0: &[&str; 2];
+    let mut _1: [&str; 2];
 
     bb0: {
-        _1 = const "collate::<_, 5>((\"Hello\", (42, ('!', ()))))"; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:354:55: 354:79
-    }
-}
-
-promoted[1] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _1: u32;                     // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-
-    bb0: {
-        _1 = const 72_u32;               // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        _0 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    }
-}
-
-promoted[2] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    let mut _1: &str;                    // in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-
-    bb0: {
-        _1 = const "ui/const-generics/generic_const_exprs/issue-82268.rs"; // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:5: 72:54
-    }
-}
-
-promoted[3] in main: &[&str; 5] = {
-    let mut _0: &[&str; 5];              // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-    let mut _1: [&str; 5];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-
-    bb0: {
-        _1 = [const "[", const ":", const "] ", const " = ", const "\n"]; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:353:35: 353:55
+        _1 = [const "[ui/const-generics/generic_const_exprs/issue-82268.rs:72] collate::<_, 5>((\"Hello\", (42, ('!', ())))) = ", const "\n"];
+        _0 = &_1;
+        return;
     }
 }
 
 main::{constant#0}: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:23: 72:24
+    let mut _0: u32;
 
     bb0: {
-        _0 = const 5_u32;                // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:23: 72:24
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-82268.rs:72:23: 72:24
+        _0 = const 5_u32;
+        return;
     }
 }

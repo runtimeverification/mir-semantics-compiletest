@@ -1,228 +1,189 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn make_array() -> [(); M + 1] {
-    let mut _0: [(); M + 1];             // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:36: 5:47
-    let mut _1: ();                      // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:6: 6:8
+    let mut _0: [(); M + 1];
 
     bb0: {
-        _0 = [move _1; M + 1];           // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:5: 6:16
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:7:2: 7:2
+        _0 = [const (); M + 1];
+        return;
     }
 }
 
 make_array::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
-    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedAdd(const M, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
+        _1 = CheckedAdd(const M, const 1_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:5:41: 5:46
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 make_array::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
-    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedAdd(const M, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
+        _1 = CheckedAdd(const M, const 1_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:6:10: 6:15
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 fn foo() -> [(); (N * 2) + 1] {
-    let mut _0: [(); (N * 2) + 1];       // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:29: 9:46
+    let mut _0: [(); (N * 2) + 1];
 
     bb0: {
-        _0 = make_array::<{ N * 2 }>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:5: 10:30
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:5: 10:28
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> [(); M + 1] {make_array::<{ N * 2 }>}, val: Value(<ZST>) }
+        _0 = make_array::<{ N * 2 }>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:11:2: 11:2
+        return;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
-    let mut _2: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
-    let mut _3: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
+    let mut _0: usize;
+    let mut _1: usize;
+    let mut _2: (usize, bool);
+    let mut _3: (usize, bool);
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
-        _2 = CheckedMul(const N, const 2_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
-        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
+        StorageLive(_1);
+        _2 = CheckedMul(const N, const 2_usize);
+        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = move (_2.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:41
-        _3 = CheckedAdd(_1, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> bb2; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
+        _1 = move (_2.0: usize);
+        _3 = CheckedAdd(_1, const 1_usize);
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> [success: bb2, unwind continue];
     }
 
     bb2: {
-        _0 = move (_3.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:44: 9:45
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:9:34: 9:45
+        _0 = move (_3.0: usize);
+        StorageDead(_1);
+        return;
     }
 }
 
 foo::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:18: 10:27
-    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:20: 10:25
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedMul(const N, const 2_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:20: 10:25
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:20: 10:25
+        _1 = CheckedMul(const N, const 2_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:20: 10:25
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:10:18: 10:27
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:13:11: 13:11
-    let mut _1: (&[(); (N * 2) + 1], &[(); 10 * 2 + 1]); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &[(); (N * 2) + 1];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _3: [(); (N * 2) + 1];           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:16: 14:27
-    let mut _4: &[(); 10 * 2 + 1];       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _5: &[(); (N * 2) + 1];          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _6: &[(); 10 * 2 + 1];           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _7: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _9: &[(); (N * 2) + 1];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _10: &[(); 10 * 2 + 1];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _12: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _13: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _14: &[(); (N * 2) + 1];     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _15: &[(); (N * 2) + 1];         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _16: &[(); 10 * 2 + 1];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _17: &[(); 10 * 2 + 1];          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _18: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _19: &[(); 10 * 2 + 1];      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    let mut _0: ();
+    let mut _1: (&[(); (N * 2) + 1], &[(); 10 * 2 + 1]);
+    let mut _2: &[(); (N * 2) + 1];
+    let _3: [(); (N * 2) + 1];
+    let _4: &[(); (N * 2) + 1];
+    let _5: &[(); 10 * 2 + 1];
+    let mut _6: bool;
+    let mut _7: bool;
+    let _9: !;
+    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _11: &[(); 10 * 2 + 1];
     scope 1 {
-        debug left_val => _5;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _6;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _11: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _4;
+        debug right_val => _5;
+        let _8: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _11;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _8;
         }
     }
 
     bb0: {
-        _3 = foo::<10>() -> bb1;         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:16: 14:27
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:16: 14:25
-                                         // + literal: Const { ty: fn() -> [(); (N * 2) + 1] {foo::<10>}, val: Value(<ZST>) }
+        _3 = foo::<10>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _19 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &[(); 10 * 2 + 1], val: Unevaluated(main, [], Some(promoted[0])) }
-        _4 = _19;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _4);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _5 = (_1.0: &[(); (N * 2) + 1]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _6 = (_1.1: &[(); 10 * 2 + 1]);  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _9 = _5;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _10 = _6;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _8 = <[(); (N * 2) + 1] as PartialEq<[(); 10 * 2 + 1]>>::eq(move _9, move _10) -> bb2; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a [(); (N * 2) + 1], &'b [(); 10 * 2 + 1]) -> bool {<[(); (N * 2) + 1] as PartialEq<[(); 10 * 2 + 1]>>::eq}, val: Value(<ZST>) }
+        _2 = &_3;
+        _11 = const _;
+        _1 = (move _2, _11);
+        _4 = (_1.0: &[(); (N * 2) + 1]);
+        _5 = (_1.1: &[(); 10 * 2 + 1]);
+        _7 = <[(); (N * 2) + 1] as PartialEq<[(); 10 * 2 + 1]>>::eq(_4, _5) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _7 = Not(move _8);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _7) -> [0: bb4, otherwise: bb3]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _6 = Not(move _7);
+        switchInt(move _6) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _11 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _13 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = _5;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _14 = _15;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _17 = _6;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _16 = _17;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _12 = core::panicking::assert_failed::<[(); (N * 2) + 1], [(); 10 * 2 + 1]>(move _13, move _14, move _16, move _18); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a [(); (N * 2) + 1], &'b [(); 10 * 2 + 1], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<[(); (N * 2) + 1], [(); 10 * 2 + 1]>}, val: Value(<ZST>) }
+        _8 = core::panicking::AssertKind::Eq;
+        _10 = Option::<Arguments<'_>>::None;
+        _9 = core::panicking::assert_failed::<[(); (N * 2) + 1], [(); 10 * 2 + 1]>(move _8, _4, _5, move _10) -> unwind continue;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:15:2: 15:2
+        return;
     }
 }
 
 promoted[0] in main: &[(); 10 * 2 + 1] = {
-    let mut _0: &[(); 10 * 2 + 1];       // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: [(); 10 * 2 + 1];        // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:29: 14:45
-    let mut _2: ();                      // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:30: 14:32
+    let mut _0: &[(); 10 * 2 + 1];
+    let mut _1: [(); 10 * 2 + 1];
+    let mut _2: ();
 
     bb0: {
-        _2 = ();                         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:30: 14:32
-        _1 = [move _2; 10 * 2 + 1];      // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:29: 14:45
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _2 = ();
+        _1 = [move _2; 10 * 2 + 1];
+        _0 = &_1;
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:22: 14:24
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 10_usize;             // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:22: 14:24
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:22: 14:24
+        _0 = const 10_usize;
+        return;
     }
 }
 
 main::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
-    let mut _2: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
-    let mut _3: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
+    let mut _0: usize;
+    let mut _1: usize;
+    let mut _2: (usize, bool);
+    let mut _3: (usize, bool);
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
-        _2 = CheckedMul(const 10_usize, const 2_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
-        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const 10_usize, const 2_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
+        StorageLive(_1);
+        _2 = CheckedMul(const 10_usize, const 2_usize);
+        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const 10_usize, const 2_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = move (_2.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:40
-        _3 = CheckedAdd(_1, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> bb2; // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
+        _1 = move (_2.0: usize);
+        _3 = CheckedAdd(_1, const 1_usize);
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> [success: bb2, unwind continue];
     }
 
     bb2: {
-        _0 = move (_3.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:43: 14:44
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/subexprs_are_const_evalutable.rs:14:34: 14:44
+        _0 = move (_3.0: usize);
+        StorageDead(_1);
+        return;
     }
 }

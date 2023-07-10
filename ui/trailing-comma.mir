@@ -1,61 +1,59 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f(_1: T) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/trailing-comma.rs:4:17: 4:17
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/trailing-comma.rs:4:18: 4:19
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/trailing-comma.rs:4:19: 4:19
+        return;
     }
 }
 
 fn <impl at ui/trailing-comma.rs:10:1: 10:9>::f(_1: isize) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/trailing-comma.rs:11:21: 11:21
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/trailing-comma.rs:11:23: 11:23
+        return;
     }
 }
 
 fn <impl at ui/trailing-comma.rs:10:1: 10:9>::g(_1: Bar, _2: isize) -> () {
-    debug self => _1;                    // in scope 0 at ui/trailing-comma.rs:12:10: 12:14
-    let mut _0: ();                      // return place in scope 0 at ui/trailing-comma.rs:12:27: 12:27
+    debug self => const Bar;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/trailing-comma.rs:12:29: 12:29
+        return;
     }
 }
 
 fn <impl at ui/trailing-comma.rs:10:1: 10:9>::h(_1: Bar) -> () {
-    debug self => _1;                    // in scope 0 at ui/trailing-comma.rs:13:10: 13:14
-    let mut _0: ();                      // return place in scope 0 at ui/trailing-comma.rs:13:17: 13:17
+    debug self => const Bar;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/trailing-comma.rs:13:19: 13:19
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/trailing-comma.rs:21:15: 21:15
-    let _1: ();                          // in scope 0 at ui/trailing-comma.rs:22:5: 22:20
-    let _3: ();                          // in scope 0 at ui/trailing-comma.rs:30:5: 30:15
-    let _4: ();                          // in scope 0 at ui/trailing-comma.rs:31:5: 31:14
-    let mut _5: Bar;                     // in scope 0 at ui/trailing-comma.rs:31:5: 31:8
-    let _6: ();                          // in scope 0 at ui/trailing-comma.rs:32:5: 32:12
-    let mut _7: Bar;                     // in scope 0 at ui/trailing-comma.rs:32:5: 32:8
+    let mut _0: ();
+    let _1: ();
+    let _3: ();
+    let _4: ();
+    let _5: ();
     scope 1 {
         scope 2 {
             scope 3 {
                 scope 4 {
-                    let _2: Foo<isize>;  // in scope 4 at ui/trailing-comma.rs:28:9: 28:10
+                    let _2: Foo<isize>;
                     scope 5 {
-                        debug x => _2;   // in scope 5 at ui/trailing-comma.rs:28:9: 28:10
-                        let _8: Baz;     // in scope 5 at ui/trailing-comma.rs:34:9: 34:10
+                        debug x => _2;
+                        let _6: Baz;
                         scope 6 {
-                            debug x => _8; // in scope 6 at ui/trailing-comma.rs:34:9: 34:10
+                            debug x => _6;
                         }
                     }
                 }
@@ -64,80 +62,62 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = f::<isize>(const 0_isize) -> bb1; // scope 0 at ui/trailing-comma.rs:22:5: 22:20
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:22:5: 22:16
-                                         // + literal: Const { ty: fn(isize) {f::<isize>}, val: Value(<ZST>) }
+        _1 = f::<isize>(const 0_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = const Foo::<isize>(1_isize); // scope 4 at ui/trailing-comma.rs:28:26: 28:42
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:28:26: 28:42
-                                         // + literal: Const { ty: Foo<isize>, val: Value(Scalar(0x0000000000000001)) }
-        _3 = Bar::f(const 0_isize) -> bb2; // scope 5 at ui/trailing-comma.rs:30:5: 30:15
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:30:5: 30:11
-                                         // + literal: Const { ty: fn(isize) {Bar::f}, val: Value(<ZST>) }
+        _2 = Foo::<isize>(const 1_isize);
+        _3 = Bar::f(const 0_isize) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _4 = Bar::g(move _5, const 0_isize) -> bb3; // scope 5 at ui/trailing-comma.rs:31:5: 31:14
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:31:9: 31:10
-                                         // + literal: Const { ty: fn(Bar, isize) {Bar::g}, val: Value(<ZST>) }
+        _4 = Bar::g(const Bar, const 0_isize) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _6 = Bar::h(move _7) -> bb4;     // scope 5 at ui/trailing-comma.rs:32:5: 32:12
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:32:9: 32:10
-                                         // + literal: Const { ty: fn(Bar) {Bar::h}, val: Value(<ZST>) }
+        _5 = Bar::h(const Bar) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _8 = const Baz::Qux(1_isize);    // scope 5 at ui/trailing-comma.rs:34:13: 34:25
-                                         // mir::Constant
-                                         // + span: ui/trailing-comma.rs:34:13: 34:25
-                                         // + literal: Const { ty: Baz, val: Value(Scalar(0x0000000000000001)) }
-        return;                          // scope 0 at ui/trailing-comma.rs:35:2: 35:2
+        _6 = Baz::Qux(const 1_isize);
+        return;
     }
 }
 
 fn Foo(_1: T) -> Foo<T> {
-    let mut _0: Foo<T>;                  // return place in scope 0 at ui/trailing-comma.rs:6:1: 6:15
+    let mut _0: Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1);          // scope 0 at ui/trailing-comma.rs:6:1: 6:15
-        return;                          // scope 0 at ui/trailing-comma.rs:6:1: 6:15
+        _0 = Foo::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: T) -> Foo<T> {
-    let mut _0: Foo<T>;                  // return place in scope 0 at ui/trailing-comma.rs:6:1: 6:15
+    let mut _0: Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1);          // scope 0 at ui/trailing-comma.rs:6:1: 6:15
-        return;                          // scope 0 at ui/trailing-comma.rs:6:1: 6:15
+        _0 = Foo::<T>(move _1);
+        return;
     }
 }
 
 fn Baz::Qux(_1: isize) -> Baz {
-    let mut _0: Baz;                     // return place in scope 0 at ui/trailing-comma.rs:17:5: 17:8
+    let mut _0: Baz;
 
     bb0: {
-        _0 = Baz::Qux(move _1);          // scope 0 at ui/trailing-comma.rs:17:5: 17:8
-        return;                          // scope 0 at ui/trailing-comma.rs:17:5: 17:8
+        _0 = Baz::Qux(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Baz::Qux(_1: isize) -> Baz {
-    let mut _0: Baz;                     // return place in scope 0 at ui/trailing-comma.rs:17:5: 17:8
+    let mut _0: Baz;
 
     bb0: {
-        _0 = Baz::Qux(move _1);          // scope 0 at ui/trailing-comma.rs:17:5: 17:8
-        return;                          // scope 0 at ui/trailing-comma.rs:17:5: 17:8
+        _0 = Baz::Qux(move _1);
+        return;
     }
 }

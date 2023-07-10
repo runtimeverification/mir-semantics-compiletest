@@ -1,71 +1,65 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 <impl at ui/consts/self_normalization2.rs:9:1: 9:24>::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization2.rs:9:15: 9:16
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization2.rs:9:15: 9:16
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:9:15: 9:16
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn <impl at ui/consts/self_normalization2.rs:9:1: 9:24>::gen(_1: A) -> [(); 0] {
-    debug x => _1;                       // in scope 0 at ui/consts/self_normalization2.rs:10:12: 10:13
-    let mut _0: [(); 0];                 // return place in scope 0 at ui/consts/self_normalization2.rs:10:24: 10:31
+    debug x => const A;
+    let mut _0: [(); 0];
 
     bb0: {
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:12:6: 12:6
+        return;
     }
 }
 
 <impl at ui/consts/self_normalization2.rs:9:1: 9:24>::gen::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization2.rs:10:29: 10:30
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization2.rs:10:29: 10:30
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:10:29: 10:30
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn array() -> impl Gen<[(); 0]> {
-    let mut _0: impl Gen<[(); 0]>;       // return place in scope 0 at ui/consts/self_normalization2.rs:15:15: 15:32
+    let mut _0: impl Gen<[(); 0]>;
 
     bb0: {
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:17:2: 17:2
+        return;
     }
 }
 
 array::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/self_normalization2.rs:15:29: 15:30
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/self_normalization2.rs:15:29: 15:30
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:15:29: 15:30
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/self_normalization2.rs:19:11: 19:11
-    let mut _1: [(); 0];                 // in scope 0 at ui/consts/self_normalization2.rs:20:14: 20:31
-    let mut _2: impl Gen<[(); 0]>;       // in scope 0 at ui/consts/self_normalization2.rs:20:23: 20:30
+    let mut _0: ();
+    let mut _1: [(); 0];
+    let mut _2: impl Gen<[(); 0]>;
     scope 1 {
     }
 
     bb0: {
-        _2 = array() -> bb1;             // scope 0 at ui/consts/self_normalization2.rs:20:23: 20:30
-                                         // mir::Constant
-                                         // + span: ui/consts/self_normalization2.rs:20:23: 20:28
-                                         // + literal: Const { ty: fn() -> impl Gen<[(); 0]> {array}, val: Value(<ZST>) }
+        _2 = array() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = <impl Gen<[(); 0]> as Gen<[(); 0]>>::gen(move _2) -> bb2; // scope 0 at ui/consts/self_normalization2.rs:20:14: 20:31
-                                         // mir::Constant
-                                         // + span: ui/consts/self_normalization2.rs:20:14: 20:22
-                                         // + literal: Const { ty: fn(impl Gen<[(); 0]>) -> [(); 0] {<impl Gen<[(); 0]> as Gen<[(); 0]>>::gen}, val: Value(<ZST>) }
+        _1 = <impl Gen<[(); 0]> as Gen<[(); 0]>>::gen(const ZeroSized: impl Gen<[(); 0]>) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/consts/self_normalization2.rs:21:2: 21:2
+        return;
     }
 }

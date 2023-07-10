@@ -1,79 +1,74 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo_pass() -> impl FooLike<Output = <T as impl_trait::Trait>::Assoc> {
-    let mut _0: impl FooLike<Output = <T as impl_trait::Trait>::Assoc>; // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:31:44: 31:75
+    let mut _0: impl FooLike<Output = <T as impl_trait::Trait>::Assoc>;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:33:6: 33:6
+        return;
     }
 }
 
 fn foo2_pass() -> impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_ {
-    let mut _0: impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_; // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:49:8: 49:59
+    let mut _0: impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:51:6: 51:6
+        return;
     }
 }
 
 fn foo2_pass2() -> impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_ {
-    let mut _0: impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_; // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:57:8: 57:59
-    let mut _1: &();                     // in scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-    let mut _2: &();                     // in scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
+    let mut _0: impl FooLike<Output = <T as lifetimes::Trait<'_>>::Assoc> + '_;
+    let mut _1: &();
 
     bb0: {
-        _2 = const _;                    // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-                                         // + literal: Const { ty: &(), val: Unevaluated(foo2_pass2, [ReErased, T], Some(promoted[0])) }
-        _1 = _2;                         // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-        _0 = Foo::<&()>(move _1);        // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:9: 58:17
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:59:6: 59:6
+        _1 = const _;
+        _0 = Foo::<&()>(_1);
+        return;
     }
 }
 
 promoted[0] in foo2_pass2: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-    let mut _1: ();                      // in scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:14: 58:16
+    let mut _0: &();
+    let mut _1: ();
 
     bb0: {
-        _1 = ();                         // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:14: 58:16
-        _0 = &_1;                        // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:58:13: 58:16
+        _1 = ();
+        _0 = &_1;
+        return;
     }
 }
 
 fn define() -> Ex {
-    let mut _0: opaque_types::Ex;        // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:82:20: 82:22
+    let mut _0: opaque_types::Ex;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:84:6: 84:6
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:87:11: 87:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:87:13: 87:13
+        return;
     }
 }
 
 fn Foo(_1: T) -> Foo<T> {
-    let mut _0: Foo<T>;                  // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
+    let mut _0: Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1);          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
+        _0 = Foo::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: T) -> Foo<T> {
-    let mut _0: Foo<T>;                  // return place in scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
+    let mut _0: Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1);          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
-        return;                          // scope 0 at ui/impl-trait/bound-normalization-pass.rs:13:1: 13:14
+        _0 = Foo::<T>(move _1);
+        return;
     }
 }

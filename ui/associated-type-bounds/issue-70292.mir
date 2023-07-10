@@ -1,30 +1,26 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: F) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-70292.rs:6:1: 6:1
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/associated-type-bounds/issue-70292.rs:9:1: 9:2
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/associated-type-bounds/issue-70292.rs:9:2: 9:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/associated-type-bounds/issue-70292.rs:19:11: 19:11
-    let _1: ();                          // in scope 0 at ui/associated-type-bounds/issue-70292.rs:20:5: 20:12
-    let mut _2: ();                      // in scope 0 at ui/associated-type-bounds/issue-70292.rs:20:9: 20:11
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = foo::<()>(move _2) -> bb1;  // scope 0 at ui/associated-type-bounds/issue-70292.rs:20:5: 20:12
-                                         // mir::Constant
-                                         // + span: ui/associated-type-bounds/issue-70292.rs:20:5: 20:8
-                                         // + literal: Const { ty: fn(()) {foo::<()>}, val: Value(<ZST>) }
+        _1 = foo::<()>(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/associated-type-bounds/issue-70292.rs:21:2: 21:2
+        return;
     }
 }

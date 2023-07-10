@@ -1,110 +1,90 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Foo::dummy(_1: &Self) -> () {
-    debug self => _1;                    // in scope 0 at ui/overloaded/issue-14958.rs:6:22: 6:27
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/issue-14958.rs:6:29: 6:29
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:6:32: 6:32
+        return;
     }
 }
 
 fn <impl at ui/overloaded/issue-14958.rs:10:1: 10:51>::call(_1: &Bar, _2: (&dyn Foo,)) -> () {
-    debug self => _1;                    // in scope 0 at ui/overloaded/issue-14958.rs:11:32: 11:37
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/issue-14958.rs:11:58: 11:58
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:11:60: 11:60
+        return;
     }
 }
 
 fn <impl at ui/overloaded/issue-14958.rs:14:1: 14:54>::call_mut(_1: &mut Bar, _2: (&dyn Foo,)) -> () {
-    debug self => _1;                    // in scope 0 at ui/overloaded/issue-14958.rs:15:36: 15:45
-    debug a => _2;                       // in scope 0 at ui/overloaded/issue-14958.rs:15:47: 15:48
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/issue-14958.rs:15:66: 15:66
-    let mut _3: &Bar;                    // in scope 0 at ui/overloaded/issue-14958.rs:15:68: 15:80
-    let mut _4: (&dyn Foo,);             // in scope 0 at ui/overloaded/issue-14958.rs:15:78: 15:79
+    debug self => _1;
+    debug a => _2;
+    let mut _0: ();
+    let mut _3: &Bar;
 
     bb0: {
-        _3 = &(*_1);                     // scope 0 at ui/overloaded/issue-14958.rs:15:68: 15:80
-        _4 = _2;                         // scope 0 at ui/overloaded/issue-14958.rs:15:78: 15:79
-        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/overloaded/issue-14958.rs:15:68: 15:80
-                                         // mir::Constant
-                                         // + span: ui/overloaded/issue-14958.rs:15:73: 15:77
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Bar, (&dyn Foo,)) -> <Bar as FnOnce<(&dyn Foo,)>>::Output {<Bar as Fn<(&dyn Foo,)>>::call}, val: Value(<ZST>) }
+        _3 = &(*_1);
+        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:15:82: 15:82
+        return;
     }
 }
 
 fn <impl at ui/overloaded/issue-14958.rs:18:1: 18:55>::call_once(_1: Bar, _2: (&dyn Foo,)) -> () {
-    debug self => _1;                    // in scope 0 at ui/overloaded/issue-14958.rs:20:37: 20:41
-    debug a => _2;                       // in scope 0 at ui/overloaded/issue-14958.rs:20:43: 20:44
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/issue-14958.rs:20:62: 20:62
-    let mut _3: &Bar;                    // in scope 0 at ui/overloaded/issue-14958.rs:20:64: 20:76
-    let mut _4: (&dyn Foo,);             // in scope 0 at ui/overloaded/issue-14958.rs:20:74: 20:75
+    debug self => const Bar;
+    debug a => _2;
+    let mut _0: ();
+    let mut _3: &Bar;
 
     bb0: {
-        _3 = &_1;                        // scope 0 at ui/overloaded/issue-14958.rs:20:64: 20:76
-        _4 = _2;                         // scope 0 at ui/overloaded/issue-14958.rs:20:74: 20:75
-        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/overloaded/issue-14958.rs:20:64: 20:76
-                                         // mir::Constant
-                                         // + span: ui/overloaded/issue-14958.rs:20:69: 20:73
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Bar, (&dyn Foo,)) -> <Bar as FnOnce<(&dyn Foo,)>>::Output {<Bar as Fn<(&dyn Foo,)>>::call}, val: Value(<ZST>) }
+        _3 = &_1;
+        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:20:78: 20:78
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/overloaded/issue-14958.rs:27:11: 27:11
-    let _1: Bar;                         // in scope 0 at ui/overloaded/issue-14958.rs:28:9: 28:12
-    let _3: ();                          // in scope 0 at ui/overloaded/issue-14958.rs:30:5: 30:13
-    let mut _4: &Bar;                    // in scope 0 at ui/overloaded/issue-14958.rs:30:5: 30:8
-    let mut _5: (&dyn Foo,);             // in scope 0 at ui/overloaded/issue-14958.rs:30:5: 30:13
-    let mut _6: &dyn Foo;                // in scope 0 at ui/overloaded/issue-14958.rs:30:9: 30:12
-    let mut _7: &Baz;                    // in scope 0 at ui/overloaded/issue-14958.rs:30:9: 30:12
+    let mut _0: ();
+    let _1: Bar;
+    let _2: ();
+    let mut _3: &Bar;
+    let mut _4: (&dyn Foo,);
+    let mut _5: &dyn Foo;
     scope 1 {
-        debug bar => _1;                 // in scope 1 at ui/overloaded/issue-14958.rs:28:9: 28:12
-        let _2: &Baz;                    // in scope 1 at ui/overloaded/issue-14958.rs:29:9: 29:12
-        let mut _8: &Baz;                // in scope 1 at ui/overloaded/issue-14958.rs:29:15: 29:19
+        debug bar => const Bar;
+        let mut _6: &Baz;
         scope 2 {
-            debug baz => _2;             // in scope 2 at ui/overloaded/issue-14958.rs:29:9: 29:12
+            debug baz => const _;
         }
     }
 
     bb0: {
-        _8 = const _;                    // scope 1 at ui/overloaded/issue-14958.rs:29:15: 29:19
-                                         // mir::Constant
-                                         // + span: ui/overloaded/issue-14958.rs:29:15: 29:19
-                                         // + literal: Const { ty: &Baz, val: Unevaluated(main, [], Some(promoted[0])) }
-        _2 = _8;                         // scope 1 at ui/overloaded/issue-14958.rs:29:15: 29:19
-        _4 = &_1;                        // scope 2 at ui/overloaded/issue-14958.rs:30:5: 30:8
-        _7 = _2;                         // scope 2 at ui/overloaded/issue-14958.rs:30:9: 30:12
-        _6 = move _7 as &dyn Foo (Pointer(Unsize)); // scope 2 at ui/overloaded/issue-14958.rs:30:9: 30:12
-        _5 = (move _6,);                 // scope 2 at ui/overloaded/issue-14958.rs:30:5: 30:13
-        _3 = <Bar as Fn<(&dyn Foo,)>>::call(move _4, move _5) -> bb1; // scope 2 at ui/overloaded/issue-14958.rs:30:5: 30:13
-                                         // mir::Constant
-                                         // + span: ui/overloaded/issue-14958.rs:30:5: 30:8
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a Bar, (&dyn Foo,)) -> <Bar as FnOnce<(&dyn Foo,)>>::Output {<Bar as Fn<(&dyn Foo,)>>::call}, val: Value(<ZST>) }
+        _6 = const _;
+        _3 = &_1;
+        _5 = _6 as &dyn Foo (Pointer(Unsize));
+        _4 = (move _5,);
+        _2 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:31:2: 31:2
+        return;
     }
 }
 
 promoted[0] in main: &Baz = {
-    let mut _0: &Baz;                    // return place in scope 0 at ui/overloaded/issue-14958.rs:29:15: 29:19
-    let mut _1: Baz;                     // in scope 0 at ui/overloaded/issue-14958.rs:29:16: 29:19
+    let mut _0: &Baz;
+    let mut _1: Baz;
 
     bb0: {
-        _1 = Baz;                        // scope 0 at ui/overloaded/issue-14958.rs:29:16: 29:19
-        _0 = &_1;                        // scope 0 at ui/overloaded/issue-14958.rs:29:15: 29:19
-        return;                          // scope 0 at ui/overloaded/issue-14958.rs:29:15: 29:19
+        _1 = Baz;
+        _0 = &_1;
+        return;
     }
 }

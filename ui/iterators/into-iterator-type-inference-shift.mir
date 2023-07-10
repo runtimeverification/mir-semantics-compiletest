@@ -1,85 +1,62 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/iterators/into-iterator-type-inference-shift.rs:19:1: 19:27>::into_iter(_1: I) -> I {
-    debug self => _1;                    // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:22:18: 22:22
-    let mut _0: I;                       // return place in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:22:27: 22:28
+    debug self => _1;
+    let mut _0: I;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:23:9: 23:13
-        return;                          // scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:24:6: 24:6
+        _0 = move _1;
+        return;
     }
 }
 
 fn desugared_for_loop_bad(_1: u8) -> u8 {
-    debug byte => _1;                    // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:27:27: 27:31
-    let mut _0: u8;                      // return place in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:27:40: 27:42
-    let mut _2: i32;                     // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:28:9: 28:19
-    let mut _4: std::ops::Range<i32>;    // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:29:41: 29:45
-    let mut _6: &mut std::ops::Range<i32>; // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:30:32: 30:38
-    let mut _7: &mut std::ops::Range<i32>; // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:30:32: 30:38
-    let mut _9: std::option::Option<i32>; // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:31:17: 31:18
-    let mut _10: u8;                     // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:32:5: 32:9
-    let mut _11: i32;                    // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:32:13: 32:14
-    let mut _12: (u8, bool);             // in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:32:5: 32:14
+    debug byte => _1;
+    let mut _0: u8;
+    let mut _3: std::ops::Range<i32>;
+    let mut _5: &mut std::ops::Range<i32>;
+    let mut _7: std::option::Option<i32>;
     scope 1 {
-        debug result => _2;              // in scope 1 at ui/iterators/into-iterator-type-inference-shift.rs:28:9: 28:19
-        let mut _3: std::ops::Range<i32>; // in scope 1 at ui/iterators/into-iterator-type-inference-shift.rs:29:9: 29:14
+        debug result => const 0_i32;
+        let mut _2: std::ops::Range<i32>;
         scope 2 {
-            debug x => _3;               // in scope 2 at ui/iterators/into-iterator-type-inference-shift.rs:29:9: 29:14
-            let mut _5: std::option::Option<i32>; // in scope 2 at ui/iterators/into-iterator-type-inference-shift.rs:30:9: 30:14
+            debug x => _2;
+            let mut _4: std::option::Option<i32>;
             scope 3 {
-                debug y => _5;           // in scope 3 at ui/iterators/into-iterator-type-inference-shift.rs:30:9: 30:14
-                let mut _8: i32;         // in scope 3 at ui/iterators/into-iterator-type-inference-shift.rs:31:9: 31:14
+                debug y => _4;
+                let mut _6: i32;
                 scope 4 {
-                    debug z => _8;       // in scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:31:9: 31:14
+                    debug z => _6;
                 }
             }
         }
     }
 
     bb0: {
-        _2 = const 0_i32;                // scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:28:22: 28:23
-        _4 = std::ops::Range::<i32> { start: const 0_i32, end: const 8_i32 }; // scope 1 at ui/iterators/into-iterator-type-inference-shift.rs:29:41: 29:45
-        _3 = <std::ops::Range<i32> as IntoIterator>::into_iter(move _4) -> bb1; // scope 1 at ui/iterators/into-iterator-type-inference-shift.rs:29:17: 29:46
-                                         // mir::Constant
-                                         // + span: ui/iterators/into-iterator-type-inference-shift.rs:29:17: 29:40
-                                         // + literal: Const { ty: fn(std::ops::Range<i32>) -> <std::ops::Range<i32> as IntoIterator>::Iter {<std::ops::Range<i32> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+        _3 = std::ops::Range::<i32> { start: const 0_i32, end: const 8_i32 };
+        _2 = <std::ops::Range<i32> as IntoIterator>::into_iter(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &mut _3;                    // scope 2 at ui/iterators/into-iterator-type-inference-shift.rs:30:32: 30:38
-        _6 = &mut (*_7);                 // scope 2 at ui/iterators/into-iterator-type-inference-shift.rs:30:32: 30:38
-        _5 = <std::ops::Range<i32> as Iterator>::next(move _6) -> bb2; // scope 2 at ui/iterators/into-iterator-type-inference-shift.rs:30:17: 30:39
-                                         // mir::Constant
-                                         // + span: ui/iterators/into-iterator-type-inference-shift.rs:30:17: 30:31
-                                         // + literal: Const { ty: for<'a> fn(&'a mut std::ops::Range<i32>) -> Option<<std::ops::Range<i32> as Iterator>::Item> {<std::ops::Range<i32> as Iterator>::next}, val: Value(<ZST>) }
+        _5 = &mut _2;
+        _4 = <std::ops::Range<i32> as Iterator>::next(_5) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = _5;                         // scope 3 at ui/iterators/into-iterator-type-inference-shift.rs:31:17: 31:18
-        _8 = Option::<i32>::unwrap(move _9) -> bb3; // scope 3 at ui/iterators/into-iterator-type-inference-shift.rs:31:17: 31:27
-                                         // mir::Constant
-                                         // + span: ui/iterators/into-iterator-type-inference-shift.rs:31:19: 31:25
-                                         // + literal: Const { ty: fn(Option<i32>) -> i32 {Option::<i32>::unwrap}, val: Value(<ZST>) }
+        _7 = _4;
+        _6 = Option::<i32>::unwrap(move _7) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _10 = _1;                        // scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:32:5: 32:9
-        _11 = _8;                        // scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:32:13: 32:14
-        _12 = CheckedShr(_10, _11);      // scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:32:5: 32:14
-        assert(!move (_12.1: bool), "attempt to shift right by `{}`, which would overflow", move _11) -> bb4; // scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:32:5: 32:14
-    }
-
-    bb4: {
-        _0 = const 1_u8;                 // scope 4 at ui/iterators/into-iterator-type-inference-shift.rs:33:5: 33:6
-        return;                          // scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:34:2: 34:2
+        _0 = const 1_u8;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:36:11: 36:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/iterators/into-iterator-type-inference-shift.rs:36:13: 36:13
+        return;
     }
 }

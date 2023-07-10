@@ -1,94 +1,77 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn impls_my_trait() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:14:33: 14:33
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:14:36: 14:36
+        return;
     }
 }
 
 fn impls_my_trait_val(_1: T) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:16:41: 16:41
-    let _2: ();                          // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:17:5: 17:26
+    let mut _0: ();
+    let _2: ();
 
     bb0: {
-        _2 = impls_my_trait::<T>() -> [return: bb1, unwind: bb3]; // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:17:5: 17:26
-                                         // mir::Constant
-                                         // + span: ui/impl-header-lifetime-elision/path-underscore.rs:17:5: 17:24
-                                         // + literal: Const { ty: fn() {impls_my_trait::<T>}, val: Value(<ZST>) }
+        _2 = impls_my_trait::<T>() -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:18:1: 18:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:18:2: 18:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:18:1: 18:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:16:1: 18:2
+        resume;
     }
 }
 
 fn random_where_clause() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:21:1: 21:1
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:21:35: 21:35
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:23:11: 23:11
-    let _1: u32;                         // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:24:9: 24:10
-    let mut _3: &u32;                    // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:25:22: 25:24
-    let _4: &u32;                        // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:25:22: 25:24
-    let _5: ();                          // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:29:5: 29:26
-    let mut _6: Foo<'_>;                 // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:29:24: 29:25
-    let _7: ();                          // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:31:5: 31:37
-    let _8: ();                          // in scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:33:5: 33:26
+    let mut _0: ();
+    let _1: u32;
+    let _3: &u32;
+    let _4: ();
+    let _5: ();
+    let _6: ();
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/impl-header-lifetime-elision/path-underscore.rs:24:9: 24:10
-        let _2: Foo<'_>;                 // in scope 1 at ui/impl-header-lifetime-elision/path-underscore.rs:25:9: 25:10
+        debug x => const 22_u32;
+        let _2: Foo<'_>;
         scope 2 {
-            debug f => _2;               // in scope 2 at ui/impl-header-lifetime-elision/path-underscore.rs:25:9: 25:10
+            debug f => _2;
         }
     }
 
     bb0: {
-        _1 = const 22_u32;               // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:24:13: 24:15
-        _4 = &_1;                        // scope 1 at ui/impl-header-lifetime-elision/path-underscore.rs:25:22: 25:24
-        _3 = _4;                         // scope 1 at ui/impl-header-lifetime-elision/path-underscore.rs:25:22: 25:24
-        _2 = Foo::<'_> { x: move _3 };   // scope 1 at ui/impl-header-lifetime-elision/path-underscore.rs:25:13: 25:26
-        _6 = move _2;                    // scope 2 at ui/impl-header-lifetime-elision/path-underscore.rs:29:24: 29:25
-        _5 = impls_my_trait_val::<Foo<'_>>(move _6) -> bb1; // scope 2 at ui/impl-header-lifetime-elision/path-underscore.rs:29:5: 29:26
-                                         // mir::Constant
-                                         // + span: ui/impl-header-lifetime-elision/path-underscore.rs:29:5: 29:23
-                                         // + literal: Const { ty: fn(Foo<'_>) {impls_my_trait_val::<Foo<'_>>}, val: Value(<ZST>) }
+        _1 = const 22_u32;
+        _3 = &_1;
+        _2 = Foo::<'_> { x: _3 };
+        _4 = impls_my_trait_val::<Foo<'_>>(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = impls_my_trait::<Foo<'_>>() -> bb2; // scope 2 at ui/impl-header-lifetime-elision/path-underscore.rs:31:5: 31:37
-                                         // mir::Constant
-                                         // + span: ui/impl-header-lifetime-elision/path-underscore.rs:31:5: 31:35
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() {impls_my_trait::<Foo<'_>>}, val: Value(<ZST>) }
+        _5 = impls_my_trait::<Foo<'_>>() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _8 = random_where_clause() -> bb3; // scope 2 at ui/impl-header-lifetime-elision/path-underscore.rs:33:5: 33:26
-                                         // mir::Constant
-                                         // + span: ui/impl-header-lifetime-elision/path-underscore.rs:33:5: 33:24
-                                         // + literal: Const { ty: fn() {random_where_clause}, val: Value(<ZST>) }
+        _6 = random_where_clause() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/impl-header-lifetime-elision/path-underscore.rs:34:2: 34:2
+        return;
     }
 }

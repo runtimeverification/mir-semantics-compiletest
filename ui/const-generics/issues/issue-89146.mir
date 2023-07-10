@@ -1,84 +1,74 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 Foo::to_bytes::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:9:32: 9:42
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-89146.rs:9:32: 9:42
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:9:32: 9:42
+        _0 = const _;
+        return;
     }
 }
 
 fn bar(_1: &G) -> u8 {
-    debug a => _1;                       // in scope 0 at ui/const-generics/issues/issue-89146.rs:12:20: 12:21
-    let mut _0: u8;                      // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:12:30: 12:32
-    let mut _2: &G;                      // in scope 0 at ui/const-generics/issues/issue-89146.rs:16:16: 16:17
+    debug a => _1;
+    let mut _0: u8;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/const-generics/issues/issue-89146.rs:16:16: 16:17
-        _0 = deeper_bar::<G>(move _2) -> bb1; // scope 0 at ui/const-generics/issues/issue-89146.rs:16:5: 16:18
-                                         // mir::Constant
-                                         // + span: ui/const-generics/issues/issue-89146.rs:16:5: 16:15
-                                         // + literal: Const { ty: for<'a> fn(&'a G) -> u8 {deeper_bar::<G>}, val: Value(<ZST>) }
+        _0 = deeper_bar::<G>(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:17:2: 17:2
+        return;
     }
 }
 
 bar::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:14:10: 14:17
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-89146.rs:14:10: 14:17
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:14:10: 14:17
+        _0 = const _;
+        return;
     }
 }
 
 fn deeper_bar(_1: &G) -> u8 {
-    debug a => _1;                       // in scope 0 at ui/const-generics/issues/issue-89146.rs:19:23: 19:24
-    let mut _0: u8;                      // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:19:33: 19:35
-    let mut _2: [u8; Self::SIZE];        // in scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:17
-    let mut _3: &G;                      // in scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:17
-    let _4: usize;                       // in scope 0 at ui/const-generics/issues/issue-89146.rs:23:18: 23:19
-    let mut _5: usize;                   // in scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
-    let mut _6: bool;                    // in scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
+    debug a => _1;
+    let mut _0: u8;
+    let mut _2: [u8; Self::SIZE];
+    let _3: usize;
+    let mut _4: usize;
+    let mut _5: bool;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:17
-        _2 = <G as Foo>::to_bytes(move _3) -> bb1; // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:17
-                                         // mir::Constant
-                                         // + span: ui/const-generics/issues/issue-89146.rs:23:7: 23:15
-                                         // + literal: Const { ty: for<'a> fn(&'a G) -> [u8; Self::SIZE] {<G as Foo>::to_bytes}, val: Value(<ZST>) }
+        _2 = <G as Foo>::to_bytes(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = const 0_usize;              // scope 0 at ui/const-generics/issues/issue-89146.rs:23:18: 23:19
-        _5 = const _;                    // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
-        _6 = Lt(_4, _5);                 // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb2; // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
+        _3 = const 0_usize;
+        _4 = const _;
+        _5 = Lt(_3, _4);
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb2, unwind continue];
     }
 
     bb2: {
-        _0 = _2[_4];                     // scope 0 at ui/const-generics/issues/issue-89146.rs:23:5: 23:20
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:24:2: 24:2
+        _0 = _2[_3];
+        return;
     }
 }
 
 deeper_bar::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:21:10: 21:17
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/const-generics/issues/issue-89146.rs:21:10: 21:17
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:21:10: 21:17
+        _0 = const _;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-89146.rs:26:11: 26:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/const-generics/issues/issue-89146.rs:26:13: 26:13
+        return;
     }
 }

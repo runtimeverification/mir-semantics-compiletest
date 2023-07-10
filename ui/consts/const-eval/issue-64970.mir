@@ -1,48 +1,62 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-64970.rs:3:11: 3:11
-    let _1: ();                          // in scope 0 at ui/consts/const-eval/issue-64970.rs:4:5: 4:12
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = foo(const 10_i32) -> bb1;   // scope 0 at ui/consts/const-eval/issue-64970.rs:4:5: 4:12
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-64970.rs:4:5: 4:8
-                                         // + literal: Const { ty: fn(i32) {foo}, val: Value(<ZST>) }
+        _1 = foo(const 10_i32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-64970.rs:5:2: 5:2
+        return;
     }
 }
 
 fn foo(_1: i32) -> () {
-    debug n => _1;                       // in scope 0 at ui/consts/const-eval/issue-64970.rs:7:8: 7:13
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-64970.rs:7:20: 7:20
-    let mut _2: bool;                    // in scope 0 at ui/consts/const-eval/issue-64970.rs:12:8: 12:16
-    let mut _3: i32;                     // in scope 0 at ui/consts/const-eval/issue-64970.rs:12:8: 12:9
-    let mut _4: i32;                     // in scope 0 at ui/consts/const-eval/issue-64970.rs:13:24: 13:25
-    let mut _5: bool;                    // in scope 0 at ui/consts/const-eval/issue-64970.rs:13:17: 13:25
+    debug n => const 0_i32;
+    let mut _0: ();
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: i32;
+    let mut _5: i32;
+    let mut _6: bool;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: bool;
     scope 1 {
     }
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/consts/const-eval/issue-64970.rs:12:8: 12:9
-        _2 = Gt(move _3, const 0_i32);   // scope 0 at ui/consts/const-eval/issue-64970.rs:12:8: 12:16
-        switchInt(move _2) -> [0: bb3, otherwise: bb1]; // scope 0 at ui/consts/const-eval/issue-64970.rs:12:8: 12:16
+        _2 = const false;
+        switchInt(move _2) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _4 = _1;                         // scope 0 at ui/consts/const-eval/issue-64970.rs:13:24: 13:25
-        _5 = Eq(_4, const 0_i32);        // scope 0 at ui/consts/const-eval/issue-64970.rs:13:17: 13:25
-        assert(!move _5, "attempt to divide `{}` by zero", const 1_i32) -> bb2; // scope 0 at ui/consts/const-eval/issue-64970.rs:13:17: 13:25
+        _1 = const 0_i32;
+        goto -> bb2;
     }
 
     bb2: {
-        goto -> bb3;                     // scope 0 at ui/consts/const-eval/issue-64970.rs:13:17: 13:25
+        _4 = _1;
+        _3 = Gt(move _4, const 0_i32);
+        switchInt(move _3) -> [0: bb5, otherwise: bb3];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-64970.rs:15:2: 15:2
+        _5 = _1;
+        _6 = Eq(_5, const 0_i32);
+        assert(!move _6, "attempt to divide `{}` by zero", const 1_i32) -> [success: bb4, unwind continue];
+    }
+
+    bb4: {
+        _7 = Eq(_5, const -1_i32);
+        _8 = Eq(const 1_i32, const i32::MIN);
+        _9 = BitAnd(move _7, move _8);
+        assert(!move _9, "attempt to compute `{} / {}`, which would overflow", const 1_i32, _5) -> [success: bb5, unwind continue];
+    }
+
+    bb5: {
+        return;
     }
 }

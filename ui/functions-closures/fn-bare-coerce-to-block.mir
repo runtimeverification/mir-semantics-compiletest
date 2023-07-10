@@ -1,47 +1,35 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn bare() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:4:11: 4:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:4:13: 4:13
+        return;
     }
 }
 
 fn likes_block(_1: F) -> () {
-    debug f => _1;                       // in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:19: 6:20
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:25: 6:25
-    let mut _2: F;                       // in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:45: 6:46
-    let mut _3: ();                      // in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:45: 6:48
+    debug f => _1;
+    let mut _0: ();
 
     bb0: {
-        _2 = move _1;                    // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:45: 6:46
-        _0 = <F as FnOnce<()>>::call_once(move _2, move _3) -> bb1; // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:45: 6:48
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-bare-coerce-to-block.rs:6:45: 6:46
-                                         // + literal: Const { ty: extern "rust-call" fn(F, ()) -> <F as FnOnce<()>>::Output {<F as FnOnce<()>>::call_once}, val: Value(<ZST>) }
+        _0 = <F as FnOnce<()>>::call_once(move _1, const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:6:50: 6:50
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:8:15: 8:15
-    let _1: ();                          // in scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:9:5: 9:22
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = likes_block::<fn() {bare}>(bare) -> bb1; // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:9:5: 9:22
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-bare-coerce-to-block.rs:9:5: 9:16
-                                         // + literal: Const { ty: fn(fn() {bare}) {likes_block::<fn() {bare}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-bare-coerce-to-block.rs:9:17: 9:21
-                                         // + literal: Const { ty: fn() {bare}, val: Value(<ZST>) }
+        _1 = likes_block::<fn() {bare}>(bare) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/fn-bare-coerce-to-block.rs:10:2: 10:2
+        return;
     }
 }

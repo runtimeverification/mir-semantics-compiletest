@@ -1,77 +1,59 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: &[&str]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:5:20: 5:20
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:5:22: 5:22
+        return;
     }
 }
 
 fn bad(_1: &str, _2: &str) -> () {
-    debug a => _1;                       // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:7:8: 7:9
-    debug b => _2;                       // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:7:17: 7:18
-    let mut _0: ();                      // return place in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:7:26: 7:26
-    let _3: ();                          // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:5: 8:17
-    let mut _4: &[&str];                 // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-    let mut _5: &[&str; 2];              // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-    let _6: &[&str; 2];                  // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-    let _7: [&str; 2];                   // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:10: 8:16
-    let mut _8: &str;                    // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:11: 8:12
-    let mut _9: &str;                    // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:14: 8:15
+    debug a => _1;
+    debug b => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: &[&str];
+    let _5: &[&str; 2];
+    let _6: [&str; 2];
 
     bb0: {
-        _8 = _1;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:11: 8:12
-        _9 = _2;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:14: 8:15
-        _7 = [move _8, move _9];         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:10: 8:16
-        _6 = &_7;                        // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-        _5 = _6;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-        _4 = move _5 as &[&str] (Pointer(Unsize)); // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:9: 8:16
-        _3 = foo(move _4) -> bb1;        // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:8:5: 8:17
-                                         // mir::Constant
-                                         // + span: ui/binding/inconsistent-lifetime-mismatch.rs:8:5: 8:8
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a [&'b str]) {foo}, val: Value(<ZST>) }
+        _6 = [_1, _2];
+        _5 = &_6;
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = foo(move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:9:2: 9:2
+        return;
     }
 }
 
 fn good(_1: &str, _2: &str) -> () {
-    debug a => _1;                       // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:11:9: 11:10
-    debug b => _2;                       // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:11:18: 11:19
-    let mut _0: ();                      // return place in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:11:27: 11:27
-    let _3: ();                          // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:5: 12:17
-    let mut _4: &[&str];                 // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-    let mut _5: &[&str; 2];              // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-    let _6: &[&str; 2];                  // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-    let _7: [&str; 2];                   // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:10: 12:16
-    let mut _8: &str;                    // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:11: 12:12
-    let mut _9: &str;                    // in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:14: 12:15
+    debug a => _1;
+    debug b => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: &[&str];
+    let _5: &[&str; 2];
+    let _6: [&str; 2];
 
     bb0: {
-        _8 = _1;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:11: 12:12
-        _9 = _2;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:14: 12:15
-        _7 = [move _8, move _9];         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:10: 12:16
-        _6 = &_7;                        // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-        _5 = _6;                         // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-        _4 = move _5 as &[&str] (Pointer(Unsize)); // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:9: 12:16
-        _3 = foo(move _4) -> bb1;        // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:12:5: 12:17
-                                         // mir::Constant
-                                         // + span: ui/binding/inconsistent-lifetime-mismatch.rs:12:5: 12:8
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a [&'b str]) {foo}, val: Value(<ZST>) }
+        _6 = [_1, _2];
+        _5 = &_6;
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = foo(move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:13:2: 13:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:15:11: 15:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/binding/inconsistent-lifetime-mismatch.rs:15:13: 15:13
+        return;
     }
 }

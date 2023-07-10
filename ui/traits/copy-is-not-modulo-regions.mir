@@ -1,93 +1,83 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/traits/copy-is-not-modulo-regions.rs:4:10: 4:15>::clone(_1: &Foo<'_>) -> Foo<'_> {
-    debug self => _1;                    // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:4:10: 4:15
-    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:4:10: 4:15
-    let mut _2: &();                     // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-    let _3: &();                         // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-    let mut _4: &&();                    // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-    let _5: &&();                        // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
+    debug self => _1;
+    let mut _0: Foo<'_>;
+    let mut _2: &();
+    let _3: &();
+    let _4: &&();
 
     bb0: {
-        _5 = &((*_1).0: &());            // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-        _4 = _5;                         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-        _3 = <&() as Clone>::clone(move _4) -> bb1; // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-                                         // mir::Constant
-                                         // + span: ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-                                         // + literal: Const { ty: for<'a> fn(&'a &()) -> &() {<&() as Clone>::clone}, val: Value(<ZST>) }
+        _4 = &((*_1).0: &());
+        _3 = <&() as Clone>::clone(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = _3;                         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:17: 5:24
-        _0 = Foo::<'_>(move _2);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:4:10: 4:15
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:4:15: 4:15
+        _2 = _3;
+        _0 = Foo::<'_>(move _2);
+        return;
     }
 }
 
 fn <impl at ui/traits/copy-is-not-modulo-regions.rs:9:10: 9:15>::clone(_1: &Bar<'_>) -> Bar<'_> {
-    debug self => _1;                    // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:9:10: 9:15
-    let mut _0: Bar<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:9:10: 9:15
-    let mut _2: Foo<'_>;                 // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-    let mut _3: &Foo<'_>;                // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-    let _4: &Foo<'_>;                    // in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
+    debug self => _1;
+    let mut _0: Bar<'_>;
+    let mut _2: Foo<'_>;
+    let _3: &Foo<'_>;
 
     bb0: {
-        _4 = &((*_1).0: Foo<'_>);        // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-        _3 = _4;                         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-        _2 = <Foo<'_> as Clone>::clone(move _3) -> bb1; // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-                                         // mir::Constant
-                                         // + span: ui/traits/copy-is-not-modulo-regions.rs:10:17: 10:25
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo<'_>) -> Foo<'_> {<Foo<'_> as Clone>::clone}, val: Value(<ZST>) }
+        _3 = &((*_1).0: Foo<'_>);
+        _2 = <Foo<'_> as Clone>::clone(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Bar::<'_>(move _2);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:9:10: 9:15
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:9:15: 9:15
+        _0 = Bar::<'_>(move _2);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:19:11: 19:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:19:13: 19:13
+        return;
     }
 }
 
 fn Foo(_1: &()) -> Foo<'_> {
-    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
+    let mut _0: Foo<'_>;
 
     bb0: {
-        _0 = Foo::<'_>(move _1);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
+        _0 = Foo::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: &()) -> Foo<'_> {
-    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
+    let mut _0: Foo<'_>;
 
     bb0: {
-        _0 = Foo::<'_>(move _1);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:5:1: 5:16
+        _0 = Foo::<'_>(move _1);
+        return;
     }
 }
 
 fn Bar(_1: Foo<'_>) -> Bar<'_> {
-    let mut _0: Bar<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
+    let mut _0: Bar<'_>;
 
     bb0: {
-        _0 = Bar::<'_>(move _1);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
+        _0 = Bar::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Bar(_1: Foo<'_>) -> Bar<'_> {
-    let mut _0: Bar<'_>;                 // return place in scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
+    let mut _0: Bar<'_>;
 
     bb0: {
-        _0 = Bar::<'_>(move _1);         // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
-        return;                          // scope 0 at ui/traits/copy-is-not-modulo-regions.rs:10:1: 10:16
+        _0 = Bar::<'_>(move _1);
+        return;
     }
 }

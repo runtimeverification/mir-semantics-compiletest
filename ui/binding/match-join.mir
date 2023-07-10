@@ -1,124 +1,117 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: Option<T>) -> () {
-    debug y => _1;                       // in scope 0 at ui/binding/match-join.rs:3:11: 3:12
-    let mut _0: ();                      // return place in scope 0 at ui/binding/match-join.rs:3:25: 3:25
-    let mut _2: isize;                   // in scope 0 at ui/binding/match-join.rs:4:9: 4:14
+    debug y => _1;
+    let mut _0: ();
+    let mut _2: isize;
+    let mut _4: bool;
+    let mut _5: isize;
+    let _6: ();
+    let mut _7: &mut std::vec::Vec<isize>;
+    let mut _8: isize;
     scope 1 {
-        debug x => _2;                   // in scope 1 at ui/binding/match-join.rs:4:9: 4:14
-        let mut _3: std::vec::Vec<isize>; // in scope 1 at ui/binding/match-join.rs:5:9: 5:15
+        debug x => _2;
+        let mut _3: std::vec::Vec<isize>;
         scope 2 {
-            debug rs => _3;              // in scope 2 at ui/binding/match-join.rs:5:9: 5:15
+            debug rs => _3;
         }
     }
 
     bb0: {
-        _3 = Vec::<isize>::new() -> [return: bb1, unwind: bb4]; // scope 1 at ui/binding/match-join.rs:5:30: 5:40
-                                         // mir::Constant
-                                         // + span: ui/binding/match-join.rs:5:30: 5:38
-                                         // + user_ty: UserType(3)
-                                         // + literal: Const { ty: fn() -> Vec<isize> {Vec::<isize>::new}, val: Value(<ZST>) }
+        _3 = Vec::<isize>::new() -> [return: bb1, unwind: bb10];
     }
 
     bb1: {
-        drop(_3) -> [return: bb2, unwind: bb4]; // scope 1 at ui/binding/match-join.rs:18:1: 18:2
+        _4 = const true;
+        switchInt(move _4) -> [0: bb2, otherwise: bb6];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/binding/match-join.rs:18:1: 18:2
+        _5 = discriminant(_1);
+        switchInt(move _5) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/match-join.rs:18:2: 18:2
+        _2 = const 42_isize;
+        goto -> bb5;
     }
 
-    bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/binding/match-join.rs:18:1: 18:2
+    bb4: {
+        _2 = const 17_isize;
+        goto -> bb5;
     }
 
-    bb5 (cleanup): {
-        resume;                          // scope 0 at ui/binding/match-join.rs:3:1: 18:2
+    bb5: {
+        _7 = &mut _3;
+        _8 = _2;
+        _6 = Vec::<isize>::push(move _7, move _8) -> [return: bb12, unwind: bb9];
+    }
+
+    bb6: {
+        drop(_3) -> [return: bb7, unwind: bb10];
+    }
+
+    bb7: {
+        drop(_1) -> [return: bb8, unwind continue];
+    }
+
+    bb8: {
+        return;
+    }
+
+    bb9 (cleanup): {
+        drop(_3) -> [return: bb10, unwind terminate];
+    }
+
+    bb10 (cleanup): {
+        drop(_1) -> [return: bb11, unwind terminate];
+    }
+
+    bb11 (cleanup): {
+        resume;
+    }
+
+    bb12: {
+        goto -> bb6;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/match-join.rs:20:15: 20:15
-    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _3: &[&str];                 // in scope 0 at ui/binding/match-join.rs:20:26: 20:33
-    let mut _4: &[&str; 1];              // in scope 0 at ui/binding/match-join.rs:20:26: 20:33
-    let _5: &[&str; 1];                  // in scope 0 at ui/binding/match-join.rs:20:26: 20:33
-    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _7: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _8: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _9: ();                          // in scope 0 at ui/binding/match-join.rs:20:36: 20:66
-    let mut _10: std::option::Option<isize>; // in scope 0 at ui/binding/match-join.rs:20:49: 20:65
-    let mut _11: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _12: &[&str; 1];             // in scope 0 at ui/binding/match-join.rs:20:26: 20:33
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let mut _3: &[&str];
+    let _4: ();
+    let mut _5: std::option::Option<isize>;
+    let mut _6: &[&str; 1];
 
     bb0: {
-        _12 = const _;                   // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-                                         // mir::Constant
-                                         // + span: ui/binding/match-join.rs:20:26: 20:33
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[1])) }
-        _5 = _12;                        // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-        _4 = _5;                         // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-        _11 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(main, [], Some(promoted[0])) }
-        _8 = _11;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _6 = const _;
+        _3 = _6 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = _print(move _2) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _1 = _print(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = Option::<isize>::Some(const 5_isize); // scope 0 at ui/binding/match-join.rs:20:49: 20:65
-        _9 = foo::<isize>(move _10) -> bb3; // scope 0 at ui/binding/match-join.rs:20:36: 20:66
-                                         // mir::Constant
-                                         // + span: ui/binding/match-join.rs:20:36: 20:48
-                                         // + literal: Const { ty: fn(Option<isize>) {foo::<isize>}, val: Value(<ZST>) }
+        _5 = Option::<isize>::Some(const 5_isize);
+        _4 = foo::<isize>(move _5) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/match-join.rs:20:69: 20:69
+        return;
     }
 }
 
-promoted[0] in main: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
+promoted[0] in main: &[&str; 1] = {
+    let mut _0: &[&str; 1];
+    let mut _1: [&str; 1];
 
     bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/binding/match-join.rs:20:26: 20:33
-    let mut _1: [&str; 1];               // in scope 0 at ui/binding/match-join.rs:20:26: 20:33
-
-    bb0: {
-        _1 = [const "hello\n"];          // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-                                         // mir::Constant
-                                         // + span: ui/binding/match-join.rs:20:26: 20:33
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/binding/match-join.rs:20:26: 20:33
-        return;                          // scope 0 at ui/binding/match-join.rs:20:26: 20:33
+        _1 = [const "hello\n"];
+        _0 = &_1;
+        return;
     }
 }

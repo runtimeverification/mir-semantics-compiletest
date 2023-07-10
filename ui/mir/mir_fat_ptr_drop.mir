@@ -1,47 +1,33 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static COUNTER: AtomicUsize = {
-    let mut _0: std::sync::atomic::AtomicUsize; // return place in scope 0 at ui/mir/mir_fat_ptr_drop.rs:13:17: 13:36
+    let mut _0: std::sync::atomic::AtomicUsize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/mir/mir_fat_ptr_drop.rs:13:39: 13:66
-        _0 = AtomicUsize::new(const 0_usize) -> bb1; // scope 0 at ui/mir/mir_fat_ptr_drop.rs:13:39: 13:66
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:13:39: 13:63
-                                         // + literal: Const { ty: fn(usize) -> AtomicUsize {AtomicUsize::new}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir_fat_ptr_drop.rs:13:1: 13:67
+        return;
     }
 }
 
 fn <impl at ui/mir/mir_fat_ptr_drop.rs:18:1: 18:21>::drop(_1: &mut DropMe) -> () {
-    debug self => _1;                    // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:19:13: 19:22
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_fat_ptr_drop.rs:19:24: 19:24
-    let _2: usize;                       // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:37
-    let mut _3: &std::sync::atomic::AtomicUsize; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:37
-    let _4: &std::sync::atomic::AtomicUsize; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:16
-    let mut _5: std::sync::atomic::Ordering; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:30: 20:36
+    debug self => _1;
+    let mut _0: ();
+    let _2: usize;
+    let _3: &std::sync::atomic::AtomicUsize;
+    let mut _4: std::sync::atomic::Ordering;
 
     bb0: {
-        _4 = const {alloc1: &AtomicUsize}; // scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:16
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:20:9: 20:16
-                                         // + literal: Const { ty: &AtomicUsize, val: Value(Scalar(alloc1)) }
-        _3 = _4;                         // scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:37
-        _5 = const SeqCst;               // scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:30: 20:36
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:20:30: 20:36
-                                         // + literal: Const { ty: std::sync::atomic::Ordering, val: Value(Scalar(0x04)) }
-        _2 = AtomicUsize::fetch_add(move _3, const 1_usize, move _5) -> bb1; // scope 0 at ui/mir/mir_fat_ptr_drop.rs:20:9: 20:37
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:20:17: 20:26
-                                         // + literal: Const { ty: for<'a> fn(&'a AtomicUsize, usize, std::sync::atomic::Ordering) -> usize {AtomicUsize::fetch_add}, val: Value(<ZST>) }
+        _3 = const {alloc1: &AtomicUsize};
+        _4 = SeqCst;
+        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir_fat_ptr_drop.rs:21:6: 21:6
+        return;
     }
 }
 
@@ -50,135 +36,90 @@ alloc1 (static: COUNTER, size: 8, align: 8) {
 }
 
 fn fat_ptr_move_then_drop(_1: Box<[DropMe]>) -> () {
-    debug a => _1;                       // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:24:27: 24:28
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_fat_ptr_drop.rs:24:45: 24:45
-    let _2: std::boxed::Box<[DropMe]>;   // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:25:9: 25:10
+    debug a => _1;
+    let mut _0: ();
+    let _2: std::boxed::Box<[DropMe]>;
     scope 1 {
-        debug b => _2;                   // in scope 1 at ui/mir/mir_fat_ptr_drop.rs:25:9: 25:10
+        debug b => _2;
     }
 
     bb0: {
-        _2 = move _1;                    // scope 0 at ui/mir/mir_fat_ptr_drop.rs:25:13: 25:14
-        drop(_2) -> bb1;                 // scope 0 at ui/mir/mir_fat_ptr_drop.rs:26:1: 26:2
+        _2 = move _1;
+        drop(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir_fat_ptr_drop.rs:26:2: 26:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_fat_ptr_drop.rs:28:11: 28:11
-    let _1: std::boxed::Box<[DropMe]>;   // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:29:9: 29:10
-    let mut _2: std::boxed::Box<[DropMe; 1]>; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:29:28: 29:50
-    let mut _3: [DropMe; 1];             // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:29:37: 29:49
-    let _4: ();                          // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:30:5: 30:30
-    let mut _5: std::boxed::Box<[DropMe]>; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:30:28: 30:29
-    let mut _6: (&usize, &usize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _7: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _8: usize;                       // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:36
-    let mut _9: &std::sync::atomic::AtomicUsize; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:36
-    let _10: &std::sync::atomic::AtomicUsize; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:23
-    let mut _11: std::sync::atomic::Ordering; // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:29: 31:35
-    let mut _12: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _16: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _17: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _18: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _20: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _21: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _22: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _23: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _24: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _25: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _26: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: std::boxed::Box<[DropMe]>;
+    let mut _2: std::boxed::Box<[DropMe; 1]>;
+    let _3: ();
+    let mut _4: (&usize, &usize);
+    let mut _5: &usize;
+    let _6: usize;
+    let _7: &std::sync::atomic::AtomicUsize;
+    let mut _8: std::sync::atomic::Ordering;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: usize;
+    let mut _14: usize;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/mir/mir_fat_ptr_drop.rs:29:9: 29:10
-        let _13: &usize;                 // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _14: &usize;                 // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _27: &usize;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug a => _1;
+        let _9: &usize;
+        let _10: &usize;
+        let mut _18: &usize;
         scope 2 {
-            debug left_val => _13;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _14;      // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _19: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _19;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _15;
             }
         }
     }
 
     bb0: {
-        _2 = Box::<[DropMe; 1]>::new(move _3) -> bb1; // scope 0 at ui/mir/mir_fat_ptr_drop.rs:29:28: 29:50
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:29:28: 29:36
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn([DropMe; 1]) -> Box<[DropMe; 1]> {Box::<[DropMe; 1]>::new}, val: Value(<ZST>) }
+        _2 = Box::<[DropMe; 1]>::new(const [DropMe {{  }}]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = move _2 as std::boxed::Box<[DropMe]> (Pointer(Unsize)); // scope 0 at ui/mir/mir_fat_ptr_drop.rs:29:28: 29:50
-        _5 = move _1;                    // scope 1 at ui/mir/mir_fat_ptr_drop.rs:30:28: 30:29
-        _4 = fat_ptr_move_then_drop(move _5) -> bb2; // scope 1 at ui/mir/mir_fat_ptr_drop.rs:30:5: 30:30
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:30:5: 30:27
-                                         // + literal: Const { ty: fn(Box<[DropMe]>) {fat_ptr_move_then_drop}, val: Value(<ZST>) }
+        _1 = move _2 as std::boxed::Box<[DropMe]> (Pointer(Unsize));
+        _3 = fat_ptr_move_then_drop(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = const {alloc1: &AtomicUsize}; // scope 1 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:23
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:31:16: 31:23
-                                         // + literal: Const { ty: &AtomicUsize, val: Value(Scalar(alloc1)) }
-        _9 = _10;                        // scope 1 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:36
-        _11 = const SeqCst;              // scope 1 at ui/mir/mir_fat_ptr_drop.rs:31:29: 31:35
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:31:29: 31:35
-                                         // + literal: Const { ty: std::sync::atomic::Ordering, val: Value(Scalar(0x04)) }
-        _8 = AtomicUsize::load(move _9, move _11) -> bb3; // scope 1 at ui/mir/mir_fat_ptr_drop.rs:31:16: 31:36
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_fat_ptr_drop.rs:31:24: 31:28
-                                         // + literal: Const { ty: for<'a> fn(&'a AtomicUsize, std::sync::atomic::Ordering) -> usize {AtomicUsize::load}, val: Value(<ZST>) }
+        _7 = const {alloc1: &AtomicUsize};
+        _8 = SeqCst;
+        _6 = AtomicUsize::load(_7, move _8) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _7 = &_8;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _27 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _12 = _27;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _6 = (move _7, move _12);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _13 = (_6.0: &usize);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _14 = (_6.1: &usize);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _17 = (*_13);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _18 = const 1_usize;             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _16 = Eq(move _17, move _18);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _15 = Not(move _16);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _15) -> [0: bb5, otherwise: bb4]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _5 = &_6;
+        _18 = const _;
+        _4 = (move _5, _18);
+        _9 = (_4.0: &usize);
+        _10 = (_4.1: &usize);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _19 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _21 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _23 = _13;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _22 = _23;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _25 = _14;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _24 = _25;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _26 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _20 = core::panicking::assert_failed::<usize, usize>(move _21, move _22, move _24, move _26); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb5: {
-        return;                          // scope 0 at ui/mir/mir_fat_ptr_drop.rs:32:2: 32:2
+        return;
     }
 }
 
@@ -187,12 +128,12 @@ alloc1 (static: COUNTER, size: 8, align: 8) {
 }
 
 promoted[0] in main: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: usize;                   // in scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:38: 31:39
+    let mut _0: &usize;
+    let mut _1: usize;
 
     bb0: {
-        _1 = const 1_usize;              // scope 0 at ui/mir/mir_fat_ptr_drop.rs:31:38: 31:39
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 1_usize;
+        _0 = &_1;
+        return;
     }
 }

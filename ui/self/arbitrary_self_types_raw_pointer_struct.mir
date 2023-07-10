@@ -1,445 +1,339 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/self/arbitrary_self_types_raw_pointer_struct.rs:8:1: 8:9>::foo(_1: *const Foo) -> *const str {
-    debug self => _1;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:9:19: 9:23
-    let mut _0: *const str;              // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:9:41: 9:51
-    let _2: &str;                        // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:9: 10:27
-    let mut _3: &std::string::String;    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:9: 10:27
+    debug self => _1;
+    let mut _0: *const str;
+    let _2: &str;
+    let mut _3: &std::string::String;
+    let mut _4: *const ();
+    let mut _5: usize;
+    let mut _6: usize;
+    let mut _7: usize;
+    let mut _8: usize;
+    let mut _9: bool;
 
     bb0: {
-        _3 = &((*_1).0: std::string::String); // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:9: 10:27
-        _2 = <String as AsRef<str>>::as_ref(move _3) -> bb1; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:9: 10:27
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:19: 10:25
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a str {<String as AsRef<str>>::as_ref}, val: Value(<ZST>) }
+        _4 = _1 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(Foo);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        _0 = &raw const (*_2);           // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:10:9: 10:27
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:11:6: 11:6
+        _0 = &raw const (*_2);
+        return;
+    }
+
+    bb2: {
+        _3 = &((*_1).0: std::string::String);
+        _2 = <String as AsRef<str>>::as_ref(move _3) -> [return: bb1, unwind continue];
     }
 }
 
 fn <impl at ui/self/arbitrary_self_types_raw_pointer_struct.rs:8:1: 8:9>::complicated_1(_1: *const Rc<Foo>) -> &str {
-    debug self => _1;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:13:22: 13:26
-    let mut _0: &str;                    // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:13:48: 13:60
+    debug self => _1;
+    let mut _0: &str;
 
     bb0: {
-        _0 = const "Foo::complicated_1"; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:14:9: 14:29
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:14:9: 14:29
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:15:6: 15:6
+        _0 = const "Foo::complicated_1";
+        return;
     }
 }
 
 fn <impl at ui/self/arbitrary_self_types_raw_pointer_struct.rs:8:1: 8:9>::complicated_2(_1: Rc<*const Foo>) -> *const str {
-    debug self => _1;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:17:29: 17:33
-    let mut _0: *const str;              // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:17:55: 17:65
-    let _2: &str;                        // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-    let mut _3: &std::string::String;    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-    let _4: &*const Foo;                 // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:11: 18:16
-    let mut _5: &std::rc::Rc<*const Foo>; // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:12: 18:16
-    let mut _6: *const Foo;              // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:11: 18:16
+    debug self => _1;
+    let mut _0: *const str;
+    let _2: &str;
+    let mut _3: &std::string::String;
+    let _4: &*const Foo;
+    let mut _5: &std::rc::Rc<*const Foo>;
+    let mut _6: *const Foo;
+    let mut _7: *const ();
+    let mut _8: usize;
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: bool;
 
     bb0: {
-        _5 = &_1;                        // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:12: 18:16
-        _4 = <Rc<*const Foo> as Deref>::deref(move _5) -> [return: bb1, unwind: bb4]; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:11: 18:16
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:11: 18:16
-                                         // + literal: Const { ty: for<'a> fn(&'a Rc<*const Foo>) -> &'a <Rc<*const Foo> as Deref>::Target {<Rc<*const Foo> as Deref>::deref}, val: Value(<ZST>) }
+        _5 = &_1;
+        _4 = <Rc<*const Foo> as Deref>::deref(move _5) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _6 = deref_copy (*_4);           // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-        _3 = &((*_6).0: std::string::String); // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-        _2 = <String as AsRef<str>>::as_ref(move _3) -> [return: bb2, unwind: bb4]; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:20: 18:26
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a str {<String as AsRef<str>>::as_ref}, val: Value(<ZST>) }
+        _6 = deref_copy (*_4);
+        _7 = _6 as *const () (PtrToPtr);
+        _8 = _7 as usize (Transmute);
+        _9 = AlignOf(Foo);
+        _10 = Sub(_9, const 1_usize);
+        _11 = BitAnd(_8, _10);
+        _12 = Eq(_11, const 0_usize);
+        assert(_12, "misaligned pointer dereference: address must be a multiple of {} but is {}", _9, _8) -> [success: bb6, unwind unreachable];
     }
 
     bb2: {
-        _0 = &raw const (*_2);           // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:18:9: 18:28
-        drop(_1) -> bb3;                 // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:19:5: 19:6
+        _0 = &raw const (*_2);
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:19:6: 19:6
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:19:5: 19:6
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:17:5: 19:6
+        resume;
+    }
+
+    bb6: {
+        _3 = &((*_6).0: std::string::String);
+        _2 = <String as AsRef<str>>::as_ref(move _3) -> [return: bb2, unwind: bb4];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:22:11: 22:11
-    let _1: Foo;                         // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:9: 23:12
-    let mut _2: std::string::String;     // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:34
-    let mut _3: &str;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:34
-    let _4: &str;                        // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:27
-    let mut _5: (&&str, &&str);          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _6: &&str;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _7: &&str;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _8: &str;                        // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:26: 24:65
-    let _9: *const str;                  // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:37: 24:63
-    let mut _10: *const Foo;             // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:37: 24:57
-    let _11: &Foo;                       // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:38: 24:42
-    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _16: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _17: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _19: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _20: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _21: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _22: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _23: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _24: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _25: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _26: (&&str, &&str);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _27: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _28: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _29: &str;                       // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:38: 25:81
-    let mut _30: *const std::rc::Rc<Foo>; // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:38: 25:65
-    let mut _33: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _34: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _35: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _36: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _38: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _39: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _40: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _41: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _42: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _43: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _44: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _46: *const Foo;             // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:22: 26:40
-    let _47: &Foo;                       // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:22: 26:26
-    let mut _48: (&&str, &&str);         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _49: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _50: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _51: &str;                       // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:26: 27:56
-    let _52: *const str;                 // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:37: 27:55
-    let mut _53: std::rc::Rc<*const Foo>; // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:37: 27:39
-    let mut _56: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _57: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _58: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _59: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _61: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _62: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _63: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _64: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _65: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _66: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _67: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: Foo;
+    let mut _2: std::string::String;
+    let _3: &str;
+    let mut _4: (&&str, &&str);
+    let mut _5: &&str;
+    let _6: &str;
+    let _7: *const str;
+    let mut _8: *const Foo;
+    let _9: &Foo;
+    let mut _12: bool;
+    let mut _13: bool;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _17: (&&str, &&str);
+    let mut _18: &&str;
+    let _19: &str;
+    let mut _20: *const std::rc::Rc<Foo>;
+    let mut _23: bool;
+    let mut _24: bool;
+    let _26: !;
+    let mut _27: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _29: *const Foo;
+    let _30: &Foo;
+    let mut _31: (&&str, &&str);
+    let mut _32: &&str;
+    let _33: &str;
+    let _34: *const str;
+    let mut _35: std::rc::Rc<*const Foo>;
+    let mut _38: bool;
+    let mut _39: bool;
+    let _41: !;
+    let mut _42: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug foo => _1;                 // in scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:9: 23:12
-        let _12: &&str;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _13: &&str;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _31: &&str;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _32: &&str;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _45: std::rc::Rc<*const Foo>; // in scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:9: 26:11
-        let mut _69: &&str;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        let mut _70: &&str;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        debug foo => _1;
+        let _10: &&str;
+        let _11: &&str;
+        let _21: &&str;
+        let _22: &&str;
+        let _28: std::rc::Rc<*const Foo>;
+        let mut _44: &&str;
+        let mut _45: &&str;
         scope 2 {
         }
         scope 3 {
-            debug left_val => _12;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _13;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _18: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _10;
+            debug right_val => _11;
+            let _14: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _18;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _14;
             }
         }
         scope 5 {
-            debug left_val => _31;       // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _32;      // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _37: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _21;
+            debug right_val => _22;
+            let _25: core::panicking::AssertKind;
             scope 6 {
-                debug kind => _37;       // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _25;
             }
         }
         scope 7 {
-            debug rc => _45;             // in scope 7 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:9: 26:11
-            let _54: &&str;              // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _55: &&str;              // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _68: &&str;          // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+            debug rc => _28;
+            let _36: &&str;
+            let _37: &&str;
+            let mut _43: &&str;
             scope 8 {
             }
             scope 9 {
-                debug left_val => _54;   // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _55;  // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _60: core::panicking::AssertKind; // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _36;
+                debug right_val => _37;
+                let _40: core::panicking::AssertKind;
                 scope 10 {
-                    debug kind => _60;   // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _40;
                 }
             }
         }
     }
 
     bb0: {
-        _4 = const "abc123";             // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:27
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:27
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _3 = _4;                         // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:34
-        _2 = <&str as Into<String>>::into(move _3) -> bb1; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:19: 23:34
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:28: 23:32
-                                         // + literal: Const { ty: fn(&str) -> String {<&str as Into<String>>::into}, val: Value(<ZST>) }
+        _3 = const "abc123";
+        _2 = <&str as Into<String>>::into(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Foo(move _2);               // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:23:15: 23:35
-        _70 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[2])) }
-        _6 = _70;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _11 = &_1;                       // scope 2 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:38: 24:42
-        _10 = &raw const (*_11);         // scope 2 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:38: 24:42
-        _9 = Foo::foo(move _10) -> [return: bb2, unwind: bb17]; // scope 2 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:37: 24:63
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:58: 24:61
-                                         // + literal: Const { ty: unsafe fn(*const Foo) -> *const str {Foo::foo}, val: Value(<ZST>) }
+        _1 = Foo(move _2);
+        _45 = const _;
+        _9 = &_1;
+        _8 = &raw const (*_9);
+        _7 = Foo::foo(move _8) -> [return: bb2, unwind: bb17];
     }
 
     bb2: {
-        _8 = &(*_9);                     // scope 2 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:35: 24:63
-        _7 = &_8;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _5 = (move _6, move _7);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _12 = (_5.0: &&str);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _13 = (_5.1: &&str);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _16 = _12;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _17 = _13;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _15 = <&str as PartialEq>::eq(move _16, move _17) -> [return: bb3, unwind: bb17]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &str, &'b &str) -> bool {<&str as PartialEq>::eq}, val: Value(<ZST>) }
+        _6 = &(*_7);
+        _5 = &_6;
+        _4 = (_45, move _5);
+        _10 = (_4.0: &&str);
+        _11 = (_4.1: &&str);
+        _13 = <&str as PartialEq>::eq(_10, _11) -> [return: bb3, unwind: bb17];
     }
 
     bb3: {
-        _14 = Not(move _15);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _14) -> [0: bb5, otherwise: bb4]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _12 = Not(move _13);
+        switchInt(move _12) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _18 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _20 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _22 = _12;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _21 = _22;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _24 = _13;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _23 = _24;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _25 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _19 = core::panicking::assert_failed::<&str, &str>(move _20, move _21, move _23, move _25) -> bb17; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &str, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&str, &str>}, val: Value(<ZST>) }
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<&str, &str>(move _14, _10, _11, move _16) -> bb17;
     }
 
     bb5: {
-        _69 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[1])) }
-        _27 = _69;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _30 = null::<Rc<Foo>>() -> [return: bb6, unwind: bb17]; // scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:38: 25:65
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:38: 25:63
-                                         // + literal: Const { ty: fn() -> *const Rc<Foo> {null::<Rc<Foo>>}, val: Value(<ZST>) }
+        _44 = const _;
+        _20 = null::<Rc<Foo>>() -> [return: bb6, unwind: bb17];
     }
 
     bb6: {
-        _29 = Foo::complicated_1(move _30) -> [return: bb7, unwind: bb17]; // scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:38: 25:81
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:66: 25:79
-                                         // + literal: Const { ty: fn(*const Rc<Foo>) -> &'static str {Foo::complicated_1}, val: Value(<ZST>) }
+        _19 = Foo::complicated_1(move _20) -> [return: bb7, unwind: bb17];
     }
 
     bb7: {
-        _28 = &_29;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _26 = (move _27, move _28);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _31 = (_26.0: &&str);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _32 = (_26.1: &&str);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _35 = _31;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _36 = _32;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _34 = <&str as PartialEq>::eq(move _35, move _36) -> [return: bb8, unwind: bb17]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &str, &'b &str) -> bool {<&str as PartialEq>::eq}, val: Value(<ZST>) }
+        _18 = &_19;
+        _17 = (_44, move _18);
+        _21 = (_17.0: &&str);
+        _22 = (_17.1: &&str);
+        _24 = <&str as PartialEq>::eq(_21, _22) -> [return: bb8, unwind: bb17];
     }
 
     bb8: {
-        _33 = Not(move _34);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _33) -> [0: bb10, otherwise: bb9]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _23 = Not(move _24);
+        switchInt(move _23) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _37 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _39 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _41 = _31;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _40 = _41;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _43 = _32;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _42 = _43;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _44 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _38 = core::panicking::assert_failed::<&str, &str>(move _39, move _40, move _42, move _44) -> bb17; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &str, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&str, &str>}, val: Value(<ZST>) }
+        _25 = core::panicking::AssertKind::Eq;
+        _27 = Option::<Arguments<'_>>::None;
+        _26 = core::panicking::assert_failed::<&str, &str>(move _25, _21, _22, move _27) -> bb17;
     }
 
     bb10: {
-        _47 = &_1;                       // scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:22: 26:26
-        _46 = &raw const (*_47);         // scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:22: 26:26
-        _45 = Rc::<*const Foo>::new(move _46) -> [return: bb11, unwind: bb17]; // scope 1 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:14: 26:41
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:26:14: 26:21
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(*const Foo) -> Rc<*const Foo> {Rc::<*const Foo>::new}, val: Value(<ZST>) }
+        _30 = &_1;
+        _29 = &raw const (*_30);
+        _28 = Rc::<*const Foo>::new(move _29) -> [return: bb11, unwind: bb17];
     }
 
     bb11: {
-        _68 = const _;                   // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
-        _49 = _68;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _53 = move _45;                  // scope 8 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:37: 27:39
-        _52 = Foo::complicated_2(move _53) -> [return: bb12, unwind: bb17]; // scope 8 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:37: 27:55
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:40: 27:53
-                                         // + literal: Const { ty: unsafe fn(Rc<*const Foo>) -> *const str {Foo::complicated_2}, val: Value(<ZST>) }
+        _43 = const _;
+        _35 = move _28;
+        _34 = Foo::complicated_2(move _35) -> [return: bb12, unwind: bb17];
     }
 
     bb12: {
-        _51 = &(*_52);                   // scope 8 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:35: 27:55
-        _50 = &_51;                      // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _48 = (move _49, move _50);      // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _54 = (_48.0: &&str);            // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _55 = (_48.1: &&str);            // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _58 = _54;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _59 = _55;                       // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _57 = <&str as PartialEq>::eq(move _58, move _59) -> [return: bb13, unwind: bb17]; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &str, &'b &str) -> bool {<&str as PartialEq>::eq}, val: Value(<ZST>) }
+        _33 = &(*_34);
+        _32 = &_33;
+        _31 = (_43, move _32);
+        _36 = (_31.0: &&str);
+        _37 = (_31.1: &&str);
+        _39 = <&str as PartialEq>::eq(_36, _37) -> [return: bb13, unwind: bb17];
     }
 
     bb13: {
-        _56 = Not(move _57);             // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _56) -> [0: bb15, otherwise: bb14]; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _38 = Not(move _39);
+        switchInt(move _38) -> [0: bb15, otherwise: bb14];
     }
 
     bb14: {
-        _60 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _62 = const core::panicking::AssertKind::Eq; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _64 = _54;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _63 = _64;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _66 = _55;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _65 = _66;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _67 = Option::<Arguments<'_>>::None; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _61 = core::panicking::assert_failed::<&str, &str>(move _62, move _63, move _65, move _67) -> bb17; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &str, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&str, &str>}, val: Value(<ZST>) }
+        _40 = core::panicking::AssertKind::Eq;
+        _42 = Option::<Arguments<'_>>::None;
+        _41 = core::panicking::assert_failed::<&str, &str>(move _40, _36, _37, move _42) -> bb17;
     }
 
     bb15: {
-        drop(_1) -> bb16;                // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:28:1: 28:2
+        drop(_1) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:28:2: 28:2
+        return;
     }
 
     bb17 (cleanup): {
-        drop(_1) -> bb18;                // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:28:1: 28:2
+        drop(_1) -> [return: bb18, unwind terminate];
     }
 
     bb18 (cleanup): {
-        resume;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:22:1: 28:2
+        resume;
     }
 }
 
 promoted[0] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: &str;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:16: 27:24
+    let mut _0: &&str;
+    let mut _1: &str;
 
     bb0: {
-        _1 = const "abc123";             // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:16: 27:24
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:27:16: 27:24
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const "abc123";
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: &str;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:16: 25:36
+    let mut _0: &&str;
+    let mut _1: &str;
 
     bb0: {
-        _1 = const "Foo::complicated_1"; // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:16: 25:36
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:25:16: 25:36
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const "Foo::complicated_1";
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[2] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: &str;                    // in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:16: 24:24
+    let mut _0: &&str;
+    let mut _1: &str;
 
     bb0: {
-        _1 = const "abc123";             // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:16: 24:24
-                                         // mir::Constant
-                                         // + span: ui/self/arbitrary_self_types_raw_pointer_struct.rs:24:16: 24:24
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        _1 = const "abc123";
+        _0 = &_1;
+        return;
     }
 }
 
 fn Foo(_1: String) -> Foo {
-    let mut _0: Foo;                     // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
+    let mut _0: Foo;
 
     bb0: {
-        _0 = Foo(move _1);               // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
+        _0 = Foo(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: String) -> Foo {
-    let mut _0: Foo;                     // return place in scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
+    let mut _0: Foo;
 
     bb0: {
-        _0 = Foo(move _1);               // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
-        return;                          // scope 0 at ui/self/arbitrary_self_types_raw_pointer_struct.rs:6:1: 6:11
+        _0 = Foo(move _1);
+        return;
     }
 }

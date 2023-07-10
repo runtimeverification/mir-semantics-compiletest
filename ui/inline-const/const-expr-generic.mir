@@ -1,83 +1,74 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-generic.rs:4:16: 4:21
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/inline-const/const-expr-generic.rs:5:5: 5:39
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:6:2: 6:2
+        _0 = const _;
+        return;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-generic.rs:5:11: 5:39
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/inline-const/const-expr-generic.rs:5:13: 5:37
-        _0 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/inline-const/const-expr-generic.rs:5:13: 5:37
-                                         // mir::Constant
-                                         // + span: ui/inline-const/const-expr-generic.rs:5:13: 5:35
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:5:11: 5:39
+        return;
     }
 }
 
 fn bar() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-generic.rs:8:29: 8:34
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/inline-const/const-expr-generic.rs:9:5: 9:20
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:10:2: 10:2
+        _0 = const _;
+        return;
     }
 }
 
 bar::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-generic.rs:9:11: 9:20
-    let mut _1: (usize, bool);           // in scope 0 at ui/inline-const/const-expr-generic.rs:9:13: 9:18
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedAdd(const N, const 1_usize); // scope 0 at ui/inline-const/const-expr-generic.rs:9:13: 9:18
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1; // scope 0 at ui/inline-const/const-expr-generic.rs:9:13: 9:18
+        _1 = CheckedAdd(const N, const 1_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/inline-const/const-expr-generic.rs:9:13: 9:18
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:9:11: 9:20
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-expr-generic.rs:12:11: 12:11
-    let _1: usize;                       // in scope 0 at ui/inline-const/const-expr-generic.rs:13:5: 13:17
-    let _2: usize;                       // in scope 0 at ui/inline-const/const-expr-generic.rs:14:5: 14:15
+    let mut _0: ();
+    let _1: usize;
+    let _2: usize;
 
     bb0: {
-        _1 = foo::<i32>() -> bb1;        // scope 0 at ui/inline-const/const-expr-generic.rs:13:5: 13:17
-                                         // mir::Constant
-                                         // + span: ui/inline-const/const-expr-generic.rs:13:5: 13:15
-                                         // + literal: Const { ty: fn() -> usize {foo::<i32>}, val: Value(<ZST>) }
+        _1 = foo::<i32>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = bar::<1>() -> bb2;          // scope 0 at ui/inline-const/const-expr-generic.rs:14:5: 14:15
-                                         // mir::Constant
-                                         // + span: ui/inline-const/const-expr-generic.rs:14:5: 14:13
-                                         // + literal: Const { ty: fn() -> usize {bar::<1>}, val: Value(<ZST>) }
+        _2 = bar::<1>() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:15:2: 15:2
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/inline-const/const-expr-generic.rs:14:11: 14:12
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/inline-const/const-expr-generic.rs:14:11: 14:12
-        return;                          // scope 0 at ui/inline-const/const-expr-generic.rs:14:11: 14:12
+        _0 = const 1_usize;
+        return;
     }
 }

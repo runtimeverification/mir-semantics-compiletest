@@ -1,307 +1,274 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/drop/issue-90752-raw-ptr-shenanigans.rs:7:1: 7:24>::drop(_1: &mut S<'_>) -> () {
-    debug self => _1;                    // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:8:13: 8:22
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:8:24: 8:24
-    let _2: ();                          // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-    let mut _3: &mut std::vec::Vec<i32>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-    let mut _4: &mut std::vec::Vec<i32>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-    let mut _5: &mut std::cell::RefMut<'_, std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-    let mut _6: std::cell::RefMut<'_, std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:28
-    let mut _7: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:28
-    let mut _8: i32;                     // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:34: 9:40
-    let mut _9: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:8:13: 8:22
+    debug self => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &mut std::vec::Vec<i32>;
+    let mut _4: &mut std::vec::Vec<i32>;
+    let mut _5: &mut std::cell::RefMut<'_, std::vec::Vec<i32>>;
+    let mut _6: std::cell::RefMut<'_, std::vec::Vec<i32>>;
+    let mut _7: i32;
+    let mut _8: &std::cell::RefCell<std::vec::Vec<i32>>;
 
     bb0: {
-        _9 = deref_copy ((*_1).1: &std::cell::RefCell<std::vec::Vec<i32>>); // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:28
-        _7 = _9;                         // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:28
-        _6 = RefCell::<Vec<i32>>::borrow_mut(move _7) -> bb1; // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:28
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:16: 9:26
-                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<Vec<i32>>) -> RefMut<'a, Vec<i32>> {RefCell::<Vec<i32>>::borrow_mut}, val: Value(<ZST>) }
+        _8 = deref_copy ((*_1).1: &std::cell::RefCell<std::vec::Vec<i32>>);
+        _6 = RefCell::<Vec<i32>>::borrow_mut(_8) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = &mut _6;                    // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-        _4 = <RefMut<'_, Vec<i32>> as DerefMut>::deref_mut(move _5) -> [return: bb2, unwind: bb5]; // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-                                         // + literal: Const { ty: for<'a> fn(&'a mut RefMut<'_, Vec<i32>>) -> &'a mut <RefMut<'_, Vec<i32>> as Deref>::Target {<RefMut<'_, Vec<i32>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _5 = &mut _6;
+        _4 = <RefMut<'_, Vec<i32>> as DerefMut>::deref_mut(move _5) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        _3 = &mut (*_4);                 // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-        _8 = ((*_1).0: i32);             // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:34: 9:40
-        _2 = Vec::<i32>::push(move _3, move _8) -> [return: bb3, unwind: bb5]; // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:9: 9:41
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:29: 9:33
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<i32>, i32) {Vec::<i32>::push}, val: Value(<ZST>) }
+        _3 = _4;
+        _7 = ((*_1).0: i32);
+        _2 = Vec::<i32>::push(move _3, move _7) -> [return: bb3, unwind: bb5];
     }
 
     bb3: {
-        drop(_6) -> bb4;                 // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:41: 9:42
+        drop(_6) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:10:6: 10:6
+        return;
     }
 
     bb5 (cleanup): {
-        drop(_6) -> bb6;                 // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:9:41: 9:42
+        drop(_6) -> [return: bb6, unwind terminate];
     }
 
     bb6 (cleanup): {
-        resume;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:8:5: 10:6
+        resume;
     }
 }
 
 fn test(_1: &RefCell<Vec<i32>>) -> () {
-    debug drops => _1;                   // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:13:9: 13:14
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:13:36: 13:36
-    let mut _2: std::option::Option<(S<'_>, S<'_>)>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:14:9: 14:16
-    let mut _4: &mut std::option::Option<(S<'_>, S<'_>)>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:15:24: 15:32
-    let mut _5: isize;                   // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:18:9: 18:13
-    let mut _6: std::option::Option<(S<'_>, S<'_>)>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:22: 23:54
-    let mut _7: (S<'_>, S<'_>);          // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:27: 23:53
-    let mut _8: S<'_>;                   // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:28: 23:39
-    let mut _9: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:33: 23:38
-    let mut _10: S<'_>;                  // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:41: 23:52
-    let mut _11: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:46: 23:51
-    let mut _12: isize;                  // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:26:9: 26:22
+    debug drops => _1;
+    let mut _0: ();
+    let mut _2: std::option::Option<(S<'_>, S<'_>)>;
+    let mut _4: &mut std::option::Option<(S<'_>, S<'_>)>;
+    let mut _5: isize;
+    let mut _6: std::option::Option<(S<'_>, S<'_>)>;
+    let mut _7: (S<'_>, S<'_>);
+    let mut _8: S<'_>;
+    let mut _9: S<'_>;
+    let mut _10: isize;
     scope 1 {
-        debug foo => _2;                 // in scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:14:9: 14:16
-        let _3: *mut std::option::Option<(S<'_>, S<'_>)>; // in scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:15:9: 15:13
+        debug foo => _2;
+        let _3: *mut std::option::Option<(S<'_>, S<'_>)>;
         scope 2 {
-            debug pfoo => _3;            // in scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:15:9: 15:13
-            let _13: S<'_>;              // in scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:26:15: 26:17
+            debug pfoo => _3;
+            let _11: S<'_>;
             scope 3 {
+                let mut _12: *const ();
+                let mut _13: usize;
+                let mut _14: usize;
+                let mut _15: usize;
+                let mut _16: usize;
+                let mut _17: bool;
+                let mut _18: *const ();
+                let mut _19: usize;
+                let mut _20: usize;
+                let mut _21: usize;
+                let mut _22: usize;
+                let mut _23: bool;
             }
             scope 4 {
-                debug _x => _13;         // in scope 4 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:26:15: 26:17
+                debug _x => _11;
             }
         }
     }
 
     bb0: {
-        _2 = Option::<(S<'_>, S<'_>)>::None; // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:14:19: 14:23
-        _4 = &mut _2;                    // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:15:24: 15:32
-        _3 = &raw mut (*_4);             // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:15:24: 15:32
-        _5 = discriminant(_2);           // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:17:11: 17:14
-        switchInt(move _5) -> [0: bb2, otherwise: bb1]; // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:17:5: 17:14
+        _2 = Option::<(S<'_>, S<'_>)>::None;
+        _4 = &mut _2;
+        _3 = &raw mut (*_4);
+        _5 = discriminant(_2);
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        drop(_2) -> bb4;                 // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:29:1: 29:2
+        drop(_2) -> [return: bb6, unwind continue];
     }
 
     bb2: {
-        _9 = _1;                         // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:33: 23:38
-        _8 = S::<'_>(const 0_i32, move _9); // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:28: 23:39
-        _11 = _1;                        // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:46: 23:51
-        _10 = S::<'_>(const 1_i32, move _11); // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:41: 23:52
-        _7 = (move _8, move _10);        // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:27: 23:53
-        _6 = Option::<(S<'_>, S<'_>)>::Some(move _7); // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:22: 23:54
-        drop((*_3)) -> [return: bb6, unwind: bb5]; // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:14: 23:19
+        _8 = S::<'_>(const 0_i32, _1);
+        _9 = S::<'_>(const 1_i32, _1);
+        _7 = (move _8, move _9);
+        _6 = Option::<(S<'_>, S<'_>)>::Some(move _7);
+        drop((*_3)) -> [return: bb3, unwind: bb4];
     }
 
     bb3: {
-        _13 = move (((_2 as Some).0: (S<'_>, S<'_>)).0: S<'_>); // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:26:15: 26:17
-        drop(_13) -> bb4;                // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:26:27: 26:28
+        _18 = _3 as *const () (PtrToPtr);
+        _19 = _18 as usize (Transmute);
+        _20 = AlignOf(std::option::Option<(S<'_>, S<'_>)>);
+        _21 = Sub(_20, const 1_usize);
+        _22 = BitAnd(_19, _21);
+        _23 = Eq(_22, const 0_usize);
+        assert(_23, "misaligned pointer dereference: address must be a multiple of {} but is {}", _20, _19) -> [success: bb8, unwind unreachable];
     }
 
-    bb4: {
-        return;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:29:2: 29:2
+    bb4 (cleanup): {
+        _12 = _3 as *const () (PtrToPtr);
+        _13 = _12 as usize (Transmute);
+        _14 = AlignOf(std::option::Option<(S<'_>, S<'_>)>);
+        _15 = Sub(_14, const 1_usize);
+        _16 = BitAnd(_13, _15);
+        _17 = Eq(_16, const 0_usize);
+        assert(_17, "misaligned pointer dereference: address must be a multiple of {} but is {}", _14, _13) -> [success: bb7, unwind unreachable];
     }
 
-    bb5 (cleanup): {
-        (*_3) = move _6;                 // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:14: 23:19
-        resume;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:13:1: 29:2
+    bb5: {
+        _11 = move (((_2 as Some).0: (S<'_>, S<'_>)).0: S<'_>);
+        drop(_11) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        (*_3) = move _6;                 // scope 3 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:23:14: 23:19
-        _12 = discriminant(_2);          // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:25:11: 25:14
-        switchInt(move _12) -> [1: bb3, otherwise: bb4]; // scope 2 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:25:5: 25:14
+        return;
+    }
+
+    bb7 (cleanup): {
+        (*_3) = move _6;
+        resume;
+    }
+
+    bb8: {
+        (*_3) = move _6;
+        _10 = discriminant(_2);
+        switchInt(move _10) -> [1: bb5, otherwise: bb6];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:31:11: 31:11
-    let _1: std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:9: 32:14
-    let mut _2: std::vec::Vec<i32>;      // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:30: 32:40
-    let _3: ();                          // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:5: 33:17
-    let mut _4: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:10: 33:16
-    let _5: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:10: 33:16
-    let mut _6: (&std::vec::Vec<i32>, &&[i32; 1]); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _7: &std::vec::Vec<i32>;     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _8: &std::vec::Vec<i32>;         // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:16: 40:31
-    let mut _9: &std::cell::Ref<'_, std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-    let _10: std::cell::Ref<'_, std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-    let mut _11: &std::cell::RefCell<std::vec::Vec<i32>>; // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-    let mut _12: &&[i32; 1];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _16: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _17: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _18: &&[i32; 1];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _20: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _21: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _22: &std::vec::Vec<i32>;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _23: &std::vec::Vec<i32>;        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _24: &&[i32; 1];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _25: &&[i32; 1];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _26: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: std::cell::RefCell<std::vec::Vec<i32>>;
+    let mut _2: std::vec::Vec<i32>;
+    let _3: ();
+    let _4: &std::cell::RefCell<std::vec::Vec<i32>>;
+    let mut _5: (&std::vec::Vec<i32>, &&[i32; 1]);
+    let mut _6: &std::vec::Vec<i32>;
+    let _7: &std::vec::Vec<i32>;
+    let mut _8: &std::cell::Ref<'_, std::vec::Vec<i32>>;
+    let _9: std::cell::Ref<'_, std::vec::Vec<i32>>;
+    let mut _10: &std::cell::RefCell<std::vec::Vec<i32>>;
+    let mut _13: bool;
+    let mut _14: bool;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug drops => _1;               // in scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:9: 32:14
-        let _13: &std::vec::Vec<i32>;    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _14: &&[i32; 1];             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _27: &&[i32; 1];         // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug drops => _1;
+        let _11: &std::vec::Vec<i32>;
+        let _12: &&[i32; 1];
+        let mut _18: &&[i32; 1];
         scope 2 {
-            debug left_val => _13;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _14;      // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _19: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _11;
+            debug right_val => _12;
+            let _15: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _19;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _15;
             }
         }
     }
 
     bb0: {
-        _2 = Vec::<i32>::new() -> bb1;   // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:30: 32:40
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:30: 32:38
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn() -> Vec<i32> {Vec::<i32>::new}, val: Value(<ZST>) }
+        _2 = Vec::<i32>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = RefCell::<Vec<i32>>::new(move _2) -> bb2; // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:17: 32:41
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:32:17: 32:29
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Vec<i32>) -> RefCell<Vec<i32>> {RefCell::<Vec<i32>>::new}, val: Value(<ZST>) }
+        _1 = RefCell::<Vec<i32>>::new(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = &_1;                        // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:10: 33:16
-        _4 = _5;                         // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:10: 33:16
-        _3 = test(move _4) -> [return: bb3, unwind: bb12]; // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:5: 33:17
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:33:5: 33:9
-                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<Vec<i32>>) {test}, val: Value(<ZST>) }
+        _4 = &_1;
+        _3 = test(_4) -> [return: bb3, unwind: bb12];
     }
 
     bb3: {
-        _11 = &_1;                       // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-        _10 = RefCell::<Vec<i32>>::borrow(move _11) -> [return: bb4, unwind: bb12]; // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:23: 40:29
-                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<Vec<i32>>) -> Ref<'a, Vec<i32>> {RefCell::<Vec<i32>>::borrow}, val: Value(<ZST>) }
+        _10 = &_1;
+        _9 = RefCell::<Vec<i32>>::borrow(move _10) -> [return: bb4, unwind: bb12];
     }
 
     bb4: {
-        _9 = &_10;                       // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:17: 40:31
-        _8 = <Ref<'_, Vec<i32>> as Deref>::deref(move _9) -> [return: bb5, unwind: bb11]; // scope 1 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:16: 40:31
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:16: 40:31
-                                         // + literal: Const { ty: for<'a> fn(&'a Ref<'_, Vec<i32>>) -> &'a <Ref<'_, Vec<i32>> as Deref>::Target {<Ref<'_, Vec<i32>> as Deref>::deref}, val: Value(<ZST>) }
+        _8 = &_9;
+        _7 = <Ref<'_, Vec<i32>> as Deref>::deref(move _8) -> [return: bb5, unwind: bb11];
     }
 
     bb5: {
-        _7 = _8;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _27 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &&[i32; 1], val: Unevaluated(main, [], Some(promoted[0])) }
-        _12 = _27;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _6 = (move _7, move _12);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _13 = (_6.0: &std::vec::Vec<i32>); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _14 = (_6.1: &&[i32; 1]);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _17 = _13;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _18 = _14;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _16 = <Vec<i32> as PartialEq<&[i32; 1]>>::eq(move _17, move _18) -> [return: bb6, unwind: bb11]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a Vec<i32>, &'b &[i32; 1]) -> bool {<Vec<i32> as PartialEq<&[i32; 1]>>::eq}, val: Value(<ZST>) }
+        _6 = _7;
+        _18 = const _;
+        _5 = (move _6, _18);
+        _11 = (_5.0: &std::vec::Vec<i32>);
+        _12 = (_5.1: &&[i32; 1]);
+        _14 = <Vec<i32> as PartialEq<&[i32; 1]>>::eq(_11, _12) -> [return: bb6, unwind: bb11];
     }
 
     bb6: {
-        _15 = Not(move _16);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _15) -> [0: bb8, otherwise: bb7]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _19 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _21 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _23 = _13;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _22 = _23;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _25 = _14;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _24 = _25;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _26 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _20 = core::panicking::assert_failed::<Vec<i32>, &[i32; 1]>(move _21, move _22, move _24, move _26) -> bb11; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a Vec<i32>, &'b &[i32; 1], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<Vec<i32>, &[i32; 1]>}, val: Value(<ZST>) }
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<Vec<i32>, &[i32; 1]>(move _15, _11, _12, move _17) -> bb11;
     }
 
     bb8: {
-        drop(_10) -> [return: bb9, unwind: bb12]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_9) -> [return: bb9, unwind: bb12];
     }
 
     bb9: {
-        drop(_1) -> bb10;                // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:41:1: 41:2
+        drop(_1) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        return;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:41:2: 41:2
+        return;
     }
 
     bb11 (cleanup): {
-        drop(_10) -> bb12;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_9) -> [return: bb12, unwind terminate];
     }
 
     bb12 (cleanup): {
-        drop(_1) -> bb13;                // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:41:1: 41:2
+        drop(_1) -> [return: bb13, unwind terminate];
     }
 
     bb13 (cleanup): {
-        resume;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:31:1: 41:2
+        resume;
     }
 }
 
 promoted[0] in main: &&[i32; 1] = {
-    let mut _0: &&[i32; 1];              // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: &[i32; 1];               // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:33: 40:37
-    let mut _2: [i32; 1];                // in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:34: 40:37
+    let mut _0: &&[i32; 1];
+    let mut _1: &[i32; 1];
+    let mut _2: [i32; 1];
 
     bb0: {
-        _2 = [const 0_i32];              // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:34: 40:37
-        _1 = &_2;                        // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:40:33: 40:37
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _2 = [const 0_i32];
+        _1 = &_2;
+        _0 = &_1;
+        return;
     }
 }
 
 fn S(_1: i32, _2: &RefCell<Vec<i32>>) -> S<'_> {
-    let mut _0: S<'_>;                   // return place in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
+    let mut _0: S<'_>;
 
     bb0: {
-        _0 = S::<'_>(move _1, move _2);  // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
-        return;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
+        _0 = S::<'_>(move _1, move _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn S(_1: i32, _2: &RefCell<Vec<i32>>) -> S<'_> {
-    let mut _0: S<'_>;                   // return place in scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
+    let mut _0: S<'_>;
 
     bb0: {
-        _0 = S::<'_>(move _1, move _2);  // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
-        return;                          // scope 0 at ui/drop/issue-90752-raw-ptr-shenanigans.rs:5:1: 5:13
+        _0 = S::<'_>(move _1, move _2);
+        return;
     }
 }

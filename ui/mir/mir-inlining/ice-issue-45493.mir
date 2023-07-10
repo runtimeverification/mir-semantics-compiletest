@@ -1,35 +1,29 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:8:20: 8:20
-    let mut _1: *mut <A as Array>::Item; // in scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:9:27: 9:47
+    let mut _0: ();
+    let mut _1: *mut <A as Array>::Item;
     scope 1 {
     }
 
     bb0: {
-        _1 = null_mut::<<A as Array>::Item>() -> bb1; // scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:9:27: 9:47
-                                         // mir::Constant
-                                         // + span: ui/mir/mir-inlining/ice-issue-45493.rs:9:27: 9:45
-                                         // + literal: Const { ty: fn() -> *mut <A as Array>::Item {null_mut::<<A as Array>::Item>}, val: Value(<ZST>) }
+        _1 = null_mut::<<A as Array>::Item>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:10:2: 10:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:15:11: 15:11
-    let _1: ();                          // in scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:16:5: 16:17
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = foo::<Foo>() -> bb1;        // scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:16:5: 16:17
-                                         // mir::Constant
-                                         // + span: ui/mir/mir-inlining/ice-issue-45493.rs:16:5: 16:15
-                                         // + literal: Const { ty: fn() {foo::<Foo>}, val: Value(<ZST>) }
+        _1 = foo::<Foo>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir-inlining/ice-issue-45493.rs:17:2: 17:2
+        return;
     }
 }

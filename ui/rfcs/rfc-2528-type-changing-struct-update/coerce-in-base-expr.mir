@@ -1,76 +1,59 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:17:11: 17:11
-    let _1: Foo<usize, dyn std::any::Any, dyn std::any::Any>; // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:18:9: 18:10
-    let mut _2: std::boxed::Box<dyn std::any::Any>; // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:12: 20:23
-    let mut _3: std::boxed::Box<B>;      // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:12: 20:23
-    let mut _4: B;                       // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:21: 20:22
-    let mut _5: Foo<i32, B, dyn std::any::Any>; // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:21:11: 26:10
-    let mut _6: std::boxed::Box<B>;      // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:23:16: 23:27
-    let mut _7: B;                       // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:23:25: 23:26
-    let mut _8: std::boxed::Box<dyn std::any::Any>; // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:16: 25:27
-    let mut _9: std::boxed::Box<C>;      // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:16: 25:27
-    let mut _10: C;                      // in scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:25: 25:26
+    let mut _0: ();
+    let _1: Foo<usize, dyn std::any::Any, dyn std::any::Any>;
+    let mut _2: std::boxed::Box<dyn std::any::Any>;
+    let mut _3: std::boxed::Box<B>;
+    let mut _4: Foo<i32, B, dyn std::any::Any>;
+    let mut _5: std::boxed::Box<B>;
+    let mut _6: std::boxed::Box<dyn std::any::Any>;
+    let mut _7: std::boxed::Box<C>;
     scope 1 {
-        debug y => _1;                   // in scope 1 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:18:9: 18:10
+        debug y => _1;
     }
 
     bb0: {
-        _3 = Box::<B>::new(move _4) -> bb1; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:12: 20:23
-                                         // mir::Constant
-                                         // + span: ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:12: 20:20
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(B) -> Box<B> {Box::<B>::new}, val: Value(<ZST>) }
+        _3 = Box::<B>::new(const B) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize)); // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:20:12: 20:23
-        _6 = Box::<B>::new(move _7) -> [return: bb2, unwind: bb6]; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:23:16: 23:27
-                                         // mir::Constant
-                                         // + span: ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:23:16: 23:24
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(B) -> Box<B> {Box::<B>::new}, val: Value(<ZST>) }
+        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
+        _5 = Box::<B>::new(const B) -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _9 = Box::<C>::new(move _10) -> [return: bb3, unwind: bb5]; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:16: 25:27
-                                         // mir::Constant
-                                         // + span: ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:16: 25:24
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(C) -> Box<C> {Box::<C>::new}, val: Value(<ZST>) }
+        _7 = Box::<C>::new(const C) -> [return: bb3, unwind: bb5];
     }
 
     bb3: {
-        _8 = move _9 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize)); // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:25:16: 25:27
-        _5 = Foo::<i32, B, dyn Any> { a: const 0_i32, b: move _6, c: move _8 }; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:21:11: 26:10
-        _1 = Foo::<usize, dyn Any, dyn Any> { a: const 0_usize, b: move _2, c: move (_5.2: std::boxed::Box<dyn std::any::Any>) }; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:18:13: 27:6
-                                         // adt
-                                         // + user_ty: UserType(3)
-        drop((_5.1: std::boxed::Box<B>)) -> [return: bb9, unwind: bb8]; // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:27:6: 27:7
+        _6 = move _7 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
+        _4 = Foo::<i32, B, dyn Any> { a: const 0_i32, b: move _5, c: move _6 };
+        _1 = Foo::<usize, dyn Any, dyn Any> { a: const 0_usize, b: move _2, c: move (_4.2: std::boxed::Box<dyn std::any::Any>) };
+        drop((_4.1: std::boxed::Box<B>)) -> [return: bb9, unwind: bb8];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:28:2: 28:2
+        return;
     }
 
     bb5 (cleanup): {
-        drop(_6) -> bb6;                 // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:26:9: 26:10
+        drop(_5) -> [return: bb6, unwind terminate];
     }
 
     bb6 (cleanup): {
-        drop(_2) -> bb7;                 // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:27:5: 27:6
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb7 (cleanup): {
-        resume;                          // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:17:1: 28:2
+        resume;
     }
 
     bb8 (cleanup): {
-        drop(_1) -> bb7;                 // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:28:1: 28:2
+        drop(_1) -> [return: bb7, unwind terminate];
     }
 
     bb9: {
-        drop(_1) -> bb4;                 // scope 0 at ui/rfcs/rfc-2528-type-changing-struct-update/coerce-in-base-expr.rs:28:1: 28:2
+        drop(_1) -> [return: bb4, unwind continue];
     }
 }

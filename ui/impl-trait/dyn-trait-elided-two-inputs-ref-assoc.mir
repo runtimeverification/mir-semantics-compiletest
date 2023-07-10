@@ -1,190 +1,128 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Foo::item(_1: &Self) -> Box<<Self as Foo>::Item> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:10:13: 10:18
-    let mut _0: std::boxed::Box<<Self as Foo>::Item>; // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:10:23: 10:38
-    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    debug self => _1;
+    let mut _0: std::boxed::Box<<Self as Foo>::Item>;
+    let mut _2: !;
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }
 
 fn is_static(_1: T) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:19:23: 19:23
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:19:42: 19:43
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:19:43: 19:43
+        return;
     }
 }
 
-fn bar(_1: &str) -> &() {
-    debug x => _1;                       // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:8: 21:9
-    let mut _0: &();                     // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-    let mut _2: &();                     // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
+fn bar(_1: &str) -> &impl Foo<Item = (dyn Bar + 'static)> {
+    debug x => _1;
+    let mut _0: &impl Foo<Item = (dyn Bar + 'static)>;
+    let mut _2: &();
 
     bb0: {
-        _2 = const _;                    // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-                                         // + literal: Const { ty: &(), val: Unevaluated(bar, [], Some(promoted[0])) }
-        _0 = _2;                         // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-        return;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:53: 21:53
+        _2 = const _;
+        _0 = _2;
+        return;
     }
 }
 
 promoted[0] in bar: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-    let mut _1: ();                      // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:49: 21:51
+    let mut _0: &();
+    let mut _1: ();
 
     bb0: {
-        _1 = ();                         // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:49: 21:51
-        _0 = &_1;                        // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
-        return;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:21:48: 21:51
+        _1 = ();
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:23:11: 23:11
-    let _1: std::string::String;         // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:9: 24:10
-    let _2: std::string::String;         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
-    let mut _3: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _4: &[&str];                 // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-    let mut _5: &[&str; 1];              // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-    let _6: &[&str; 1];                  // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-    let mut _7: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _8: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let _9: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _11: &str;                   // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-    let _12: &str;                       // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-    let mut _13: &std::string::String;   // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-    let _14: &std::string::String;       // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-    let _15: ();                         // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:5: 26:24
-    let mut _16: std::boxed::Box<dyn Bar>; // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:15: 26:23
-    let mut _17: &impl Foo<Item = (dyn Bar + 'static)>; // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:15: 26:23
-    let mut _18: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _19: &[&str; 1];             // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
+    let mut _0: ();
+    let _1: std::string::String;
+    let _2: std::string::String;
+    let mut _3: std::fmt::Arguments<'_>;
+    let mut _4: &[&str];
+    let mut _6: &str;
+    let _7: &str;
+    let _8: &std::string::String;
+    let _9: ();
+    let mut _10: std::boxed::Box<dyn Bar>;
+    let mut _11: &impl Foo<Item = (dyn Bar + 'static)>;
+    let mut _12: &[&str; 1];
     scope 1 {
-        debug s => _1;                   // in scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:9: 24:10
-        let _10: &impl Foo<Item = (dyn Bar + 'static)>; // in scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:9: 25:10
+        debug s => _1;
+        let _5: &impl Foo<Item = (dyn Bar + 'static)>;
         scope 3 {
-            debug r => _10;              // in scope 3 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:9: 25:10
+            debug r => _5;
         }
     }
     scope 2 {
-        debug res => _2;                 // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
+        debug res => _2;
     }
 
     bb0: {
-        _19 = const _;                   // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[1])) }
-        _6 = _19;                        // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-        _5 = _6;                         // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-        _4 = move _5 as &[&str] (Pointer(Unsize)); // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-        _18 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(main, [], Some(promoted[0])) }
-        _9 = _18;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _8 = _9;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _7 = move _8 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _12 = const _;
+        _4 = _12 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = format(move _3) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:80
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:38
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) -> String {format}, val: Value(<ZST>) }
+        _2 = format(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _1 = move _2;                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:119:9: 119:12
-        _14 = &_1;                       // scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-        _13 = _14;                       // scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-        _12 = <String as Deref>::deref(move _13) -> [return: bb3, unwind: bb8]; // scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a <String as Deref>::Target {<String as Deref>::deref}, val: Value(<ZST>) }
+        _1 = move _2;
+        _8 = &_1;
+        _7 = <String as Deref>::deref(_8) -> [return: bb3, unwind: bb8];
     }
 
     bb3: {
-        _11 = _12;                       // scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:17: 25:19
-        _10 = bar(move _11) -> [return: bb4, unwind: bb8]; // scope 1 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:13: 25:20
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:25:13: 25:16
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> &'a impl Foo<Item = (dyn Bar + 'static)> {bar}, val: Value(<ZST>) }
+        _6 = _7;
+        _5 = bar(move _6) -> [return: bb4, unwind: bb8];
     }
 
     bb4: {
-        _17 = _10;                       // scope 3 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:15: 26:23
-        _16 = <impl Foo<Item = (dyn Bar + 'static)> as Foo>::item(move _17) -> [return: bb5, unwind: bb8]; // scope 3 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:15: 26:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:17: 26:21
-                                         // + literal: Const { ty: for<'a> fn(&'a impl Foo<Item = (dyn Bar + 'static)>) -> Box<<impl Foo<Item = (dyn Bar + 'static)> as Foo>::Item> {<impl Foo<Item = (dyn Bar + 'static)> as Foo>::item}, val: Value(<ZST>) }
+        _11 = _5;
+        _10 = <impl Foo<Item = (dyn Bar + 'static)> as Foo>::item(move _11) -> [return: bb5, unwind: bb8];
     }
 
     bb5: {
-        _15 = is_static::<Box<dyn Bar>>(move _16) -> [return: bb6, unwind: bb8]; // scope 3 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:5: 26:24
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:26:5: 26:14
-                                         // + literal: Const { ty: fn(Box<dyn Bar>) {is_static::<Box<dyn Bar>>}, val: Value(<ZST>) }
+        _9 = is_static::<Box<dyn Bar>>(move _10) -> [return: bb6, unwind: bb8];
     }
 
     bb6: {
-        drop(_1) -> bb7;                 // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:27:1: 27:2
+        drop(_1) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        return;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:27:2: 27:2
+        return;
     }
 
     bb8 (cleanup): {
-        drop(_1) -> bb9;                 // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:27:1: 27:2
+        drop(_1) -> [return: bb9, unwind terminate];
     }
 
     bb9 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:23:1: 27:2
+        resume;
     }
 }
 
-promoted[0] in main: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
+promoted[0] in main: &[&str; 1] = {
+    let mut _0: &[&str; 1];
+    let mut _1: [&str; 1];
 
     bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-    let mut _1: [&str; 1];               // in scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-
-    bb0: {
-        _1 = [const "foo"];              // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
-        return;                          // scope 0 at ui/impl-trait/dyn-trait-elided-two-inputs-ref-assoc.rs:24:21: 24:26
+        _1 = [const "foo"];
+        _0 = &_1;
+        return;
     }
 }

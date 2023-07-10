@@ -1,239 +1,172 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/self/object-safety-sized-self-generic-method.rs:16:1: 16:26>::tick(_1: &mut CCounter) -> u32 {
-    debug self => _1;                    // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:13: 17:22
-    let mut _0: u32;                     // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:27: 17:30
-    let mut _2: (u32, bool);             // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:33: 17:44
+    debug self => _1;
+    let mut _0: u32;
 
     bb0: {
-        _2 = CheckedAdd(((*_1).0: u32), const 1_u32); // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:33: 17:44
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", ((*_1).0: u32), const 1_u32) -> bb1; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:33: 17:44
-    }
-
-    bb1: {
-        ((*_1).0: u32) = move (_2.0: u32); // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:33: 17:44
-        _0 = ((*_1).0: u32);             // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:46: 17:52
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:17:54: 17:54
+        ((*_1).0: u32) = Add(((*_1).0: u32), const 1_u32);
+        _0 = ((*_1).0: u32);
+        return;
     }
 }
 
 fn <impl at ui/self/object-safety-sized-self-generic-method.rs:16:1: 16:26>::with(_1: &CCounter, _2: F) -> () {
-    debug self => _1;                    // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:28: 18:33
-    debug f => _2;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:35: 18:36
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:41: 18:41
-    let _3: ();                          // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:52
-    let mut _4: F;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:44
-    let mut _5: (u32,);                  // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:52
-    let mut _6: u32;                     // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:45: 18:51
+    debug self => _1;
+    debug f => _2;
+    let mut _0: ();
+    let _3: ();
+    let mut _4: (u32,);
+    let mut _5: u32;
 
     bb0: {
-        _4 = move _2;                    // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:44
-        _6 = ((*_1).0: u32);             // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:45: 18:51
-        _5 = (move _6,);                 // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:52
-        _3 = <F as FnOnce<(u32,)>>::call_once(move _4, move _5) -> bb1; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:52
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:18:43: 18:44
-                                         // + literal: Const { ty: extern "rust-call" fn(F, (u32,)) -> <F as FnOnce<(u32,)>>::Output {<F as FnOnce<(u32,)>>::call_once}, val: Value(<ZST>) }
+        _5 = ((*_1).0: u32);
+        _4 = (move _5,);
+        _3 = <F as FnOnce<(u32,)>>::call_once(move _2, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:18:55: 18:55
+        return;
     }
 }
 
 fn tick1(_1: &mut C) -> () {
-    debug c => _1;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:21:21: 21:22
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:21:32: 21:32
-    let _2: ();                          // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:5: 22:13
-    let mut _3: &mut dyn Counter;        // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:11: 22:12
-    let mut _4: &mut C;                  // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:11: 22:12
-    let _5: ();                          // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:5: 23:19
-    let mut _6: &C;                      // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:5: 23:19
-    let mut _7: [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]; // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:18
+    debug c => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &mut dyn Counter;
+    let _4: ();
+    let mut _5: &C;
 
     bb0: {
-        _4 = &mut (*_1);                 // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:11: 22:12
-        _3 = move _4 as &mut dyn Counter (Pointer(Unsize)); // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:11: 22:12
-        _2 = tick2(move _3) -> bb1;      // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:22:5: 22:13
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:22:5: 22:10
-                                         // + literal: Const { ty: for<'a> fn(&'a mut (dyn Counter + 'a)) {tick2}, val: Value(<ZST>) }
+        _3 = _1 as &mut dyn Counter (Pointer(Unsize));
+        _2 = tick2(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _6 = &(*_1);                     // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:5: 23:19
-        _5 = <C as Counter>::with::<[closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]>(move _6, move _7) -> bb2; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:5: 23:19
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:23:7: 23:11
-                                         // + literal: Const { ty: for<'a> fn(&'a C, [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]) {<C as Counter>::with::<[closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]>}, val: Value(<ZST>) }
+        _5 = &(*_1);
+        _4 = <C as Counter>::with::<[closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]>(move _5, const ZeroSized: [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:24:2: 24:2
+        return;
     }
 }
 
 fn tick1::{closure#0}(_1: [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15], _2: u32) -> () {
-    debug i => _2;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:13: 23:14
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:16: 23:16
+    debug i => _2;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:23:18: 23:18
+        return;
     }
 }
 
 fn tick2(_1: &mut dyn Counter) -> () {
-    debug c => _1;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:26:10: 26:11
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:26:31: 26:31
-    let _2: ();                          // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:27:5: 27:13
-    let mut _3: &mut dyn Counter;        // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:27:11: 27:12
+    debug c => _1;
+    let mut _0: ();
+    let _2: ();
 
     bb0: {
-        _3 = &mut (*_1);                 // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:27:11: 27:12
-        _2 = tick3::<dyn Counter>(move _3) -> bb1; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:27:5: 27:13
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:27:5: 27:10
-                                         // + literal: Const { ty: for<'a> fn(&'a mut dyn Counter) {tick3::<dyn Counter>}, val: Value(<ZST>) }
+        _2 = tick3::<dyn Counter>(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:28:2: 28:2
+        return;
     }
 }
 
 fn tick3(_1: &mut C) -> () {
-    debug c => _1;                       // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:30:28: 30:29
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:30:39: 30:39
-    let _2: u32;                         // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:31:5: 31:13
-    let mut _3: &mut C;                  // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:31:5: 31:13
-    let _4: u32;                         // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:32:5: 32:13
-    let mut _5: &mut C;                  // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:32:5: 32:13
+    debug c => _1;
+    let mut _0: ();
+    let _2: u32;
+    let _3: u32;
 
     bb0: {
-        _3 = &mut (*_1);                 // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:31:5: 31:13
-        _2 = <C as Counter>::tick(move _3) -> bb1; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:31:5: 31:13
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:31:7: 31:11
-                                         // + literal: Const { ty: for<'a> fn(&'a mut C) -> u32 {<C as Counter>::tick}, val: Value(<ZST>) }
+        _2 = <C as Counter>::tick(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = &mut (*_1);                 // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:32:5: 32:13
-        _4 = <C as Counter>::tick(move _5) -> bb2; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:32:5: 32:13
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:32:7: 32:11
-                                         // + literal: Const { ty: for<'a> fn(&'a mut C) -> u32 {<C as Counter>::tick}, val: Value(<ZST>) }
+        _3 = <C as Counter>::tick(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:33:2: 33:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:35:11: 35:11
-    let mut _1: CCounter;                // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:36:9: 36:14
-    let _2: ();                          // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:37:5: 37:18
-    let mut _3: &mut CCounter;           // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:37:11: 37:17
-    let mut _4: &mut CCounter;           // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:37:11: 37:17
-    let mut _5: (&u32, &u32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _6: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _7: u32;                         // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:38:16: 38:24
-    let mut _8: &mut CCounter;           // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:38:16: 38:24
-    let mut _9: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _12: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _13: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _14: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _15: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _17: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _18: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _19: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _20: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _21: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _22: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _23: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let mut _1: CCounter;
+    let _2: ();
+    let mut _3: &mut CCounter;
+    let mut _4: (&u32, &u32);
+    let mut _5: &u32;
+    let _6: u32;
+    let mut _7: &mut CCounter;
+    let mut _10: bool;
+    let mut _11: bool;
+    let mut _12: u32;
+    let mut _13: u32;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug c => _1;                   // in scope 1 at ui/self/object-safety-sized-self-generic-method.rs:36:9: 36:14
-        let _10: &u32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _11: &u32;                   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _24: &u32;               // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug c => _1;
+        let _8: &u32;
+        let _9: &u32;
+        let mut _17: &u32;
         scope 2 {
-            debug left_val => _10;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _11;      // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _16: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _8;
+            debug right_val => _9;
+            let _14: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _16;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _14;
             }
         }
     }
 
     bb0: {
-        _1 = CCounter { c: const 0_u32 }; // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:36:17: 36:34
-        _4 = &mut _1;                    // scope 1 at ui/self/object-safety-sized-self-generic-method.rs:37:11: 37:17
-        _3 = &mut (*_4);                 // scope 1 at ui/self/object-safety-sized-self-generic-method.rs:37:11: 37:17
-        _2 = tick1::<CCounter>(move _3) -> bb1; // scope 1 at ui/self/object-safety-sized-self-generic-method.rs:37:5: 37:18
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:37:5: 37:10
-                                         // + literal: Const { ty: for<'a> fn(&'a mut CCounter) {tick1::<CCounter>}, val: Value(<ZST>) }
+        _1 = CCounter { c: const 0_u32 };
+        _3 = &mut _1;
+        _2 = tick1::<CCounter>(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = &mut _1;                    // scope 1 at ui/self/object-safety-sized-self-generic-method.rs:38:16: 38:24
-        _7 = <CCounter as Counter>::tick(move _8) -> bb2; // scope 1 at ui/self/object-safety-sized-self-generic-method.rs:38:16: 38:24
-                                         // mir::Constant
-                                         // + span: ui/self/object-safety-sized-self-generic-method.rs:38:18: 38:22
-                                         // + literal: Const { ty: for<'a> fn(&'a mut CCounter) -> u32 {<CCounter as Counter>::tick}, val: Value(<ZST>) }
+        _7 = &mut _1;
+        _6 = <CCounter as Counter>::tick(move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = &_7;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _24 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _9 = _24;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _5 = (move _6, move _9);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _10 = (_5.0: &u32);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _11 = (_5.1: &u32);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _14 = (*_10);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _15 = const 3_u32;               // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _13 = Eq(move _14, move _15);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _12 = Not(move _13);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _12) -> [0: bb4, otherwise: bb3]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _5 = &_6;
+        _17 = const _;
+        _4 = (move _5, _17);
+        _8 = (_4.0: &u32);
+        _9 = (_4.1: &u32);
+        _12 = (*_8);
+        _13 = (*_9);
+        _11 = Eq(move _12, move _13);
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _16 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _18 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _20 = _10;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _20;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _22 = _11;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _21 = _22;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _23 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _17 = core::panicking::assert_failed::<u32, u32>(move _18, move _19, move _21, move _23); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16) -> unwind continue;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:39:2: 39:2
+        return;
     }
 }
 
 promoted[0] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u32;                     // in scope 0 at ui/self/object-safety-sized-self-generic-method.rs:38:26: 38:27
+    let mut _0: &u32;
+    let mut _1: u32;
 
     bb0: {
-        _1 = const 3_u32;                // scope 0 at ui/self/object-safety-sized-self-generic-method.rs:38:26: 38:27
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 3_u32;
+        _0 = &_1;
+        return;
     }
 }

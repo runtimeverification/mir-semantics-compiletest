@@ -1,44 +1,36 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/hygiene/issue-44128.rs:14:11: 14:11
-    let _1: main::Test;                  // in scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-    let mut _2: &main::Test;             // in scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-    let mut _3: &main::Test;             // in scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
+    let mut _0: ();
+    let _1: main::Test;
+    let mut _2: &main::Test;
 
     bb0: {
-        _3 = const _;                    // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-                                         // mir::Constant
-                                         // + span: ui/hygiene/issue-44128.rs:16:5: 16:17
-                                         // + literal: Const { ty: &Test, val: Unevaluated(main, [], Some(promoted[0])) }
-        _2 = _3;                         // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-        _1 = <Test as Clone>::clone(move _2) -> bb1; // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-                                         // mir::Constant
-                                         // + span: ui/hygiene/issue-44128.rs:16:10: 16:15
-                                         // + literal: Const { ty: for<'a> fn(&'a Test) -> Test {<Test as Clone>::clone}, val: Value(<ZST>) }
+        _2 = const _;
+        _1 = <Test as Clone>::clone(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/hygiene/issue-44128.rs:17:2: 17:2
+        return;
     }
 }
 
 promoted[0] in main: &Test = {
-    let mut _0: &main::Test;             // return place in scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-    let mut _1: main::Test;              // in scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:9
+    let mut _0: &main::Test;
+    let mut _1: main::Test;
 
     bb0: {
-        _1 = Test;                       // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:9
-        _0 = &_1;                        // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
-        return;                          // scope 0 at ui/hygiene/issue-44128.rs:16:5: 16:17
+        _1 = Test;
+        _0 = &_1;
+        return;
     }
 }
 
 fn main::<impl at ui/hygiene/issue-44128.rs:7:5: 7:22>::clone(_1: &Test) -> Test {
-    debug self => _1;                    // in scope 0 at ui/hygiene/issue-44128.rs:8:18: 8:23
-    let mut _0: main::Test;              // return place in scope 0 at ui/hygiene/issue-44128.rs:8:28: 8:32
+    debug self => _1;
+    let mut _0: main::Test;
 
     bb0: {
-        return;                          // scope 0 at ui/hygiene/issue-44128.rs:10:10: 10:10
+        return;
     }
 }

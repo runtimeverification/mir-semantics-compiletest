@@ -1,35 +1,31 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Foo::dummy(_1: &Self) -> () {
-    debug self => _1;                    // in scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:8:22: 8:27
-    let mut _0: ();                      // return place in scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:8:29: 8:29
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:8:32: 8:32
+        return;
     }
 }
 
 fn want_foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:14:29: 14:29
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:14:32: 14:32
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:16:11: 16:11
-    let _1: ();                          // in scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:17:5: 17:26
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = want_foo::<dyn Bar>() -> bb1; // scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:17:5: 17:26
-                                         // mir::Constant
-                                         // + span: ui/traits/impl-object-overlap-issue-23853.rs:17:5: 17:24
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() {want_foo::<dyn Bar>}, val: Value(<ZST>) }
+        _1 = want_foo::<dyn Bar>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/traits/impl-object-overlap-issue-23853.rs:18:2: 18:2
+        return;
     }
 }

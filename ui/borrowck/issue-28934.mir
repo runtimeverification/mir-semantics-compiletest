@@ -1,118 +1,93 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/borrowck/issue-28934.rs:10:1: 10:28>::parse_nested_block(_1: &mut Parser<'_, '_>, _2: F) -> Result<T, ()> {
-    debug self => _1;                    // in scope 0 at ui/borrowck/issue-28934.rs:11:33: 11:42
-    debug parse => _2;                   // in scope 0 at ui/borrowck/issue-28934.rs:11:44: 11:49
-    let mut _0: std::result::Result<T, ()>; // return place in scope 0 at ui/borrowck/issue-28934.rs:11:57: 11:70
-    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    debug self => _1;
+    debug parse => _2;
+    let mut _0: std::result::Result<T, ()>;
+    let mut _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = begin_panic::<&str>(const "explicit panic") -> bb1;
     }
 
     bb1 (cleanup): {
-        drop(_2) -> bb2;                 // scope 0 at ui/borrowck/issue-28934.rs:15:5: 15:6
+        drop(_2) -> [return: bb2, unwind terminate];
     }
 
     bb2 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/issue-28934.rs:11:5: 15:6
+        resume;
     }
 }
 
 fn <impl at ui/borrowck/issue-28934.rs:10:1: 10:28>::expect_exhausted(_1: &mut Parser<'_, '_>) -> Result<(), ()> {
-    debug self => _1;                    // in scope 0 at ui/borrowck/issue-28934.rs:17:25: 17:34
-    let mut _0: std::result::Result<(), ()>; // return place in scope 0 at ui/borrowck/issue-28934.rs:17:39: 17:53
+    debug self => _1;
+    let mut _0: std::result::Result<(), ()>;
 
     bb0: {
-        _0 = const Result::<(), ()>::Ok(()); // scope 0 at ui/borrowck/issue-28934.rs:18:9: 18:15
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-28934.rs:18:9: 18:15
-                                         // + literal: Const { ty: Result<(), ()>, val: Value(Scalar(0x00)) }
-        return;                          // scope 0 at ui/borrowck/issue-28934.rs:19:6: 19:6
+        _0 = Result::<(), ()>::Ok(const ());
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-28934.rs:22:11: 22:11
-    let _1: u8;                          // in scope 0 at ui/borrowck/issue-28934.rs:23:9: 23:10
-    let _2: std::result::Result<(), ()>; // in scope 0 at ui/borrowck/issue-28934.rs:24:5: 24:81
-    let mut _3: std::result::Result<std::result::Result<(), ()>, ()>; // in scope 0 at ui/borrowck/issue-28934.rs:24:5: 24:72
-    let mut _4: &mut Parser<'_, '_>;     // in scope 0 at ui/borrowck/issue-28934.rs:24:5: 24:72
-    let mut _5: Parser<'_, '_>;          // in scope 0 at ui/borrowck/issue-28934.rs:24:5: 24:19
-    let mut _6: &u8;                     // in scope 0 at ui/borrowck/issue-28934.rs:24:12: 24:14
-    let _7: &u8;                         // in scope 0 at ui/borrowck/issue-28934.rs:24:12: 24:14
-    let mut _8: &u8;                     // in scope 0 at ui/borrowck/issue-28934.rs:24:16: 24:18
-    let _9: &u8;                         // in scope 0 at ui/borrowck/issue-28934.rs:24:16: 24:18
-    let mut _10: [closure@ui/borrowck/issue-28934.rs:24:39: 24:46]; // in scope 0 at ui/borrowck/issue-28934.rs:24:39: 24:71
+    let mut _0: ();
+    let _1: u8;
+    let _2: std::result::Result<(), ()>;
+    let mut _3: std::result::Result<std::result::Result<(), ()>, ()>;
+    let mut _4: &mut Parser<'_, '_>;
+    let mut _5: Parser<'_, '_>;
+    let _6: &u8;
+    let _7: &u8;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/borrowck/issue-28934.rs:23:9: 23:10
+        debug x => const 0_u8;
     }
 
     bb0: {
-        _1 = const 0_u8;                 // scope 0 at ui/borrowck/issue-28934.rs:23:13: 23:16
-        _7 = &_1;                        // scope 1 at ui/borrowck/issue-28934.rs:24:12: 24:14
-        _6 = _7;                         // scope 1 at ui/borrowck/issue-28934.rs:24:12: 24:14
-        _9 = &_1;                        // scope 1 at ui/borrowck/issue-28934.rs:24:16: 24:18
-        _8 = _9;                         // scope 1 at ui/borrowck/issue-28934.rs:24:16: 24:18
-        _5 = Parser::<'_, '_>(move _6, move _8); // scope 1 at ui/borrowck/issue-28934.rs:24:5: 24:19
-        _4 = &mut _5;                    // scope 1 at ui/borrowck/issue-28934.rs:24:5: 24:72
-        _3 = Parser::<'_, '_>::parse_nested_block::<[closure@ui/borrowck/issue-28934.rs:24:39: 24:46], Result<(), ()>>(move _4, move _10) -> bb1; // scope 1 at ui/borrowck/issue-28934.rs:24:5: 24:72
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-28934.rs:24:20: 24:38
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Parser<'_, '_>, [closure@ui/borrowck/issue-28934.rs:24:39: 24:46]) -> Result<Result<(), ()>, ()> {Parser::<'_, '_>::parse_nested_block::<[closure@ui/borrowck/issue-28934.rs:24:39: 24:46], Result<(), ()>>}, val: Value(<ZST>) }
+        _1 = const 0_u8;
+        _6 = &_1;
+        _7 = &_1;
+        _5 = Parser::<'_, '_>(_6, _7);
+        _4 = &mut _5;
+        _3 = Parser::<'_, '_>::parse_nested_block::<[closure@ui/borrowck/issue-28934.rs:24:39: 24:46], Result<(), ()>>(move _4, const ZeroSized: [closure@ui/borrowck/issue-28934.rs:24:39: 24:46]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Result::<Result<(), ()>, ()>::unwrap(move _3) -> bb2; // scope 1 at ui/borrowck/issue-28934.rs:24:5: 24:81
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-28934.rs:24:73: 24:79
-                                         // + literal: Const { ty: fn(Result<Result<(), ()>, ()>) -> Result<(), ()> {Result::<Result<(), ()>, ()>::unwrap}, val: Value(<ZST>) }
+        _2 = Result::<Result<(), ()>, ()>::unwrap(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/borrowck/issue-28934.rs:25:2: 25:2
+        return;
     }
 }
 
 fn main::{closure#0}(_1: [closure@ui/borrowck/issue-28934.rs:24:39: 24:46], _2: &mut Parser<'_, '_>) -> Result<(), ()> {
-    debug input => _2;                   // in scope 0 at ui/borrowck/issue-28934.rs:24:40: 24:45
-    let mut _0: std::result::Result<(), ()>; // return place in scope 0 at ui/borrowck/issue-28934.rs:24:47: 24:47
-    let mut _3: &mut Parser<'_, '_>;     // in scope 0 at ui/borrowck/issue-28934.rs:24:47: 24:71
+    debug input => _2;
+    let mut _0: std::result::Result<(), ()>;
 
     bb0: {
-        _3 = &mut (*_2);                 // scope 0 at ui/borrowck/issue-28934.rs:24:47: 24:71
-        _0 = Parser::<'_, '_>::expect_exhausted(move _3) -> bb1; // scope 0 at ui/borrowck/issue-28934.rs:24:47: 24:71
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-28934.rs:24:53: 24:69
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Parser<'_, '_>) -> Result<(), ()> {Parser::<'_, '_>::expect_exhausted}, val: Value(<ZST>) }
+        _0 = Parser::<'_, '_>::expect_exhausted(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/borrowck/issue-28934.rs:24:71: 24:71
+        return;
     }
 }
 
 fn Parser(_1: &u8, _2: &u8) -> Parser<'_, '_> {
-    let mut _0: Parser<'_, '_>;          // return place in scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
+    let mut _0: Parser<'_, '_>;
 
     bb0: {
-        _0 = Parser::<'_, '_>(move _1, move _2); // scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
-        return;                          // scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
+        _0 = Parser::<'_, '_>(move _1, move _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Parser(_1: &u8, _2: &u8) -> Parser<'_, '_> {
-    let mut _0: Parser<'_, '_>;          // return place in scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
+    let mut _0: Parser<'_, '_>;
 
     bb0: {
-        _0 = Parser::<'_, '_>(move _1, move _2); // scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
-        return;                          // scope 0 at ui/borrowck/issue-28934.rs:8:1: 8:26
+        _0 = Parser::<'_, '_>(move _1, move _2);
+        return;
     }
 }

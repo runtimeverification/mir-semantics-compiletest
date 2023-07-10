@@ -1,77 +1,70 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn blah(_1: T, _2: F) -> B<<T as Foo>::Item, impl Fn(<T as Foo>::Item)> {
-    debug x => _1;                       // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:9:15: 9:16
-    debug f => _2;                       // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:9:21: 9:22
-    let mut _0: B<<T as Foo>::Item, impl Fn(<T as Foo>::Item)>; // return place in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:9:30: 9:58
-    let mut _3: <T as Foo>::Item;        // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:12: 14:19
-    let mut _4: &T;                      // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:12: 14:19
-    let mut _5: F;                       // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:21: 14:22
+    debug x => _1;
+    debug f => _2;
+    let mut _0: B<<T as Foo>::Item, impl Fn(<T as Foo>::Item)>;
+    let mut _3: <T as Foo>::Item;
+    let mut _4: &T;
+    let mut _5: F;
 
     bb0: {
-        _4 = &_1;                        // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:12: 14:19
-        _3 = <T as Foo>::get(move _4) -> [return: bb1, unwind: bb3]; // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:12: 14:19
-                                         // mir::Constant
-                                         // + span: ui/traits/associated_type_bound/issue-51446.rs:14:14: 14:17
-                                         // + literal: Const { ty: for<'a> fn(&'a T) -> <T as Foo>::Item {<T as Foo>::get}, val: Value(<ZST>) }
+        _4 = &_1;
+        _3 = <T as Foo>::get(move _4) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        _5 = move _2;                    // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:21: 14:22
-        _0 = B::<<T as Foo>::Item, F> { x: move _3, f: move _5 }; // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:14:5: 14:24
-        drop(_1) -> bb2;                 // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:15:1: 15:2
+        _5 = move _2;
+        _0 = B::<<T as Foo>::Item, F> { x: move _3, f: move _5 };
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:15:2: 15:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_2) -> bb4;                 // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:15:1: 15:2
+        drop(_2) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:15:1: 15:2
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:9:1: 15:2
+        resume;
     }
 }
 
 fn <impl at ui/traits/associated_type_bound/issue-51446.rs:25:1: 25:17>::get(_1: &i32) -> i32 {
-    debug self => _1;                    // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:27:12: 27:17
-    let mut _0: i32;                     // return place in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:27:22: 27:25
+    debug self => _1;
+    let mut _0: i32;
 
     bb0: {
-        _0 = (*_1);                      // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:28:9: 28:14
-        return;                          // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:29:6: 29:6
+        _0 = (*_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:32:11: 32:11
-    let mut _1: B<i32, impl Fn(<i32 as Foo>::Item)>; // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:33:13: 33:28
-    let mut _2: [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]; // in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:27
+    let mut _0: ();
+    let mut _1: B<i32, impl Fn(<i32 as Foo>::Item)>;
     scope 1 {
     }
 
     bb0: {
-        _1 = blah::<i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]>(const 0_i32, move _2) -> bb1; // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:33:13: 33:28
-                                         // mir::Constant
-                                         // + span: ui/traits/associated_type_bound/issue-51446.rs:33:13: 33:17
-                                         // + literal: Const { ty: fn(i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]) -> B<<i32 as Foo>::Item, impl Fn(<i32 as Foo>::Item)> {blah::<i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]>}, val: Value(<ZST>) }
+        _1 = blah::<i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]>(const 0_i32, const ZeroSized: [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:34:2: 34:2
+        return;
     }
 }
 
 fn main::{closure#0}(_1: &[closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24], _2: i32) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/associated_type_bound/issue-51446.rs:33:25: 33:25
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/associated_type_bound/issue-51446.rs:33:27: 33:27
+        return;
     }
 }

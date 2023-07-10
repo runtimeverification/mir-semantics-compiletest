@@ -1,131 +1,101 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: bool) -> Foo {
-    debug b => _1;                       // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:7:8: 7:9
-    let mut _0: Foo;                     // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:7:20: 7:23
-    let mut _2: bool;                    // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:8:8: 8:9
-    let _3: std::vec::Vec<i32>;          // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:11:9: 11:10
-    let mut _4: std::iter::Empty<i32>;   // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:12:5: 12:23
+    debug b => _1;
+    let mut _0: Foo;
+    let _2: std::vec::Vec<i32>;
+    let mut _3: std::iter::Empty<i32>;
     scope 1 {
-        debug x => _3;                   // in scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:11:9: 11:10
+        debug x => _2;
     }
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:8:8: 8:9
-        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:8:8: 8:9
+        switchInt(_1) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _0 = Vec::<i32>::new() -> bb6;   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:57
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> Vec<i32> {Vec::<i32>::new}, val: Value(<ZST>) }
+        _0 = Vec::<i32>::new() -> [return: bb6, unwind continue];
     }
 
     bb2: {
-        _3 = foo(const false) -> bb3;    // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:11:23: 11:33
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:11:23: 11:26
-                                         // + literal: Const { ty: fn(bool) -> Foo {foo}, val: Value(<ZST>) }
+        _2 = foo(const false) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _4 = std::iter::empty::<i32>() -> [return: bb4, unwind: bb7]; // scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:12:5: 12:23
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:12:5: 12:21
-                                         // + literal: Const { ty: fn() -> std::iter::Empty<i32> {std::iter::empty::<i32>}, val: Value(<ZST>) }
+        _3 = std::iter::empty::<i32>() -> [return: bb4, unwind: bb7];
     }
 
     bb4: {
-        _0 = <std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>(move _4) -> [return: bb5, unwind: bb7]; // scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:12:5: 12:33
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:12:24: 12:31
-                                         // + literal: Const { ty: fn(std::iter::Empty<i32>) -> Vec<i32> {<std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>}, val: Value(<ZST>) }
+        _0 = <std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>(const std::iter::Empty::<i32>(PhantomData::<fn() -> i32>)) -> [return: bb5, unwind: bb7];
     }
 
     bb5: {
-        drop(_3) -> bb6;                 // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:13:1: 13:2
+        drop(_2) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:13:2: 13:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop(_3) -> bb8;                 // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:13:1: 13:2
+        drop(_2) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:7:1: 13:2
+        resume;
     }
 }
 
 fn bar(_1: bool) -> impl Debug {
-    debug b => _1;                       // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:15:8: 15:9
-    let mut _0: impl std::fmt::Debug;    // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:15:20: 15:40
-    let mut _2: bool;                    // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:16:8: 16:9
-    let _3: std::vec::Vec<i32>;          // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:19:9: 19:10
-    let mut _4: std::iter::Empty<i32>;   // in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:20:5: 20:23
+    debug b => _1;
+    let mut _0: impl std::fmt::Debug;
+    let _2: std::vec::Vec<i32>;
+    let mut _3: std::iter::Empty<i32>;
     scope 1 {
-        debug x => _3;                   // in scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:19:9: 19:10
+        debug x => _2;
     }
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:16:8: 16:9
-        switchInt(move _2) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:16:8: 16:9
+        switchInt(_1) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _0 = Vec::<i32>::new() -> bb6;   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:59
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:44:36: 44:57
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> Vec<i32> {Vec::<i32>::new}, val: Value(<ZST>) }
+        _0 = Vec::<i32>::new() -> [return: bb6, unwind continue];
     }
 
     bb2: {
-        _3 = bar(const false) -> bb3;    // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:19:23: 19:33
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:19:23: 19:26
-                                         // + literal: Const { ty: fn(bool) -> impl Debug {bar}, val: Value(<ZST>) }
+        _2 = bar(const false) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _4 = std::iter::empty::<i32>() -> [return: bb4, unwind: bb7]; // scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:20:5: 20:23
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:20:5: 20:21
-                                         // + literal: Const { ty: fn() -> std::iter::Empty<i32> {std::iter::empty::<i32>}, val: Value(<ZST>) }
+        _3 = std::iter::empty::<i32>() -> [return: bb4, unwind: bb7];
     }
 
     bb4: {
-        _0 = <std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>(move _4) -> [return: bb5, unwind: bb7]; // scope 1 at ui/lazy-type-alias-impl-trait/recursion2.rs:20:5: 20:33
-                                         // mir::Constant
-                                         // + span: ui/lazy-type-alias-impl-trait/recursion2.rs:20:24: 20:31
-                                         // + literal: Const { ty: fn(std::iter::Empty<i32>) -> Vec<i32> {<std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>}, val: Value(<ZST>) }
+        _0 = <std::iter::Empty<i32> as Iterator>::collect::<Vec<i32>>(const std::iter::Empty::<i32>(PhantomData::<fn() -> i32>)) -> [return: bb5, unwind: bb7];
     }
 
     bb5: {
-        drop(_3) -> bb6;                 // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:21:1: 21:2
+        drop(_2) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:21:2: 21:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop(_3) -> bb8;                 // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:21:1: 21:2
+        drop(_2) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:15:1: 21:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:23:11: 23:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/lazy-type-alias-impl-trait/recursion2.rs:23:13: 23:13
+        return;
     }
 }

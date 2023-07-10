@@ -1,74 +1,88 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn test(_1: &mut Nat) -> () {
-    debug x => _1;                       // in scope 0 at ui/borrowck/issue-10876.rs:7:9: 7:10
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-10876.rs:7:22: 7:22
-    let mut _2: &mut Nat;                // in scope 0 at ui/borrowck/issue-10876.rs:8:9: 8:14
-    let mut _3: isize;                   // in scope 0 at ui/borrowck/issue-10876.rs:11:18: 11:24
-    let mut _5: &mut Nat;                // in scope 0 at ui/borrowck/issue-10876.rs:12:43: 12:50
-    let mut _6: &mut std::boxed::Box<Nat>; // in scope 0 at ui/borrowck/issue-10876.rs:12:43: 12:50
-    let mut _7: std::boxed::Box<Nat>;    // in scope 0 at ui/borrowck/issue-10876.rs:12:43: 12:50
-    let mut _8: *const Nat;              // in scope 0 at ui/borrowck/issue-10876.rs:12:43: 12:50
+    debug x => _1;
+    let mut _0: ();
+    let mut _2: &mut Nat;
+    let mut _3: isize;
+    let mut _5: &mut Nat;
+    let mut _6: std::boxed::Box<Nat>;
+    let mut _7: *const Nat;
     scope 1 {
-        debug p => _2;                   // in scope 1 at ui/borrowck/issue-10876.rs:8:9: 8:14
-        let _4: &mut std::boxed::Box<Nat>; // in scope 1 at ui/borrowck/issue-10876.rs:12:25: 12:34
+        debug p => _2;
+        let _4: &mut std::boxed::Box<Nat>;
         scope 2 {
-            debug n => _4;               // in scope 2 at ui/borrowck/issue-10876.rs:12:25: 12:34
+            debug n => _4;
+            let mut _8: *const ();
+            let mut _9: usize;
+            let mut _10: usize;
+            let mut _11: usize;
+            let mut _12: usize;
+            let mut _13: bool;
         }
     }
 
     bb0: {
-        _2 = &mut (*_1);                 // scope 0 at ui/borrowck/issue-10876.rs:8:17: 8:24
-        goto -> bb1;                     // scope 1 at ui/borrowck/issue-10876.rs:9:5: 14:6
+        _2 = _1;
+        goto -> bb1;
     }
 
     bb1: {
-        _3 = discriminant((*_2));        // scope 1 at ui/borrowck/issue-10876.rs:10:15: 10:16
-        switchInt(move _3) -> [0: bb2, 1: bb4, otherwise: bb3]; // scope 1 at ui/borrowck/issue-10876.rs:10:9: 10:16
+        _3 = discriminant((*_2));
+        switchInt(move _3) -> [0: bb2, 1: bb4, otherwise: bb3];
     }
 
     bb2: {
-        _4 = &mut (((*_2) as S).0: std::boxed::Box<Nat>); // scope 1 at ui/borrowck/issue-10876.rs:12:25: 12:34
-        _6 = &mut (*_4);                 // scope 2 at ui/borrowck/issue-10876.rs:12:43: 12:50
-        _7 = deref_copy (*_6);           // scope 2 at ui/borrowck/issue-10876.rs:12:43: 12:50
-        _8 = (((_7.0: std::ptr::Unique<Nat>).0: std::ptr::NonNull<Nat>).0: *const Nat); // scope 2 at ui/borrowck/issue-10876.rs:12:43: 12:50
-        _5 = &mut (*_8);                 // scope 2 at ui/borrowck/issue-10876.rs:12:43: 12:50
-        _2 = move _5;                    // scope 2 at ui/borrowck/issue-10876.rs:12:39: 12:50
-        goto -> bb1;                     // scope 1 at ui/borrowck/issue-10876.rs:12:49: 12:50
+        _4 = &mut (((*_2) as S).0: std::boxed::Box<Nat>);
+        _6 = deref_copy (*_4);
+        _7 = (((_6.0: std::ptr::Unique<Nat>).0: std::ptr::NonNull<Nat>).0: *const Nat);
+        _8 = _7 as *const () (PtrToPtr);
+        _9 = _8 as usize (Transmute);
+        _10 = AlignOf(Nat);
+        _11 = Sub(_10, const 1_usize);
+        _12 = BitAnd(_9, _11);
+        _13 = Eq(_12, const 0_usize);
+        assert(_13, "misaligned pointer dereference: address must be a multiple of {} but is {}", _10, _9) -> [success: bb5, unwind unreachable];
     }
 
     bb3: {
-        unreachable;                     // scope 1 at ui/borrowck/issue-10876.rs:10:15: 10:16
+        unreachable;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/borrowck/issue-10876.rs:15:2: 15:2
+        return;
+    }
+
+    bb5: {
+        _5 = &mut (*_7);
+        _2 = move _5;
+        goto -> bb1;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-10876.rs:17:11: 17:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/borrowck/issue-10876.rs:17:13: 17:13
+        return;
     }
 }
 
 fn Nat::S(_1: Box<Nat>) -> Nat {
-    let mut _0: Nat;                     // return place in scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
+    let mut _0: Nat;
 
     bb0: {
-        _0 = Nat::S(move _1);            // scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
-        return;                          // scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
+        _0 = Nat::S(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Nat::S(_1: Box<Nat>) -> Nat {
-    let mut _0: Nat;                     // return place in scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
+    let mut _0: Nat;
 
     bb0: {
-        _0 = Nat::S(move _1);            // scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
-        return;                          // scope 0 at ui/borrowck/issue-10876.rs:4:5: 4:6
+        _0 = Nat::S(move _1);
+        return;
     }
 }

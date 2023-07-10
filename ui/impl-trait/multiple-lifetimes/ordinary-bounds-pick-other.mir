@@ -1,72 +1,71 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
-fn upper_bounds(_1: Ordinary<'_>, _2: Ordinary<'_>) -> Ordinary<'_> {
-    debug a => _1;                       // in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:17:37: 17:38
-    debug b => _2;                       // in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:17:54: 17:55
-    let mut _0: Ordinary<'_>;            // return place in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:9: 34:10
-    let mut _3: bool;                    // in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:16: 34:27
+fn upper_bounds(_1: Ordinary<'_>, _2: Ordinary<'_>) -> impl Trait<'_, '_> {
+    debug a => _1;
+    debug b => _2;
+    let mut _0: impl Trait<'_, '_>;
+    let _3: Ordinary<'_>;
+    let mut _4: bool;
     scope 1 {
-        debug p => _0;                   // in scope 1 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:9: 34:10
+        debug p => _3;
     }
 
     bb0: {
-        _3 = condition() -> bb1;         // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:16: 34:27
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:16: 34:25
-                                         // + literal: Const { ty: fn() -> bool {condition}, val: Value(<ZST>) }
+        _4 = condition() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        switchInt(move _3) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:16: 34:27
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _0 = move _1;                    // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:30: 34:31
-        goto -> bb4;                     // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:13: 34:44
+        _3 = move _1;
+        goto -> bb4;
     }
 
     bb3: {
-        _0 = move _2;                    // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:41: 34:42
-        goto -> bb4;                     // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:34:13: 34:44
+        _3 = move _2;
+        goto -> bb4;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:36:2: 36:2
+        _0 = move _3;
+        return;
     }
 }
 
 fn condition() -> bool {
-    let mut _0: bool;                    // return place in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:38:19: 38:23
+    let mut _0: bool;
 
     bb0: {
-        _0 = const true;                 // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:39:5: 39:9
-        return;                          // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:40:2: 40:2
+        _0 = const true;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:42:11: 42:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:42:13: 42:13
+        return;
     }
 }
 
 fn Ordinary(_1: &u8) -> Ordinary<'_> {
-    let mut _0: Ordinary<'_>;            // return place in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
+    let mut _0: Ordinary<'_>;
 
     bb0: {
-        _0 = Ordinary::<'_>(move _1);    // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
-        return;                          // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
+        _0 = Ordinary::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Ordinary(_1: &u8) -> Ordinary<'_> {
-    let mut _0: Ordinary<'_>;            // return place in scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
+    let mut _0: Ordinary<'_>;
 
     bb0: {
-        _0 = Ordinary::<'_>(move _1);    // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
-        return;                          // scope 0 at ui/impl-trait/multiple-lifetimes/ordinary-bounds-pick-other.rs:12:1: 12:20
+        _0 = Ordinary::<'_>(move _1);
+        return;
     }
 }

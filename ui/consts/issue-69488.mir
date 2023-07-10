@@ -1,189 +1,157 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn make_1u8_bag() -> BagOfBits<T> {
-    let mut _0: BagOfBits<T>;            // return place in scope 0 at ui/consts/issue-69488.rs:14:9: 14:16
-    let mut _1: bool;                    // in scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-    let mut _2: bool;                    // in scope 0 at ui/consts/issue-69488.rs:13:13: 13:43
-    let mut _3: usize;                   // in scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-    let mut _4: !;                       // in scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-    let mut _5: ();                      // in scope 0 at ui/consts/issue-69488.rs:14:39: 14:41
-    let _6: ();                          // in scope 0 at ui/consts/issue-69488.rs:15:14: 15:54
-    let mut _7: *mut u8;                 // in scope 0 at ui/consts/issue-69488.rs:15:14: 15:45
-    let mut _8: *mut BagOfBits<T>;       // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:33
-    let mut _9: *mut BagOfBits<T>;       // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:33
-    let mut _10: &mut BagOfBits<T>;      // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:23
+    let mut _0: BagOfBits<T>;
+    let mut _1: bool;
+    let mut _2: bool;
+    let mut _3: usize;
+    let mut _4: !;
+    let mut _5: BagOfBits<T>;
+    let _6: ();
+    let mut _7: *mut u8;
+    let mut _8: *mut BagOfBits<T>;
+    let mut _9: &mut BagOfBits<T>;
     scope 1 {
-        debug bag => _0;                 // in scope 1 at ui/consts/issue-69488.rs:14:9: 14:16
+        debug bag => _5;
         scope 2 {
         }
     }
 
     bb0: {
-        _3 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:13:13: 13:36
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        _3 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Ge(move _3, const 1_usize); // scope 0 at ui/consts/issue-69488.rs:13:13: 13:43
-        _1 = Not(move _2);               // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        switchInt(move _1) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
+        _2 = Ge(move _3, const 1_usize);
+        _1 = Not(move _2);
+        switchInt(move _1) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _4 = panic(const "assertion failed: core::mem::size_of::<T>() >= 1"); // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:13:5: 13:44
-                                         // + literal: Const { ty: fn(&'static str) -> ! {panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _4 = panic(const "assertion failed: core::mem::size_of::<T>() >= 1") -> unwind continue;
     }
 
     bb3: {
-        _0 = BagOfBits::<T> { uninit: move _5 }; // scope 0 at ui/consts/issue-69488.rs:14:19: 14:43
-        _10 = &mut _0;                   // scope 2 at ui/consts/issue-69488.rs:15:15: 15:23
-        _9 = &raw mut (*_10);            // scope 2 at ui/consts/issue-69488.rs:15:15: 15:23
-        _8 = _9;                         // scope 2 at ui/consts/issue-69488.rs:15:15: 15:33
-        _7 = move _8 as *mut u8 (PtrToPtr); // scope 2 at ui/consts/issue-69488.rs:15:14: 15:45
-        _6 = ptr::mut_ptr::<impl *mut u8>::write(move _7, const 1_u8) -> bb4; // scope 2 at ui/consts/issue-69488.rs:15:14: 15:54
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:15:46: 15:51
-                                         // + literal: Const { ty: unsafe fn(*mut u8, u8) {ptr::mut_ptr::<impl *mut u8>::write}, val: Value(<ZST>) }
+        _5 = BagOfBits::<T> { uninit: const () };
+        _9 = &mut _5;
+        _8 = &raw mut (*_9);
+        _7 = _8 as *mut u8 (PtrToPtr);
+        _6 = ptr::mut_ptr::<impl *mut u8>::write(move _7, const 1_u8) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/consts/issue-69488.rs:17:2: 17:2
+        _0 = move _5;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn make_1u8_bag() -> BagOfBits<T> {
-    let mut _0: BagOfBits<T>;            // return place in scope 0 at ui/consts/issue-69488.rs:12:41: 12:53
-    let _1: ();                          // in scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-    let mut _2: bool;                    // in scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-    let mut _3: bool;                    // in scope 0 at ui/consts/issue-69488.rs:13:13: 13:43
-    let mut _4: usize;                   // in scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-    let mut _5: !;                       // in scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-    let mut _6: BagOfBits<T>;            // in scope 0 at ui/consts/issue-69488.rs:14:9: 14:16
-    let mut _7: ();                      // in scope 0 at ui/consts/issue-69488.rs:14:39: 14:41
-    let _8: ();                          // in scope 0 at ui/consts/issue-69488.rs:15:5: 15:57
-    let _9: ();                          // in scope 0 at ui/consts/issue-69488.rs:15:14: 15:54
-    let mut _10: *mut u8;                // in scope 0 at ui/consts/issue-69488.rs:15:14: 15:45
-    let mut _11: *mut BagOfBits<T>;      // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:33
-    let mut _12: *mut BagOfBits<T>;      // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:33
-    let mut _13: &mut BagOfBits<T>;      // in scope 0 at ui/consts/issue-69488.rs:15:15: 15:23
+    let mut _0: BagOfBits<T>;
+    let _1: ();
+    let mut _2: bool;
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: !;
+    let mut _6: BagOfBits<T>;
+    let mut _7: ();
+    let _8: ();
+    let _9: ();
+    let mut _10: *mut u8;
+    let mut _11: *mut BagOfBits<T>;
+    let mut _12: *mut BagOfBits<T>;
+    let mut _13: &mut BagOfBits<T>;
     scope 1 {
-        debug bag => _6;                 // in scope 1 at ui/consts/issue-69488.rs:14:9: 14:16
+        debug bag => _6;
         scope 2 {
         }
     }
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        StorageLive(_2);                 // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        StorageLive(_3);                 // scope 0 at ui/consts/issue-69488.rs:13:13: 13:43
-        StorageLive(_4);                 // scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-        ConstEvalCounter;                // scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-        _4 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/consts/issue-69488.rs:13:13: 13:38
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:13:13: 13:36
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        ConstEvalCounter;
+        _4 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = Ge(move _4, const 1_usize); // scope 0 at ui/consts/issue-69488.rs:13:13: 13:43
-        StorageDead(_4);                 // scope 0 at ui/consts/issue-69488.rs:13:42: 13:43
-        _2 = Not(move _3);               // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        StorageDead(_3);                 // scope 0 at ui/consts/issue-69488.rs:13:43: 13:44
-        switchInt(move _2) -> [0: bb3, otherwise: bb2]; // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
+        _3 = Ge(move _4, const 1_usize);
+        StorageDead(_4);
+        _2 = Not(move _3);
+        StorageDead(_3);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        StorageLive(_5);                 // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        ConstEvalCounter;                // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-        _5 = panic(const "assertion failed: core::mem::size_of::<T>() >= 1"); // scope 0 at ui/consts/issue-69488.rs:13:5: 13:44
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:13:5: 13:44
-                                         // + literal: Const { ty: fn(&'static str) -> ! {panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        StorageLive(_5);
+        ConstEvalCounter;
+        _5 = panic(const "assertion failed: core::mem::size_of::<T>() >= 1") -> unwind continue;
     }
 
     bb3: {
-        _1 = const ();                   // scope 0 at ui/consts/issue-69488.rs:13:44: 13:44
-        StorageDead(_2);                 // scope 0 at ui/consts/issue-69488.rs:13:43: 13:44
-        StorageDead(_1);                 // scope 0 at ui/consts/issue-69488.rs:13:43: 13:44
-        StorageLive(_6);                 // scope 0 at ui/consts/issue-69488.rs:14:9: 14:16
-        StorageLive(_7);                 // scope 0 at ui/consts/issue-69488.rs:14:39: 14:41
-        _7 = ();                         // scope 0 at ui/consts/issue-69488.rs:14:39: 14:41
-        _6 = BagOfBits::<T> { uninit: move _7 }; // scope 0 at ui/consts/issue-69488.rs:14:19: 14:43
-        StorageDead(_7);                 // scope 0 at ui/consts/issue-69488.rs:14:42: 14:43
-        StorageLive(_8);                 // scope 1 at ui/consts/issue-69488.rs:15:5: 15:57
-        StorageLive(_9);                 // scope 2 at ui/consts/issue-69488.rs:15:14: 15:54
-        StorageLive(_10);                // scope 2 at ui/consts/issue-69488.rs:15:14: 15:45
-        StorageLive(_11);                // scope 2 at ui/consts/issue-69488.rs:15:15: 15:33
-        StorageLive(_12);                // scope 2 at ui/consts/issue-69488.rs:15:15: 15:33
-        StorageLive(_13);                // scope 2 at ui/consts/issue-69488.rs:15:15: 15:23
-        _13 = &mut _6;                   // scope 2 at ui/consts/issue-69488.rs:15:15: 15:23
-        _12 = &raw mut (*_13);           // scope 2 at ui/consts/issue-69488.rs:15:15: 15:23
-        _11 = _12;                       // scope 2 at ui/consts/issue-69488.rs:15:15: 15:33
-        _10 = move _11 as *mut u8 (PtrToPtr); // scope 2 at ui/consts/issue-69488.rs:15:14: 15:45
-        StorageDead(_11);                // scope 2 at ui/consts/issue-69488.rs:15:44: 15:45
-        ConstEvalCounter;                // scope 2 at ui/consts/issue-69488.rs:15:14: 15:54
-        _9 = ptr::mut_ptr::<impl *mut u8>::write(move _10, const 1_u8) -> bb4; // scope 2 at ui/consts/issue-69488.rs:15:14: 15:54
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:15:46: 15:51
-                                         // + literal: Const { ty: unsafe fn(*mut u8, u8) {ptr::mut_ptr::<impl *mut u8>::write}, val: Value(<ZST>) }
+        _1 = const ();
+        StorageDead(_2);
+        StorageDead(_1);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = ();
+        _6 = BagOfBits::<T> { uninit: move _7 };
+        StorageDead(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        StorageLive(_10);
+        StorageLive(_11);
+        StorageLive(_12);
+        StorageLive(_13);
+        _13 = &mut _6;
+        _12 = &raw mut (*_13);
+        _11 = _12;
+        _10 = move _11 as *mut u8 (PtrToPtr);
+        StorageDead(_11);
+        ConstEvalCounter;
+        _9 = ptr::mut_ptr::<impl *mut u8>::write(move _10, const 1_u8) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        StorageDead(_10);                // scope 2 at ui/consts/issue-69488.rs:15:53: 15:54
-        StorageDead(_13);                // scope 2 at ui/consts/issue-69488.rs:15:54: 15:55
-        StorageDead(_12);                // scope 2 at ui/consts/issue-69488.rs:15:54: 15:55
-        StorageDead(_9);                 // scope 2 at ui/consts/issue-69488.rs:15:54: 15:55
-        _8 = const ();                   // scope 2 at ui/consts/issue-69488.rs:15:5: 15:57
-        StorageDead(_8);                 // scope 1 at ui/consts/issue-69488.rs:15:57: 15:58
-        _0 = move _6;                    // scope 1 at ui/consts/issue-69488.rs:16:5: 16:8
-        StorageDead(_6);                 // scope 0 at ui/consts/issue-69488.rs:17:1: 17:2
-        return;                          // scope 0 at ui/consts/issue-69488.rs:17:2: 17:2
+        StorageDead(_10);
+        StorageDead(_13);
+        StorageDead(_12);
+        StorageDead(_9);
+        _8 = const ();
+        StorageDead(_8);
+        _0 = move _6;
+        StorageDead(_6);
+        return;
     }
 }
 
 fn check_bag(_1: &BagOfBits<T>) -> () {
-    debug bag => _1;                     // in scope 0 at ui/consts/issue-69488.rs:19:27: 19:30
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-69488.rs:19:47: 19:47
-    let _2: u8;                          // in scope 0 at ui/consts/issue-69488.rs:20:9: 20:12
-    let mut _3: *const u8;               // in scope 0 at ui/consts/issue-69488.rs:20:24: 20:54
-    let mut _4: *const BagOfBits<T>;     // in scope 0 at ui/consts/issue-69488.rs:20:25: 20:40
-    let mut _5: *const BagOfBits<T>;     // in scope 0 at ui/consts/issue-69488.rs:20:25: 20:40
-    let mut _6: (&u8, &u8);              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _7: &u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _8: &u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _12: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _13: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _14: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _16: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _17: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _18: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _19: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _20: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _21: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _22: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    debug bag => _1;
+    let mut _0: ();
+    let _2: u8;
+    let mut _3: *const u8;
+    let mut _4: *const BagOfBits<T>;
+    let mut _5: (&u8, &u8);
+    let mut _6: &u8;
+    let mut _9: bool;
+    let mut _10: bool;
+    let mut _11: u8;
+    let mut _12: u8;
+    let _14: !;
+    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug val => _2;                 // in scope 1 at ui/consts/issue-69488.rs:20:9: 20:12
-        let _9: &u8;                     // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _10: &u8;                    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _23: &u8;                // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug val => _2;
+        let _7: &u8;
+        let _8: &u8;
+        let mut _16: &u8;
         scope 3 {
-            debug left_val => _9;        // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _10;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _15: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _7;
+            debug right_val => _8;
+            let _13: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _15;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _13;
             }
         }
     }
@@ -191,224 +159,154 @@ fn check_bag(_1: &BagOfBits<T>) -> () {
     }
 
     bb0: {
-        _5 = &raw const (*_1);           // scope 2 at ui/consts/issue-69488.rs:20:25: 20:28
-        _4 = _5;                         // scope 2 at ui/consts/issue-69488.rs:20:25: 20:40
-        _3 = move _4 as *const u8 (PtrToPtr); // scope 2 at ui/consts/issue-69488.rs:20:24: 20:54
-        _2 = ptr::const_ptr::<impl *const u8>::read(move _3) -> bb1; // scope 2 at ui/consts/issue-69488.rs:20:24: 20:61
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:20:55: 20:59
-                                         // + literal: Const { ty: unsafe fn(*const u8) -> u8 {ptr::const_ptr::<impl *const u8>::read}, val: Value(<ZST>) }
+        _4 = &raw const (*_1);
+        _3 = _4 as *const u8 (PtrToPtr);
+        _2 = ptr::const_ptr::<impl *const u8>::read(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &_2;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _23 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(check_bag, [T], Some(promoted[0])) }
-        _8 = _23;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _6 = (move _7, move _8);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _9 = (_6.0: &u8);                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _10 = (_6.1: &u8);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _13 = (*_9);                     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _14 = (*_10);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _12 = Eq(move _13, move _14);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _11 = Not(move _12);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _11) -> [0: bb3, otherwise: bb2]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _6 = &_2;
+        _16 = const _;
+        _5 = (move _6, _16);
+        _7 = (_5.0: &u8);
+        _8 = (_5.1: &u8);
+        _11 = (*_7);
+        _12 = (*_8);
+        _10 = Eq(move _11, move _12);
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _15 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: AssertKind, val: Value(Scalar(0x00)) }
-        _17 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: AssertKind, val: Value(Scalar(0x00)) }
-        _19 = _9;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _18 = _19;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _21 = _10;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = _21;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _22 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _16 = assert_failed::<u8, u8>(move _17, move _18, move _20, move _22); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _13 = core::panicking::AssertKind::Eq;
+        _15 = Option::<Arguments<'_>>::None;
+        _14 = assert_failed::<u8, u8>(move _13, _7, _8, move _15) -> unwind continue;
     }
 
     bb3: {
-        return;                          // scope 0 at ui/consts/issue-69488.rs:22:2: 22:2
+        return;
     }
 }
 
 promoted[0] in check_bag: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/consts/issue-69488.rs:21:21: 21:22
+    let mut _0: &u8;
+    let mut _1: u8;
 
     bb0: {
-        _1 = const 1_u8;                 // scope 0 at ui/consts/issue-69488.rs:21:21: 21:22
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        _1 = const 1_u8;
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-69488.rs:24:11: 24:11
-    let _1: ();                          // in scope 0 at ui/consts/issue-69488.rs:25:5: 25:45
-    let mut _2: &BagOfBits<[usize; 1]>;  // in scope 0 at ui/consts/issue-69488.rs:25:15: 25:44
-    let _3: &BagOfBits<[usize; 1]>;      // in scope 0 at ui/consts/issue-69488.rs:25:15: 25:44
-    let _4: BagOfBits<[usize; 1]>;       // in scope 0 at ui/consts/issue-69488.rs:25:16: 25:44
-    let _5: ();                          // in scope 0 at ui/consts/issue-69488.rs:26:5: 26:40
-    let mut _6: &BagOfBits<usize>;       // in scope 0 at ui/consts/issue-69488.rs:26:15: 26:39
-    let _7: &BagOfBits<usize>;           // in scope 0 at ui/consts/issue-69488.rs:26:15: 26:39
-    let _8: BagOfBits<usize>;            // in scope 0 at ui/consts/issue-69488.rs:26:16: 26:39
-    let _9: ();                          // in scope 0 at ui/consts/issue-69488.rs:29:5: 29:32
-    let mut _10: &BagOfBits<[usize; 1]>; // in scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-    let _11: &BagOfBits<[usize; 1]>;     // in scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-    let _12: ();                         // in scope 0 at ui/consts/issue-69488.rs:33:5: 33:32
-    let mut _13: &BagOfBits<usize>;      // in scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-    let _14: &BagOfBits<usize>;          // in scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-    let mut _15: &BagOfBits<usize>;      // in scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-    let mut _16: &BagOfBits<[usize; 1]>; // in scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
+    let mut _0: ();
+    let _1: ();
+    let _2: &BagOfBits<[usize; 1]>;
+    let _3: BagOfBits<[usize; 1]>;
+    let _4: ();
+    let _5: &BagOfBits<usize>;
+    let _6: BagOfBits<usize>;
+    let _7: ();
+    let _8: ();
+    let mut _9: &BagOfBits<usize>;
+    let mut _10: &BagOfBits<[usize; 1]>;
 
     bb0: {
-        _4 = make_1u8_bag::<[usize; 1]>() -> bb1; // scope 0 at ui/consts/issue-69488.rs:25:16: 25:44
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:25:16: 25:42
-                                         // + literal: Const { ty: fn() -> BagOfBits<[usize; 1]> {make_1u8_bag::<[usize; 1]>}, val: Value(<ZST>) }
+        _3 = make_1u8_bag::<[usize; 1]>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = &_4;                        // scope 0 at ui/consts/issue-69488.rs:25:15: 25:44
-        _2 = _3;                         // scope 0 at ui/consts/issue-69488.rs:25:15: 25:44
-        _1 = check_bag::<[usize; 1]>(move _2) -> bb2; // scope 0 at ui/consts/issue-69488.rs:25:5: 25:45
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:25:5: 25:14
-                                         // + literal: Const { ty: for<'a> fn(&'a BagOfBits<[usize; 1]>) {check_bag::<[usize; 1]>}, val: Value(<ZST>) }
+        _2 = &_3;
+        _1 = check_bag::<[usize; 1]>(_2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _8 = make_1u8_bag::<usize>() -> bb3; // scope 0 at ui/consts/issue-69488.rs:26:16: 26:39
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:26:16: 26:37
-                                         // + literal: Const { ty: fn() -> BagOfBits<usize> {make_1u8_bag::<usize>}, val: Value(<ZST>) }
+        _6 = make_1u8_bag::<usize>() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _7 = &_8;                        // scope 0 at ui/consts/issue-69488.rs:26:15: 26:39
-        _6 = _7;                         // scope 0 at ui/consts/issue-69488.rs:26:15: 26:39
-        _5 = check_bag::<usize>(move _6) -> bb4; // scope 0 at ui/consts/issue-69488.rs:26:5: 26:40
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:26:5: 26:14
-                                         // + literal: Const { ty: for<'a> fn(&'a BagOfBits<usize>) {check_bag::<usize>}, val: Value(<ZST>) }
+        _5 = &_6;
+        _4 = check_bag::<usize>(_5) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _16 = const _;                   // scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:29:15: 29:31
-                                         // + literal: Const { ty: &BagOfBits<[usize; 1]>, val: Unevaluated(main, [], Some(promoted[1])) }
-        _11 = _16;                       // scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-        _10 = _11;                       // scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-        _9 = check_bag::<[usize; 1]>(move _10) -> bb5; // scope 0 at ui/consts/issue-69488.rs:29:5: 29:32
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:29:5: 29:14
-                                         // + literal: Const { ty: for<'a> fn(&'a BagOfBits<[usize; 1]>) {check_bag::<[usize; 1]>}, val: Value(<ZST>) }
+        _10 = const _;
+        _7 = check_bag::<[usize; 1]>(_10) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _15 = const _;                   // scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:33:15: 33:31
-                                         // + literal: Const { ty: &BagOfBits<usize>, val: Unevaluated(main, [], Some(promoted[0])) }
-        _14 = _15;                       // scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-        _13 = _14;                       // scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-        _12 = check_bag::<usize>(move _13) -> bb6; // scope 0 at ui/consts/issue-69488.rs:33:5: 33:32
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:33:5: 33:14
-                                         // + literal: Const { ty: for<'a> fn(&'a BagOfBits<usize>) {check_bag::<usize>}, val: Value(<ZST>) }
+        _9 = const _;
+        _8 = check_bag::<usize>(_9) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;                          // scope 0 at ui/consts/issue-69488.rs:34:2: 34:2
+        return;
     }
 }
 
 promoted[0] in main: &BagOfBits<usize> = {
-    let mut _0: &BagOfBits<usize>;       // return place in scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-    let mut _1: BagOfBits<usize>;        // in scope 0 at ui/consts/issue-69488.rs:33:16: 33:31
+    let mut _0: &BagOfBits<usize>;
+    let mut _1: BagOfBits<usize>;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/issue-69488.rs:33:16: 33:31
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:33:16: 33:31
-                                         // + literal: Const { ty: BagOfBits<usize>, val: Unevaluated(CONST_USIZE_BAG, [], None) }
-        _0 = &_1;                        // scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
-        return;                          // scope 0 at ui/consts/issue-69488.rs:33:15: 33:31
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }
 
 promoted[1] in main: &BagOfBits<[usize; 1]> = {
-    let mut _0: &BagOfBits<[usize; 1]>;  // return place in scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-    let mut _1: BagOfBits<[usize; 1]>;   // in scope 0 at ui/consts/issue-69488.rs:29:16: 29:31
+    let mut _0: &BagOfBits<[usize; 1]>;
+    let mut _1: BagOfBits<[usize; 1]>;
 
     bb0: {
-        _1 = const _;                    // scope 0 at ui/consts/issue-69488.rs:29:16: 29:31
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:29:16: 29:31
-                                         // + literal: Const { ty: BagOfBits<[usize; 1]>, val: Unevaluated(CONST_ARRAY_BAG, [], None) }
-        _0 = &_1;                        // scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
-        return;                          // scope 0 at ui/consts/issue-69488.rs:29:15: 29:31
+        _1 = const _;
+        _0 = &_1;
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-69488.rs:25:39: 25:40
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/issue-69488.rs:25:39: 25:40
-        return;                          // scope 0 at ui/consts/issue-69488.rs:25:39: 25:40
+        _0 = const 1_usize;
+        return;
     }
 }
 
 const CONST_ARRAY_BAG: BagOfBits<[usize; 1]> = {
-    let mut _0: BagOfBits<[usize; 1]>;   // return place in scope 0 at ui/consts/issue-69488.rs:28:28: 28:49
+    let mut _0: BagOfBits<[usize; 1]>;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/issue-69488.rs:28:52: 28:66
-        _0 = make_1u8_bag::<[usize; 1]>() -> bb1; // scope 0 at ui/consts/issue-69488.rs:28:52: 28:66
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:28:52: 28:64
-                                         // + literal: Const { ty: fn() -> BagOfBits<[usize; 1]> {make_1u8_bag::<[usize; 1]>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = make_1u8_bag::<[usize; 1]>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/issue-69488.rs:28:5: 28:67
+        return;
     }
 }
 
 CONST_ARRAY_BAG::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-69488.rs:28:46: 28:47
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/issue-69488.rs:28:46: 28:47
-        return;                          // scope 0 at ui/consts/issue-69488.rs:28:46: 28:47
+        _0 = const 1_usize;
+        return;
     }
 }
 
 const CONST_USIZE_BAG: BagOfBits<usize> = {
-    let mut _0: BagOfBits<usize>;        // return place in scope 0 at ui/consts/issue-69488.rs:30:28: 30:44
+    let mut _0: BagOfBits<usize>;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/issue-69488.rs:30:47: 30:61
-        _0 = make_1u8_bag::<usize>() -> bb1; // scope 0 at ui/consts/issue-69488.rs:30:47: 30:61
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-69488.rs:30:47: 30:59
-                                         // + literal: Const { ty: fn() -> BagOfBits<usize> {make_1u8_bag::<usize>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = make_1u8_bag::<usize>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/issue-69488.rs:30:5: 30:62
+        return;
     }
 }

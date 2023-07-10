@@ -1,87 +1,70 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/codegen/issue-64401.rs:23:1: 23:40>::new(_1: F) -> CtxHandlerWithoutState<M, F> {
-    debug _function => _1;               // in scope 0 at ui/codegen/issue-64401.rs:24:16: 24:25
-    let mut _0: CtxHandlerWithoutState<M, F>; // return place in scope 0 at ui/codegen/issue-64401.rs:24:33: 24:37
-    let mut _2: std::marker::PhantomData<M>; // in scope 0 at ui/codegen/issue-64401.rs:26:27: 26:38
-    let mut _3: F;                       // in scope 0 at ui/codegen/issue-64401.rs:27:13: 27:22
+    debug _function => _1;
+    let mut _0: CtxHandlerWithoutState<M, F>;
 
     bb0: {
-        _3 = move _1;                    // scope 0 at ui/codegen/issue-64401.rs:27:13: 27:22
-        _0 = CtxHandlerWithoutState::<M, F> { message_type: move _2, _function: move _3 }; // scope 0 at ui/codegen/issue-64401.rs:25:9: 28:10
-        return;                          // scope 0 at ui/codegen/issue-64401.rs:29:6: 29:6
+        _0 = CtxHandlerWithoutState::<M, F> { message_type: const ZeroSized: PhantomData<M>, _function: move _1 };
+        return;
     }
 }
 
 fn <impl at ui/codegen/issue-64401.rs:32:1: 32:56>::handle(_1: &CtxHandlerWithoutState<M, F>) -> () {
-    debug self => _1;                    // in scope 0 at ui/codegen/issue-64401.rs:37:15: 37:20
-    let mut _0: ();                      // return place in scope 0 at ui/codegen/issue-64401.rs:37:22: 37:22
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/codegen/issue-64401.rs:37:24: 37:24
+        return;
     }
 }
 
 fn e_to_i(_1: <M as Owned<'_>>::Reader) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/codegen/issue-64401.rs:40:62: 40:62
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/codegen/issue-64401.rs:40:63: 40:64
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/codegen/issue-64401.rs:40:64: 40:64
+        return;
     }
 }
 
 fn send_external_to_internal() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/codegen/issue-64401.rs:43:1: 43:1
-    let mut _1: std::boxed::Box<dyn Handler>; // in scope 0 at ui/codegen/issue-64401.rs:46:31: 46:89
-    let mut _2: std::boxed::Box<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>>; // in scope 0 at ui/codegen/issue-64401.rs:46:31: 46:89
-    let mut _3: CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>; // in scope 0 at ui/codegen/issue-64401.rs:46:40: 46:88
+    let mut _0: ();
+    let mut _1: std::boxed::Box<dyn Handler>;
+    let mut _2: std::boxed::Box<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>>;
+    let mut _3: CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>;
     scope 1 {
     }
 
     bb0: {
-        _3 = CtxHandlerWithoutState::<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>::new(e_to_i::<M>) -> bb1; // scope 0 at ui/codegen/issue-64401.rs:46:40: 46:88
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-64401.rs:46:40: 46:75
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}) -> CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}> {CtxHandlerWithoutState::<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>::new}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-64401.rs:46:76: 46:87
-                                         // + literal: Const { ty: for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}, val: Value(<ZST>) }
+        _3 = CtxHandlerWithoutState::<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>::new(e_to_i::<M>) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Box::<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>>::new(move _3) -> bb2; // scope 0 at ui/codegen/issue-64401.rs:46:31: 46:89
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-64401.rs:46:31: 46:39
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>) -> Box<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>> {Box::<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>>::new}, val: Value(<ZST>) }
+        _2 = Box::<CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>>::new(const ZeroSized: CtxHandlerWithoutState<M, for<'a> fn(<M as Owned<'a>>::Reader) {e_to_i::<M>}>) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _1 = move _2 as std::boxed::Box<dyn Handler> (Pointer(Unsize)); // scope 0 at ui/codegen/issue-64401.rs:46:31: 46:89
-        drop(_1) -> bb3;                 // scope 0 at ui/codegen/issue-64401.rs:46:89: 46:90
+        _1 = move _2 as std::boxed::Box<dyn Handler> (Pointer(Unsize));
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/codegen/issue-64401.rs:47:2: 47:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/codegen/issue-64401.rs:49:11: 49:11
+    let mut _0: ();
 
     bb0: {
-        _0 = send_external_to_internal::<()>() -> bb1; // scope 0 at ui/codegen/issue-64401.rs:50:5: 50:38
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-64401.rs:50:5: 50:36
-                                         // + literal: Const { ty: fn() {send_external_to_internal::<()>}, val: Value(<ZST>) }
+        _0 = send_external_to_internal::<()>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/codegen/issue-64401.rs:51:2: 51:2
+        return;
     }
 }

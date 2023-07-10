@@ -1,114 +1,95 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: T) -> isize {
-    debug t => _1;                       // in scope 0 at ui/macros/issue-8851.rs:17:16: 17:17
-    let mut _0: isize;                   // return place in scope 0 at ui/macros/issue-8851.rs:17:25: 17:30
-    let mut _2: isize;                   // in scope 0 at ui/macros/issue-8851.rs:19:17: 19:26
-    let _3: isize;                       // in scope 0 at ui/macros/issue-8851.rs:19:22: 19:25
-    let mut _4: isize;                   // in scope 0 at ui/macros/issue-8851.rs:26:15: 26:27
-    let mut _5: (isize, bool);           // in scope 0 at ui/macros/issue-8851.rs:26:10: 26:27
-    let _6: usize;                       // in scope 0 at ui/macros/issue-8851.rs:20:22: 20:25
-    let mut _7: isize;                   // in scope 0 at ui/macros/issue-8851.rs:26:15: 26:27
-    let mut _8: usize;                   // in scope 0 at ui/macros/issue-8851.rs:26:16: 26:17
-    let mut _9: (isize, bool);           // in scope 0 at ui/macros/issue-8851.rs:26:10: 26:27
+    debug t => _1;
+    let mut _0: isize;
+    let mut _2: isize;
+    let _3: isize;
+    let _4: usize;
+    let mut _5: isize;
     scope 1 {
-        debug y => _3;                   // in scope 1 at ui/macros/issue-8851.rs:19:22: 19:25
+        debug y => _3;
     }
     scope 2 {
-        debug y => _6;                   // in scope 2 at ui/macros/issue-8851.rs:20:22: 20:25
+        debug y => _4;
     }
 
     bb0: {
-        _2 = discriminant(_1);           // scope 0 at ui/macros/issue-8851.rs:18:19: 18:20
-        switchInt(move _2) -> [0: bb3, 1: bb1, otherwise: bb2]; // scope 0 at ui/macros/issue-8851.rs:18:13: 18:20
+        _2 = discriminant(_1);
+        switchInt(move _2) -> [0: bb3, 1: bb1, otherwise: bb2];
     }
 
     bb1: {
-        _6 = ((_1 as B).0: usize);       // scope 0 at ui/macros/issue-8851.rs:20:22: 20:25
-        _8 = _6;                         // scope 2 at ui/macros/issue-8851.rs:26:16: 26:17
-        _7 = move _8 as isize (IntToInt); // scope 2 at ui/macros/issue-8851.rs:26:15: 26:27
-        _9 = CheckedAdd(const 10_isize, _7); // scope 2 at ui/macros/issue-8851.rs:26:10: 26:27
-        assert(!move (_9.1: bool), "attempt to compute `{} + {}`, which would overflow", const 10_isize, move _7) -> bb5; // scope 2 at ui/macros/issue-8851.rs:26:10: 26:27
+        _4 = ((_1 as B).0: usize);
+        _5 = _4 as isize (IntToInt);
+        _0 = Add(const 10_isize, move _5);
+        goto -> bb4;
     }
 
     bb2: {
-        unreachable;                     // scope 0 at ui/macros/issue-8851.rs:18:19: 18:20
+        unreachable;
     }
 
     bb3: {
-        _3 = ((_1 as A).0: isize);       // scope 0 at ui/macros/issue-8851.rs:19:22: 19:25
-        _4 = _3;                         // scope 1 at ui/macros/issue-8851.rs:26:16: 26:17
-        _5 = CheckedAdd(const 10_isize, _4); // scope 1 at ui/macros/issue-8851.rs:26:10: 26:27
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", const 10_isize, move _4) -> bb4; // scope 1 at ui/macros/issue-8851.rs:26:10: 26:27
+        _3 = ((_1 as A).0: isize);
+        _0 = Add(const 10_isize, _3);
+        goto -> bb4;
     }
 
     bb4: {
-        _0 = move (_5.0: isize);         // scope 1 at ui/macros/issue-8851.rs:26:10: 26:27
-        goto -> bb6;                     // scope 0 at ui/macros/issue-8851.rs:19:31: 19:32
-    }
-
-    bb5: {
-        _0 = move (_9.0: isize);         // scope 2 at ui/macros/issue-8851.rs:26:10: 26:27
-        goto -> bb6;                     // scope 0 at ui/macros/issue-8851.rs:20:31: 20:32
-    }
-
-    bb6: {
-        return;                          // scope 0 at ui/macros/issue-8851.rs:22:10: 22:10
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/macros/issue-8851.rs:28:15: 28:15
-    let _1: isize;                       // in scope 0 at ui/macros/issue-8851.rs:29:5: 29:18
-    let mut _2: T;                       // in scope 0 at ui/macros/issue-8851.rs:29:9: 29:17
+    let mut _0: ();
+    let _1: isize;
+    let mut _2: T;
 
     bb0: {
-        _2 = T::A(const 20_isize);       // scope 0 at ui/macros/issue-8851.rs:29:9: 29:17
-        _1 = foo(move _2) -> bb1;        // scope 0 at ui/macros/issue-8851.rs:29:5: 29:18
-                                         // mir::Constant
-                                         // + span: ui/macros/issue-8851.rs:29:5: 29:8
-                                         // + literal: Const { ty: fn(T) -> isize {foo}, val: Value(<ZST>) }
+        _2 = T::A(const 20_isize);
+        _1 = foo(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/macros/issue-8851.rs:30:2: 30:2
+        return;
     }
 }
 
 fn T::A(_1: isize) -> T {
-    let mut _0: T;                       // return place in scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
+    let mut _0: T;
 
     bb0: {
-        _0 = T::A(move _1);              // scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
-        return;                          // scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
+        _0 = T::A(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn T::A(_1: isize) -> T {
-    let mut _0: T;                       // return place in scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
+    let mut _0: T;
 
     bb0: {
-        _0 = T::A(move _1);              // scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
-        return;                          // scope 0 at ui/macros/issue-8851.rs:11:5: 11:6
+        _0 = T::A(move _1);
+        return;
     }
 }
 
 fn T::B(_1: usize) -> T {
-    let mut _0: T;                       // return place in scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
+    let mut _0: T;
 
     bb0: {
-        _0 = T::B(move _1);              // scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
-        return;                          // scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
+        _0 = T::B(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn T::B(_1: usize) -> T {
-    let mut _0: T;                       // return place in scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
+    let mut _0: T;
 
     bb0: {
-        _0 = T::B(move _1);              // scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
-        return;                          // scope 0 at ui/macros/issue-8851.rs:12:5: 12:6
+        _0 = T::B(move _1);
+        return;
     }
 }

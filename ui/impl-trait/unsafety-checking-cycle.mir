@@ -1,115 +1,105 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn not_restricted(_1: bool) -> impl Sized {
-    debug c => _1;                       // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:12:19: 12:20
-    let mut _0: impl Sized;              // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:12:31: 12:41
-    let mut _2: bool;                    // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:13:8: 13:9
-    let _3: AnyValue<impl Sized>;        // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:14:13: 14:14
-    let mut _4: impl Sized;              // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:14:26: 14:47
+    debug c => _1;
+    let mut _0: impl Sized;
+    let _2: AnyValue<impl Sized>;
+    let mut _3: impl Sized;
     scope 1 {
-        debug x => _3;                   // in scope 1 at ui/impl-trait/unsafety-checking-cycle.rs:14:13: 14:14
+        debug x => _2;
     }
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:13:8: 13:9
-        switchInt(move _2) -> [0: bb3, otherwise: bb1]; // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:13:8: 13:9
+        switchInt(_1) -> [0: bb3, otherwise: bb1];
     }
 
     bb1: {
-        _4 = not_restricted(const false) -> bb2; // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:14:26: 14:47
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/unsafety-checking-cycle.rs:14:26: 14:40
-                                         // + literal: Const { ty: fn(bool) -> impl Sized {not_restricted}, val: Value(<ZST>) }
+        _3 = not_restricted(const false) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = AnyValue::<impl Sized>(move _4); // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:14:17: 14:48
-        goto -> bb3;                     // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:13:5: 16:6
+        _2 = AnyValue::<impl Sized>(move _3);
+        goto -> bb3;
     }
 
     bb3: {
-        _0 = const 2_u32;                // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:17:5: 17:9
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:18:2: 18:2
+        _0 = const 2_u32;
+        return;
     }
 }
 
 fn not_field(_1: bool) -> impl Sized {
-    debug c => _1;                       // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:24:14: 24:15
-    let mut _0: impl Sized;              // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:24:26: 24:36
-    let mut _2: bool;                    // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:25:8: 25:9
-    let _3: NonZero<impl Sized>;         // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:26:13: 26:14
-    let mut _4: impl Sized;              // in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:26:34: 26:50
+    debug c => _1;
+    let mut _0: impl Sized;
+    let _2: NonZero<impl Sized>;
+    let mut _3: impl Sized;
     scope 1 {
-        debug x => _3;                   // in scope 1 at ui/impl-trait/unsafety-checking-cycle.rs:26:13: 26:14
+        debug x => _2;
     }
     scope 2 {
     }
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:25:8: 25:9
-        switchInt(move _2) -> [0: bb3, otherwise: bb1]; // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:25:8: 25:9
+        switchInt(_1) -> [0: bb3, otherwise: bb1];
     }
 
     bb1: {
-        _4 = not_field(const false) -> bb2; // scope 2 at ui/impl-trait/unsafety-checking-cycle.rs:26:34: 26:50
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/unsafety-checking-cycle.rs:26:34: 26:43
-                                         // + literal: Const { ty: fn(bool) -> impl Sized {not_field}, val: Value(<ZST>) }
+        _3 = not_field(const false) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = NonZero::<impl Sized>(move _4); // scope 2 at ui/impl-trait/unsafety-checking-cycle.rs:26:26: 26:51
-        goto -> bb3;                     // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:25:5: 28:6
+        _2 = NonZero::<impl Sized>(move _3);
+        goto -> bb3;
     }
 
     bb3: {
-        _0 = const 5_u32;                // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:29:5: 29:9
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:30:2: 30:2
+        _0 = const 5_u32;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:32:11: 32:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:32:13: 32:13
+        return;
     }
 }
 
 fn AnyValue(_1: T) -> AnyValue<T> {
-    let mut _0: AnyValue<T>;             // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
+    let mut _0: AnyValue<T>;
 
     bb0: {
-        _0 = AnyValue::<T>(move _1);     // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
+        _0 = AnyValue::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn AnyValue(_1: T) -> AnyValue<T> {
-    let mut _0: AnyValue<T>;             // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
+    let mut _0: AnyValue<T>;
 
     bb0: {
-        _0 = AnyValue::<T>(move _1);     // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:8:1: 8:19
+        _0 = AnyValue::<T>(move _1);
+        return;
     }
 }
 
 fn NonZero(_1: T) -> NonZero<T> {
-    let mut _0: NonZero<T>;              // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
+    let mut _0: NonZero<T>;
 
     bb0: {
-        _0 = NonZero::<T>(move _1);      // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
+        _0 = NonZero::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn NonZero(_1: T) -> NonZero<T> {
-    let mut _0: NonZero<T>;              // return place in scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
+    let mut _0: NonZero<T>;
 
     bb0: {
-        _0 = NonZero::<T>(move _1);      // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
-        return;                          // scope 0 at ui/impl-trait/unsafety-checking-cycle.rs:21:1: 21:18
+        _0 = NonZero::<T>(move _1);
+        return;
     }
 }

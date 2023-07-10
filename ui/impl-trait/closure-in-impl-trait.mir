@@ -1,221 +1,167 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn bug() -> impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> {
-    let mut _0: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:16: 3:65
+    let mut _0: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
 
     bb0: {
-        _0 = std::iter::empty::<[(); 4]>() -> bb1; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:4:5: 4:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:4:5: 4:21
-                                         // + literal: Const { ty: fn() -> std::iter::Empty<[(); 4]> {std::iter::empty::<[(); 4]>}, val: Value(<ZST>) }
+        _0 = std::iter::empty::<[(); 4]>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:5:2: 5:2
+        return;
     }
 }
 
 bug::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:42: 3:63
-    let _1: [closure@ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:52]; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:58
+    let mut _0: usize;
+    let _1: [closure@ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:52];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:58
-        _1 = [closure@ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:52]; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:58
-                                         // closure
-                                         // + def_id: DefId(0:6 ~ closure_in_impl_trait[5c81]::bug::{constant#0}::{closure#0})
-                                         // + substs: [
-                                         //     i8,
-                                         //     extern "rust-call" fn((u32,)) -> u32,
-                                         //     (),
-                                         // ]
-        StorageDead(_1);                 // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:58: 3:59
-        _0 = const 4_usize;              // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:60: 3:61
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:42: 3:63
+        StorageLive(_1);
+        _1 = [closure@ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:52];
+        StorageDead(_1);
+        _0 = const 4_usize;
+        return;
     }
 }
 
 fn bug::{constant#0}::{closure#0}(_1: &[closure@ui/impl-trait/closure-in-impl-trait.rs:3:44: 3:52], _2: u32) -> u32 {
-    debug x => _2;                       // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:45: 3:46
-    let mut _0: u32;                     // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:53: 3:53
+    debug x => _2;
+    let mut _0: u32;
 
     bb0: {
-        _0 = _2;                         // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:55: 3:56
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:3:58: 3:58
+        _0 = _2;
+        return;
     }
 }
 
 fn ok() -> Box<dyn Iterator<Item = [(); 4]>> {
-    let mut _0: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:15: 7:68
-    let mut _1: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:33
-    let mut _2: std::boxed::Box<std::iter::Empty<[(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:33
-    let mut _3: std::iter::Empty<[(); 4]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:14: 8:32
+    let mut _0: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>;
+    let mut _1: std::boxed::Box<std::iter::Empty<[(); 4]>>;
+    let mut _2: std::iter::Empty<[(); 4]>;
 
     bb0: {
-        _3 = std::iter::empty::<[(); 4]>() -> bb1; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:14: 8:32
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:8:14: 8:30
-                                         // + literal: Const { ty: fn() -> std::iter::Empty<[(); 4]> {std::iter::empty::<[(); 4]>}, val: Value(<ZST>) }
+        _2 = std::iter::empty::<[(); 4]>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Box::<std::iter::Empty<[(); 4]>>::new(move _3) -> bb2; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:33
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:13
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(std::iter::Empty<[(); 4]>) -> Box<std::iter::Empty<[(); 4]>> {Box::<std::iter::Empty<[(); 4]>>::new}, val: Value(<ZST>) }
+        _1 = Box::<std::iter::Empty<[(); 4]>>::new(const std::iter::Empty::<[(); 4]>(PhantomData::<fn() -> [(); 4]>)) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _1 = move _2 as std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>> (Pointer(Unsize)); // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:33
-        _0 = move _1 as std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>> (Pointer(Unsize)); // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:8:5: 8:33
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:9:2: 9:2
+        _0 = move _1 as std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>> (Pointer(Unsize));
+        return;
     }
 }
 
 ok::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:44: 7:65
-    let _1: [closure@ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:54]; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:60
+    let mut _0: usize;
+    let _1: [closure@ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:54];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:60
-        _1 = [closure@ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:54]; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:60
-                                         // closure
-                                         // + def_id: DefId(0:10 ~ closure_in_impl_trait[5c81]::ok::{constant#0}::{closure#0})
-                                         // + substs: [
-                                         //     i8,
-                                         //     extern "rust-call" fn((u32,)) -> u32,
-                                         //     (),
-                                         // ]
-        StorageDead(_1);                 // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:60: 7:61
-        _0 = const 4_usize;              // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:62: 7:63
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:44: 7:65
+        StorageLive(_1);
+        _1 = [closure@ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:54];
+        StorageDead(_1);
+        _0 = const 4_usize;
+        return;
     }
 }
 
 fn ok::{constant#0}::{closure#0}(_1: &[closure@ui/impl-trait/closure-in-impl-trait.rs:7:46: 7:54], _2: u32) -> u32 {
-    debug x => _2;                       // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:47: 7:48
-    let mut _0: u32;                     // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:55: 7:55
+    debug x => _2;
+    let mut _0: u32;
 
     bb0: {
-        _0 = _2;                         // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:57: 7:58
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:7:60: 7:60
+        _0 = _2;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:11:11: 11:11
-    let mut _1: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _2: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _3: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _4: std::option::Option<[(); 4]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _5: &mut std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _6: &mut std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-    let mut _7: isize;                   // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:5: 12:32
-    let mut _9: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _10: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _11: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _12: std::option::Option<[(); 4]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _13: &mut impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _14: &mut impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>; // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-    let mut _15: isize;                  // in scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:5: 13:33
+    let mut _0: ();
+    let mut _1: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>;
+    let mut _2: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>;
+    let mut _3: std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>;
+    let mut _4: std::option::Option<[(); 4]>;
+    let mut _5: &mut std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>>;
+    let mut _6: isize;
+    let mut _7: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
+    let mut _8: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
+    let mut _9: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
+    let mut _10: std::option::Option<[(); 4]>;
+    let mut _11: &mut impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
+    let mut _12: isize;
     scope 1 {
-        debug iter => _3;                // in scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-        let _8: [(); 4];                 // in scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:9: 12:14
+        debug iter => _3;
         scope 2 {
-            debug _item => _8;           // in scope 2 at ui/impl-trait/closure-in-impl-trait.rs:12:9: 12:14
+            debug _item => const [(), (), (), ()];
         }
     }
     scope 3 {
-        debug iter => _11;               // in scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-        let _16: [(); 4];                // in scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:9: 13:14
+        debug iter => const ZeroSized: impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
         scope 4 {
-            debug _item => _16;          // in scope 4 at ui/impl-trait/closure-in-impl-trait.rs:13:9: 13:14
+            debug _item => const [(), (), (), ()];
         }
     }
 
     bb0: {
-        _2 = ok::<u32>() -> bb1;         // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:27
-                                         // + literal: Const { ty: fn() -> Box<(dyn Iterator<Item = [(); { |x: u32| { x }; 4 }]> + 'static)> {ok::<u32>}, val: Value(<ZST>) }
+        _2 = ok::<u32>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = <Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::into_iter(move _2) -> bb2; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-                                         // + literal: Const { ty: fn(Box<dyn Iterator<Item = [(); 4]>>) -> <Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::IntoIter {<Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+        _1 = <Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::into_iter(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = move _1;                    // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-        goto -> bb3;                     // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:5: 12:32
+        _3 = move _1;
+        goto -> bb3;
     }
 
     bb3: {
-        _6 = &mut _3;                    // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-        _5 = &mut (*_6);                 // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-        _4 = <Box<dyn Iterator<Item = [(); 4]>> as Iterator>::next(move _5) -> [return: bb4, unwind: bb13]; // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<dyn Iterator<Item = [(); 4]>>) -> Option<<Box<dyn Iterator<Item = [(); 4]>> as Iterator>::Item> {<Box<dyn Iterator<Item = [(); 4]>> as Iterator>::next}, val: Value(<ZST>) }
+        _5 = &mut _3;
+        _4 = <Box<dyn Iterator<Item = [(); 4]>> as Iterator>::next(_5) -> [return: bb4, unwind: bb12];
     }
 
     bb4: {
-        _7 = discriminant(_4);           // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
-        switchInt(move _7) -> [0: bb6, 1: bb3, otherwise: bb5]; // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
+        _6 = discriminant(_4);
+        switchInt(move _6) -> [0: bb6, 1: bb3, otherwise: bb5];
     }
 
     bb5: {
-        unreachable;                     // scope 1 at ui/impl-trait/closure-in-impl-trait.rs:12:18: 12:29
+        unreachable;
     }
 
     bb6: {
-        drop(_3) -> bb7;                 // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:31: 12:32
+        drop(_3) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _10 = bug::<u32>() -> bb8;       // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:28
-                                         // + literal: Const { ty: fn() -> impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> {bug::<u32>}, val: Value(<ZST>) }
+        _8 = bug::<u32>() -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _9 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::into_iter(move _10) -> bb9; // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-                                         // + literal: Const { ty: fn(impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>) -> <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::IntoIter {<impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+        _7 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::into_iter(const ZeroSized: impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        _14 = &mut _11;                  // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-        _13 = &mut (*_14);               // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-        _12 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::next(move _13) -> bb10; // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-                                         // + literal: Const { ty: for<'a> fn(&'a mut impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>) -> Option<<impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::Item> {<impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::next}, val: Value(<ZST>) }
+        _11 = &mut _9;
+        _10 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::next(_11) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _15 = discriminant(_12);         // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
-        switchInt(move _15) -> [0: bb12, 1: bb9, otherwise: bb11]; // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
+        _12 = discriminant(_10);
+        switchInt(move _12) -> [0: bb11, 1: bb9, otherwise: bb5];
     }
 
     bb11: {
-        unreachable;                     // scope 3 at ui/impl-trait/closure-in-impl-trait.rs:13:18: 13:30
+        return;
     }
 
-    bb12: {
-        return;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:14:2: 14:2
+    bb12 (cleanup): {
+        drop(_3) -> [return: bb13, unwind terminate];
     }
 
     bb13 (cleanup): {
-        drop(_3) -> bb14;                // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:12:31: 12:32
-    }
-
-    bb14 (cleanup): {
-        resume;                          // scope 0 at ui/impl-trait/closure-in-impl-trait.rs:11:1: 14:2
+        resume;
     }
 }

@@ -1,80 +1,62 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f3() -> impl Trait1<T, <T as Trait2>::T> {
-    let mut _0: impl Trait1<T, <T as Trait2>::T>; // return place in scope 0 at ui/impl-trait/issues/issue-65581.rs:16:23: 16:43
+    let mut _0: impl Trait1<T, <T as Trait2>::T>;
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-65581.rs:18:2: 18:2
+        return;
     }
 }
 
-fn <impl at ui/impl-trait/issues/issue-65581.rs:22:1: 22:44>::f1(_1: Struct1) -> <T as Trait2>::T {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/issues/issue-65581.rs:23:11: 23:15
-    let mut _0: <T as Trait2>::T;        // return place in scope 0 at ui/impl-trait/issues/issue-65581.rs:23:20: 23:24
-    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+fn <impl at ui/impl-trait/issues/issue-65581.rs:21:1: 21:44>::f1(_1: Struct1) -> <T as Trait2>::T {
+    debug self => const Struct1;
+    let mut _0: <T as Trait2>::T;
+    let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "not implemented"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:33
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:34: 706:51
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = core::panicking::panic(const "not implemented") -> unwind continue;
     }
 }
 
 fn f4() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-65581.rs:28:20: 28:20
-    let _1: ();                          // in scope 0 at ui/impl-trait/issues/issue-65581.rs:29:5: 31:7
-    let mut _2: [closure@ui/impl-trait/issues/issue-65581.rs:29:11: 29:14]; // in scope 0 at ui/impl-trait/issues/issue-65581.rs:29:11: 31:6
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = <T as Trait2>::f2::<[closure@ui/impl-trait/issues/issue-65581.rs:29:11: 29:14]>(move _2) -> bb1; // scope 0 at ui/impl-trait/issues/issue-65581.rs:29:5: 31:7
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-65581.rs:29:5: 29:10
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn([closure@ui/impl-trait/issues/issue-65581.rs:29:11: 29:14]) {<T as Trait2>::f2::<[closure@ui/impl-trait/issues/issue-65581.rs:29:11: 29:14]>}, val: Value(<ZST>) }
+        _1 = <T as Trait2>::f2::<[closure@ui/impl-trait/issues/issue-65581.rs:28:11: 28:14]>(const ZeroSized: [closure@ui/impl-trait/issues/issue-65581.rs:28:11: 28:14]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-65581.rs:32:2: 32:2
+        return;
     }
 }
 
-fn f4::{closure#0}(_1: [closure@ui/impl-trait/issues/issue-65581.rs:29:11: 29:14], _2: &<T as Trait2>::U) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-65581.rs:29:15: 29:15
-    let _3: <T as Trait2>::T;            // in scope 0 at ui/impl-trait/issues/issue-65581.rs:30:9: 30:26
-    let mut _4: impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T>; // in scope 0 at ui/impl-trait/issues/issue-65581.rs:30:9: 30:21
+fn f4::{closure#0}(_1: [closure@ui/impl-trait/issues/issue-65581.rs:28:11: 28:14], _2: &<T as Trait2>::U) -> () {
+    let mut _0: ();
+    let _3: <T as Trait2>::T;
+    let mut _4: impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T>;
 
     bb0: {
-        _4 = f3::<<T as Trait2>::U>() -> bb1; // scope 0 at ui/impl-trait/issues/issue-65581.rs:30:9: 30:21
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-65581.rs:30:9: 30:19
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T> {f3::<<T as Trait2>::U>}, val: Value(<ZST>) }
+        _4 = f3::<<T as Trait2>::U>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = <impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T> as Trait1<<T as Trait2>::U, <T as Trait2>::T>>::f1(move _4) -> bb2; // scope 0 at ui/impl-trait/issues/issue-65581.rs:30:9: 30:26
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/issues/issue-65581.rs:30:22: 30:24
-                                         // + literal: Const { ty: fn(impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T>) -> <T as Trait2>::T {<impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T> as Trait1<<T as Trait2>::U, <T as Trait2>::T>>::f1}, val: Value(<ZST>) }
+        _3 = <impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T> as Trait1<<T as Trait2>::U, <T as Trait2>::T>>::f1(const ZeroSized: impl Trait1<<T as Trait2>::U, <<T as Trait2>::U as Trait2>::T>) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        drop(_3) -> bb3;                 // scope 0 at ui/impl-trait/issues/issue-65581.rs:30:26: 30:27
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-65581.rs:31:6: 31:6
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/issues/issue-65581.rs:34:11: 34:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/impl-trait/issues/issue-65581.rs:34:13: 34:13
+        return;
     }
 }

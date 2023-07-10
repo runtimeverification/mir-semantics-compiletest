@@ -1,47 +1,44 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: usize) -> usize {
-    debug x => _1;                       // in scope 0 at ui/consts/return-in-const-fn.rs:5:14: 5:15
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/return-in-const-fn.rs:5:27: 5:32
+    debug x => _1;
+    let mut _0: usize;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/consts/return-in-const-fn.rs:6:12: 6:13
-        return;                          // scope 0 at ui/consts/return-in-const-fn.rs:7:2: 7:2
+        _0 = _1;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo(_1: usize) -> usize {
-    debug x => _1;                       // in scope 0 at ui/consts/return-in-const-fn.rs:5:14: 5:15
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/return-in-const-fn.rs:5:27: 5:32
-    let mut _2: !;                       // in scope 0 at ui/consts/return-in-const-fn.rs:5:33: 7:2
+    debug x => _1;
+    let mut _0: usize;
+    let mut _2: !;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/consts/return-in-const-fn.rs:6:12: 6:13
-        return;                          // scope 0 at ui/consts/return-in-const-fn.rs:7:2: 7:2
+        _0 = _1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/return-in-const-fn.rs:8:11: 8:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/return-in-const-fn.rs:10:2: 10:2
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/return-in-const-fn.rs:9:9: 9:15
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/return-in-const-fn.rs:9:9: 9:15
-        _0 = foo(const 2_usize) -> bb1;  // scope 0 at ui/consts/return-in-const-fn.rs:9:9: 9:15
-                                         // mir::Constant
-                                         // + span: ui/consts/return-in-const-fn.rs:9:9: 9:12
-                                         // + literal: Const { ty: fn(usize) -> usize {foo}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = foo(const 2_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/return-in-const-fn.rs:9:9: 9:15
+        return;
     }
 }

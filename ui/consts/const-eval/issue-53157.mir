@@ -1,43 +1,39 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-53157.rs:10:11: 10:11
-    let _1: ();                          // in scope 0 at ui/consts/const-eval/issue-53157.rs:12:5: 12:14
-    let mut _2: fn(impl Sized) {main::f::<impl Sized>}; // in scope 0 at ui/consts/const-eval/issue-53157.rs:4:12: 7:6
-    let mut _3: impl Sized;              // in scope 0 at ui/consts/const-eval/issue-53157.rs:12:10: 12:13
+    let mut _0: ();
+    let _1: ();
+    let mut _2: impl Sized;
 
     bb0: {
-        _3 = main::f() -> bb1;           // scope 0 at ui/consts/const-eval/issue-53157.rs:12:10: 12:13
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-53157.rs:12:10: 12:11
-                                         // + literal: Const { ty: fn() -> impl Sized {main::f}, val: Value(<ZST>) }
+        _2 = main::f() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = move _2(move _3) -> bb2;    // scope 0 at ui/consts/const-eval/issue-53157.rs:12:5: 12:14
+        _1 = main::f::<impl Sized>(const ZeroSized: impl Sized) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-53157.rs:13:2: 13:2
+        return;
     }
 }
 
 fn main::f() -> impl Sized {
-    let mut _0: impl Sized;              // return place in scope 0 at ui/consts/const-eval/issue-53157.rs:11:15: 11:25
+    let mut _0: impl Sized;
 
     bb0: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-53157.rs:11:28: 11:28
+        return;
     }
 }
 
 fn main::f(_1: impl Sized) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-53157.rs:5:29: 5:29
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/consts/const-eval/issue-53157.rs:5:30: 5:31
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-53157.rs:5:31: 5:31
+        return;
     }
 }

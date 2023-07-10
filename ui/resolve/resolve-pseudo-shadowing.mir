@@ -1,68 +1,61 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn check(_1: Clone) -> () {
-    debug _c => _1;                      // in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:4:17: 4:19
-    let mut _0: ();                      // return place in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:4:28: 4:28
-    let _2: ();                          // in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:8:5: 8:13
+    debug _c => _1;
+    let mut _0: ();
+    let _2: ();
 
     bb0: {
-        _2 = check2() -> [return: bb1, unwind: bb3]; // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:8:5: 8:13
-                                         // mir::Constant
-                                         // + span: ui/resolve/resolve-pseudo-shadowing.rs:8:5: 8:11
-                                         // + literal: Const { ty: fn() {check2}, val: Value(<ZST>) }
+        _2 = check2() -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:9:1: 9:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:9:2: 9:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:9:1: 9:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:4:1: 9:2
+        resume;
     }
 }
 
 fn check2() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:5:17: 5:17
+    let mut _0: ();
     scope 1 {
     }
 
     bb0: {
-        return;                          // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:7:6: 7:6
+        return;
     }
 }
 
 promoted[0] in check2: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:6:50: 6:53
-    let mut _1: ();                      // in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:6:51: 6:53
+    let mut _0: &();
+    let mut _1: ();
 
     bb0: {
-        _1 = ();                         // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:6:51: 6:53
-        _0 = &_1;                        // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:6:50: 6:53
-        return;                          // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:6:50: 6:53
+        _1 = ();
+        _0 = &_1;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:11:11: 11:11
-    let _1: ();                          // in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:11:13: 11:22
-    let mut _2: ();                      // in scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:11:19: 11:21
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = check::<()>(move _2) -> bb1; // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:11:13: 11:22
-                                         // mir::Constant
-                                         // + span: ui/resolve/resolve-pseudo-shadowing.rs:11:13: 11:18
-                                         // + literal: Const { ty: fn(()) {check::<()>}, val: Value(<ZST>) }
+        _1 = check::<()>(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/resolve/resolve-pseudo-shadowing.rs:11:25: 11:25
+        return;
     }
 }

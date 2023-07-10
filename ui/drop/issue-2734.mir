@@ -1,112 +1,78 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn hax::dummy(_1: &Self) -> () {
-    debug self => _1;                    // in scope 0 at ui/drop/issue-2734.rs:8:14: 8:19
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-2734.rs:8:21: 8:21
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/drop/issue-2734.rs:8:24: 8:24
+        return;
     }
 }
 
 fn perform_hax(_1: Box<T>) -> Box<dyn hax> {
-    debug x => _1;                       // in scope 0 at ui/drop/issue-2734.rs:12:28: 12:29
-    let mut _0: std::boxed::Box<dyn hax>; // return place in scope 0 at ui/drop/issue-2734.rs:12:42: 12:62
-    let mut _2: std::boxed::Box<dyn hax>; // in scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-    let mut _3: std::boxed::Box<dyn hax>; // in scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-    let mut _4: std::boxed::Box<dyn hax>; // in scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-    let mut _5: std::boxed::Box<std::boxed::Box<T>>; // in scope 0 at ui/drop/issue-2734.rs:13:5: 13:16
-    let mut _6: std::boxed::Box<T>;      // in scope 0 at ui/drop/issue-2734.rs:13:14: 13:15
+    debug x => _1;
+    let mut _0: std::boxed::Box<dyn hax>;
+    let mut _2: std::boxed::Box<std::boxed::Box<T>>;
 
     bb0: {
-        _6 = move _1;                    // scope 0 at ui/drop/issue-2734.rs:13:14: 13:15
-        _5 = Box::<Box<T>>::new(move _6) -> bb1; // scope 0 at ui/drop/issue-2734.rs:13:5: 13:16
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:13:5: 13:13
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Box<T>) -> Box<Box<T>> {Box::<Box<T>>::new}, val: Value(<ZST>) }
+        _2 = Box::<Box<T>>::new(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = move _5 as std::boxed::Box<dyn hax> (Pointer(Unsize)); // scope 0 at ui/drop/issue-2734.rs:13:5: 13:16
-        _3 = move _4;                    // scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-        _2 = move _3 as std::boxed::Box<dyn hax> (Pointer(Unsize)); // scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-        _0 = move _2 as std::boxed::Box<dyn hax> (Pointer(Unsize)); // scope 0 at ui/drop/issue-2734.rs:13:5: 13:40
-        return;                          // scope 0 at ui/drop/issue-2734.rs:14:2: 14:2
+        _0 = move _2 as std::boxed::Box<dyn hax> (Pointer(Unsize));
+        return;
     }
 }
 
 fn deadcode() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-2734.rs:16:15: 16:15
-    let _1: std::boxed::Box<dyn hax>;    // in scope 0 at ui/drop/issue-2734.rs:17:5: 17:50
-    let mut _2: std::boxed::Box<std::string::String>; // in scope 0 at ui/drop/issue-2734.rs:17:17: 17:49
-    let mut _3: std::string::String;     // in scope 0 at ui/drop/issue-2734.rs:17:26: 17:48
-    let mut _4: &str;                    // in scope 0 at ui/drop/issue-2734.rs:17:26: 17:48
-    let _5: &str;                        // in scope 0 at ui/drop/issue-2734.rs:17:26: 17:36
+    let mut _0: ();
+    let _1: std::boxed::Box<dyn hax>;
+    let mut _2: std::boxed::Box<std::string::String>;
+    let mut _3: std::string::String;
+    let _4: &str;
 
     bb0: {
-        _5 = const "deadcode";           // scope 0 at ui/drop/issue-2734.rs:17:26: 17:36
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:17:26: 17:36
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _4 = _5;                         // scope 0 at ui/drop/issue-2734.rs:17:26: 17:48
-        _3 = <str as ToString>::to_string(move _4) -> bb1; // scope 0 at ui/drop/issue-2734.rs:17:26: 17:48
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:17:37: 17:46
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+        _4 = const "deadcode";
+        _3 = <str as ToString>::to_string(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Box::<String>::new(move _3) -> bb2; // scope 0 at ui/drop/issue-2734.rs:17:17: 17:49
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:17:17: 17:25
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(String) -> Box<String> {Box::<String>::new}, val: Value(<ZST>) }
+        _2 = Box::<String>::new(move _3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _1 = perform_hax::<String>(move _2) -> bb3; // scope 0 at ui/drop/issue-2734.rs:17:5: 17:50
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:17:5: 17:16
-                                         // + literal: Const { ty: fn(Box<String>) -> Box<(dyn hax + 'static)> {perform_hax::<String>}, val: Value(<ZST>) }
+        _1 = perform_hax::<String>(move _2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        drop(_1) -> bb4;                 // scope 0 at ui/drop/issue-2734.rs:17:50: 17:51
+        drop(_1) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/drop/issue-2734.rs:18:2: 18:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/drop/issue-2734.rs:20:15: 20:15
-    let mut _1: std::boxed::Box<dyn hax>; // in scope 0 at ui/drop/issue-2734.rs:21:13: 21:38
-    let mut _2: std::boxed::Box<i32>;    // in scope 0 at ui/drop/issue-2734.rs:21:25: 21:37
+    let mut _0: ();
+    let mut _1: std::boxed::Box<dyn hax>;
+    let mut _2: std::boxed::Box<i32>;
     scope 1 {
     }
 
     bb0: {
-        _2 = Box::<i32>::new(const 42_i32) -> bb1; // scope 0 at ui/drop/issue-2734.rs:21:25: 21:37
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:21:25: 21:33
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(i32) -> Box<i32> {Box::<i32>::new}, val: Value(<ZST>) }
+        _2 = Box::<i32>::new(const 42_i32) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = perform_hax::<i32>(move _2) -> bb2; // scope 0 at ui/drop/issue-2734.rs:21:13: 21:38
-                                         // mir::Constant
-                                         // + span: ui/drop/issue-2734.rs:21:13: 21:24
-                                         // + literal: Const { ty: fn(Box<i32>) -> Box<(dyn hax + 'static)> {perform_hax::<i32>}, val: Value(<ZST>) }
+        _1 = perform_hax::<i32>(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/drop/issue-2734.rs:21:38: 21:39
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/drop/issue-2734.rs:22:2: 22:2
+        return;
     }
 }

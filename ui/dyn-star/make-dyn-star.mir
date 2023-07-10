@@ -1,67 +1,57 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn make_dyn_star(_1: usize) -> () {
-    debug i => _1;                       // in scope 0 at ui/dyn-star/make-dyn-star.rs:7:18: 7:19
-    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/make-dyn-star.rs:7:28: 7:28
-    let _2: dyn* std::fmt::Debug;        // in scope 0 at ui/dyn-star/make-dyn-star.rs:8:9: 8:15
-    let mut _3: usize;                   // in scope 0 at ui/dyn-star/make-dyn-star.rs:8:30: 8:31
+    debug i => _1;
+    let mut _0: ();
+    let _2: dyn* std::fmt::Debug;
     scope 1 {
-        debug _dyn_i => _2;              // in scope 1 at ui/dyn-star/make-dyn-star.rs:8:9: 8:15
+        debug _dyn_i => _2;
     }
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/dyn-star/make-dyn-star.rs:8:30: 8:31
-        _2 = move _3 as dyn* std::fmt::Debug (DynStar); // scope 0 at ui/dyn-star/make-dyn-star.rs:8:30: 8:31
-        drop(_2) -> bb1;                 // scope 0 at ui/dyn-star/make-dyn-star.rs:9:1: 9:2
+        _2 = _1 as dyn* std::fmt::Debug (DynStar);
+        drop(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/dyn-star/make-dyn-star.rs:9:2: 9:2
+        return;
     }
 }
 
 fn make_dyn_star_explicit(_1: usize) -> () {
-    debug i => _1;                       // in scope 0 at ui/dyn-star/make-dyn-star.rs:11:27: 11:28
-    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/make-dyn-star.rs:11:37: 11:37
-    let _2: dyn* std::fmt::Debug;        // in scope 0 at ui/dyn-star/make-dyn-star.rs:12:9: 12:15
-    let mut _3: dyn* std::fmt::Debug;    // in scope 0 at ui/dyn-star/make-dyn-star.rs:12:30: 12:45
-    let mut _4: usize;                   // in scope 0 at ui/dyn-star/make-dyn-star.rs:12:30: 12:31
+    debug i => _1;
+    let mut _0: ();
+    let _2: dyn* std::fmt::Debug;
+    let mut _3: dyn* std::fmt::Debug;
     scope 1 {
-        debug _dyn_i => _2;              // in scope 1 at ui/dyn-star/make-dyn-star.rs:12:9: 12:15
+        debug _dyn_i => _2;
     }
 
     bb0: {
-        _4 = _1;                         // scope 0 at ui/dyn-star/make-dyn-star.rs:12:30: 12:31
-        _3 = move _4 as dyn* std::fmt::Debug (DynStar); // scope 0 at ui/dyn-star/make-dyn-star.rs:12:30: 12:31
-        _2 = move _3;                    // scope 0 at ui/dyn-star/make-dyn-star.rs:12:30: 12:45
-        drop(_2) -> bb1;                 // scope 0 at ui/dyn-star/make-dyn-star.rs:13:1: 13:2
+        _3 = _1 as dyn* std::fmt::Debug (DynStar);
+        _2 = move _3;
+        drop(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/dyn-star/make-dyn-star.rs:13:2: 13:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/dyn-star/make-dyn-star.rs:15:11: 15:11
-    let _1: ();                          // in scope 0 at ui/dyn-star/make-dyn-star.rs:16:5: 16:22
-    let _2: ();                          // in scope 0 at ui/dyn-star/make-dyn-star.rs:17:5: 17:31
+    let mut _0: ();
+    let _1: ();
+    let _2: ();
 
     bb0: {
-        _1 = make_dyn_star(const 42_usize) -> bb1; // scope 0 at ui/dyn-star/make-dyn-star.rs:16:5: 16:22
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/make-dyn-star.rs:16:5: 16:18
-                                         // + literal: Const { ty: fn(usize) {make_dyn_star}, val: Value(<ZST>) }
+        _1 = make_dyn_star(const 42_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = make_dyn_star_explicit(const 42_usize) -> bb2; // scope 0 at ui/dyn-star/make-dyn-star.rs:17:5: 17:31
-                                         // mir::Constant
-                                         // + span: ui/dyn-star/make-dyn-star.rs:17:5: 17:27
-                                         // + literal: Const { ty: fn(usize) {make_dyn_star_explicit}, val: Value(<ZST>) }
+        _2 = make_dyn_star_explicit(const 42_usize) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/dyn-star/make-dyn-star.rs:18:2: 18:2
+        return;
     }
 }

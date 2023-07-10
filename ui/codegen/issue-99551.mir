@@ -1,146 +1,111 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn test(_1: T) -> Option<&mut dyn B> {
-    debug view => _1;                    // in scope 0 at ui/codegen/issue-99551.rs:10:20: 10:24
-    let mut _0: std::option::Option<&mut dyn B>; // return place in scope 0 at ui/codegen/issue-99551.rs:10:32: 10:53
-    let mut _2: &mut dyn B;              // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-    let mut _3: &mut dyn B;              // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-    let mut _4: &mut dyn B;              // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-    let mut _5: std::option::Option<&mut dyn B>; // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:40
-    let mut _6: &mut <T as std::iter::IntoIterator>::IntoIter; // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:40
-    let mut _7: <T as std::iter::IntoIterator>::IntoIter; // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:33
-    let mut _8: T;                       // in scope 0 at ui/codegen/issue-99551.rs:14:17: 14:21
+    debug view => _1;
+    let mut _0: std::option::Option<&mut dyn B>;
+    let mut _2: &mut dyn B;
+    let mut _3: &mut dyn B;
+    let mut _4: std::option::Option<&mut dyn B>;
+    let mut _5: &mut <T as std::iter::IntoIterator>::IntoIter;
+    let mut _6: <T as std::iter::IntoIterator>::IntoIter;
 
     bb0: {
-        _8 = move _1;                    // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:21
-        _7 = <T as IntoIterator>::into_iter(move _8) -> bb1; // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:33
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:14:22: 14:31
-                                         // + literal: Const { ty: fn(T) -> <T as IntoIterator>::IntoIter {<T as IntoIterator>::into_iter}, val: Value(<ZST>) }
+        _6 = <T as IntoIterator>::into_iter(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _6 = &mut _7;                    // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:40
-        _5 = <<T as IntoIterator>::IntoIter as Iterator>::next(move _6) -> [return: bb2, unwind: bb5]; // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:40
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:14:34: 14:38
-                                         // + literal: Const { ty: for<'a> fn(&'a mut <T as IntoIterator>::IntoIter) -> Option<<<T as IntoIterator>::IntoIter as Iterator>::Item> {<<T as IntoIterator>::IntoIter as Iterator>::next}, val: Value(<ZST>) }
+        _5 = &mut _6;
+        _4 = <<T as IntoIterator>::IntoIter as Iterator>::next(move _5) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        _4 = Option::<&mut dyn B>::unwrap(move _5) -> [return: bb3, unwind: bb5]; // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:14:41: 14:47
-                                         // + literal: Const { ty: fn(Option<&mut dyn B>) -> &mut dyn B {Option::<&mut dyn B>::unwrap}, val: Value(<ZST>) }
+        _3 = Option::<&mut dyn B>::unwrap(move _4) -> [return: bb3, unwind: bb5];
     }
 
     bb3: {
-        _3 = &mut (*_4);                 // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-        _2 = move _3 as &mut dyn B (Pointer(Unsize)); // scope 0 at ui/codegen/issue-99551.rs:14:17: 14:49
-        _0 = Option::<&mut dyn B>::Some(move _2); // scope 0 at ui/codegen/issue-99551.rs:14:12: 14:50
-        drop(_7) -> bb4;                 // scope 0 at ui/codegen/issue-99551.rs:14:50: 14:51
+        _2 = _3;
+        _0 = Option::<&mut dyn B>::Some(move _2);
+        drop(_6) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/codegen/issue-99551.rs:15:2: 15:2
+        return;
     }
 
     bb5 (cleanup): {
-        drop(_7) -> bb6;                 // scope 0 at ui/codegen/issue-99551.rs:14:50: 14:51
+        drop(_6) -> [return: bb6, unwind terminate];
     }
 
     bb6 (cleanup): {
-        resume;                          // scope 0 at ui/codegen/issue-99551.rs:10:1: 15:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/codegen/issue-99551.rs:17:11: 17:11
-    let mut _1: std::vec::Vec<std::boxed::Box<dyn C>>; // in scope 0 at ui/codegen/issue-99551.rs:18:9: 18:14
-    let _2: std::option::Option<&mut dyn B>; // in scope 0 at ui/codegen/issue-99551.rs:19:5: 19:57
-    let mut _3: std::iter::Map<std::slice::IterMut<'_, std::boxed::Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>; // in scope 0 at ui/codegen/issue-99551.rs:19:10: 19:56
-    let mut _4: std::slice::IterMut<'_, std::boxed::Box<dyn C>>; // in scope 0 at ui/codegen/issue-99551.rs:19:10: 19:22
-    let mut _5: &mut [std::boxed::Box<dyn C>]; // in scope 0 at ui/codegen/issue-99551.rs:19:10: 19:22
-    let mut _6: &mut [std::boxed::Box<dyn C>]; // in scope 0 at ui/codegen/issue-99551.rs:19:10: 19:22
-    let mut _7: &mut std::vec::Vec<std::boxed::Box<dyn C>>; // in scope 0 at ui/codegen/issue-99551.rs:19:10: 19:22
-    let mut _8: [closure@ui/codegen/issue-99551.rs:19:27: 19:30]; // in scope 0 at ui/codegen/issue-99551.rs:19:27: 19:55
+    let mut _0: ();
+    let mut _1: std::vec::Vec<std::boxed::Box<dyn C>>;
+    let _2: std::option::Option<&mut dyn B>;
+    let mut _3: std::iter::Map<std::slice::IterMut<'_, std::boxed::Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>;
+    let mut _4: std::slice::IterMut<'_, std::boxed::Box<dyn C>>;
+    let mut _5: &mut [std::boxed::Box<dyn C>];
+    let mut _6: &mut [std::boxed::Box<dyn C>];
+    let mut _7: &mut std::vec::Vec<std::boxed::Box<dyn C>>;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/codegen/issue-99551.rs:18:9: 18:14
+        debug a => _1;
     }
 
     bb0: {
-        _1 = Vec::<Box<dyn C>>::new() -> bb1; // scope 0 at ui/codegen/issue-99551.rs:18:34: 18:44
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:18:34: 18:42
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn() -> Vec<Box<dyn C>> {Vec::<Box<dyn C>>::new}, val: Value(<ZST>) }
+        _1 = Vec::<Box<dyn C>>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &mut _1;                    // scope 1 at ui/codegen/issue-99551.rs:19:10: 19:22
-        _6 = <Vec<Box<dyn C>> as DerefMut>::deref_mut(move _7) -> [return: bb2, unwind: bb7]; // scope 1 at ui/codegen/issue-99551.rs:19:10: 19:22
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:19:10: 19:22
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<Box<dyn C>>) -> &'a mut <Vec<Box<dyn C>> as Deref>::Target {<Vec<Box<dyn C>> as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _7 = &mut _1;
+        _6 = <Vec<Box<dyn C>> as DerefMut>::deref_mut(move _7) -> [return: bb2, unwind: bb7];
     }
 
     bb2: {
-        _5 = &mut (*_6);                 // scope 1 at ui/codegen/issue-99551.rs:19:10: 19:22
-        _4 = core::slice::<impl [Box<dyn C>]>::iter_mut(move _5) -> [return: bb3, unwind: bb7]; // scope 1 at ui/codegen/issue-99551.rs:19:10: 19:22
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:19:12: 19:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut [Box<dyn C>]) -> std::slice::IterMut<'a, Box<dyn C>> {core::slice::<impl [Box<dyn C>]>::iter_mut}, val: Value(<ZST>) }
+        _5 = _6;
+        _4 = core::slice::<impl [Box<dyn C>]>::iter_mut(move _5) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        _3 = <std::slice::IterMut<'_, Box<dyn C>> as Iterator>::map::<&mut dyn B, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>(move _4, move _8) -> [return: bb4, unwind: bb7]; // scope 1 at ui/codegen/issue-99551.rs:19:10: 19:56
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:19:23: 19:26
-                                         // + literal: Const { ty: fn(std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]) -> Map<std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]> {<std::slice::IterMut<'_, Box<dyn C>> as Iterator>::map::<&mut dyn B, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>}, val: Value(<ZST>) }
+        _3 = <std::slice::IterMut<'_, Box<dyn C>> as Iterator>::map::<&mut dyn B, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>(move _4, const ZeroSized: [closure@ui/codegen/issue-99551.rs:19:27: 19:30]) -> [return: bb4, unwind: bb7];
     }
 
     bb4: {
-        _2 = test::<'_, Map<std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>>(move _3) -> [return: bb5, unwind: bb7]; // scope 1 at ui/codegen/issue-99551.rs:19:5: 19:57
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:19:5: 19:9
-                                         // + literal: Const { ty: fn(Map<std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>) -> Option<&mut dyn B> {test::<'_, Map<std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>>}, val: Value(<ZST>) }
+        _2 = test::<'_, Map<std::slice::IterMut<'_, Box<dyn C>>, [closure@ui/codegen/issue-99551.rs:19:27: 19:30]>>(move _3) -> [return: bb5, unwind: bb7];
     }
 
     bb5: {
-        drop(_1) -> bb6;                 // scope 0 at ui/codegen/issue-99551.rs:20:1: 20:2
+        drop(_1) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;                          // scope 0 at ui/codegen/issue-99551.rs:20:2: 20:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop(_1) -> bb8;                 // scope 0 at ui/codegen/issue-99551.rs:20:1: 20:2
+        drop(_1) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;                          // scope 0 at ui/codegen/issue-99551.rs:17:1: 20:2
+        resume;
     }
 }
 
 fn main::{closure#0}(_1: &mut [closure@ui/codegen/issue-99551.rs:19:27: 19:30], _2: &mut Box<dyn C>) -> &mut dyn B {
-    debug c => _2;                       // in scope 0 at ui/codegen/issue-99551.rs:19:28: 19:29
-    let mut _0: &mut dyn B;              // return place in scope 0 at ui/codegen/issue-99551.rs:19:31: 19:55
-    let mut _3: &mut dyn C;              // in scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-    let mut _4: &mut dyn C;              // in scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-    let mut _5: &mut std::boxed::Box<dyn C>; // in scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
+    debug c => _2;
+    let mut _0: &mut dyn B;
+    let mut _3: &mut dyn C;
+    let mut _4: &mut dyn C;
 
     bb0: {
-        _5 = &mut (*_2);                 // scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-        _4 = <Box<dyn C> as AsMut<dyn C>>::as_mut(move _5) -> bb1; // scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-                                         // mir::Constant
-                                         // + span: ui/codegen/issue-99551.rs:19:33: 19:39
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Box<dyn C>) -> &'a mut dyn C {<Box<dyn C> as AsMut<dyn C>>::as_mut}, val: Value(<ZST>) }
+        _4 = <Box<dyn C> as AsMut<dyn C>>::as_mut(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = &mut (*_4);                 // scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-        _0 = move _3 as &mut dyn B (Pointer(Unsize)); // scope 0 at ui/codegen/issue-99551.rs:19:31: 19:41
-        return;                          // scope 0 at ui/codegen/issue-99551.rs:19:55: 19:55
+        _3 = _4;
+        _0 = move _3 as &mut dyn B (Pointer(Unsize));
+        return;
     }
 }
