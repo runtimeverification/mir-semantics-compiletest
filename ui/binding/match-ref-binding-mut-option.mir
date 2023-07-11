@@ -6,25 +6,26 @@ fn main() -> () {
     let mut _2: isize;
     let mut _4: (&std::option::Option<i32>, &std::option::Option<i32>);
     let mut _5: &std::option::Option<i32>;
-    let mut _8: bool;
-    let mut _9: bool;
-    let _11: !;
-    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _6: &std::option::Option<i32>;
+    let _7: std::option::Option<i32>;
+    let mut _10: bool;
+    let mut _11: bool;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug v => _1;
         let _3: &mut i32;
-        let _6: &std::option::Option<i32>;
-        let _7: &std::option::Option<i32>;
-        let mut _13: &std::option::Option<i32>;
+        let _8: &std::option::Option<i32>;
+        let _9: &std::option::Option<i32>;
         scope 2 {
             debug p => _3;
         }
         scope 3 {
-            debug left_val => _6;
-            debug right_val => _7;
-            let _10: core::panicking::AssertKind;
+            debug left_val => _8;
+            debug right_val => _9;
+            let _12: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _10;
+                debug kind => _12;
             }
         }
     }
@@ -47,36 +48,26 @@ fn main() -> () {
 
     bb3: {
         _5 = &_1;
-        _13 = const _;
-        _4 = (move _5, _13);
-        _6 = (_4.0: &std::option::Option<i32>);
-        _7 = (_4.1: &std::option::Option<i32>);
-        _9 = <Option<i32> as PartialEq>::eq(_6, _7) -> [return: bb4, unwind continue];
+        _7 = Option::<i32>::Some(const 23_i32);
+        _6 = &_7;
+        _4 = (move _5, move _6);
+        _8 = (_4.0: &std::option::Option<i32>);
+        _9 = (_4.1: &std::option::Option<i32>);
+        _11 = <Option<i32> as PartialEq>::eq(_8, _9) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _8 = Not(move _9);
-        switchInt(move _8) -> [0: bb6, otherwise: bb5];
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _10 = core::panicking::AssertKind::Eq;
-        _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _10, _6, _7, move _12) -> unwind continue;
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _12, _8, _9, move _14) -> unwind continue;
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &Option<i32> = {
-    let mut _0: &std::option::Option<i32>;
-    let mut _1: std::option::Option<i32>;
-
-    bb0: {
-        _1 = Option::<i32>::Some(const 23_i32);
-        _0 = &_1;
         return;
     }
 }

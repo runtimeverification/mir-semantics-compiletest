@@ -5,19 +5,20 @@ fn main() -> () {
     let mut _1: (&&str, &&str);
     let mut _2: &&str;
     let _3: &str;
-    let _4: &&str;
-    let _5: &&str;
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: &&str;
+    let mut _4: &&str;
+    let _5: &str;
+    let _6: &&str;
+    let _7: &&str;
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
@@ -27,36 +28,26 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _11 = const _;
-        _1 = (move _2, _11);
-        _4 = (_1.0: &&str);
-        _5 = (_1.1: &&str);
-        _7 = <&str as PartialEq>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _5 = const "c";
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &&str);
+        _7 = (_1.1: &&str);
+        _9 = <&str as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<&str, &str>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<&str, &str>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "c";
-        _0 = &_1;
         return;
     }
 }

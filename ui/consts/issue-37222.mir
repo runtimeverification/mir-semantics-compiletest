@@ -39,7 +39,7 @@ fn <impl at ui/consts/issue-37222.rs:3:10: 3:15>::fmt(_1: &Bar, _2: &mut Formatt
         _4 = &(((*_1) as A).0: i64);
         _5 = const "A";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb5, unwind continue];
     }
 
@@ -47,7 +47,7 @@ fn <impl at ui/consts/issue-37222.rs:3:10: 3:15>::fmt(_1: &Bar, _2: &mut Formatt
         _8 = &(((*_1) as B).0: i32);
         _9 = const "B";
         _11 = &_8;
-        _10 = _11 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _10 = _11 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _9, move _10) -> [return: bb5, unwind continue];
     }
 
@@ -180,10 +180,10 @@ fn <impl at ui/consts/issue-37222.rs:10:10: 10:15>::fmt(_1: &Foo, _2: &mut Forma
     bb0: {
         _3 = const "Foo";
         _5 = &((*_1).0: Bar);
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _8 = &((*_1).1: u8);
         _7 = &_8;
-        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field2_finish(_2, _3, move _4, move _6) -> [return: bb1, unwind continue];
     }
 
@@ -274,19 +274,22 @@ fn main() -> () {
     let _5: usize;
     let mut _6: usize;
     let mut _7: bool;
-    let _8: &&Foo;
-    let _9: &&Foo;
-    let mut _10: bool;
-    let mut _11: bool;
-    let _13: !;
-    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _15: &&Foo;
+    let mut _8: &&Foo;
+    let _9: &Foo;
+    let _10: Foo;
+    let mut _11: Bar;
+    let _12: &&Foo;
+    let _13: &&Foo;
+    let mut _14: bool;
+    let mut _15: bool;
+    let _17: !;
+    let mut _18: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _8;
-        debug right_val => _9;
-        let _12: core::panicking::AssertKind;
+        debug left_val => _12;
+        debug right_val => _13;
+        let _16: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _12;
+            debug kind => _16;
         }
     }
 
@@ -301,22 +304,25 @@ fn main() -> () {
     bb1: {
         _3 = &(*_4)[_5];
         _2 = &_3;
-        _15 = const _;
-        _1 = (move _2, _15);
-        _8 = (_1.0: &&Foo);
-        _9 = (_1.1: &&Foo);
-        _11 = <&Foo as PartialEq>::eq(_8, _9) -> [return: bb2, unwind continue];
+        _11 = Bar::C;
+        _10 = Foo(move _11, const u8::MAX);
+        _9 = &_10;
+        _8 = &_9;
+        _1 = (move _2, move _8);
+        _12 = (_1.0: &&Foo);
+        _13 = (_1.1: &&Foo);
+        _15 = <&Foo as PartialEq>::eq(_12, _13) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = Not(move _11);
-        switchInt(move _10) -> [0: bb4, otherwise: bb3];
+        _14 = Not(move _15);
+        switchInt(move _14) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _12 = core::panicking::AssertKind::Eq;
-        _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<&Foo, &Foo>(move _12, _8, _9, move _14) -> unwind continue;
+        _16 = core::panicking::AssertKind::Eq;
+        _18 = Option::<Arguments<'_>>::None;
+        _17 = core::panicking::assert_failed::<&Foo, &Foo>(move _16, _12, _13, move _18) -> unwind continue;
     }
 
     bb4: {
@@ -328,21 +334,6 @@ alloc1 (static: FOO, size: 48, align: 8) {
     0x00 │ 02 00 00 00 __ __ __ __ __ __ __ __ __ __ __ __ │ ....░░░░░░░░░░░░
     0x10 │ 00 __ __ __ __ __ __ __ 02 00 00 00 __ __ __ __ │ .░░░░░░░....░░░░
     0x20 │ __ __ __ __ __ __ __ __ ff __ __ __ __ __ __ __ │ ░░░░░░░░.░░░░░░░
-}
-
-promoted[0] in main: &&Foo = {
-    let mut _0: &&Foo;
-    let mut _1: &Foo;
-    let mut _2: Foo;
-    let mut _3: Bar;
-
-    bb0: {
-        _3 = Bar::C;
-        _2 = Foo(move _3, const u8::MAX);
-        _1 = &_2;
-        _0 = &_1;
-        return;
-    }
 }
 
 fn Bar::A(_1: i64) -> Bar {

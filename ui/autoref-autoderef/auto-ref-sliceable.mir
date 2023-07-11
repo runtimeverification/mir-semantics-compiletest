@@ -29,28 +29,29 @@ fn main() -> () {
     let mut _10: &mut std::vec::Vec<i32>;
     let mut _11: (&std::vec::Vec<i32>, &[i32; 3]);
     let mut _12: &std::vec::Vec<i32>;
-    let mut _15: bool;
-    let mut _16: bool;
-    let _18: !;
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _21: *const [i32; 1];
-    let mut _22: *const ();
-    let mut _23: usize;
+    let mut _13: &[i32; 3];
+    let _14: [i32; 3];
+    let mut _17: bool;
+    let mut _18: bool;
+    let _20: !;
+    let mut _21: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _22: *const [i32; 1];
+    let mut _23: *const ();
     let mut _24: usize;
     let mut _25: usize;
     let mut _26: usize;
-    let mut _27: bool;
+    let mut _27: usize;
+    let mut _28: bool;
     scope 1 {
         debug v => _1;
-        let _13: &std::vec::Vec<i32>;
-        let _14: &[i32; 3];
-        let mut _20: &[i32; 3];
+        let _15: &std::vec::Vec<i32>;
+        let _16: &[i32; 3];
         scope 3 {
-            debug left_val => _13;
-            debug right_val => _14;
-            let _17: core::panicking::AssertKind;
+            debug left_val => _15;
+            debug right_val => _16;
+            let _19: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _17;
+                debug kind => _19;
             }
         }
     }
@@ -65,14 +66,14 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i32; 1]);
-        _21 = (((_6.0: std::ptr::Unique<[i32; 1]>).0: std::ptr::NonNull<[i32; 1]>).0: *const [i32; 1]);
-        _22 = _21 as *const () (PtrToPtr);
-        _23 = _22 as usize (Transmute);
-        _24 = AlignOf(i32);
-        _25 = Sub(_24, const 1_usize);
-        _26 = BitAnd(_23, _25);
-        _27 = Eq(_26, const 0_usize);
-        assert(_27, "misaligned pointer dereference: address must be a multiple of {} but is {}", _24, _23) -> [success: bb11, unwind unreachable];
+        _22 = (((_6.0: std::ptr::Unique<[i32; 1]>).0: std::ptr::NonNull<[i32; 1]>).0: *const [i32; 1]);
+        _23 = _22 as *const () (PtrToPtr);
+        _24 = _23 as usize (Transmute);
+        _25 = AlignOf(i32);
+        _26 = Sub(_25, const 1_usize);
+        _27 = BitAnd(_24, _26);
+        _28 = Eq(_27, const 0_usize);
+        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb11, unwind unreachable];
     }
 
     bb2: {
@@ -87,22 +88,23 @@ fn main() -> () {
 
     bb4: {
         _12 = &_1;
-        _20 = const _;
-        _11 = (move _12, _20);
-        _13 = (_11.0: &std::vec::Vec<i32>);
-        _14 = (_11.1: &[i32; 3]);
-        _16 = <Vec<i32> as PartialEq<[i32; 3]>>::eq(_13, _14) -> [return: bb5, unwind: bb9];
+        _14 = [const 1_i32, const 2_i32, const 3_i32];
+        _13 = &_14;
+        _11 = (move _12, move _13);
+        _15 = (_11.0: &std::vec::Vec<i32>);
+        _16 = (_11.1: &[i32; 3]);
+        _18 = <Vec<i32> as PartialEq<[i32; 3]>>::eq(_15, _16) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        _15 = Not(move _16);
-        switchInt(move _15) -> [0: bb7, otherwise: bb6];
+        _17 = Not(move _18);
+        switchInt(move _17) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _17 = core::panicking::AssertKind::Eq;
-        _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<Vec<i32>, [i32; 3]>(move _17, _13, _14, move _19) -> bb9;
+        _19 = core::panicking::AssertKind::Eq;
+        _21 = Option::<Arguments<'_>>::None;
+        _20 = core::panicking::assert_failed::<Vec<i32>, [i32; 3]>(move _19, _15, _16, move _21) -> bb9;
     }
 
     bb7: {
@@ -122,19 +124,8 @@ fn main() -> () {
     }
 
     bb11: {
-        (*_21) = [const 1_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        (*_22) = [const 1_i32];
+        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
         _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &[i32; 3] = {
-    let mut _0: &[i32; 3];
-    let mut _1: [i32; 3];
-
-    bb0: {
-        _1 = [const 1_i32, const 2_i32, const 3_i32];
-        _0 = &_1;
-        return;
     }
 }

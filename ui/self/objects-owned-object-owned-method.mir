@@ -40,23 +40,24 @@ fn main() -> () {
     let mut _4: (&usize, &usize);
     let mut _5: &usize;
     let _6: usize;
-    let mut _9: bool;
-    let mut _10: bool;
-    let mut _11: usize;
-    let mut _12: usize;
-    let _14: !;
-    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _7: &usize;
+    let _8: usize;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: usize;
+    let mut _14: usize;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug foo => _1;
-        let _7: &usize;
-        let _8: &usize;
-        let mut _16: &usize;
+        let _9: &usize;
+        let _10: &usize;
         scope 2 {
-            debug left_val => _7;
-            debug right_val => _8;
-            let _13: core::panicking::AssertKind;
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _13;
+                debug kind => _15;
             }
         }
     }
@@ -67,41 +68,31 @@ fn main() -> () {
     }
 
     bb1: {
-        _1 = move _2 as std::boxed::Box<dyn FooTrait> (Pointer(Unsize));
-        _16 = const _;
-        _6 = <dyn FooTrait as FooTrait>::foo(move _1) -> [return: bb2, unwind continue];
+        _1 = move _2 as std::boxed::Box<dyn FooTrait> (PointerCoercion(Unsize));
+        _6 = const 22_usize;
+        _5 = &_6;
+        _8 = <dyn FooTrait as FooTrait>::foo(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = &_6;
-        _4 = (_16, move _5);
-        _7 = (_4.0: &usize);
-        _8 = (_4.1: &usize);
-        _11 = (*_7);
-        _12 = (*_8);
-        _10 = Eq(move _11, move _12);
-        _9 = Not(move _10);
-        switchInt(move _9) -> [0: bb4, otherwise: bb3];
+        _7 = &_8;
+        _4 = (move _5, move _7);
+        _9 = (_4.0: &usize);
+        _10 = (_4.1: &usize);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _13 = core::panicking::AssertKind::Eq;
-        _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15) -> unwind continue;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 22_usize;
-        _0 = &_1;
         return;
     }
 }

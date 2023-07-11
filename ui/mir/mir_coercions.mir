@@ -5,7 +5,7 @@ fn identity_coercion(_1: &dyn Fn(u32) -> u32 + Send) -> &dyn Fn(u32) -> u32 {
     let mut _0: &dyn std::ops::Fn(u32) -> u32;
 
     bb0: {
-        _0 = _1 as &dyn std::ops::Fn(u32) -> u32 (Pointer(Unsize));
+        _0 = _1 as &dyn std::ops::Fn(u32) -> u32 (PointerCoercion(Unsize));
         return;
     }
 }
@@ -19,8 +19,8 @@ fn fn_coercions(_1: &fn(u32) -> u32) -> (unsafe fn(u32) -> u32, &dyn Fn(u32) -> 
 
     bb0: {
         _3 = (*_1);
-        _2 = move _3 as unsafe fn(u32) -> u32 (Pointer(UnsafeFnPointer));
-        _4 = _1 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (Pointer(Unsize));
+        _2 = move _3 as unsafe fn(u32) -> u32 (PointerCoercion(UnsafeFnPointer));
+        _4 = _1 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (PointerCoercion(Unsize));
         _0 = (move _2, move _4);
         return;
     }
@@ -31,7 +31,7 @@ fn simple_array_coercion(_1: &[u8; 3]) -> &[u8] {
     let mut _0: &[u8];
 
     bb0: {
-        _0 = _1 as &[u8] (Pointer(Unsize));
+        _0 = _1 as &[u8] (PointerCoercion(Unsize));
         return;
     }
 }
@@ -159,7 +159,7 @@ fn coerce_ptr_wrapper(_1: PtrWrapper<'_, [u8; 3]>) -> PtrWrapper<'_, [u8]> {
     let mut _0: PtrWrapper<'_, [u8]>;
 
     bb0: {
-        _0 = move _1 as PtrWrapper<'_, [u8]> (Pointer(Unsize));
+        _0 = move _1 as PtrWrapper<'_, [u8]> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -178,7 +178,7 @@ fn coerce_triv_ptr_wrapper(_1: TrivPtrWrapper<'_, [u8; 3]>) -> TrivPtrWrapper<'_
     let mut _0: TrivPtrWrapper<'_, [u8]>;
 
     bb0: {
-        _0 = move _1 as TrivPtrWrapper<'_, [u8]> (Pointer(Unsize));
+        _0 = move _1 as TrivPtrWrapper<'_, [u8]> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -197,7 +197,7 @@ fn coerce_fat_ptr_wrapper(_1: PtrWrapper<'_, dyn Fn(u32) -> u32 + Send>) -> PtrW
     let mut _0: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>;
 
     bb0: {
-        _0 = move _1 as PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32> (Pointer(Unsize));
+        _0 = move _1 as PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -207,7 +207,7 @@ fn coerce_ptr_wrapper_poly(_1: PtrWrapper<'_, T>) -> PtrWrapper<'_, Trait> {
     let mut _0: PtrWrapper<'_, Trait>;
 
     bb0: {
-        _0 = move _1 as PtrWrapper<'_, Trait> (Pointer(Unsize));
+        _0 = move _1 as PtrWrapper<'_, Trait> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -233,82 +233,90 @@ fn main() -> () {
     let mut _23: &u32;
     let _24: u32;
     let mut _25: (u32,);
-    let mut _28: bool;
-    let mut _29: bool;
-    let mut _30: u32;
-    let mut _31: u32;
-    let _33: !;
-    let mut _34: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _35: (&u32, &u32);
-    let mut _36: &u32;
-    let _37: u32;
-    let mut _38: &dyn std::ops::Fn(u32) -> u32;
-    let _39: &dyn std::ops::Fn(u32) -> u32;
-    let mut _40: (u32,);
-    let mut _43: bool;
-    let mut _44: bool;
-    let mut _45: u32;
-    let mut _46: u32;
-    let _48: !;
-    let mut _49: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _50: (&&[u8], &&[u8; 3]);
-    let mut _51: &&[u8];
-    let _52: &[u8];
-    let _53: &[u8; 3];
-    let mut _54: &&[u8; 3];
-    let _55: &[u8; 3];
-    let mut _58: bool;
-    let mut _59: bool;
-    let _61: !;
-    let mut _62: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _64: PtrWrapper<'_, [u8; 3]>;
-    let _65: &[u8; 3];
-    let mut _66: bool;
-    let mut _67: bool;
-    let mut _68: &PtrWrapper<'_, [u8]>;
-    let mut _69: &PtrWrapper<'_, [u8]>;
-    let _70: PtrWrapper<'_, [u8]>;
-    let mut _71: PtrWrapper<'_, [u8; 3]>;
-    let _72: &[u8; 3];
-    let mut _73: !;
-    let mut _75: TrivPtrWrapper<'_, [u8; 3]>;
+    let mut _26: &u32;
+    let _27: u32;
+    let mut _30: bool;
+    let mut _31: bool;
+    let mut _32: u32;
+    let mut _33: u32;
+    let _35: !;
+    let mut _36: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _37: (&u32, &u32);
+    let mut _38: &u32;
+    let _39: u32;
+    let mut _40: &dyn std::ops::Fn(u32) -> u32;
+    let _41: &dyn std::ops::Fn(u32) -> u32;
+    let mut _42: (u32,);
+    let mut _43: &u32;
+    let _44: u32;
+    let mut _47: bool;
+    let mut _48: bool;
+    let mut _49: u32;
+    let mut _50: u32;
+    let _52: !;
+    let mut _53: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _54: (&&[u8], &&[u8; 3]);
+    let mut _55: &&[u8];
+    let _56: &[u8];
+    let _57: &[u8; 3];
+    let mut _58: &&[u8; 3];
+    let _59: &[u8; 3];
+    let mut _62: bool;
+    let mut _63: bool;
+    let _65: !;
+    let mut _66: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _68: PtrWrapper<'_, [u8; 3]>;
+    let _69: &[u8; 3];
+    let mut _70: bool;
+    let mut _71: bool;
+    let mut _72: &PtrWrapper<'_, [u8]>;
+    let mut _73: &PtrWrapper<'_, [u8]>;
+    let _74: PtrWrapper<'_, [u8]>;
+    let mut _75: PtrWrapper<'_, [u8; 3]>;
     let _76: &[u8; 3];
-    let mut _77: (&&&[u8], &&[u8; 3]);
-    let mut _78: &&&[u8];
-    let _79: &&[u8];
-    let mut _80: &&[u8; 3];
-    let _81: &[u8; 3];
-    let mut _84: bool;
-    let mut _85: bool;
-    let _87: !;
-    let mut _88: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _90: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send>;
-    let mut _91: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send;
-    let _92: &fn(u32) -> u32;
-    let mut _93: (&u32, &u32);
-    let mut _94: &u32;
-    let _95: u32;
-    let mut _96: (u32,);
-    let mut _99: bool;
-    let mut _100: bool;
-    let mut _101: u32;
-    let mut _102: u32;
-    let _104: !;
-    let mut _105: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _107: PtrWrapper<'_, fn(u32) -> u32>;
-    let _108: &fn(u32) -> u32;
-    let mut _109: (&u32, &u32);
-    let mut _110: &u32;
-    let _111: u32;
-    let mut _112: (u32,);
-    let mut _115: bool;
-    let mut _116: bool;
-    let mut _117: u32;
-    let mut _118: u32;
-    let _120: !;
-    let mut _121: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _126: &dyn std::ops::Fn(u32) -> u32;
-    let mut _127: &dyn std::ops::Fn(u32) -> u32;
+    let mut _77: !;
+    let mut _79: TrivPtrWrapper<'_, [u8; 3]>;
+    let _80: &[u8; 3];
+    let mut _81: (&&&[u8], &&[u8; 3]);
+    let mut _82: &&&[u8];
+    let _83: &&[u8];
+    let mut _84: &&[u8; 3];
+    let _85: &[u8; 3];
+    let mut _88: bool;
+    let mut _89: bool;
+    let _91: !;
+    let mut _92: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _94: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32 + std::marker::Send>;
+    let mut _95: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send;
+    let _96: &fn(u32) -> u32;
+    let mut _97: (&u32, &u32);
+    let mut _98: &u32;
+    let _99: u32;
+    let mut _100: (u32,);
+    let mut _101: &u32;
+    let _102: u32;
+    let mut _105: bool;
+    let mut _106: bool;
+    let mut _107: u32;
+    let mut _108: u32;
+    let _110: !;
+    let mut _111: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _113: PtrWrapper<'_, fn(u32) -> u32>;
+    let _114: &fn(u32) -> u32;
+    let mut _115: (&u32, &u32);
+    let mut _116: &u32;
+    let _117: u32;
+    let mut _118: (u32,);
+    let mut _119: &u32;
+    let _120: u32;
+    let mut _123: bool;
+    let mut _124: bool;
+    let mut _125: u32;
+    let mut _126: u32;
+    let _128: !;
+    let mut _129: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _130: &dyn std::ops::Fn(u32) -> u32;
+    let mut _131: &dyn std::ops::Fn(u32) -> u32;
     scope 1 {
         debug a => _1;
         let _2: fn(u32) -> u32;
@@ -321,15 +329,13 @@ fn main() -> () {
                 debug g => _4;
                 let _13: &usize;
                 let _14: &usize;
-                let _26: &u32;
-                let _27: &u32;
-                let _41: &u32;
-                let _42: &u32;
-                let _56: &&[u8];
-                let _57: &&[u8; 3];
-                let _63: PtrWrapper<'_, [u8]>;
-                let mut _124: &u32;
-                let mut _125: &u32;
+                let _28: &u32;
+                let _29: &u32;
+                let _45: &u32;
+                let _46: &u32;
+                let _60: &&[u8];
+                let _61: &&[u8; 3];
+                let _67: PtrWrapper<'_, [u8]>;
                 scope 4 {
                     debug left_val => _13;
                     debug right_val => _14;
@@ -339,70 +345,68 @@ fn main() -> () {
                     }
                 }
                 scope 6 {
-                    debug left_val => _26;
-                    debug right_val => _27;
-                    let _32: core::panicking::AssertKind;
+                    debug left_val => _28;
+                    debug right_val => _29;
+                    let _34: core::panicking::AssertKind;
                     scope 7 {
-                        debug kind => _32;
+                        debug kind => _34;
                     }
                 }
                 scope 8 {
-                    debug left_val => _41;
-                    debug right_val => _42;
-                    let _47: core::panicking::AssertKind;
+                    debug left_val => _45;
+                    debug right_val => _46;
+                    let _51: core::panicking::AssertKind;
                     scope 9 {
-                        debug kind => _47;
+                        debug kind => _51;
                     }
                 }
                 scope 10 {
-                    debug left_val => _56;
-                    debug right_val => _57;
-                    let _60: core::panicking::AssertKind;
+                    debug left_val => _60;
+                    debug right_val => _61;
+                    let _64: core::panicking::AssertKind;
                     scope 11 {
-                        debug kind => _60;
+                        debug kind => _64;
                     }
                 }
                 scope 12 {
-                    debug w => _63;
-                    let _74: TrivPtrWrapper<'_, [u8]>;
+                    debug w => _67;
+                    let _78: TrivPtrWrapper<'_, [u8]>;
                     scope 13 {
-                        debug w => _74;
-                        let _82: &&&[u8];
-                        let _83: &&[u8; 3];
-                        let _89: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>;
+                        debug w => _78;
+                        let _86: &&&[u8];
+                        let _87: &&[u8; 3];
+                        let _93: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>;
                         scope 14 {
-                            debug left_val => _82;
-                            debug right_val => _83;
-                            let _86: core::panicking::AssertKind;
+                            debug left_val => _86;
+                            debug right_val => _87;
+                            let _90: core::panicking::AssertKind;
                             scope 15 {
-                                debug kind => _86;
+                                debug kind => _90;
                             }
                         }
                         scope 16 {
-                            debug z => _89;
-                            let _97: &u32;
-                            let _98: &u32;
-                            let _106: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>;
-                            let mut _123: &u32;
+                            debug z => _93;
+                            let _103: &u32;
+                            let _104: &u32;
+                            let _112: PtrWrapper<'_, dyn std::ops::Fn(u32) -> u32>;
                             scope 17 {
-                                debug left_val => _97;
-                                debug right_val => _98;
-                                let _103: core::panicking::AssertKind;
+                                debug left_val => _103;
+                                debug right_val => _104;
+                                let _109: core::panicking::AssertKind;
                                 scope 18 {
-                                    debug kind => _103;
+                                    debug kind => _109;
                                 }
                             }
                             scope 19 {
-                                debug z => _106;
-                                let _113: &u32;
-                                let _114: &u32;
-                                let mut _122: &u32;
+                                debug z => _112;
+                                let _121: &u32;
+                                let _122: &u32;
                                 scope 20 {
-                                    debug left_val => _113;
-                                    debug right_val => _114;
-                                    let _119: core::panicking::AssertKind;
+                                    debug left_val => _121;
+                                    debug right_val => _122;
+                                    let _127: core::panicking::AssertKind;
                                     scope 21 {
-                                        debug kind => _119;
+                                        debug kind => _127;
                                     }
                                 }
                             }
@@ -415,7 +419,7 @@ fn main() -> () {
 
     bb0: {
         _1 = [const 0_u8, const 1_u8, const 2_u8];
-        _2 = square as fn(u32) -> u32 (Pointer(ReifyFnPointer));
+        _2 = square as fn(u32) -> u32 (PointerCoercion(ReifyFnPointer));
         _6 = &_2;
         _5 = fn_coercions(_6) -> [return: bb1, unwind continue];
     }
@@ -425,7 +429,7 @@ fn main() -> () {
         _4 = (_5.1: &dyn std::ops::Fn(u32) -> u32 + std::marker::Send);
         _9 = _3 as usize (PointerExposeAddress);
         _8 = &_9;
-        _12 = square as fn(u32) -> u32 (Pointer(ReifyFnPointer));
+        _12 = square as fn(u32) -> u32 (PointerCoercion(ReifyFnPointer));
         _11 = move _12 as usize (PointerExposeAddress);
         _10 = &_11;
         _7 = (move _8, move _10);
@@ -451,238 +455,198 @@ fn main() -> () {
 
     bb4: {
         _23 = &_24;
-        _125 = const _;
-        _22 = (move _23, _125);
-        _26 = (_22.0: &u32);
-        _27 = (_22.1: &u32);
-        _30 = (*_26);
-        _31 = (*_27);
-        _29 = Eq(move _30, move _31);
-        _28 = Not(move _29);
-        switchInt(move _28) -> [0: bb6, otherwise: bb5];
+        _27 = const 16_u32;
+        _26 = &_27;
+        _22 = (move _23, move _26);
+        _28 = (_22.0: &u32);
+        _29 = (_22.1: &u32);
+        _32 = (*_28);
+        _33 = (*_29);
+        _31 = Eq(move _32, move _33);
+        _30 = Not(move _31);
+        switchInt(move _30) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _32 = core::panicking::AssertKind::Eq;
-        _34 = Option::<Arguments<'_>>::None;
-        _33 = core::panicking::assert_failed::<u32, u32>(move _32, _26, _27, move _34) -> unwind continue;
+        _34 = core::panicking::AssertKind::Eq;
+        _36 = Option::<Arguments<'_>>::None;
+        _35 = core::panicking::assert_failed::<u32, u32>(move _34, _28, _29, move _36) -> unwind continue;
     }
 
     bb6: {
-        _39 = identity_coercion(_4) -> [return: bb7, unwind continue];
+        _41 = identity_coercion(_4) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _38 = _39;
-        _40 = (const 5_u32,);
-        _37 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(move _38, move _40) -> [return: bb8, unwind continue];
+        _40 = _41;
+        _42 = (const 5_u32,);
+        _39 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(move _40, move _42) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _36 = &_37;
-        _124 = const _;
-        _35 = (move _36, _124);
-        _41 = (_35.0: &u32);
-        _42 = (_35.1: &u32);
-        _45 = (*_41);
-        _46 = (*_42);
-        _44 = Eq(move _45, move _46);
-        _43 = Not(move _44);
-        switchInt(move _43) -> [0: bb10, otherwise: bb9];
+        _38 = &_39;
+        _44 = const 25_u32;
+        _43 = &_44;
+        _37 = (move _38, move _43);
+        _45 = (_37.0: &u32);
+        _46 = (_37.1: &u32);
+        _49 = (*_45);
+        _50 = (*_46);
+        _48 = Eq(move _49, move _50);
+        _47 = Not(move _48);
+        switchInt(move _47) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _47 = core::panicking::AssertKind::Eq;
-        _49 = Option::<Arguments<'_>>::None;
-        _48 = core::panicking::assert_failed::<u32, u32>(move _47, _41, _42, move _49) -> unwind continue;
+        _51 = core::panicking::AssertKind::Eq;
+        _53 = Option::<Arguments<'_>>::None;
+        _52 = core::panicking::assert_failed::<u32, u32>(move _51, _45, _46, move _53) -> unwind continue;
     }
 
     bb10: {
-        _53 = &_1;
-        _52 = simple_array_coercion(_53) -> [return: bb11, unwind continue];
+        _57 = &_1;
+        _56 = simple_array_coercion(_57) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        _51 = &_52;
-        _55 = &_1;
-        _54 = &_55;
-        _50 = (move _51, move _54);
-        _56 = (_50.0: &&[u8]);
-        _57 = (_50.1: &&[u8; 3]);
-        _59 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_56, _57) -> [return: bb12, unwind continue];
+        _55 = &_56;
+        _59 = &_1;
+        _58 = &_59;
+        _54 = (move _55, move _58);
+        _60 = (_54.0: &&[u8]);
+        _61 = (_54.1: &&[u8; 3]);
+        _63 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_60, _61) -> [return: bb12, unwind continue];
     }
 
     bb12: {
-        _58 = Not(move _59);
-        switchInt(move _58) -> [0: bb14, otherwise: bb13];
+        _62 = Not(move _63);
+        switchInt(move _62) -> [0: bb14, otherwise: bb13];
     }
 
     bb13: {
-        _60 = core::panicking::AssertKind::Eq;
-        _62 = Option::<Arguments<'_>>::None;
-        _61 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _60, _56, _57, move _62) -> unwind continue;
+        _64 = core::panicking::AssertKind::Eq;
+        _66 = Option::<Arguments<'_>>::None;
+        _65 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _64, _60, _61, move _66) -> unwind continue;
     }
 
     bb14: {
-        _65 = &_1;
-        _64 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, const (), _65);
-        _63 = coerce_ptr_wrapper(move _64) -> [return: bb15, unwind continue];
+        _69 = &_1;
+        _68 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, const (), _69);
+        _67 = coerce_ptr_wrapper(move _68) -> [return: bb15, unwind continue];
     }
 
     bb15: {
-        _68 = &_63;
-        _72 = &_1;
-        _71 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, const (), _72);
-        _70 = move _71 as PtrWrapper<'_, [u8]> (Pointer(Unsize));
-        _69 = &_70;
-        _67 = <PtrWrapper<'_, [u8]> as PartialEq>::eq(move _68, move _69) -> [return: bb16, unwind continue];
+        _72 = &_67;
+        _76 = &_1;
+        _75 = PtrWrapper::<'_, [u8; 3]>(const 2_u32, const 3_u32, const (), _76);
+        _74 = move _75 as PtrWrapper<'_, [u8]> (PointerCoercion(Unsize));
+        _73 = &_74;
+        _71 = <PtrWrapper<'_, [u8]> as PartialEq>::eq(move _72, move _73) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        _66 = Not(move _67);
-        switchInt(move _66) -> [0: bb18, otherwise: bb17];
+        _70 = Not(move _71);
+        switchInt(move _70) -> [0: bb18, otherwise: bb17];
     }
 
     bb17: {
-        _73 = core::panicking::panic(const "assertion failed: w == PtrWrapper(2, 3, (), &a) as PtrWrapper<[u8]>") -> unwind continue;
+        _77 = core::panicking::panic(const "assertion failed: w == PtrWrapper(2, 3, (), &a) as PtrWrapper<[u8]>") -> unwind continue;
     }
 
     bb18: {
-        _76 = &_1;
-        _75 = TrivPtrWrapper::<'_, [u8; 3]>(_76);
-        _74 = coerce_triv_ptr_wrapper(move _75) -> [return: bb19, unwind continue];
+        _80 = &_1;
+        _79 = TrivPtrWrapper::<'_, [u8; 3]>(_80);
+        _78 = coerce_triv_ptr_wrapper(move _79) -> [return: bb19, unwind continue];
     }
 
     bb19: {
-        _79 = &(_74.0: &[u8]);
-        _78 = &_79;
-        _81 = &_1;
-        _80 = &_81;
-        _77 = (move _78, move _80);
-        _82 = (_77.0: &&&[u8]);
-        _83 = (_77.1: &&[u8; 3]);
-        _85 = <&&[u8] as PartialEq<&[u8; 3]>>::eq(_82, _83) -> [return: bb20, unwind continue];
+        _83 = &(_78.0: &[u8]);
+        _82 = &_83;
+        _85 = &_1;
+        _84 = &_85;
+        _81 = (move _82, move _84);
+        _86 = (_81.0: &&&[u8]);
+        _87 = (_81.1: &&[u8; 3]);
+        _89 = <&&[u8] as PartialEq<&[u8; 3]>>::eq(_86, _87) -> [return: bb20, unwind continue];
     }
 
     bb20: {
-        _84 = Not(move _85);
-        switchInt(move _84) -> [0: bb22, otherwise: bb21];
+        _88 = Not(move _89);
+        switchInt(move _88) -> [0: bb22, otherwise: bb21];
     }
 
     bb21: {
-        _86 = core::panicking::AssertKind::Eq;
-        _88 = Option::<Arguments<'_>>::None;
-        _87 = core::panicking::assert_failed::<&&[u8], &[u8; 3]>(move _86, _82, _83, move _88) -> unwind continue;
+        _90 = core::panicking::AssertKind::Eq;
+        _92 = Option::<Arguments<'_>>::None;
+        _91 = core::panicking::assert_failed::<&&[u8], &[u8; 3]>(move _90, _86, _87, move _92) -> unwind continue;
     }
 
     bb22: {
-        _92 = &_2;
-        _91 = _92 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (Pointer(Unsize));
-        _90 = PtrWrapper::<'_, dyn Fn(u32) -> u32 + Send>(const 2_u32, const 3_u32, const (), move _91);
-        _89 = coerce_fat_ptr_wrapper(move _90) -> [return: bb23, unwind continue];
+        _96 = &_2;
+        _95 = _96 as &dyn std::ops::Fn(u32) -> u32 + std::marker::Send (PointerCoercion(Unsize));
+        _94 = PtrWrapper::<'_, dyn Fn(u32) -> u32 + Send>(const 2_u32, const 3_u32, const (), move _95);
+        _93 = coerce_fat_ptr_wrapper(move _94) -> [return: bb23, unwind continue];
     }
 
     bb23: {
-        _126 = deref_copy (_89.3: &dyn std::ops::Fn(u32) -> u32);
-        _96 = (const 6_u32,);
-        _95 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(_126, move _96) -> [return: bb24, unwind continue];
+        _130 = deref_copy (_93.3: &dyn std::ops::Fn(u32) -> u32);
+        _100 = (const 6_u32,);
+        _99 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(_130, move _100) -> [return: bb24, unwind continue];
     }
 
     bb24: {
-        _94 = &_95;
-        _123 = const _;
-        _93 = (move _94, _123);
-        _97 = (_93.0: &u32);
-        _98 = (_93.1: &u32);
-        _101 = (*_97);
-        _102 = (*_98);
-        _100 = Eq(move _101, move _102);
-        _99 = Not(move _100);
-        switchInt(move _99) -> [0: bb26, otherwise: bb25];
+        _98 = &_99;
+        _102 = const 36_u32;
+        _101 = &_102;
+        _97 = (move _98, move _101);
+        _103 = (_97.0: &u32);
+        _104 = (_97.1: &u32);
+        _107 = (*_103);
+        _108 = (*_104);
+        _106 = Eq(move _107, move _108);
+        _105 = Not(move _106);
+        switchInt(move _105) -> [0: bb26, otherwise: bb25];
     }
 
     bb25: {
-        _103 = core::panicking::AssertKind::Eq;
-        _105 = Option::<Arguments<'_>>::None;
-        _104 = core::panicking::assert_failed::<u32, u32>(move _103, _97, _98, move _105) -> unwind continue;
+        _109 = core::panicking::AssertKind::Eq;
+        _111 = Option::<Arguments<'_>>::None;
+        _110 = core::panicking::assert_failed::<u32, u32>(move _109, _103, _104, move _111) -> unwind continue;
     }
 
     bb26: {
-        _108 = &_2;
-        _107 = PtrWrapper::<'_, fn(u32) -> u32>(const 2_u32, const 3_u32, const (), _108);
-        _106 = coerce_ptr_wrapper_poly::<'_, fn(u32) -> u32, dyn Fn(u32) -> u32>(move _107) -> [return: bb27, unwind continue];
+        _114 = &_2;
+        _113 = PtrWrapper::<'_, fn(u32) -> u32>(const 2_u32, const 3_u32, const (), _114);
+        _112 = coerce_ptr_wrapper_poly::<'_, fn(u32) -> u32, dyn Fn(u32) -> u32>(move _113) -> [return: bb27, unwind continue];
     }
 
     bb27: {
-        _127 = deref_copy (_106.3: &dyn std::ops::Fn(u32) -> u32);
-        _112 = (const 6_u32,);
-        _111 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(_127, move _112) -> [return: bb28, unwind continue];
+        _131 = deref_copy (_112.3: &dyn std::ops::Fn(u32) -> u32);
+        _118 = (const 6_u32,);
+        _117 = <dyn Fn(u32) -> u32 as Fn<(u32,)>>::call(_131, move _118) -> [return: bb28, unwind continue];
     }
 
     bb28: {
-        _110 = &_111;
-        _122 = const _;
-        _109 = (move _110, _122);
-        _113 = (_109.0: &u32);
-        _114 = (_109.1: &u32);
-        _117 = (*_113);
-        _118 = (*_114);
-        _116 = Eq(move _117, move _118);
-        _115 = Not(move _116);
-        switchInt(move _115) -> [0: bb30, otherwise: bb29];
+        _116 = &_117;
+        _120 = const 36_u32;
+        _119 = &_120;
+        _115 = (move _116, move _119);
+        _121 = (_115.0: &u32);
+        _122 = (_115.1: &u32);
+        _125 = (*_121);
+        _126 = (*_122);
+        _124 = Eq(move _125, move _126);
+        _123 = Not(move _124);
+        switchInt(move _123) -> [0: bb30, otherwise: bb29];
     }
 
     bb29: {
-        _119 = core::panicking::AssertKind::Eq;
-        _121 = Option::<Arguments<'_>>::None;
-        _120 = core::panicking::assert_failed::<u32, u32>(move _119, _113, _114, move _121) -> unwind continue;
+        _127 = core::panicking::AssertKind::Eq;
+        _129 = Option::<Arguments<'_>>::None;
+        _128 = core::panicking::assert_failed::<u32, u32>(move _127, _121, _122, move _129) -> unwind continue;
     }
 
     bb30: {
-        return;
-    }
-}
-
-promoted[0] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 36_u32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 36_u32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 25_u32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 16_u32;
-        _0 = &_1;
         return;
     }
 }

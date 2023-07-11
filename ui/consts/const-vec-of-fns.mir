@@ -15,32 +15,23 @@ static bare_fns: &[fn()] = {
     let _3: [fn(); 2];
     let mut _4: fn();
     let mut _5: fn();
-    let mut _6: &[fn(); 2];
 
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _6 = const _;
-        _2 = &(*_6);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = f as fn() (PointerCoercion(ReifyFnPointer));
+        StorageLive(_5);
+        _5 = f as fn() (PointerCoercion(ReifyFnPointer));
+        _3 = [move _4, move _5];
+        StorageDead(_5);
+        StorageDead(_4);
+        _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[fn()] (Pointer(Unsize));
+        _0 = move _1 as &[fn()] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in bare_fns: &[fn(); 2] = {
-    let mut _0: &[fn(); 2];
-    let mut _1: [fn(); 2];
-    let mut _2: fn();
-    let mut _3: fn();
-
-    bb0: {
-        _2 = f as fn() (Pointer(ReifyFnPointer));
-        _3 = f as fn() (Pointer(ReifyFnPointer));
-        _1 = [move _2, move _3];
-        _0 = &_1;
         return;
     }
 }
@@ -61,12 +52,12 @@ static mut closures: &mut [S<fn()>] = {
         StorageLive(_3);
         StorageLive(_4);
         StorageLive(_5);
-        _5 = f as fn() (Pointer(ReifyFnPointer));
+        _5 = f as fn() (PointerCoercion(ReifyFnPointer));
         _4 = S::<fn()>(move _5);
         StorageDead(_5);
         StorageLive(_6);
         StorageLive(_7);
-        _7 = f as fn() (Pointer(ReifyFnPointer));
+        _7 = f as fn() (PointerCoercion(ReifyFnPointer));
         _6 = S::<fn()>(move _7);
         StorageDead(_7);
         _3 = [move _4, move _6];
@@ -74,7 +65,7 @@ static mut closures: &mut [S<fn()>] = {
         StorageDead(_4);
         _2 = &mut _3;
         _1 = &mut (*_2);
-        _0 = move _1 as &mut [S<fn()>] (Pointer(Unsize));
+        _0 = move _1 as &mut [S<fn()>] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -203,21 +194,21 @@ fn main() -> () {
 }
 
 alloc2 (static: closures, size: 16, align: 8) {
-    ╾───────alloc12───────╼ 02 00 00 00 00 00 00 00 │ ╾──────╼........
+    ╾───────alloc11───────╼ 02 00 00 00 00 00 00 00 │ ╾──────╼........
 }
 
-alloc12 (size: 16, align: 8) {
-    ╾───────alloc7────────╼ ╾───────alloc7────────╼ │ ╾──────╼╾──────╼
+alloc11 (size: 16, align: 8) {
+    ╾───────alloc6────────╼ ╾───────alloc6────────╼ │ ╾──────╼╾──────╼
 }
 
-alloc7 (fn: f)
+alloc6 (fn: f)
 
 alloc1 (static: bare_fns, size: 16, align: 8) {
-    ╾───────alloc8────────╼ 02 00 00 00 00 00 00 00 │ ╾──────╼........
+    ╾───────alloc7────────╼ 02 00 00 00 00 00 00 00 │ ╾──────╼........
 }
 
-alloc8 (size: 16, align: 8) {
-    ╾───────alloc7────────╼ ╾───────alloc7────────╼ │ ╾──────╼╾──────╼
+alloc7 (size: 16, align: 8) {
+    ╾───────alloc6────────╼ ╾───────alloc6────────╼ │ ╾──────╼╾──────╼
 }
 
 fn S(_1: F) -> S<F> {

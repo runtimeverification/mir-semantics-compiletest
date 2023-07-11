@@ -16,7 +16,7 @@ fn <impl at ui/mir/issue-66851.rs:7:10: 7:15>::fmt(_1: &SpecialsRes, _2: &mut Fo
         _3 = &(((*_1) as Res).0: u64);
         _4 = const "Res";
         _6 = &_3;
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _4, move _5) -> [return: bb1, unwind continue];
     }
 
@@ -106,19 +106,20 @@ fn main() -> () {
     let mut _1: (&SpecialsRes, &SpecialsRes);
     let mut _2: &SpecialsRes;
     let _3: SpecialsRes;
-    let _4: &SpecialsRes;
-    let _5: &SpecialsRes;
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: &SpecialsRes;
+    let mut _4: &SpecialsRes;
+    let _5: SpecialsRes;
+    let _6: &SpecialsRes;
+    let _7: &SpecialsRes;
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
@@ -128,36 +129,26 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _11 = const _;
-        _1 = (move _2, _11);
-        _4 = (_1.0: &SpecialsRes);
-        _5 = (_1.1: &SpecialsRes);
-        _7 = <SpecialsRes as PartialEq>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _5 = SpecialsRes::Res(const 1_u64);
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &SpecialsRes);
+        _7 = (_1.1: &SpecialsRes);
+        _9 = <SpecialsRes as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<SpecialsRes, SpecialsRes>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<SpecialsRes, SpecialsRes>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &SpecialsRes = {
-    let mut _0: &SpecialsRes;
-    let mut _1: SpecialsRes;
-
-    bb0: {
-        _1 = SpecialsRes::Res(const 1_u64);
-        _0 = &_1;
         return;
     }
 }

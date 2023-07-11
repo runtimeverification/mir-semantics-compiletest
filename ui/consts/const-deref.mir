@@ -4,25 +4,14 @@ const C: &isize = {
     let mut _0: &isize;
     let _1: &isize;
     let _2: isize;
-    let mut _3: &isize;
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = const 1000_isize;
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in C: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 1000_isize;
-        _0 = &_1;
         return;
     }
 }
@@ -44,41 +33,43 @@ fn main() -> () {
     let mut _0: ();
     let mut _1: (&isize, &isize);
     let _2: &isize;
-    let _3: &isize;
-    let _4: &isize;
-    let mut _5: bool;
-    let mut _6: bool;
-    let mut _7: isize;
-    let mut _8: isize;
-    let _10: !;
-    let mut _11: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _12: &isize;
+    let mut _3: &isize;
+    let _4: isize;
+    let _5: &isize;
+    let _6: &isize;
+    let mut _7: bool;
+    let mut _8: bool;
+    let mut _9: isize;
+    let mut _10: isize;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _3;
-        debug right_val => _4;
-        let _9: core::panicking::AssertKind;
+        debug left_val => _5;
+        debug right_val => _6;
+        let _11: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _9;
+            debug kind => _11;
         }
     }
 
     bb0: {
         _2 = const {alloc1: &isize};
-        _12 = const _;
-        _1 = (_2, _12);
-        _3 = (_1.0: &isize);
-        _4 = (_1.1: &isize);
-        _7 = (*_3);
-        _8 = (*_4);
-        _6 = Eq(move _7, move _8);
-        _5 = Not(move _6);
-        switchInt(move _5) -> [0: bb2, otherwise: bb1];
+        _4 = const 1000_isize;
+        _3 = &_4;
+        _1 = (_2, move _3);
+        _5 = (_1.0: &isize);
+        _6 = (_1.1: &isize);
+        _9 = (*_5);
+        _10 = (*_6);
+        _8 = Eq(move _9, move _10);
+        _7 = Not(move _8);
+        switchInt(move _7) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _9 = core::panicking::AssertKind::Eq;
-        _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<isize, isize>(move _9, _3, _4, move _11) -> unwind continue;
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<isize, isize>(move _11, _5, _6, move _13) -> unwind continue;
     }
 
     bb2: {
@@ -88,15 +79,4 @@ fn main() -> () {
 
 alloc1 (static: D, size: 8, align: 8) {
     e8 03 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in main: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 1000_isize;
-        _0 = &_1;
-        return;
-    }
 }

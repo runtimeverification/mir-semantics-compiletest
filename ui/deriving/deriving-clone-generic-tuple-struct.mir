@@ -21,28 +21,17 @@ fn main() -> () {
     let mut _0: ();
     let mut _1: S<i32>;
     let mut _2: &S<i32>;
+    let _3: S<i32>;
     scope 1 {
     }
 
     bb0: {
-        _2 = const _;
-        _1 = <S<i32> as Clone>::clone(_2) -> [return: bb1, unwind continue];
+        _3 = S::<i32>(const 1_i32, const ());
+        _2 = &_3;
+        _1 = <S<i32> as Clone>::clone(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in main: &S<i32> = {
-    let mut _0: &S<i32>;
-    let mut _1: S<i32>;
-    let mut _2: ();
-
-    bb0: {
-        _2 = ();
-        _1 = S::<i32>(const 1_i32, move _2);
-        _0 = &_1;
         return;
     }
 }

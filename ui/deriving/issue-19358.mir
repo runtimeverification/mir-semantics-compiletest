@@ -24,7 +24,7 @@ fn <impl at ui/deriving/issue-19358.rs:7:10: 7:15>::fmt(_1: &Foo<T>, _2: &mut Fo
         _4 = const "foo";
         _7 = &((*_1).0: T);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
     }
 
@@ -48,7 +48,7 @@ fn <impl at ui/deriving/issue-19358.rs:12:10: 12:15>::fmt(_1: &Bar<T>, _2: &mut 
         _4 = const "bar";
         _7 = &((*_1).0: T);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
     }
 
@@ -63,41 +63,43 @@ fn main() -> () {
     let _3: ();
     let mut _4: std::fmt::Arguments<'_>;
     let mut _5: &[&str];
-    let mut _6: &[core::fmt::rt::Argument<'_>];
-    let _7: &[core::fmt::rt::Argument<'_>; 2];
-    let _8: [core::fmt::rt::Argument<'_>; 2];
-    let mut _9: core::fmt::rt::Argument<'_>;
-    let _10: &Foo<isize>;
+    let _6: &[&str; 3];
+    let _7: [&str; 3];
+    let mut _8: &[core::fmt::rt::Argument<'_>];
+    let _9: &[core::fmt::rt::Argument<'_>; 2];
+    let _10: [core::fmt::rt::Argument<'_>; 2];
     let mut _11: core::fmt::rt::Argument<'_>;
-    let _12: &Bar<isize>;
+    let _12: &Foo<isize>;
+    let mut _13: core::fmt::rt::Argument<'_>;
+    let _14: &Bar<isize>;
     scope 1 {
         debug a => _1;
         let _2: Bar<isize>;
         scope 2 {
             debug b => _2;
-            let mut _13: &[&str; 3];
         }
     }
 
     bb0: {
         _1 = Foo::<isize> { foo: const 12_isize };
         _2 = Bar::<isize> { bar: const 12_isize };
-        _13 = const _;
-        _5 = _13 as &[&str] (Pointer(Unsize));
-        _10 = &_1;
-        _9 = core::fmt::rt::Argument::<'_>::new_debug::<Foo<isize>>(_10) -> [return: bb1, unwind continue];
+        _7 = [const "", const " ", const "\n"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _12 = &_1;
+        _11 = core::fmt::rt::Argument::<'_>::new_debug::<Foo<isize>>(_12) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _12 = &_2;
-        _11 = core::fmt::rt::Argument::<'_>::new_debug::<Bar<isize>>(_12) -> [return: bb2, unwind continue];
+        _14 = &_2;
+        _13 = core::fmt::rt::Argument::<'_>::new_debug::<Bar<isize>>(_14) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _8 = [move _9, move _11];
-        _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _6) -> [return: bb3, unwind continue];
+        _10 = [move _11, move _13];
+        _9 = &_10;
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind continue];
     }
 
     bb3: {
@@ -105,17 +107,6 @@ fn main() -> () {
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &[&str; 3] = {
-    let mut _0: &[&str; 3];
-    let mut _1: [&str; 3];
-
-    bb0: {
-        _1 = [const "", const " ", const "\n"];
-        _0 = &_1;
         return;
     }
 }

@@ -10,7 +10,7 @@ const C0: &[u8] = {
         StorageLive(_2);
         _2 = const b"\x00";
         _1 = &(*_2);
-        _0 = move _1 as &[u8] (Pointer(Unsize));
+        _0 = move _1 as &[u8] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -24,46 +24,48 @@ alloc1 (size: 1, align: 1) {
 fn main() -> () {
     let mut _0: ();
     let _1: &[u8];
-    let mut _2: bool;
-    let mut _3: bool;
-    let mut _4: usize;
-    let mut _5: usize;
-    let mut _6: bool;
+    let _2: &[u8; 1];
+    let _3: [u8; 1];
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: usize;
     let mut _7: usize;
-    let mut _8: usize;
-    let mut _9: bool;
+    let mut _8: bool;
+    let mut _9: usize;
     let mut _10: usize;
-    let mut _11: usize;
-    let mut _12: bool;
-    let mut _13: &[u8; 1];
+    let mut _11: bool;
+    let mut _12: usize;
+    let mut _13: usize;
+    let mut _14: bool;
     scope 1 {
         debug x => _1;
     }
 
     bb0: {
-        _13 = const _;
-        _1 = _13 as &[u8] (Pointer(Unsize));
-        _10 = Len((*_1));
-        _11 = const 0_usize;
-        _12 = Eq(move _10, move _11);
-        switchInt(move _12) -> [0: bb1, otherwise: bb7];
+        _3 = [const 0_u8];
+        _2 = &_3;
+        _1 = _2 as &[u8] (PointerCoercion(Unsize));
+        _12 = Len((*_1));
+        _13 = const 0_usize;
+        _14 = Eq(move _12, move _13);
+        switchInt(move _14) -> [0: bb1, otherwise: bb7];
     }
 
     bb1: {
-        _7 = Len((*_1));
-        _8 = const 1_usize;
-        _9 = Eq(move _7, move _8);
-        switchInt(move _9) -> [0: bb6, otherwise: bb2];
+        _9 = Len((*_1));
+        _10 = const 1_usize;
+        _11 = Eq(move _9, move _10);
+        switchInt(move _11) -> [0: bb6, otherwise: bb2];
     }
 
     bb2: {
-        _2 = Le(const 1_u8, (*_1)[0 of 1]);
-        switchInt(move _2) -> [0: bb4, otherwise: bb3];
+        _4 = Le(const 1_u8, (*_1)[0 of 1]);
+        switchInt(move _4) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _3 = Le((*_1)[0 of 1], const u8::MAX);
-        switchInt(move _3) -> [0: bb4, otherwise: bb7];
+        _5 = Le((*_1)[0 of 1], const u8::MAX);
+        switchInt(move _5) -> [0: bb4, otherwise: bb7];
     }
 
     bb4: {
@@ -75,24 +77,13 @@ fn main() -> () {
     }
 
     bb6: {
-        _4 = Len((*_1));
-        _5 = const 2_usize;
-        _6 = Ge(move _4, move _5);
-        switchInt(move _6) -> [0: bb5, otherwise: bb7];
+        _6 = Len((*_1));
+        _7 = const 2_usize;
+        _8 = Ge(move _6, move _7);
+        switchInt(move _8) -> [0: bb5, otherwise: bb7];
     }
 
     bb7: {
-        return;
-    }
-}
-
-promoted[0] in main: &[u8; 1] = {
-    let mut _0: &[u8; 1];
-    let mut _1: [u8; 1];
-
-    bb0: {
-        _1 = [const 0_u8];
-        _0 = &_1;
         return;
     }
 }

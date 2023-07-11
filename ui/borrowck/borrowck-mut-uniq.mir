@@ -17,11 +17,11 @@ fn <impl at ui/borrowck/borrowck-mut-uniq.rs:5:10: 5:15>::fmt(_1: &Ints, _2: &mu
         _3 = const "Ints";
         _4 = const "sum";
         _6 = &((*_1).0: std::boxed::Box<isize>);
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _7 = const "values";
         _10 = &((*_1).1: std::vec::Vec<isize>);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
     }
 
@@ -221,35 +221,36 @@ fn main() -> () {
     let _11: ();
     let mut _12: std::fmt::Arguments<'_>;
     let mut _13: &[&str];
-    let mut _14: &[core::fmt::rt::Argument<'_>];
-    let _15: &[core::fmt::rt::Argument<'_>; 1];
-    let _16: [core::fmt::rt::Argument<'_>; 1];
-    let mut _17: core::fmt::rt::Argument<'_>;
-    let _18: &std::boxed::Box<Ints>;
-    let mut _20: *const Ints;
+    let _14: &[&str; 2];
+    let _15: [&str; 2];
+    let mut _16: &[core::fmt::rt::Argument<'_>];
+    let _17: &[core::fmt::rt::Argument<'_>; 1];
+    let _18: [core::fmt::rt::Argument<'_>; 1];
+    let mut _19: core::fmt::rt::Argument<'_>;
+    let _20: &std::boxed::Box<Ints>;
     let mut _21: *const Ints;
     let mut _22: *const Ints;
+    let mut _23: *const Ints;
     scope 1 {
         debug ints => _1;
-        let mut _19: &[&str; 2];
-        let mut _23: *const ();
-        let mut _24: usize;
+        let mut _24: *const ();
         let mut _25: usize;
         let mut _26: usize;
         let mut _27: usize;
-        let mut _28: bool;
-        let mut _29: *const ();
-        let mut _30: usize;
+        let mut _28: usize;
+        let mut _29: bool;
+        let mut _30: *const ();
         let mut _31: usize;
         let mut _32: usize;
         let mut _33: usize;
-        let mut _34: bool;
-        let mut _35: *const ();
-        let mut _36: usize;
+        let mut _34: usize;
+        let mut _35: bool;
+        let mut _36: *const ();
         let mut _37: usize;
         let mut _38: usize;
         let mut _39: usize;
-        let mut _40: bool;
+        let mut _40: usize;
+        let mut _41: bool;
     }
 
     bb0: {
@@ -266,50 +267,51 @@ fn main() -> () {
     }
 
     bb3: {
-        _20 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
-        _35 = _20 as *const () (PtrToPtr);
-        _36 = _35 as usize (Transmute);
-        _37 = AlignOf(Ints);
-        _38 = Sub(_37, const 1_usize);
-        _39 = BitAnd(_36, _38);
-        _40 = Eq(_39, const 0_usize);
-        assert(_40, "misaligned pointer dereference: address must be a multiple of {} but is {}", _37, _36) -> [success: bb16, unwind unreachable];
+        _21 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
+        _36 = _21 as *const () (PtrToPtr);
+        _37 = _36 as usize (Transmute);
+        _38 = AlignOf(Ints);
+        _39 = Sub(_38, const 1_usize);
+        _40 = BitAnd(_37, _39);
+        _41 = Eq(_40, const 0_usize);
+        assert(_41, "misaligned pointer dereference: address must be a multiple of {} but is {}", _38, _37) -> [success: bb16, unwind unreachable];
     }
 
     bb4: {
-        _21 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
-        _29 = _21 as *const () (PtrToPtr);
-        _30 = _29 as usize (Transmute);
-        _31 = AlignOf(Ints);
-        _32 = Sub(_31, const 1_usize);
-        _33 = BitAnd(_30, _32);
-        _34 = Eq(_33, const 0_usize);
-        assert(_34, "misaligned pointer dereference: address must be a multiple of {} but is {}", _31, _30) -> [success: bb15, unwind unreachable];
+        _22 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
+        _30 = _22 as *const () (PtrToPtr);
+        _31 = _30 as usize (Transmute);
+        _32 = AlignOf(Ints);
+        _33 = Sub(_32, const 1_usize);
+        _34 = BitAnd(_31, _33);
+        _35 = Eq(_34, const 0_usize);
+        assert(_35, "misaligned pointer dereference: address must be a multiple of {} but is {}", _32, _31) -> [success: bb15, unwind unreachable];
     }
 
     bb5: {
-        _22 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
-        _23 = _22 as *const () (PtrToPtr);
-        _24 = _23 as usize (Transmute);
-        _25 = AlignOf(Ints);
-        _26 = Sub(_25, const 1_usize);
-        _27 = BitAnd(_24, _26);
-        _28 = Eq(_27, const 0_usize);
-        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb14, unwind unreachable];
+        _23 = (((_1.0: std::ptr::Unique<Ints>).0: std::ptr::NonNull<Ints>).0: *const Ints);
+        _24 = _23 as *const () (PtrToPtr);
+        _25 = _24 as usize (Transmute);
+        _26 = AlignOf(Ints);
+        _27 = Sub(_26, const 1_usize);
+        _28 = BitAnd(_25, _27);
+        _29 = Eq(_28, const 0_usize);
+        assert(_29, "misaligned pointer dereference: address must be a multiple of {} but is {}", _26, _25) -> [success: bb14, unwind unreachable];
     }
 
     bb6: {
-        _19 = const _;
-        _13 = _19 as &[&str] (Pointer(Unsize));
-        _18 = &_1;
-        _17 = core::fmt::rt::Argument::<'_>::new_debug::<Box<Ints>>(_18) -> [return: bb7, unwind: bb11];
+        _15 = [const "ints=", const "\n"];
+        _14 = &_15;
+        _13 = _14 as &[&str] (PointerCoercion(Unsize));
+        _20 = &_1;
+        _19 = core::fmt::rt::Argument::<'_>::new_debug::<Box<Ints>>(_20) -> [return: bb7, unwind: bb11];
     }
 
     bb7: {
-        _16 = [move _17];
-        _15 = &_16;
-        _14 = _15 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _12 = Arguments::<'_>::new_v1(move _13, move _14) -> [return: bb8, unwind: bb11];
+        _18 = [move _19];
+        _17 = &_18;
+        _16 = _17 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _12 = Arguments::<'_>::new_v1(move _13, move _16) -> [return: bb8, unwind: bb11];
     }
 
     bb8: {
@@ -337,29 +339,18 @@ fn main() -> () {
     }
 
     bb14: {
-        _10 = &(*_22);
+        _10 = &(*_23);
         _9 = iter_ints::<[closure@ui/borrowck/borrowck-mut-uniq.rs:26:23: 26:26]>(_10, const ZeroSized: [closure@ui/borrowck/borrowck-mut-uniq.rs:26:23: 26:26]) -> [return: bb6, unwind: bb11];
     }
 
     bb15: {
-        _8 = &mut (*_21);
+        _8 = &mut (*_22);
         _7 = add_int(_8, const 44_isize) -> [return: bb5, unwind: bb11];
     }
 
     bb16: {
-        _6 = &mut (*_20);
+        _6 = &mut (*_21);
         _5 = add_int(_6, const 22_isize) -> [return: bb4, unwind: bb11];
-    }
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "ints=", const "\n"];
-        _0 = &_1;
-        return;
     }
 }
 
@@ -369,23 +360,25 @@ fn main::{closure#0}(_1: &mut [closure@ui/borrowck/borrowck-mut-uniq.rs:26:23: 2
     let _3: ();
     let mut _4: std::fmt::Arguments<'_>;
     let mut _5: &[&str];
-    let mut _6: &[core::fmt::rt::Argument<'_>];
-    let _7: &[core::fmt::rt::Argument<'_>; 1];
-    let _8: [core::fmt::rt::Argument<'_>; 1];
-    let mut _9: core::fmt::rt::Argument<'_>;
-    let mut _10: &[&str; 2];
+    let _6: &[&str; 2];
+    let _7: [&str; 2];
+    let mut _8: &[core::fmt::rt::Argument<'_>];
+    let _9: &[core::fmt::rt::Argument<'_>; 1];
+    let _10: [core::fmt::rt::Argument<'_>; 1];
+    let mut _11: core::fmt::rt::Argument<'_>;
 
     bb0: {
-        _10 = const _;
-        _5 = _10 as &[&str] (Pointer(Unsize));
-        _9 = core::fmt::rt::Argument::<'_>::new_debug::<isize>(_2) -> [return: bb1, unwind continue];
+        _7 = [const "isize = ", const "\n"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _11 = core::fmt::rt::Argument::<'_>::new_debug::<isize>(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = [move _9];
-        _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _6) -> [return: bb2, unwind continue];
+        _10 = [move _11];
+        _9 = &_10;
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb2, unwind continue];
     }
 
     bb2: {
@@ -394,17 +387,6 @@ fn main::{closure#0}(_1: &mut [closure@ui/borrowck/borrowck-mut-uniq.rs:26:23: 2
 
     bb3: {
         _0 = const true;
-        return;
-    }
-}
-
-promoted[0] in main::{closure#0}: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "isize = ", const "\n"];
-        _0 = &_1;
         return;
     }
 }

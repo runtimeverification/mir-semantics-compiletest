@@ -9,14 +9,16 @@ fn nested(_1: t) -> () {
     let _5: ();
     let mut _6: std::fmt::Arguments<'_>;
     let mut _7: &[&str];
-    let mut _8: !;
-    let _9: ();
-    let mut _10: std::fmt::Arguments<'_>;
-    let mut _11: &[&str];
-    let mut _12: &[&str; 1];
+    let _8: &[&str; 1];
+    let _9: [&str; 1];
+    let mut _10: !;
+    let _11: ();
+    let mut _12: std::fmt::Arguments<'_>;
+    let mut _13: &[&str];
+    let _14: &[&str; 1];
+    let _15: [&str; 1];
     scope 1 {
         debug _i => _4;
-        let mut _13: &[&str; 1];
     }
 
     bb0: {
@@ -25,9 +27,10 @@ fn nested(_1: t) -> () {
     }
 
     bb1: {
-        _12 = const _;
-        _11 = _12 as &[&str] (Pointer(Unsize));
-        _10 = Arguments::<'_>::new_const(move _11) -> [return: bb6, unwind continue];
+        _15 = [const "succeeded\n"];
+        _14 = &_15;
+        _13 = _14 as &[&str] (PointerCoercion(Unsize));
+        _12 = Arguments::<'_>::new_const(move _13) -> [return: bb6, unwind continue];
     }
 
     bb2: {
@@ -37,8 +40,9 @@ fn nested(_1: t) -> () {
 
     bb3: {
         _4 = ((_1 as bar).0: isize);
-        _13 = const _;
-        _7 = _13 as &[&str] (Pointer(Unsize));
+        _9 = [const "wrong pattern matched\n"];
+        _8 = &_9;
+        _7 = _8 as &[&str] (PointerCoercion(Unsize));
         _6 = Arguments::<'_>::new_const(move _7) -> [return: bb4, unwind continue];
     }
 
@@ -47,36 +51,14 @@ fn nested(_1: t) -> () {
     }
 
     bb5: {
-        _8 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _10 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 
     bb6: {
-        _9 = _print(move _10) -> [return: bb7, unwind continue];
+        _11 = _print(move _12) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        return;
-    }
-}
-
-promoted[0] in nested: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "succeeded\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in nested: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "wrong pattern matched\n"];
-        _0 = &_1;
         return;
     }
 }

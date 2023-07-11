@@ -50,20 +50,22 @@ fn foo5(_1: Foo2<'_, '_>) -> &u8 {
 
 fn main() -> () {
     let mut _0: ();
-    let mut _1: Foo<'_>;
-    let mut _2: Foo<'_>;
+    let _1: &u8;
+    let _2: u8;
     let mut _3: Foo<'_>;
-    let _4: ();
+    let mut _4: Foo<'_>;
     let mut _5: Foo<'_>;
-    let mut _6: &u8;
-    let mut _7: Foo2<'_, '_>;
-    let mut _9: &u8;
+    let _6: ();
+    let mut _7: Foo<'_>;
+    let mut _8: &u8;
+    let mut _9: Foo2<'_, '_>;
+    let _10: &u8;
+    let _11: u8;
     scope 1 {
-        debug x => const _;
+        debug x => _1;
         scope 2 {
             scope 3 {
                 scope 4 {
-                    let mut _8: &u8;
                     scope 5 {
                     }
                 }
@@ -72,52 +74,32 @@ fn main() -> () {
     }
 
     bb0: {
-        _9 = const _;
-        _1 = foo(_9) -> [return: bb1, unwind continue];
+        _2 = const 5_u8;
+        _1 = &_2;
+        _3 = foo(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = foo2(_9) -> [return: bb2, unwind continue];
+        _4 = foo2(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = foo3(_9) -> [return: bb3, unwind continue];
+        _5 = foo3(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _5 = Foo::<'_>(_9);
-        _4 = foo4(move _5) -> [return: bb4, unwind continue];
+        _7 = Foo::<'_>(_1);
+        _6 = foo4(move _7) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _8 = const _;
-        _7 = Foo2::<'_, '_> { a: _9, b: _8 };
-        _6 = foo5(move _7) -> [return: bb5, unwind continue];
+        _11 = const 6_u8;
+        _10 = &_11;
+        _9 = Foo2::<'_, '_> { a: _1, b: _10 };
+        _8 = foo5(move _9) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in main: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const 6_u8;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const 5_u8;
-        _0 = &_1;
         return;
     }
 }

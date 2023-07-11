@@ -57,10 +57,12 @@ fn main() -> () {
     let mut _2: &[u32];
     let _3: &[u32];
     let mut _4: &[u32; 126];
+    let _5: [u32; 126];
 
     bb0: {
-        _4 = const _;
-        _3 = <[u32; 126] as Index<RangeFull>>::index(_4, const RangeFull) -> [return: bb1, unwind continue];
+        _5 = const _;
+        _4 = &_5;
+        _3 = <[u32; 126] as Index<RangeFull>>::index(move _4, const RangeFull) -> [return: bb1, unwind continue];
     }
 
     bb1: {
@@ -73,42 +75,33 @@ fn main() -> () {
     }
 }
 
-promoted[0] in main: &[u32; 126] = {
-    let mut _0: &[u32; 126];
-    let mut _1: [u32; 126];
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
-        return;
-    }
-}
-
 fn foo(_1: T) -> () {
     debug x => _1;
     let mut _0: ();
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 1];
-    let _7: [core::fmt::rt::Argument<'_>; 1];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &T;
-    let mut _10: &[&str; 2];
+    let _5: &[&str; 2];
+    let _6: [&str; 2];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 1];
+    let _9: [core::fmt::rt::Argument<'_>; 1];
+    let mut _10: core::fmt::rt::Argument<'_>;
+    let _11: &T;
 
     bb0: {
-        _10 = const _;
-        _4 = _10 as &[&str] (Pointer(Unsize));
-        _9 = &_1;
-        _8 = core::fmt::rt::Argument::<'_>::new_debug::<T>(_9) -> [return: bb1, unwind: bb5];
+        _6 = [const "", const "\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &_1;
+        _10 = core::fmt::rt::Argument::<'_>::new_debug::<T>(_11) -> [return: bb1, unwind: bb5];
     }
 
     bb1: {
-        _7 = [move _8];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb2, unwind: bb5];
+        _9 = [move _10];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
@@ -129,16 +122,5 @@ fn foo(_1: T) -> () {
 
     bb6 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in foo: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }

@@ -70,19 +70,20 @@ fn use_dyn(_1: &dyn Foo<N>) -> () {
     let mut _2: (&[u8; N + 1], &[u8; N + 1]);
     let mut _3: &[u8; N + 1];
     let _4: [u8; N + 1];
-    let _5: &[u8; N + 1];
-    let _6: &[u8; N + 1];
-    let mut _7: bool;
-    let mut _8: bool;
-    let _10: !;
-    let mut _11: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _12: &[u8; N + 1];
+    let mut _5: &[u8; N + 1];
+    let _6: [u8; N + 1];
+    let _7: &[u8; N + 1];
+    let _8: &[u8; N + 1];
+    let mut _9: bool;
+    let mut _10: bool;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _5;
-        debug right_val => _6;
-        let _9: core::panicking::AssertKind;
+        debug left_val => _7;
+        debug right_val => _8;
+        let _11: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _9;
+            debug kind => _11;
         }
     }
 
@@ -92,36 +93,26 @@ fn use_dyn(_1: &dyn Foo<N>) -> () {
 
     bb1: {
         _3 = &_4;
-        _12 = const _;
-        _2 = (move _3, _12);
-        _5 = (_2.0: &[u8; N + 1]);
-        _6 = (_2.1: &[u8; N + 1]);
-        _8 = <[u8; N + 1] as PartialEq<[u8; N + 1]>>::eq(_5, _6) -> [return: bb2, unwind continue];
+        _6 = [const 0_u8; N + 1];
+        _5 = &_6;
+        _2 = (move _3, move _5);
+        _7 = (_2.0: &[u8; N + 1]);
+        _8 = (_2.1: &[u8; N + 1]);
+        _10 = <[u8; N + 1] as PartialEq<[u8; N + 1]>>::eq(_7, _8) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _7 = Not(move _8);
-        switchInt(move _7) -> [0: bb4, otherwise: bb3];
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _9 = core::panicking::AssertKind::Eq;
-        _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<[u8; N + 1], [u8; N + 1]>(move _9, _5, _6, move _11) -> unwind continue;
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<[u8; N + 1], [u8; N + 1]>(move _11, _7, _8, move _13) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in use_dyn: &[u8; N + 1] = {
-    let mut _0: &[u8; N + 1];
-    let mut _1: [u8; N + 1];
-
-    bb0: {
-        _1 = [const 0_u8; N + 1];
-        _0 = &_1;
         return;
     }
 }
@@ -169,26 +160,16 @@ fn main() -> () {
     let mut _0: ();
     let _1: ();
     let mut _2: &dyn Foo<3>;
-    let mut _3: &();
+    let _3: &();
+    let _4: ();
 
     bb0: {
-        _3 = const _;
-        _2 = _3 as &dyn Foo<3> (Pointer(Unsize));
+        _3 = &_4;
+        _2 = _3 as &dyn Foo<3> (PointerCoercion(Unsize));
         _1 = use_dyn::<3>(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in main: &() = {
-    let mut _0: &();
-    let mut _1: ();
-
-    bb0: {
-        _1 = ();
-        _0 = &_1;
         return;
     }
 }

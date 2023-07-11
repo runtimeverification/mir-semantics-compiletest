@@ -3,66 +3,48 @@
 fn main() -> () {
     let mut _0: ();
     let mut _1: (&&str, &&str);
-    let _2: &&str;
-    let _3: &&str;
-    let mut _4: bool;
-    let mut _5: bool;
-    let _7: !;
-    let mut _8: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _9: &&str;
-    let mut _10: &&str;
+    let mut _2: &&str;
+    let _3: &str;
+    let mut _4: &&str;
+    let _5: &str;
+    let _6: &&str;
+    let _7: &&str;
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _2;
-        debug right_val => _3;
-        let _6: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _6;
+            debug kind => _10;
         }
     }
 
     bb0: {
-        _10 = const _;
-        _9 = const _;
-        _1 = (_10, _9);
-        _2 = (_1.0: &&str);
-        _3 = (_1.1: &&str);
-        _5 = <&str as PartialEq>::eq(_2, _3) -> [return: bb1, unwind continue];
+        _3 = const "foobar";
+        _2 = &_3;
+        _5 = const "foobar";
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &&str);
+        _7 = (_1.1: &&str);
+        _9 = <&str as PartialEq>::eq(_6, _7) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = Not(move _5);
-        switchInt(move _4) -> [0: bb3, otherwise: bb2];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _6 = core::panicking::AssertKind::Eq;
-        _8 = Option::<Arguments<'_>>::None;
-        _7 = core::panicking::assert_failed::<&str, &str>(move _6, _2, _3, move _8) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<&str, &str>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "foobar";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "foobar";
-        _0 = &_1;
         return;
     }
 }

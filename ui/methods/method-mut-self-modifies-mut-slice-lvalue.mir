@@ -99,33 +99,36 @@ fn main() -> () {
     let mut _5: std::result::Result<(), ()>;
     let mut _6: &mut &mut [u8];
     let mut _7: &[u8];
-    let _8: ();
-    let mut _9: std::result::Result<(), ()>;
-    let mut _10: &mut &mut [u8];
-    let mut _11: &[u8];
-    let mut _12: (&[u8; 6], &[u8; 6]);
-    let mut _13: &[u8; 6];
-    let mut _16: bool;
-    let mut _17: bool;
-    let _19: !;
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
+    let _8: &[u8; 3];
+    let _9: [u8; 3];
+    let _10: ();
+    let mut _11: std::result::Result<(), ()>;
+    let mut _12: &mut &mut [u8];
+    let mut _13: &[u8];
+    let _14: &[u8; 3];
+    let _15: [u8; 3];
+    let mut _16: (&[u8; 6], &[u8; 6]);
+    let mut _17: &[u8; 6];
+    let mut _18: &[u8; 6];
+    let _19: [u8; 6];
+    let mut _22: bool;
+    let mut _23: bool;
+    let _25: !;
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug buf => _1;
         let mut _2: &mut [u8];
-        let _14: &[u8; 6];
-        let _15: &[u8; 6];
-        let mut _21: &[u8; 6];
+        let _20: &[u8; 6];
+        let _21: &[u8; 6];
         scope 2 {
             debug writer => _2;
-            let mut _22: &[u8; 3];
-            let mut _23: &[u8; 3];
         }
         scope 3 {
-            debug left_val => _14;
-            debug right_val => _15;
-            let _18: core::panicking::AssertKind;
+            debug left_val => _20;
+            debug right_val => _21;
+            let _24: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _18;
+                debug kind => _24;
             }
         }
     }
@@ -133,10 +136,11 @@ fn main() -> () {
     bb0: {
         _1 = [const 0_u8; 6];
         _3 = &mut _1;
-        _2 = _3 as &mut [u8] (Pointer(Unsize));
+        _2 = _3 as &mut [u8] (PointerCoercion(Unsize));
         _6 = &mut _2;
-        _23 = const _;
-        _7 = _23 as &[u8] (Pointer(Unsize));
+        _9 = [const 0_u8, const 1_u8, const 2_u8];
+        _8 = &_9;
+        _7 = _8 as &[u8] (PointerCoercion(Unsize));
         _5 = <&mut [u8] as MyWriter>::my_write(move _6, move _7) -> [return: bb1, unwind continue];
     }
 
@@ -145,70 +149,39 @@ fn main() -> () {
     }
 
     bb2: {
-        _10 = &mut _2;
-        _22 = const _;
-        _11 = _22 as &[u8] (Pointer(Unsize));
-        _9 = <&mut [u8] as MyWriter>::my_write(move _10, move _11) -> [return: bb3, unwind continue];
+        _12 = &mut _2;
+        _15 = [const 3_u8, const 4_u8, const 5_u8];
+        _14 = &_15;
+        _13 = _14 as &[u8] (PointerCoercion(Unsize));
+        _11 = <&mut [u8] as MyWriter>::my_write(move _12, move _13) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _8 = Result::<(), ()>::unwrap(move _9) -> [return: bb4, unwind continue];
+        _10 = Result::<(), ()>::unwrap(move _11) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _13 = &_1;
-        _21 = const _;
-        _12 = (move _13, _21);
-        _14 = (_12.0: &[u8; 6]);
-        _15 = (_12.1: &[u8; 6]);
-        _17 = <[u8; 6] as PartialEq>::eq(_14, _15) -> [return: bb5, unwind continue];
+        _17 = &_1;
+        _19 = [const 0_u8, const 1_u8, const 2_u8, const 3_u8, const 4_u8, const 5_u8];
+        _18 = &_19;
+        _16 = (move _17, move _18);
+        _20 = (_16.0: &[u8; 6]);
+        _21 = (_16.1: &[u8; 6]);
+        _23 = <[u8; 6] as PartialEq>::eq(_20, _21) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _16 = Not(move _17);
-        switchInt(move _16) -> [0: bb7, otherwise: bb6];
+        _22 = Not(move _23);
+        switchInt(move _22) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _18 = core::panicking::AssertKind::Eq;
-        _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<[u8; 6], [u8; 6]>(move _18, _14, _15, move _20) -> unwind continue;
+        _24 = core::panicking::AssertKind::Eq;
+        _26 = Option::<Arguments<'_>>::None;
+        _25 = core::panicking::assert_failed::<[u8; 6], [u8; 6]>(move _24, _20, _21, move _26) -> unwind continue;
     }
 
     bb7: {
-        return;
-    }
-}
-
-promoted[0] in main: &[u8; 6] = {
-    let mut _0: &[u8; 6];
-    let mut _1: [u8; 6];
-
-    bb0: {
-        _1 = [const 0_u8, const 1_u8, const 2_u8, const 3_u8, const 4_u8, const 5_u8];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[u8; 3] = {
-    let mut _0: &[u8; 3];
-    let mut _1: [u8; 3];
-
-    bb0: {
-        _1 = [const 3_u8, const 4_u8, const 5_u8];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[u8; 3] = {
-    let mut _0: &[u8; 3];
-    let mut _1: [u8; 3];
-
-    bb0: {
-        _1 = [const 0_u8, const 1_u8, const 2_u8];
-        _0 = &_1;
         return;
     }
 }

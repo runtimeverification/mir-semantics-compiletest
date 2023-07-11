@@ -7,12 +7,13 @@ fn main() -> () {
     let mut _3: &mut std::string::String;
     let mut _4: std::fmt::Arguments<'_>;
     let mut _5: &[&str];
-    let mut _6: &[core::fmt::rt::Argument<'_>];
-    let _7: &[core::fmt::rt::Argument<'_>; 0];
-    let _8: [core::fmt::rt::Argument<'_>; 0];
+    let _6: &[&str; 1];
+    let _7: [&str; 1];
+    let mut _8: &[core::fmt::rt::Argument<'_>];
+    let _9: &[core::fmt::rt::Argument<'_>; 0];
+    let _10: [core::fmt::rt::Argument<'_>; 0];
     scope 1 {
         debug example => _1;
-        let mut _9: &[&str; 1];
     }
 
     bb0: {
@@ -21,15 +22,16 @@ fn main() -> () {
 
     bb1: {
         _3 = &mut _1;
-        _9 = const _;
-        _5 = _9 as &[&str] (Pointer(Unsize));
-        _8 = core::fmt::rt::Argument::<'_>::none() -> [return: bb2, unwind: bb6];
+        _7 = [const "42"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _10 = core::fmt::rt::Argument::<'_>::none() -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _6) -> [return: bb3, unwind: bb6];
+        _9 = &_10;
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb6];
     }
 
     bb3: {
@@ -50,16 +52,5 @@ fn main() -> () {
 
     bb7 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "42"];
-        _0 = &_1;
-        return;
     }
 }

@@ -6,28 +6,30 @@ fn <impl at ui/impl-trait/universal_in_trait_defn_parameters.rs:9:1: 9:34>::in_p
     let _2: std::string::String;
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 1];
-    let _7: [core::fmt::rt::Argument<'_>; 1];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &impl Debug;
-    let mut _10: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 1];
+    let _9: [core::fmt::rt::Argument<'_>; 1];
+    let mut _10: core::fmt::rt::Argument<'_>;
+    let _11: &impl Debug;
     scope 1 {
         debug res => _2;
     }
 
     bb0: {
-        _10 = const _;
-        _4 = _10 as &[&str] (Pointer(Unsize));
-        _9 = &_1;
-        _8 = core::fmt::rt::Argument::<'_>::new_debug::<impl Debug>(_9) -> [return: bb1, unwind: bb5];
+        _6 = [const "() + "];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &_1;
+        _10 = core::fmt::rt::Argument::<'_>::new_debug::<impl Debug>(_11) -> [return: bb1, unwind: bb5];
     }
 
     bb1: {
-        _7 = [move _8];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb2, unwind: bb5];
+        _9 = [move _10];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
@@ -52,37 +54,27 @@ fn <impl at ui/impl-trait/universal_in_trait_defn_parameters.rs:9:1: 9:34>::in_p
     }
 }
 
-promoted[0] in <impl at ui/impl-trait/universal_in_trait_defn_parameters.rs:9:1: 9:34>::in_parameters: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "() + "];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn main() -> () {
     let mut _0: ();
     let _1: std::string::String;
     let mut _2: (&std::string::String, &&str);
     let mut _3: &std::string::String;
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _4: &&str;
+    let _5: &str;
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug s => _1;
-        let _4: &std::string::String;
-        let _5: &&str;
-        let mut _11: &&str;
+        let _6: &std::string::String;
+        let _7: &&str;
         scope 2 {
-            debug left_val => _4;
-            debug right_val => _5;
-            let _8: core::panicking::AssertKind;
+            debug left_val => _6;
+            debug right_val => _7;
+            let _10: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _8;
+                debug kind => _10;
             }
         }
     }
@@ -93,22 +85,23 @@ fn main() -> () {
 
     bb1: {
         _3 = &_1;
-        _11 = const _;
-        _2 = (move _3, _11);
-        _4 = (_2.0: &std::string::String);
-        _5 = (_2.1: &&str);
-        _7 = <String as PartialEq<&str>>::eq(_4, _5) -> [return: bb2, unwind: bb6];
+        _5 = const "() + 22";
+        _4 = &_5;
+        _2 = (move _3, move _4);
+        _6 = (_2.0: &std::string::String);
+        _7 = (_2.1: &&str);
+        _9 = <String as PartialEq<&str>>::eq(_6, _7) -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<String, &str>(move _8, _4, _5, move _10) -> bb6;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<String, &str>(move _10, _6, _7, move _12) -> bb6;
     }
 
     bb4: {
@@ -125,16 +118,5 @@ fn main() -> () {
 
     bb7 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "() + 22";
-        _0 = &_1;
-        return;
     }
 }

@@ -96,33 +96,34 @@ fn main() -> () {
     let mut _9: std::vec::Vec<isize>;
     let mut _10: (&isize, &isize);
     let mut _11: &isize;
-    let mut _14: bool;
-    let mut _15: bool;
-    let mut _16: isize;
-    let mut _17: isize;
-    let _19: !;
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _22: *const [isize; 6];
-    let mut _23: *const ();
-    let mut _24: usize;
+    let mut _12: &isize;
+    let _13: isize;
+    let mut _16: bool;
+    let mut _17: bool;
+    let mut _18: isize;
+    let mut _19: isize;
+    let _21: !;
+    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _23: *const [isize; 6];
+    let mut _24: *const ();
     let mut _25: usize;
     let mut _26: usize;
     let mut _27: usize;
-    let mut _28: bool;
+    let mut _28: usize;
+    let mut _29: bool;
     scope 1 {
         debug v => _1;
         let _7: isize;
         scope 3 {
             debug r => _7;
-            let _12: &isize;
-            let _13: &isize;
-            let mut _21: &isize;
+            let _14: &isize;
+            let _15: &isize;
             scope 4 {
-                debug left_val => _12;
-                debug right_val => _13;
-                let _18: core::panicking::AssertKind;
+                debug left_val => _14;
+                debug right_val => _15;
+                let _20: core::panicking::AssertKind;
                 scope 5 {
-                    debug kind => _18;
+                    debug kind => _20;
                 }
             }
         }
@@ -138,14 +139,14 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [isize; 6]);
-        _22 = (((_6.0: std::ptr::Unique<[isize; 6]>).0: std::ptr::NonNull<[isize; 6]>).0: *const [isize; 6]);
-        _23 = _22 as *const () (PtrToPtr);
-        _24 = _23 as usize (Transmute);
-        _25 = AlignOf(isize);
-        _26 = Sub(_25, const 1_usize);
-        _27 = BitAnd(_24, _26);
-        _28 = Eq(_27, const 0_usize);
-        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb7, unwind unreachable];
+        _23 = (((_6.0: std::ptr::Unique<[isize; 6]>).0: std::ptr::NonNull<[isize; 6]>).0: *const [isize; 6]);
+        _24 = _23 as *const () (PtrToPtr);
+        _25 = _24 as usize (Transmute);
+        _26 = AlignOf(isize);
+        _27 = Sub(_26, const 1_usize);
+        _28 = BitAnd(_25, _27);
+        _29 = Eq(_28, const 0_usize);
+        assert(_29, "misaligned pointer dereference: address must be a multiple of {} but is {}", _26, _25) -> [success: bb7, unwind unreachable];
     }
 
     bb2: {
@@ -159,21 +160,22 @@ fn main() -> () {
 
     bb4: {
         _11 = &_7;
-        _21 = const _;
-        _10 = (move _11, _21);
-        _12 = (_10.0: &isize);
-        _13 = (_10.1: &isize);
-        _16 = (*_12);
-        _17 = (*_13);
-        _15 = Eq(move _16, move _17);
-        _14 = Not(move _15);
-        switchInt(move _14) -> [0: bb6, otherwise: bb5];
+        _13 = const 9_isize;
+        _12 = &_13;
+        _10 = (move _11, move _12);
+        _14 = (_10.0: &isize);
+        _15 = (_10.1: &isize);
+        _18 = (*_14);
+        _19 = (*_15);
+        _17 = Eq(move _18, move _19);
+        _16 = Not(move _17);
+        switchInt(move _16) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _18 = core::panicking::AssertKind::Eq;
-        _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<isize, isize>(move _18, _12, _13, move _20) -> unwind continue;
+        _20 = core::panicking::AssertKind::Eq;
+        _22 = Option::<Arguments<'_>>::None;
+        _21 = core::panicking::assert_failed::<isize, isize>(move _20, _14, _15, move _22) -> unwind continue;
     }
 
     bb6: {
@@ -181,19 +183,8 @@ fn main() -> () {
     }
 
     bb7: {
-        (*_22) = [const 1_isize, const 2_isize, const 3_isize, const 4_isize, const 5_isize, const 6_isize];
-        _2 = move _6 as std::boxed::Box<[isize]> (Pointer(Unsize));
+        (*_23) = [const 1_isize, const 2_isize, const 3_isize, const 4_isize, const 5_isize, const 6_isize];
+        _2 = move _6 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
         _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 9_isize;
-        _0 = &_1;
-        return;
     }
 }

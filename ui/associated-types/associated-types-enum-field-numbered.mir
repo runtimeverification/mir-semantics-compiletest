@@ -84,29 +84,32 @@ fn main() -> () {
     let mut _13: &&std::option::Option<char>;
     let _14: &std::option::Option<char>;
     let _15: &std::vec::Vec<VarValue<usize>>;
-    let mut _18: bool;
-    let mut _19: bool;
-    let _21: !;
-    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _25: *const [VarValue<usize>; 4];
-    let mut _26: *const ();
-    let mut _27: usize;
-    let mut _28: usize;
-    let mut _29: usize;
+    let _16: &usize;
+    let _17: usize;
+    let mut _18: &&std::option::Option<char>;
+    let _19: &std::option::Option<char>;
+    let _20: std::option::Option<char>;
+    let mut _23: bool;
+    let mut _24: bool;
+    let _26: !;
+    let mut _27: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _28: *const [VarValue<usize>; 4];
+    let mut _29: *const ();
     let mut _30: usize;
-    let mut _31: bool;
+    let mut _31: usize;
+    let mut _32: usize;
+    let mut _33: usize;
+    let mut _34: bool;
     scope 1 {
         debug table => _1;
-        let _16: &&std::option::Option<char>;
-        let _17: &&std::option::Option<char>;
-        let mut _23: &&std::option::Option<char>;
-        let mut _24: &usize;
+        let _21: &&std::option::Option<char>;
+        let _22: &&std::option::Option<char>;
         scope 3 {
-            debug left_val => _16;
-            debug right_val => _17;
-            let _20: core::panicking::AssertKind;
+            debug left_val => _21;
+            debug right_val => _22;
+            let _25: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _20;
+                debug kind => _25;
             }
         }
     }
@@ -126,40 +129,43 @@ fn main() -> () {
         _10 = Option::<char>::Some(const 'x');
         _9 = VarValue::<usize>::Root(move _10, const 0_usize);
         _11 = VarValue::<usize>::Redirect(const 2_usize);
-        _25 = (((_6.0: std::ptr::Unique<[VarValue<usize>; 4]>).0: std::ptr::NonNull<[VarValue<usize>; 4]>).0: *const [VarValue<usize>; 4]);
-        _26 = _25 as *const () (PtrToPtr);
-        _27 = _26 as usize (Transmute);
-        _28 = AlignOf(VarValue<usize>);
-        _29 = Sub(_28, const 1_usize);
-        _30 = BitAnd(_27, _29);
-        _31 = Eq(_30, const 0_usize);
-        assert(_31, "misaligned pointer dereference: address must be a multiple of {} but is {}", _28, _27) -> [success: bb10, unwind unreachable];
+        _28 = (((_6.0: std::ptr::Unique<[VarValue<usize>; 4]>).0: std::ptr::NonNull<[VarValue<usize>; 4]>).0: *const [VarValue<usize>; 4]);
+        _29 = _28 as *const () (PtrToPtr);
+        _30 = _29 as usize (Transmute);
+        _31 = AlignOf(VarValue<usize>);
+        _32 = Sub(_31, const 1_usize);
+        _33 = BitAnd(_30, _32);
+        _34 = Eq(_33, const 0_usize);
+        assert(_34, "misaligned pointer dereference: address must be a multiple of {} but is {}", _31, _30) -> [success: bb10, unwind unreachable];
     }
 
     bb2: {
         _15 = &_1;
-        _24 = const _;
-        _14 = get::<usize, char>(_15, _24) -> [return: bb3, unwind: bb8];
+        _17 = const 0_usize;
+        _16 = &_17;
+        _14 = get::<usize, char>(_15, _16) -> [return: bb3, unwind: bb8];
     }
 
     bb3: {
         _13 = &_14;
-        _23 = const _;
-        _12 = (move _13, _23);
-        _16 = (_12.0: &&std::option::Option<char>);
-        _17 = (_12.1: &&std::option::Option<char>);
-        _19 = <&Option<char> as PartialEq>::eq(_16, _17) -> [return: bb4, unwind: bb8];
+        _20 = Option::<char>::Some(const 'x');
+        _19 = &_20;
+        _18 = &_19;
+        _12 = (move _13, move _18);
+        _21 = (_12.0: &&std::option::Option<char>);
+        _22 = (_12.1: &&std::option::Option<char>);
+        _24 = <&Option<char> as PartialEq>::eq(_21, _22) -> [return: bb4, unwind: bb8];
     }
 
     bb4: {
-        _18 = Not(move _19);
-        switchInt(move _18) -> [0: bb6, otherwise: bb5];
+        _23 = Not(move _24);
+        switchInt(move _23) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _20 = core::panicking::AssertKind::Eq;
-        _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<&Option<char>, &Option<char>>(move _20, _16, _17, move _22) -> bb8;
+        _25 = core::panicking::AssertKind::Eq;
+        _27 = Option::<Arguments<'_>>::None;
+        _26 = core::panicking::assert_failed::<&Option<char>, &Option<char>>(move _25, _21, _22, move _27) -> bb8;
     }
 
     bb6: {
@@ -179,33 +185,9 @@ fn main() -> () {
     }
 
     bb10: {
-        (*_25) = [move _7, move _8, move _9, move _11];
-        _2 = move _6 as std::boxed::Box<[VarValue<usize>]> (Pointer(Unsize));
+        (*_28) = [move _7, move _8, move _9, move _11];
+        _2 = move _6 as std::boxed::Box<[VarValue<usize>]> (PointerCoercion(Unsize));
         _1 = slice::<impl [VarValue<usize>]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &&Option<char> = {
-    let mut _0: &&std::option::Option<char>;
-    let mut _1: &std::option::Option<char>;
-    let mut _2: std::option::Option<char>;
-
-    bb0: {
-        _2 = Option::<char>::Some(const 'x');
-        _1 = &_2;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 0_usize;
-        _0 = &_1;
-        return;
     }
 }
 

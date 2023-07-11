@@ -13,7 +13,7 @@ fn test() -> () {
     }
 
     bb1: {
-        _1 = move _2 as std::ptr::NonNull<[i32]> (Pointer(Unsize));
+        _1 = move _2 as std::ptr::NonNull<[i32]> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -35,7 +35,7 @@ fn test() -> () {
     }
 
     bb1: {
-        _1 = move _2 as std::ptr::NonNull<[i32]> (Pointer(Unsize));
+        _1 = move _2 as std::ptr::NonNull<[i32]> (PointerCoercion(Unsize));
         StorageDead(_2);
         _0 = const ();
         StorageDead(_1);
@@ -61,7 +61,7 @@ fn dangling_slice() -> NonNull<[T]> {
     }
 
     bb1: {
-        _0 = move _1 as std::ptr::NonNull<[T]> (Pointer(Unsize));
+        _0 = move _1 as std::ptr::NonNull<[T]> (PointerCoercion(Unsize));
         return;
     }
 }
@@ -78,7 +78,7 @@ fn dangling_slice() -> NonNull<[T]> {
     }
 
     bb1: {
-        _0 = move _1 as std::ptr::NonNull<[T]> (Pointer(Unsize));
+        _0 = move _1 as std::ptr::NonNull<[T]> (PointerCoercion(Unsize));
         StorageDead(_1);
         return;
     }
@@ -127,15 +127,16 @@ fn main() -> () {
     let mut _18: &usize;
     let _19: usize;
     let mut _20: *mut [i32];
-    let _21: &usize;
-    let _22: &usize;
-    let mut _23: bool;
-    let mut _24: bool;
-    let mut _25: usize;
-    let mut _26: usize;
-    let _28: !;
-    let mut _29: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _30: &usize;
+    let mut _21: &usize;
+    let _22: usize;
+    let _23: &usize;
+    let _24: &usize;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: usize;
+    let mut _28: usize;
+    let _30: !;
+    let mut _31: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug left_val => _8;
         debug right_val => _9;
@@ -145,11 +146,11 @@ fn main() -> () {
         }
     }
     scope 3 {
-        debug left_val => _21;
-        debug right_val => _22;
-        let _27: core::panicking::AssertKind;
+        debug left_val => _23;
+        debug right_val => _24;
+        let _29: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _27;
+            debug kind => _29;
         }
     }
 
@@ -167,7 +168,7 @@ fn main() -> () {
     }
 
     bb3: {
-        _5 = move _6 as *mut [i32] (Pointer(Unsize));
+        _5 = move _6 as *mut [i32] (PointerCoercion(Unsize));
         _4 = &_5;
         _1 = (move _2, move _4);
         _8 = (_1.0: &*mut [i32]);
@@ -195,35 +196,25 @@ fn main() -> () {
 
     bb7: {
         _18 = &_19;
-        _30 = const _;
-        _17 = (move _18, _30);
-        _21 = (_17.0: &usize);
-        _22 = (_17.1: &usize);
-        _25 = (*_21);
-        _26 = (*_22);
-        _24 = Eq(move _25, move _26);
-        _23 = Not(move _24);
-        switchInt(move _23) -> [0: bb9, otherwise: bb8];
+        _22 = const 1_usize;
+        _21 = &_22;
+        _17 = (move _18, move _21);
+        _23 = (_17.0: &usize);
+        _24 = (_17.1: &usize);
+        _27 = (*_23);
+        _28 = (*_24);
+        _26 = Eq(move _27, move _28);
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _27 = core::panicking::AssertKind::Eq;
-        _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<usize, usize>(move _27, _21, _22, move _29) -> unwind continue;
+        _29 = core::panicking::AssertKind::Eq;
+        _31 = Option::<Arguments<'_>>::None;
+        _30 = core::panicking::assert_failed::<usize, usize>(move _29, _23, _24, move _31) -> unwind continue;
     }
 
     bb9: {
-        return;
-    }
-}
-
-promoted[0] in main: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 1_usize;
-        _0 = &_1;
         return;
     }
 }

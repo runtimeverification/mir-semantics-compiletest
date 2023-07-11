@@ -3,33 +3,34 @@
 fn foo() -> () {
     let mut _0: ();
     let mut _1: std::slice::Iter<'_, ()>;
-    let mut _2: std::slice::Iter<'_, ()>;
-    let mut _3: std::option::Option<&()>;
-    let mut _4: &mut std::slice::Iter<'_, ()>;
-    let mut _5: isize;
-    let mut _6: &[(); 1];
+    let mut _2: &[(); 1];
+    let _3: [(); 1];
+    let mut _4: std::slice::Iter<'_, ()>;
+    let mut _5: std::option::Option<&()>;
+    let mut _6: &mut std::slice::Iter<'_, ()>;
+    let mut _7: isize;
     scope 1 {
-        debug iter => _2;
+        debug iter => _4;
     }
 
     bb0: {
-        _6 = const _;
-        _1 = <&[(); 1] as IntoIterator>::into_iter(_6) -> [return: bb1, unwind continue];
+        _2 = &_3;
+        _1 = <&[(); 1] as IntoIterator>::into_iter(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1;
+        _4 = move _1;
         goto -> bb2;
     }
 
     bb2: {
-        _4 = &mut _2;
-        _3 = <std::slice::Iter<'_, ()> as Iterator>::next(_4) -> [return: bb3, unwind continue];
+        _6 = &mut _4;
+        _5 = <std::slice::Iter<'_, ()> as Iterator>::next(_6) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _5 = discriminant(_3);
-        switchInt(move _5) -> [0: bb5, 1: bb2, otherwise: bb4];
+        _7 = discriminant(_5);
+        switchInt(move _7) -> [0: bb5, 1: bb2, otherwise: bb4];
     }
 
     bb4: {
@@ -37,19 +38,6 @@ fn foo() -> () {
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in foo: &[(); 1] = {
-    let mut _0: &[(); 1];
-    let mut _1: [(); 1];
-    let mut _2: ();
-
-    bb0: {
-        _2 = ();
-        _1 = [move _2];
-        _0 = &_1;
         return;
     }
 }

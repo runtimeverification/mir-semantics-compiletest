@@ -1,7 +1,7 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f(_1: u32, _2: Lto) -> u32 {
-    debug cookie => const 0_u32;
+    debug cookie => _1;
     debug lto => _2;
     let mut _0: u32;
     let mut _3: bool;
@@ -43,21 +43,22 @@ fn main() -> () {
     let mut _2: &u32;
     let _3: u32;
     let mut _4: Lto;
-    let _5: &u32;
-    let _6: &u32;
-    let mut _7: bool;
-    let mut _8: bool;
-    let mut _9: u32;
-    let mut _10: u32;
-    let _12: !;
-    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _14: &u32;
+    let mut _5: &u32;
+    let _6: u32;
+    let _7: &u32;
+    let _8: &u32;
+    let mut _9: bool;
+    let mut _10: bool;
+    let mut _11: u32;
+    let mut _12: u32;
+    let _14: !;
+    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _5;
-        debug right_val => _6;
-        let _11: core::panicking::AssertKind;
+        debug left_val => _7;
+        debug right_val => _8;
+        let _13: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _11;
+            debug kind => _13;
         }
     }
 
@@ -68,35 +69,25 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _14 = const _;
-        _1 = (move _2, _14);
-        _5 = (_1.0: &u32);
-        _6 = (_1.1: &u32);
-        _9 = (*_5);
-        _10 = (*_6);
-        _8 = Eq(move _9, move _10);
-        _7 = Not(move _8);
-        switchInt(move _7) -> [0: bb3, otherwise: bb2];
+        _6 = const 0_u32;
+        _5 = &_6;
+        _1 = (move _2, move _5);
+        _7 = (_1.0: &u32);
+        _8 = (_1.1: &u32);
+        _11 = (*_7);
+        _12 = (*_8);
+        _10 = Eq(move _11, move _12);
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _11 = core::panicking::AssertKind::Eq;
-        _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<u32, u32>(move _11, _5, _6, move _13) -> unwind continue;
+        _13 = core::panicking::AssertKind::Eq;
+        _15 = Option::<Arguments<'_>>::None;
+        _14 = core::panicking::assert_failed::<u32, u32>(move _13, _7, _8, move _15) -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 0_u32;
-        _0 = &_1;
         return;
     }
 }

@@ -50,7 +50,7 @@ fn <impl at ui/deriving/deriving-default-enum.rs:7:10: 7:15>::fmt(_1: &Foo, _2: 
         _5 = &(((*_1) as Beta).0: NotDefault);
         _6 = const "Beta";
         _8 = &_5;
-        _7 = _8 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _7 = _8 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _6, move _7) -> [return: bb4, unwind continue];
     }
 
@@ -167,24 +167,25 @@ fn main() -> () {
     let mut _1: (&Foo, &Foo);
     let mut _2: &Foo;
     let _3: Foo;
-    let _4: &Foo;
-    let _5: &Foo;
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: bool;
-    let mut _12: bool;
-    let mut _13: MyOption<NotDefault>;
-    let mut _14: isize;
-    let mut _15: !;
-    let mut _16: &Foo;
+    let mut _4: &Foo;
+    let _5: Foo;
+    let _6: &Foo;
+    let _7: &Foo;
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _13: bool;
+    let mut _14: bool;
+    let mut _15: MyOption<NotDefault>;
+    let mut _16: isize;
+    let mut _17: !;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
@@ -194,51 +195,41 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _16 = const _;
-        _1 = (move _2, _16);
-        _4 = (_1.0: &Foo);
-        _5 = (_1.1: &Foo);
-        _7 = <Foo as PartialEq>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _5 = Foo::Alpha;
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &Foo);
+        _7 = (_1.1: &Foo);
+        _9 = <Foo as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<Foo, Foo>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<Foo, Foo>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        _13 = <MyOption<NotDefault> as Default>::default() -> [return: bb5, unwind continue];
+        _15 = <MyOption<NotDefault> as Default>::default() -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _14 = discriminant(_13);
-        _12 = Eq(_14, const 0_isize);
-        _11 = Not(move _12);
-        switchInt(move _11) -> [0: bb7, otherwise: bb6];
+        _16 = discriminant(_15);
+        _14 = Eq(_16, const 0_isize);
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _15 = core::panicking::panic(const "assertion failed: matches!(MyOption :: < NotDefault > :: default(), MyOption :: None)") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: matches!(MyOption :: < NotDefault > :: default(), MyOption :: None)") -> unwind continue;
     }
 
     bb7: {
-        return;
-    }
-}
-
-promoted[0] in main: &Foo = {
-    let mut _0: &Foo;
-    let mut _1: Foo;
-
-    bb0: {
-        _1 = Foo::Alpha;
-        _0 = &_1;
         return;
     }
 }

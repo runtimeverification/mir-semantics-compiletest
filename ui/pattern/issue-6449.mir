@@ -30,18 +30,20 @@ fn main() -> () {
     let _26: isize;
     let mut _27: (&isize, &isize);
     let mut _28: &isize;
-    let mut _31: bool;
-    let mut _32: bool;
-    let mut _33: isize;
-    let mut _34: isize;
-    let _36: !;
-    let mut _37: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _38: !;
-    let mut _39: Other;
-    let mut _40: Foo;
-    let mut _41: isize;
-    let mut _42: isize;
+    let mut _29: &isize;
+    let _30: isize;
+    let mut _33: bool;
+    let mut _34: bool;
+    let mut _35: isize;
+    let mut _36: isize;
+    let _38: !;
+    let mut _39: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _40: !;
+    let mut _41: Other;
+    let mut _42: Foo;
     let mut _43: isize;
+    let mut _44: isize;
+    let mut _45: isize;
     scope 1 {
         debug _n => _8;
     }
@@ -50,15 +52,14 @@ fn main() -> () {
     }
     scope 3 {
         debug n => _26;
-        let _29: &isize;
-        let _30: &isize;
-        let mut _44: &isize;
+        let _31: &isize;
+        let _32: &isize;
         scope 4 {
-            debug left_val => _29;
-            debug right_val => _30;
-            let _35: core::panicking::AssertKind;
+            debug left_val => _31;
+            debug right_val => _32;
+            let _37: core::panicking::AssertKind;
             scope 5 {
-                debug kind => _35;
+                debug kind => _37;
             }
         }
     }
@@ -152,7 +153,7 @@ fn main() -> () {
     }
 
     bb19: {
-        _38 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _40 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 
     bb20: {
@@ -180,52 +181,42 @@ fn main() -> () {
     bb25: {
         _26 = ((_19 as Bar).0: isize);
         _28 = &_26;
-        _44 = const _;
-        _27 = (move _28, _44);
-        _29 = (_27.0: &isize);
-        _30 = (_27.1: &isize);
-        _33 = (*_29);
-        _34 = (*_30);
-        _32 = Eq(move _33, move _34);
-        _31 = Not(move _32);
-        switchInt(move _31) -> [0: bb27, otherwise: bb26];
+        _30 = const 4_isize;
+        _29 = &_30;
+        _27 = (move _28, move _29);
+        _31 = (_27.0: &isize);
+        _32 = (_27.1: &isize);
+        _35 = (*_31);
+        _36 = (*_32);
+        _34 = Eq(move _35, move _36);
+        _33 = Not(move _34);
+        switchInt(move _33) -> [0: bb27, otherwise: bb26];
     }
 
     bb26: {
-        _35 = core::panicking::AssertKind::Eq;
-        _37 = Option::<Arguments<'_>>::None;
-        _36 = core::panicking::assert_failed::<isize, isize>(move _35, _29, _30, move _37) -> unwind continue;
+        _37 = core::panicking::AssertKind::Eq;
+        _39 = Option::<Arguments<'_>>::None;
+        _38 = core::panicking::assert_failed::<isize, isize>(move _37, _31, _32, move _39) -> unwind continue;
     }
 
     bb27: {
-        _40 = Foo::Baz;
-        _39 = Other::Other1(move _40);
-        _43 = discriminant(_39);
-        switchInt(move _43) -> [0: bb28, 1: bb29, otherwise: bb3];
+        _42 = Foo::Baz;
+        _41 = Other::Other1(move _42);
+        _45 = discriminant(_41);
+        switchInt(move _45) -> [0: bb28, 1: bb29, otherwise: bb3];
     }
 
     bb28: {
-        _41 = discriminant(((_39 as Other1).0: Foo));
-        switchInt(move _41) -> [0: bb30, 1: bb30, otherwise: bb3];
+        _43 = discriminant(((_41 as Other1).0: Foo));
+        switchInt(move _43) -> [0: bb30, 1: bb30, otherwise: bb3];
     }
 
     bb29: {
-        _42 = discriminant(((_39 as Other2).0: Foo));
-        switchInt(move _42) -> [0: bb30, 1: bb30, otherwise: bb3];
+        _44 = discriminant(((_41 as Other2).0: Foo));
+        switchInt(move _44) -> [0: bb30, 1: bb30, otherwise: bb3];
     }
 
     bb30: {
-        return;
-    }
-}
-
-promoted[0] in main: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 4_isize;
-        _0 = &_1;
         return;
     }
 }

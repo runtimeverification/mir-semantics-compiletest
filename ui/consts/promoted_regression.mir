@@ -10,19 +10,6 @@ fn main() -> () {
     }
 }
 
-promoted[0] in main: &[(&str, &str); 3] = {
-    let mut _0: &[(&str, &str); 3];
-    let mut _1: [(&str, &str); 3];
-    let mut _2: (&str, &str);
-
-    bb0: {
-        _2 = (const "", const "");
-        _1 = [move _2; 3];
-        _0 = &_1;
-        return;
-    }
-}
-
 main::{constant#0}: usize = {
     let mut _0: usize;
 
@@ -38,30 +25,20 @@ const FOO: &[(&str, &str)] = {
     let _2: &[(&str, &str); 3];
     let _3: [(&str, &str); 3];
     let mut _4: (&str, &str);
-    let mut _5: &[(&str, &str); 3];
 
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _5 = const _;
-        _2 = &(*_5);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = (const "", const "");
+        _3 = [move _4; 3];
+        StorageDead(_4);
+        _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[(&str, &str)] (Pointer(Unsize));
+        _0 = move _1 as &[(&str, &str)] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in FOO: &[(&str, &str); 3] = {
-    let mut _0: &[(&str, &str); 3];
-    let mut _1: [(&str, &str); 3];
-    let mut _2: (&str, &str);
-
-    bb0: {
-        _2 = (const "", const "");
-        _1 = [move _2; 3];
-        _0 = &_1;
         return;
     }
 }
@@ -80,27 +57,17 @@ const BAR: &[(&str, &str); 5] = {
     let _1: &[(&str, &str); 5];
     let _2: [(&str, &str); 5];
     let mut _3: (&str, &str);
-    let mut _4: &[(&str, &str); 5];
 
     bb0: {
         StorageLive(_1);
-        _4 = const _;
-        _1 = &(*_4);
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = (const "", const "");
+        _2 = [move _3; 5];
+        StorageDead(_3);
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in BAR: &[(&str, &str); 5] = {
-    let mut _0: &[(&str, &str); 5];
-    let mut _1: [(&str, &str); 5];
-    let mut _2: (&str, &str);
-
-    bb0: {
-        _2 = (const "", const "");
-        _1 = [move _2; 5];
-        _0 = &_1;
         return;
     }
 }
@@ -128,27 +95,17 @@ const BAA: &[[&str; 12]; 11] = {
     let _1: &[[&str; 12]; 11];
     let _2: [[&str; 12]; 11];
     let mut _3: [&str; 12];
-    let mut _4: &[[&str; 12]; 11];
 
     bb0: {
         StorageLive(_1);
-        _4 = const _;
-        _1 = &(*_4);
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = [const ""; 12];
+        _2 = [move _3; 11];
+        StorageDead(_3);
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in BAA: &[[&str; 12]; 11] = {
-    let mut _0: &[[&str; 12]; 11];
-    let mut _1: [[&str; 12]; 11];
-    let mut _2: [&str; 12];
-
-    bb0: {
-        _2 = [const ""; 12];
-        _1 = [move _2; 11];
-        _0 = &_1;
         return;
     }
 }

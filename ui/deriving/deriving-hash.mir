@@ -196,56 +196,47 @@ fn <impl at ui/deriving/deriving-hash.rs:48:1: 48:34>::write(_1: &mut OnlyOneByt
     let mut _3: (&usize, &usize);
     let mut _4: &usize;
     let _5: usize;
-    let _6: &usize;
-    let _7: &usize;
-    let mut _8: bool;
-    let mut _9: bool;
-    let mut _10: usize;
-    let mut _11: usize;
-    let _13: !;
-    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _15: &usize;
+    let mut _6: &usize;
+    let _7: usize;
+    let _8: &usize;
+    let _9: &usize;
+    let mut _10: bool;
+    let mut _11: bool;
+    let mut _12: usize;
+    let mut _13: usize;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _6;
-        debug right_val => _7;
-        let _12: core::panicking::AssertKind;
+        debug left_val => _8;
+        debug right_val => _9;
+        let _14: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _12;
+            debug kind => _14;
         }
     }
 
     bb0: {
         _5 = Len((*_2));
         _4 = &_5;
-        _15 = const _;
-        _3 = (move _4, _15);
-        _6 = (_3.0: &usize);
-        _7 = (_3.1: &usize);
-        _10 = (*_6);
-        _11 = (*_7);
-        _9 = Eq(move _10, move _11);
-        _8 = Not(move _9);
-        switchInt(move _8) -> [0: bb2, otherwise: bb1];
+        _7 = const 1_usize;
+        _6 = &_7;
+        _3 = (move _4, move _6);
+        _8 = (_3.0: &usize);
+        _9 = (_3.1: &usize);
+        _12 = (*_8);
+        _13 = (*_9);
+        _11 = Eq(move _12, move _13);
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _12 = core::panicking::AssertKind::Eq;
-        _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in <impl at ui/deriving/deriving-hash.rs:48:1: 48:34>::write: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 1_usize;
-        _0 = &_1;
         return;
     }
 }
@@ -305,9 +296,11 @@ fn main() -> () {
     let _61: !;
     let mut _62: std::option::Option<std::fmt::Arguments<'_>>;
     let _63: ();
-    let mut _64: &mut OnlyOneByteHasher;
-    let mut _65: OnlyOneByteHasher;
-    let mut _67: *const [u8; 1];
+    let mut _64: &main::E;
+    let _65: main::E;
+    let mut _66: &mut OnlyOneByteHasher;
+    let mut _67: OnlyOneByteHasher;
+    let mut _68: *const [u8; 1];
     scope 1 {
         debug person1 => _1;
         let _4: Person;
@@ -334,7 +327,6 @@ fn main() -> () {
                         debug v => _43;
                         let _56: &std::vec::Vec<u8>;
                         let _57: &std::vec::Vec<u8>;
-                        let mut _66: &main::E;
                         scope 8 {
                         }
                         scope 9 {
@@ -465,9 +457,9 @@ fn main() -> () {
 
     bb20: {
         _54 = ShallowInitBox(move _53, [u8; 1]);
-        _67 = (((_54.0: std::ptr::Unique<[u8; 1]>).0: std::ptr::NonNull<[u8; 1]>).0: *const [u8; 1]);
-        (*_67) = [const 17_u8];
-        _50 = move _54 as std::boxed::Box<[u8]> (Pointer(Unsize));
+        _68 = (((_54.0: std::ptr::Unique<[u8; 1]>).0: std::ptr::NonNull<[u8; 1]>).0: *const [u8; 1]);
+        (*_68) = [const 17_u8];
+        _50 = move _54 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
         _49 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _50) -> [return: bb21, unwind: bb33];
     }
 
@@ -496,9 +488,10 @@ fn main() -> () {
     }
 
     bb25: {
-        _66 = const _;
-        _64 = &mut _65;
-        _63 = <main::E as Hash>::hash::<OnlyOneByteHasher>(_66, _64) -> [return: bb26, unwind: bb33];
+        _65 = main::E::A;
+        _64 = &_65;
+        _66 = &mut _67;
+        _63 = <main::E as Hash>::hash::<OnlyOneByteHasher>(move _64, _66) -> [return: bb26, unwind: bb33];
     }
 
     bb26: {
@@ -551,17 +544,6 @@ fn main() -> () {
 
     bb38 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &main::E = {
-    let mut _0: &main::E;
-    let mut _1: main::E;
-
-    bb0: {
-        _1 = main::E::A;
-        _0 = &_1;
-        return;
     }
 }
 

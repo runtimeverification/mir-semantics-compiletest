@@ -13,43 +13,44 @@ fn <impl at ui/impl-trait/projection.rs:12:1: 12:22>::foo(_1: &D) -> Option<()> 
 fn run(_1: F) -> () {
     debug f => _1;
     let mut _0: ();
-    let mut _2: std::option::Option<<&D as Tr>::It>;
-    let mut _3: isize;
-    let _5: ();
-    let mut _6: &F;
-    let mut _7: (<&D as Tr>::It,);
-    let mut _8: &D;
+    let _2: &D;
+    let _3: D;
+    let mut _4: std::option::Option<<&D as Tr>::It>;
+    let mut _5: isize;
+    let _7: ();
+    let mut _8: &F;
+    let mut _9: (<&D as Tr>::It,);
     scope 1 {
-        debug d => const _;
+        debug d => _2;
         scope 2 {
-            debug i => _4;
-            let _4: <&D as Tr>::It;
+            debug i => _6;
+            let _6: <&D as Tr>::It;
         }
     }
 
     bb0: {
-        _8 = const _;
+        _2 = &_3;
         goto -> bb1;
     }
 
     bb1: {
-        _2 = <&D as Tr>::foo(_8) -> [return: bb2, unwind: bb7];
+        _4 = <&D as Tr>::foo(_2) -> [return: bb2, unwind: bb7];
     }
 
     bb2: {
-        _3 = discriminant(_2);
-        switchInt(move _3) -> [1: bb3, otherwise: bb4];
+        _5 = discriminant(_4);
+        switchInt(move _5) -> [1: bb3, otherwise: bb4];
     }
 
     bb3: {
-        _4 = move ((_2 as Some).0: <&D as Tr>::It);
-        _6 = &_1;
-        _7 = (move _4,);
-        _5 = <F as Fn<(<&D as Tr>::It,)>>::call(move _6, move _7) -> [return: bb9, unwind: bb7];
+        _6 = move ((_4 as Some).0: <&D as Tr>::It);
+        _8 = &_1;
+        _9 = (move _6,);
+        _7 = <F as Fn<(<&D as Tr>::It,)>>::call(move _8, move _9) -> [return: bb9, unwind: bb7];
     }
 
     bb4: {
-        drop(_2) -> [return: bb5, unwind: bb7];
+        drop(_4) -> [return: bb5, unwind: bb7];
     }
 
     bb5: {
@@ -70,17 +71,6 @@ fn run(_1: F) -> () {
 
     bb9: {
         goto -> bb1;
-    }
-}
-
-promoted[0] in run: &D = {
-    let mut _0: &D;
-    let mut _1: D;
-
-    bb0: {
-        _1 = D;
-        _0 = &_1;
-        return;
     }
 }
 

@@ -16,51 +16,53 @@ fn main() -> () {
     let mut _13: &&str;
     let _14: &&str;
     let mut _15: &std::vec::Vec<&str>;
-    let mut _18: bool;
-    let mut _19: bool;
-    let _21: !;
-    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _23: (&&str, &&str);
-    let mut _24: &&str;
-    let _25: &&str;
-    let mut _26: &std::vec::Vec<&str>;
-    let mut _29: bool;
-    let mut _30: bool;
-    let _32: !;
-    let mut _33: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _36: &str;
-    let mut _37: *const [&str; 2];
-    let mut _38: *const ();
-    let mut _39: usize;
-    let mut _40: usize;
+    let mut _16: &&str;
+    let _17: &str;
+    let mut _20: bool;
+    let mut _21: bool;
+    let _23: !;
+    let mut _24: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _25: (&&str, &&str);
+    let mut _26: &&str;
+    let _27: &&str;
+    let mut _28: &std::vec::Vec<&str>;
+    let mut _29: &&str;
+    let _30: &str;
+    let mut _33: bool;
+    let mut _34: bool;
+    let _36: !;
+    let mut _37: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _38: &str;
+    let mut _39: *const [&str; 2];
+    let mut _40: *const ();
     let mut _41: usize;
     let mut _42: usize;
-    let mut _43: bool;
+    let mut _43: usize;
+    let mut _44: usize;
+    let mut _45: bool;
     scope 1 {
         debug args => _1;
         let _8: std::vec::Vec<&str>;
         scope 3 {
             debug arr => _8;
-            let _16: &&str;
-            let _17: &&str;
-            let _27: &&str;
-            let _28: &&str;
-            let mut _34: &&str;
-            let mut _35: &&str;
+            let _18: &&str;
+            let _19: &&str;
+            let _31: &&str;
+            let _32: &&str;
             scope 4 {
-                debug left_val => _16;
-                debug right_val => _17;
-                let _20: core::panicking::AssertKind;
+                debug left_val => _18;
+                debug right_val => _19;
+                let _22: core::panicking::AssertKind;
                 scope 5 {
-                    debug kind => _20;
+                    debug kind => _22;
                 }
             }
             scope 6 {
-                debug left_val => _27;
-                debug right_val => _28;
-                let _31: core::panicking::AssertKind;
+                debug left_val => _31;
+                debug right_val => _32;
+                let _35: core::panicking::AssertKind;
                 scope 7 {
-                    debug kind => _31;
+                    debug kind => _35;
                 }
             }
         }
@@ -77,14 +79,14 @@ fn main() -> () {
     bb1: {
         _6 = ShallowInitBox(move _5, [&str; 2]);
         _7 = const "asdf::asdf";
-        _37 = (((_6.0: std::ptr::Unique<[&str; 2]>).0: std::ptr::NonNull<[&str; 2]>).0: *const [&str; 2]);
-        _38 = _37 as *const () (PtrToPtr);
-        _39 = _38 as usize (Transmute);
-        _40 = AlignOf(&str);
-        _41 = Sub(_40, const 1_usize);
-        _42 = BitAnd(_39, _41);
-        _43 = Eq(_42, const 0_usize);
-        assert(_43, "misaligned pointer dereference: address must be a multiple of {} but is {}", _40, _39) -> [success: bb19, unwind unreachable];
+        _39 = (((_6.0: std::ptr::Unique<[&str; 2]>).0: std::ptr::NonNull<[&str; 2]>).0: *const [&str; 2]);
+        _40 = _39 as *const () (PtrToPtr);
+        _41 = _40 as usize (Transmute);
+        _42 = AlignOf(&str);
+        _43 = Sub(_42, const 1_usize);
+        _44 = BitAnd(_41, _43);
+        _45 = Eq(_44, const 0_usize);
+        assert(_45, "misaligned pointer dereference: address must be a multiple of {} but is {}", _42, _41) -> [success: bb19, unwind unreachable];
     }
 
     bb2: {
@@ -93,8 +95,8 @@ fn main() -> () {
     }
 
     bb3: {
-        _36 = deref_copy (*_10);
-        _9 = core::str::<impl str>::split::<'_, &str>(_36, const "::") -> [return: bb4, unwind: bb17];
+        _38 = deref_copy (*_10);
+        _9 = core::str::<impl str>::split::<'_, &str>(_38, const "::") -> [return: bb4, unwind: bb17];
     }
 
     bb4: {
@@ -108,47 +110,49 @@ fn main() -> () {
 
     bb6: {
         _13 = _14;
-        _35 = const _;
-        _12 = (move _13, _35);
-        _16 = (_12.0: &&str);
-        _17 = (_12.1: &&str);
-        _19 = <&str as PartialEq>::eq(_16, _17) -> [return: bb7, unwind: bb16];
+        _17 = const "asdf";
+        _16 = &_17;
+        _12 = (move _13, move _16);
+        _18 = (_12.0: &&str);
+        _19 = (_12.1: &&str);
+        _21 = <&str as PartialEq>::eq(_18, _19) -> [return: bb7, unwind: bb16];
     }
 
     bb7: {
-        _18 = Not(move _19);
-        switchInt(move _18) -> [0: bb9, otherwise: bb8];
+        _20 = Not(move _21);
+        switchInt(move _20) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _20 = core::panicking::AssertKind::Eq;
-        _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<&str, &str>(move _20, _16, _17, move _22) -> bb16;
+        _22 = core::panicking::AssertKind::Eq;
+        _24 = Option::<Arguments<'_>>::None;
+        _23 = core::panicking::assert_failed::<&str, &str>(move _22, _18, _19, move _24) -> bb16;
     }
 
     bb9: {
-        _26 = &_8;
-        _25 = <Vec<&str> as Index<usize>>::index(move _26, const 0_usize) -> [return: bb10, unwind: bb16];
+        _28 = &_8;
+        _27 = <Vec<&str> as Index<usize>>::index(move _28, const 0_usize) -> [return: bb10, unwind: bb16];
     }
 
     bb10: {
-        _24 = _25;
-        _34 = const _;
-        _23 = (move _24, _34);
-        _27 = (_23.0: &&str);
-        _28 = (_23.1: &&str);
-        _30 = <&str as PartialEq>::eq(_27, _28) -> [return: bb11, unwind: bb16];
+        _26 = _27;
+        _30 = const "asdf";
+        _29 = &_30;
+        _25 = (move _26, move _29);
+        _31 = (_25.0: &&str);
+        _32 = (_25.1: &&str);
+        _34 = <&str as PartialEq>::eq(_31, _32) -> [return: bb11, unwind: bb16];
     }
 
     bb11: {
-        _29 = Not(move _30);
-        switchInt(move _29) -> [0: bb13, otherwise: bb12];
+        _33 = Not(move _34);
+        switchInt(move _33) -> [0: bb13, otherwise: bb12];
     }
 
     bb12: {
-        _31 = core::panicking::AssertKind::Eq;
-        _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<&str, &str>(move _31, _27, _28, move _33) -> bb16;
+        _35 = core::panicking::AssertKind::Eq;
+        _37 = Option::<Arguments<'_>>::None;
+        _36 = core::panicking::assert_failed::<&str, &str>(move _35, _31, _32, move _37) -> bb16;
     }
 
     bb13: {
@@ -176,30 +180,8 @@ fn main() -> () {
     }
 
     bb19: {
-        (*_37) = [const "foobie", _7];
-        _2 = move _6 as std::boxed::Box<[&str]> (Pointer(Unsize));
+        (*_39) = [const "foobie", _7];
+        _2 = move _6 as std::boxed::Box<[&str]> (PointerCoercion(Unsize));
         _1 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "asdf";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "asdf";
-        _0 = &_1;
-        return;
     }
 }

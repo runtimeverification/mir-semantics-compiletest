@@ -4,39 +4,21 @@ fn with_closure(_1: F) -> u32 {
     debug f => _1;
     let mut _0: u32;
     let mut _2: (&u32, &u32);
-    let mut _3: &u32;
-    let mut _4: &u32;
+    let _3: &u32;
+    let _4: u32;
+    let _5: &u32;
+    let _6: u32;
 
     bb0: {
-        _4 = const _;
-        _3 = const _;
-        _2 = (_4, _3);
+        _4 = const 22_u32;
+        _3 = &_4;
+        _6 = const 44_u32;
+        _5 = &_6;
+        _2 = (_3, _5);
         _0 = <F as FnOnce<(&u32, &u32)>>::call_once(move _1, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in with_closure: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 44_u32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in with_closure: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 22_u32;
-        _0 = &_1;
         return;
     }
 }
@@ -47,23 +29,25 @@ fn main() -> () {
     let mut _2: u32;
     let mut _3: (&u32, &u32);
     let mut _4: &u32;
-    let mut _7: bool;
-    let mut _8: bool;
-    let mut _9: u32;
-    let mut _10: u32;
-    let _12: !;
-    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _5: &u32;
+    let _6: u32;
+    let mut _7: u32;
+    let mut _10: bool;
+    let mut _11: bool;
+    let mut _12: u32;
+    let mut _13: u32;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug z => _1;
-        let _5: &u32;
-        let _6: &u32;
-        let mut _14: &u32;
+        let _8: &u32;
+        let _9: &u32;
         scope 2 {
-            debug left_val => _5;
-            debug right_val => _6;
-            let _11: core::panicking::AssertKind;
+            debug left_val => _8;
+            debug right_val => _9;
+            let _14: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _11;
+                debug kind => _14;
             }
         }
     }
@@ -78,37 +62,26 @@ fn main() -> () {
 
     bb2: {
         _4 = &_1;
-        _14 = const _;
-        _3 = (move _4, _14);
-        _5 = (_3.0: &u32);
-        _6 = (_3.1: &u32);
-        _9 = (*_5);
-        _10 = (*_6);
-        _8 = Eq(move _9, move _10);
-        _7 = Not(move _8);
-        switchInt(move _7) -> [0: bb4, otherwise: bb3];
+        _7 = Add(const 22_u32, const 44_u32);
+        _6 = Add(move _7, const 1_u32);
+        _5 = &_6;
+        _3 = (move _4, move _5);
+        _8 = (_3.0: &u32);
+        _9 = (_3.1: &u32);
+        _12 = (*_8);
+        _13 = (*_9);
+        _11 = Eq(move _12, move _13);
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _11 = core::panicking::AssertKind::Eq;
-        _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<u32, u32>(move _11, _5, _6, move _13) -> unwind continue;
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-    let mut _2: u32;
-
-    bb0: {
-        _2 = Add(const 22_u32, const 44_u32);
-        _1 = Add(move _2, const 1_u32);
-        _0 = &_1;
         return;
     }
 }

@@ -27,21 +27,22 @@ fn main() -> () {
     let mut _5: !;
     let mut _6: (&&str, &&str);
     let mut _7: &&str;
-    let mut _10: bool;
-    let mut _11: bool;
-    let _13: !;
-    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
+    let _8: &str;
+    let mut _9: &&str;
+    let mut _12: bool;
+    let mut _13: bool;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug s => _1;
-        let _8: &&str;
-        let _9: &&str;
-        let mut _15: &&str;
+        let _10: &&str;
+        let _11: &&str;
         scope 2 {
-            debug left_val => _8;
-            debug right_val => _9;
-            let _12: core::panicking::AssertKind;
+            debug left_val => _10;
+            debug right_val => _11;
+            let _14: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _12;
+                debug kind => _14;
             }
         }
     }
@@ -76,37 +77,27 @@ fn main() -> () {
     }
 
     bb6: {
-        _15 = const _;
-        _7 = &_1;
-        _6 = (_15, move _7);
-        _8 = (_6.0: &&str);
-        _9 = (_6.1: &&str);
-        _11 = <&str as PartialEq>::eq(_8, _9) -> [return: bb7, unwind continue];
+        _8 = const "BAZ";
+        _7 = &_8;
+        _9 = &_1;
+        _6 = (move _7, move _9);
+        _10 = (_6.0: &&str);
+        _11 = (_6.1: &&str);
+        _13 = <&str as PartialEq>::eq(_10, _11) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _10 = Not(move _11);
-        switchInt(move _10) -> [0: bb9, otherwise: bb8];
+        _12 = Not(move _13);
+        switchInt(move _12) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _12 = core::panicking::AssertKind::Eq;
-        _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<&str, &str>(move _12, _8, _9, move _14) -> unwind continue;
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<&str, &str>(move _14, _10, _11, move _16) -> unwind continue;
     }
 
     bb9: {
-        return;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "BAZ";
-        _0 = &_1;
         return;
     }
 }

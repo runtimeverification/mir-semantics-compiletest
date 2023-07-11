@@ -17,11 +17,11 @@ fn <impl at ui/closures/2229_closure_analysis/diagnostics/liveness_unintentional
         _3 = const "MyStruct";
         _4 = const "a";
         _6 = &((*_1).0: i32);
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _7 = const "b";
         _10 = &((*_1).1: i32);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
     }
 
@@ -43,7 +43,7 @@ fn unintentional_copy_one() -> () {
     let mut _11: &mut [closure@ui/closures/2229_closure_analysis/diagnostics/liveness_unintentional_copy.rs:16:17: 16:25];
     let mut _12: (i32,);
     scope 1 {
-        debug a => const 1_i32;
+        debug a => _1;
         let mut _2: MyStruct;
         scope 2 {
             debug last => _2;
@@ -100,7 +100,7 @@ fn unintentional_copy_two() -> () {
     let mut _4: std::ops::Range<i32>;
     let mut _5: [closure@ui/closures/2229_closure_analysis/diagnostics/liveness_unintentional_copy.rs:32:22: 32:30];
     scope 1 {
-        debug a => const 1_i32;
+        debug a => _1;
         let mut _2: MyStruct;
         scope 2 {
             debug sum => _2;

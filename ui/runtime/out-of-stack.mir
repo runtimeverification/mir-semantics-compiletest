@@ -55,13 +55,15 @@ fn loud_recurse() -> () {
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let _4: ();
-    let _5: ();
-    let mut _6: &[&str; 1];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
+    let _6: ();
+    let _7: ();
 
     bb0: {
-        _6 = const _;
-        _3 = _6 as &[&str] (Pointer(Unsize));
+        _5 = [const "hello!\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
         _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
@@ -70,25 +72,14 @@ fn loud_recurse() -> () {
     }
 
     bb2: {
-        _4 = loud_recurse() -> [return: bb3, unwind continue];
+        _6 = loud_recurse() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _5 = black_box::<()>(const ()) -> [return: bb4, unwind continue];
+        _7 = black_box::<()>(const ()) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in loud_recurse: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "hello!\n"];
-        _0 = &_1;
         return;
     }
 }
@@ -105,19 +96,20 @@ fn check_status(_1: ExitStatus) -> () {
     let mut _8: &std::option::Option<i32>;
     let _9: std::option::Option<i32>;
     let mut _10: &std::process::ExitStatus;
-    let _11: &std::option::Option<i32>;
-    let _12: &std::option::Option<i32>;
-    let mut _13: bool;
-    let mut _14: bool;
-    let _16: !;
-    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _18: &std::option::Option<i32>;
+    let mut _11: &std::option::Option<i32>;
+    let _12: std::option::Option<i32>;
+    let _13: &std::option::Option<i32>;
+    let _14: &std::option::Option<i32>;
+    let mut _15: bool;
+    let mut _16: bool;
+    let _18: !;
+    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _11;
-        debug right_val => _12;
-        let _15: core::panicking::AssertKind;
+        debug left_val => _13;
+        debug right_val => _14;
+        let _17: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _15;
+            debug kind => _17;
         }
     }
 
@@ -143,36 +135,26 @@ fn check_status(_1: ExitStatus) -> () {
 
     bb4: {
         _8 = &_9;
-        _18 = const _;
-        _7 = (move _8, _18);
-        _11 = (_7.0: &std::option::Option<i32>);
-        _12 = (_7.1: &std::option::Option<i32>);
-        _14 = <Option<i32> as PartialEq>::eq(_11, _12) -> [return: bb5, unwind continue];
+        _12 = Option::<i32>::Some(const _);
+        _11 = &_12;
+        _7 = (move _8, move _11);
+        _13 = (_7.0: &std::option::Option<i32>);
+        _14 = (_7.1: &std::option::Option<i32>);
+        _16 = <Option<i32> as PartialEq>::eq(_13, _14) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _13 = Not(move _14);
-        switchInt(move _13) -> [0: bb7, otherwise: bb6];
+        _15 = Not(move _16);
+        switchInt(move _15) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _15 = core::panicking::AssertKind::Eq;
-        _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _15, _11, _12, move _17) -> unwind continue;
+        _17 = core::panicking::AssertKind::Eq;
+        _19 = Option::<Arguments<'_>>::None;
+        _18 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _17, _13, _14, move _19) -> unwind continue;
     }
 
     bb7: {
-        return;
-    }
-}
-
-promoted[0] in check_status: &Option<i32> = {
-    let mut _0: &std::option::Option<i32>;
-    let mut _1: std::option::Option<i32>;
-
-    bb0: {
-        _1 = Option::<i32>::Some(const _);
-        _0 = &_1;
         return;
     }
 }
@@ -189,120 +171,126 @@ fn main() -> () {
     let mut _8: &std::string::String;
     let _9: &std::string::String;
     let mut _10: &std::vec::Vec<std::string::String>;
-    let _11: ();
-    let mut _12: bool;
-    let mut _13: bool;
-    let mut _14: usize;
-    let mut _15: &std::vec::Vec<std::string::String>;
-    let mut _16: bool;
-    let mut _17: &std::string::String;
-    let _18: &std::string::String;
-    let mut _19: &std::vec::Vec<std::string::String>;
-    let _20: ();
-    let mut _21: bool;
-    let mut _22: bool;
-    let mut _23: usize;
-    let mut _24: &std::vec::Vec<std::string::String>;
+    let mut _11: &&str;
+    let _12: &str;
+    let _13: ();
+    let mut _14: bool;
+    let mut _15: bool;
+    let mut _16: usize;
+    let mut _17: &std::vec::Vec<std::string::String>;
+    let mut _18: bool;
+    let mut _19: &std::string::String;
+    let _20: &std::string::String;
+    let mut _21: &std::vec::Vec<std::string::String>;
+    let mut _22: &&str;
+    let _23: &str;
+    let _24: ();
     let mut _25: bool;
-    let mut _26: &std::string::String;
-    let _27: &std::string::String;
+    let mut _26: bool;
+    let mut _27: usize;
     let mut _28: &std::vec::Vec<std::string::String>;
-    let _29: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
-    let mut _30: std::thread::JoinHandle<()>;
-    let mut _31: bool;
-    let mut _32: bool;
-    let mut _33: usize;
-    let mut _34: &std::vec::Vec<std::string::String>;
-    let mut _35: bool;
-    let mut _36: &std::string::String;
-    let _37: &std::string::String;
-    let mut _38: &std::vec::Vec<std::string::String>;
-    let _39: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
-    let mut _40: std::thread::JoinHandle<()>;
-    let mut _42: std::boxed::Box<[&str]>;
-    let mut _43: usize;
-    let mut _44: usize;
-    let mut _45: *mut u8;
-    let mut _46: std::boxed::Box<[&str; 2]>;
-    let _47: &str;
-    let mut _48: bool;
-    let _49: ();
-    let mut _50: &mut std::vec::Vec<&str>;
-    let _51: &str;
-    let _52: ();
-    let mut _53: &mut std::vec::Vec<&str>;
-    let _54: &str;
-    let mut _55: std::vec::IntoIter<&str>;
-    let mut _56: std::vec::Vec<&str>;
-    let mut _58: std::option::Option<&str>;
-    let mut _59: &mut std::vec::IntoIter<&str>;
-    let mut _60: isize;
-    let _62: ();
-    let mut _63: std::fmt::Arguments<'_>;
-    let mut _64: &[&str];
-    let mut _65: &[core::fmt::rt::Argument<'_>];
-    let _66: &[core::fmt::rt::Argument<'_>; 1];
-    let _67: [core::fmt::rt::Argument<'_>; 1];
-    let mut _68: core::fmt::rt::Argument<'_>;
-    let _69: &&str;
-    let mut _71: std::result::Result<std::process::Output, std::io::Error>;
-    let mut _72: &mut std::process::Command;
-    let mut _73: &mut std::process::Command;
-    let mut _74: &mut std::process::Command;
-    let mut _75: std::process::Command;
-    let mut _76: &std::string::String;
-    let _77: &std::string::String;
-    let mut _78: &std::vec::Vec<std::string::String>;
-    let mut _79: &str;
-    let _80: ();
-    let mut _81: std::process::ExitStatus;
-    let mut _83: &[u8];
-    let _84: &[u8];
-    let _85: &std::vec::Vec<u8>;
-    let mut _86: bool;
-    let mut _87: bool;
-    let mut _88: &str;
-    let _89: &str;
-    let mut _90: &std::borrow::Cow<'_, str>;
-    let _91: !;
-    let mut _92: std::fmt::Arguments<'_>;
-    let mut _93: &[&str];
-    let mut _94: &[core::fmt::rt::Argument<'_>];
-    let _95: &[core::fmt::rt::Argument<'_>; 1];
-    let _96: [core::fmt::rt::Argument<'_>; 1];
-    let mut _97: core::fmt::rt::Argument<'_>;
-    let _98: &std::borrow::Cow<'_, str>;
-    let mut _105: bool;
-    let mut _106: *const [&str; 2];
+    let mut _29: bool;
+    let mut _30: &std::string::String;
+    let _31: &std::string::String;
+    let mut _32: &std::vec::Vec<std::string::String>;
+    let mut _33: &&str;
+    let _34: &str;
+    let _35: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
+    let mut _36: std::thread::JoinHandle<()>;
+    let mut _37: bool;
+    let mut _38: bool;
+    let mut _39: usize;
+    let mut _40: &std::vec::Vec<std::string::String>;
+    let mut _41: bool;
+    let mut _42: &std::string::String;
+    let _43: &std::string::String;
+    let mut _44: &std::vec::Vec<std::string::String>;
+    let mut _45: &&str;
+    let _46: &str;
+    let _47: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
+    let mut _48: std::thread::JoinHandle<()>;
+    let mut _50: std::boxed::Box<[&str]>;
+    let mut _51: usize;
+    let mut _52: usize;
+    let mut _53: *mut u8;
+    let mut _54: std::boxed::Box<[&str; 2]>;
+    let _55: &str;
+    let mut _56: bool;
+    let _57: ();
+    let mut _58: &mut std::vec::Vec<&str>;
+    let _59: &str;
+    let _60: ();
+    let mut _61: &mut std::vec::Vec<&str>;
+    let _62: &str;
+    let mut _63: std::vec::IntoIter<&str>;
+    let mut _64: std::vec::Vec<&str>;
+    let mut _66: std::option::Option<&str>;
+    let mut _67: &mut std::vec::IntoIter<&str>;
+    let mut _68: isize;
+    let _70: ();
+    let mut _71: std::fmt::Arguments<'_>;
+    let mut _72: &[&str];
+    let _73: &[&str; 2];
+    let _74: [&str; 2];
+    let mut _75: &[core::fmt::rt::Argument<'_>];
+    let _76: &[core::fmt::rt::Argument<'_>; 1];
+    let _77: [core::fmt::rt::Argument<'_>; 1];
+    let mut _78: core::fmt::rt::Argument<'_>;
+    let _79: &&str;
+    let mut _81: std::result::Result<std::process::Output, std::io::Error>;
+    let mut _82: &mut std::process::Command;
+    let mut _83: &mut std::process::Command;
+    let mut _84: &mut std::process::Command;
+    let mut _85: std::process::Command;
+    let mut _86: &std::string::String;
+    let _87: &std::string::String;
+    let mut _88: &std::vec::Vec<std::string::String>;
+    let mut _89: &str;
+    let _90: ();
+    let mut _91: std::process::ExitStatus;
+    let mut _93: &[u8];
+    let _94: &[u8];
+    let _95: &std::vec::Vec<u8>;
+    let mut _96: bool;
+    let mut _97: bool;
+    let mut _98: &str;
+    let _99: &str;
+    let mut _100: &std::borrow::Cow<'_, str>;
+    let _101: !;
+    let mut _102: std::fmt::Arguments<'_>;
+    let mut _103: &[&str];
+    let _104: &[&str; 1];
+    let _105: [&str; 1];
+    let mut _106: &[core::fmt::rt::Argument<'_>];
+    let _107: &[core::fmt::rt::Argument<'_>; 1];
+    let _108: [core::fmt::rt::Argument<'_>; 1];
+    let mut _109: core::fmt::rt::Argument<'_>;
+    let _110: &std::borrow::Cow<'_, str>;
+    let mut _111: bool;
+    let mut _112: *const [&str; 2];
     scope 1 {
         debug args => _1;
-        let mut _41: std::vec::Vec<&str>;
-        let mut _101: &&str;
-        let mut _102: &&str;
-        let mut _103: &&str;
-        let mut _104: &&str;
-        let mut _107: *const ();
-        let mut _108: usize;
-        let mut _109: usize;
-        let mut _110: usize;
-        let mut _111: usize;
-        let mut _112: bool;
+        let mut _49: std::vec::Vec<&str>;
+        let mut _113: *const ();
+        let mut _114: usize;
+        let mut _115: usize;
+        let mut _116: usize;
+        let mut _117: usize;
+        let mut _118: bool;
         scope 2 {
-            debug modes => _41;
-            let mut _57: std::vec::IntoIter<&str>;
+            debug modes => _49;
+            let mut _65: std::vec::IntoIter<&str>;
             scope 4 {
-                debug iter => _57;
-                let _61: &str;
+                debug iter => _65;
+                let _69: &str;
                 scope 5 {
-                    debug mode => _61;
-                    let _70: std::process::Output;
-                    let mut _100: &[&str; 2];
+                    debug mode => _69;
+                    let _80: std::process::Output;
                     scope 6 {
-                        debug silent => _70;
-                        let _82: std::borrow::Cow<'_, str>;
+                        debug silent => _80;
+                        let _92: std::borrow::Cow<'_, str>;
                         scope 7 {
-                            debug error => _82;
-                            let mut _99: &[&str; 1];
+                            debug error => _92;
                         }
                     }
                 }
@@ -313,7 +301,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _105 = const false;
+        _111 = const false;
         _2 = args() -> [return: bb1, unwind continue];
     }
 
@@ -347,8 +335,9 @@ fn main() -> () {
 
     bb7: {
         _8 = _9;
-        _104 = const _;
-        _7 = <String as PartialEq<&str>>::eq(move _8, _104) -> [return: bb8, unwind: bb76];
+        _12 = const "silent";
+        _11 = &_12;
+        _7 = <String as PartialEq<&str>>::eq(move _8, move _11) -> [return: bb8, unwind: bb76];
     }
 
     bb8: {
@@ -357,206 +346,210 @@ fn main() -> () {
     }
 
     bb9: {
-        _11 = silent_recurse() -> [return: bb81, unwind: bb76];
+        _13 = silent_recurse() -> [return: bb81, unwind: bb76];
     }
 
     bb10: {
-        _15 = &_1;
-        _14 = Vec::<String>::len(move _15) -> [return: bb14, unwind: bb76];
+        _17 = &_1;
+        _16 = Vec::<String>::len(move _17) -> [return: bb14, unwind: bb76];
     }
 
     bb11: {
-        _12 = const false;
+        _14 = const false;
         goto -> bb13;
     }
 
     bb12: {
-        _19 = &_1;
-        _18 = <Vec<String> as Index<usize>>::index(move _19, const 1_usize) -> [return: bb15, unwind: bb76];
+        _21 = &_1;
+        _20 = <Vec<String> as Index<usize>>::index(move _21, const 1_usize) -> [return: bb15, unwind: bb76];
     }
 
     bb13: {
-        switchInt(move _12) -> [0: bb18, otherwise: bb17];
+        switchInt(move _14) -> [0: bb18, otherwise: bb17];
     }
 
     bb14: {
-        _13 = Gt(move _14, const 1_usize);
-        switchInt(move _13) -> [0: bb11, otherwise: bb12];
+        _15 = Gt(move _16, const 1_usize);
+        switchInt(move _15) -> [0: bb11, otherwise: bb12];
     }
 
     bb15: {
-        _17 = _18;
-        _103 = const _;
-        _16 = <String as PartialEq<&str>>::eq(move _17, _103) -> [return: bb16, unwind: bb76];
+        _19 = _20;
+        _23 = const "loud";
+        _22 = &_23;
+        _18 = <String as PartialEq<&str>>::eq(move _19, move _22) -> [return: bb16, unwind: bb76];
     }
 
     bb16: {
-        _12 = move _16;
+        _14 = move _18;
         goto -> bb13;
     }
 
     bb17: {
-        _20 = loud_recurse() -> [return: bb82, unwind: bb76];
+        _24 = loud_recurse() -> [return: bb82, unwind: bb76];
     }
 
     bb18: {
-        _24 = &_1;
-        _23 = Vec::<String>::len(move _24) -> [return: bb22, unwind: bb76];
+        _28 = &_1;
+        _27 = Vec::<String>::len(move _28) -> [return: bb22, unwind: bb76];
     }
 
     bb19: {
-        _21 = const false;
+        _25 = const false;
         goto -> bb21;
     }
 
     bb20: {
-        _28 = &_1;
-        _27 = <Vec<String> as Index<usize>>::index(move _28, const 1_usize) -> [return: bb23, unwind: bb76];
+        _32 = &_1;
+        _31 = <Vec<String> as Index<usize>>::index(move _32, const 1_usize) -> [return: bb23, unwind: bb76];
     }
 
     bb21: {
-        switchInt(move _21) -> [0: bb28, otherwise: bb25];
+        switchInt(move _25) -> [0: bb28, otherwise: bb25];
     }
 
     bb22: {
-        _22 = Gt(move _23, const 1_usize);
-        switchInt(move _22) -> [0: bb19, otherwise: bb20];
+        _26 = Gt(move _27, const 1_usize);
+        switchInt(move _26) -> [0: bb19, otherwise: bb20];
     }
 
     bb23: {
-        _26 = _27;
-        _102 = const _;
-        _25 = <String as PartialEq<&str>>::eq(move _26, _102) -> [return: bb24, unwind: bb76];
+        _30 = _31;
+        _34 = const "silent-thread";
+        _33 = &_34;
+        _29 = <String as PartialEq<&str>>::eq(move _30, move _33) -> [return: bb24, unwind: bb76];
     }
 
     bb24: {
-        _21 = move _25;
+        _25 = move _29;
         goto -> bb21;
     }
 
     bb25: {
-        _30 = spawn::<fn() {silent_recurse}, ()>(silent_recurse) -> [return: bb26, unwind: bb76];
+        _36 = spawn::<fn() {silent_recurse}, ()>(silent_recurse) -> [return: bb26, unwind: bb76];
     }
 
     bb26: {
-        _29 = JoinHandle::<()>::join(move _30) -> [return: bb27, unwind: bb76];
+        _35 = JoinHandle::<()>::join(move _36) -> [return: bb27, unwind: bb76];
     }
 
     bb27: {
-        drop(_29) -> [return: bb70, unwind: bb76];
+        drop(_35) -> [return: bb70, unwind: bb76];
     }
 
     bb28: {
-        _34 = &_1;
-        _33 = Vec::<String>::len(move _34) -> [return: bb32, unwind: bb76];
+        _40 = &_1;
+        _39 = Vec::<String>::len(move _40) -> [return: bb32, unwind: bb76];
     }
 
     bb29: {
-        _31 = const false;
+        _37 = const false;
         goto -> bb31;
     }
 
     bb30: {
-        _38 = &_1;
-        _37 = <Vec<String> as Index<usize>>::index(move _38, const 1_usize) -> [return: bb33, unwind: bb76];
+        _44 = &_1;
+        _43 = <Vec<String> as Index<usize>>::index(move _44, const 1_usize) -> [return: bb33, unwind: bb76];
     }
 
     bb31: {
-        switchInt(move _31) -> [0: bb38, otherwise: bb35];
+        switchInt(move _37) -> [0: bb38, otherwise: bb35];
     }
 
     bb32: {
-        _32 = Gt(move _33, const 1_usize);
-        switchInt(move _32) -> [0: bb29, otherwise: bb30];
+        _38 = Gt(move _39, const 1_usize);
+        switchInt(move _38) -> [0: bb29, otherwise: bb30];
     }
 
     bb33: {
-        _36 = _37;
-        _101 = const _;
-        _35 = <String as PartialEq<&str>>::eq(move _36, _101) -> [return: bb34, unwind: bb76];
+        _42 = _43;
+        _46 = const "loud-thread";
+        _45 = &_46;
+        _41 = <String as PartialEq<&str>>::eq(move _42, move _45) -> [return: bb34, unwind: bb76];
     }
 
     bb34: {
-        _31 = move _35;
+        _37 = move _41;
         goto -> bb31;
     }
 
     bb35: {
-        _40 = spawn::<fn() {loud_recurse}, ()>(loud_recurse) -> [return: bb36, unwind: bb76];
+        _48 = spawn::<fn() {loud_recurse}, ()>(loud_recurse) -> [return: bb36, unwind: bb76];
     }
 
     bb36: {
-        _39 = JoinHandle::<()>::join(move _40) -> [return: bb37, unwind: bb76];
+        _47 = JoinHandle::<()>::join(move _48) -> [return: bb37, unwind: bb76];
     }
 
     bb37: {
-        drop(_39) -> [return: bb70, unwind: bb76];
+        drop(_47) -> [return: bb70, unwind: bb76];
     }
 
     bb38: {
-        _43 = SizeOf([&str; 2]);
-        _44 = AlignOf([&str; 2]);
-        _45 = alloc::alloc::exchange_malloc(move _43, move _44) -> [return: bb39, unwind: bb76];
+        _51 = SizeOf([&str; 2]);
+        _52 = AlignOf([&str; 2]);
+        _53 = alloc::alloc::exchange_malloc(move _51, move _52) -> [return: bb39, unwind: bb76];
     }
 
     bb39: {
-        _46 = ShallowInitBox(move _45, [&str; 2]);
-        _47 = const "loud-thread";
-        _106 = (((_46.0: std::ptr::Unique<[&str; 2]>).0: std::ptr::NonNull<[&str; 2]>).0: *const [&str; 2]);
-        _107 = _106 as *const () (PtrToPtr);
-        _108 = _107 as usize (Transmute);
-        _109 = AlignOf(&str);
-        _110 = Sub(_109, const 1_usize);
-        _111 = BitAnd(_108, _110);
-        _112 = Eq(_111, const 0_usize);
-        assert(_112, "misaligned pointer dereference: address must be a multiple of {} but is {}", _109, _108) -> [success: bb80, unwind unreachable];
+        _54 = ShallowInitBox(move _53, [&str; 2]);
+        _55 = const "loud-thread";
+        _112 = (((_54.0: std::ptr::Unique<[&str; 2]>).0: std::ptr::NonNull<[&str; 2]>).0: *const [&str; 2]);
+        _113 = _112 as *const () (PtrToPtr);
+        _114 = _113 as usize (Transmute);
+        _115 = AlignOf(&str);
+        _116 = Sub(_115, const 1_usize);
+        _117 = BitAnd(_114, _116);
+        _118 = Eq(_117, const 0_usize);
+        assert(_118, "misaligned pointer dereference: address must be a multiple of {} but is {}", _115, _114) -> [success: bb80, unwind unreachable];
     }
 
     bb40: {
-        _105 = const true;
-        _48 = Not(const true);
-        switchInt(move _48) -> [0: bb43, otherwise: bb41];
+        _111 = const true;
+        _56 = Not(const true);
+        switchInt(move _56) -> [0: bb43, otherwise: bb41];
     }
 
     bb41: {
-        _50 = &mut _41;
-        _51 = const "silent";
-        _49 = Vec::<&str>::push(move _50, _51) -> [return: bb42, unwind: bb79];
+        _58 = &mut _49;
+        _59 = const "silent";
+        _57 = Vec::<&str>::push(move _58, _59) -> [return: bb42, unwind: bb79];
     }
 
     bb42: {
-        _53 = &mut _41;
-        _54 = const "loud";
-        _52 = Vec::<&str>::push(move _53, _54) -> [return: bb83, unwind: bb79];
+        _61 = &mut _49;
+        _62 = const "loud";
+        _60 = Vec::<&str>::push(move _61, _62) -> [return: bb83, unwind: bb79];
     }
 
     bb43: {
-        _105 = const false;
-        _56 = move _41;
-        _55 = <Vec<&str> as IntoIterator>::into_iter(move _56) -> [return: bb44, unwind: bb79];
+        _111 = const false;
+        _64 = move _49;
+        _63 = <Vec<&str> as IntoIterator>::into_iter(move _64) -> [return: bb44, unwind: bb79];
     }
 
     bb44: {
-        _57 = move _55;
+        _65 = move _63;
         goto -> bb45;
     }
 
     bb45: {
-        _59 = &mut _57;
-        _58 = <std::vec::IntoIter<&str> as Iterator>::next(_59) -> [return: bb46, unwind: bb75];
+        _67 = &mut _65;
+        _66 = <std::vec::IntoIter<&str> as Iterator>::next(_67) -> [return: bb46, unwind: bb75];
     }
 
     bb46: {
-        _60 = discriminant(_58);
-        switchInt(move _60) -> [0: bb49, 1: bb47, otherwise: bb48];
+        _68 = discriminant(_66);
+        switchInt(move _68) -> [0: bb49, 1: bb47, otherwise: bb48];
     }
 
     bb47: {
-        _61 = ((_58 as Some).0: &str);
-        _100 = const _;
-        _64 = _100 as &[&str] (Pointer(Unsize));
-        _69 = &_61;
-        _68 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_69) -> [return: bb50, unwind: bb75];
+        _69 = ((_66 as Some).0: &str);
+        _74 = [const "testing: ", const "\n"];
+        _73 = &_74;
+        _72 = _73 as &[&str] (PointerCoercion(Unsize));
+        _79 = &_69;
+        _78 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_79) -> [return: bb50, unwind: bb75];
     }
 
     bb48: {
@@ -564,107 +557,108 @@ fn main() -> () {
     }
 
     bb49: {
-        drop(_57) -> [return: bb69, unwind: bb79];
+        drop(_65) -> [return: bb69, unwind: bb79];
     }
 
     bb50: {
-        _67 = [move _68];
-        _66 = &_67;
-        _65 = _66 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _63 = Arguments::<'_>::new_v1(move _64, move _65) -> [return: bb51, unwind: bb75];
+        _77 = [move _78];
+        _76 = &_77;
+        _75 = _76 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _71 = Arguments::<'_>::new_v1(move _72, move _75) -> [return: bb51, unwind: bb75];
     }
 
     bb51: {
-        _62 = _print(move _63) -> [return: bb52, unwind: bb75];
+        _70 = _print(move _71) -> [return: bb52, unwind: bb75];
     }
 
     bb52: {
-        _78 = &_1;
-        _77 = <Vec<String> as Index<usize>>::index(move _78, const 0_usize) -> [return: bb53, unwind: bb75];
+        _88 = &_1;
+        _87 = <Vec<String> as Index<usize>>::index(move _88, const 0_usize) -> [return: bb53, unwind: bb75];
     }
 
     bb53: {
-        _76 = _77;
-        _75 = Command::new::<&String>(move _76) -> [return: bb54, unwind: bb75];
+        _86 = _87;
+        _85 = Command::new::<&String>(move _86) -> [return: bb54, unwind: bb75];
     }
 
     bb54: {
-        _74 = &mut _75;
-        _79 = _61;
-        _73 = Command::arg::<&str>(move _74, move _79) -> [return: bb55, unwind: bb74];
+        _84 = &mut _85;
+        _89 = _69;
+        _83 = Command::arg::<&str>(move _84, move _89) -> [return: bb55, unwind: bb74];
     }
 
     bb55: {
-        _72 = _73;
-        _71 = Command::output(move _72) -> [return: bb56, unwind: bb74];
+        _82 = _83;
+        _81 = Command::output(move _82) -> [return: bb56, unwind: bb74];
     }
 
     bb56: {
-        _70 = Result::<Output, std::io::Error>::unwrap(move _71) -> [return: bb57, unwind: bb74];
+        _80 = Result::<Output, std::io::Error>::unwrap(move _81) -> [return: bb57, unwind: bb74];
     }
 
     bb57: {
-        drop(_75) -> [return: bb58, unwind: bb73];
+        drop(_85) -> [return: bb58, unwind: bb73];
     }
 
     bb58: {
-        _81 = (_70.0: std::process::ExitStatus);
-        _80 = check_status(move _81) -> [return: bb59, unwind: bb73];
+        _91 = (_80.0: std::process::ExitStatus);
+        _90 = check_status(move _91) -> [return: bb59, unwind: bb73];
     }
 
     bb59: {
-        _85 = &(_70.2: std::vec::Vec<u8>);
-        _84 = <Vec<u8> as Deref>::deref(_85) -> [return: bb60, unwind: bb73];
+        _95 = &(_80.2: std::vec::Vec<u8>);
+        _94 = <Vec<u8> as Deref>::deref(_95) -> [return: bb60, unwind: bb73];
     }
 
     bb60: {
-        _83 = _84;
-        _82 = String::from_utf8_lossy(move _83) -> [return: bb61, unwind: bb73];
+        _93 = _94;
+        _92 = String::from_utf8_lossy(move _93) -> [return: bb61, unwind: bb73];
     }
 
     bb61: {
-        _90 = &_82;
-        _89 = <Cow<'_, str> as Deref>::deref(move _90) -> [return: bb62, unwind: bb72];
+        _100 = &_92;
+        _99 = <Cow<'_, str> as Deref>::deref(move _100) -> [return: bb62, unwind: bb72];
     }
 
     bb62: {
-        _88 = _89;
-        _87 = core::str::<impl str>::contains::<'_, &str>(move _88, const "has overflowed its stack") -> [return: bb63, unwind: bb72];
+        _98 = _99;
+        _97 = core::str::<impl str>::contains::<'_, &str>(move _98, const "has overflowed its stack") -> [return: bb63, unwind: bb72];
     }
 
     bb63: {
-        _86 = Not(move _87);
-        switchInt(move _86) -> [0: bb67, otherwise: bb64];
+        _96 = Not(move _97);
+        switchInt(move _96) -> [0: bb67, otherwise: bb64];
     }
 
     bb64: {
-        _99 = const _;
-        _93 = _99 as &[&str] (Pointer(Unsize));
-        _98 = &_82;
-        _97 = core::fmt::rt::Argument::<'_>::new_display::<Cow<'_, str>>(_98) -> [return: bb65, unwind: bb72];
+        _105 = [const "missing overflow message: "];
+        _104 = &_105;
+        _103 = _104 as &[&str] (PointerCoercion(Unsize));
+        _110 = &_92;
+        _109 = core::fmt::rt::Argument::<'_>::new_display::<Cow<'_, str>>(_110) -> [return: bb65, unwind: bb72];
     }
 
     bb65: {
-        _96 = [move _97];
-        _95 = &_96;
-        _94 = _95 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _92 = Arguments::<'_>::new_v1(move _93, move _94) -> [return: bb66, unwind: bb72];
+        _108 = [move _109];
+        _107 = &_108;
+        _106 = _107 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _102 = Arguments::<'_>::new_v1(move _103, move _106) -> [return: bb66, unwind: bb72];
     }
 
     bb66: {
-        _91 = panic_fmt(move _92) -> bb72;
+        _101 = panic_fmt(move _102) -> bb72;
     }
 
     bb67: {
-        drop(_82) -> [return: bb68, unwind: bb73];
+        drop(_92) -> [return: bb68, unwind: bb73];
     }
 
     bb68: {
-        drop(_70) -> [return: bb45, unwind: bb75];
+        drop(_80) -> [return: bb45, unwind: bb75];
     }
 
     bb69: {
-        _105 = const false;
+        _111 = const false;
         goto -> bb70;
     }
 
@@ -677,19 +671,19 @@ fn main() -> () {
     }
 
     bb72 (cleanup): {
-        drop(_82) -> [return: bb73, unwind terminate];
+        drop(_92) -> [return: bb73, unwind terminate];
     }
 
     bb73 (cleanup): {
-        drop(_70) -> [return: bb75, unwind terminate];
+        drop(_80) -> [return: bb75, unwind terminate];
     }
 
     bb74 (cleanup): {
-        drop(_75) -> [return: bb75, unwind terminate];
+        drop(_85) -> [return: bb75, unwind terminate];
     }
 
     bb75 (cleanup): {
-        drop(_57) -> [return: bb79, unwind terminate];
+        drop(_65) -> [return: bb79, unwind terminate];
     }
 
     bb76 (cleanup): {
@@ -701,17 +695,17 @@ fn main() -> () {
     }
 
     bb78 (cleanup): {
-        drop(_41) -> [return: bb76, unwind terminate];
+        drop(_49) -> [return: bb76, unwind terminate];
     }
 
     bb79 (cleanup): {
-        switchInt(_105) -> [0: bb76, otherwise: bb78];
+        switchInt(_111) -> [0: bb76, otherwise: bb78];
     }
 
     bb80: {
-        (*_106) = [const "silent-thread", _47];
-        _42 = move _46 as std::boxed::Box<[&str]> (Pointer(Unsize));
-        _41 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _42) -> [return: bb40, unwind: bb76];
+        (*_112) = [const "silent-thread", _55];
+        _50 = move _54 as std::boxed::Box<[&str]> (PointerCoercion(Unsize));
+        _49 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _50) -> [return: bb40, unwind: bb76];
     }
 
     bb81: {
@@ -724,71 +718,5 @@ fn main() -> () {
 
     bb83: {
         goto -> bb43;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "missing overflow message: "];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "testing: ", const "\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "loud-thread";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "silent-thread";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[4] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "loud";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[5] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "silent";
-        _0 = &_1;
-        return;
     }
 }

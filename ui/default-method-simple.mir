@@ -6,12 +6,14 @@ fn Foo::f(_1: &Self) -> () {
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let _5: ();
-    let mut _6: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
+    let _7: ();
 
     bb0: {
-        _6 = const _;
-        _4 = _6 as &[&str] (Pointer(Unsize));
+        _6 = [const "Hello!\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
         _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
     }
 
@@ -20,21 +22,10 @@ fn Foo::f(_1: &Self) -> () {
     }
 
     bb2: {
-        _5 = <Self as Foo>::g(_1) -> [return: bb3, unwind continue];
+        _7 = <Self as Foo>::g(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in Foo::f: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "Hello!\n"];
-        _0 = &_1;
         return;
     }
 }
@@ -45,11 +36,13 @@ fn <impl at ui/default-method-simple.rs:17:1: 17:15>::g(_1: &A) -> () {
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
 
     bb0: {
-        _5 = const _;
-        _4 = _5 as &[&str] (Pointer(Unsize));
+        _6 = [const "Goodbye!\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
         _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
     }
 
@@ -58,17 +51,6 @@ fn <impl at ui/default-method-simple.rs:17:1: 17:15>::g(_1: &A) -> () {
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in <impl at ui/default-method-simple.rs:17:1: 17:15>::g: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "Goodbye!\n"];
-        _0 = &_1;
         return;
     }
 }

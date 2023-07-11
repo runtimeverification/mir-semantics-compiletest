@@ -10,7 +10,7 @@ const FOO: &[u8] = {
         StorageLive(_2);
         _2 = const b"foo";
         _1 = &(*_2);
-        _0 = move _1 as &[u8] (Pointer(Unsize));
+        _0 = move _1 as &[u8] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -26,28 +26,17 @@ const BAR: &[u8] = {
     let mut _1: &[u8; 3];
     let _2: &[u8; 3];
     let _3: [u8; 3];
-    let mut _4: &[u8; 3];
 
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _4 = const _;
-        _2 = &(*_4);
+        StorageLive(_3);
+        _3 = [const 1_u8, const 2_u8, const 3_u8];
+        _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[u8] (Pointer(Unsize));
+        _0 = move _1 as &[u8] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in BAR: &[u8; 3] = {
-    let mut _0: &[u8; 3];
-    let mut _1: [u8; 3];
-
-    bb0: {
-        _1 = [const 1_u8, const 2_u8, const 3_u8];
-        _0 = &_1;
         return;
     }
 }
@@ -56,25 +45,14 @@ const BOO: &i32 = {
     let mut _0: &i32;
     let _1: &i32;
     let _2: i32;
-    let mut _3: &i32;
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = const 42_i32;
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in BOO: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 42_i32;
-        _0 = &_1;
         return;
     }
 }
@@ -82,43 +60,49 @@ promoted[0] in BOO: &i32 = {
 fn main() -> () {
     let mut _0: ();
     let mut _1: &[u8];
-    let mut _2: usize;
-    let mut _3: usize;
-    let mut _4: bool;
-    let _5: !;
-    let _6: ();
-    let mut _7: std::fmt::Arguments<'_>;
-    let mut _8: &[&str];
-    let _9: !;
-    let mut _10: &[u8];
-    let _11: &[u8; 3];
-    let mut _12: usize;
-    let mut _13: usize;
-    let mut _14: bool;
-    let _15: ();
-    let mut _16: std::fmt::Arguments<'_>;
-    let mut _17: &[&str];
-    let _18: !;
-    let _19: !;
-    let mut _20: !;
-    let _21: ();
-    let mut _22: std::fmt::Arguments<'_>;
-    let mut _23: &[&str];
-    let mut _26: &[&str; 1];
-    let mut _27: &[&str; 1];
-    let mut _28: &[u8; 3];
+    let _2: &[u8; 3];
+    let _3: [u8; 3];
+    let mut _4: usize;
+    let mut _5: usize;
+    let mut _6: bool;
+    let _7: !;
+    let _8: ();
+    let mut _9: std::fmt::Arguments<'_>;
+    let mut _10: &[&str];
+    let _11: &[&str; 1];
+    let _12: [&str; 1];
+    let _13: !;
+    let mut _14: &[u8];
+    let _15: &[u8; 3];
+    let mut _16: usize;
+    let mut _17: usize;
+    let mut _18: bool;
+    let _19: ();
+    let mut _20: std::fmt::Arguments<'_>;
+    let mut _21: &[&str];
+    let _22: &[&str; 1];
+    let _23: [&str; 1];
+    let _24: !;
+    let _25: !;
+    let mut _26: &i32;
+    let _27: i32;
+    let mut _28: !;
+    let _29: ();
+    let mut _30: std::fmt::Arguments<'_>;
+    let mut _31: &[&str];
+    let _32: &[&str; 1];
+    let _33: [&str; 1];
     scope 1 {
-        let mut _24: &[&str; 1];
-        let mut _25: &i32;
     }
 
     bb0: {
-        _28 = const _;
-        _1 = _28 as &[u8] (Pointer(Unsize));
-        _2 = Len((*_1));
-        _3 = const 3_usize;
-        _4 = Eq(move _2, move _3);
-        switchInt(move _4) -> [0: bb4, otherwise: bb1];
+        _3 = [const 1_u8, const 2_u8, const 3_u8];
+        _2 = &_3;
+        _1 = _2 as &[u8] (PointerCoercion(Unsize));
+        _4 = Len((*_1));
+        _5 = const 3_usize;
+        _6 = Eq(move _4, move _5);
+        switchInt(move _6) -> [0: bb4, otherwise: bb1];
     }
 
     bb1: {
@@ -134,7 +118,7 @@ fn main() -> () {
     }
 
     bb4: {
-        _9 = begin_panic::<&str>(const "c") -> unwind continue;
+        _13 = begin_panic::<&str>(const "c") -> unwind continue;
     }
 
     bb5: {
@@ -146,83 +130,87 @@ fn main() -> () {
     }
 
     bb7: {
-        _5 = begin_panic::<&str>(const "a") -> unwind continue;
+        _7 = begin_panic::<&str>(const "a") -> unwind continue;
     }
 
     bb8: {
-        _27 = const _;
-        _8 = _27 as &[&str] (Pointer(Unsize));
-        _7 = Arguments::<'_>::new_const(move _8) -> [return: bb9, unwind continue];
+        _12 = [const "b\n"];
+        _11 = &_12;
+        _10 = _11 as &[&str] (PointerCoercion(Unsize));
+        _9 = Arguments::<'_>::new_const(move _10) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        _6 = _print(move _7) -> [return: bb10, unwind continue];
+        _8 = _print(move _9) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _11 = const b"foo";
-        _10 = _11 as &[u8] (Pointer(Unsize));
-        _12 = Len((*_10));
-        _13 = const 3_usize;
-        _14 = Eq(move _12, move _13);
-        switchInt(move _14) -> [0: bb14, otherwise: bb11];
+        _15 = const b"foo";
+        _14 = _15 as &[u8] (PointerCoercion(Unsize));
+        _16 = Len((*_14));
+        _17 = const 3_usize;
+        _18 = Eq(move _16, move _17);
+        switchInt(move _18) -> [0: bb14, otherwise: bb11];
     }
 
     bb11: {
-        switchInt((*_10)[0 of 3]) -> [102: bb12, 1: bb15, otherwise: bb14];
+        switchInt((*_14)[0 of 3]) -> [102: bb12, 1: bb15, otherwise: bb14];
     }
 
     bb12: {
-        switchInt((*_10)[1 of 3]) -> [111: bb13, otherwise: bb14];
+        switchInt((*_14)[1 of 3]) -> [111: bb13, otherwise: bb14];
     }
 
     bb13: {
-        switchInt((*_10)[2 of 3]) -> [111: bb17, otherwise: bb14];
+        switchInt((*_14)[2 of 3]) -> [111: bb17, otherwise: bb14];
     }
 
     bb14: {
-        _19 = begin_panic::<&str>(const "c") -> unwind continue;
+        _25 = begin_panic::<&str>(const "c") -> unwind continue;
     }
 
     bb15: {
-        switchInt((*_10)[1 of 3]) -> [2: bb16, otherwise: bb14];
+        switchInt((*_14)[1 of 3]) -> [2: bb16, otherwise: bb14];
     }
 
     bb16: {
-        switchInt((*_10)[2 of 3]) -> [3: bb20, otherwise: bb14];
+        switchInt((*_14)[2 of 3]) -> [3: bb20, otherwise: bb14];
     }
 
     bb17: {
-        _26 = const _;
-        _17 = _26 as &[&str] (Pointer(Unsize));
-        _16 = Arguments::<'_>::new_const(move _17) -> [return: bb18, unwind continue];
+        _23 = [const "a\n"];
+        _22 = &_23;
+        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _20 = Arguments::<'_>::new_const(move _21) -> [return: bb18, unwind continue];
     }
 
     bb18: {
-        _15 = _print(move _16) -> [return: bb19, unwind continue];
+        _19 = _print(move _20) -> [return: bb19, unwind continue];
     }
 
     bb19: {
-        _25 = const _;
-        switchInt((*_25)) -> [42: bb22, otherwise: bb21];
+        _27 = const 43_i32;
+        _26 = &_27;
+        switchInt((*_26)) -> [42: bb22, otherwise: bb21];
     }
 
     bb20: {
-        _18 = begin_panic::<&str>(const "b") -> unwind continue;
+        _24 = begin_panic::<&str>(const "b") -> unwind continue;
     }
 
     bb21: {
-        _24 = const _;
-        _23 = _24 as &[&str] (Pointer(Unsize));
-        _22 = Arguments::<'_>::new_const(move _23) -> [return: bb23, unwind continue];
+        _33 = [const "d\n"];
+        _32 = &_33;
+        _31 = _32 as &[&str] (PointerCoercion(Unsize));
+        _30 = Arguments::<'_>::new_const(move _31) -> [return: bb23, unwind continue];
     }
 
     bb22: {
-        _20 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _28 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 
     bb23: {
-        _21 = _print(move _22) -> [return: bb24, unwind continue];
+        _29 = _print(move _30) -> [return: bb24, unwind continue];
     }
 
     bb24: {
@@ -230,61 +218,6 @@ fn main() -> () {
     }
 }
 
-alloc9 (size: 3, align: 1) {
+alloc7 (size: 3, align: 1) {
     66 6f 6f                                        │ foo
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "d\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 43_i32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "a\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "b\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[4] in main: &[u8; 3] = {
-    let mut _0: &[u8; 3];
-    let mut _1: [u8; 3];
-
-    bb0: {
-        _1 = [const 1_u8, const 2_u8, const 3_u8];
-        _0 = &_1;
-        return;
-    }
 }

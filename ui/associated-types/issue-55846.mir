@@ -5,11 +5,13 @@ fn <impl at ui/associated-types/issue-55846.rs:25:1: 25:31>::barify() -> () {
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let mut _4: &[&str; 1];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
 
     bb0: {
-        _4 = const _;
-        _3 = _4 as &[&str] (Pointer(Unsize));
+        _5 = [const "All correct!\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
         _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
@@ -18,17 +20,6 @@ fn <impl at ui/associated-types/issue-55846.rs:25:1: 25:31>::barify() -> () {
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in <impl at ui/associated-types/issue-55846.rs:25:1: 25:31>::barify: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "All correct!\n"];
-        _0 = &_1;
         return;
     }
 }

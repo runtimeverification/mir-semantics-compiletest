@@ -17,21 +17,22 @@ fn main() -> () {
     let mut _13: &std::cell::Ref<'_, std::vec::Vec<u32>>;
     let _14: std::cell::Ref<'_, std::vec::Vec<u32>>;
     let mut _15: &std::cell::RefCell<std::vec::Vec<u32>>;
-    let mut _18: bool;
-    let mut _19: bool;
-    let _21: !;
-    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _16: &[u32; 8];
+    let _17: [u32; 8];
+    let mut _20: bool;
+    let mut _21: bool;
+    let _23: !;
+    let mut _24: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug log => _1;
-        let _16: &&[u32];
-        let _17: &[u32; 8];
-        let mut _23: &[u32; 8];
+        let _18: &&[u32];
+        let _19: &[u32; 8];
         scope 2 {
-            debug left_val => _16;
-            debug right_val => _17;
-            let _20: core::panicking::AssertKind;
+            debug left_val => _18;
+            debug right_val => _19;
+            let _22: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _20;
+                debug kind => _22;
             }
         }
     }
@@ -72,22 +73,23 @@ fn main() -> () {
     bb7: {
         _9 = _10;
         _8 = &_9;
-        _23 = const _;
-        _7 = (move _8, _23);
-        _16 = (_7.0: &&[u32]);
-        _17 = (_7.1: &[u32; 8]);
-        _19 = <&[u32] as PartialEq<[u32; 8]>>::eq(_16, _17) -> [return: bb8, unwind: bb13];
+        _17 = [const 3_u32, const 4_u32, const 5_u32, const 2_u32, const 6_u32, const 1_u32, const 0_u32, const 7_u32];
+        _16 = &_17;
+        _7 = (move _8, move _16);
+        _18 = (_7.0: &&[u32]);
+        _19 = (_7.1: &[u32; 8]);
+        _21 = <&[u32] as PartialEq<[u32; 8]>>::eq(_18, _19) -> [return: bb8, unwind: bb13];
     }
 
     bb8: {
-        _18 = Not(move _19);
-        switchInt(move _18) -> [0: bb10, otherwise: bb9];
+        _20 = Not(move _21);
+        switchInt(move _20) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _20 = core::panicking::AssertKind::Eq;
-        _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<&[u32], [u32; 8]>(move _20, _16, _17, move _22) -> bb13;
+        _22 = core::panicking::AssertKind::Eq;
+        _24 = Option::<Arguments<'_>>::None;
+        _23 = core::panicking::assert_failed::<&[u32], [u32; 8]>(move _22, _18, _19, move _24) -> bb13;
     }
 
     bb10: {
@@ -115,17 +117,6 @@ fn main() -> () {
     }
 }
 
-promoted[0] in main: &[u32; 8] = {
-    let mut _0: &[u32; 8];
-    let mut _1: [u32; 8];
-
-    bb0: {
-        _1 = [const 3_u32, const 4_u32, const 5_u32, const 2_u32, const 6_u32, const 1_u32, const 0_u32, const 7_u32];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn test(_1: &RefCell<Vec<u32>>) -> () {
     debug log => _1;
     let mut _0: ();
@@ -141,13 +132,15 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     let _13: std::string::String;
     let mut _15: std::fmt::Arguments<'_>;
     let mut _16: &[&str];
-    let mut _17: &[core::fmt::rt::Argument<'_>];
-    let _18: &[core::fmt::rt::Argument<'_>; 1];
-    let _19: [core::fmt::rt::Argument<'_>; 1];
-    let mut _20: core::fmt::rt::Argument<'_>;
-    let _21: &d::D<'_>;
-    let mut _23: bool;
+    let _17: &[&str; 1];
+    let _18: [&str; 1];
+    let mut _19: &[core::fmt::rt::Argument<'_>];
+    let _20: &[core::fmt::rt::Argument<'_>; 1];
+    let _21: [core::fmt::rt::Argument<'_>; 1];
+    let mut _22: core::fmt::rt::Argument<'_>;
+    let _23: &d::D<'_>;
     let mut _24: bool;
+    let mut _25: bool;
     scope 1 {
         debug da => _2;
         let _3: d::D<'_>;
@@ -157,7 +150,6 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
             scope 3 {
                 debug result => _6;
                 let _14: std::string::String;
-                let mut _22: &[&str; 1];
                 scope 4 {
                     debug res => _14;
                 }
@@ -166,9 +158,9 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     }
 
     bb0: {
+        _25 = const false;
         _24 = const false;
-        _23 = const false;
-        _24 = const true;
+        _25 = const true;
         _2 = D::<'_>::new(const "da", const 0_u32, _1) -> [return: bb1, unwind continue];
     }
 
@@ -177,31 +169,32 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     }
 
     bb2: {
-        _23 = const true;
+        _24 = const true;
         _5 = const "calling foo";
         _4 = println(_5) -> [return: bb3, unwind: bb16];
     }
 
     bb3: {
-        _24 = const false;
+        _25 = const false;
         _7 = move _2;
-        _23 = const false;
+        _24 = const false;
         _8 = move _3;
         _6 = foo(move _7, move _8) -> [return: bb4, unwind: bb16];
     }
 
     bb4: {
-        _22 = const _;
-        _16 = _22 as &[&str] (Pointer(Unsize));
-        _21 = &_6;
-        _20 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_21) -> [return: bb5, unwind: bb13];
+        _18 = [const "result "];
+        _17 = &_18;
+        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _23 = &_6;
+        _22 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_23) -> [return: bb5, unwind: bb13];
     }
 
     bb5: {
-        _19 = [move _20];
-        _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _15 = Arguments::<'_>::new_v1(move _16, move _17) -> [return: bb6, unwind: bb13];
+        _21 = [move _22];
+        _20 = &_21;
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb6, unwind: bb13];
     }
 
     bb6: {
@@ -228,8 +221,8 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     }
 
     bb11: {
-        _23 = const false;
         _24 = const false;
+        _25 = const false;
         return;
     }
 
@@ -250,7 +243,7 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     }
 
     bb16 (cleanup): {
-        switchInt(_23) -> [0: bb18, otherwise: bb15];
+        switchInt(_24) -> [0: bb18, otherwise: bb15];
     }
 
     bb17 (cleanup): {
@@ -258,18 +251,7 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     }
 
     bb18 (cleanup): {
-        switchInt(_24) -> [0: bb14, otherwise: bb17];
-    }
-}
-
-promoted[0] in test: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "result "];
-        _0 = &_1;
-        return;
+        switchInt(_25) -> [0: bb14, otherwise: bb17];
     }
 }
 
@@ -556,38 +538,39 @@ fn indent_println(_1: u32, _2: &str) -> () {
     let _21: ();
     let mut _22: std::fmt::Arguments<'_>;
     let mut _23: &[&str];
-    let mut _24: &[core::fmt::rt::Argument<'_>];
-    let _25: &[core::fmt::rt::Argument<'_>; 2];
-    let _26: [core::fmt::rt::Argument<'_>; 2];
-    let mut _27: core::fmt::rt::Argument<'_>;
-    let _28: &std::string::String;
+    let _24: &[&str; 3];
+    let _25: [&str; 3];
+    let mut _26: &[core::fmt::rt::Argument<'_>];
+    let _27: &[core::fmt::rt::Argument<'_>; 2];
+    let _28: [core::fmt::rt::Argument<'_>; 2];
     let mut _29: core::fmt::rt::Argument<'_>;
-    let _30: &&str;
-    let mut _32: bool;
+    let _30: &std::string::String;
+    let mut _31: core::fmt::rt::Argument<'_>;
+    let _32: &&str;
+    let mut _33: bool;
     scope 1 {
         debug indent => _3;
         let mut _6: std::ops::Range<u32>;
-        let mut _31: &[&str; 3];
         scope 2 {
             debug iter => _6;
             let _10: u32;
             scope 3 {
                 debug i => _10;
                 scope 4 {
-                    let mut _33: *const ();
-                    let mut _34: usize;
+                    let mut _34: *const ();
                     let mut _35: usize;
                     let mut _36: usize;
                     let mut _37: usize;
-                    let mut _38: bool;
+                    let mut _38: usize;
+                    let mut _39: bool;
                 }
             }
         }
     }
 
     bb0: {
-        _32 = const false;
-        _32 = const true;
+        _33 = const false;
+        _33 = const true;
         _3 = String::new() -> [return: bb1, unwind continue];
     }
 
@@ -614,13 +597,13 @@ fn indent_println(_1: u32, _2: &str) -> () {
     bb5: {
         _10 = ((_7 as Some).0: u32);
         _13 = const {alloc1: *mut u64};
-        _33 = _13 as *const () (PtrToPtr);
-        _34 = _33 as usize (Transmute);
-        _35 = AlignOf(u64);
-        _36 = Sub(_35, const 1_usize);
-        _37 = BitAnd(_34, _36);
-        _38 = Eq(_37, const 0_usize);
-        assert(_38, "misaligned pointer dereference: address must be a multiple of {} but is {}", _35, _34) -> [success: bb20, unwind unreachable];
+        _34 = _13 as *const () (PtrToPtr);
+        _35 = _34 as usize (Transmute);
+        _36 = AlignOf(u64);
+        _37 = Sub(_36, const 1_usize);
+        _38 = BitAnd(_35, _37);
+        _39 = Eq(_38, const 0_usize);
+        assert(_39, "misaligned pointer dereference: address must be a multiple of {} but is {}", _36, _35) -> [success: bb20, unwind unreachable];
     }
 
     bb6: {
@@ -628,48 +611,49 @@ fn indent_println(_1: u32, _2: &str) -> () {
     }
 
     bb7: {
-        _31 = const _;
-        _23 = _31 as &[&str] (Pointer(Unsize));
-        _28 = &_3;
-        _27 = core::fmt::rt::Argument::<'_>::new_display::<String>(_28) -> [return: bb12, unwind: bb19];
+        _25 = [const "", const "", const "\n"];
+        _24 = &_25;
+        _23 = _24 as &[&str] (PointerCoercion(Unsize));
+        _30 = &_3;
+        _29 = core::fmt::rt::Argument::<'_>::new_display::<String>(_30) -> [return: bb12, unwind: bb19];
     }
 
     bb8: {
-        _32 = const false;
+        _33 = const false;
         _16 = move _3;
         _17 = const "| ";
         _15 = <String as Add<&str>>::add(move _16, _17) -> [return: bb9, unwind: bb19];
     }
 
     bb9: {
-        _32 = const true;
+        _33 = const true;
         _3 = move _15;
         goto -> bb3;
     }
 
     bb10: {
-        _32 = const false;
+        _33 = const false;
         _19 = move _3;
         _20 = const "  ";
         _18 = <String as Add<&str>>::add(move _19, _20) -> [return: bb11, unwind: bb19];
     }
 
     bb11: {
-        _32 = const true;
+        _33 = const true;
         _3 = move _18;
         goto -> bb3;
     }
 
     bb12: {
-        _30 = &_2;
-        _29 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_30) -> [return: bb13, unwind: bb19];
+        _32 = &_2;
+        _31 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_32) -> [return: bb13, unwind: bb19];
     }
 
     bb13: {
-        _26 = [move _27, move _29];
-        _25 = &_26;
-        _24 = _25 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _22 = Arguments::<'_>::new_v1(move _23, move _24) -> [return: bb14, unwind: bb19];
+        _28 = [move _29, move _31];
+        _27 = &_28;
+        _26 = _27 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _22 = Arguments::<'_>::new_v1(move _23, move _26) -> [return: bb14, unwind: bb19];
     }
 
     bb14: {
@@ -681,7 +665,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     }
 
     bb16: {
-        _32 = const false;
+        _33 = const false;
         return;
     }
 
@@ -694,7 +678,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     }
 
     bb19 (cleanup): {
-        switchInt(_32) -> [0: bb17, otherwise: bb18];
+        switchInt(_33) -> [0: bb17, otherwise: bb18];
     }
 
     bb20: {
@@ -707,17 +691,6 @@ fn indent_println(_1: u32, _2: &str) -> () {
 
 alloc1 (static: trails, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in indent_println: &[&str; 3] = {
-    let mut _0: &[&str; 3];
-    let mut _1: [&str; 3];
-
-    bb0: {
-        _1 = [const "", const "", const "\n"];
-        _0 = &_1;
-        return;
-    }
 }
 
 fn println(_1: &str) -> () {
@@ -824,39 +797,41 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:129:5: 129:36>::fm
     let mut _0: std::result::Result<(), std::fmt::Error>;
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 3];
-    let _7: [core::fmt::rt::Argument<'_>; 3];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &&str;
+    let _5: &[&str; 4];
+    let _6: [&str; 4];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 3];
+    let _9: [core::fmt::rt::Argument<'_>; 3];
     let mut _10: core::fmt::rt::Argument<'_>;
-    let _11: &u32;
+    let _11: &&str;
     let mut _12: core::fmt::rt::Argument<'_>;
     let _13: &u32;
-    let mut _14: &[&str; 4];
+    let mut _14: core::fmt::rt::Argument<'_>;
+    let _15: &u32;
 
     bb0: {
-        _14 = const _;
-        _4 = _14 as &[&str] (Pointer(Unsize));
-        _9 = &((*_1).0: &str);
-        _8 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_9) -> [return: bb1, unwind continue];
+        _6 = [const "D(", const "_", const ", ", const ")"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &((*_1).0: &str);
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _11 = &((*_1).1: u32);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_11) -> [return: bb2, unwind continue];
+        _13 = &((*_1).1: u32);
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_13) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _13 = &((*_1).2: u32);
-        _12 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_13) -> [return: bb3, unwind continue];
+        _15 = &((*_1).2: u32);
+        _14 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_15) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _7 = [move _8, move _10, move _12];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb4, unwind continue];
+        _9 = [move _10, move _12, move _14];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb4, unwind continue];
     }
 
     bb4: {
@@ -864,17 +839,6 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:129:5: 129:36>::fm
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:129:5: 129:36>::fmt: &[&str; 4] = {
-    let mut _0: &[&str; 4];
-    let mut _1: [&str; 4];
-
-    bb0: {
-        _1 = [const "D(", const "_", const ", ", const ")"];
-        _0 = &_1;
         return;
     }
 }
@@ -898,53 +862,54 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
     let _18: std::string::String;
     let mut _20: std::fmt::Arguments<'_>;
     let mut _21: &[&str];
-    let mut _22: &[core::fmt::rt::Argument<'_>];
-    let _23: &[core::fmt::rt::Argument<'_>; 1];
-    let _24: [core::fmt::rt::Argument<'_>; 1];
-    let mut _25: core::fmt::rt::Argument<'_>;
-    let _26: &d::D<'_>;
+    let _22: &[&str; 1];
+    let _23: [&str; 1];
+    let mut _24: &[core::fmt::rt::Argument<'_>];
+    let _25: &[core::fmt::rt::Argument<'_>; 1];
+    let _26: [core::fmt::rt::Argument<'_>; 1];
+    let mut _27: core::fmt::rt::Argument<'_>;
+    let _28: &d::D<'_>;
     scope 1 {
         let _4: u32;
         scope 2 {
             debug trail => _4;
             let _5: u32;
-            let mut _52: *const ();
-            let mut _53: usize;
+            let mut _53: *const ();
             let mut _54: usize;
             let mut _55: usize;
             let mut _56: usize;
-            let mut _57: bool;
+            let mut _57: usize;
+            let mut _58: bool;
             scope 3 {
                 debug ctr => _5;
                 let _11: d::D<'_>;
-                let mut _28: *const ();
-                let mut _29: usize;
+                let mut _29: *const ();
                 let mut _30: usize;
                 let mut _31: usize;
                 let mut _32: usize;
-                let mut _33: bool;
-                let mut _34: *const ();
-                let mut _35: usize;
+                let mut _33: usize;
+                let mut _34: bool;
+                let mut _35: *const ();
                 let mut _36: usize;
                 let mut _37: usize;
                 let mut _38: usize;
-                let mut _39: bool;
-                let mut _40: *const ();
-                let mut _41: usize;
+                let mut _39: usize;
+                let mut _40: bool;
+                let mut _41: *const ();
                 let mut _42: usize;
                 let mut _43: usize;
                 let mut _44: usize;
-                let mut _45: bool;
-                let mut _46: *const ();
-                let mut _47: usize;
+                let mut _45: usize;
+                let mut _46: bool;
+                let mut _47: *const ();
                 let mut _48: usize;
                 let mut _49: usize;
                 let mut _50: usize;
-                let mut _51: bool;
+                let mut _51: usize;
+                let mut _52: bool;
                 scope 4 {
                     debug ret => _11;
                     let _19: std::string::String;
-                    let mut _27: &[&str; 1];
                     scope 5 {
                         debug res => _19;
                     }
@@ -959,20 +924,20 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
 
     bb1: {
         _6 = const {alloc2: *mut u32};
-        _52 = _6 as *const () (PtrToPtr);
-        _53 = _52 as usize (Transmute);
-        _54 = AlignOf(u32);
-        _55 = Sub(_54, const 1_usize);
-        _56 = BitAnd(_53, _55);
-        _57 = Eq(_56, const 0_usize);
-        assert(_57, "misaligned pointer dereference: address must be a multiple of {} but is {}", _54, _53) -> [success: bb15, unwind unreachable];
+        _53 = _6 as *const () (PtrToPtr);
+        _54 = _53 as usize (Transmute);
+        _55 = AlignOf(u32);
+        _56 = Sub(_55, const 1_usize);
+        _57 = BitAnd(_54, _56);
+        _58 = Eq(_57, const 0_usize);
+        assert(_58, "misaligned pointer dereference: address must be a multiple of {} but is {}", _55, _54) -> [success: bb15, unwind unreachable];
     }
 
     bb2: {
-        _24 = [move _25];
-        _23 = &_24;
-        _22 = _23 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _20 = Arguments::<'_>::new_v1(move _21, move _22) -> [return: bb3, unwind: bb9];
+        _26 = [move _27];
+        _25 = &_26;
+        _24 = _25 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _20 = Arguments::<'_>::new_v1(move _21, move _24) -> [return: bb3, unwind: bb9];
     }
 
     bb3: {
@@ -1016,20 +981,21 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
         _12 = _4;
         _11 = D::<'_> { name: _1, i: _2, uid: _5, trail: move _12, log: _3 };
         _14 = _4;
-        _27 = const _;
-        _21 = _27 as &[&str] (Pointer(Unsize));
-        _26 = &_11;
-        _25 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_26) -> [return: bb2, unwind: bb9];
+        _23 = [const "+-- Make "];
+        _22 = &_23;
+        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _28 = &_11;
+        _27 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_28) -> [return: bb2, unwind: bb9];
     }
 
     bb12: {
-        _28 = _10 as *const () (PtrToPtr);
-        _29 = _28 as usize (Transmute);
-        _30 = AlignOf(u64);
-        _31 = Sub(_30, const 1_usize);
-        _32 = BitAnd(_29, _31);
-        _33 = Eq(_32, const 0_usize);
-        assert(_33, "misaligned pointer dereference: address must be a multiple of {} but is {}", _30, _29) -> [success: bb11, unwind unreachable];
+        _29 = _10 as *const () (PtrToPtr);
+        _30 = _29 as usize (Transmute);
+        _31 = AlignOf(u64);
+        _32 = Sub(_31, const 1_usize);
+        _33 = BitAnd(_30, _32);
+        _34 = Eq(_33, const 0_usize);
+        assert(_34, "misaligned pointer dereference: address must be a multiple of {} but is {}", _31, _30) -> [success: bb11, unwind unreachable];
     }
 
     bb13: {
@@ -1037,35 +1003,35 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
         _9 = _4;
         _8 = Shl(const 1_u64, move _9);
         _10 = const {alloc1: *mut u64};
-        _34 = _10 as *const () (PtrToPtr);
-        _35 = _34 as usize (Transmute);
-        _36 = AlignOf(u64);
-        _37 = Sub(_36, const 1_usize);
-        _38 = BitAnd(_35, _37);
-        _39 = Eq(_38, const 0_usize);
-        assert(_39, "misaligned pointer dereference: address must be a multiple of {} but is {}", _36, _35) -> [success: bb12, unwind unreachable];
+        _35 = _10 as *const () (PtrToPtr);
+        _36 = _35 as usize (Transmute);
+        _37 = AlignOf(u64);
+        _38 = Sub(_37, const 1_usize);
+        _39 = BitAnd(_36, _38);
+        _40 = Eq(_39, const 0_usize);
+        assert(_40, "misaligned pointer dereference: address must be a multiple of {} but is {}", _37, _36) -> [success: bb12, unwind unreachable];
     }
 
     bb14: {
-        _40 = _7 as *const () (PtrToPtr);
-        _41 = _40 as usize (Transmute);
-        _42 = AlignOf(u32);
-        _43 = Sub(_42, const 1_usize);
-        _44 = BitAnd(_41, _43);
-        _45 = Eq(_44, const 0_usize);
-        assert(_45, "misaligned pointer dereference: address must be a multiple of {} but is {}", _42, _41) -> [success: bb13, unwind unreachable];
+        _41 = _7 as *const () (PtrToPtr);
+        _42 = _41 as usize (Transmute);
+        _43 = AlignOf(u32);
+        _44 = Sub(_43, const 1_usize);
+        _45 = BitAnd(_42, _44);
+        _46 = Eq(_45, const 0_usize);
+        assert(_46, "misaligned pointer dereference: address must be a multiple of {} but is {}", _43, _42) -> [success: bb13, unwind unreachable];
     }
 
     bb15: {
         _5 = (*_6);
         _7 = const {alloc2: *mut u32};
-        _46 = _7 as *const () (PtrToPtr);
-        _47 = _46 as usize (Transmute);
-        _48 = AlignOf(u32);
-        _49 = Sub(_48, const 1_usize);
-        _50 = BitAnd(_47, _49);
-        _51 = Eq(_50, const 0_usize);
-        assert(_51, "misaligned pointer dereference: address must be a multiple of {} but is {}", _48, _47) -> [success: bb14, unwind unreachable];
+        _47 = _7 as *const () (PtrToPtr);
+        _48 = _47 as usize (Transmute);
+        _49 = AlignOf(u32);
+        _50 = Sub(_49, const 1_usize);
+        _51 = BitAnd(_48, _50);
+        _52 = Eq(_51, const 0_usize);
+        assert(_52, "misaligned pointer dereference: address must be a multiple of {} but is {}", _49, _48) -> [success: bb14, unwind unreachable];
     }
 }
 
@@ -1075,17 +1041,6 @@ alloc2 (static: counter, size: 4, align: 4) {
 
 alloc1 (static: trails, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::new: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "+-- Make "];
-        _0 = &_1;
-        return;
-    }
 }
 
 fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::incr(_1: &D<'_>) -> D<'_> {
@@ -1131,28 +1086,29 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
     let _18: std::string::String;
     let mut _19: std::fmt::Arguments<'_>;
     let mut _20: &[&str];
-    let mut _21: &[core::fmt::rt::Argument<'_>];
-    let _22: &[core::fmt::rt::Argument<'_>; 1];
-    let _23: [core::fmt::rt::Argument<'_>; 1];
-    let mut _24: core::fmt::rt::Argument<'_>;
-    let _25: &&mut d::D<'_>;
-    let _26: ();
-    let _27: &str;
-    let mut _28: &[&str; 1];
-    let mut _29: &std::cell::RefCell<std::vec::Vec<u32>>;
+    let _21: &[&str; 1];
+    let _22: [&str; 1];
+    let mut _23: &[core::fmt::rt::Argument<'_>];
+    let _24: &[core::fmt::rt::Argument<'_>; 1];
+    let _25: [core::fmt::rt::Argument<'_>; 1];
+    let mut _26: core::fmt::rt::Argument<'_>;
+    let _27: &&mut d::D<'_>;
+    let _28: ();
+    let _29: &str;
+    let mut _30: &std::cell::RefCell<std::vec::Vec<u32>>;
     scope 1 {
-        let mut _30: *const ();
-        let mut _31: usize;
+        let mut _31: *const ();
         let mut _32: usize;
         let mut _33: usize;
         let mut _34: usize;
-        let mut _35: bool;
-        let mut _36: *const ();
-        let mut _37: usize;
+        let mut _35: usize;
+        let mut _36: bool;
+        let mut _37: *const ();
         let mut _38: usize;
         let mut _39: usize;
         let mut _40: usize;
-        let mut _41: bool;
+        let mut _41: usize;
+        let mut _42: bool;
     }
     scope 2 {
         debug res => _18;
@@ -1163,13 +1119,13 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
         _3 = Shl(const 1_u64, move _4);
         _2 = Not(move _3);
         _5 = const {alloc1: *mut u64};
-        _36 = _5 as *const () (PtrToPtr);
-        _37 = _36 as usize (Transmute);
-        _38 = AlignOf(u64);
-        _39 = Sub(_38, const 1_usize);
-        _40 = BitAnd(_37, _39);
-        _41 = Eq(_40, const 0_usize);
-        assert(_41, "misaligned pointer dereference: address must be a multiple of {} but is {}", _38, _37) -> [success: bb16, unwind unreachable];
+        _37 = _5 as *const () (PtrToPtr);
+        _38 = _37 as usize (Transmute);
+        _39 = AlignOf(u64);
+        _40 = Sub(_39, const 1_usize);
+        _41 = BitAnd(_38, _40);
+        _42 = Eq(_41, const 0_usize);
+        assert(_42, "misaligned pointer dereference: address must be a multiple of {} but is {}", _39, _38) -> [success: bb16, unwind unreachable];
     }
 
     bb1: {
@@ -1189,17 +1145,18 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
 
     bb4: {
         _13 = ((*_1).3: u32);
-        _28 = const _;
-        _20 = _28 as &[&str] (Pointer(Unsize));
-        _25 = &_1;
-        _24 = core::fmt::rt::Argument::<'_>::new_display::<&mut D<'_>>(_25) -> [return: bb5, unwind continue];
+        _22 = [const "+-- Drop "];
+        _21 = &_22;
+        _20 = _21 as &[&str] (PointerCoercion(Unsize));
+        _27 = &_1;
+        _26 = core::fmt::rt::Argument::<'_>::new_display::<&mut D<'_>>(_27) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _23 = [move _24];
-        _22 = &_23;
-        _21 = _22 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _19 = Arguments::<'_>::new_v1(move _20, move _21) -> [return: bb6, unwind continue];
+        _25 = [move _26];
+        _24 = &_25;
+        _23 = _24 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> [return: bb6, unwind continue];
     }
 
     bb6: {
@@ -1222,8 +1179,8 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
     }
 
     bb10: {
-        _27 = const "";
-        _26 = indent_println(const _, _27) -> [return: bb11, unwind continue];
+        _29 = const "";
+        _28 = indent_println(const _, _29) -> [return: bb11, unwind continue];
     }
 
     bb11: {
@@ -1244,32 +1201,21 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
 
     bb15: {
         (*_5) = BitAnd((*_5), move _2);
-        _29 = deref_copy ((*_1).4: &std::cell::RefCell<std::vec::Vec<u32>>);
-        _10 = RefCell::<Vec<u32>>::borrow_mut(_29) -> [return: bb1, unwind continue];
+        _30 = deref_copy ((*_1).4: &std::cell::RefCell<std::vec::Vec<u32>>);
+        _10 = RefCell::<Vec<u32>>::borrow_mut(_30) -> [return: bb1, unwind continue];
     }
 
     bb16: {
-        _30 = _5 as *const () (PtrToPtr);
-        _31 = _30 as usize (Transmute);
-        _32 = AlignOf(u64);
-        _33 = Sub(_32, const 1_usize);
-        _34 = BitAnd(_31, _33);
-        _35 = Eq(_34, const 0_usize);
-        assert(_35, "misaligned pointer dereference: address must be a multiple of {} but is {}", _32, _31) -> [success: bb15, unwind unreachable];
+        _31 = _5 as *const () (PtrToPtr);
+        _32 = _31 as usize (Transmute);
+        _33 = AlignOf(u64);
+        _34 = Sub(_33, const 1_usize);
+        _35 = BitAnd(_32, _34);
+        _36 = Eq(_35, const 0_usize);
+        assert(_36, "misaligned pointer dereference: address must be a multiple of {} but is {}", _33, _32) -> [success: bb15, unwind unreachable];
     }
 }
 
 alloc1 (static: trails, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::drop: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "+-- Drop "];
-        _0 = &_1;
-        return;
-    }
 }

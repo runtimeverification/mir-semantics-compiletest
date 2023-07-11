@@ -18,14 +18,15 @@ fn main() -> () {
     let _17: ();
     let mut _18: std::fmt::Arguments<'_>;
     let mut _19: &[&str];
-    let _20: !;
+    let _20: &[&str; 1];
+    let _21: [&str; 1];
+    let _22: !;
     scope 1 {
         debug buffer => _1;
         let mut _2: u64;
         scope 2 {
             debug a => _2;
             let mut _5: std::slice::Iter<'_, u8>;
-            let mut _21: &[&str; 1];
             scope 3 {
                 debug iter => _5;
                 let _9: &u8;
@@ -102,13 +103,14 @@ fn main() -> () {
     }
 
     bb12: {
-        _21 = const _;
-        _19 = _21 as &[&str] (Pointer(Unsize));
+        _21 = [const "What did you expect?\n"];
+        _20 = &_21;
+        _19 = _20 as &[&str] (PointerCoercion(Unsize));
         _18 = Arguments::<'_>::new_const(move _19) -> [return: bb14, unwind continue];
     }
 
     bb13: {
-        _20 = begin_panic::<&str>(const "this should be unreachable.") -> unwind continue;
+        _22 = begin_panic::<&str>(const "this should be unreachable.") -> unwind continue;
     }
 
     bb14: {
@@ -116,17 +118,6 @@ fn main() -> () {
     }
 
     bb15: {
-        return;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "What did you expect?\n"];
-        _0 = &_1;
         return;
     }
 }

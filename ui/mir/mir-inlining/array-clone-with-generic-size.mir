@@ -48,28 +48,19 @@ fn main() -> () {
     let mut _0: ();
     let mut _1: Array<u32, 3>;
     let mut _2: &Array<u32, 3>;
+    let _3: Array<u32, 3>;
+    let mut _4: [u32; 3];
     scope 1 {
     }
 
     bb0: {
-        _2 = const _;
-        _1 = <Array<u32, 3> as Clone>::clone(_2) -> [return: bb1, unwind continue];
+        _4 = [const 0_u32, const 1_u32, const 2_u32];
+        _3 = Array::<u32, 3>(move _4);
+        _2 = &_3;
+        _1 = <Array<u32, 3> as Clone>::clone(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in main: &Array<u32, 3> = {
-    let mut _0: &Array<u32, 3>;
-    let mut _1: Array<u32, 3>;
-    let mut _2: [u32; 3];
-
-    bb0: {
-        _2 = [const 0_u32, const 1_u32, const 2_u32];
-        _1 = Array::<u32, 3>(move _2);
-        _0 = &_1;
         return;
     }
 }

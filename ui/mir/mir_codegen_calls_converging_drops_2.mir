@@ -6,11 +6,13 @@ fn <impl at ui/mir/mir_codegen_calls_converging_drops_2.rs:8:1: 8:24>::drop(_1: 
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
 
     bb0: {
-        _5 = const _;
-        _4 = _5 as &[&str] (Pointer(Unsize));
+        _6 = [const "dropped\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
         _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
     }
 
@@ -23,27 +25,18 @@ fn <impl at ui/mir/mir_codegen_calls_converging_drops_2.rs:8:1: 8:24>::drop(_1: 
     }
 }
 
-promoted[0] in <impl at ui/mir/mir_codegen_calls_converging_drops_2.rs:8:1: 8:24>::drop: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "dropped\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn complex() -> u64 {
     let mut _0: u64;
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let mut _4: &[&str; 1];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
 
     bb0: {
-        _4 = const _;
-        _3 = _4 as &[&str] (Pointer(Unsize));
+        _5 = [const "complex called\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
         _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
@@ -53,17 +46,6 @@ fn complex() -> u64 {
 
     bb2: {
         _0 = const 42_u64;
-        return;
-    }
-}
-
-promoted[0] in complex: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "complex called\n"];
-        _0 = &_1;
         return;
     }
 }
@@ -101,22 +83,23 @@ fn main() -> () {
     let mut _1: (&u64, &u64);
     let mut _2: &u64;
     let _3: u64;
-    let _4: &u64;
-    let _5: &u64;
-    let mut _6: bool;
-    let mut _7: bool;
-    let mut _8: u64;
-    let mut _9: u64;
-    let _11: !;
-    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _4: &u64;
+    let _5: u64;
+    let _6: &u64;
+    let _7: &u64;
+    let mut _8: bool;
+    let mut _9: bool;
+    let mut _10: u64;
+    let mut _11: u64;
     let _13: !;
-    let mut _14: &u64;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
+    let _15: !;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _10: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _12: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _10;
+            debug kind => _12;
         }
     }
 
@@ -126,35 +109,25 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _14 = const _;
-        _1 = (move _2, _14);
-        _4 = (_1.0: &u64);
-        _5 = (_1.1: &u64);
-        _8 = (*_4);
-        _9 = (*_5);
-        _7 = Eq(move _8, move _9);
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb3, otherwise: bb2];
+        _5 = const 42_u64;
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &u64);
+        _7 = (_1.1: &u64);
+        _10 = (*_6);
+        _11 = (*_7);
+        _9 = Eq(move _10, move _11);
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _10 = core::panicking::AssertKind::Eq;
-        _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<u64, u64>(move _10, _4, _5, move _12) -> unwind continue;
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<u64, u64>(move _12, _6, _7, move _14) -> unwind continue;
     }
 
     bb3: {
-        _13 = begin_panic::<&str>(const "exit") -> unwind continue;
-    }
-}
-
-promoted[0] in main: &u64 = {
-    let mut _0: &u64;
-    let mut _1: u64;
-
-    bb0: {
-        _1 = const 42_u64;
-        _0 = &_1;
-        return;
+        _15 = begin_panic::<&str>(const "exit") -> unwind continue;
     }
 }

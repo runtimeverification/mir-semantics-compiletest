@@ -32,15 +32,16 @@ fn <impl at ui/box/large-allocator-ice.rs:9:1: 9:39>::deallocate(_1: &BigAllocat
 fn main() -> () {
     let mut _0: ();
     let _1: std::boxed::Box<(), &std::alloc::Global>;
-    let _2: std::boxed::Box<(), BigAllocator>;
-    let mut _3: BigAllocator;
-    let mut _4: [usize; 2];
-    let _5: ();
-    let mut _6: &std::alloc::Global;
+    let mut _2: &std::alloc::Global;
+    let _3: std::alloc::Global;
+    let _4: std::boxed::Box<(), BigAllocator>;
+    let mut _5: BigAllocator;
+    let mut _6: [usize; 2];
+    let _7: ();
 
     bb0: {
-        _6 = const _;
-        _1 = Box::<(), &std::alloc::Global>::new_in(const (), _6) -> [return: bb1, unwind continue];
+        _2 = &_3;
+        _1 = Box::<(), &std::alloc::Global>::new_in(const (), move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
@@ -48,31 +49,20 @@ fn main() -> () {
     }
 
     bb2: {
-        _4 = [const 0_usize; 2];
-        _3 = BigAllocator(move _4);
-        _2 = Box::<(), BigAllocator>::new_in(const (), move _3) -> [return: bb3, unwind continue];
+        _6 = [const 0_usize; 2];
+        _5 = BigAllocator(move _6);
+        _4 = Box::<(), BigAllocator>::new_in(const (), move _5) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        drop(_2) -> [return: bb4, unwind continue];
+        drop(_4) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _5 = generic_function::<i32>(const 0_i32) -> [return: bb5, unwind continue];
+        _7 = generic_function::<i32>(const 0_i32) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in main: &std::alloc::Global = {
-    let mut _0: &std::alloc::Global;
-    let mut _1: std::alloc::Global;
-
-    bb0: {
-        _1 = std::alloc::Global;
-        _0 = &_1;
         return;
     }
 }
@@ -92,32 +82,33 @@ fn generic_function(_1: T) -> () {
     let _2: T;
     let mut _3: std::boxed::Box<T, &std::alloc::Global>;
     let mut _4: &std::alloc::Global;
-    let mut _5: &mut std::boxed::Box<T, &std::alloc::Global>;
-    let mut _6: ();
-    let mut _7: &mut std::boxed::Box<T, &std::alloc::Global>;
-    let mut _8: ();
-    let mut _9: *const T;
-    let mut _10: *const ();
-    let mut _11: usize;
+    let _5: std::alloc::Global;
+    let mut _6: &mut std::boxed::Box<T, &std::alloc::Global>;
+    let mut _7: ();
+    let mut _8: &mut std::boxed::Box<T, &std::alloc::Global>;
+    let mut _9: ();
+    let mut _10: *const T;
+    let mut _11: *const ();
     let mut _12: usize;
     let mut _13: usize;
     let mut _14: usize;
-    let mut _15: bool;
+    let mut _15: usize;
+    let mut _16: bool;
 
     bb0: {
-        _4 = const _;
-        _3 = Box::<T, &std::alloc::Global>::new_in(move _1, _4) -> [return: bb1, unwind continue];
+        _4 = &_5;
+        _3 = Box::<T, &std::alloc::Global>::new_in(move _1, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _9 = (((_3.0: std::ptr::Unique<T>).0: std::ptr::NonNull<T>).0: *const T);
-        _10 = _9 as *const () (PtrToPtr);
-        _11 = _10 as usize (Transmute);
-        _12 = AlignOf(T);
-        _13 = Sub(_12, const 1_usize);
-        _14 = BitAnd(_11, _13);
-        _15 = Eq(_14, const 0_usize);
-        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb6, unwind unreachable];
+        _10 = (((_3.0: std::ptr::Unique<T>).0: std::ptr::NonNull<T>).0: *const T);
+        _11 = _10 as *const () (PtrToPtr);
+        _12 = _11 as usize (Transmute);
+        _13 = AlignOf(T);
+        _14 = Sub(_13, const 1_usize);
+        _15 = BitAnd(_12, _14);
+        _16 = Eq(_15, const 0_usize);
+        assert(_16, "misaligned pointer dereference: address must be a multiple of {} but is {}", _13, _12) -> [success: bb6, unwind unreachable];
     }
 
     bb2 (cleanup): {
@@ -129,29 +120,18 @@ fn generic_function(_1: T) -> () {
     }
 
     bb4: {
-        _5 = &mut _3;
-        _6 = <Box<T, &std::alloc::Global> as Drop>::drop(move _5) -> [return: bb3, unwind continue];
+        _6 = &mut _3;
+        _7 = <Box<T, &std::alloc::Global> as Drop>::drop(move _6) -> [return: bb3, unwind continue];
     }
 
     bb5 (cleanup): {
-        _7 = &mut _3;
-        _8 = <Box<T, &std::alloc::Global> as Drop>::drop(move _7) -> [return: bb2, unwind terminate];
+        _8 = &mut _3;
+        _9 = <Box<T, &std::alloc::Global> as Drop>::drop(move _8) -> [return: bb2, unwind terminate];
     }
 
     bb6: {
-        _2 = move (*_9);
+        _2 = move (*_10);
         drop(_2) -> [return: bb4, unwind: bb5];
-    }
-}
-
-promoted[0] in generic_function: &std::alloc::Global = {
-    let mut _0: &std::alloc::Global;
-    let mut _1: std::alloc::Global;
-
-    bb0: {
-        _1 = std::alloc::Global;
-        _0 = &_1;
-        return;
     }
 }
 

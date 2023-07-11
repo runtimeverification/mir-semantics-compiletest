@@ -16,44 +16,46 @@ fn foo() -> () {
     let _4: ();
     let mut _5: std::fmt::Arguments<'_>;
     let mut _6: &[&str];
-    let mut _7: &[core::fmt::rt::Argument<'_>];
-    let _8: &[core::fmt::rt::Argument<'_>; 1];
-    let _9: [core::fmt::rt::Argument<'_>; 1];
-    let mut _10: core::fmt::rt::Argument<'_>;
-    let _11: &isize;
-    let _12: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
-    let mut _13: std::thread::JoinHandle<()>;
-    let mut _15: bool;
+    let _7: &[&str; 2];
+    let _8: [&str; 2];
+    let mut _9: &[core::fmt::rt::Argument<'_>];
+    let _10: &[core::fmt::rt::Argument<'_>; 1];
+    let _11: [core::fmt::rt::Argument<'_>; 1];
+    let mut _12: core::fmt::rt::Argument<'_>;
+    let _13: &isize;
+    let _14: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
+    let mut _15: std::thread::JoinHandle<()>;
+    let mut _16: bool;
     scope 1 {
         debug i => _1;
         let _2: std::thread::JoinHandle<()>;
         scope 2 {
             debug t => _2;
-            let mut _14: &[&str; 2];
         }
     }
 
     bb0: {
-        _15 = const false;
+        _16 = const false;
         _1 = const 0_isize;
         _3 = [closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:13:27: 13:33] { i: _1 };
-        _15 = const true;
+        _16 = const true;
         _2 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:13:27: 13:33], ()>(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
         _1 = Add(_1, const 1_isize);
-        _14 = const _;
-        _6 = _14 as &[&str] (Pointer(Unsize));
-        _11 = &_1;
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_11) -> [return: bb2, unwind: bb9];
+        _8 = [const "original ", const "\n"];
+        _7 = &_8;
+        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _13 = &_1;
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> [return: bb2, unwind: bb9];
     }
 
     bb2: {
-        _9 = [move _10];
-        _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _7) -> [return: bb3, unwind: bb9];
+        _11 = [move _12];
+        _10 = &_11;
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind: bb9];
     }
 
     bb3: {
@@ -61,17 +63,17 @@ fn foo() -> () {
     }
 
     bb4: {
-        _15 = const false;
-        _13 = move _2;
-        _12 = JoinHandle::<()>::join(move _13) -> [return: bb5, unwind: bb9];
+        _16 = const false;
+        _15 = move _2;
+        _14 = JoinHandle::<()>::join(move _15) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        drop(_12) -> [return: bb6, unwind: bb9];
+        drop(_14) -> [return: bb6, unwind: bb9];
     }
 
     bb6: {
-        _15 = const false;
+        _16 = const false;
         return;
     }
 
@@ -84,18 +86,7 @@ fn foo() -> () {
     }
 
     bb9 (cleanup): {
-        switchInt(_15) -> [0: bb7, otherwise: bb8];
-    }
-}
-
-promoted[0] in foo: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "original ", const "\n"];
-        _0 = &_1;
-        return;
+        switchInt(_16) -> [0: bb7, otherwise: bb8];
     }
 }
 
@@ -107,12 +98,13 @@ fn foo::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
     let _4: ();
     let mut _5: std::fmt::Arguments<'_>;
     let mut _6: &[&str];
-    let mut _7: &[core::fmt::rt::Argument<'_>];
-    let _8: &[core::fmt::rt::Argument<'_>; 1];
-    let _9: [core::fmt::rt::Argument<'_>; 1];
-    let mut _10: core::fmt::rt::Argument<'_>;
-    let _11: &isize;
-    let mut _12: &[&str; 2];
+    let _7: &[&str; 2];
+    let _8: [&str; 2];
+    let mut _9: &[core::fmt::rt::Argument<'_>];
+    let _10: &[core::fmt::rt::Argument<'_>; 1];
+    let _11: [core::fmt::rt::Argument<'_>; 1];
+    let mut _12: core::fmt::rt::Argument<'_>;
+    let _13: &isize;
 
     bb0: {
         _3 = (_1.0: isize);
@@ -120,17 +112,18 @@ fn foo::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
     }
 
     bb1: {
-        _12 = const _;
-        _6 = _12 as &[&str] (Pointer(Unsize));
-        _11 = &(_1.0: isize);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_11) -> [return: bb2, unwind continue];
+        _8 = [const "spawned ", const "\n"];
+        _7 = &_8;
+        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _13 = &(_1.0: isize);
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = [move _10];
-        _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _7) -> [return: bb3, unwind continue];
+        _11 = [move _12];
+        _10 = &_11;
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind continue];
     }
 
     bb3: {
@@ -138,17 +131,6 @@ fn foo::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in foo::{closure#0}: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "spawned ", const "\n"];
-        _0 = &_1;
         return;
     }
 }

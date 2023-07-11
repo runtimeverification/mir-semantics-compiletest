@@ -395,14 +395,16 @@ alloc1 (static: ORDER, size: 24, align: 8) {
 
 fn main() -> () {
     let mut _0: ();
-    let mut _5: (&&[usize], &[usize; 3]);
-    let mut _6: &&[usize];
-    let mut _7: &[usize; 3];
-    let _8: *mut [usize; 3];
-    let mut _11: bool;
-    let mut _12: bool;
-    let _14: !;
-    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let _5: &[usize; 3];
+    let _6: [usize; 3];
+    let mut _7: (&&[usize], &[usize; 3]);
+    let mut _8: &&[usize];
+    let mut _9: &[usize; 3];
+    let _10: *mut [usize; 3];
+    let mut _13: bool;
+    let mut _14: bool;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug matched => const A;
         let _1: C;
@@ -420,23 +422,22 @@ fn main() -> () {
     }
     scope 5 {
         let _4: &[usize];
-        let mut _16: &[usize; 3];
         scope 6 {
             debug expected => _4;
-            let _9: &&[usize];
-            let _10: &[usize; 3];
-            let mut _17: *const ();
-            let mut _18: usize;
+            let _11: &&[usize];
+            let _12: &[usize; 3];
+            let mut _18: *const ();
             let mut _19: usize;
             let mut _20: usize;
             let mut _21: usize;
-            let mut _22: bool;
+            let mut _22: usize;
+            let mut _23: bool;
             scope 7 {
-                debug left_val => _9;
-                debug right_val => _10;
-                let _13: core::panicking::AssertKind;
+                debug left_val => _11;
+                debug right_val => _12;
+                let _15: core::panicking::AssertKind;
                 scope 8 {
-                    debug kind => _13;
+                    debug kind => _15;
                 }
             }
         }
@@ -455,28 +456,29 @@ fn main() -> () {
     }
 
     bb3: {
-        _16 = const _;
-        _4 = _16 as &[usize] (Pointer(Unsize));
-        _6 = &_4;
-        _8 = const {alloc1: *mut [usize; 3]};
-        _17 = _8 as *const () (PtrToPtr);
-        _18 = _17 as usize (Transmute);
-        _19 = AlignOf(usize);
-        _20 = Sub(_19, const 1_usize);
-        _21 = BitAnd(_18, _20);
-        _22 = Eq(_21, const 0_usize);
-        assert(_22, "misaligned pointer dereference: address must be a multiple of {} but is {}", _19, _18) -> [success: bb9, unwind unreachable];
+        _6 = [const 1_usize, const 2_usize, const 3_usize];
+        _5 = &_6;
+        _4 = _5 as &[usize] (PointerCoercion(Unsize));
+        _8 = &_4;
+        _10 = const {alloc1: *mut [usize; 3]};
+        _18 = _10 as *const () (PtrToPtr);
+        _19 = _18 as usize (Transmute);
+        _20 = AlignOf(usize);
+        _21 = Sub(_20, const 1_usize);
+        _22 = BitAnd(_19, _21);
+        _23 = Eq(_22, const 0_usize);
+        assert(_23, "misaligned pointer dereference: address must be a multiple of {} but is {}", _20, _19) -> [success: bb9, unwind unreachable];
     }
 
     bb4: {
-        _11 = Not(move _12);
-        switchInt(move _11) -> [0: bb6, otherwise: bb5];
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _13 = core::panicking::AssertKind::Eq;
-        _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<&[usize], [usize; 3]>(move _13, _9, _10, move _15) -> unwind continue;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<&[usize], [usize; 3]>(move _15, _11, _12, move _17) -> unwind continue;
     }
 
     bb6: {
@@ -492,26 +494,15 @@ fn main() -> () {
     }
 
     bb9: {
-        _7 = &(*_8);
-        _5 = (move _6, move _7);
-        _9 = (_5.0: &&[usize]);
-        _10 = (_5.1: &[usize; 3]);
-        _12 = <&[usize] as PartialEq<[usize; 3]>>::eq(_9, _10) -> [return: bb4, unwind continue];
+        _9 = &(*_10);
+        _7 = (move _8, move _9);
+        _11 = (_7.0: &&[usize]);
+        _12 = (_7.1: &[usize; 3]);
+        _14 = <&[usize] as PartialEq<[usize; 3]>>::eq(_11, _12) -> [return: bb4, unwind continue];
     }
 }
 
 alloc1 (static: ORDER, size: 24, align: 8) {
     0x00 │ 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 │ ................
     0x10 │ 00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in main: &[usize; 3] = {
-    let mut _0: &[usize; 3];
-    let mut _1: [usize; 3];
-
-    bb0: {
-        _1 = [const 1_usize, const 2_usize, const 3_usize];
-        _0 = &_1;
-        return;
-    }
 }

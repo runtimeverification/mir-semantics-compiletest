@@ -53,34 +53,36 @@ fn main() -> () {
     let mut _5: *mut u8;
     let mut _6: std::boxed::Box<[i32; 3]>;
     let mut _7: (&&[i32; 3], &&[i32]);
-    let mut _8: &&[i32];
-    let _9: &[i32];
-    let mut _10: &std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
-    let _11: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
-    let mut _12: std::rc::Rc<std::vec::Vec<i32>>;
-    let mut _13: std::vec::Vec<i32>;
-    let mut _16: bool;
-    let mut _17: bool;
-    let _19: !;
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _22: *const [i32; 3];
-    let mut _23: *const ();
-    let mut _24: usize;
-    let mut _25: usize;
+    let mut _8: &&[i32; 3];
+    let _9: &[i32; 3];
+    let _10: [i32; 3];
+    let mut _11: &&[i32];
+    let _12: &[i32];
+    let mut _13: &std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
+    let _14: std::boxed::Box<std::rc::Rc<std::vec::Vec<i32>>>;
+    let mut _15: std::rc::Rc<std::vec::Vec<i32>>;
+    let mut _16: std::vec::Vec<i32>;
+    let mut _19: bool;
+    let mut _20: bool;
+    let _22: !;
+    let mut _23: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _24: *const [i32; 3];
+    let mut _25: *const ();
     let mut _26: usize;
     let mut _27: usize;
-    let mut _28: bool;
+    let mut _28: usize;
+    let mut _29: usize;
+    let mut _30: bool;
     scope 1 {
         debug v => _1;
-        let _14: &&[i32; 3];
-        let _15: &&[i32];
-        let mut _21: &&[i32; 3];
+        let _17: &&[i32; 3];
+        let _18: &&[i32];
         scope 3 {
-            debug left_val => _14;
-            debug right_val => _15;
-            let _18: core::panicking::AssertKind;
+            debug left_val => _17;
+            debug right_val => _18;
+            let _21: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _18;
+                debug kind => _21;
             }
         }
     }
@@ -95,52 +97,54 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i32; 3]);
-        _22 = (((_6.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]);
-        _23 = _22 as *const () (PtrToPtr);
-        _24 = _23 as usize (Transmute);
-        _25 = AlignOf(i32);
-        _26 = Sub(_25, const 1_usize);
-        _27 = BitAnd(_24, _26);
-        _28 = Eq(_27, const 0_usize);
-        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb12, unwind unreachable];
+        _24 = (((_6.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]);
+        _25 = _24 as *const () (PtrToPtr);
+        _26 = _25 as usize (Transmute);
+        _27 = AlignOf(i32);
+        _28 = Sub(_27, const 1_usize);
+        _29 = BitAnd(_26, _28);
+        _30 = Eq(_29, const 0_usize);
+        assert(_30, "misaligned pointer dereference: address must be a multiple of {} but is {}", _27, _26) -> [success: bb12, unwind unreachable];
     }
 
     bb2: {
-        _21 = const _;
-        _13 = move _1;
-        _12 = Rc::<Vec<i32>>::new(move _13) -> [return: bb3, unwind continue];
+        _10 = [const 1_i32, const 2_i32, const 3_i32];
+        _9 = &_10;
+        _8 = &_9;
+        _16 = move _1;
+        _15 = Rc::<Vec<i32>>::new(move _16) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _11 = Box::<Rc<Vec<i32>>>::new(move _12) -> [return: bb4, unwind continue];
+        _14 = Box::<Rc<Vec<i32>>>::new(move _15) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _10 = &_11;
-        _9 = <Vec<i32> as Trait>::trait_method(move _10) -> [return: bb5, unwind: bb10];
+        _13 = &_14;
+        _12 = <Vec<i32> as Trait>::trait_method(move _13) -> [return: bb5, unwind: bb10];
     }
 
     bb5: {
-        _8 = &_9;
-        _7 = (_21, move _8);
-        _14 = (_7.0: &&[i32; 3]);
-        _15 = (_7.1: &&[i32]);
-        _17 = <&[i32; 3] as PartialEq<&[i32]>>::eq(_14, _15) -> [return: bb6, unwind: bb10];
+        _11 = &_12;
+        _7 = (move _8, move _11);
+        _17 = (_7.0: &&[i32; 3]);
+        _18 = (_7.1: &&[i32]);
+        _20 = <&[i32; 3] as PartialEq<&[i32]>>::eq(_17, _18) -> [return: bb6, unwind: bb10];
     }
 
     bb6: {
-        _16 = Not(move _17);
-        switchInt(move _16) -> [0: bb8, otherwise: bb7];
+        _19 = Not(move _20);
+        switchInt(move _19) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _18 = core::panicking::AssertKind::Eq;
-        _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<&[i32; 3], &[i32]>(move _18, _14, _15, move _20) -> bb10;
+        _21 = core::panicking::AssertKind::Eq;
+        _23 = Option::<Arguments<'_>>::None;
+        _22 = core::panicking::assert_failed::<&[i32; 3], &[i32]>(move _21, _17, _18, move _23) -> bb10;
     }
 
     bb8: {
-        drop(_11) -> [return: bb9, unwind continue];
+        drop(_14) -> [return: bb9, unwind continue];
     }
 
     bb9: {
@@ -148,7 +152,7 @@ fn main() -> () {
     }
 
     bb10 (cleanup): {
-        drop(_11) -> [return: bb11, unwind terminate];
+        drop(_14) -> [return: bb11, unwind terminate];
     }
 
     bb11 (cleanup): {
@@ -156,21 +160,8 @@ fn main() -> () {
     }
 
     bb12: {
-        (*_22) = [const 1_i32, const 2_i32, const 3_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        (*_24) = [const 1_i32, const 2_i32, const 3_i32];
+        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
         _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &&[i32; 3] = {
-    let mut _0: &&[i32; 3];
-    let mut _1: &[i32; 3];
-    let mut _2: [i32; 3];
-
-    bb0: {
-        _2 = [const 1_i32, const 2_i32, const 3_i32];
-        _1 = &_2;
-        _0 = &_1;
-        return;
     }
 }

@@ -106,11 +106,13 @@ fn main() -> () {
     let _12: ();
     let mut _13: std::fmt::Arguments<'_>;
     let mut _14: &[&str];
-    let mut _15: &[core::fmt::rt::Argument<'_>];
-    let _16: &[core::fmt::rt::Argument<'_>; 1];
-    let _17: [core::fmt::rt::Argument<'_>; 1];
-    let mut _18: core::fmt::rt::Argument<'_>;
-    let _19: &&u8;
+    let _15: &[&str; 2];
+    let _16: [&str; 2];
+    let mut _17: &[core::fmt::rt::Argument<'_>];
+    let _18: &[core::fmt::rt::Argument<'_>; 1];
+    let _19: [core::fmt::rt::Argument<'_>; 1];
+    let mut _20: core::fmt::rt::Argument<'_>;
+    let _21: &&u8;
     scope 1 {
         debug ptr => _1;
         let mut _7: std::slice::Iter<'_, u8>;
@@ -119,28 +121,27 @@ fn main() -> () {
             let _11: &u8;
             scope 4 {
                 debug a => _11;
-                let mut _20: &[&str; 2];
             }
         }
     }
     scope 2 {
-        let mut _21: *const ();
-        let mut _22: usize;
+        let mut _22: *const ();
         let mut _23: usize;
         let mut _24: usize;
         let mut _25: usize;
-        let mut _26: bool;
+        let mut _26: usize;
+        let mut _27: bool;
     }
 
     bb0: {
         _2 = const {alloc1: *mut AA};
-        _21 = _2 as *const () (PtrToPtr);
-        _22 = _21 as usize (Transmute);
-        _23 = AlignOf(AA);
-        _24 = Sub(_23, const 1_usize);
-        _25 = BitAnd(_22, _24);
-        _26 = Eq(_25, const 0_usize);
-        assert(_26, "misaligned pointer dereference: address must be a multiple of {} but is {}", _23, _22) -> [success: bb10, unwind unreachable];
+        _22 = _2 as *const () (PtrToPtr);
+        _23 = _22 as usize (Transmute);
+        _24 = AlignOf(AA);
+        _25 = Sub(_24, const 1_usize);
+        _26 = BitAnd(_23, _25);
+        _27 = Eq(_26, const 0_usize);
+        assert(_27, "misaligned pointer dereference: address must be a multiple of {} but is {}", _24, _23) -> [success: bb10, unwind unreachable];
     }
 
     bb1: {
@@ -164,10 +165,11 @@ fn main() -> () {
 
     bb5: {
         _11 = ((_8 as Some).0: &u8);
-        _20 = const _;
-        _14 = _20 as &[&str] (Pointer(Unsize));
-        _19 = &_11;
-        _18 = core::fmt::rt::Argument::<'_>::new_display::<&u8>(_19) -> [return: bb8, unwind continue];
+        _16 = [const "", const "\n"];
+        _15 = &_16;
+        _14 = _15 as &[&str] (PointerCoercion(Unsize));
+        _21 = &_11;
+        _20 = core::fmt::rt::Argument::<'_>::new_display::<&u8>(_21) -> [return: bb8, unwind continue];
     }
 
     bb6: {
@@ -179,10 +181,10 @@ fn main() -> () {
     }
 
     bb8: {
-        _17 = [move _18];
-        _16 = &_17;
-        _15 = _16 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _13 = Arguments::<'_>::new_v1(move _14, move _15) -> [return: bb9, unwind continue];
+        _19 = [move _20];
+        _18 = &_19;
+        _17 = _18 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _13 = Arguments::<'_>::new_v1(move _14, move _17) -> [return: bb9, unwind continue];
     }
 
     bb9: {
@@ -192,22 +194,11 @@ fn main() -> () {
     bb10: {
         _1 = &mut (*_2);
         _6 = &((*_1).0: [u8; 10]);
-        _5 = move _6 as &[u8] (Pointer(Unsize));
+        _5 = move _6 as &[u8] (PointerCoercion(Unsize));
         _4 = core::slice::<impl [u8]>::iter(move _5) -> [return: bb1, unwind continue];
     }
 }
 
 alloc1 (static: BB, size: 10, align: 1) {
     05 00 00 00 00 00 00 00 00 00                   │ ..........
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
-    }
 }

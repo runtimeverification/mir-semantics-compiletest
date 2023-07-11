@@ -164,19 +164,20 @@ fn main() -> () {
     let mut _7: (&mut State,);
     let mut _8: &mut State;
     let mut _9: State;
-    let _10: &std::result::Result<bool, ()>;
-    let _11: &std::result::Result<bool, ()>;
-    let mut _12: bool;
-    let mut _13: bool;
-    let _15: !;
-    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _17: &std::result::Result<bool, ()>;
+    let mut _10: &std::result::Result<bool, ()>;
+    let _11: std::result::Result<bool, ()>;
+    let _12: &std::result::Result<bool, ()>;
+    let _13: &std::result::Result<bool, ()>;
+    let mut _14: bool;
+    let mut _15: bool;
+    let _17: !;
+    let mut _18: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _10;
-        debug right_val => _11;
-        let _14: core::panicking::AssertKind;
+        debug left_val => _12;
+        debug right_val => _13;
+        let _16: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _14;
+            debug kind => _16;
         }
     }
 
@@ -197,36 +198,26 @@ fn main() -> () {
 
     bb3: {
         _2 = &_3;
-        _17 = const _;
-        _1 = (move _2, _17);
-        _10 = (_1.0: &std::result::Result<bool, ()>);
-        _11 = (_1.1: &std::result::Result<bool, ()>);
-        _13 = <Result<bool, ()> as PartialEq>::eq(_10, _11) -> [return: bb4, unwind continue];
+        _11 = Result::<bool, ()>::Ok(const true);
+        _10 = &_11;
+        _1 = (move _2, move _10);
+        _12 = (_1.0: &std::result::Result<bool, ()>);
+        _13 = (_1.1: &std::result::Result<bool, ()>);
+        _15 = <Result<bool, ()> as PartialEq>::eq(_12, _13) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _12 = Not(move _13);
-        switchInt(move _12) -> [0: bb6, otherwise: bb5];
+        _14 = Not(move _15);
+        switchInt(move _14) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _14 = core::panicking::AssertKind::Eq;
-        _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<Result<bool, ()>, Result<bool, ()>>(move _14, _10, _11, move _16) -> unwind continue;
+        _16 = core::panicking::AssertKind::Eq;
+        _18 = Option::<Arguments<'_>>::None;
+        _17 = core::panicking::assert_failed::<Result<bool, ()>, Result<bool, ()>>(move _16, _12, _13, move _18) -> unwind continue;
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &Result<bool, ()> = {
-    let mut _0: &std::result::Result<bool, ()>;
-    let mut _1: std::result::Result<bool, ()>;
-
-    bb0: {
-        _1 = Result::<bool, ()>::Ok(const true);
-        _0 = &_1;
         return;
     }
 }

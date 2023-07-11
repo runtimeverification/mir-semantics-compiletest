@@ -140,7 +140,7 @@ fn <impl at ui/closures/2229_closure_analysis/run_pass/move_closure.rs:32:10: 32
         _3 = const "S";
         _6 = &((*_1).0: std::string::String);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
     }
 
@@ -162,7 +162,7 @@ fn <impl at ui/closures/2229_closure_analysis/run_pass/move_closure.rs:35:10: 35
         _3 = const "T";
         _6 = &((*_1).0: S);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
     }
 
@@ -281,34 +281,36 @@ fn no_ref_nested::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 1];
-    let _7: [core::fmt::rt::Argument<'_>; 1];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &S;
-    let mut _10: [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28];
-    let _11: ();
-    let mut _12: &mut [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28];
-    let mut _13: &[&str; 2];
-    let mut _14: bool;
+    let _5: &[&str; 2];
+    let _6: [&str; 2];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 1];
+    let _9: [core::fmt::rt::Argument<'_>; 1];
+    let mut _10: core::fmt::rt::Argument<'_>;
+    let _11: &S;
+    let mut _12: [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28];
+    let _13: ();
+    let mut _14: &mut [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28];
+    let mut _15: bool;
     scope 1 {
-        debug c => _10;
+        debug c => _12;
     }
 
     bb0: {
-        _14 = const false;
-        _14 = const true;
-        _13 = const _;
-        _4 = _13 as &[&str] (Pointer(Unsize));
-        _9 = &((_1.0: T).0: S);
-        _8 = core::fmt::rt::Argument::<'_>::new_debug::<S>(_9) -> [return: bb1, unwind: bb9];
+        _15 = const false;
+        _15 = const true;
+        _6 = [const "", const "\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &((_1.0: T).0: S);
+        _10 = core::fmt::rt::Argument::<'_>::new_debug::<S>(_11) -> [return: bb1, unwind: bb9];
     }
 
     bb1: {
-        _7 = [move _8];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb2, unwind: bb9];
+        _9 = [move _10];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb9];
     }
 
     bb2: {
@@ -316,14 +318,14 @@ fn no_ref_nested::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run
     }
 
     bb3: {
-        _14 = const false;
-        _10 = [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28] { t: move (_1.0: T) };
-        _12 = &mut _10;
-        _11 = <[closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28] as FnMut<()>>::call_mut(move _12, const ()) -> [return: bb4, unwind: bb6];
+        _15 = const false;
+        _12 = [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28] { t: move (_1.0: T) };
+        _14 = &mut _12;
+        _13 = <[closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:50:21: 50:28] as FnMut<()>>::call_mut(move _14, const ()) -> [return: bb4, unwind: bb6];
     }
 
     bb4: {
-        drop(_10) -> [return: bb5, unwind: bb9];
+        drop(_12) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
@@ -331,7 +333,7 @@ fn no_ref_nested::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run
     }
 
     bb6 (cleanup): {
-        drop(_10) -> [return: bb9, unwind terminate];
+        drop(_12) -> [return: bb9, unwind terminate];
     }
 
     bb7 (cleanup): {
@@ -343,18 +345,7 @@ fn no_ref_nested::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run
     }
 
     bb9 (cleanup): {
-        switchInt(_14) -> [0: bb7, otherwise: bb8];
-    }
-}
-
-promoted[0] in no_ref_nested::{closure#0}: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
+        switchInt(_15) -> [0: bb7, otherwise: bb8];
     }
 }
 
@@ -366,12 +357,13 @@ fn no_ref_nested::{closure#0}::{closure#0}(_1: &mut [closure@ui/closures/2229_cl
     let _4: ();
     let mut _5: std::fmt::Arguments<'_>;
     let mut _6: &[&str];
-    let mut _7: &[core::fmt::rt::Argument<'_>];
-    let _8: &[core::fmt::rt::Argument<'_>; 1];
-    let _9: [core::fmt::rt::Argument<'_>; 1];
-    let mut _10: core::fmt::rt::Argument<'_>;
-    let _11: &std::string::String;
-    let mut _12: &[&str; 2];
+    let _7: &[&str; 2];
+    let _8: [&str; 2];
+    let mut _9: &[core::fmt::rt::Argument<'_>];
+    let _10: &[core::fmt::rt::Argument<'_>; 1];
+    let _11: [core::fmt::rt::Argument<'_>; 1];
+    let mut _12: core::fmt::rt::Argument<'_>;
+    let _13: &std::string::String;
 
     bb0: {
         _3 = const "new S";
@@ -384,10 +376,11 @@ fn no_ref_nested::{closure#0}::{closure#0}(_1: &mut [closure@ui/closures/2229_cl
 
     bb2: {
         ((((*_1).0: T).0: S).0: std::string::String) = move _2;
-        _12 = const _;
-        _6 = _12 as &[&str] (Pointer(Unsize));
-        _11 = &((((*_1).0: T).0: S).0: std::string::String);
-        _10 = core::fmt::rt::Argument::<'_>::new_debug::<String>(_11) -> [return: bb4, unwind continue];
+        _8 = [const "", const "\n"];
+        _7 = &_8;
+        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _13 = &((((*_1).0: T).0: S).0: std::string::String);
+        _12 = core::fmt::rt::Argument::<'_>::new_debug::<String>(_13) -> [return: bb4, unwind continue];
     }
 
     bb3 (cleanup): {
@@ -396,10 +389,10 @@ fn no_ref_nested::{closure#0}::{closure#0}(_1: &mut [closure@ui/closures/2229_cl
     }
 
     bb4: {
-        _9 = [move _10];
-        _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _7) -> [return: bb5, unwind continue];
+        _11 = [move _12];
+        _10 = &_11;
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb5, unwind continue];
     }
 
     bb5: {
@@ -407,17 +400,6 @@ fn no_ref_nested::{closure#0}::{closure#0}(_1: &mut [closure@ui/closures/2229_cl
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in no_ref_nested::{closure#0}::{closure#0}: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
         return;
     }
 }
@@ -507,7 +489,7 @@ fn returned_closure_owns_copy_type_data() -> impl Fn() -> i32 {
     let mut _0: impl Fn() -> i32;
     let _1: i32;
     scope 1 {
-        debug x => const 10_i32;
+        debug x => _1;
         let _2: [closure@ui/closures/2229_closure_analysis/run_pass/move_closure.rs:79:13: 79:20];
         scope 2 {
             debug c => _2;

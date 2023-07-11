@@ -6,7 +6,7 @@ fn function_with_bytes() -> &[u8] {
 
     bb0: {
         _1 = const BYTES;
-        _0 = _1 as &[u8] (Pointer(Unsize));
+        _0 = _1 as &[u8] (PointerCoercion(Unsize));
         return;
     }
 }
@@ -25,37 +25,40 @@ fn main() -> () {
     let mut _1: (&&[u8], &&[u8; 4]);
     let mut _2: &&[u8];
     let _3: &[u8];
-    let _4: &&[u8];
-    let _5: &&[u8; 4];
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: (&&[u8], &&[u8; 4]);
-    let mut _12: &&[u8];
-    let _13: &[u8];
-    let _14: &&[u8];
-    let _15: &&[u8; 4];
-    let mut _16: bool;
-    let mut _17: bool;
-    let _19: !;
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _21: &&[u8; 4];
-    let mut _22: &&[u8; 4];
+    let mut _4: &&[u8; 4];
+    let _5: &[u8; 4];
+    let _6: [u8; 4];
+    let _7: &&[u8];
+    let _8: &&[u8; 4];
+    let mut _9: bool;
+    let mut _10: bool;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _14: (&&[u8], &&[u8; 4]);
+    let mut _15: &&[u8];
+    let _16: &[u8];
+    let mut _17: &&[u8; 4];
+    let _18: &[u8; 4];
+    let _19: &&[u8];
+    let _20: &&[u8; 4];
+    let mut _21: bool;
+    let mut _22: bool;
+    let _24: !;
+    let mut _25: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _7;
+        debug right_val => _8;
+        let _11: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _11;
         }
     }
     scope 3 {
-        debug left_val => _14;
-        debug right_val => _15;
-        let _18: core::panicking::AssertKind;
+        debug left_val => _19;
+        debug right_val => _20;
+        let _23: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _18;
+            debug kind => _23;
         }
     }
 
@@ -65,46 +68,49 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _22 = const _;
-        _1 = (move _2, _22);
-        _4 = (_1.0: &&[u8]);
-        _5 = (_1.1: &&[u8; 4]);
-        _7 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _6 = [const 65_u8, const 65_u8, const 65_u8, const 65_u8];
+        _5 = &_6;
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _7 = (_1.0: &&[u8]);
+        _8 = (_1.1: &&[u8; 4]);
+        _10 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_7, _8) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _8, _4, _5, move _10) -> unwind continue;
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _11, _7, _8, move _13) -> unwind continue;
     }
 
     bb4: {
-        _13 = function_with_bytes::<&*b"AAAA">() -> [return: bb5, unwind continue];
+        _16 = function_with_bytes::<&*b"AAAA">() -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _12 = &_13;
-        _21 = const _;
-        _11 = (move _12, _21);
-        _14 = (_11.0: &&[u8]);
-        _15 = (_11.1: &&[u8; 4]);
-        _17 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_14, _15) -> [return: bb6, unwind continue];
+        _15 = &_16;
+        _18 = const b"AAAA";
+        _17 = &_18;
+        _14 = (move _15, move _17);
+        _19 = (_14.0: &&[u8]);
+        _20 = (_14.1: &&[u8; 4]);
+        _22 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_19, _20) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _16 = Not(move _17);
-        switchInt(move _16) -> [0: bb8, otherwise: bb7];
+        _21 = Not(move _22);
+        switchInt(move _21) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _18 = core::panicking::AssertKind::Eq;
-        _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _18, _14, _15, move _20) -> unwind continue;
+        _23 = core::panicking::AssertKind::Eq;
+        _25 = Option::<Arguments<'_>>::None;
+        _24 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _23, _19, _20, move _25) -> unwind continue;
     }
 
     bb8: {
@@ -112,32 +118,8 @@ fn main() -> () {
     }
 }
 
-promoted[0] in main: &&[u8; 4] = {
-    let mut _0: &&[u8; 4];
-    let mut _1: &[u8; 4];
-
-    bb0: {
-        _1 = const b"AAAA";
-        _0 = &_1;
-        return;
-    }
-}
-
-alloc4 (size: 4, align: 1) {
+alloc3 (size: 4, align: 1) {
     41 41 41 41                                     │ AAAA
-}
-
-promoted[1] in main: &&[u8; 4] = {
-    let mut _0: &&[u8; 4];
-    let mut _1: &[u8; 4];
-    let mut _2: [u8; 4];
-
-    bb0: {
-        _2 = [const 65_u8, const 65_u8, const 65_u8, const 65_u8];
-        _1 = &_2;
-        _0 = &_1;
-        return;
-    }
 }
 
 main::{constant#0}: &[u8; 4] = {
@@ -149,7 +131,7 @@ main::{constant#0}: &[u8; 4] = {
     }
 }
 
-alloc5 (size: 4, align: 1) {
+alloc4 (size: 4, align: 1) {
     41 41 41 41                                     │ AAAA
 }
 
@@ -157,25 +139,14 @@ main::{constant#1}: &[u8; 4] = {
     let mut _0: &[u8; 4];
     let _1: &[u8; 4];
     let _2: [u8; 4];
-    let mut _3: &[u8; 4];
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = [const 65_u8, const 65_u8, const 65_u8, const 65_u8];
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in main::{constant#1}: &[u8; 4] = {
-    let mut _0: &[u8; 4];
-    let mut _1: [u8; 4];
-
-    bb0: {
-        _1 = [const 65_u8, const 65_u8, const 65_u8, const 65_u8];
-        _0 = &_1;
         return;
     }
 }

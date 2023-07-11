@@ -83,24 +83,28 @@ fn main() -> () {
     let mut _9: &[u8];
     let mut _11: FatPtrContainer<'_>;
     let mut _12: &[u8];
-    let _14: ();
-    let mut _15: &[u8];
-    let mut _16: &mut &[u8];
-    let mut _17: (&&[u8], &&[u8; 3]);
-    let mut _18: &&[u8];
-    let mut _19: &&[u8; 3];
-    let _20: &[u8; 3];
-    let mut _23: bool;
-    let mut _24: bool;
-    let _26: !;
-    let mut _27: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _28: (&&str, &&str);
-    let mut _29: &&str;
-    let _30: &str;
-    let mut _33: bool;
-    let mut _34: bool;
-    let _36: !;
-    let mut _37: std::option::Option<std::fmt::Arguments<'_>>;
+    let _14: &[u8; 1];
+    let _15: [u8; 1];
+    let _16: ();
+    let mut _17: &[u8];
+    let mut _18: &mut &[u8];
+    let mut _19: (&&[u8], &&[u8; 3]);
+    let mut _20: &&[u8];
+    let mut _21: &&[u8; 3];
+    let _22: &[u8; 3];
+    let mut _25: bool;
+    let mut _26: bool;
+    let _28: !;
+    let mut _29: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _30: (&&str, &&str);
+    let mut _31: &&str;
+    let _32: &str;
+    let mut _33: &&str;
+    let _34: &str;
+    let mut _37: bool;
+    let mut _38: bool;
+    let _40: !;
+    let mut _41: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug a => _1;
         let _3: &[u8];
@@ -116,28 +120,26 @@ fn main() -> () {
                     scope 5 {
                         debug p => _10;
                         let mut _13: &[u8];
-                        let mut _39: &[u8; 1];
                         scope 6 {
                             debug target => _13;
-                            let _21: &&[u8];
-                            let _22: &&[u8; 3];
-                            let _31: &&str;
-                            let _32: &&str;
-                            let mut _38: &&str;
+                            let _23: &&[u8];
+                            let _24: &&[u8; 3];
+                            let _35: &&str;
+                            let _36: &&str;
                             scope 7 {
-                                debug left_val => _21;
-                                debug right_val => _22;
-                                let _25: core::panicking::AssertKind;
+                                debug left_val => _23;
+                                debug right_val => _24;
+                                let _27: core::panicking::AssertKind;
                                 scope 8 {
-                                    debug kind => _25;
+                                    debug kind => _27;
                                 }
                             }
                             scope 9 {
-                                debug left_val => _31;
-                                debug right_val => _32;
-                                let _35: core::panicking::AssertKind;
+                                debug left_val => _35;
+                                debug right_val => _36;
+                                let _39: core::panicking::AssertKind;
                                 scope 10 {
-                                    debug kind => _35;
+                                    debug kind => _39;
                                 }
                             }
                         }
@@ -151,7 +153,7 @@ fn main() -> () {
         _2 = [const 7_u8, const 6_u8, const 5_u8];
         _1 = Wrapper::<[u8; 3]>(const 4_u32, move _2);
         _5 = &_1;
-        _4 = _5 as &Wrapper<[u8]> (Pointer(Unsize));
+        _4 = _5 as &Wrapper<[u8]> (PointerCoercion(Unsize));
         _3 = fat_ptr_project(move _4) -> [return: bb1, unwind continue];
     }
 
@@ -175,81 +177,61 @@ fn main() -> () {
     }
 
     bb5: {
-        _39 = const _;
-        _13 = _39 as &[u8] (Pointer(Unsize));
-        _15 = _10;
-        _16 = &mut _13;
-        _14 = fat_ptr_store_to(move _15, _16) -> [return: bb6, unwind continue];
+        _15 = [const 42_u8];
+        _14 = &_15;
+        _13 = _14 as &[u8] (PointerCoercion(Unsize));
+        _17 = _10;
+        _18 = &mut _13;
+        _16 = fat_ptr_store_to(move _17, _18) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _18 = &_13;
-        _20 = &(_1.1: [u8; 3]);
-        _19 = &_20;
-        _17 = (move _18, move _19);
-        _21 = (_17.0: &&[u8]);
-        _22 = (_17.1: &&[u8; 3]);
-        _24 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_21, _22) -> [return: bb7, unwind continue];
+        _20 = &_13;
+        _22 = &(_1.1: [u8; 3]);
+        _21 = &_22;
+        _19 = (move _20, move _21);
+        _23 = (_19.0: &&[u8]);
+        _24 = (_19.1: &&[u8; 3]);
+        _26 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_23, _24) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _23 = Not(move _24);
-        switchInt(move _23) -> [0: bb9, otherwise: bb8];
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _25 = core::panicking::AssertKind::Eq;
-        _27 = Option::<Arguments<'_>>::None;
-        _26 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _25, _21, _22, move _27) -> unwind continue;
+        _27 = core::panicking::AssertKind::Eq;
+        _29 = Option::<Arguments<'_>>::None;
+        _28 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _27, _23, _24, move _29) -> unwind continue;
     }
 
     bb9: {
-        _30 = fat_ptr_constant() -> [return: bb10, unwind continue];
+        _32 = fat_ptr_constant() -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _29 = &_30;
-        _38 = const _;
-        _28 = (move _29, _38);
-        _31 = (_28.0: &&str);
-        _32 = (_28.1: &&str);
-        _34 = <&str as PartialEq>::eq(_31, _32) -> [return: bb11, unwind continue];
+        _31 = &_32;
+        _34 = const "HELLO";
+        _33 = &_34;
+        _30 = (move _31, move _33);
+        _35 = (_30.0: &&str);
+        _36 = (_30.1: &&str);
+        _38 = <&str as PartialEq>::eq(_35, _36) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        _33 = Not(move _34);
-        switchInt(move _33) -> [0: bb13, otherwise: bb12];
+        _37 = Not(move _38);
+        switchInt(move _37) -> [0: bb13, otherwise: bb12];
     }
 
     bb12: {
-        _35 = core::panicking::AssertKind::Eq;
-        _37 = Option::<Arguments<'_>>::None;
-        _36 = core::panicking::assert_failed::<&str, &str>(move _35, _31, _32, move _37) -> unwind continue;
+        _39 = core::panicking::AssertKind::Eq;
+        _41 = Option::<Arguments<'_>>::None;
+        _40 = core::panicking::assert_failed::<&str, &str>(move _39, _35, _36, move _41) -> unwind continue;
     }
 
     bb13: {
-        return;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "HELLO";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[u8; 1] = {
-    let mut _0: &[u8; 1];
-    let mut _1: [u8; 1];
-
-    bb0: {
-        _1 = [const 42_u8];
-        _0 = &_1;
         return;
     }
 }

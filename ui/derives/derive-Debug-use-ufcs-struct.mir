@@ -15,7 +15,7 @@ fn <impl at ui/derives/derive-Debug-use-ufcs-struct.rs:4:10: 4:15>::fmt(_1: &Bar
         _4 = const "t";
         _7 = &((*_1).0: ());
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
     }
 
@@ -136,80 +136,84 @@ fn main() -> () {
     let mut _0: ();
     let _1: Bar;
     let mut _2: (&&str, &std::string::String);
-    let mut _3: &std::string::String;
-    let _4: std::string::String;
-    let mut _6: std::fmt::Arguments<'_>;
-    let mut _7: &[&str];
-    let mut _8: &[core::fmt::rt::Argument<'_>];
-    let _9: &[core::fmt::rt::Argument<'_>; 1];
-    let _10: [core::fmt::rt::Argument<'_>; 1];
-    let mut _11: core::fmt::rt::Argument<'_>;
-    let _12: &Bar;
-    let mut _15: bool;
-    let mut _16: bool;
-    let _18: !;
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _3: &&str;
+    let _4: &str;
+    let mut _5: &std::string::String;
+    let _6: std::string::String;
+    let mut _8: std::fmt::Arguments<'_>;
+    let mut _9: &[&str];
+    let _10: &[&str; 1];
+    let _11: [&str; 1];
+    let mut _12: &[core::fmt::rt::Argument<'_>];
+    let _13: &[core::fmt::rt::Argument<'_>; 1];
+    let _14: [core::fmt::rt::Argument<'_>; 1];
+    let mut _15: core::fmt::rt::Argument<'_>;
+    let _16: &Bar;
+    let mut _19: bool;
+    let mut _20: bool;
+    let _22: !;
+    let mut _23: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug bar => const Bar {{ t: () }};
-        let _5: std::string::String;
-        let _13: &&str;
-        let _14: &std::string::String;
-        let mut _20: &[&str; 1];
-        let mut _21: &&str;
+        let _7: std::string::String;
+        let _17: &&str;
+        let _18: &std::string::String;
         scope 2 {
-            debug res => _5;
+            debug res => _7;
         }
         scope 3 {
-            debug left_val => _13;
-            debug right_val => _14;
-            let _17: core::panicking::AssertKind;
+            debug left_val => _17;
+            debug right_val => _18;
+            let _21: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _17;
+                debug kind => _21;
             }
         }
     }
 
     bb0: {
-        _21 = const _;
-        _20 = const _;
-        _7 = _20 as &[&str] (Pointer(Unsize));
-        _12 = &_1;
-        _11 = core::fmt::rt::Argument::<'_>::new_debug::<Bar>(_12) -> [return: bb1, unwind continue];
+        _4 = const "Bar { t: () }";
+        _3 = &_4;
+        _11 = [const ""];
+        _10 = &_11;
+        _9 = _10 as &[&str] (PointerCoercion(Unsize));
+        _16 = &_1;
+        _15 = core::fmt::rt::Argument::<'_>::new_debug::<Bar>(_16) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _10 = [move _11];
-        _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _6 = Arguments::<'_>::new_v1(move _7, move _8) -> [return: bb2, unwind continue];
+        _14 = [move _15];
+        _13 = &_14;
+        _12 = _13 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = Arguments::<'_>::new_v1(move _9, move _12) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = format(move _6) -> [return: bb3, unwind continue];
+        _7 = format(move _8) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _4 = move _5;
-        _3 = &_4;
-        _2 = (_21, move _3);
-        _13 = (_2.0: &&str);
-        _14 = (_2.1: &std::string::String);
-        _16 = <&str as PartialEq<String>>::eq(_13, _14) -> [return: bb4, unwind: bb8];
+        _6 = move _7;
+        _5 = &_6;
+        _2 = (move _3, move _5);
+        _17 = (_2.0: &&str);
+        _18 = (_2.1: &std::string::String);
+        _20 = <&str as PartialEq<String>>::eq(_17, _18) -> [return: bb4, unwind: bb8];
     }
 
     bb4: {
-        _15 = Not(move _16);
-        switchInt(move _15) -> [0: bb6, otherwise: bb5];
+        _19 = Not(move _20);
+        switchInt(move _19) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _17 = core::panicking::AssertKind::Eq;
-        _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<&str, String>(move _17, _13, _14, move _19) -> bb8;
+        _21 = core::panicking::AssertKind::Eq;
+        _23 = Option::<Arguments<'_>>::None;
+        _22 = core::panicking::assert_failed::<&str, String>(move _21, _17, _18, move _23) -> bb8;
     }
 
     bb6: {
-        drop(_4) -> [return: bb7, unwind continue];
+        drop(_6) -> [return: bb7, unwind continue];
     }
 
     bb7: {
@@ -217,32 +221,10 @@ fn main() -> () {
     }
 
     bb8 (cleanup): {
-        drop(_4) -> [return: bb9, unwind terminate];
+        drop(_6) -> [return: bb9, unwind terminate];
     }
 
     bb9 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const ""];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "Bar { t: () }";
-        _0 = &_1;
-        return;
     }
 }

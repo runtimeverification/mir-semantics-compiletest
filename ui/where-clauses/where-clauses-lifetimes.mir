@@ -19,10 +19,12 @@ fn main() -> () {
     let mut _2: std::slice::Iter<'_, isize>;
     let mut _3: &[isize];
     let mut _4: &[isize; 2];
+    let _5: [isize; 2];
 
     bb0: {
-        _4 = const _;
-        _3 = _4 as &[isize] (Pointer(Unsize));
+        _5 = [const 1_isize, const 2_isize];
+        _4 = &_5;
+        _3 = move _4 as &[isize] (PointerCoercion(Unsize));
         _2 = core::slice::<impl [isize]>::iter(move _3) -> [return: bb1, unwind continue];
     }
 
@@ -31,17 +33,6 @@ fn main() -> () {
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in main: &[isize; 2] = {
-    let mut _0: &[isize; 2];
-    let mut _1: [isize; 2];
-
-    bb0: {
-        _1 = [const 1_isize, const 2_isize];
-        _0 = &_1;
         return;
     }
 }

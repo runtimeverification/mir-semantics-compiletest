@@ -6,7 +6,7 @@ fn test_basic() -> () {
     let mut _2: bool;
     let mut _3: !;
     scope 1 {
-        debug rs => const true;
+        debug rs => _1;
     }
 
     bb0: {
@@ -29,23 +29,24 @@ fn test_rec() -> () {
     let _1: RS;
     let mut _2: (&isize, &isize);
     let mut _3: &isize;
-    let mut _6: bool;
-    let mut _7: bool;
-    let mut _8: isize;
-    let mut _9: isize;
-    let _11: !;
-    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _4: &isize;
+    let _5: isize;
+    let mut _8: bool;
+    let mut _9: bool;
+    let mut _10: isize;
+    let mut _11: isize;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug rs => _1;
-        let _4: &isize;
-        let _5: &isize;
-        let mut _13: &isize;
+        let _6: &isize;
+        let _7: &isize;
         scope 2 {
-            debug left_val => _4;
-            debug right_val => _5;
-            let _10: core::panicking::AssertKind;
+            debug left_val => _6;
+            debug right_val => _7;
+            let _12: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _10;
+                debug kind => _12;
             }
         }
     }
@@ -53,35 +54,25 @@ fn test_rec() -> () {
     bb0: {
         _1 = RS { v1: const 10_isize, v2: const 20_isize };
         _3 = &(_1.1: isize);
-        _13 = const _;
-        _2 = (move _3, _13);
-        _4 = (_2.0: &isize);
-        _5 = (_2.1: &isize);
-        _8 = (*_4);
-        _9 = (*_5);
-        _7 = Eq(move _8, move _9);
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb2, otherwise: bb1];
+        _5 = const 20_isize;
+        _4 = &_5;
+        _2 = (move _3, move _4);
+        _6 = (_2.0: &isize);
+        _7 = (_2.1: &isize);
+        _10 = (*_6);
+        _11 = (*_7);
+        _9 = Eq(move _10, move _11);
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _10 = core::panicking::AssertKind::Eq;
-        _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<isize, isize>(move _10, _4, _5, move _12) -> unwind continue;
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<isize, isize>(move _12, _6, _7, move _14) -> unwind continue;
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in test_rec: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 20_isize;
-        _0 = &_1;
         return;
     }
 }
@@ -94,23 +85,24 @@ fn test_filled_with_stuff() -> () {
     let mut _4: i32;
     let mut _5: (&i32, &i32);
     let mut _6: &i32;
-    let mut _9: bool;
-    let mut _10: bool;
-    let mut _11: i32;
-    let mut _12: i32;
-    let _14: !;
-    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _7: &i32;
+    let _8: i32;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: i32;
+    let mut _14: i32;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug rs => _1;
-        let _7: &i32;
-        let _8: &i32;
-        let mut _16: &i32;
+        let _9: &i32;
+        let _10: &i32;
         scope 3 {
-            debug left_val => _7;
-            debug right_val => _8;
-            let _13: core::panicking::AssertKind;
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _13;
+                debug kind => _15;
             }
         }
     }
@@ -137,35 +129,25 @@ fn test_filled_with_stuff() -> () {
     bb3: {
         _1 = _2;
         _6 = &_1;
-        _16 = const _;
-        _5 = (move _6, _16);
-        _7 = (_5.0: &i32);
-        _8 = (_5.1: &i32);
-        _11 = (*_7);
-        _12 = (*_8);
-        _10 = Eq(move _11, move _12);
-        _9 = Not(move _10);
-        switchInt(move _9) -> [0: bb5, otherwise: bb4];
+        _8 = const 10_i32;
+        _7 = &_8;
+        _5 = (move _6, move _7);
+        _9 = (_5.0: &i32);
+        _10 = (_5.1: &i32);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _13 = core::panicking::AssertKind::Eq;
-        _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15) -> unwind continue;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in test_filled_with_stuff: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 10_i32;
-        _0 = &_1;
         return;
     }
 }

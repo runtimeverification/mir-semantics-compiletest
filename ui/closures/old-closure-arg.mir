@@ -16,17 +16,19 @@ fn main() -> () {
     let _14: ();
     let mut _15: std::fmt::Arguments<'_>;
     let mut _16: &[&str];
-    let mut _17: &[core::fmt::rt::Argument<'_>];
-    let _18: &[core::fmt::rt::Argument<'_>; 1];
-    let _19: [core::fmt::rt::Argument<'_>; 1];
-    let mut _20: core::fmt::rt::Argument<'_>;
-    let mut _22: *const [f64; 5];
-    let mut _23: *const ();
-    let mut _24: usize;
+    let _17: &[&str; 2];
+    let _18: [&str; 2];
+    let mut _19: &[core::fmt::rt::Argument<'_>];
+    let _20: &[core::fmt::rt::Argument<'_>; 1];
+    let _21: [core::fmt::rt::Argument<'_>; 1];
+    let mut _22: core::fmt::rt::Argument<'_>;
+    let mut _23: *const [f64; 5];
+    let mut _24: *const ();
     let mut _25: usize;
     let mut _26: usize;
     let mut _27: usize;
-    let mut _28: bool;
+    let mut _28: usize;
+    let mut _29: bool;
     scope 1 {
         debug v => _1;
         let mut _9: std::slice::Iter<'_, f64>;
@@ -35,7 +37,6 @@ fn main() -> () {
             let _13: &f64;
             scope 4 {
                 debug i => _13;
-                let mut _21: &[&str; 2];
             }
         }
     }
@@ -50,14 +51,14 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [f64; 5]);
-        _22 = (((_6.0: std::ptr::Unique<[f64; 5]>).0: std::ptr::NonNull<[f64; 5]>).0: *const [f64; 5]);
-        _23 = _22 as *const () (PtrToPtr);
-        _24 = _23 as usize (Transmute);
-        _25 = AlignOf(f64);
-        _26 = Sub(_25, const 1_usize);
-        _27 = BitAnd(_24, _26);
-        _28 = Eq(_27, const 0_usize);
-        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb14, unwind unreachable];
+        _23 = (((_6.0: std::ptr::Unique<[f64; 5]>).0: std::ptr::NonNull<[f64; 5]>).0: *const [f64; 5]);
+        _24 = _23 as *const () (PtrToPtr);
+        _25 = _24 as usize (Transmute);
+        _26 = AlignOf(f64);
+        _27 = Sub(_26, const 1_usize);
+        _28 = BitAnd(_25, _27);
+        _29 = Eq(_28, const 0_usize);
+        assert(_29, "misaligned pointer dereference: address must be a multiple of {} but is {}", _26, _25) -> [success: bb14, unwind unreachable];
     }
 
     bb2: {
@@ -82,9 +83,10 @@ fn main() -> () {
 
     bb6: {
         _13 = ((_10 as Some).0: &f64);
-        _21 = const _;
-        _16 = _21 as &[&str] (Pointer(Unsize));
-        _20 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_13) -> [return: bb9, unwind: bb12];
+        _18 = [const "", const "\n"];
+        _17 = &_18;
+        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _22 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_13) -> [return: bb9, unwind: bb12];
     }
 
     bb7: {
@@ -96,10 +98,10 @@ fn main() -> () {
     }
 
     bb9: {
-        _19 = [move _20];
-        _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _15 = Arguments::<'_>::new_v1(move _16, move _17) -> [return: bb10, unwind: bb12];
+        _21 = [move _22];
+        _20 = &_21;
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb10, unwind: bb12];
     }
 
     bb10: {
@@ -119,23 +121,12 @@ fn main() -> () {
     }
 
     bb14: {
-        (*_22) = [const -1f64, const 0f64, const 1f64, const 2f64, const 3f64];
-        _2 = move _6 as std::boxed::Box<[f64]> (Pointer(Unsize));
+        (*_23) = [const -1f64, const 0f64, const 1f64, const 2f64, const 3f64];
+        _2 = move _6 as std::boxed::Box<[f64]> (PointerCoercion(Unsize));
         _1 = slice::<impl [f64]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
     }
 
     bb15: {
         goto -> bb4;
-    }
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }

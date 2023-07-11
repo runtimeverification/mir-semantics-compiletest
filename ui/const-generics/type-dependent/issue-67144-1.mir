@@ -61,6 +61,10 @@ fn main() -> () {
     let _3: u8;
     let mut _4: [u8; 3];
     let mut _8: [u8; 3];
+    let mut _9: &X;
+    let _10: X;
+    let mut _12: &X;
+    let _13: X;
     scope 1 {
         debug a => _1;
         debug b => _2;
@@ -68,15 +72,13 @@ fn main() -> () {
         let _5: u8;
         let _6: u8;
         let _7: u8;
-        let mut _11: &X;
         scope 2 {
             debug a => _5;
             debug b => _6;
             debug c => _7;
-            let _9: [u8; 3];
-            let mut _10: &X;
+            let _11: [u8; 3];
             scope 3 {
-                debug arr => _9;
+                debug arr => _11;
             }
         }
     }
@@ -89,41 +91,19 @@ fn main() -> () {
         _1 = _4[0 of 3];
         _2 = _4[1 of 3];
         _3 = _4[2 of 3];
-        _11 = const _;
-        _8 = X::getn::<3>(_11) -> [return: bb2, unwind continue];
+        _9 = &_10;
+        _8 = X::getn::<3>(move _9) -> [return: bb2, unwind continue];
     }
 
     bb2: {
         _5 = _8[0 of 3];
         _6 = _8[1 of 3];
         _7 = _8[2 of 3];
-        _10 = const _;
-        _9 = X::getn::<3>(_10) -> [return: bb3, unwind continue];
+        _12 = &_13;
+        _11 = X::getn::<3>(move _12) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in main: &X = {
-    let mut _0: &X;
-    let mut _1: X;
-
-    bb0: {
-        _1 = X;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &X = {
-    let mut _0: &X;
-    let mut _1: X;
-
-    bb0: {
-        _1 = X;
-        _0 = &_1;
         return;
     }
 }

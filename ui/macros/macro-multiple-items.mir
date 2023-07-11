@@ -12,24 +12,14 @@ fn <impl at ui/macros/macro-multiple-items.rs:6:9: 6:17>::bar(_1: &Foo) -> () {
 fn main() -> () {
     let mut _0: ();
     let mut _1: &Foo;
+    let _2: Foo;
 
     bb0: {
-        _1 = const _;
-        _0 = Foo::bar(_1) -> [return: bb1, unwind continue];
+        _1 = &_2;
+        _0 = Foo::bar(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in main: &Foo = {
-    let mut _0: &Foo;
-    let mut _1: Foo;
-
-    bb0: {
-        _1 = Foo;
-        _0 = &_1;
         return;
     }
 }

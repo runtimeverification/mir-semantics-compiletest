@@ -29,7 +29,7 @@ fn <impl at ui/match/issue-42679.rs:4:10: 4:15>::fmt(_1: &Test, _2: &mut Formatt
         _8 = &(((*_1) as Bar).0: isize);
         _9 = const "Bar";
         _11 = &_8;
-        _10 = _11 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _10 = _11 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _9, move _10) -> [return: bb4, unwind continue];
     }
 
@@ -41,7 +41,7 @@ fn <impl at ui/match/issue-42679.rs:4:10: 4:15>::fmt(_1: &Test, _2: &mut Formatt
         _4 = &(((*_1) as Foo).0: usize);
         _5 = const "Foo";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb4, unwind continue];
     }
 
@@ -174,29 +174,31 @@ fn main() -> () {
     let mut _10: !;
     let mut _13: (&usize, &usize);
     let mut _14: &usize;
-    let mut _17: bool;
-    let mut _18: bool;
-    let mut _19: usize;
-    let mut _20: usize;
-    let _22: !;
-    let mut _23: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _24: (&std::boxed::Box<Test>, &std::boxed::Box<Test>);
-    let mut _25: &std::boxed::Box<Test>;
-    let mut _26: &std::boxed::Box<Test>;
-    let _27: std::boxed::Box<Test>;
-    let mut _28: Test;
-    let mut _31: bool;
-    let mut _32: bool;
-    let _34: !;
-    let mut _35: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _36: !;
-    let mut _38: std::boxed::Box<Test>;
+    let mut _15: &usize;
+    let _16: usize;
+    let mut _19: bool;
+    let mut _20: bool;
+    let mut _21: usize;
+    let mut _22: usize;
+    let _24: !;
+    let mut _25: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _26: (&std::boxed::Box<Test>, &std::boxed::Box<Test>);
+    let mut _27: &std::boxed::Box<Test>;
+    let mut _28: &std::boxed::Box<Test>;
+    let _29: std::boxed::Box<Test>;
+    let mut _30: Test;
+    let mut _33: bool;
+    let mut _34: bool;
+    let _36: !;
+    let mut _37: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _38: !;
     let mut _39: std::boxed::Box<Test>;
     let mut _40: std::boxed::Box<Test>;
-    let mut _41: bool;
-    let mut _42: *const Test;
+    let mut _41: std::boxed::Box<Test>;
+    let mut _42: bool;
     let mut _43: *const Test;
     let mut _44: *const Test;
+    let mut _45: *const Test;
     scope 1 {
         debug a => _1;
         let _3: std::boxed::Box<Test>;
@@ -204,46 +206,45 @@ fn main() -> () {
             debug b => _3;
             let _11: usize;
             let _12: std::boxed::Box<Test>;
-            let mut _45: *const ();
-            let mut _46: usize;
+            let mut _46: *const ();
             let mut _47: usize;
             let mut _48: usize;
             let mut _49: usize;
-            let mut _50: bool;
-            let mut _51: *const ();
-            let mut _52: usize;
+            let mut _50: usize;
+            let mut _51: bool;
+            let mut _52: *const ();
             let mut _53: usize;
             let mut _54: usize;
             let mut _55: usize;
-            let mut _56: bool;
-            let mut _57: *const ();
-            let mut _58: usize;
+            let mut _56: usize;
+            let mut _57: bool;
+            let mut _58: *const ();
             let mut _59: usize;
             let mut _60: usize;
             let mut _61: usize;
-            let mut _62: bool;
+            let mut _62: usize;
+            let mut _63: bool;
             scope 3 {
                 debug x => _11;
                 debug b => _12;
-                let _15: &usize;
-                let _16: &usize;
-                let _29: &std::boxed::Box<Test>;
-                let _30: &std::boxed::Box<Test>;
-                let mut _37: &usize;
+                let _17: &usize;
+                let _18: &usize;
+                let _31: &std::boxed::Box<Test>;
+                let _32: &std::boxed::Box<Test>;
                 scope 4 {
-                    debug left_val => _15;
-                    debug right_val => _16;
-                    let _21: core::panicking::AssertKind;
+                    debug left_val => _17;
+                    debug right_val => _18;
+                    let _23: core::panicking::AssertKind;
                     scope 5 {
-                        debug kind => _21;
+                        debug kind => _23;
                     }
                 }
                 scope 6 {
-                    debug left_val => _29;
-                    debug right_val => _30;
-                    let _33: core::panicking::AssertKind;
+                    debug left_val => _31;
+                    debug right_val => _32;
+                    let _35: core::panicking::AssertKind;
                     scope 7 {
-                        debug kind => _33;
+                        debug kind => _35;
                     }
                 }
             }
@@ -251,7 +252,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _41 = const false;
+        _42 = const false;
         _2 = Test::Foo(const 10_usize);
         _1 = Box::<Test>::new(move _2) -> [return: bb1, unwind continue];
     }
@@ -264,33 +265,33 @@ fn main() -> () {
     bb2: {
         _6 = move _1;
         _7 = move _3;
-        _41 = const true;
+        _42 = const true;
         _5 = (move _6, move _7);
-        _38 = deref_copy (_5.1: std::boxed::Box<Test>);
-        _42 = (((_38.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _57 = _42 as *const () (PtrToPtr);
-        _58 = _57 as usize (Transmute);
-        _59 = AlignOf(Test);
-        _60 = Sub(_59, const 1_usize);
-        _61 = BitAnd(_58, _60);
-        _62 = Eq(_61, const 0_usize);
-        assert(_62, "misaligned pointer dereference: address must be a multiple of {} but is {}", _59, _58) -> [success: bb25, unwind unreachable];
+        _39 = deref_copy (_5.1: std::boxed::Box<Test>);
+        _43 = (((_39.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _58 = _43 as *const () (PtrToPtr);
+        _59 = _58 as usize (Transmute);
+        _60 = AlignOf(Test);
+        _61 = Sub(_60, const 1_usize);
+        _62 = BitAnd(_59, _61);
+        _63 = Eq(_62, const 0_usize);
+        assert(_63, "misaligned pointer dereference: address must be a multiple of {} but is {}", _60, _59) -> [success: bb25, unwind unreachable];
     }
 
     bb3: {
-        _39 = deref_copy (_5.0: std::boxed::Box<Test>);
-        _43 = (((_39.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _51 = _43 as *const () (PtrToPtr);
-        _52 = _51 as usize (Transmute);
-        _53 = AlignOf(Test);
-        _54 = Sub(_53, const 1_usize);
-        _55 = BitAnd(_52, _54);
-        _56 = Eq(_55, const 0_usize);
-        assert(_56, "misaligned pointer dereference: address must be a multiple of {} but is {}", _53, _52) -> [success: bb24, unwind unreachable];
+        _40 = deref_copy (_5.0: std::boxed::Box<Test>);
+        _44 = (((_40.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _52 = _44 as *const () (PtrToPtr);
+        _53 = _52 as usize (Transmute);
+        _54 = AlignOf(Test);
+        _55 = Sub(_54, const 1_usize);
+        _56 = BitAnd(_53, _55);
+        _57 = Eq(_56, const 0_usize);
+        assert(_57, "misaligned pointer dereference: address must be a multiple of {} but is {}", _54, _53) -> [success: bb24, unwind unreachable];
     }
 
     bb4: {
-        _36 = core::panicking::panic(const "internal error: entered unreachable code") -> bb22;
+        _38 = core::panicking::panic(const "internal error: entered unreachable code") -> bb22;
     }
 
     bb5: {
@@ -298,52 +299,52 @@ fn main() -> () {
     }
 
     bb6: {
-        _41 = const false;
+        _42 = const false;
         _12 = move (_5.1: std::boxed::Box<Test>);
-        _40 = deref_copy (_5.0: std::boxed::Box<Test>);
-        _44 = (((_40.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _45 = _44 as *const () (PtrToPtr);
-        _46 = _45 as usize (Transmute);
-        _47 = AlignOf(Test);
-        _48 = Sub(_47, const 1_usize);
-        _49 = BitAnd(_46, _48);
-        _50 = Eq(_49, const 0_usize);
-        assert(_50, "misaligned pointer dereference: address must be a multiple of {} but is {}", _47, _46) -> [success: bb23, unwind unreachable];
+        _41 = deref_copy (_5.0: std::boxed::Box<Test>);
+        _45 = (((_41.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _46 = _45 as *const () (PtrToPtr);
+        _47 = _46 as usize (Transmute);
+        _48 = AlignOf(Test);
+        _49 = Sub(_48, const 1_usize);
+        _50 = BitAnd(_47, _49);
+        _51 = Eq(_50, const 0_usize);
+        assert(_51, "misaligned pointer dereference: address must be a multiple of {} but is {}", _48, _47) -> [success: bb23, unwind unreachable];
     }
 
     bb7: {
-        _21 = core::panicking::AssertKind::Eq;
-        _23 = Option::<Arguments<'_>>::None;
-        _22 = core::panicking::assert_failed::<usize, usize>(move _21, _15, _16, move _23) -> bb16;
+        _23 = core::panicking::AssertKind::Eq;
+        _25 = Option::<Arguments<'_>>::None;
+        _24 = core::panicking::assert_failed::<usize, usize>(move _23, _17, _18, move _25) -> bb16;
     }
 
     bb8: {
-        _25 = &_12;
-        _28 = Test::Bar(const -20_isize);
-        _27 = Box::<Test>::new(move _28) -> [return: bb9, unwind: bb16];
+        _27 = &_12;
+        _30 = Test::Bar(const -20_isize);
+        _29 = Box::<Test>::new(move _30) -> [return: bb9, unwind: bb16];
     }
 
     bb9: {
-        _26 = &_27;
-        _24 = (move _25, move _26);
-        _29 = (_24.0: &std::boxed::Box<Test>);
-        _30 = (_24.1: &std::boxed::Box<Test>);
-        _32 = <Box<Test> as PartialEq>::eq(_29, _30) -> [return: bb10, unwind: bb15];
+        _28 = &_29;
+        _26 = (move _27, move _28);
+        _31 = (_26.0: &std::boxed::Box<Test>);
+        _32 = (_26.1: &std::boxed::Box<Test>);
+        _34 = <Box<Test> as PartialEq>::eq(_31, _32) -> [return: bb10, unwind: bb15];
     }
 
     bb10: {
-        _31 = Not(move _32);
-        switchInt(move _31) -> [0: bb12, otherwise: bb11];
+        _33 = Not(move _34);
+        switchInt(move _33) -> [0: bb12, otherwise: bb11];
     }
 
     bb11: {
-        _33 = core::panicking::AssertKind::Eq;
-        _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<Box<Test>, Box<Test>>(move _33, _29, _30, move _35) -> bb15;
+        _35 = core::panicking::AssertKind::Eq;
+        _37 = Option::<Arguments<'_>>::None;
+        _36 = core::panicking::assert_failed::<Box<Test>, Box<Test>>(move _35, _31, _32, move _37) -> bb15;
     }
 
     bb12: {
-        drop(_27) -> [return: bb13, unwind: bb16];
+        drop(_29) -> [return: bb13, unwind: bb16];
     }
 
     bb13: {
@@ -355,7 +356,7 @@ fn main() -> () {
     }
 
     bb15 (cleanup): {
-        drop(_27) -> [return: bb16, unwind terminate];
+        drop(_29) -> [return: bb16, unwind terminate];
     }
 
     bb16 (cleanup): {
@@ -371,12 +372,12 @@ fn main() -> () {
     }
 
     bb19: {
-        _41 = const false;
+        _42 = const false;
         return;
     }
 
     bb20 (cleanup): {
-        switchInt(_41) -> [0: bb18, otherwise: bb21];
+        switchInt(_42) -> [0: bb18, otherwise: bb21];
     }
 
     bb21 (cleanup): {
@@ -388,38 +389,28 @@ fn main() -> () {
     }
 
     bb23: {
-        _11 = (((*_44) as Foo).0: usize);
+        _11 = (((*_45) as Foo).0: usize);
         _14 = &_11;
-        _37 = const _;
-        _13 = (move _14, _37);
-        _15 = (_13.0: &usize);
-        _16 = (_13.1: &usize);
-        _19 = (*_15);
-        _20 = (*_16);
-        _18 = Eq(move _19, move _20);
-        _17 = Not(move _18);
-        switchInt(move _17) -> [0: bb8, otherwise: bb7];
+        _16 = const 10_usize;
+        _15 = &_16;
+        _13 = (move _14, move _15);
+        _17 = (_13.0: &usize);
+        _18 = (_13.1: &usize);
+        _21 = (*_17);
+        _22 = (*_18);
+        _20 = Eq(move _21, move _22);
+        _19 = Not(move _20);
+        switchInt(move _19) -> [0: bb8, otherwise: bb7];
     }
 
     bb24: {
-        _8 = discriminant((*_43));
+        _8 = discriminant((*_44));
         switchInt(move _8) -> [0: bb6, otherwise: bb4];
     }
 
     bb25: {
-        _9 = discriminant((*_42));
+        _9 = discriminant((*_43));
         switchInt(move _9) -> [0: bb5, otherwise: bb3];
-    }
-}
-
-promoted[0] in main: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 10_usize;
-        _0 = &_1;
-        return;
     }
 }
 

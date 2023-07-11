@@ -33,11 +33,13 @@ fn f() -> () {
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let mut _4: &[&str; 1];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
 
     bb0: {
-        _4 = const _;
-        _3 = _4 as &[&str] (Pointer(Unsize));
+        _5 = [const "hello\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
         _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
@@ -46,17 +48,6 @@ fn f() -> () {
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in f: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "hello\n"];
-        _0 = &_1;
         return;
     }
 }
@@ -153,31 +144,32 @@ fn main() -> () {
     let _6: &str;
     let mut _7: std::string::String;
     let _8: &str;
-    let _9: &std::string::String;
-    let _10: &&str;
-    let mut _11: bool;
-    let mut _12: bool;
-    let _14: !;
-    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _16: &&str;
-    let mut _17: bool;
+    let mut _9: &&str;
+    let _10: &str;
+    let _11: &std::string::String;
+    let _12: &&str;
+    let mut _13: bool;
+    let mut _14: bool;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: bool;
     scope 1 {
-        debug left_val => _9;
-        debug right_val => _10;
-        let _13: core::panicking::AssertKind;
+        debug left_val => _11;
+        debug right_val => _12;
+        let _15: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _13;
+            debug kind => _15;
         }
     }
 
     bb0: {
-        _17 = const false;
+        _18 = const false;
         _1 = call_f::<fn() {f}>(f) -> [return: bb1, unwind continue];
     }
 
     bb1: {
         _6 = const "foo";
-        _17 = const true;
+        _18 = const true;
         _5 = <str as ToString>::to_string(_6) -> [return: bb2, unwind continue];
     }
 
@@ -187,29 +179,30 @@ fn main() -> () {
     }
 
     bb3: {
-        _17 = const false;
+        _18 = const false;
         _4 = call_g::<fn(String, String) -> String {g}>(g, move _5, move _7) -> [return: bb4, unwind: bb12];
     }
 
     bb4: {
-        _17 = const false;
+        _18 = const false;
         _3 = &_4;
-        _16 = const _;
-        _2 = (move _3, _16);
-        _9 = (_2.0: &std::string::String);
-        _10 = (_2.1: &&str);
-        _12 = <String as PartialEq<&str>>::eq(_9, _10) -> [return: bb5, unwind: bb9];
+        _10 = const "foobar";
+        _9 = &_10;
+        _2 = (move _3, move _9);
+        _11 = (_2.0: &std::string::String);
+        _12 = (_2.1: &&str);
+        _14 = <String as PartialEq<&str>>::eq(_11, _12) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        _11 = Not(move _12);
-        switchInt(move _11) -> [0: bb7, otherwise: bb6];
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _13 = core::panicking::AssertKind::Eq;
-        _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<String, &str>(move _13, _9, _10, move _15) -> bb9;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<String, &str>(move _15, _11, _12, move _17) -> bb9;
     }
 
     bb7: {
@@ -233,17 +226,6 @@ fn main() -> () {
     }
 
     bb12 (cleanup): {
-        switchInt(_17) -> [0: bb10, otherwise: bb11];
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "foobar";
-        _0 = &_1;
-        return;
+        switchInt(_18) -> [0: bb10, otherwise: bb11];
     }
 }

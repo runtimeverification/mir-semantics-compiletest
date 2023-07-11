@@ -10,32 +10,34 @@ fn main() -> () {
     let _6: usize;
     let mut _7: (&u32, &u32);
     let mut _8: &u32;
-    let mut _11: bool;
-    let mut _12: bool;
-    let mut _13: u32;
-    let mut _14: u32;
-    let _16: !;
-    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
-    let _18: ();
-    let mut _19: std::fmt::Arguments<'_>;
-    let mut _20: &[&str];
-    let mut _21: &[core::fmt::rt::Argument<'_>];
-    let _22: &[core::fmt::rt::Argument<'_>; 1];
-    let _23: [core::fmt::rt::Argument<'_>; 1];
-    let mut _24: core::fmt::rt::Argument<'_>;
-    let _25: &u32;
+    let mut _9: &u32;
+    let _10: u32;
+    let mut _13: bool;
+    let mut _14: bool;
+    let mut _15: u32;
+    let mut _16: u32;
+    let _18: !;
+    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
+    let _20: ();
+    let mut _21: std::fmt::Arguments<'_>;
+    let mut _22: &[&str];
+    let _23: &[&str; 2];
+    let _24: [&str; 2];
+    let mut _25: &[core::fmt::rt::Argument<'_>];
+    let _26: &[core::fmt::rt::Argument<'_>; 1];
+    let _27: [core::fmt::rt::Argument<'_>; 1];
+    let mut _28: core::fmt::rt::Argument<'_>;
+    let _29: &u32;
     scope 1 {
         debug f => _1;
-        let _9: &u32;
-        let _10: &u32;
-        let mut _26: &[&str; 2];
-        let mut _27: &u32;
+        let _11: &u32;
+        let _12: &u32;
         scope 3 {
-            debug left_val => _9;
-            debug right_val => _10;
-            let _15: core::panicking::AssertKind;
+            debug left_val => _11;
+            debug right_val => _12;
+            let _17: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _15;
+                debug kind => _17;
             }
         }
     }
@@ -61,15 +63,16 @@ fn main() -> () {
         _6 = ((_2 as Some).0: usize);
         _1 = _6 as u32 (IntToInt);
         _8 = &_1;
-        _27 = const _;
-        _7 = (move _8, _27);
-        _9 = (_7.0: &u32);
-        _10 = (_7.1: &u32);
-        _13 = (*_9);
-        _14 = (*_10);
-        _12 = Eq(move _13, move _14);
-        _11 = Not(move _12);
-        switchInt(move _11) -> [0: bb6, otherwise: bb5];
+        _10 = const 1234_u32;
+        _9 = &_10;
+        _7 = (move _8, move _9);
+        _11 = (_7.0: &u32);
+        _12 = (_7.1: &u32);
+        _15 = (*_11);
+        _16 = (*_12);
+        _14 = Eq(move _15, move _16);
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb6, otherwise: bb5];
     }
 
     bb4: {
@@ -77,52 +80,31 @@ fn main() -> () {
     }
 
     bb5: {
-        _15 = core::panicking::AssertKind::Eq;
-        _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<u32, u32>(move _15, _9, _10, move _17) -> unwind continue;
+        _17 = core::panicking::AssertKind::Eq;
+        _19 = Option::<Arguments<'_>>::None;
+        _18 = core::panicking::assert_failed::<u32, u32>(move _17, _11, _12, move _19) -> unwind continue;
     }
 
     bb6: {
-        _26 = const _;
-        _20 = _26 as &[&str] (Pointer(Unsize));
-        _25 = &_1;
-        _24 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_25) -> [return: bb7, unwind continue];
+        _24 = [const "", const "\n"];
+        _23 = &_24;
+        _22 = _23 as &[&str] (PointerCoercion(Unsize));
+        _29 = &_1;
+        _28 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_29) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _23 = [move _24];
-        _22 = &_23;
-        _21 = _22 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _19 = Arguments::<'_>::new_v1(move _20, move _21) -> [return: bb8, unwind continue];
+        _27 = [move _28];
+        _26 = &_27;
+        _25 = _26 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _21 = Arguments::<'_>::new_v1(move _22, move _25) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _18 = _print(move _19) -> [return: bb9, unwind continue];
+        _20 = _print(move _21) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        return;
-    }
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 1234_u32;
-        _0 = &_1;
         return;
     }
 }

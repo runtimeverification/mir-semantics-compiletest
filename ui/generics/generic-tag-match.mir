@@ -7,23 +7,25 @@ fn altfoo(_1: foo<T>) -> () {
     let _4: ();
     let mut _5: std::fmt::Arguments<'_>;
     let mut _6: &[&str];
-    let mut _7: bool;
-    let mut _8: bool;
-    let mut _9: !;
+    let _7: &[&str; 1];
+    let _8: [&str; 1];
+    let mut _9: bool;
+    let mut _10: bool;
+    let mut _11: !;
     scope 1 {
         debug hit => _2;
         let _3: T;
         scope 2 {
             debug _x => _3;
-            let mut _10: &[&str; 1];
         }
     }
 
     bb0: {
         _2 = const false;
         _3 = move ((_1 as arm).0: T);
-        _10 = const _;
-        _6 = _10 as &[&str] (Pointer(Unsize));
+        _8 = [const "in arm\n"];
+        _7 = &_8;
+        _6 = _7 as &[&str] (PointerCoercion(Unsize));
         _5 = Arguments::<'_>::new_const(move _6) -> [return: bb1, unwind: bb6];
     }
 
@@ -37,13 +39,13 @@ fn altfoo(_1: foo<T>) -> () {
     }
 
     bb3: {
-        _8 = _2;
-        _7 = Not(move _8);
-        switchInt(move _7) -> [0: bb5, otherwise: bb4];
+        _10 = _2;
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _9 = core::panicking::panic(const "assertion failed: (hit)") -> unwind continue;
+        _11 = core::panicking::panic(const "assertion failed: (hit)") -> unwind continue;
     }
 
     bb5: {
@@ -56,17 +58,6 @@ fn altfoo(_1: foo<T>) -> () {
 
     bb7 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in altfoo: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "in arm\n"];
-        _0 = &_1;
-        return;
     }
 }
 

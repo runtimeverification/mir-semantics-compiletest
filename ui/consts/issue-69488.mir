@@ -135,23 +135,24 @@ fn check_bag(_1: &BagOfBits<T>) -> () {
     let mut _4: *const BagOfBits<T>;
     let mut _5: (&u8, &u8);
     let mut _6: &u8;
-    let mut _9: bool;
-    let mut _10: bool;
-    let mut _11: u8;
-    let mut _12: u8;
-    let _14: !;
-    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _7: &u8;
+    let _8: u8;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: u8;
+    let mut _14: u8;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug val => _2;
-        let _7: &u8;
-        let _8: &u8;
-        let mut _16: &u8;
+        let _9: &u8;
+        let _10: &u8;
         scope 3 {
-            debug left_val => _7;
-            debug right_val => _8;
-            let _13: core::panicking::AssertKind;
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _13;
+                debug kind => _15;
             }
         }
     }
@@ -166,35 +167,25 @@ fn check_bag(_1: &BagOfBits<T>) -> () {
 
     bb1: {
         _6 = &_2;
-        _16 = const _;
-        _5 = (move _6, _16);
-        _7 = (_5.0: &u8);
-        _8 = (_5.1: &u8);
-        _11 = (*_7);
-        _12 = (*_8);
-        _10 = Eq(move _11, move _12);
-        _9 = Not(move _10);
-        switchInt(move _9) -> [0: bb3, otherwise: bb2];
+        _8 = const 1_u8;
+        _7 = &_8;
+        _5 = (move _6, move _7);
+        _9 = (_5.0: &u8);
+        _10 = (_5.1: &u8);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _13 = core::panicking::AssertKind::Eq;
-        _15 = Option::<Arguments<'_>>::None;
-        _14 = assert_failed::<u8, u8>(move _13, _7, _8, move _15) -> unwind continue;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in check_bag: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const 1_u8;
-        _0 = &_1;
         return;
     }
 }
@@ -208,9 +199,11 @@ fn main() -> () {
     let _5: &BagOfBits<usize>;
     let _6: BagOfBits<usize>;
     let _7: ();
-    let _8: ();
-    let mut _9: &BagOfBits<usize>;
-    let mut _10: &BagOfBits<[usize; 1]>;
+    let _8: &BagOfBits<[usize; 1]>;
+    let _9: BagOfBits<[usize; 1]>;
+    let _10: ();
+    let _11: &BagOfBits<usize>;
+    let _12: BagOfBits<usize>;
 
     bb0: {
         _3 = make_1u8_bag::<[usize; 1]>() -> [return: bb1, unwind continue];
@@ -231,38 +224,18 @@ fn main() -> () {
     }
 
     bb4: {
-        _10 = const _;
-        _7 = check_bag::<[usize; 1]>(_10) -> [return: bb5, unwind continue];
+        _9 = const _;
+        _8 = &_9;
+        _7 = check_bag::<[usize; 1]>(_8) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _9 = const _;
-        _8 = check_bag::<usize>(_9) -> [return: bb6, unwind continue];
+        _12 = const _;
+        _11 = &_12;
+        _10 = check_bag::<usize>(_11) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &BagOfBits<usize> = {
-    let mut _0: &BagOfBits<usize>;
-    let mut _1: BagOfBits<usize>;
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &BagOfBits<[usize; 1]> = {
-    let mut _0: &BagOfBits<[usize; 1]>;
-    let mut _1: BagOfBits<[usize; 1]>;
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
         return;
     }
 }

@@ -6,8 +6,9 @@ fn main() -> () {
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: !;
-    let mut _6: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
+    let mut _7: !;
 
     bb0: {
         _1 = Foo { bar: const 3_u32 };
@@ -15,12 +16,13 @@ fn main() -> () {
     }
 
     bb1: {
-        _5 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _7 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
     }
 
     bb2: {
-        _6 = const _;
-        _4 = _6 as &[&str] (Pointer(Unsize));
+        _6 = [const "Test OK\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
         _3 = Arguments::<'_>::new_const(move _4) -> [return: bb3, unwind continue];
     }
 
@@ -29,17 +31,6 @@ fn main() -> () {
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "Test OK\n"];
-        _0 = &_1;
         return;
     }
 }

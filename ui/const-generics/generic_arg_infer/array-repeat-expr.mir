@@ -26,58 +26,49 @@ fn main() -> () {
     let mut _1: (&[u8; 3], &[u8; 3]);
     let mut _2: &[u8; 3];
     let _3: [u8; 3];
-    let _4: &[u8; 3];
-    let _5: &[u8; 3];
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: &[u8; 3];
+    let mut _4: &[u8; 3];
+    let _5: [u8; 3];
+    let _6: &[u8; 3];
+    let _7: &[u8; 3];
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
     bb0: {
-        _11 = const _;
-        _3 = foo() -> [return: bb1, unwind continue];
+        _3 = [const 0_u8; 3];
+        _2 = &_3;
+        _5 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &_3;
-        _1 = (_11, move _2);
-        _4 = (_1.0: &[u8; 3]);
-        _5 = (_1.1: &[u8; 3]);
-        _7 = <[u8; 3] as PartialEq>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &[u8; 3]);
+        _7 = (_1.1: &[u8; 3]);
+        _9 = <[u8; 3] as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<[u8; 3], [u8; 3]>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<[u8; 3], [u8; 3]>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &[u8; 3] = {
-    let mut _0: &[u8; 3];
-    let mut _1: [u8; 3];
-
-    bb0: {
-        _1 = [const 0_u8; 3];
-        _0 = &_1;
         return;
     }
 }

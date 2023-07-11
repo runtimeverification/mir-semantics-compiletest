@@ -7,14 +7,16 @@ fn foo(_1: maybe<isize>) -> () {
     let _3: ();
     let mut _4: std::fmt::Arguments<'_>;
     let mut _5: &[&str];
-    let _6: isize;
-    let _7: ();
-    let mut _8: std::fmt::Arguments<'_>;
-    let mut _9: &[&str];
-    let mut _11: &[&str; 1];
+    let _6: &[&str; 1];
+    let _7: [&str; 1];
+    let _8: isize;
+    let _9: ();
+    let mut _10: std::fmt::Arguments<'_>;
+    let mut _11: &[&str];
+    let _12: &[&str; 1];
+    let _13: [&str; 1];
     scope 1 {
-        debug _a => _6;
-        let mut _10: &[&str; 1];
+        debug _a => _8;
     }
 
     bb0: {
@@ -23,10 +25,11 @@ fn foo(_1: maybe<isize>) -> () {
     }
 
     bb1: {
-        _6 = ((_1 as just).0: isize);
-        _10 = const _;
-        _9 = _10 as &[&str] (Pointer(Unsize));
-        _8 = Arguments::<'_>::new_const(move _9) -> [return: bb5, unwind continue];
+        _8 = ((_1 as just).0: isize);
+        _13 = [const "B\n"];
+        _12 = &_13;
+        _11 = _12 as &[&str] (PointerCoercion(Unsize));
+        _10 = Arguments::<'_>::new_const(move _11) -> [return: bb5, unwind continue];
     }
 
     bb2: {
@@ -34,8 +37,9 @@ fn foo(_1: maybe<isize>) -> () {
     }
 
     bb3: {
-        _11 = const _;
-        _5 = _11 as &[&str] (Pointer(Unsize));
+        _7 = [const "A\n"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
         _4 = Arguments::<'_>::new_const(move _5) -> [return: bb4, unwind continue];
     }
 
@@ -44,32 +48,10 @@ fn foo(_1: maybe<isize>) -> () {
     }
 
     bb5: {
-        _7 = _print(move _8) -> [return: bb6, unwind continue];
+        _9 = _print(move _10) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in foo: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "B\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in foo: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "A\n"];
-        _0 = &_1;
         return;
     }
 }

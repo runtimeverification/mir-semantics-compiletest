@@ -15,43 +15,24 @@ fn size_of_val(_1: &T) -> usize {
 fn main() -> () {
     let mut _0: ();
     let _1: usize;
-    let _2: usize;
-    let mut _3: &fn(i64) -> Foo {Foo};
-    let mut _4: &Foo;
+    let _2: &Foo;
+    let _3: Foo;
+    let _4: usize;
+    let _5: &fn(i64) -> Foo {Foo};
+    let _6: fn(i64) -> Foo {Foo};
 
     bb0: {
-        _4 = const _;
-        _1 = size_of_val::<Foo>(_4) -> [return: bb1, unwind continue];
+        _3 = Foo(const 0_i64);
+        _2 = &_3;
+        _1 = size_of_val::<Foo>(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = const _;
-        _2 = size_of_val::<fn(i64) -> Foo {Foo}>(_3) -> [return: bb2, unwind continue];
+        _5 = &_6;
+        _4 = size_of_val::<fn(i64) -> Foo {Foo}>(_5) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in main: &fn(i64) -> Foo {Foo} = {
-    let mut _0: &fn(i64) -> Foo {Foo};
-    let mut _1: fn(i64) -> Foo {Foo};
-
-    bb0: {
-        _1 = Foo;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &Foo = {
-    let mut _0: &Foo;
-    let mut _1: Foo;
-
-    bb0: {
-        _1 = Foo(const 0_i64);
-        _0 = &_1;
         return;
     }
 }

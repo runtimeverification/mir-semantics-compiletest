@@ -18,21 +18,23 @@ fn main() -> () {
     let _14: &[i32];
     let _15: &[i32];
     let mut _16: &[i32; 2];
-    let mut _19: bool;
-    let mut _20: bool;
-    let _22: !;
-    let mut _23: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _17: &&[i32; 2];
+    let _18: &[i32; 2];
+    let _19: [i32; 2];
+    let mut _22: bool;
+    let mut _23: bool;
+    let _25: !;
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug t => _1;
-        let _17: &&[i32];
-        let _18: &&[i32; 2];
-        let mut _24: &&[i32; 2];
+        let _20: &&[i32];
+        let _21: &&[i32; 2];
         scope 2 {
-            debug left_val => _17;
-            debug right_val => _18;
-            let _21: core::panicking::AssertKind;
+            debug left_val => _20;
+            debug right_val => _21;
+            let _24: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _21;
+                debug kind => _24;
             }
         }
     }
@@ -65,38 +67,27 @@ fn main() -> () {
     bb3: {
         _14 = _15;
         _13 = &_14;
-        _24 = const _;
-        _12 = (move _13, _24);
-        _17 = (_12.0: &&[i32]);
-        _18 = (_12.1: &&[i32; 2]);
-        _20 = <&[i32] as PartialEq<&[i32; 2]>>::eq(_17, _18) -> [return: bb4, unwind continue];
+        _19 = [const 2_i32, const 2_i32];
+        _18 = &_19;
+        _17 = &_18;
+        _12 = (move _13, move _17);
+        _20 = (_12.0: &&[i32]);
+        _21 = (_12.1: &&[i32; 2]);
+        _23 = <&[i32] as PartialEq<&[i32; 2]>>::eq(_20, _21) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _19 = Not(move _20);
-        switchInt(move _19) -> [0: bb6, otherwise: bb5];
+        _22 = Not(move _23);
+        switchInt(move _22) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _21 = core::panicking::AssertKind::Eq;
-        _23 = Option::<Arguments<'_>>::None;
-        _22 = core::panicking::assert_failed::<&[i32], &[i32; 2]>(move _21, _17, _18, move _23) -> unwind continue;
+        _24 = core::panicking::AssertKind::Eq;
+        _26 = Option::<Arguments<'_>>::None;
+        _25 = core::panicking::assert_failed::<&[i32], &[i32; 2]>(move _24, _20, _21, move _26) -> unwind continue;
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &&[i32; 2] = {
-    let mut _0: &&[i32; 2];
-    let mut _1: &[i32; 2];
-    let mut _2: [i32; 2];
-
-    bb0: {
-        _2 = [const 2_i32, const 2_i32];
-        _1 = &_2;
-        _0 = &_1;
         return;
     }
 }

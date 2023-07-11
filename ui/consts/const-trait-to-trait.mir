@@ -3,37 +3,21 @@
 fn main() -> () {
     let mut _0: ();
     let _1: &[&dyn Trait];
-    let mut _2: &[&dyn Trait; 1];
+    let _2: &[&dyn Trait; 1];
+    let _3: [&dyn Trait; 1];
+    let _4: &dyn Trait;
+    let _5: &Bar;
+    let _6: Bar;
     scope 1 {
         debug x => _1;
     }
 
     bb0: {
-        _2 = const _;
-        _1 = _2 as &[&dyn Trait] (Pointer(Unsize));
-        return;
-    }
-}
-
-promoted[0] in main: &[&dyn Trait; 1] = {
-    let mut _0: &[&dyn Trait; 1];
-    let mut _1: [&dyn Trait; 1];
-    let mut _2: &dyn Trait;
-    let mut _3: &dyn Trait;
-    let mut _4: &dyn Trait;
-    let mut _5: &Bar;
-    let mut _6: &Bar;
-    let mut _7: Bar;
-
-    bb0: {
-        _7 = Bar;
-        _6 = &_7;
-        _5 = &(*_6);
-        _4 = move _5 as &dyn Trait (Pointer(Unsize));
-        _3 = &(*_4);
-        _2 = move _3 as &dyn Trait (Pointer(Unsize));
-        _1 = [move _2];
-        _0 = &_1;
+        _5 = &_6;
+        _4 = _5 as &dyn Trait (PointerCoercion(Unsize));
+        _3 = [_4];
+        _2 = &_3;
+        _1 = _2 as &[&dyn Trait] (PointerCoercion(Unsize));
         return;
     }
 }
@@ -42,25 +26,14 @@ const UTF_8: &UTF8Encoding = {
     let mut _0: &UTF8Encoding;
     let _1: &UTF8Encoding;
     let _2: UTF8Encoding;
-    let mut _3: &UTF8Encoding;
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = UTF8Encoding;
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in UTF_8: &UTF8Encoding = {
-    let mut _0: &UTF8Encoding;
-    let mut _1: UTF8Encoding;
-
-    bb0: {
-        _1 = UTF8Encoding;
-        _0 = &_1;
         return;
     }
 }
@@ -71,7 +44,7 @@ fn f() -> &dyn Encoding {
 
     bb0: {
         _1 = const _;
-        _0 = _1 as &dyn Encoding (Pointer(Unsize));
+        _0 = _1 as &dyn Encoding (PointerCoercion(Unsize));
         return;
     }
 }
@@ -81,28 +54,17 @@ const FOO: &dyn Trait = {
     let mut _1: &Bar;
     let _2: &Bar;
     let _3: Bar;
-    let mut _4: &Bar;
 
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _4 = const _;
-        _2 = &(*_4);
+        StorageLive(_3);
+        _3 = Bar;
+        _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &dyn Trait (Pointer(Unsize));
+        _0 = move _1 as &dyn Trait (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in FOO: &Bar = {
-    let mut _0: &Bar;
-    let mut _1: Bar;
-
-    bb0: {
-        _1 = Bar;
-        _0 = &_1;
         return;
     }
 }
@@ -117,7 +79,7 @@ const BAR: &dyn Trait = {
         StorageLive(_2);
         _2 = const _;
         _1 = &(*_2);
-        _0 = move _1 as &dyn Trait (Pointer(Unsize));
+        _0 = move _1 as &dyn Trait (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -126,11 +88,13 @@ const BAR: &dyn Trait = {
 
 fn foo() -> () {
     let mut _0: ();
+    let _1: &dyn Trait;
     scope 1 {
-        debug _x => const _;
+        debug _x => _1;
     }
 
     bb0: {
+        _1 = const _;
         return;
     }
 }

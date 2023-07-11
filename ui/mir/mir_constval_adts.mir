@@ -53,11 +53,11 @@ fn <impl at ui/mir/mir_constval_adts.rs:2:21: 2:26>::fmt(_1: &Point, _2: &mut Fo
         _3 = const "Point";
         _4 = const "_x";
         _6 = &((*_1).0: i32);
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _7 = const "_y";
         _10 = &((*_1).1: i32);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
     }
 
@@ -108,7 +108,7 @@ fn <impl at ui/mir/mir_constval_adts.rs:8:25: 8:30>::fmt(_1: &Newtype<T>, _2: &m
         _3 = const "Newtype";
         _6 = &((*_1).0: T);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
     }
 
@@ -165,16 +165,16 @@ fn mir() -> (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) {
     let mut _0: (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
     let _1: Point;
     scope 1 {
-        debug struct1 => const _;
+        debug struct1 => _1;
         let _2: (i32, i32);
         scope 2 {
-            debug tuple1 => const _;
+            debug tuple1 => _2;
             let _3: (&str, &str);
             scope 3 {
-                debug tuple2 => const _;
+                debug tuple2 => _3;
                 let _4: (Newtype<i32>, Newtype<i32>);
                 scope 4 {
-                    debug pair_newtype => const _;
+                    debug pair_newtype => _4;
                 }
             }
         }
@@ -210,75 +210,55 @@ const NEWTYPE: Newtype<&str> = {
 fn test_promoted_newtype_str_ref() -> () {
     let mut _0: ();
     let _1: &Newtype<&str>;
-    let mut _2: (&&Newtype<&str>, &&Newtype<&str>);
-    let mut _3: &&Newtype<&str>;
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _12: &Newtype<&str>;
+    let _2: Newtype<&str>;
+    let mut _3: (&&Newtype<&str>, &&Newtype<&str>);
+    let mut _4: &&Newtype<&str>;
+    let mut _5: &&Newtype<&str>;
+    let _6: &Newtype<&str>;
+    let _7: Newtype<&str>;
+    let mut _10: bool;
+    let mut _11: bool;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug x => _1;
-        let _4: &&Newtype<&str>;
-        let _5: &&Newtype<&str>;
-        let mut _11: &&Newtype<&str>;
+        let _8: &&Newtype<&str>;
+        let _9: &&Newtype<&str>;
         scope 2 {
-            debug left_val => _4;
-            debug right_val => _5;
-            let _8: core::panicking::AssertKind;
+            debug left_val => _8;
+            debug right_val => _9;
+            let _12: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _8;
+                debug kind => _12;
             }
         }
     }
 
     bb0: {
-        _12 = const _;
-        _1 = _12;
-        _3 = &_1;
-        _11 = const _;
-        _2 = (move _3, _11);
-        _4 = (_2.0: &&Newtype<&str>);
-        _5 = (_2.1: &&Newtype<&str>);
-        _7 = <&Newtype<&str> as PartialEq>::eq(_4, _5) -> [return: bb1, unwind continue];
+        _2 = const _;
+        _1 = &_2;
+        _4 = &_1;
+        _7 = Newtype::<&str>(const "foobar");
+        _6 = &_7;
+        _5 = &_6;
+        _3 = (move _4, move _5);
+        _8 = (_3.0: &&Newtype<&str>);
+        _9 = (_3.1: &&Newtype<&str>);
+        _11 = <&Newtype<&str> as PartialEq>::eq(_8, _9) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb3, otherwise: bb2];
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<&Newtype<&str>, &Newtype<&str>>(move _8, _4, _5, move _10) -> unwind continue;
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<&Newtype<&str>, &Newtype<&str>>(move _12, _8, _9, move _14) -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in test_promoted_newtype_str_ref: &&Newtype<&str> = {
-    let mut _0: &&Newtype<&str>;
-    let mut _1: &Newtype<&str>;
-    let mut _2: Newtype<&str>;
-
-    bb0: {
-        _2 = Newtype::<&str>(const "foobar");
-        _1 = &_2;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in test_promoted_newtype_str_ref: &Newtype<&str> = {
-    let mut _0: &Newtype<&str>;
-    let mut _1: Newtype<&str>;
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
         return;
     }
 }
@@ -288,20 +268,21 @@ fn main() -> () {
     let mut _1: (&(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)), &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
     let mut _2: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
     let _3: (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
-    let _4: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
-    let _5: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let _11: ();
-    let mut _12: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
+    let mut _4: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
+    let _5: (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
+    let _6: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
+    let _7: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let _13: ();
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
@@ -311,40 +292,30 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _12 = const _;
-        _1 = (move _2, _12);
-        _4 = (_1.0: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
-        _5 = (_1.1: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
-        _7 = <(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) as PartialEq>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _5 = (const _, const _, const _, const _);
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
+        _7 = (_1.1: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
+        _9 = <(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)), (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>))>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)), (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>))>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        _11 = test_promoted_newtype_str_ref() -> [return: bb5, unwind continue];
+        _13 = test_promoted_newtype_str_ref() -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;
-    }
-}
-
-promoted[0] in main: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) = {
-    let mut _0: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
-    let mut _1: (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>));
-
-    bb0: {
-        _1 = (const _, const _, const _, const _);
-        _0 = &_1;
         return;
     }
 }

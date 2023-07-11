@@ -13,7 +13,7 @@ fn <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:15:10: 15:15>::fmt(_
         _3 = const "ScribbleOnDrop";
         _6 = &((*_1).0: std::string::String);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
     }
 
@@ -29,14 +29,16 @@ fn <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:18:1: 18:29>::drop(_
     let _3: std::string::String;
     let mut _4: std::fmt::Arguments<'_>;
     let mut _5: &[&str];
-    let mut _6: &[&str; 1];
+    let _6: &[&str; 1];
+    let _7: [&str; 1];
     scope 1 {
         debug res => _3;
     }
 
     bb0: {
-        _6 = const _;
-        _5 = _6 as &[&str] (Pointer(Unsize));
+        _7 = [const "DROPPED"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
         _4 = Arguments::<'_>::new_const(move _5) -> [return: bb1, unwind continue];
     }
 
@@ -60,42 +62,33 @@ fn <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:18:1: 18:29>::drop(_
     }
 }
 
-promoted[0] in <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:18:1: 18:29>::drop: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "DROPPED"];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:26:1: 26:45>::drop(_1: &mut Foo<T>) -> () {
     debug self => _1;
     let mut _0: ();
     let _2: ();
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 1];
-    let _7: [core::fmt::rt::Argument<'_>; 1];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &u32;
-    let mut _10: &[&str; 2];
+    let _5: &[&str; 2];
+    let _6: [&str; 2];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 1];
+    let _9: [core::fmt::rt::Argument<'_>; 1];
+    let mut _10: core::fmt::rt::Argument<'_>;
+    let _11: &u32;
 
     bb0: {
-        _10 = const _;
-        _4 = _10 as &[&str] (Pointer(Unsize));
-        _9 = &((*_1).0: u32);
-        _8 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_9) -> [return: bb1, unwind continue];
+        _6 = [const "Dropping Foo(", const ", _)\n"];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &((*_1).0: u32);
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_11) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = [move _8];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb2, unwind continue];
+        _9 = [move _10];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
@@ -107,45 +100,36 @@ fn <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:26:1: 26:45>::drop(_
     }
 }
 
-promoted[0] in <impl at ui/dropck/issue-28498-ugeh-with-passed-to-fn.rs:26:1: 26:45>::drop: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "Dropping Foo(", const ", _)\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn callback(_1: &&ScribbleOnDrop) -> String {
     debug s => _1;
     let mut _0: std::string::String;
     let _2: std::string::String;
     let mut _3: std::fmt::Arguments<'_>;
     let mut _4: &[&str];
-    let mut _5: &[core::fmt::rt::Argument<'_>];
-    let _6: &[core::fmt::rt::Argument<'_>; 1];
-    let _7: [core::fmt::rt::Argument<'_>; 1];
-    let mut _8: core::fmt::rt::Argument<'_>;
-    let _9: &&&ScribbleOnDrop;
-    let mut _10: &[&str; 1];
+    let _5: &[&str; 1];
+    let _6: [&str; 1];
+    let mut _7: &[core::fmt::rt::Argument<'_>];
+    let _8: &[core::fmt::rt::Argument<'_>; 1];
+    let _9: [core::fmt::rt::Argument<'_>; 1];
+    let mut _10: core::fmt::rt::Argument<'_>;
+    let _11: &&&ScribbleOnDrop;
     scope 1 {
         debug res => _2;
     }
 
     bb0: {
-        _10 = const _;
-        _4 = _10 as &[&str] (Pointer(Unsize));
-        _9 = &_1;
-        _8 = core::fmt::rt::Argument::<'_>::new_debug::<&&ScribbleOnDrop>(_9) -> [return: bb1, unwind continue];
+        _6 = [const ""];
+        _5 = &_6;
+        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _11 = &_1;
+        _10 = core::fmt::rt::Argument::<'_>::new_debug::<&&ScribbleOnDrop>(_11) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = [move _8];
-        _6 = &_7;
-        _5 = _6 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _5) -> [return: bb2, unwind continue];
+        _9 = [move _10];
+        _8 = &_9;
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
@@ -158,17 +142,6 @@ fn callback(_1: &&ScribbleOnDrop) -> String {
     }
 }
 
-promoted[0] in callback: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const ""];
-        _0 = &_1;
-        return;
-    }
-}
-
 fn main() -> () {
     let mut _0: ();
     let _1: ScribbleOnDrop;
@@ -177,32 +150,38 @@ fn main() -> () {
     let mut _6: std::string::String;
     let mut _8: std::fmt::Arguments<'_>;
     let mut _9: &[&str];
-    let mut _10: ScribbleOnDrop;
-    let mut _11: std::string::String;
-    let mut _13: std::fmt::Arguments<'_>;
-    let mut _14: &[&str];
-    let mut _15: Foo<&ScribbleOnDrop>;
-    let mut _16: &ScribbleOnDrop;
-    let mut _17: std::boxed::Box<for<'r> fn(&'r &ScribbleOnDrop) -> std::string::String>;
-    let mut _18: for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String;
+    let _10: &[&str; 1];
+    let _11: [&str; 1];
+    let mut _12: ScribbleOnDrop;
+    let mut _13: std::string::String;
+    let mut _15: std::fmt::Arguments<'_>;
+    let mut _16: &[&str];
+    let _17: &[&str; 1];
+    let _18: [&str; 1];
     let mut _19: Foo<&ScribbleOnDrop>;
     let mut _20: &ScribbleOnDrop;
     let mut _21: std::boxed::Box<for<'r> fn(&'r &ScribbleOnDrop) -> std::string::String>;
     let mut _22: for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String;
-    let _23: ();
-    let mut _24: std::fmt::Arguments<'_>;
-    let mut _25: &[&str];
-    let mut _26: &[core::fmt::rt::Argument<'_>];
-    let _27: &[core::fmt::rt::Argument<'_>; 2];
-    let _28: [core::fmt::rt::Argument<'_>; 2];
-    let mut _29: core::fmt::rt::Argument<'_>;
-    let _30: &&ScribbleOnDrop;
-    let mut _31: core::fmt::rt::Argument<'_>;
-    let _32: &&ScribbleOnDrop;
-    let mut _36: bool;
-    let mut _37: bool;
-    let mut _38: bool;
+    let mut _23: Foo<&ScribbleOnDrop>;
+    let mut _24: &ScribbleOnDrop;
+    let mut _25: std::boxed::Box<for<'r> fn(&'r &ScribbleOnDrop) -> std::string::String>;
+    let mut _26: for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String;
+    let _27: ();
+    let mut _28: std::fmt::Arguments<'_>;
+    let mut _29: &[&str];
+    let _30: &[&str; 3];
+    let _31: [&str; 3];
+    let mut _32: &[core::fmt::rt::Argument<'_>];
+    let _33: &[core::fmt::rt::Argument<'_>; 2];
+    let _34: [core::fmt::rt::Argument<'_>; 2];
+    let mut _35: core::fmt::rt::Argument<'_>;
+    let _36: &&ScribbleOnDrop;
+    let mut _37: core::fmt::rt::Argument<'_>;
+    let _38: &&ScribbleOnDrop;
     let mut _39: bool;
+    let mut _40: bool;
+    let mut _41: bool;
+    let mut _42: bool;
     scope 1 {
         debug last_dropped => _1;
         debug foo0 => _2;
@@ -212,26 +191,24 @@ fn main() -> () {
             debug foo1 => _3;
             debug first_dropped => _4;
             let _7: std::string::String;
-            let _12: std::string::String;
-            let mut _33: &[&str; 3];
-            let mut _34: &[&str; 1];
-            let mut _35: &[&str; 1];
+            let _14: std::string::String;
             scope 3 {
                 debug res => _7;
             }
             scope 4 {
-                debug res => _12;
+                debug res => _14;
             }
         }
     }
 
     bb0: {
+        _42 = const false;
+        _41 = const false;
+        _40 = const false;
         _39 = const false;
-        _38 = const false;
-        _37 = const false;
-        _36 = const false;
-        _35 = const _;
-        _9 = _35 as &[&str] (Pointer(Unsize));
+        _11 = [const "last"];
+        _10 = &_11;
+        _9 = _10 as &[&str] (PointerCoercion(Unsize));
         _8 = Arguments::<'_>::new_const(move _9) -> [return: bb1, unwind: bb17];
     }
 
@@ -242,60 +219,62 @@ fn main() -> () {
     bb2: {
         _6 = move _7;
         _5 = ScribbleOnDrop(move _6);
-        _39 = const true;
+        _42 = const true;
         _1 = move _5;
-        _34 = const _;
-        _14 = _34 as &[&str] (Pointer(Unsize));
-        _13 = Arguments::<'_>::new_const(move _14) -> [return: bb3, unwind: bb17];
+        _18 = [const "first"];
+        _17 = &_18;
+        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _15 = Arguments::<'_>::new_const(move _16) -> [return: bb3, unwind: bb17];
     }
 
     bb3: {
-        _12 = format(move _13) -> [return: bb4, unwind: bb17];
+        _14 = format(move _15) -> [return: bb4, unwind: bb17];
     }
 
     bb4: {
-        _11 = move _12;
-        _10 = ScribbleOnDrop(move _11);
-        _36 = const true;
-        _4 = move _10;
-        _16 = &_1;
-        _18 = callback as for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String (Pointer(ReifyFnPointer));
-        _17 = Box::<for<'r> fn(&'r &ScribbleOnDrop) -> String>::new(move _18) -> [return: bb5, unwind: bb17];
+        _13 = move _14;
+        _12 = ScribbleOnDrop(move _13);
+        _39 = const true;
+        _4 = move _12;
+        _20 = &_1;
+        _22 = callback as for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String (PointerCoercion(ReifyFnPointer));
+        _21 = Box::<for<'r> fn(&'r &ScribbleOnDrop) -> String>::new(move _22) -> [return: bb5, unwind: bb17];
     }
 
     bb5: {
-        _15 = Foo::<&ScribbleOnDrop>(const 0_u32, move _16, move _17);
-        _38 = const true;
-        _2 = move _15;
-        _20 = &_4;
-        _22 = callback as for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String (Pointer(ReifyFnPointer));
-        _21 = Box::<for<'r> fn(&'r &ScribbleOnDrop) -> String>::new(move _22) -> [return: bb6, unwind: bb17];
+        _19 = Foo::<&ScribbleOnDrop>(const 0_u32, move _20, move _21);
+        _41 = const true;
+        _2 = move _19;
+        _24 = &_4;
+        _26 = callback as for<'a, 'b> fn(&'a &'b ScribbleOnDrop) -> std::string::String (PointerCoercion(ReifyFnPointer));
+        _25 = Box::<for<'r> fn(&'r &ScribbleOnDrop) -> String>::new(move _26) -> [return: bb6, unwind: bb17];
     }
 
     bb6: {
-        _19 = Foo::<&ScribbleOnDrop>(const 1_u32, move _20, move _21);
-        _37 = const true;
-        _3 = move _19;
-        _33 = const _;
-        _25 = _33 as &[&str] (Pointer(Unsize));
-        _30 = &(_2.1: &ScribbleOnDrop);
-        _29 = core::fmt::rt::Argument::<'_>::new_debug::<&ScribbleOnDrop>(_30) -> [return: bb7, unwind: bb17];
+        _23 = Foo::<&ScribbleOnDrop>(const 1_u32, move _24, move _25);
+        _40 = const true;
+        _3 = move _23;
+        _31 = [const "foo0.1: ", const " foo1.1: ", const "\n"];
+        _30 = &_31;
+        _29 = _30 as &[&str] (PointerCoercion(Unsize));
+        _36 = &(_2.1: &ScribbleOnDrop);
+        _35 = core::fmt::rt::Argument::<'_>::new_debug::<&ScribbleOnDrop>(_36) -> [return: bb7, unwind: bb17];
     }
 
     bb7: {
-        _32 = &(_3.1: &ScribbleOnDrop);
-        _31 = core::fmt::rt::Argument::<'_>::new_debug::<&ScribbleOnDrop>(_32) -> [return: bb8, unwind: bb17];
+        _38 = &(_3.1: &ScribbleOnDrop);
+        _37 = core::fmt::rt::Argument::<'_>::new_debug::<&ScribbleOnDrop>(_38) -> [return: bb8, unwind: bb17];
     }
 
     bb8: {
-        _28 = [move _29, move _31];
-        _27 = &_28;
-        _26 = _27 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _24 = Arguments::<'_>::new_v1(move _25, move _26) -> [return: bb9, unwind: bb17];
+        _34 = [move _35, move _37];
+        _33 = &_34;
+        _32 = _33 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _28 = Arguments::<'_>::new_v1(move _29, move _32) -> [return: bb9, unwind: bb17];
     }
 
     bb9: {
-        _23 = _print(move _24) -> [return: bb10, unwind: bb17];
+        _27 = _print(move _28) -> [return: bb10, unwind: bb17];
     }
 
     bb10: {
@@ -303,22 +282,22 @@ fn main() -> () {
     }
 
     bb11: {
-        _36 = const false;
+        _39 = const false;
         drop(_3) -> [return: bb12, unwind: bb21];
     }
 
     bb12: {
-        _37 = const false;
+        _40 = const false;
         drop(_2) -> [return: bb13, unwind: bb23];
     }
 
     bb13: {
-        _38 = const false;
+        _41 = const false;
         drop(_1) -> [return: bb14, unwind continue];
     }
 
     bb14: {
-        _39 = const false;
+        _42 = const false;
         return;
     }
 
@@ -331,7 +310,7 @@ fn main() -> () {
     }
 
     bb17 (cleanup): {
-        switchInt(_36) -> [0: bb19, otherwise: bb16];
+        switchInt(_39) -> [0: bb19, otherwise: bb16];
     }
 
     bb18 (cleanup): {
@@ -339,7 +318,7 @@ fn main() -> () {
     }
 
     bb19 (cleanup): {
-        switchInt(_37) -> [0: bb21, otherwise: bb18];
+        switchInt(_40) -> [0: bb21, otherwise: bb18];
     }
 
     bb20 (cleanup): {
@@ -347,7 +326,7 @@ fn main() -> () {
     }
 
     bb21 (cleanup): {
-        switchInt(_38) -> [0: bb23, otherwise: bb20];
+        switchInt(_41) -> [0: bb23, otherwise: bb20];
     }
 
     bb22 (cleanup): {
@@ -355,40 +334,7 @@ fn main() -> () {
     }
 
     bb23 (cleanup): {
-        switchInt(_39) -> [0: bb15, otherwise: bb22];
-    }
-}
-
-promoted[0] in main: &[&str; 3] = {
-    let mut _0: &[&str; 3];
-    let mut _1: [&str; 3];
-
-    bb0: {
-        _1 = [const "foo0.1: ", const " foo1.1: ", const "\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "first"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "last"];
-        _0 = &_1;
-        return;
+        switchInt(_42) -> [0: bb15, otherwise: bb22];
     }
 }
 

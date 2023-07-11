@@ -46,39 +46,40 @@ fn main() -> () {
     let _8: i32;
     let mut _9: std::result::Result<i32, std::sync::mpsc::RecvError>;
     let mut _10: &std::sync::mpsc::Receiver<i32>;
-    let mut _13: bool;
-    let mut _14: bool;
-    let mut _15: i32;
-    let mut _16: i32;
-    let _18: !;
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _21: bool;
+    let mut _11: &i32;
+    let _12: i32;
+    let mut _15: bool;
+    let mut _16: bool;
+    let mut _17: i32;
+    let mut _18: i32;
+    let _20: !;
+    let mut _21: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _22: bool;
     scope 1 {
         debug tx => _1;
         debug rx => _2;
-        let _11: &i32;
-        let _12: &i32;
-        let mut _20: &i32;
+        let _13: &i32;
+        let _14: &i32;
         scope 2 {
-            debug left_val => _11;
-            debug right_val => _12;
-            let _17: core::panicking::AssertKind;
+            debug left_val => _13;
+            debug right_val => _14;
+            let _19: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _17;
+                debug kind => _19;
             }
         }
     }
 
     bb0: {
-        _21 = const false;
+        _22 = const false;
         _3 = channel::<i32>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _21 = const true;
+        _22 = const true;
         _1 = move (_3.0: std::sync::mpsc::Sender<i32>);
         _2 = move (_3.1: std::sync::mpsc::Receiver<i32>);
-        _21 = const false;
+        _22 = const false;
         _5 = move _1;
         _4 = foo::<i32>(const 31337_i32, move _5) -> [return: bb2, unwind: bb8];
     }
@@ -94,21 +95,22 @@ fn main() -> () {
 
     bb4: {
         _7 = &_8;
-        _20 = const _;
-        _6 = (move _7, _20);
-        _11 = (_6.0: &i32);
-        _12 = (_6.1: &i32);
-        _15 = (*_11);
-        _16 = (*_12);
-        _14 = Eq(move _15, move _16);
-        _13 = Not(move _14);
-        switchInt(move _13) -> [0: bb6, otherwise: bb5];
+        _12 = const 31337_i32;
+        _11 = &_12;
+        _6 = (move _7, move _11);
+        _13 = (_6.0: &i32);
+        _14 = (_6.1: &i32);
+        _17 = (*_13);
+        _18 = (*_14);
+        _16 = Eq(move _17, move _18);
+        _15 = Not(move _16);
+        switchInt(move _15) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _17 = core::panicking::AssertKind::Eq;
-        _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<i32, i32>(move _17, _11, _12, move _19) -> bb8;
+        _19 = core::panicking::AssertKind::Eq;
+        _21 = Option::<Arguments<'_>>::None;
+        _20 = core::panicking::assert_failed::<i32, i32>(move _19, _13, _14, move _21) -> bb8;
     }
 
     bb6: {
@@ -116,7 +118,7 @@ fn main() -> () {
     }
 
     bb7: {
-        _21 = const false;
+        _22 = const false;
         return;
     }
 
@@ -133,17 +135,6 @@ fn main() -> () {
     }
 
     bb11 (cleanup): {
-        switchInt(_21) -> [0: bb9, otherwise: bb10];
-    }
-}
-
-promoted[0] in main: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 31337_i32;
-        _0 = &_1;
-        return;
+        switchInt(_22) -> [0: bb9, otherwise: bb10];
     }
 }

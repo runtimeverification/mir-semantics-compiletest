@@ -11,24 +11,26 @@ fn main() -> () {
     let _8: &str;
     let mut _9: !;
     let mut _10: (&&str, &&str);
-    let mut _13: bool;
-    let mut _14: bool;
-    let _16: !;
-    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _11: &&str;
+    let _12: &str;
+    let mut _13: &&str;
+    let _14: &str;
+    let mut _17: bool;
+    let mut _18: bool;
+    let _20: !;
+    let mut _21: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         let _1: std::string::String;
         scope 2 {
             debug asdf_fdsa => _1;
-            let _11: &&str;
-            let _12: &&str;
-            let mut _18: &&str;
-            let mut _19: &&str;
+            let _15: &&str;
+            let _16: &&str;
             scope 3 {
-                debug left_val => _11;
-                debug right_val => _12;
-                let _15: core::panicking::AssertKind;
+                debug left_val => _15;
+                debug right_val => _16;
+                let _19: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _15;
+                    debug kind => _19;
                 }
             }
         }
@@ -64,23 +66,25 @@ fn main() -> () {
     }
 
     bb6: {
-        _19 = const _;
-        _18 = const _;
-        _10 = (_19, _18);
-        _11 = (_10.0: &&str);
-        _12 = (_10.1: &&str);
-        _14 = <&str as PartialEq>::eq(_11, _12) -> [return: bb7, unwind: bb12];
+        _12 = const "use_mention_distinction";
+        _11 = &_12;
+        _14 = const "use_mention_distinction";
+        _13 = &_14;
+        _10 = (move _11, move _13);
+        _15 = (_10.0: &&str);
+        _16 = (_10.1: &&str);
+        _18 = <&str as PartialEq>::eq(_15, _16) -> [return: bb7, unwind: bb12];
     }
 
     bb7: {
-        _13 = Not(move _14);
-        switchInt(move _13) -> [0: bb9, otherwise: bb8];
+        _17 = Not(move _18);
+        switchInt(move _17) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _15 = core::panicking::AssertKind::Eq;
-        _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<&str, &str>(move _15, _11, _12, move _17) -> bb12;
+        _19 = core::panicking::AssertKind::Eq;
+        _21 = Option::<Arguments<'_>>::None;
+        _20 = core::panicking::assert_failed::<&str, &str>(move _19, _15, _16, move _21) -> bb12;
     }
 
     bb9: {
@@ -101,27 +105,5 @@ fn main() -> () {
 
     bb13 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "use_mention_distinction";
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "use_mention_distinction";
-        _0 = &_1;
-        return;
     }
 }

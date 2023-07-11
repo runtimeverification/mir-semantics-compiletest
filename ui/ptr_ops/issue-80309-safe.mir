@@ -63,19 +63,20 @@ fn main() -> () {
     let _7: ();
     let mut _8: std::fmt::Arguments<'_>;
     let mut _9: &[&str];
-    let mut _10: &[core::fmt::rt::Argument<'_>];
-    let _11: &[core::fmt::rt::Argument<'_>; 1];
-    let _12: [core::fmt::rt::Argument<'_>; 1];
-    let mut _13: core::fmt::rt::Argument<'_>;
-    let _14: &i8;
-    let _15: i8;
-    let mut _16: &[i8];
-    let _17: &[i8];
-    let _18: &std::vec::Vec<i8>;
-    let mut _20: *const [i8; 2];
+    let _10: &[&str; 2];
+    let _11: [&str; 2];
+    let mut _12: &[core::fmt::rt::Argument<'_>];
+    let _13: &[core::fmt::rt::Argument<'_>; 1];
+    let _14: [core::fmt::rt::Argument<'_>; 1];
+    let mut _15: core::fmt::rt::Argument<'_>;
+    let _16: &i8;
+    let _17: i8;
+    let mut _18: &[i8];
+    let _19: &[i8];
+    let _20: &std::vec::Vec<i8>;
+    let mut _21: *const [i8; 2];
     scope 1 {
         debug z => _1;
-        let mut _19: &[&str; 2];
     }
     scope 2 {
     }
@@ -88,34 +89,35 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i8; 2]);
-        _20 = (((_6.0: std::ptr::Unique<[i8; 2]>).0: std::ptr::NonNull<[i8; 2]>).0: *const [i8; 2]);
-        (*_20) = [const 42_i8, const 43_i8];
-        _2 = move _6 as std::boxed::Box<[i8]> (Pointer(Unsize));
+        _21 = (((_6.0: std::ptr::Unique<[i8; 2]>).0: std::ptr::NonNull<[i8; 2]>).0: *const [i8; 2]);
+        (*_21) = [const 42_i8, const 43_i8];
+        _2 = move _6 as std::boxed::Box<[i8]> (PointerCoercion(Unsize));
         _1 = slice::<impl [i8]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _19 = const _;
-        _9 = _19 as &[&str] (Pointer(Unsize));
-        _18 = &_1;
-        _17 = <Vec<i8> as Deref>::deref(_18) -> [return: bb3, unwind: bb9];
+        _11 = [const "", const "\n"];
+        _10 = &_11;
+        _9 = _10 as &[&str] (PointerCoercion(Unsize));
+        _20 = &_1;
+        _19 = <Vec<i8> as Deref>::deref(_20) -> [return: bb3, unwind: bb9];
     }
 
     bb3: {
-        _16 = _17;
-        _15 = qux(move _16) -> [return: bb4, unwind: bb9];
+        _18 = _19;
+        _17 = qux(move _18) -> [return: bb4, unwind: bb9];
     }
 
     bb4: {
-        _14 = &_15;
-        _13 = core::fmt::rt::Argument::<'_>::new_display::<i8>(_14) -> [return: bb5, unwind: bb9];
+        _16 = &_17;
+        _15 = core::fmt::rt::Argument::<'_>::new_display::<i8>(_16) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        _12 = [move _13];
-        _11 = &_12;
-        _10 = _11 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _8 = Arguments::<'_>::new_v1(move _9, move _10) -> [return: bb6, unwind: bb9];
+        _14 = [move _15];
+        _13 = &_14;
+        _12 = _13 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = Arguments::<'_>::new_v1(move _9, move _12) -> [return: bb6, unwind: bb9];
     }
 
     bb6: {
@@ -136,16 +138,5 @@ fn main() -> () {
 
     bb10 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }

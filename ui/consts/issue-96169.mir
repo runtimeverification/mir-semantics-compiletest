@@ -32,6 +32,11 @@ fn foo() -> () {
     let mut _2: &*const dyn std::ops::Fn(u32);
     let _3: *const dyn std::ops::Fn(u32);
     let mut _4: &*const dyn std::ops::Fn(u32);
+    let _5: *const dyn std::ops::Fn(u32);
+    let mut _6: *const dyn std::ops::Fn(u32);
+    let _7: &dyn std::ops::Fn(u32);
+    let _8: &fn(u32) {bar};
+    let _9: fn(u32) {bar};
 
     bb0: {
         _3 = baz() -> [return: bb1, unwind continue];
@@ -39,32 +44,15 @@ fn foo() -> () {
 
     bb1: {
         _2 = &_3;
-        _4 = const _;
-        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, _4) -> [return: bb2, unwind continue];
+        _8 = &_9;
+        _7 = _8 as &dyn std::ops::Fn(u32) (PointerCoercion(Unsize));
+        _6 = &raw const (*_7);
+        _5 = move _6;
+        _4 = &_5;
+        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;
-    }
-}
-
-promoted[0] in foo: &*const dyn Fn(u32) = {
-    let mut _0: &*const dyn std::ops::Fn(u32);
-    let mut _1: *const dyn std::ops::Fn(u32);
-    let mut _2: *const dyn std::ops::Fn(u32);
-    let mut _3: &dyn std::ops::Fn(u32);
-    let mut _4: &fn(u32) {bar};
-    let mut _5: &fn(u32) {bar};
-    let mut _6: fn(u32) {bar};
-
-    bb0: {
-        _6 = bar;
-        _5 = &_6;
-        _4 = &(*_5);
-        _3 = move _4 as &dyn std::ops::Fn(u32) (Pointer(Unsize));
-        _2 = &raw const (*_3);
-        _1 = move _2 as *const dyn std::ops::Fn(u32) (Pointer(Unsize));
-        _0 = &_1;
         return;
     }
 }

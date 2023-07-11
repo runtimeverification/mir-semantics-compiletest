@@ -7,31 +7,22 @@ static B: &A = {
     let mut _3: &();
     let _4: &();
     let _5: ();
-    let mut _6: &A;
 
     bb0: {
         StorageLive(_1);
-        _6 = const _;
-        _1 = &(*_6);
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = ();
+        _4 = &_5;
+        _3 = &(*_4);
+        _2 = A { a: move _3 };
+        StorageDead(_3);
+        _1 = &_2;
         _0 = &(*_1);
+        StorageDead(_4);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in B: &A = {
-    let mut _0: &A;
-    let mut _1: A;
-    let mut _2: &();
-    let mut _3: &();
-    let mut _4: ();
-
-    bb0: {
-        _4 = ();
-        _3 = &_4;
-        _2 = &(*_3);
-        _1 = A { a: move _2 };
-        _0 = &_1;
         return;
     }
 }
@@ -55,14 +46,14 @@ static C: &A = {
 }
 
 alloc1 (static: B, size: 8, align: 8) {
-    ╾───────alloc6────────╼                         │ ╾──────╼
-}
-
-alloc6 (size: 8, align: 8) {
     ╾───────alloc5────────╼                         │ ╾──────╼
 }
 
-alloc5 (size: 0, align: 1) {}
+alloc5 (size: 8, align: 8) {
+    ╾───────alloc4────────╼                         │ ╾──────╼
+}
+
+alloc4 (size: 0, align: 1) {}
 
 fn main() -> () {
     let mut _0: ();

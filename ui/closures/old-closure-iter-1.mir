@@ -96,41 +96,43 @@ fn main() -> () {
     let _12: ();
     let mut _13: std::fmt::Arguments<'_>;
     let mut _14: &[&str];
-    let mut _15: &[core::fmt::rt::Argument<'_>];
-    let _16: &[core::fmt::rt::Argument<'_>; 1];
-    let _17: [core::fmt::rt::Argument<'_>; 1];
-    let mut _18: core::fmt::rt::Argument<'_>;
-    let _19: &i32;
-    let mut _20: (&i32, &i32);
-    let mut _21: &i32;
-    let mut _24: bool;
-    let mut _25: bool;
-    let mut _26: i32;
-    let mut _27: i32;
-    let _29: !;
-    let mut _30: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _33: *const [i32; 7];
-    let mut _34: *const ();
-    let mut _35: usize;
-    let mut _36: usize;
+    let _15: &[&str; 2];
+    let _16: [&str; 2];
+    let mut _17: &[core::fmt::rt::Argument<'_>];
+    let _18: &[core::fmt::rt::Argument<'_>; 1];
+    let _19: [core::fmt::rt::Argument<'_>; 1];
+    let mut _20: core::fmt::rt::Argument<'_>;
+    let _21: &i32;
+    let mut _22: (&i32, &i32);
+    let mut _23: &i32;
+    let mut _24: &i32;
+    let _25: i32;
+    let mut _28: bool;
+    let mut _29: bool;
+    let mut _30: i32;
+    let mut _31: i32;
+    let _33: !;
+    let mut _34: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _35: *const [i32; 7];
+    let mut _36: *const ();
     let mut _37: usize;
     let mut _38: usize;
-    let mut _39: bool;
+    let mut _39: usize;
+    let mut _40: usize;
+    let mut _41: bool;
     scope 1 {
         debug v => _1;
         let mut _7: i32;
         scope 3 {
             debug odds => _7;
-            let _22: &i32;
-            let _23: &i32;
-            let mut _31: &i32;
-            let mut _32: &[&str; 2];
+            let _26: &i32;
+            let _27: &i32;
             scope 4 {
-                debug left_val => _22;
-                debug right_val => _23;
-                let _28: core::panicking::AssertKind;
+                debug left_val => _26;
+                debug right_val => _27;
+                let _32: core::panicking::AssertKind;
                 scope 5 {
-                    debug kind => _28;
+                    debug kind => _32;
                 }
             }
         }
@@ -146,14 +148,14 @@ fn main() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i32; 7]);
-        _33 = (((_6.0: std::ptr::Unique<[i32; 7]>).0: std::ptr::NonNull<[i32; 7]>).0: *const [i32; 7]);
-        _34 = _33 as *const () (PtrToPtr);
-        _35 = _34 as usize (Transmute);
-        _36 = AlignOf(i32);
-        _37 = Sub(_36, const 1_usize);
-        _38 = BitAnd(_35, _37);
-        _39 = Eq(_38, const 0_usize);
-        assert(_39, "misaligned pointer dereference: address must be a multiple of {} but is {}", _36, _35) -> [success: bb9, unwind unreachable];
+        _35 = (((_6.0: std::ptr::Unique<[i32; 7]>).0: std::ptr::NonNull<[i32; 7]>).0: *const [i32; 7]);
+        _36 = _35 as *const () (PtrToPtr);
+        _37 = _36 as usize (Transmute);
+        _38 = AlignOf(i32);
+        _39 = Sub(_38, const 1_usize);
+        _40 = BitAnd(_37, _39);
+        _41 = Eq(_40, const 0_usize);
+        assert(_41, "misaligned pointer dereference: address must be a multiple of {} but is {}", _38, _37) -> [success: bb9, unwind unreachable];
     }
 
     bb2: {
@@ -165,17 +167,18 @@ fn main() -> () {
     }
 
     bb3: {
-        _32 = const _;
-        _14 = _32 as &[&str] (Pointer(Unsize));
-        _19 = &_7;
-        _18 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_19) -> [return: bb4, unwind continue];
+        _16 = [const "", const "\n"];
+        _15 = &_16;
+        _14 = _15 as &[&str] (PointerCoercion(Unsize));
+        _21 = &_7;
+        _20 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_21) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _17 = [move _18];
-        _16 = &_17;
-        _15 = _16 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _13 = Arguments::<'_>::new_v1(move _14, move _15) -> [return: bb5, unwind continue];
+        _19 = [move _20];
+        _18 = &_19;
+        _17 = _18 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _13 = Arguments::<'_>::new_v1(move _14, move _17) -> [return: bb5, unwind continue];
     }
 
     bb5: {
@@ -183,22 +186,23 @@ fn main() -> () {
     }
 
     bb6: {
-        _21 = &_7;
-        _31 = const _;
-        _20 = (move _21, _31);
-        _22 = (_20.0: &i32);
-        _23 = (_20.1: &i32);
-        _26 = (*_22);
-        _27 = (*_23);
-        _25 = Eq(move _26, move _27);
-        _24 = Not(move _25);
-        switchInt(move _24) -> [0: bb8, otherwise: bb7];
+        _23 = &_7;
+        _25 = const 4_i32;
+        _24 = &_25;
+        _22 = (move _23, move _24);
+        _26 = (_22.0: &i32);
+        _27 = (_22.1: &i32);
+        _30 = (*_26);
+        _31 = (*_27);
+        _29 = Eq(move _30, move _31);
+        _28 = Not(move _29);
+        switchInt(move _28) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _28 = core::panicking::AssertKind::Eq;
-        _30 = Option::<Arguments<'_>>::None;
-        _29 = core::panicking::assert_failed::<i32, i32>(move _28, _22, _23, move _30) -> unwind continue;
+        _32 = core::panicking::AssertKind::Eq;
+        _34 = Option::<Arguments<'_>>::None;
+        _33 = core::panicking::assert_failed::<i32, i32>(move _32, _26, _27, move _34) -> unwind continue;
     }
 
     bb8: {
@@ -206,31 +210,9 @@ fn main() -> () {
     }
 
     bb9: {
-        (*_33) = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32, const 6_i32, const 7_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        (*_35) = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32, const 6_i32, const 7_i32];
+        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
         _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 4_i32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }
 

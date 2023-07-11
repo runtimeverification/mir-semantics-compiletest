@@ -53,38 +53,28 @@ fn <impl at ui/overloaded/issue-14958.rs:18:1: 18:55>::call_once(_1: Bar, _2: (&
 fn main() -> () {
     let mut _0: ();
     let _1: Bar;
-    let _2: ();
-    let mut _3: &Bar;
-    let mut _4: (&dyn Foo,);
-    let mut _5: &dyn Foo;
+    let _3: Baz;
+    let _4: ();
+    let mut _5: &Bar;
+    let mut _6: (&dyn Foo,);
+    let mut _7: &dyn Foo;
     scope 1 {
         debug bar => const Bar;
-        let mut _6: &Baz;
+        let _2: &Baz;
         scope 2 {
-            debug baz => const _;
+            debug baz => _2;
         }
     }
 
     bb0: {
-        _6 = const _;
-        _3 = &_1;
-        _5 = _6 as &dyn Foo (Pointer(Unsize));
-        _4 = (move _5,);
-        _2 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, move _4) -> [return: bb1, unwind continue];
+        _2 = &_3;
+        _5 = &_1;
+        _7 = _2 as &dyn Foo (PointerCoercion(Unsize));
+        _6 = (move _7,);
+        _4 = <Bar as Fn<(&dyn Foo,)>>::call(move _5, move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;
-    }
-}
-
-promoted[0] in main: &Baz = {
-    let mut _0: &Baz;
-    let mut _1: Baz;
-
-    bb0: {
-        _1 = Baz;
-        _0 = &_1;
         return;
     }
 }

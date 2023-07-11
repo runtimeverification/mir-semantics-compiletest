@@ -5,7 +5,7 @@ fn foo() -> () {
     let _1: i32;
     let mut _3: &i32;
     scope 1 {
-        debug ref_x_ck => const 123_i32;
+        debug ref_x_ck => _1;
         let _2: [closure@ui/closures/2229_closure_analysis/match/issue-87426.rs:6:14: 6:16];
         scope 2 {
             debug _y => _2;
@@ -28,35 +28,39 @@ fn foo::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/issue-
     let _4: ();
     let mut _5: std::fmt::Arguments<'_>;
     let mut _6: &[&str];
-    let _7: ();
-    let mut _8: std::fmt::Arguments<'_>;
-    let mut _9: &[&str];
-    let mut _10: &[&str; 1];
-    let mut _11: &[&str; 1];
-    let mut _12: &i32;
-    let mut _13: &i32;
+    let _7: &[&str; 1];
+    let _8: [&str; 1];
+    let _9: ();
+    let mut _10: std::fmt::Arguments<'_>;
+    let mut _11: &[&str];
+    let _12: &[&str; 1];
+    let _13: [&str; 1];
+    let mut _14: &i32;
+    let mut _15: &i32;
 
     bb0: {
-        _12 = deref_copy ((*_1).0: &i32);
-        _2 = Le(const 2000000_i32, (*_12));
+        _14 = deref_copy ((*_1).0: &i32);
+        _2 = Le(const 2000000_i32, (*_14));
         switchInt(move _2) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _13 = deref_copy ((*_1).0: &i32);
-        _3 = Le((*_13), const 3999999_i32);
+        _15 = deref_copy ((*_1).0: &i32);
+        _3 = Le((*_15), const 3999999_i32);
         switchInt(move _3) -> [0: bb2, otherwise: bb3];
     }
 
     bb2: {
-        _10 = const _;
-        _9 = _10 as &[&str] (Pointer(Unsize));
-        _8 = Arguments::<'_>::new_const(move _9) -> [return: bb5, unwind continue];
+        _13 = [const "B\n"];
+        _12 = &_13;
+        _11 = _12 as &[&str] (PointerCoercion(Unsize));
+        _10 = Arguments::<'_>::new_const(move _11) -> [return: bb5, unwind continue];
     }
 
     bb3: {
-        _11 = const _;
-        _6 = _11 as &[&str] (Pointer(Unsize));
+        _8 = [const "A\n"];
+        _7 = &_8;
+        _6 = _7 as &[&str] (PointerCoercion(Unsize));
         _5 = Arguments::<'_>::new_const(move _6) -> [return: bb4, unwind continue];
     }
 
@@ -65,32 +69,10 @@ fn foo::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/match/issue-
     }
 
     bb5: {
-        _7 = _print(move _8) -> [return: bb6, unwind continue];
+        _9 = _print(move _10) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in foo::{closure#0}: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "B\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in foo::{closure#0}: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "A\n"];
-        _0 = &_1;
         return;
     }
 }

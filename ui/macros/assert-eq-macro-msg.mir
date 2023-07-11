@@ -3,87 +3,60 @@
 fn main() -> () {
     let mut _0: ();
     let mut _1: (&i32, &i32);
-    let _2: &i32;
-    let _3: &i32;
-    let mut _4: bool;
-    let mut _5: bool;
-    let mut _6: i32;
-    let mut _7: i32;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: std::fmt::Arguments<'_>;
-    let mut _12: &[&str];
-    let mut _14: &i32;
-    let mut _15: &i32;
+    let mut _2: &i32;
+    let _3: i32;
+    let mut _4: &i32;
+    let _5: i32;
+    let _6: &i32;
+    let _7: &i32;
+    let mut _8: bool;
+    let mut _9: bool;
+    let mut _10: i32;
+    let mut _11: i32;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _15: std::fmt::Arguments<'_>;
+    let mut _16: &[&str];
+    let _17: &[&str; 1];
+    let _18: [&str; 1];
     scope 1 {
-        debug left_val => _2;
-        debug right_val => _3;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _12: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
-            let mut _13: &[&str; 1];
+            debug kind => _12;
         }
     }
 
     bb0: {
-        _15 = const _;
-        _14 = const _;
-        _1 = (_15, _14);
-        _2 = (_1.0: &i32);
-        _3 = (_1.1: &i32);
-        _6 = (*_2);
-        _7 = (*_3);
-        _5 = Eq(move _6, move _7);
-        _4 = Not(move _5);
-        switchInt(move _4) -> [0: bb3, otherwise: bb1];
+        _3 = Add(const 1_i32, const 1_i32);
+        _2 = &_3;
+        _5 = const 3_i32;
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &i32);
+        _7 = (_1.1: &i32);
+        _10 = (*_6);
+        _11 = (*_7);
+        _9 = Eq(move _10, move _11);
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb3, otherwise: bb1];
     }
 
     bb1: {
-        _8 = core::panicking::AssertKind::Eq;
-        _13 = const _;
-        _12 = _13 as &[&str] (Pointer(Unsize));
-        _11 = Arguments::<'_>::new_const(move _12) -> [return: bb2, unwind continue];
+        _12 = core::panicking::AssertKind::Eq;
+        _18 = [const "1 + 1 definitely should be 3"];
+        _17 = &_18;
+        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _15 = Arguments::<'_>::new_const(move _16) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = Option::<Arguments<'_>>::Some(move _11);
-        _9 = core::panicking::assert_failed::<i32, i32>(move _8, _2, _3, move _10) -> unwind continue;
+        _14 = Option::<Arguments<'_>>::Some(move _15);
+        _13 = core::panicking::assert_failed::<i32, i32>(move _12, _6, _7, move _14) -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "1 + 1 definitely should be 3"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = const 3_i32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &i32 = {
-    let mut _0: &i32;
-    let mut _1: i32;
-
-    bb0: {
-        _1 = Add(const 1_i32, const 1_i32);
-        _0 = &_1;
         return;
     }
 }

@@ -39,12 +39,12 @@ fn test(_1: usize) -> fn(usize, usize) -> usize {
     }
 
     bb2: {
-        _0 = foo as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
+        _0 = foo as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
         goto -> bb4;
     }
 
     bb3: {
-        _0 = bar as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
+        _0 = bar as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
         goto -> bb4;
     }
 
@@ -57,7 +57,7 @@ const FOO: fn(usize, usize) -> usize = {
     let mut _0: fn(usize, usize) -> usize;
 
     bb0: {
-        _0 = foo as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
+        _0 = foo as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
         return;
     }
 }
@@ -66,7 +66,7 @@ const BAR: fn(usize, usize) -> usize = {
     let mut _0: fn(usize, usize) -> usize;
 
     bb0: {
-        _0 = bar as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
+        _0 = bar as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
         return;
     }
 }
@@ -81,12 +81,14 @@ fn main() -> () {
     let _6: ();
     let mut _7: std::fmt::Arguments<'_>;
     let mut _8: &[&str];
-    let _9: ();
-    let mut _10: std::fmt::Arguments<'_>;
-    let mut _11: &[&str];
-    let mut _12: !;
-    let mut _13: &[&str; 1];
-    let mut _14: &[&str; 1];
+    let _9: &[&str; 1];
+    let _10: [&str; 1];
+    let _11: ();
+    let mut _12: std::fmt::Arguments<'_>;
+    let mut _13: &[&str];
+    let _14: &[&str; 1];
+    let _15: [&str; 1];
+    let mut _16: !;
 
     bb0: {
         _3 = const _;
@@ -108,12 +110,13 @@ fn main() -> () {
     }
 
     bb4: {
-        _12 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _16 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
     }
 
     bb5: {
-        _14 = const _;
-        _8 = _14 as &[&str] (Pointer(Unsize));
+        _10 = [const "foo\n"];
+        _9 = &_10;
+        _8 = _9 as &[&str] (PointerCoercion(Unsize));
         _7 = Arguments::<'_>::new_const(move _8) -> [return: bb6, unwind continue];
     }
 
@@ -122,13 +125,14 @@ fn main() -> () {
     }
 
     bb7: {
-        _13 = const _;
-        _11 = _13 as &[&str] (Pointer(Unsize));
-        _10 = Arguments::<'_>::new_const(move _11) -> [return: bb8, unwind continue];
+        _15 = [const "bar\n"];
+        _14 = &_15;
+        _13 = _14 as &[&str] (PointerCoercion(Unsize));
+        _12 = Arguments::<'_>::new_const(move _13) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _9 = _print(move _10) -> [return: bb9, unwind continue];
+        _11 = _print(move _12) -> [return: bb9, unwind continue];
     }
 
     bb9: {
@@ -139,25 +143,3 @@ fn main() -> () {
 alloc4 (fn: bar)
 
 alloc2 (fn: foo)
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "bar\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "foo\n"];
-        _0 = &_1;
-        return;
-    }
-}

@@ -447,12 +447,14 @@ fn main() -> () {
     let mut _18: (&usize, &usize);
     let mut _19: &usize;
     let _20: *mut usize;
-    let mut _23: bool;
-    let mut _24: bool;
-    let mut _25: usize;
-    let mut _26: usize;
-    let _28: !;
-    let mut _29: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _21: &usize;
+    let _22: usize;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: usize;
+    let mut _28: usize;
+    let _30: !;
+    let mut _31: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug x => const Foo;
         scope 2 {
@@ -464,21 +466,20 @@ fn main() -> () {
                                 scope 8 {
                                     scope 9 {
                                         scope 10 {
-                                            let _21: &usize;
-                                            let _22: &usize;
-                                            let mut _30: &usize;
-                                            let mut _31: *const ();
-                                            let mut _32: usize;
+                                            let _23: &usize;
+                                            let _24: &usize;
+                                            let mut _32: *const ();
                                             let mut _33: usize;
                                             let mut _34: usize;
                                             let mut _35: usize;
-                                            let mut _36: bool;
+                                            let mut _36: usize;
+                                            let mut _37: bool;
                                             scope 11 {
-                                                debug left_val => _21;
-                                                debug right_val => _22;
-                                                let _27: core::panicking::AssertKind;
+                                                debug left_val => _23;
+                                                debug right_val => _24;
+                                                let _29: core::panicking::AssertKind;
                                                 scope 12 {
-                                                    debug kind => _27;
+                                                    debug kind => _29;
                                                 }
                                             }
                                         }
@@ -534,19 +535,19 @@ fn main() -> () {
 
     bb8: {
         _20 = const {alloc1: *mut usize};
-        _31 = _20 as *const () (PtrToPtr);
-        _32 = _31 as usize (Transmute);
-        _33 = AlignOf(usize);
-        _34 = Sub(_33, const 1_usize);
-        _35 = BitAnd(_32, _34);
-        _36 = Eq(_35, const 0_usize);
-        assert(_36, "misaligned pointer dereference: address must be a multiple of {} but is {}", _33, _32) -> [success: bb11, unwind unreachable];
+        _32 = _20 as *const () (PtrToPtr);
+        _33 = _32 as usize (Transmute);
+        _34 = AlignOf(usize);
+        _35 = Sub(_34, const 1_usize);
+        _36 = BitAnd(_33, _35);
+        _37 = Eq(_36, const 0_usize);
+        assert(_37, "misaligned pointer dereference: address must be a multiple of {} but is {}", _34, _33) -> [success: bb11, unwind unreachable];
     }
 
     bb9: {
-        _27 = core::panicking::AssertKind::Eq;
-        _29 = Option::<Arguments<'_>>::None;
-        _28 = assert_failed::<usize, usize>(move _27, _21, _22, move _29) -> unwind continue;
+        _29 = core::panicking::AssertKind::Eq;
+        _31 = Option::<Arguments<'_>>::None;
+        _30 = assert_failed::<usize, usize>(move _29, _23, _24, move _31) -> unwind continue;
     }
 
     bb10: {
@@ -555,29 +556,19 @@ fn main() -> () {
 
     bb11: {
         _19 = &(*_20);
-        _30 = const _;
-        _18 = (move _19, _30);
-        _21 = (_18.0: &usize);
-        _22 = (_18.1: &usize);
-        _25 = (*_21);
-        _26 = (*_22);
-        _24 = Eq(move _25, move _26);
-        _23 = Not(move _24);
-        switchInt(move _23) -> [0: bb10, otherwise: bb9];
+        _22 = const 8_usize;
+        _21 = &_22;
+        _18 = (move _19, move _21);
+        _23 = (_18.0: &usize);
+        _24 = (_18.1: &usize);
+        _27 = (*_23);
+        _28 = (*_24);
+        _26 = Eq(move _27, move _28);
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb10, otherwise: bb9];
     }
 }
 
 alloc1 (static: COUNT, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in main: &usize = {
-    let mut _0: &usize;
-    let mut _1: usize;
-
-    bb0: {
-        _1 = const 8_usize;
-        _0 = &_1;
-        return;
-    }
 }

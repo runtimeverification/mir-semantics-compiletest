@@ -34,7 +34,7 @@ static DATA: Data<i32> = {
         StorageLive(_1);
         StorageLive(_2);
         _2 = [closure@ui/consts/issue-46553.rs:15:40: 15:42];
-        _1 = move _2 as fn() -> i32 (Pointer(ClosureFnPointer(Normal)));
+        _1 = move _2 as fn() -> i32 (PointerCoercion(ClosureFnPointer(Normal)));
         StorageDead(_2);
         ConstEvalCounter;
         _0 = Data::<i32>::new(move _1) -> [return: bb1, unwind continue];
@@ -60,34 +60,36 @@ fn main() -> () {
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let mut _4: &[core::fmt::rt::Argument<'_>];
-    let _5: &[core::fmt::rt::Argument<'_>; 1];
-    let _6: [core::fmt::rt::Argument<'_>; 1];
-    let mut _7: core::fmt::rt::Argument<'_>;
-    let _8: &i32;
-    let _9: i32;
-    let mut _10: fn() -> i32;
-    let mut _11: &Data<i32>;
-    let mut _12: &[&str; 1];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
+    let mut _6: &[core::fmt::rt::Argument<'_>];
+    let _7: &[core::fmt::rt::Argument<'_>; 1];
+    let _8: [core::fmt::rt::Argument<'_>; 1];
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let _10: &i32;
+    let _11: i32;
+    let mut _12: fn() -> i32;
+    let mut _13: &Data<i32>;
 
     bb0: {
-        _12 = const _;
-        _3 = _12 as &[&str] (Pointer(Unsize));
-        _11 = const {alloc1: &Data<i32>};
-        _10 = ((*_11).0: fn() -> i32);
-        _9 = move _10() -> [return: bb1, unwind continue];
+        _5 = [const ""];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _13 = const {alloc1: &Data<i32>};
+        _12 = ((*_13).0: fn() -> i32);
+        _11 = move _12() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = &_9;
-        _7 = core::fmt::rt::Argument::<'_>::new_debug::<i32>(_8) -> [return: bb2, unwind continue];
+        _10 = &_11;
+        _9 = core::fmt::rt::Argument::<'_>::new_debug::<i32>(_10) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = [move _7];
-        _5 = &_6;
-        _4 = _5 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _4) -> [return: bb3, unwind continue];
+        _8 = [move _9];
+        _7 = &_8;
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb3, unwind continue];
     }
 
     bb3: {
@@ -100,18 +102,7 @@ fn main() -> () {
 }
 
 alloc1 (static: DATA, size: 8, align: 8) {
-    ╾───────alloc9────────╼                         │ ╾──────╼
+    ╾───────alloc7────────╼                         │ ╾──────╼
 }
 
-alloc9 (fn: <[closure@ui/consts/issue-46553.rs:15:40: 15:42] as FnOnce<()>>::call_once - shim)
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const ""];
-        _0 = &_1;
-        return;
-    }
-}
+alloc7 (fn: <[closure@ui/consts/issue-46553.rs:15:40: 15:42] as FnOnce<()>>::call_once - shim)

@@ -135,9 +135,10 @@ fn main() -> () {
     let mut _3: &t;
     let _4: t;
     let mut _5: isize;
+    let mut _6: &t;
+    let _7: t;
     scope 1 {
         debug i => _1;
-        let mut _6: &t;
     }
 
     bb0: {
@@ -152,44 +153,42 @@ fn main() -> () {
 
     bb2: {
         _3 = &_4;
-        _6 = const _;
-        _2 = <t as PartialEq>::ne(move _3, _6) -> [return: bb3, unwind: bb7];
+        _7 = t::a;
+        _6 = &_7;
+        _2 = <t as PartialEq>::ne(move _3, move _6) -> [return: bb3, unwind: bb8];
     }
 
     bb3: {
-        drop(_4) -> [return: bb4, unwind continue];
+        drop(_7) -> [return: bb4, unwind: bb9];
     }
 
     bb4: {
-        switchInt(move _2) -> [0: bb6, otherwise: bb5];
+        drop(_4) -> [return: bb5, unwind continue];
     }
 
     bb5: {
+        switchInt(move _2) -> [0: bb7, otherwise: bb6];
+    }
+
+    bb6: {
         _1 = Add(_1, const 1_isize);
         goto -> bb1;
     }
 
-    bb6: {
+    bb7: {
         return;
-    }
-
-    bb7 (cleanup): {
-        drop(_4) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;
+        drop(_7) -> [return: bb9, unwind terminate];
     }
-}
 
-promoted[0] in main: &t = {
-    let mut _0: &t;
-    let mut _1: t;
+    bb9 (cleanup): {
+        drop(_4) -> [return: bb10, unwind terminate];
+    }
 
-    bb0: {
-        _1 = t::a;
-        _0 = &_1;
-        return;
+    bb10 (cleanup): {
+        resume;
     }
 }
 

@@ -24,7 +24,6 @@ const INVALID_PTR_IN_INT: () = {
     let _3: u8;
     scope 1 {
         let _1: usize;
-        let mut _4: &u8;
         scope 2 {
             debug _x => _1;
         }
@@ -33,23 +32,14 @@ const INVALID_PTR_IN_INT: () = {
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _4 = const _;
-        _2 = &(*_4);
+        StorageLive(_3);
+        _3 = const 3_u8;
+        _2 = &_3;
         _1 = move _2 as usize (Transmute);
         StorageDead(_2);
+        StorageDead(_3);
         _0 = const ();
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in INVALID_PTR_IN_INT: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const 3_u8;
-        _0 = &_1;
         return;
     }
 }
@@ -62,7 +52,6 @@ const INVALID_SLICE_TO_USIZE_TRANSMUTE: () = {
     let mut _6: &[u8];
     scope 1 {
         let _1: &[u8];
-        let mut _7: &[u8; 32];
         scope 2 {
             debug x => _1;
             let _5: (usize, usize);
@@ -76,10 +65,11 @@ const INVALID_SLICE_TO_USIZE_TRANSMUTE: () = {
         StorageLive(_1);
         StorageLive(_2);
         StorageLive(_3);
-        _7 = const _;
-        _3 = &(*_7);
+        StorageLive(_4);
+        _4 = [const 0_u8; 32];
+        _3 = &_4;
         _2 = &(*_3);
-        _1 = move _2 as &[u8] (Pointer(Unsize));
+        _1 = move _2 as &[u8] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_3);
         StorageLive(_5);
@@ -89,18 +79,8 @@ const INVALID_SLICE_TO_USIZE_TRANSMUTE: () = {
         StorageDead(_6);
         _0 = const ();
         StorageDead(_5);
+        StorageDead(_4);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in INVALID_SLICE_TO_USIZE_TRANSMUTE: &[u8; 32] = {
-    let mut _0: &[u8; 32];
-    let mut _1: [u8; 32];
-
-    bb0: {
-        _1 = [const 0_u8; 32];
-        _0 = &_1;
         return;
     }
 }
@@ -120,7 +100,6 @@ const UNALIGNED_PTR: () = {
     let _3: [u8; 4];
     scope 1 {
         let _1: &u32;
-        let mut _4: &[u8; 4];
         scope 2 {
             debug _x => _1;
         }
@@ -129,23 +108,14 @@ const UNALIGNED_PTR: () = {
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _4 = const _;
-        _2 = &(*_4);
+        StorageLive(_3);
+        _3 = [const 0_u8; 4];
+        _2 = &_3;
         _1 = move _2 as &u32 (Transmute);
         StorageDead(_2);
+        StorageDead(_3);
         _0 = const ();
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in UNALIGNED_PTR: &[u8; 4] = {
-    let mut _0: &[u8; 4];
-    let mut _1: [u8; 4];
-
-    bb0: {
-        _1 = [const 0_u8; 4];
-        _0 = &_1;
         return;
     }
 }

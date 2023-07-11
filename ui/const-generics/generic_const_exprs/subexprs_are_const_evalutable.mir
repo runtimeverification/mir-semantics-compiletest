@@ -96,19 +96,20 @@ fn main() -> () {
     let mut _1: (&[(); (N * 2) + 1], &[(); 10 * 2 + 1]);
     let mut _2: &[(); (N * 2) + 1];
     let _3: [(); (N * 2) + 1];
-    let _4: &[(); (N * 2) + 1];
-    let _5: &[(); 10 * 2 + 1];
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: &[(); 10 * 2 + 1];
+    let mut _4: &[(); 10 * 2 + 1];
+    let _5: [(); 10 * 2 + 1];
+    let _6: &[(); (N * 2) + 1];
+    let _7: &[(); 10 * 2 + 1];
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _10;
         }
     }
 
@@ -118,38 +119,25 @@ fn main() -> () {
 
     bb1: {
         _2 = &_3;
-        _11 = const _;
-        _1 = (move _2, _11);
-        _4 = (_1.0: &[(); (N * 2) + 1]);
-        _5 = (_1.1: &[(); 10 * 2 + 1]);
-        _7 = <[(); (N * 2) + 1] as PartialEq<[(); 10 * 2 + 1]>>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &[(); (N * 2) + 1]);
+        _7 = (_1.1: &[(); 10 * 2 + 1]);
+        _9 = <[(); (N * 2) + 1] as PartialEq<[(); 10 * 2 + 1]>>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<[(); (N * 2) + 1], [(); 10 * 2 + 1]>(move _8, _4, _5, move _10) -> unwind continue;
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<[(); (N * 2) + 1], [(); 10 * 2 + 1]>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &[(); 10 * 2 + 1] = {
-    let mut _0: &[(); 10 * 2 + 1];
-    let mut _1: [(); 10 * 2 + 1];
-    let mut _2: ();
-
-    bb0: {
-        _2 = ();
-        _1 = [move _2; 10 * 2 + 1];
-        _0 = &_1;
         return;
     }
 }

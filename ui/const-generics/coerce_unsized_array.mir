@@ -5,7 +5,7 @@ fn foo(_1: &[u8; N]) -> &[u8] {
     let mut _0: &[u8];
 
     bb0: {
-        _0 = _1 as &[u8] (Pointer(Unsize));
+        _0 = _1 as &[u8] (PointerCoercion(Unsize));
         return;
     }
 }
@@ -24,73 +24,55 @@ fn main() -> () {
     let mut _1: (&&[u8], &&[u8; 2]);
     let mut _2: &&[u8];
     let _3: &[u8];
-    let _4: &&[u8];
-    let _5: &&[u8; 2];
-    let mut _6: bool;
-    let mut _7: bool;
-    let _9: !;
-    let mut _10: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _11: &&[u8; 2];
-    let mut _12: &[u8; 2];
+    let _4: &[u8; 2];
+    let _5: [u8; 2];
+    let mut _6: &&[u8; 2];
+    let _7: &[u8; 2];
+    let _8: [u8; 2];
+    let _9: &&[u8];
+    let _10: &&[u8; 2];
+    let mut _11: bool;
+    let mut _12: bool;
+    let _14: !;
+    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _4;
-        debug right_val => _5;
-        let _8: core::panicking::AssertKind;
+        debug left_val => _9;
+        debug right_val => _10;
+        let _13: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _8;
+            debug kind => _13;
         }
     }
 
     bb0: {
-        _12 = const _;
-        _3 = foo::<2>(_12) -> [return: bb1, unwind continue];
+        _5 = [const 1_u8, const 2_u8];
+        _4 = &_5;
+        _3 = foo::<2>(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
         _2 = &_3;
-        _11 = const _;
-        _1 = (move _2, _11);
-        _4 = (_1.0: &&[u8]);
-        _5 = (_1.1: &&[u8; 2]);
-        _7 = <&[u8] as PartialEq<&[u8; 2]>>::eq(_4, _5) -> [return: bb2, unwind continue];
+        _8 = [const 1_u8, const 2_u8];
+        _7 = &_8;
+        _6 = &_7;
+        _1 = (move _2, move _6);
+        _9 = (_1.0: &&[u8]);
+        _10 = (_1.1: &&[u8; 2]);
+        _12 = <&[u8] as PartialEq<&[u8; 2]>>::eq(_9, _10) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = Not(move _7);
-        switchInt(move _6) -> [0: bb4, otherwise: bb3];
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _8 = core::panicking::AssertKind::Eq;
-        _10 = Option::<Arguments<'_>>::None;
-        _9 = core::panicking::assert_failed::<&[u8], &[u8; 2]>(move _8, _4, _5, move _10) -> unwind continue;
+        _13 = core::panicking::AssertKind::Eq;
+        _15 = Option::<Arguments<'_>>::None;
+        _14 = core::panicking::assert_failed::<&[u8], &[u8; 2]>(move _13, _9, _10, move _15) -> unwind continue;
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &&[u8; 2] = {
-    let mut _0: &&[u8; 2];
-    let mut _1: &[u8; 2];
-    let mut _2: [u8; 2];
-
-    bb0: {
-        _2 = [const 1_u8, const 2_u8];
-        _1 = &_2;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[u8; 2] = {
-    let mut _0: &[u8; 2];
-    let mut _1: [u8; 2];
-
-    bb0: {
-        _1 = [const 1_u8, const 2_u8];
-        _0 = &_1;
         return;
     }
 }

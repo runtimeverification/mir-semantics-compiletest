@@ -12,17 +12,18 @@ fn main() -> () {
     let mut _8: &std::string::String;
     let _9: &std::string::String;
     let mut _10: &std::vec::Vec<std::string::String>;
-    let mut _11: *mut isize;
+    let mut _11: &&str;
+    let _12: &str;
+    let mut _13: *mut isize;
     scope 1 {
         debug args => _1;
-        let mut _12: &&str;
         scope 2 {
-            let mut _13: *const ();
-            let mut _14: usize;
+            let mut _14: *const ();
             let mut _15: usize;
             let mut _16: usize;
             let mut _17: usize;
-            let mut _18: bool;
+            let mut _18: usize;
+            let mut _19: bool;
         }
     }
 
@@ -60,8 +61,9 @@ fn main() -> () {
 
     bb7: {
         _8 = _9;
-        _12 = const _;
-        _7 = <String as PartialEq<&str>>::eq(move _8, _12) -> [return: bb8, unwind: bb13];
+        _12 = const "signal";
+        _11 = &_12;
+        _7 = <String as PartialEq<&str>>::eq(move _8, move _11) -> [return: bb8, unwind: bb13];
     }
 
     bb8: {
@@ -70,17 +72,17 @@ fn main() -> () {
     }
 
     bb9: {
-        _11 = null_mut::<isize>() -> [return: bb10, unwind: bb13];
+        _13 = null_mut::<isize>() -> [return: bb10, unwind: bb13];
     }
 
     bb10: {
-        _13 = _11 as *const () (PtrToPtr);
-        _14 = _13 as usize (Transmute);
-        _15 = AlignOf(isize);
-        _16 = Sub(_15, const 1_usize);
-        _17 = BitAnd(_14, _16);
-        _18 = Eq(_17, const 0_usize);
-        assert(_18, "misaligned pointer dereference: address must be a multiple of {} but is {}", _15, _14) -> [success: bb15, unwind unreachable];
+        _14 = _13 as *const () (PtrToPtr);
+        _15 = _14 as usize (Transmute);
+        _16 = AlignOf(isize);
+        _17 = Sub(_16, const 1_usize);
+        _18 = BitAnd(_15, _17);
+        _19 = Eq(_18, const 0_usize);
+        assert(_19, "misaligned pointer dereference: address must be a multiple of {} but is {}", _16, _15) -> [success: bb15, unwind unreachable];
     }
 
     bb11: {
@@ -100,18 +102,7 @@ fn main() -> () {
     }
 
     bb15: {
-        (*_11) = const 0_isize;
+        (*_13) = const 0_isize;
         goto -> bb11;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "signal";
-        _0 = &_1;
-        return;
     }
 }

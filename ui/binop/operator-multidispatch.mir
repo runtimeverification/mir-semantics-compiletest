@@ -17,11 +17,11 @@ fn <impl at ui/binop/operator-multidispatch.rs:7:10: 7:15>::fmt(_1: &Point, _2: 
         _3 = const "Point";
         _4 = const "x";
         _6 = &((*_1).0: isize);
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _7 = const "y";
         _10 = &((*_1).1: isize);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
     }
 
@@ -127,40 +127,42 @@ fn main() -> () {
     let mut _4: Point;
     let mut _5: (&Point, &Point);
     let mut _6: &Point;
-    let mut _9: bool;
-    let mut _10: bool;
-    let _12: !;
-    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _14: Point;
-    let mut _15: Point;
-    let mut _16: (&Point, &Point);
-    let mut _17: &Point;
-    let mut _20: bool;
-    let mut _21: bool;
-    let _23: !;
-    let mut _24: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _7: &Point;
+    let _8: Point;
+    let mut _11: bool;
+    let mut _12: bool;
+    let _14: !;
+    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _16: Point;
+    let mut _17: Point;
+    let mut _18: (&Point, &Point);
+    let mut _19: &Point;
+    let mut _20: &Point;
+    let _21: Point;
+    let mut _24: bool;
+    let mut _25: bool;
+    let _27: !;
+    let mut _28: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug p => _1;
-        let _7: &Point;
-        let _8: &Point;
-        let _18: &Point;
-        let _19: &Point;
-        let mut _25: &Point;
-        let mut _26: &Point;
+        let _9: &Point;
+        let _10: &Point;
+        let _22: &Point;
+        let _23: &Point;
         scope 2 {
-            debug left_val => _7;
-            debug right_val => _8;
-            let _11: core::panicking::AssertKind;
+            debug left_val => _9;
+            debug right_val => _10;
+            let _13: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _11;
+                debug kind => _13;
             }
         }
         scope 4 {
-            debug left_val => _18;
-            debug right_val => _19;
-            let _22: core::panicking::AssertKind;
+            debug left_val => _22;
+            debug right_val => _23;
+            let _26: core::panicking::AssertKind;
             scope 5 {
-                debug kind => _22;
+                debug kind => _26;
             }
         }
     }
@@ -175,73 +177,53 @@ fn main() -> () {
     bb1: {
         _1 = move _2;
         _6 = &_1;
-        _26 = const _;
-        _5 = (move _6, _26);
-        _7 = (_5.0: &Point);
-        _8 = (_5.1: &Point);
-        _10 = <Point as PartialEq>::eq(_7, _8) -> [return: bb2, unwind continue];
+        _8 = Point { x: const 111_isize, y: const 122_isize };
+        _7 = &_8;
+        _5 = (move _6, move _7);
+        _9 = (_5.0: &Point);
+        _10 = (_5.1: &Point);
+        _12 = <Point as PartialEq>::eq(_9, _10) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = Not(move _10);
-        switchInt(move _9) -> [0: bb4, otherwise: bb3];
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _11 = core::panicking::AssertKind::Eq;
-        _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<Point, Point>(move _11, _7, _8, move _13) -> unwind continue;
+        _13 = core::panicking::AssertKind::Eq;
+        _15 = Option::<Arguments<'_>>::None;
+        _14 = core::panicking::assert_failed::<Point, Point>(move _13, _9, _10, move _15) -> unwind continue;
     }
 
     bb4: {
-        _15 = move _1;
-        _14 = <Point as Add<isize>>::add(move _15, const 1_isize) -> [return: bb5, unwind continue];
+        _17 = move _1;
+        _16 = <Point as Add<isize>>::add(move _17, const 1_isize) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _1 = move _14;
-        _17 = &_1;
-        _25 = const _;
-        _16 = (move _17, _25);
-        _18 = (_16.0: &Point);
-        _19 = (_16.1: &Point);
-        _21 = <Point as PartialEq>::eq(_18, _19) -> [return: bb6, unwind continue];
+        _1 = move _16;
+        _19 = &_1;
+        _21 = Point { x: const 112_isize, y: const 123_isize };
+        _20 = &_21;
+        _18 = (move _19, move _20);
+        _22 = (_18.0: &Point);
+        _23 = (_18.1: &Point);
+        _25 = <Point as PartialEq>::eq(_22, _23) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _20 = Not(move _21);
-        switchInt(move _20) -> [0: bb8, otherwise: bb7];
+        _24 = Not(move _25);
+        switchInt(move _24) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _22 = core::panicking::AssertKind::Eq;
-        _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<Point, Point>(move _22, _18, _19, move _24) -> unwind continue;
+        _26 = core::panicking::AssertKind::Eq;
+        _28 = Option::<Arguments<'_>>::None;
+        _27 = core::panicking::assert_failed::<Point, Point>(move _26, _22, _23, move _28) -> unwind continue;
     }
 
     bb8: {
-        return;
-    }
-}
-
-promoted[0] in main: &Point = {
-    let mut _0: &Point;
-    let mut _1: Point;
-
-    bb0: {
-        _1 = Point { x: const 112_isize, y: const 123_isize };
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &Point = {
-    let mut _0: &Point;
-    let mut _1: Point;
-
-    bb0: {
-        _1 = Point { x: const 111_isize, y: const 122_isize };
-        _0 = &_1;
         return;
     }
 }

@@ -5,23 +5,27 @@ fn main() -> () {
     let _1: std::vec::Vec<u8>;
     scope 1 {
         debug _container => _1;
+        let _2: u8;
         scope 2 {
-            debug _item => const 0_u8;
-            let _2: std::vec::Vec<u16>;
+            debug _item => _2;
+            let _3: std::vec::Vec<u16>;
             scope 3 {
-                debug _container => _2;
+                debug _container => _3;
+                let _4: u16;
                 scope 4 {
-                    debug _item => const 0_u16;
-                    let _3: std::string::String;
+                    debug _item => _4;
+                    let _5: std::string::String;
                     scope 5 {
-                        debug _container => _3;
+                        debug _container => _5;
+                        let _6: u8;
                         scope 6 {
-                            debug _item => const 0_u8;
-                            let _4: std::vec::Vec<()>;
+                            debug _item => _6;
+                            let _7: std::vec::Vec<()>;
                             scope 7 {
-                                debug _container => _4;
+                                debug _container => _7;
+                                let _8: u32;
                                 scope 8 {
-                                    debug _item => const 0_u32;
+                                    debug _item => _8;
                                 }
                             }
                         }
@@ -36,27 +40,31 @@ fn main() -> () {
     }
 
     bb1: {
-        _2 = Vec::<u16>::new() -> [return: bb2, unwind: bb11];
+        _2 = const 0_u8;
+        _3 = Vec::<u16>::new() -> [return: bb2, unwind: bb11];
     }
 
     bb2: {
-        _3 = String::new() -> [return: bb3, unwind: bb10];
+        _4 = const 0_u16;
+        _5 = String::new() -> [return: bb3, unwind: bb10];
     }
 
     bb3: {
-        _4 = Vec::<()>::new() -> [return: bb4, unwind: bb9];
+        _6 = const 0_u8;
+        _7 = Vec::<()>::new() -> [return: bb4, unwind: bb9];
     }
 
     bb4: {
-        drop(_4) -> [return: bb5, unwind: bb9];
+        _8 = const 0_u32;
+        drop(_7) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        drop(_3) -> [return: bb6, unwind: bb10];
+        drop(_5) -> [return: bb6, unwind: bb10];
     }
 
     bb6: {
-        drop(_2) -> [return: bb7, unwind: bb11];
+        drop(_3) -> [return: bb7, unwind: bb11];
     }
 
     bb7: {
@@ -68,11 +76,11 @@ fn main() -> () {
     }
 
     bb9 (cleanup): {
-        drop(_3) -> [return: bb10, unwind terminate];
+        drop(_5) -> [return: bb10, unwind terminate];
     }
 
     bb10 (cleanup): {
-        drop(_2) -> [return: bb11, unwind terminate];
+        drop(_3) -> [return: bb11, unwind terminate];
     }
 
     bb11 (cleanup): {

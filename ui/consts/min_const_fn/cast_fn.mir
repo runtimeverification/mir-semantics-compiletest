@@ -13,7 +13,7 @@ fn unsize(_1: &[u8; 3]) -> &[u8] {
     let mut _0: &[u8];
 
     bb0: {
-        _0 = _1 as &[u8] (Pointer(Unsize));
+        _0 = _1 as &[u8] (PointerCoercion(Unsize));
         return;
     }
 }
@@ -27,7 +27,7 @@ fn unsize(_1: &[u8; 3]) -> &[u8] {
     bb0: {
         StorageLive(_2);
         _2 = &(*_1);
-        _0 = move _2 as &[u8] (Pointer(Unsize));
+        _0 = move _2 as &[u8] (PointerCoercion(Unsize));
         StorageDead(_2);
         return;
     }
@@ -46,7 +46,7 @@ fn closure() -> fn() {
     let mut _0: fn();
 
     bb0: {
-        _0 = const ZeroSized: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32] as fn() (Pointer(ClosureFnPointer(Normal)));
+        _0 = const ZeroSized: [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32] as fn() (PointerCoercion(ClosureFnPointer(Normal)));
         return;
     }
 }
@@ -59,7 +59,7 @@ fn closure() -> fn() {
     bb0: {
         StorageLive(_1);
         _1 = [closure@ui/consts/min_const_fn/cast_fn.rs:6:30: 6:32];
-        _0 = move _1 as fn() (Pointer(ClosureFnPointer(Normal)));
+        _0 = move _1 as fn() (PointerCoercion(ClosureFnPointer(Normal)));
         StorageDead(_1);
         return;
     }
@@ -91,7 +91,7 @@ fn closure2() -> () {
         StorageLive(_1);
         StorageLive(_2);
         _2 = [closure@ui/consts/min_const_fn/cast_fn.rs:8:6: 8:8];
-        _1 = move _2 as fn() (Pointer(ClosureFnPointer(Normal)));
+        _1 = move _2 as fn() (PointerCoercion(ClosureFnPointer(Normal)));
         StorageDead(_2);
         StorageDead(_1);
         _0 = const ();
@@ -112,7 +112,7 @@ fn reify(_1: fn()) -> unsafe fn() {
     let mut _0: unsafe fn();
 
     bb0: {
-        _0 = _1 as unsafe fn() (Pointer(UnsafeFnPointer));
+        _0 = _1 as unsafe fn() (PointerCoercion(UnsafeFnPointer));
         return;
     }
 }
@@ -126,7 +126,7 @@ fn reify(_1: fn()) -> unsafe fn() {
     bb0: {
         StorageLive(_2);
         _2 = _1;
-        _0 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer));
+        _0 = move _2 as unsafe fn() (PointerCoercion(UnsafeFnPointer));
         StorageDead(_2);
         return;
     }
@@ -149,8 +149,8 @@ fn reify2() -> () {
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _2 = main as fn() (Pointer(ReifyFnPointer));
-        _1 = move _2 as unsafe fn() (Pointer(UnsafeFnPointer));
+        _2 = main as fn() (PointerCoercion(ReifyFnPointer));
+        _1 = move _2 as unsafe fn() (PointerCoercion(UnsafeFnPointer));
         StorageDead(_2);
         StorageDead(_1);
         _0 = const ();

@@ -192,24 +192,25 @@ fn main() -> () {
     let _15: std::cmp::Ordering;
     let mut _16: &ShortCircuit;
     let _17: &ShortCircuit;
-    let mut _20: bool;
-    let mut _21: bool;
-    let _23: !;
-    let mut _24: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: &std::cmp::Ordering;
+    let _19: std::cmp::Ordering;
+    let mut _22: bool;
+    let mut _23: bool;
+    let _25: !;
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug a => _1;
         let _2: ShortCircuit;
         scope 2 {
             debug b => _2;
-            let _18: &std::cmp::Ordering;
-            let _19: &std::cmp::Ordering;
-            let mut _25: &std::cmp::Ordering;
+            let _20: &std::cmp::Ordering;
+            let _21: &std::cmp::Ordering;
             scope 3 {
-                debug left_val => _18;
-                debug right_val => _19;
-                let _22: core::panicking::AssertKind;
+                debug left_val => _20;
+                debug right_val => _21;
+                let _24: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _22;
+                    debug kind => _24;
                 }
             }
         }
@@ -255,36 +256,26 @@ fn main() -> () {
 
     bb7: {
         _14 = &_15;
-        _25 = const _;
-        _13 = (move _14, _25);
-        _18 = (_13.0: &std::cmp::Ordering);
-        _19 = (_13.1: &std::cmp::Ordering);
-        _21 = <std::cmp::Ordering as PartialEq>::eq(_18, _19) -> [return: bb8, unwind continue];
+        _19 = Less;
+        _18 = &_19;
+        _13 = (move _14, move _18);
+        _20 = (_13.0: &std::cmp::Ordering);
+        _21 = (_13.1: &std::cmp::Ordering);
+        _23 = <std::cmp::Ordering as PartialEq>::eq(_20, _21) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _20 = Not(move _21);
-        switchInt(move _20) -> [0: bb10, otherwise: bb9];
+        _22 = Not(move _23);
+        switchInt(move _22) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _22 = core::panicking::AssertKind::Eq;
-        _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _22, _18, _19, move _24) -> unwind continue;
+        _24 = core::panicking::AssertKind::Eq;
+        _26 = Option::<Arguments<'_>>::None;
+        _25 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _24, _20, _21, move _26) -> unwind continue;
     }
 
     bb10: {
-        return;
-    }
-}
-
-promoted[0] in main: &std::cmp::Ordering = {
-    let mut _0: &std::cmp::Ordering;
-    let mut _1: std::cmp::Ordering;
-
-    bb0: {
-        _1 = Less;
-        _0 = &_1;
         return;
     }
 }

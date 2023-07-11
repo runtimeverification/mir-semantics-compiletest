@@ -29,12 +29,12 @@ const B: u8 = {
     let _3: usize;
     let mut _4: usize;
     let mut _5: bool;
-    let mut _6: &[u8; 1];
 
     bb0: {
         StorageLive(_1);
-        _6 = const _;
-        _1 = &(*_6);
+        StorageLive(_2);
+        _2 = const _;
+        _1 = &_2;
         StorageLive(_3);
         _3 = const 0_usize;
         _4 = Len((*_1));
@@ -45,18 +45,8 @@ const B: u8 = {
     bb1: {
         _0 = (*_1)[_3];
         StorageDead(_3);
+        StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in B: &[u8; 1] = {
-    let mut _0: &[u8; 1];
-    let mut _1: [u8; 1];
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
         return;
     }
 }
@@ -68,31 +58,20 @@ const C: &&&&[u8; 1] = {
     let _3: &&[u8; 1];
     let _4: &[u8; 1];
     let _5: [u8; 1];
-    let mut _6: &&&&[u8; 1];
 
     bb0: {
         StorageLive(_1);
-        _6 = const _;
-        _1 = &(*_6);
-        _0 = &(*_1);
-        StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in C: &&&&[u8; 1] = {
-    let mut _0: &&&&[u8; 1];
-    let mut _1: &&&[u8; 1];
-    let mut _2: &&[u8; 1];
-    let mut _3: &[u8; 1];
-    let mut _4: [u8; 1];
-
-    bb0: {
-        _4 = const _;
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = const _;
+        _4 = &_5;
         _3 = &_4;
         _2 = &_3;
         _1 = &_2;
-        _0 = &_1;
+        _0 = &(*_1);
+        StorageDead(_1);
         return;
     }
 }
@@ -113,50 +92,40 @@ const D: u8 = {
     let _3: usize;
     let mut _4: usize;
     let mut _5: bool;
-    let mut _6: &&&&&[u8; 1];
-    let mut _7: &&&&[u8; 1];
-    let mut _8: &&&[u8; 1];
-    let mut _9: &&[u8; 1];
-    let mut _10: &[u8; 1];
-    let mut _11: &&&&[u8; 1];
-    let mut _12: &&&[u8; 1];
-    let mut _13: &&[u8; 1];
-    let mut _14: &[u8; 1];
+    let mut _6: &&&&[u8; 1];
+    let mut _7: &&&[u8; 1];
+    let mut _8: &&[u8; 1];
+    let mut _9: &[u8; 1];
+    let mut _10: &&&&[u8; 1];
+    let mut _11: &&&[u8; 1];
+    let mut _12: &&[u8; 1];
+    let mut _13: &[u8; 1];
 
     bb0: {
         StorageLive(_1);
-        _6 = const _;
-        _1 = &(*_6);
+        StorageLive(_2);
+        _2 = const _;
+        _1 = &_2;
         StorageLive(_3);
         _3 = const 0_usize;
-        _7 = deref_copy (*_1);
+        _6 = deref_copy (*_1);
+        _7 = deref_copy (*_6);
         _8 = deref_copy (*_7);
         _9 = deref_copy (*_8);
-        _10 = deref_copy (*_9);
-        _4 = Len((*_10));
+        _4 = Len((*_9));
         _5 = Lt(_3, _4);
         assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _11 = deref_copy (*_1);
+        _10 = deref_copy (*_1);
+        _11 = deref_copy (*_10);
         _12 = deref_copy (*_11);
         _13 = deref_copy (*_12);
-        _14 = deref_copy (*_13);
-        _0 = (*_14)[_3];
+        _0 = (*_13)[_3];
         StorageDead(_3);
+        StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in D: &&&&&[u8; 1] = {
-    let mut _0: &&&&&[u8; 1];
-    let mut _1: &&&&[u8; 1];
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
         return;
     }
 }
@@ -165,150 +134,110 @@ fn main() -> () {
     let mut _0: ();
     let mut _1: (&u8, &u8);
     let mut _2: &u8;
-    let _3: usize;
-    let mut _4: usize;
-    let mut _5: bool;
-    let _6: &u8;
-    let _7: &u8;
+    let _3: u8;
+    let mut _4: &u8;
+    let _5: [u8; 1];
+    let _6: usize;
+    let mut _7: usize;
     let mut _8: bool;
-    let mut _9: bool;
-    let mut _10: u8;
-    let mut _11: u8;
-    let _13: !;
-    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _15: (&u8, &u8);
-    let mut _16: &u8;
-    let _17: usize;
-    let mut _18: usize;
-    let mut _19: bool;
-    let _20: &u8;
-    let _21: &u8;
-    let mut _22: bool;
-    let mut _23: bool;
-    let mut _24: u8;
-    let mut _25: u8;
-    let _27: !;
-    let mut _28: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _29: &[u8; 1];
-    let mut _30: &u8;
-    let mut _31: &[u8; 1];
-    let mut _32: &u8;
+    let _9: &u8;
+    let _10: &u8;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: u8;
+    let mut _14: u8;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: (&u8, &u8);
+    let mut _19: &u8;
+    let _20: u8;
+    let mut _21: &u8;
+    let _22: [u8; 1];
+    let _23: usize;
+    let mut _24: usize;
+    let mut _25: bool;
+    let _26: &u8;
+    let _27: &u8;
+    let mut _28: bool;
+    let mut _29: bool;
+    let mut _30: u8;
+    let mut _31: u8;
+    let _33: !;
+    let mut _34: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _6;
-        debug right_val => _7;
-        let _12: core::panicking::AssertKind;
+        debug left_val => _9;
+        debug right_val => _10;
+        let _15: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _12;
+            debug kind => _15;
         }
     }
     scope 3 {
-        debug left_val => _20;
-        debug right_val => _21;
-        let _26: core::panicking::AssertKind;
+        debug left_val => _26;
+        debug right_val => _27;
+        let _32: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _26;
+            debug kind => _32;
         }
     }
 
     bb0: {
-        _32 = const _;
-        _3 = const 0_usize;
-        _4 = const 1_usize;
-        _5 = Lt(_3, _4);
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+        _3 = const _;
+        _2 = &_3;
+        _5 = const _;
+        _6 = const 0_usize;
+        _7 = const 1_usize;
+        _8 = Lt(_6, _7);
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _31 = const _;
-        _2 = &(*_31)[_3];
-        _1 = (_32, move _2);
-        _6 = (_1.0: &u8);
-        _7 = (_1.1: &u8);
-        _10 = (*_6);
-        _11 = (*_7);
-        _9 = Eq(move _10, move _11);
-        _8 = Not(move _9);
-        switchInt(move _8) -> [0: bb3, otherwise: bb2];
+        _4 = &_5[_6];
+        _1 = (move _2, move _4);
+        _9 = (_1.0: &u8);
+        _10 = (_1.1: &u8);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _12 = core::panicking::AssertKind::Eq;
-        _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u8, u8>(move _12, _6, _7, move _14) -> unwind continue;
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb3: {
-        _30 = const _;
-        _17 = const 0_usize;
-        _18 = const 1_usize;
-        _19 = Lt(_17, _18);
-        assert(move _19, "index out of bounds: the length is {} but the index is {}", move _18, _17) -> [success: bb4, unwind continue];
+        _20 = const _;
+        _19 = &_20;
+        _22 = const _;
+        _23 = const 0_usize;
+        _24 = const 1_usize;
+        _25 = Lt(_23, _24);
+        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _23) -> [success: bb4, unwind continue];
     }
 
     bb4: {
-        _29 = const _;
-        _16 = &(*_29)[_17];
-        _15 = (_30, move _16);
-        _20 = (_15.0: &u8);
-        _21 = (_15.1: &u8);
-        _24 = (*_20);
-        _25 = (*_21);
-        _23 = Eq(move _24, move _25);
-        _22 = Not(move _23);
-        switchInt(move _22) -> [0: bb6, otherwise: bb5];
+        _21 = &_22[_23];
+        _18 = (move _19, move _21);
+        _26 = (_18.0: &u8);
+        _27 = (_18.1: &u8);
+        _30 = (*_26);
+        _31 = (*_27);
+        _29 = Eq(move _30, move _31);
+        _28 = Not(move _29);
+        switchInt(move _28) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _26 = core::panicking::AssertKind::Eq;
-        _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<u8, u8>(move _26, _20, _21, move _28) -> unwind continue;
+        _32 = core::panicking::AssertKind::Eq;
+        _34 = Option::<Arguments<'_>>::None;
+        _33 = core::panicking::assert_failed::<u8, u8>(move _32, _26, _27, move _34) -> unwind continue;
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &[u8; 1] = {
-    let mut _0: &[u8; 1];
-    let mut _1: [u8; 1];
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[u8; 1] = {
-    let mut _0: &[u8; 1];
-    let mut _1: [u8; 1];
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const _;
-        _0 = &_1;
         return;
     }
 }

@@ -15,7 +15,7 @@ fn <impl at ui/resource-assign-is-not-copy.rs:6:10: 6:15>::fmt(_1: &r<'_>, _2: &
         _4 = const "i";
         _7 = &((*_1).0: &std::cell::Cell<isize>);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
     }
 
@@ -67,26 +67,29 @@ fn main() -> () {
     let _8: ();
     let mut _9: std::fmt::Arguments<'_>;
     let mut _10: &[&str];
-    let mut _11: &[core::fmt::rt::Argument<'_>];
-    let _12: &[core::fmt::rt::Argument<'_>; 1];
-    let _13: [core::fmt::rt::Argument<'_>; 1];
-    let mut _14: core::fmt::rt::Argument<'_>;
-    let _15: &r<'_>;
-    let mut _16: (&isize, &isize);
-    let mut _17: &isize;
-    let _18: isize;
-    let mut _21: bool;
-    let mut _22: bool;
-    let mut _23: isize;
-    let mut _24: isize;
-    let _26: !;
-    let mut _27: std::option::Option<std::fmt::Arguments<'_>>;
+    let _11: &[&str; 2];
+    let _12: [&str; 2];
+    let mut _13: &[core::fmt::rt::Argument<'_>];
+    let _14: &[core::fmt::rt::Argument<'_>; 1];
+    let _15: [core::fmt::rt::Argument<'_>; 1];
+    let mut _16: core::fmt::rt::Argument<'_>;
+    let _17: &r<'_>;
+    let mut _18: (&isize, &isize);
+    let mut _19: &isize;
+    let _20: isize;
+    let mut _21: &isize;
+    let _22: isize;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: isize;
+    let mut _28: isize;
+    let _30: !;
+    let mut _31: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug i => _1;
         let _3: r<'_>;
-        let _19: &isize;
-        let _20: &isize;
-        let mut _28: &isize;
+        let _23: &isize;
+        let _24: &isize;
         scope 2 {
             debug a => _3;
             let _4: (r<'_>, i32);
@@ -97,16 +100,15 @@ fn main() -> () {
                 scope 4 {
                     debug c => _6;
                     debug _d => _7;
-                    let mut _29: &[&str; 2];
                 }
             }
         }
         scope 5 {
-            debug left_val => _19;
-            debug right_val => _20;
-            let _25: core::panicking::AssertKind;
+            debug left_val => _23;
+            debug right_val => _24;
+            let _29: core::panicking::AssertKind;
             scope 6 {
-                debug kind => _25;
+                debug kind => _29;
             }
         }
     }
@@ -125,17 +127,18 @@ fn main() -> () {
         _4 = (move _5, const 10_i32);
         _6 = move (_4.0: r<'_>);
         _7 = (_4.1: i32);
-        _29 = const _;
-        _10 = _29 as &[&str] (Pointer(Unsize));
-        _15 = &_6;
-        _14 = core::fmt::rt::Argument::<'_>::new_debug::<r<'_>>(_15) -> [return: bb3, unwind: bb10];
+        _12 = [const "", const "\n"];
+        _11 = &_12;
+        _10 = _11 as &[&str] (PointerCoercion(Unsize));
+        _17 = &_6;
+        _16 = core::fmt::rt::Argument::<'_>::new_debug::<r<'_>>(_17) -> [return: bb3, unwind: bb10];
     }
 
     bb3: {
-        _13 = [move _14];
-        _12 = &_13;
-        _11 = _12 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _9 = Arguments::<'_>::new_v1(move _10, move _11) -> [return: bb4, unwind: bb10];
+        _15 = [move _16];
+        _14 = &_15;
+        _13 = _14 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _9 = Arguments::<'_>::new_v1(move _10, move _13) -> [return: bb4, unwind: bb10];
     }
 
     bb4: {
@@ -147,26 +150,27 @@ fn main() -> () {
     }
 
     bb6: {
-        _18 = Cell::<isize>::get(_1) -> [return: bb7, unwind continue];
+        _20 = Cell::<isize>::get(_1) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _17 = &_18;
-        _28 = const _;
-        _16 = (move _17, _28);
-        _19 = (_16.0: &isize);
-        _20 = (_16.1: &isize);
-        _23 = (*_19);
-        _24 = (*_20);
-        _22 = Eq(move _23, move _24);
-        _21 = Not(move _22);
-        switchInt(move _21) -> [0: bb9, otherwise: bb8];
+        _19 = &_20;
+        _22 = const 1_isize;
+        _21 = &_22;
+        _18 = (move _19, move _21);
+        _23 = (_18.0: &isize);
+        _24 = (_18.1: &isize);
+        _27 = (*_23);
+        _28 = (*_24);
+        _26 = Eq(move _27, move _28);
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _25 = core::panicking::AssertKind::Eq;
-        _27 = Option::<Arguments<'_>>::None;
-        _26 = core::panicking::assert_failed::<isize, isize>(move _25, _19, _20, move _27) -> unwind continue;
+        _29 = core::panicking::AssertKind::Eq;
+        _31 = Option::<Arguments<'_>>::None;
+        _30 = core::panicking::assert_failed::<isize, isize>(move _29, _23, _24, move _31) -> unwind continue;
     }
 
     bb9: {
@@ -179,27 +183,5 @@ fn main() -> () {
 
     bb11 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &isize = {
-    let mut _0: &isize;
-    let mut _1: isize;
-
-    bb0: {
-        _1 = const 1_isize;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }

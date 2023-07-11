@@ -148,34 +148,37 @@ fn use_floatify() -> () {
     let mut _9: (&std::option::Option<&f32>, &std::option::Option<&f32>);
     let mut _10: &std::option::Option<&f32>;
     let _11: std::option::Option<&f32>;
-    let mut _12: &mut std::slice::Iter<'_, f32>;
-    let mut _13: std::slice::Iter<'_, f32>;
-    let mut _14: &std::vec::Vec<f32>;
-    let mut _17: bool;
-    let mut _18: bool;
-    let _20: !;
-    let mut _21: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _23: *const [i32; 3];
-    let mut _24: *const ();
-    let mut _25: usize;
-    let mut _26: usize;
-    let mut _27: usize;
+    let mut _12: &f32;
+    let _13: f32;
+    let mut _14: &std::option::Option<&f32>;
+    let _15: std::option::Option<&f32>;
+    let mut _16: &mut std::slice::Iter<'_, f32>;
+    let mut _17: std::slice::Iter<'_, f32>;
+    let mut _18: &std::vec::Vec<f32>;
+    let mut _21: bool;
+    let mut _22: bool;
+    let _24: !;
+    let mut _25: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _26: *const [i32; 3];
+    let mut _27: *const ();
     let mut _28: usize;
-    let mut _29: bool;
+    let mut _29: usize;
+    let mut _30: usize;
+    let mut _31: usize;
+    let mut _32: bool;
     scope 1 {
         debug a => _1;
         let _7: std::vec::Vec<f32>;
         scope 3 {
             debug b => _7;
-            let _15: &std::option::Option<&f32>;
-            let _16: &std::option::Option<&f32>;
-            let mut _22: &std::option::Option<&f32>;
+            let _19: &std::option::Option<&f32>;
+            let _20: &std::option::Option<&f32>;
             scope 4 {
-                debug left_val => _15;
-                debug right_val => _16;
-                let _19: core::panicking::AssertKind;
+                debug left_val => _19;
+                debug right_val => _20;
+                let _23: core::panicking::AssertKind;
                 scope 5 {
-                    debug kind => _19;
+                    debug kind => _23;
                 }
             }
         }
@@ -191,14 +194,14 @@ fn use_floatify() -> () {
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i32; 3]);
-        _23 = (((_6.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]);
-        _24 = _23 as *const () (PtrToPtr);
-        _25 = _24 as usize (Transmute);
-        _26 = AlignOf(i32);
-        _27 = Sub(_26, const 1_usize);
-        _28 = BitAnd(_25, _27);
-        _29 = Eq(_28, const 0_usize);
-        assert(_29, "misaligned pointer dereference: address must be a multiple of {} but is {}", _26, _25) -> [success: bb14, unwind unreachable];
+        _26 = (((_6.0: std::ptr::Unique<[i32; 3]>).0: std::ptr::NonNull<[i32; 3]>).0: *const [i32; 3]);
+        _27 = _26 as *const () (PtrToPtr);
+        _28 = _27 as usize (Transmute);
+        _29 = AlignOf(i32);
+        _30 = Sub(_29, const 1_usize);
+        _31 = BitAnd(_28, _30);
+        _32 = Eq(_31, const 0_usize);
+        assert(_32, "misaligned pointer dereference: address must be a multiple of {} but is {}", _29, _28) -> [success: bb14, unwind unreachable];
     }
 
     bb2: {
@@ -207,33 +210,36 @@ fn use_floatify() -> () {
     }
 
     bb3: {
-        _22 = const _;
-        _14 = &_7;
-        _13 = <Vec<f32> as Collection<f32>>::iterate(move _14) -> [return: bb4, unwind: bb11];
+        _13 = const 1f32;
+        _12 = &_13;
+        _11 = Option::<&f32>::Some(move _12);
+        _10 = &_11;
+        _18 = &_7;
+        _17 = <Vec<f32> as Collection<f32>>::iterate(move _18) -> [return: bb4, unwind: bb11];
     }
 
     bb4: {
-        _12 = &mut _13;
-        _11 = <std::slice::Iter<'_, f32> as Iterator>::next(move _12) -> [return: bb5, unwind: bb11];
+        _16 = &mut _17;
+        _15 = <std::slice::Iter<'_, f32> as Iterator>::next(move _16) -> [return: bb5, unwind: bb11];
     }
 
     bb5: {
-        _10 = &_11;
-        _9 = (_22, move _10);
-        _15 = (_9.0: &std::option::Option<&f32>);
-        _16 = (_9.1: &std::option::Option<&f32>);
-        _18 = <Option<&f32> as PartialEq>::eq(_15, _16) -> [return: bb6, unwind: bb11];
+        _14 = &_15;
+        _9 = (move _10, move _14);
+        _19 = (_9.0: &std::option::Option<&f32>);
+        _20 = (_9.1: &std::option::Option<&f32>);
+        _22 = <Option<&f32> as PartialEq>::eq(_19, _20) -> [return: bb6, unwind: bb11];
     }
 
     bb6: {
-        _17 = Not(move _18);
-        switchInt(move _17) -> [0: bb8, otherwise: bb7];
+        _21 = Not(move _22);
+        switchInt(move _21) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _19 = core::panicking::AssertKind::Eq;
-        _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<Option<&f32>, Option<&f32>>(move _19, _15, _16, move _21) -> bb11;
+        _23 = core::panicking::AssertKind::Eq;
+        _25 = Option::<Arguments<'_>>::None;
+        _24 = core::panicking::assert_failed::<Option<&f32>, Option<&f32>>(move _23, _19, _20, move _25) -> bb11;
     }
 
     bb8: {
@@ -261,24 +267,9 @@ fn use_floatify() -> () {
     }
 
     bb14: {
-        (*_23) = [const 1_i32, const 2_i32, const 3_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        (*_26) = [const 1_i32, const 2_i32, const 3_i32];
+        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
         _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in use_floatify: &Option<&f32> = {
-    let mut _0: &std::option::Option<&f32>;
-    let mut _1: std::option::Option<&f32>;
-    let mut _2: &f32;
-    let mut _3: f32;
-
-    bb0: {
-        _3 = const 1f32;
-        _2 = &_3;
-        _1 = Option::<&f32>::Some(move _2);
-        _0 = &_1;
-        return;
     }
 }
 

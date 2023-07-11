@@ -13,24 +13,25 @@ fn main() -> () {
     let _10: !;
     let mut _11: (&&str, &&str);
     let mut _12: &&str;
-    let mut _15: bool;
-    let mut _16: bool;
-    let _18: !;
-    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _13: &&str;
+    let _14: &str;
+    let mut _17: bool;
+    let mut _18: bool;
+    let _20: !;
+    let mut _21: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug x => const 'a';
+        debug x => _1;
         let _2: &str;
         scope 2 {
             debug y => _2;
-            let _13: &&str;
-            let _14: &&str;
-            let mut _20: &&str;
+            let _15: &&str;
+            let _16: &&str;
             scope 3 {
-                debug left_val => _13;
-                debug right_val => _14;
-                let _17: core::panicking::AssertKind;
+                debug left_val => _15;
+                debug right_val => _16;
+                let _19: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _17;
+                    debug kind => _19;
                 }
             }
         }
@@ -89,36 +90,26 @@ fn main() -> () {
 
     bb10: {
         _12 = &_2;
-        _20 = const _;
-        _11 = (move _12, _20);
-        _13 = (_11.0: &&str);
-        _14 = (_11.1: &&str);
-        _16 = <&str as PartialEq>::eq(_13, _14) -> [return: bb11, unwind continue];
+        _14 = const "two";
+        _13 = &_14;
+        _11 = (move _12, move _13);
+        _15 = (_11.0: &&str);
+        _16 = (_11.1: &&str);
+        _18 = <&str as PartialEq>::eq(_15, _16) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        _15 = Not(move _16);
-        switchInt(move _15) -> [0: bb13, otherwise: bb12];
+        _17 = Not(move _18);
+        switchInt(move _17) -> [0: bb13, otherwise: bb12];
     }
 
     bb12: {
-        _17 = core::panicking::AssertKind::Eq;
-        _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<&str, &str>(move _17, _13, _14, move _19) -> unwind continue;
+        _19 = core::panicking::AssertKind::Eq;
+        _21 = Option::<Arguments<'_>>::None;
+        _20 = core::panicking::assert_failed::<&str, &str>(move _19, _15, _16, move _21) -> unwind continue;
     }
 
     bb13: {
-        return;
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;
-    let mut _1: &str;
-
-    bb0: {
-        _1 = const "two";
-        _0 = &_1;
         return;
     }
 }

@@ -154,21 +154,23 @@ fn main() -> () {
     let mut _8: &std::cell::Ref<'_, std::vec::Vec<i32>>;
     let _9: std::cell::Ref<'_, std::vec::Vec<i32>>;
     let mut _10: &std::cell::RefCell<std::vec::Vec<i32>>;
-    let mut _13: bool;
-    let mut _14: bool;
-    let _16: !;
-    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _11: &&[i32; 1];
+    let _12: &[i32; 1];
+    let _13: [i32; 1];
+    let mut _16: bool;
+    let mut _17: bool;
+    let _19: !;
+    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         debug drops => _1;
-        let _11: &std::vec::Vec<i32>;
-        let _12: &&[i32; 1];
-        let mut _18: &&[i32; 1];
+        let _14: &std::vec::Vec<i32>;
+        let _15: &&[i32; 1];
         scope 2 {
-            debug left_val => _11;
-            debug right_val => _12;
-            let _15: core::panicking::AssertKind;
+            debug left_val => _14;
+            debug right_val => _15;
+            let _18: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _15;
+                debug kind => _18;
             }
         }
     }
@@ -198,22 +200,24 @@ fn main() -> () {
 
     bb5: {
         _6 = _7;
-        _18 = const _;
-        _5 = (move _6, _18);
-        _11 = (_5.0: &std::vec::Vec<i32>);
-        _12 = (_5.1: &&[i32; 1]);
-        _14 = <Vec<i32> as PartialEq<&[i32; 1]>>::eq(_11, _12) -> [return: bb6, unwind: bb11];
+        _13 = [const 0_i32];
+        _12 = &_13;
+        _11 = &_12;
+        _5 = (move _6, move _11);
+        _14 = (_5.0: &std::vec::Vec<i32>);
+        _15 = (_5.1: &&[i32; 1]);
+        _17 = <Vec<i32> as PartialEq<&[i32; 1]>>::eq(_14, _15) -> [return: bb6, unwind: bb11];
     }
 
     bb6: {
-        _13 = Not(move _14);
-        switchInt(move _13) -> [0: bb8, otherwise: bb7];
+        _16 = Not(move _17);
+        switchInt(move _16) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _15 = core::panicking::AssertKind::Eq;
-        _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<Vec<i32>, &[i32; 1]>(move _15, _11, _12, move _17) -> bb11;
+        _18 = core::panicking::AssertKind::Eq;
+        _20 = Option::<Arguments<'_>>::None;
+        _19 = core::panicking::assert_failed::<Vec<i32>, &[i32; 1]>(move _18, _14, _15, move _20) -> bb11;
     }
 
     bb8: {
@@ -238,19 +242,6 @@ fn main() -> () {
 
     bb13 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &&[i32; 1] = {
-    let mut _0: &&[i32; 1];
-    let mut _1: &[i32; 1];
-    let mut _2: [i32; 1];
-
-    bb0: {
-        _2 = [const 0_i32];
-        _1 = &_2;
-        _0 = &_1;
-        return;
     }
 }
 

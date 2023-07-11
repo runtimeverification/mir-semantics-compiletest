@@ -25,54 +25,34 @@ fn <impl at ui/traits/issue-26339.rs:19:1: 19:30>::eq(_1: &Aimpl, _2: &Bar) -> b
 fn main() -> () {
     let mut _0: ();
     let mut _1: &dyn A;
-    let mut _2: bool;
-    let mut _3: bool;
-    let mut _4: !;
-    let mut _6: &Aimpl;
+    let _2: &Aimpl;
+    let _3: Aimpl;
+    let mut _4: bool;
+    let mut _5: bool;
+    let mut _6: &Foo;
+    let _7: Foo;
+    let mut _8: !;
     scope 1 {
         debug a => _1;
-        let mut _5: &Foo;
     }
 
     bb0: {
-        _6 = const _;
-        _1 = _6 as &dyn A (Pointer(Unsize));
-        _5 = const _;
-        _3 = <dyn A as PartialEq<Foo>>::eq(_1, _5) -> [return: bb1, unwind continue];
+        _2 = &_3;
+        _1 = _2 as &dyn A (PointerCoercion(Unsize));
+        _6 = &_7;
+        _5 = <dyn A as PartialEq<Foo>>::eq(_1, move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = Not(move _3);
-        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+        _4 = Not(move _5);
+        switchInt(move _4) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _4 = core::panicking::panic(const "assertion failed: *a == Foo") -> unwind continue;
+        _8 = core::panicking::panic(const "assertion failed: *a == Foo") -> unwind continue;
     }
 
     bb3: {
-        return;
-    }
-}
-
-promoted[0] in main: &Foo = {
-    let mut _0: &Foo;
-    let mut _1: Foo;
-
-    bb0: {
-        _1 = Foo;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &Aimpl = {
-    let mut _0: &Aimpl;
-    let mut _1: Aimpl;
-
-    bb0: {
-        _1 = Aimpl;
-        _0 = &_1;
         return;
     }
 }

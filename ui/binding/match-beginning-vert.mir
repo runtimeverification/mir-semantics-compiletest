@@ -3,54 +3,68 @@
 fn main() -> () {
     let mut _0: ();
     let mut _1: std::slice::Iter<'_, Foo>;
-    let mut _2: std::slice::Iter<'_, Foo>;
-    let mut _3: std::option::Option<&Foo>;
-    let mut _4: &mut std::slice::Iter<'_, Foo>;
-    let mut _5: isize;
-    let mut _7: isize;
-    let _8: ();
-    let mut _9: std::fmt::Arguments<'_>;
-    let mut _10: &[&str];
-    let mut _11: bool;
-    let mut _12: bool;
-    let _13: ();
-    let mut _14: std::fmt::Arguments<'_>;
-    let mut _15: &[&str];
-    let mut _18: &[Foo; 5];
+    let mut _2: &[Foo; 5];
+    let _3: [Foo; 5];
+    let mut _4: Foo;
+    let mut _5: Foo;
+    let mut _6: Foo;
+    let mut _7: Foo;
+    let mut _8: Foo;
+    let mut _9: std::slice::Iter<'_, Foo>;
+    let mut _10: std::option::Option<&Foo>;
+    let mut _11: &mut std::slice::Iter<'_, Foo>;
+    let mut _12: isize;
+    let mut _14: isize;
+    let _15: ();
+    let mut _16: std::fmt::Arguments<'_>;
+    let mut _17: &[&str];
+    let _18: &[&str; 1];
+    let _19: [&str; 1];
+    let mut _20: bool;
+    let mut _21: bool;
+    let _22: ();
+    let mut _23: std::fmt::Arguments<'_>;
+    let mut _24: &[&str];
+    let _25: &[&str; 1];
+    let _26: [&str; 1];
     scope 1 {
-        debug iter => _2;
-        let _6: &Foo;
+        debug iter => _9;
+        let _13: &Foo;
         scope 2 {
-            debug foo => _6;
-            let mut _16: &[&str; 1];
-            let mut _17: &[&str; 1];
+            debug foo => _13;
         }
     }
 
     bb0: {
-        _18 = const _;
-        _1 = <&[Foo; 5] as IntoIterator>::into_iter(_18) -> [return: bb1, unwind continue];
+        _4 = Foo::A;
+        _5 = Foo::B;
+        _6 = Foo::C;
+        _7 = Foo::D;
+        _8 = Foo::E;
+        _3 = [move _4, move _5, move _6, move _7, move _8];
+        _2 = &_3;
+        _1 = <&[Foo; 5] as IntoIterator>::into_iter(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _1;
+        _9 = move _1;
         goto -> bb2;
     }
 
     bb2: {
-        _4 = &mut _2;
-        _3 = <std::slice::Iter<'_, Foo> as Iterator>::next(_4) -> [return: bb3, unwind continue];
+        _11 = &mut _9;
+        _10 = <std::slice::Iter<'_, Foo> as Iterator>::next(_11) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _5 = discriminant(_3);
-        switchInt(move _5) -> [0: bb6, 1: bb4, otherwise: bb5];
+        _12 = discriminant(_10);
+        switchInt(move _12) -> [0: bb6, 1: bb4, otherwise: bb5];
     }
 
     bb4: {
-        _6 = ((_3 as Some).0: &Foo);
-        _7 = discriminant((*_6));
-        switchInt(move _7) -> [0: bb7, 1: bb10, 2: bb11, otherwise: bb2];
+        _13 = ((_10 as Some).0: &Foo);
+        _14 = discriminant((*_13));
+        switchInt(move _14) -> [0: bb7, 1: bb10, 2: bb11, otherwise: bb2];
     }
 
     bb5: {
@@ -62,75 +76,34 @@ fn main() -> () {
     }
 
     bb7: {
-        _17 = const _;
-        _10 = _17 as &[&str] (Pointer(Unsize));
-        _9 = Arguments::<'_>::new_const(move _10) -> [return: bb8, unwind continue];
+        _19 = [const "A\n"];
+        _18 = &_19;
+        _17 = _18 as &[&str] (PointerCoercion(Unsize));
+        _16 = Arguments::<'_>::new_const(move _17) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _8 = _print(move _9) -> [return: bb2, unwind continue];
+        _15 = _print(move _16) -> [return: bb2, unwind continue];
     }
 
     bb9: {
-        _16 = const _;
-        _15 = _16 as &[&str] (Pointer(Unsize));
-        _14 = Arguments::<'_>::new_const(move _15) -> [return: bb12, unwind continue];
+        _26 = [const "BC!\n"];
+        _25 = &_26;
+        _24 = _25 as &[&str] (PointerCoercion(Unsize));
+        _23 = Arguments::<'_>::new_const(move _24) -> [return: bb12, unwind continue];
     }
 
     bb10: {
-        _11 = Lt(const 1_i32, const 2_i32);
-        switchInt(move _11) -> [0: bb2, otherwise: bb9];
+        _20 = Lt(const 1_i32, const 2_i32);
+        switchInt(move _20) -> [0: bb2, otherwise: bb9];
     }
 
     bb11: {
-        _12 = Lt(const 1_i32, const 2_i32);
-        switchInt(move _12) -> [0: bb2, otherwise: bb9];
+        _21 = Lt(const 1_i32, const 2_i32);
+        switchInt(move _21) -> [0: bb2, otherwise: bb9];
     }
 
     bb12: {
-        _13 = _print(move _14) -> [return: bb2, unwind continue];
-    }
-}
-
-promoted[0] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "BC!\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];
-    let mut _1: [&str; 1];
-
-    bb0: {
-        _1 = [const "A\n"];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[Foo; 5] = {
-    let mut _0: &[Foo; 5];
-    let mut _1: [Foo; 5];
-    let mut _2: Foo;
-    let mut _3: Foo;
-    let mut _4: Foo;
-    let mut _5: Foo;
-    let mut _6: Foo;
-
-    bb0: {
-        _2 = Foo::A;
-        _3 = Foo::B;
-        _4 = Foo::C;
-        _5 = Foo::D;
-        _6 = Foo::E;
-        _1 = [move _2, move _3, move _4, move _5, move _6];
-        _0 = &_1;
-        return;
+        _22 = _print(move _23) -> [return: bb2, unwind continue];
     }
 }

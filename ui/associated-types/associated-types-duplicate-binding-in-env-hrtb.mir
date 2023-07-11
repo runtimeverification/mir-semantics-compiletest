@@ -5,11 +5,13 @@ fn foo(_1: T) -> i32 {
     let mut _0: i32;
     let mut _2: &T;
     let mut _3: (&u8,);
-    let mut _4: &u8;
+    let _4: &u8;
+    let _5: u8;
 
     bb0: {
         _2 = &_1;
-        _4 = const _;
+        _5 = const 3_u8;
+        _4 = &_5;
         _3 = (_4,);
         _0 = <T as Fn<(&u8,)>>::call(move _2, move _3) -> [return: bb1, unwind: bb3];
     }
@@ -28,17 +30,6 @@ fn foo(_1: T) -> i32 {
 
     bb4 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in foo: &u8 = {
-    let mut _0: &u8;
-    let mut _1: u8;
-
-    bb0: {
-        _1 = const 3_u8;
-        _0 = &_1;
-        return;
     }
 }
 

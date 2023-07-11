@@ -33,12 +33,12 @@ fn bad1(_1: String) -> Option<&str> {
     }
 
     bb0: {
-        _4 = good as for<'a> fn(&'a std::string::String) -> Foo<'a> (Pointer(ReifyFnPointer));
+        _4 = good as for<'a> fn(&'a std::string::String) -> Foo<'a> (PointerCoercion(ReifyFnPointer));
         _3 = Box::<for<'a> fn(&'a String) -> Foo<'a>>::new(move _4) -> [return: bb1, unwind: bb7];
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (PointerCoercion(Unsize));
         _9 = (((_2.0: std::ptr::Unique<dyn std::any::Any>).0: std::ptr::NonNull<dyn std::any::Any>).0: *const dyn std::any::Any);
         _6 = &(*_9);
         _5 = <(dyn Any + 'static)>::downcast_ref::<for<'a> fn(&'a String) -> Foo<'_>>(move _6) -> [return: bb2, unwind: bb6];
@@ -129,12 +129,12 @@ fn bad2(_1: String) -> Option<&str> {
     }
 
     bb1: {
-        _4 = move _5 as std::boxed::Box<dyn for<'a> AsStr<'a, 'a>> (Pointer(Unsize));
+        _4 = move _5 as std::boxed::Box<dyn for<'a> AsStr<'a, 'a>> (PointerCoercion(Unsize));
         _3 = Box::<Box<dyn for<'a> AsStr<'a, 'a>>>::new(move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (PointerCoercion(Unsize));
         _8 = (((_2.0: std::ptr::Unique<dyn std::any::Any>).0: std::ptr::NonNull<dyn std::any::Any>).0: *const dyn std::any::Any);
         _7 = &(*_8);
         _6 = <(dyn Any + 'static)>::downcast_ref::<Box<dyn for<'a> AsStr<'a, '_>>>(move _7) -> [return: bb3, unwind: bb6];
@@ -186,38 +186,40 @@ fn main() -> () {
     let mut _2: &std::option::Option<&str>;
     let _3: std::option::Option<&str>;
     let mut _4: std::string::String;
-    let _5: &std::option::Option<&str>;
-    let _6: &std::option::Option<&str>;
-    let mut _7: bool;
-    let mut _8: bool;
-    let _10: !;
-    let mut _11: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _12: (&std::option::Option<&str>, &std::option::Option<&str>);
-    let mut _13: &std::option::Option<&str>;
-    let _14: std::option::Option<&str>;
-    let mut _15: std::string::String;
-    let _16: &std::option::Option<&str>;
-    let _17: &std::option::Option<&str>;
-    let mut _18: bool;
-    let mut _19: bool;
-    let _21: !;
-    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _23: &std::option::Option<&str>;
-    let mut _24: &std::option::Option<&str>;
+    let mut _5: &std::option::Option<&str>;
+    let _6: std::option::Option<&str>;
+    let _7: &std::option::Option<&str>;
+    let _8: &std::option::Option<&str>;
+    let mut _9: bool;
+    let mut _10: bool;
+    let _12: !;
+    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _14: (&std::option::Option<&str>, &std::option::Option<&str>);
+    let mut _15: &std::option::Option<&str>;
+    let _16: std::option::Option<&str>;
+    let mut _17: std::string::String;
+    let mut _18: &std::option::Option<&str>;
+    let _19: std::option::Option<&str>;
+    let _20: &std::option::Option<&str>;
+    let _21: &std::option::Option<&str>;
+    let mut _22: bool;
+    let mut _23: bool;
+    let _25: !;
+    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _5;
-        debug right_val => _6;
-        let _9: core::panicking::AssertKind;
+        debug left_val => _7;
+        debug right_val => _8;
+        let _11: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _9;
+            debug kind => _11;
         }
     }
     scope 3 {
-        debug left_val => _16;
-        debug right_val => _17;
-        let _20: core::panicking::AssertKind;
+        debug left_val => _20;
+        debug right_val => _21;
+        let _24: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _20;
+            debug kind => _24;
         }
     }
 
@@ -231,75 +233,55 @@ fn main() -> () {
 
     bb2: {
         _2 = &_3;
-        _24 = const _;
-        _1 = (move _2, _24);
-        _5 = (_1.0: &std::option::Option<&str>);
-        _6 = (_1.1: &std::option::Option<&str>);
-        _8 = <Option<&str> as PartialEq>::eq(_5, _6) -> [return: bb3, unwind continue];
+        _6 = Option::<&str>::None;
+        _5 = &_6;
+        _1 = (move _2, move _5);
+        _7 = (_1.0: &std::option::Option<&str>);
+        _8 = (_1.1: &std::option::Option<&str>);
+        _10 = <Option<&str> as PartialEq>::eq(_7, _8) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _7 = Not(move _8);
-        switchInt(move _7) -> [0: bb5, otherwise: bb4];
+        _9 = Not(move _10);
+        switchInt(move _9) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _9 = core::panicking::AssertKind::Eq;
-        _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _9, _5, _6, move _11) -> unwind continue;
+        _11 = core::panicking::AssertKind::Eq;
+        _13 = Option::<Arguments<'_>>::None;
+        _12 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _11, _7, _8, move _13) -> unwind continue;
     }
 
     bb5: {
-        _15 = <String as From<&str>>::from(const "bar") -> [return: bb6, unwind continue];
+        _17 = <String as From<&str>>::from(const "bar") -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _14 = bad2(move _15) -> [return: bb7, unwind continue];
+        _16 = bad2(move _17) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _13 = &_14;
-        _23 = const _;
-        _12 = (move _13, _23);
-        _16 = (_12.0: &std::option::Option<&str>);
-        _17 = (_12.1: &std::option::Option<&str>);
-        _19 = <Option<&str> as PartialEq>::eq(_16, _17) -> [return: bb8, unwind continue];
+        _15 = &_16;
+        _19 = Option::<&str>::None;
+        _18 = &_19;
+        _14 = (move _15, move _18);
+        _20 = (_14.0: &std::option::Option<&str>);
+        _21 = (_14.1: &std::option::Option<&str>);
+        _23 = <Option<&str> as PartialEq>::eq(_20, _21) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _18 = Not(move _19);
-        switchInt(move _18) -> [0: bb10, otherwise: bb9];
+        _22 = Not(move _23);
+        switchInt(move _22) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _20 = core::panicking::AssertKind::Eq;
-        _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _20, _16, _17, move _22) -> unwind continue;
+        _24 = core::panicking::AssertKind::Eq;
+        _26 = Option::<Arguments<'_>>::None;
+        _25 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _24, _20, _21, move _26) -> unwind continue;
     }
 
     bb10: {
-        return;
-    }
-}
-
-promoted[0] in main: &Option<&str> = {
-    let mut _0: &std::option::Option<&str>;
-    let mut _1: std::option::Option<&str>;
-
-    bb0: {
-        _1 = Option::<&str>::None;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &Option<&str> = {
-    let mut _0: &std::option::Option<&str>;
-    let mut _1: std::option::Option<&str>;
-
-    bb0: {
-        _1 = Option::<&str>::None;
-        _0 = &_1;
         return;
     }
 }

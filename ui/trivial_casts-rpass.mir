@@ -11,48 +11,54 @@ fn Foo::foo(_1: &Self) -> () {
 
 fn main() -> () {
     let mut _0: ();
-    let mut _1: &mut u32;
-    let mut _2: u32;
-    let mut _3: &mut [u32; 3];
-    let mut _4: [u32; 3];
-    let mut _6: [u32; 3];
-    let mut _7: std::boxed::Box<[u32]>;
-    let mut _8: std::boxed::Box<[u32; 3]>;
-    let mut _9: &mut Bar;
-    let mut _10: Bar;
-    let mut _12: std::boxed::Box<dyn Foo>;
-    let mut _13: std::boxed::Box<Bar>;
+    let _1: &u32;
+    let _2: u32;
+    let mut _3: &mut u32;
+    let mut _4: u32;
+    let _5: &[u32; 3];
+    let _6: [u32; 3];
+    let mut _7: &mut [u32; 3];
+    let mut _8: [u32; 3];
+    let mut _10: [u32; 3];
+    let mut _11: std::boxed::Box<[u32]>;
+    let mut _12: std::boxed::Box<[u32; 3]>;
+    let _13: &Bar;
+    let _14: Bar;
+    let mut _15: &mut Bar;
+    let mut _16: Bar;
+    let mut _18: std::boxed::Box<dyn Foo>;
+    let mut _19: std::boxed::Box<Bar>;
     scope 1 {
         scope 2 {
             scope 3 {
-                debug x => const _;
+                debug x => _1;
                 scope 4 {
                     scope 5 {
-                        debug x => _1;
+                        debug x => _3;
                         scope 6 {
                             scope 7 {
-                                debug x => const _;
+                                debug x => _5;
                                 scope 8 {
                                     scope 9 {
                                         scope 10 {
-                                            debug x => _3;
+                                            debug x => _7;
                                             scope 11 {
                                                 scope 12 {
-                                                    let _5: std::boxed::Box<[u32; 3]>;
+                                                    let _9: std::boxed::Box<[u32; 3]>;
                                                     scope 13 {
-                                                        debug x => _5;
+                                                        debug x => _9;
                                                         scope 14 {
                                                             scope 15 {
-                                                                debug x => const _;
+                                                                debug x => _13;
                                                                 scope 16 {
                                                                     scope 17 {
                                                                         scope 18 {
-                                                                            debug x => _9;
+                                                                            debug x => _15;
                                                                             scope 19 {
                                                                                 scope 20 {
-                                                                                    let _11: std::boxed::Box<Bar>;
+                                                                                    let _17: std::boxed::Box<Bar>;
                                                                                     scope 21 {
-                                                                                        debug x => _11;
+                                                                                        debug x => _17;
                                                                                         scope 22 {
                                                                                             scope 23 {
                                                                                                 scope 24 {
@@ -86,75 +92,36 @@ fn main() -> () {
 
     bb0: {
         _2 = const 42_u32;
-        _1 = &mut _2;
-        _4 = [const 42_u32, const 43_u32, const 44_u32];
+        _1 = &_2;
+        _4 = const 42_u32;
         _3 = &mut _4;
         _6 = [const 42_u32, const 43_u32, const 44_u32];
-        _5 = Box::<[u32; 3]>::new(move _6) -> [return: bb1, unwind continue];
+        _5 = &_6;
+        _8 = [const 42_u32, const 43_u32, const 44_u32];
+        _7 = &mut _8;
+        _10 = [const 42_u32, const 43_u32, const 44_u32];
+        _9 = Box::<[u32; 3]>::new(move _10) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = move _5;
-        _7 = move _8 as std::boxed::Box<[u32]> (Pointer(Unsize));
-        drop(_7) -> [return: bb2, unwind continue];
+        _12 = move _9;
+        _11 = move _12 as std::boxed::Box<[u32]> (PointerCoercion(Unsize));
+        drop(_11) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = &mut _10;
-        _11 = Box::<Bar>::new(const Bar) -> [return: bb3, unwind continue];
+        _13 = &_14;
+        _15 = &mut _16;
+        _17 = Box::<Bar>::new(const Bar) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _13 = move _11;
-        _12 = move _13 as std::boxed::Box<dyn Foo> (Pointer(Unsize));
-        drop(_12) -> [return: bb4, unwind continue];
+        _19 = move _17;
+        _18 = move _19 as std::boxed::Box<dyn Foo> (PointerCoercion(Unsize));
+        drop(_18) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;
-    }
-}
-
-promoted[0] in main: &fn(i32) {baz} = {
-    let mut _0: &fn(i32) {main::baz};
-    let mut _1: fn(i32) {main::baz};
-
-    bb0: {
-        _1 = baz;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &Bar = {
-    let mut _0: &Bar;
-    let mut _1: Bar;
-
-    bb0: {
-        _1 = Bar;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &[u32; 3] = {
-    let mut _0: &[u32; 3];
-    let mut _1: [u32; 3];
-
-    bb0: {
-        _1 = [const 42_u32, const 43_u32, const 44_u32];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &u32 = {
-    let mut _0: &u32;
-    let mut _1: u32;
-
-    bb0: {
-        _1 = const 42_u32;
-        _0 = &_1;
         return;
     }
 }

@@ -4,25 +4,14 @@ const PAIR_REF: &(i32, i64) = {
     let mut _0: &(i32, i64);
     let _1: &(i32, i64);
     let _2: (i32, i64);
-    let mut _3: &(i32, i64);
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = (const 1_i32, const 2_i64);
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in PAIR_REF: &(i32, i64) = {
-    let mut _0: &(i32, i64);
-    let mut _1: (i32, i64);
-
-    bb0: {
-        _1 = (const 1_i32, const 2_i64);
-        _0 = &_1;
         return;
     }
 }
@@ -31,25 +20,14 @@ const ARRAY_REF: &[i32; 2] = {
     let mut _0: &[i32; 2];
     let _1: &[i32; 2];
     let _2: [i32; 2];
-    let mut _3: &[i32; 2];
 
     bb0: {
         StorageLive(_1);
-        _3 = const _;
-        _1 = &(*_3);
+        StorageLive(_2);
+        _2 = [const 3_i32, const 4_i32];
+        _1 = &_2;
         _0 = &(*_1);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in ARRAY_REF: &[i32; 2] = {
-    let mut _0: &[i32; 2];
-    let mut _1: [i32; 2];
-
-    bb0: {
-        _1 = [const 3_i32, const 4_i32];
-        _0 = &_1;
         return;
     }
 }
@@ -68,28 +46,17 @@ const SLICE_REF: &[i32] = {
     let mut _1: &[i32; 2];
     let _2: &[i32; 2];
     let _3: [i32; 2];
-    let mut _4: &[i32; 2];
 
     bb0: {
         StorageLive(_1);
         StorageLive(_2);
-        _4 = const _;
-        _2 = &(*_4);
+        StorageLive(_3);
+        _3 = [const 5_i32, const 6_i32];
+        _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[i32] (Pointer(Unsize));
+        _0 = move _1 as &[i32] (PointerCoercion(Unsize));
         StorageDead(_2);
         StorageDead(_1);
-        return;
-    }
-}
-
-promoted[0] in SLICE_REF: &[i32; 2] = {
-    let mut _0: &[i32; 2];
-    let mut _1: [i32; 2];
-
-    bb0: {
-        _1 = [const 5_i32, const 6_i32];
-        _0 = &_1;
         return;
     }
 }
@@ -133,7 +100,7 @@ fn main() -> () {
                             debug index_deref_ref => _14;
                             let _19: i32;
                             scope 7 {
-                                debug x => const 0_i32;
+                                debug x => _19;
                                 let _20: *const i32;
                                 scope 8 {
                                     debug ascribe_ref => _20;

@@ -15,8 +15,10 @@ Expected result of running a test case is determined by the [header commands](ht
 By default, all the MIR files are created using the following command (with our preferred flags):
 
 ```sh
-rustc --emit mir -C overflow-checks=off -o <output_file.mir> <input_file.rs>
+-rustc --emit mir -C overflow-checks=off -o <output_file.mir> <input_file.rs>
 ```
+
+Note that due to the `-` preceding `rustc`, this will not block if an error is encountered when attempting to compile a test.
 
 To re-create all the MIR files, run:
 

@@ -132,7 +132,7 @@ fn <impl at ui/mir/mir-inlining/ice-issue-77564.rs:16:1: 16:41>::inner_array(_1:
 
     bb2: {
         _8 = &mut _2;
-        _7 = move _8 as &mut [std::mem::MaybeUninit<A>] (Pointer(Unsize));
+        _7 = move _8 as &mut [std::mem::MaybeUninit<A>] (PointerCoercion(Unsize));
         _6 = core::slice::<impl [MaybeUninit<A>]>::iter_mut(move _7) -> [return: bb3, unwind continue];
     }
 
@@ -231,26 +231,43 @@ fn main() -> () {
     let mut _5: std::iter::Map<std::slice::Iter<'_, [i32; 2]>, [closure@ui/mir/mir-inlining/ice-issue-77564.rs:34:18: 34:23]>;
     let mut _6: std::slice::Iter<'_, [i32; 2]>;
     let mut _7: &[[i32; 2]];
-    let _8: &[[&i32; 2]; 2];
-    let _9: &[[&i32; 2]; 2];
-    let mut _10: bool;
-    let mut _11: bool;
-    let _13: !;
-    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _15: &[[&i32; 2]; 2];
-    let mut _16: &[[i32; 2]; 2];
+    let mut _8: &[[i32; 2]; 2];
+    let _9: [[i32; 2]; 2];
+    let mut _10: [i32; 2];
+    let mut _11: [i32; 2];
+    let mut _12: &[[&i32; 2]; 2];
+    let _13: [[&i32; 2]; 2];
+    let mut _14: [&i32; 2];
+    let mut _15: &i32;
+    let _16: i32;
+    let _17: &i32;
+    let _18: i32;
+    let mut _19: [&i32; 2];
+    let _20: &i32;
+    let _21: i32;
+    let _22: &i32;
+    let _23: i32;
+    let _24: &[[&i32; 2]; 2];
+    let _25: &[[&i32; 2]; 2];
+    let mut _26: bool;
+    let mut _27: bool;
+    let _29: !;
+    let mut _30: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _8;
-        debug right_val => _9;
-        let _12: core::panicking::AssertKind;
+        debug left_val => _24;
+        debug right_val => _25;
+        let _28: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _12;
+            debug kind => _28;
         }
     }
 
     bb0: {
-        _16 = const _;
-        _7 = _16 as &[[i32; 2]] (Pointer(Unsize));
+        _10 = [const 1_i32, const 2_i32];
+        _11 = [const 3_i32, const 4_i32];
+        _9 = [move _10, move _11];
+        _8 = &_9;
+        _7 = move _8 as &[[i32; 2]] (PointerCoercion(Unsize));
         _6 = core::slice::<impl [[i32; 2]]>::iter(move _7) -> [return: bb1, unwind continue];
     }
 
@@ -265,77 +282,36 @@ fn main() -> () {
 
     bb3: {
         _2 = &_3;
-        _15 = const _;
-        _1 = (move _2, _15);
-        _8 = (_1.0: &[[&i32; 2]; 2]);
-        _9 = (_1.1: &[[&i32; 2]; 2]);
-        _11 = <[[&i32; 2]; 2] as PartialEq>::eq(_8, _9) -> [return: bb4, unwind continue];
+        _16 = const 1_i32;
+        _15 = &_16;
+        _18 = const 2_i32;
+        _17 = &_18;
+        _14 = [move _15, _17];
+        _21 = const 3_i32;
+        _20 = &_21;
+        _23 = const 4_i32;
+        _22 = &_23;
+        _19 = [_20, _22];
+        _13 = [move _14, move _19];
+        _12 = &_13;
+        _1 = (move _2, move _12);
+        _24 = (_1.0: &[[&i32; 2]; 2]);
+        _25 = (_1.1: &[[&i32; 2]; 2]);
+        _27 = <[[&i32; 2]; 2] as PartialEq>::eq(_24, _25) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _10 = Not(move _11);
-        switchInt(move _10) -> [0: bb6, otherwise: bb5];
+        _26 = Not(move _27);
+        switchInt(move _26) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _12 = core::panicking::AssertKind::Eq;
-        _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<[[&i32; 2]; 2], [[&i32; 2]; 2]>(move _12, _8, _9, move _14) -> unwind continue;
+        _28 = core::panicking::AssertKind::Eq;
+        _30 = Option::<Arguments<'_>>::None;
+        _29 = core::panicking::assert_failed::<[[&i32; 2]; 2], [[&i32; 2]; 2]>(move _28, _24, _25, move _30) -> unwind continue;
     }
 
     bb6: {
-        return;
-    }
-}
-
-promoted[0] in main: &[[&i32; 2]; 2] = {
-    let mut _0: &[[&i32; 2]; 2];
-    let mut _1: [[&i32; 2]; 2];
-    let mut _2: [&i32; 2];
-    let mut _3: &i32;
-    let mut _4: i32;
-    let mut _5: &i32;
-    let mut _6: &i32;
-    let mut _7: i32;
-    let mut _8: [&i32; 2];
-    let mut _9: &i32;
-    let mut _10: &i32;
-    let mut _11: i32;
-    let mut _12: &i32;
-    let mut _13: &i32;
-    let mut _14: i32;
-
-    bb0: {
-        _4 = const 1_i32;
-        _3 = &_4;
-        _7 = const 2_i32;
-        _6 = &_7;
-        _5 = &(*_6);
-        _2 = [move _3, move _5];
-        _11 = const 3_i32;
-        _10 = &_11;
-        _9 = &(*_10);
-        _14 = const 4_i32;
-        _13 = &_14;
-        _12 = &(*_13);
-        _8 = [move _9, move _12];
-        _1 = [move _2, move _8];
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &[[i32; 2]; 2] = {
-    let mut _0: &[[i32; 2]; 2];
-    let mut _1: [[i32; 2]; 2];
-    let mut _2: [i32; 2];
-    let mut _3: [i32; 2];
-
-    bb0: {
-        _2 = [const 1_i32, const 2_i32];
-        _3 = [const 3_i32, const 4_i32];
-        _1 = [move _2, move _3];
-        _0 = &_1;
         return;
     }
 }
@@ -348,7 +324,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/mir/mir-inlining/ice-issue-77564.rs:34
     let mut _5: &[i32];
 
     bb0: {
-        _5 = _2 as &[i32] (Pointer(Unsize));
+        _5 = _2 as &[i32] (PointerCoercion(Unsize));
         _4 = core::slice::<impl [i32]>::iter(move _5) -> [return: bb1, unwind continue];
     }
 

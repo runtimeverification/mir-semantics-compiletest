@@ -15,7 +15,7 @@ fn next_u32(_1: &mut dyn for<'a> FnMut(&'a mut [u8])) -> () {
     bb0: {
         _2 = [const 0_u8; 4];
         _6 = &mut _2;
-        _5 = _6 as &mut [u8] (Pointer(Unsize));
+        _5 = _6 as &mut [u8] (PointerCoercion(Unsize));
         _4 = (move _5,);
         _3 = <dyn for<'a> FnMut(&'a mut [u8]) as FnMut<(&mut [u8],)>>::call_mut(_1, move _4) -> [return: bb1, unwind continue];
     }
@@ -58,7 +58,7 @@ fn explicit(_1: &mut dyn for<'a> FnMut(&'a mut [u8])) -> () {
     bb0: {
         _2 = [const 0_u8; 4];
         _6 = &mut _2;
-        _5 = _6 as &mut [u8] (Pointer(Unsize));
+        _5 = _6 as &mut [u8] (PointerCoercion(Unsize));
         _4 = (move _5,);
         _3 = <dyn for<'a> FnMut(&'a mut [u8]) as FnMut<(&mut [u8],)>>::call_mut(_1, move _4) -> [return: bb1, unwind continue];
     }
@@ -106,50 +106,6 @@ fn main() -> () {
     }
 
     bb0: {
-        return;
-    }
-}
-
-promoted[0] in main: &for<'a> fn(&'a mut (dyn for<'a> FnMut(&'a mut [u8]) + 'a)) {explicit} = {
-    let mut _0: &for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {explicit};
-    let mut _1: for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {explicit};
-
-    bb0: {
-        _1 = explicit;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &for<'a> fn(&'a mut (dyn for<'a> FnMut(&'a mut [u8]) + 'a)) {next_u32} = {
-    let mut _0: &for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {next_u32};
-    let mut _1: for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {next_u32};
-
-    bb0: {
-        _1 = next_u32;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &for<'a> fn(&'a mut (dyn for<'a> FnMut(&'a mut [u8]) + 'a)) {explicit} = {
-    let mut _0: &for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {explicit};
-    let mut _1: for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {explicit};
-
-    bb0: {
-        _1 = explicit;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &for<'a> fn(&'a mut (dyn for<'a> FnMut(&'a mut [u8]) + 'a)) {next_u32} = {
-    let mut _0: &for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {next_u32};
-    let mut _1: for<'a> fn(&'a mut (dyn for<'a> std::ops::FnMut(&'a mut [u8]) + 'a)) {next_u32};
-
-    bb0: {
-        _1 = next_u32;
-        _0 = &_1;
         return;
     }
 }

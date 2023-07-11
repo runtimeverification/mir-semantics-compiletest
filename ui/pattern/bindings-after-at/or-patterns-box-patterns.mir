@@ -32,7 +32,7 @@ fn <impl at ui/pattern/bindings-after-at/or-patterns-box-patterns.rs:7:10: 7:15>
         _4 = &(((*_1) as Arm).0: usize);
         _5 = const "Arm";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb4, unwind continue];
     }
 
@@ -215,21 +215,25 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     let mut _18: bool;
     let mut _19: bool;
     let mut _20: &Test;
-    let mut _21: bool;
-    let mut _22: &Test;
-    let mut _23: !;
-    let mut _26: std::boxed::Box<Test>;
-    let mut _27: std::boxed::Box<Test>;
+    let mut _21: &Test;
+    let _22: Test;
+    let mut _23: bool;
+    let mut _24: &Test;
+    let mut _25: &Test;
+    let _26: Test;
+    let mut _27: !;
     let mut _28: std::boxed::Box<Test>;
-    let mut _29: *const Test;
-    let mut _30: *const Test;
+    let mut _29: std::boxed::Box<Test>;
+    let mut _30: std::boxed::Box<Test>;
     let mut _31: *const Test;
-    let mut _44: *const ();
-    let mut _45: usize;
-    let mut _46: usize;
+    let mut _32: *const Test;
+    let mut _33: *const Test;
+    let mut _46: *const ();
     let mut _47: usize;
     let mut _48: usize;
-    let mut _49: bool;
+    let mut _49: usize;
+    let mut _50: usize;
+    let mut _51: bool;
     scope 1 {
         debug bar => _4;
         let _9: &&std::option::Option<std::boxed::Box<Test>>;
@@ -245,20 +249,18 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
     scope 4 {
         debug bar => _16;
-        let mut _24: &Test;
-        let mut _25: &Test;
-        let mut _32: *const ();
-        let mut _33: usize;
-        let mut _34: usize;
+        let mut _34: *const ();
         let mut _35: usize;
         let mut _36: usize;
-        let mut _37: bool;
-        let mut _38: *const ();
-        let mut _39: usize;
-        let mut _40: usize;
+        let mut _37: usize;
+        let mut _38: usize;
+        let mut _39: bool;
+        let mut _40: *const ();
         let mut _41: usize;
         let mut _42: usize;
-        let mut _43: bool;
+        let mut _43: usize;
+        let mut _44: usize;
+        let mut _45: bool;
     }
 
     bb0: {
@@ -272,15 +274,15 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
 
     bb2: {
-        _26 = deref_copy ((_1 as Some).0: std::boxed::Box<Test>);
-        _29 = (((_26.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _44 = _29 as *const () (PtrToPtr);
-        _45 = _44 as usize (Transmute);
-        _46 = AlignOf(Test);
-        _47 = Sub(_46, const 1_usize);
-        _48 = BitAnd(_45, _47);
-        _49 = Eq(_48, const 0_usize);
-        assert(_49, "misaligned pointer dereference: address must be a multiple of {} but is {}", _46, _45) -> [success: bb25, unwind unreachable];
+        _28 = deref_copy ((_1 as Some).0: std::boxed::Box<Test>);
+        _31 = (((_28.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _46 = _31 as *const () (PtrToPtr);
+        _47 = _46 as usize (Transmute);
+        _48 = AlignOf(Test);
+        _49 = Sub(_48, const 1_usize);
+        _50 = BitAnd(_47, _49);
+        _51 = Eq(_50, const 0_usize);
+        assert(_51, "misaligned pointer dereference: address must be a multiple of {} but is {}", _48, _47) -> [success: bb25, unwind unreachable];
     }
 
     bb3: {
@@ -320,15 +322,15 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
 
     bb9: {
-        _27 = deref_copy (*_16);
-        _30 = (((_27.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _38 = _30 as *const () (PtrToPtr);
-        _39 = _38 as usize (Transmute);
-        _40 = AlignOf(Test);
-        _41 = Sub(_40, const 1_usize);
-        _42 = BitAnd(_39, _41);
-        _43 = Eq(_42, const 0_usize);
-        assert(_43, "misaligned pointer dereference: address must be a multiple of {} but is {}", _40, _39) -> [success: bb24, unwind unreachable];
+        _29 = deref_copy (*_16);
+        _32 = (((_29.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _40 = _32 as *const () (PtrToPtr);
+        _41 = _40 as usize (Transmute);
+        _42 = AlignOf(Test);
+        _43 = Sub(_42, const 1_usize);
+        _44 = BitAnd(_41, _43);
+        _45 = Eq(_44, const 0_usize);
+        assert(_45, "misaligned pointer dereference: address must be a multiple of {} but is {}", _42, _41) -> [success: bb24, unwind unreachable];
     }
 
     bb10: {
@@ -347,15 +349,15 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
 
     bb13: {
-        _28 = deref_copy (*_16);
-        _31 = (((_28.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
-        _32 = _31 as *const () (PtrToPtr);
-        _33 = _32 as usize (Transmute);
-        _34 = AlignOf(Test);
-        _35 = Sub(_34, const 1_usize);
-        _36 = BitAnd(_33, _35);
-        _37 = Eq(_36, const 0_usize);
-        assert(_37, "misaligned pointer dereference: address must be a multiple of {} but is {}", _34, _33) -> [success: bb23, unwind unreachable];
+        _30 = deref_copy (*_16);
+        _33 = (((_30.0: std::ptr::Unique<Test>).0: std::ptr::NonNull<Test>).0: *const Test);
+        _34 = _33 as *const () (PtrToPtr);
+        _35 = _34 as usize (Transmute);
+        _36 = AlignOf(Test);
+        _37 = Sub(_36, const 1_usize);
+        _38 = BitAnd(_35, _37);
+        _39 = Eq(_38, const 0_usize);
+        assert(_39, "misaligned pointer dereference: address must be a multiple of {} but is {}", _36, _35) -> [success: bb23, unwind unreachable];
     }
 
     bb14: {
@@ -368,12 +370,12 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
 
     bb16: {
-        _18 = move _21;
+        _18 = move _23;
         goto -> bb14;
     }
 
     bb17: {
-        _23 = core::panicking::panic(const "assertion failed: **bar == Test::Baz || **bar == Test::Qux") -> bb21;
+        _27 = core::panicking::panic(const "assertion failed: **bar == Test::Baz || **bar == Test::Qux") -> bb21;
     }
 
     bb18: {
@@ -398,46 +400,26 @@ fn test(_1: Option<Box<Test>>) -> MatchArm {
     }
 
     bb23: {
-        _22 = &(*_31);
-        _24 = const _;
-        _21 = <Test as PartialEq>::eq(move _22, _24) -> [return: bb16, unwind: bb21];
+        _24 = &(*_33);
+        _26 = Test::Qux;
+        _25 = &_26;
+        _23 = <Test as PartialEq>::eq(move _24, move _25) -> [return: bb16, unwind: bb21];
     }
 
     bb24: {
-        _20 = &(*_30);
-        _25 = const _;
-        _19 = <Test as PartialEq>::eq(move _20, _25) -> [return: bb15, unwind: bb21];
+        _20 = &(*_32);
+        _22 = Test::Baz;
+        _21 = &_22;
+        _19 = <Test as PartialEq>::eq(move _20, move _21) -> [return: bb15, unwind: bb21];
     }
 
     bb25: {
-        _2 = discriminant((*_29));
+        _2 = discriminant((*_31));
         switchInt(move _2) -> [0: bb4, 1: bb5, 2: bb10, 3: bb11, otherwise: bb26];
     }
 
     bb26: {
         unreachable;
-    }
-}
-
-promoted[0] in test: &Test = {
-    let mut _0: &Test;
-    let mut _1: Test;
-
-    bb0: {
-        _1 = Test::Qux;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in test: &Test = {
-    let mut _0: &Test;
-    let mut _1: Test;
-
-    bb0: {
-        _1 = Test::Baz;
-        _0 = &_1;
-        return;
     }
 }
 
@@ -449,101 +431,106 @@ fn main() -> () {
     let mut _4: std::option::Option<std::boxed::Box<Test>>;
     let mut _5: std::boxed::Box<Test>;
     let mut _6: Test;
-    let _7: &MatchArm;
-    let _8: &MatchArm;
-    let mut _9: bool;
-    let mut _10: bool;
-    let _12: !;
-    let mut _13: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _14: (&MatchArm, &MatchArm);
-    let mut _15: &MatchArm;
-    let _16: MatchArm;
-    let mut _17: std::option::Option<std::boxed::Box<Test>>;
-    let mut _18: std::boxed::Box<Test>;
-    let mut _19: Test;
-    let _20: &MatchArm;
-    let _21: &MatchArm;
-    let mut _22: bool;
-    let mut _23: bool;
-    let _25: !;
-    let mut _26: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _27: (&MatchArm, &MatchArm);
-    let mut _28: &MatchArm;
-    let _29: MatchArm;
-    let mut _30: std::option::Option<std::boxed::Box<Test>>;
-    let mut _31: std::boxed::Box<Test>;
-    let mut _32: Test;
-    let _33: &MatchArm;
-    let _34: &MatchArm;
-    let mut _35: bool;
-    let mut _36: bool;
-    let _38: !;
-    let mut _39: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _40: (&MatchArm, &MatchArm);
-    let mut _41: &MatchArm;
-    let _42: MatchArm;
-    let mut _43: std::option::Option<std::boxed::Box<Test>>;
-    let mut _44: std::boxed::Box<Test>;
-    let mut _45: Test;
-    let _46: &MatchArm;
-    let _47: &MatchArm;
-    let mut _48: bool;
-    let mut _49: bool;
-    let _51: !;
-    let mut _52: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _53: (&MatchArm, &MatchArm);
-    let mut _54: &MatchArm;
-    let _55: MatchArm;
-    let mut _56: std::option::Option<std::boxed::Box<Test>>;
-    let _57: &MatchArm;
-    let _58: &MatchArm;
-    let mut _59: bool;
-    let mut _60: bool;
-    let _62: !;
-    let mut _63: std::option::Option<std::fmt::Arguments<'_>>;
-    let mut _64: &MatchArm;
+    let mut _7: &MatchArm;
+    let _8: MatchArm;
+    let _9: &MatchArm;
+    let _10: &MatchArm;
+    let mut _11: bool;
+    let mut _12: bool;
+    let _14: !;
+    let mut _15: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _16: (&MatchArm, &MatchArm);
+    let mut _17: &MatchArm;
+    let _18: MatchArm;
+    let mut _19: std::option::Option<std::boxed::Box<Test>>;
+    let mut _20: std::boxed::Box<Test>;
+    let mut _21: Test;
+    let mut _22: &MatchArm;
+    let _23: MatchArm;
+    let _24: &MatchArm;
+    let _25: &MatchArm;
+    let mut _26: bool;
+    let mut _27: bool;
+    let _29: !;
+    let mut _30: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _31: (&MatchArm, &MatchArm);
+    let mut _32: &MatchArm;
+    let _33: MatchArm;
+    let mut _34: std::option::Option<std::boxed::Box<Test>>;
+    let mut _35: std::boxed::Box<Test>;
+    let mut _36: Test;
+    let mut _37: &MatchArm;
+    let _38: MatchArm;
+    let _39: &MatchArm;
+    let _40: &MatchArm;
+    let mut _41: bool;
+    let mut _42: bool;
+    let _44: !;
+    let mut _45: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _46: (&MatchArm, &MatchArm);
+    let mut _47: &MatchArm;
+    let _48: MatchArm;
+    let mut _49: std::option::Option<std::boxed::Box<Test>>;
+    let mut _50: std::boxed::Box<Test>;
+    let mut _51: Test;
+    let mut _52: &MatchArm;
+    let _53: MatchArm;
+    let _54: &MatchArm;
+    let _55: &MatchArm;
+    let mut _56: bool;
+    let mut _57: bool;
+    let _59: !;
+    let mut _60: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _61: (&MatchArm, &MatchArm);
+    let mut _62: &MatchArm;
+    let _63: MatchArm;
+    let mut _64: std::option::Option<std::boxed::Box<Test>>;
     let mut _65: &MatchArm;
-    let mut _66: &MatchArm;
-    let mut _67: &MatchArm;
-    let mut _68: &MatchArm;
+    let _66: MatchArm;
+    let _67: &MatchArm;
+    let _68: &MatchArm;
+    let mut _69: bool;
+    let mut _70: bool;
+    let _72: !;
+    let mut _73: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _7;
-        debug right_val => _8;
-        let _11: core::panicking::AssertKind;
+        debug left_val => _9;
+        debug right_val => _10;
+        let _13: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _11;
+            debug kind => _13;
         }
     }
     scope 3 {
-        debug left_val => _20;
-        debug right_val => _21;
-        let _24: core::panicking::AssertKind;
+        debug left_val => _24;
+        debug right_val => _25;
+        let _28: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _24;
+            debug kind => _28;
         }
     }
     scope 5 {
-        debug left_val => _33;
-        debug right_val => _34;
-        let _37: core::panicking::AssertKind;
+        debug left_val => _39;
+        debug right_val => _40;
+        let _43: core::panicking::AssertKind;
         scope 6 {
-            debug kind => _37;
+            debug kind => _43;
         }
     }
     scope 7 {
-        debug left_val => _46;
-        debug right_val => _47;
-        let _50: core::panicking::AssertKind;
+        debug left_val => _54;
+        debug right_val => _55;
+        let _58: core::panicking::AssertKind;
         scope 8 {
-            debug kind => _50;
+            debug kind => _58;
         }
     }
     scope 9 {
-        debug left_val => _57;
-        debug right_val => _58;
-        let _61: core::panicking::AssertKind;
+        debug left_val => _67;
+        debug right_val => _68;
+        let _71: core::panicking::AssertKind;
         scope 10 {
-            debug kind => _61;
+            debug kind => _71;
         }
     }
 
@@ -559,195 +546,145 @@ fn main() -> () {
 
     bb2: {
         _2 = &_3;
-        _68 = const _;
-        _1 = (move _2, _68);
-        _7 = (_1.0: &MatchArm);
-        _8 = (_1.1: &MatchArm);
-        _10 = <MatchArm as PartialEq>::eq(_7, _8) -> [return: bb3, unwind continue];
+        _8 = MatchArm::Arm(const 0_usize);
+        _7 = &_8;
+        _1 = (move _2, move _7);
+        _9 = (_1.0: &MatchArm);
+        _10 = (_1.1: &MatchArm);
+        _12 = <MatchArm as PartialEq>::eq(_9, _10) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _9 = Not(move _10);
-        switchInt(move _9) -> [0: bb5, otherwise: bb4];
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _11 = core::panicking::AssertKind::Eq;
-        _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _11, _7, _8, move _13) -> unwind continue;
+        _13 = core::panicking::AssertKind::Eq;
+        _15 = Option::<Arguments<'_>>::None;
+        _14 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _13, _9, _10, move _15) -> unwind continue;
     }
 
     bb5: {
-        _19 = Test::Bar;
-        _18 = Box::<Test>::new(move _19) -> [return: bb6, unwind continue];
+        _21 = Test::Bar;
+        _20 = Box::<Test>::new(move _21) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _17 = Option::<Box<Test>>::Some(move _18);
-        _16 = test(move _17) -> [return: bb7, unwind continue];
+        _19 = Option::<Box<Test>>::Some(move _20);
+        _18 = test(move _19) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _15 = &_16;
-        _67 = const _;
-        _14 = (move _15, _67);
-        _20 = (_14.0: &MatchArm);
-        _21 = (_14.1: &MatchArm);
-        _23 = <MatchArm as PartialEq>::eq(_20, _21) -> [return: bb8, unwind continue];
+        _17 = &_18;
+        _23 = MatchArm::Arm(const 0_usize);
+        _22 = &_23;
+        _16 = (move _17, move _22);
+        _24 = (_16.0: &MatchArm);
+        _25 = (_16.1: &MatchArm);
+        _27 = <MatchArm as PartialEq>::eq(_24, _25) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _22 = Not(move _23);
-        switchInt(move _22) -> [0: bb10, otherwise: bb9];
+        _26 = Not(move _27);
+        switchInt(move _26) -> [0: bb10, otherwise: bb9];
     }
 
     bb9: {
-        _24 = core::panicking::AssertKind::Eq;
-        _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _24, _20, _21, move _26) -> unwind continue;
+        _28 = core::panicking::AssertKind::Eq;
+        _30 = Option::<Arguments<'_>>::None;
+        _29 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _28, _24, _25, move _30) -> unwind continue;
     }
 
     bb10: {
-        _32 = Test::Baz;
-        _31 = Box::<Test>::new(move _32) -> [return: bb11, unwind continue];
+        _36 = Test::Baz;
+        _35 = Box::<Test>::new(move _36) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        _30 = Option::<Box<Test>>::Some(move _31);
-        _29 = test(move _30) -> [return: bb12, unwind continue];
+        _34 = Option::<Box<Test>>::Some(move _35);
+        _33 = test(move _34) -> [return: bb12, unwind continue];
     }
 
     bb12: {
-        _28 = &_29;
-        _66 = const _;
-        _27 = (move _28, _66);
-        _33 = (_27.0: &MatchArm);
-        _34 = (_27.1: &MatchArm);
-        _36 = <MatchArm as PartialEq>::eq(_33, _34) -> [return: bb13, unwind continue];
+        _32 = &_33;
+        _38 = MatchArm::Arm(const 1_usize);
+        _37 = &_38;
+        _31 = (move _32, move _37);
+        _39 = (_31.0: &MatchArm);
+        _40 = (_31.1: &MatchArm);
+        _42 = <MatchArm as PartialEq>::eq(_39, _40) -> [return: bb13, unwind continue];
     }
 
     bb13: {
-        _35 = Not(move _36);
-        switchInt(move _35) -> [0: bb15, otherwise: bb14];
+        _41 = Not(move _42);
+        switchInt(move _41) -> [0: bb15, otherwise: bb14];
     }
 
     bb14: {
-        _37 = core::panicking::AssertKind::Eq;
-        _39 = Option::<Arguments<'_>>::None;
-        _38 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _37, _33, _34, move _39) -> unwind continue;
+        _43 = core::panicking::AssertKind::Eq;
+        _45 = Option::<Arguments<'_>>::None;
+        _44 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _43, _39, _40, move _45) -> unwind continue;
     }
 
     bb15: {
-        _45 = Test::Qux;
-        _44 = Box::<Test>::new(move _45) -> [return: bb16, unwind continue];
+        _51 = Test::Qux;
+        _50 = Box::<Test>::new(move _51) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        _43 = Option::<Box<Test>>::Some(move _44);
-        _42 = test(move _43) -> [return: bb17, unwind continue];
+        _49 = Option::<Box<Test>>::Some(move _50);
+        _48 = test(move _49) -> [return: bb17, unwind continue];
     }
 
     bb17: {
-        _41 = &_42;
-        _65 = const _;
-        _40 = (move _41, _65);
-        _46 = (_40.0: &MatchArm);
-        _47 = (_40.1: &MatchArm);
-        _49 = <MatchArm as PartialEq>::eq(_46, _47) -> [return: bb18, unwind continue];
+        _47 = &_48;
+        _53 = MatchArm::Arm(const 1_usize);
+        _52 = &_53;
+        _46 = (move _47, move _52);
+        _54 = (_46.0: &MatchArm);
+        _55 = (_46.1: &MatchArm);
+        _57 = <MatchArm as PartialEq>::eq(_54, _55) -> [return: bb18, unwind continue];
     }
 
     bb18: {
-        _48 = Not(move _49);
-        switchInt(move _48) -> [0: bb20, otherwise: bb19];
+        _56 = Not(move _57);
+        switchInt(move _56) -> [0: bb20, otherwise: bb19];
     }
 
     bb19: {
-        _50 = core::panicking::AssertKind::Eq;
-        _52 = Option::<Arguments<'_>>::None;
-        _51 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _50, _46, _47, move _52) -> unwind continue;
+        _58 = core::panicking::AssertKind::Eq;
+        _60 = Option::<Arguments<'_>>::None;
+        _59 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _58, _54, _55, move _60) -> unwind continue;
     }
 
     bb20: {
-        _56 = Option::<Box<Test>>::None;
-        _55 = test(move _56) -> [return: bb21, unwind continue];
+        _64 = Option::<Box<Test>>::None;
+        _63 = test(move _64) -> [return: bb21, unwind continue];
     }
 
     bb21: {
-        _54 = &_55;
-        _64 = const _;
-        _53 = (move _54, _64);
-        _57 = (_53.0: &MatchArm);
-        _58 = (_53.1: &MatchArm);
-        _60 = <MatchArm as PartialEq>::eq(_57, _58) -> [return: bb22, unwind continue];
+        _62 = &_63;
+        _66 = MatchArm::Wild;
+        _65 = &_66;
+        _61 = (move _62, move _65);
+        _67 = (_61.0: &MatchArm);
+        _68 = (_61.1: &MatchArm);
+        _70 = <MatchArm as PartialEq>::eq(_67, _68) -> [return: bb22, unwind continue];
     }
 
     bb22: {
-        _59 = Not(move _60);
-        switchInt(move _59) -> [0: bb24, otherwise: bb23];
+        _69 = Not(move _70);
+        switchInt(move _69) -> [0: bb24, otherwise: bb23];
     }
 
     bb23: {
-        _61 = core::panicking::AssertKind::Eq;
-        _63 = Option::<Arguments<'_>>::None;
-        _62 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _61, _57, _58, move _63) -> unwind continue;
+        _71 = core::panicking::AssertKind::Eq;
+        _73 = Option::<Arguments<'_>>::None;
+        _72 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _71, _67, _68, move _73) -> unwind continue;
     }
 
     bb24: {
-        return;
-    }
-}
-
-promoted[0] in main: &MatchArm = {
-    let mut _0: &MatchArm;
-    let mut _1: MatchArm;
-
-    bb0: {
-        _1 = MatchArm::Wild;
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[1] in main: &MatchArm = {
-    let mut _0: &MatchArm;
-    let mut _1: MatchArm;
-
-    bb0: {
-        _1 = MatchArm::Arm(const 1_usize);
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[2] in main: &MatchArm = {
-    let mut _0: &MatchArm;
-    let mut _1: MatchArm;
-
-    bb0: {
-        _1 = MatchArm::Arm(const 1_usize);
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[3] in main: &MatchArm = {
-    let mut _0: &MatchArm;
-    let mut _1: MatchArm;
-
-    bb0: {
-        _1 = MatchArm::Arm(const 0_usize);
-        _0 = &_1;
-        return;
-    }
-}
-
-promoted[4] in main: &MatchArm = {
-    let mut _0: &MatchArm;
-    let mut _1: MatchArm;
-
-    bb0: {
-        _1 = MatchArm::Arm(const 0_usize);
-        _0 = &_1;
         return;
     }
 }

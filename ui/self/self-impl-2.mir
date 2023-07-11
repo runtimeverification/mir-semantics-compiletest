@@ -100,66 +100,67 @@ fn <impl at ui/self/self-impl-2.rs:48:1: 48:36>::bar(_1: Box<Baz<isize>>, _2: &B
 fn main() -> () {
     let mut _0: ();
     let mut _1: Foo;
-    let mut _2: std::boxed::Box<Foo>;
-    let mut _3: std::boxed::Box<Baz<isize>>;
-    let mut _4: std::boxed::Box<Baz<isize>>;
-    let mut _5: Baz<isize>;
-    let _6: &std::boxed::Box<Baz<isize>>;
-    let _7: std::boxed::Box<Baz<isize>>;
-    let mut _8: Baz<isize>;
-    let mut _9: std::boxed::Box<std::boxed::Box<Baz<isize>>>;
-    let mut _10: std::boxed::Box<Baz<isize>>;
-    let mut _11: Baz<isize>;
-    let mut _12: &Foo;
-    let mut _13: bool;
+    let _2: &Foo;
+    let _3: Foo;
+    let mut _4: std::boxed::Box<Foo>;
+    let mut _5: std::boxed::Box<Baz<isize>>;
+    let mut _6: std::boxed::Box<Baz<isize>>;
+    let mut _7: Baz<isize>;
+    let _8: &std::boxed::Box<Baz<isize>>;
+    let _9: std::boxed::Box<Baz<isize>>;
+    let mut _10: Baz<isize>;
+    let mut _11: std::boxed::Box<std::boxed::Box<Baz<isize>>>;
+    let mut _12: std::boxed::Box<Baz<isize>>;
+    let mut _13: Baz<isize>;
+    let mut _14: bool;
     scope 1 {
         scope 2 {
         }
     }
 
     bb0: {
-        _13 = const false;
-        _12 = const _;
-        _2 = Box::<Foo>::new(const Foo) -> [return: bb1, unwind continue];
+        _14 = const false;
+        _2 = &_3;
+        _4 = Box::<Foo>::new(const Foo) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Foo::foo(const Foo, _12, move _2) -> [return: bb2, unwind continue];
+        _1 = Foo::foo(const Foo, _2, move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _5 = Baz::<isize> { f: const 42_isize };
-        _13 = const true;
-        _4 = Box::<Baz<isize>>::new(move _5) -> [return: bb3, unwind continue];
+        _7 = Baz::<isize> { f: const 42_isize };
+        _14 = const true;
+        _6 = Box::<Baz<isize>>::new(move _7) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _8 = Baz::<isize> { f: const 42_isize };
-        _7 = Box::<Baz<isize>>::new(move _8) -> [return: bb4, unwind: bb11];
+        _10 = Baz::<isize> { f: const 42_isize };
+        _9 = Box::<Baz<isize>>::new(move _10) -> [return: bb4, unwind: bb11];
     }
 
     bb4: {
-        _6 = &_7;
-        _11 = Baz::<isize> { f: const 42_isize };
-        _10 = Box::<Baz<isize>>::new(move _11) -> [return: bb5, unwind: bb14];
+        _8 = &_9;
+        _13 = Baz::<isize> { f: const 42_isize };
+        _12 = Box::<Baz<isize>>::new(move _13) -> [return: bb5, unwind: bb14];
     }
 
     bb5: {
-        _9 = Box::<Box<Baz<isize>>>::new(move _10) -> [return: bb6, unwind: bb14];
+        _11 = Box::<Box<Baz<isize>>>::new(move _12) -> [return: bb6, unwind: bb14];
     }
 
     bb6: {
-        _13 = const false;
-        _3 = <Box<Baz<isize>> as Bar<isize>>::bar(move _4, _6, move _9, const true) -> [return: bb7, unwind: bb14];
+        _14 = const false;
+        _5 = <Box<Baz<isize>> as Bar<isize>>::bar(move _6, _8, move _11, const true) -> [return: bb7, unwind: bb14];
     }
 
     bb7: {
-        _13 = const false;
-        drop(_3) -> [return: bb8, unwind: bb10];
+        _14 = const false;
+        drop(_5) -> [return: bb8, unwind: bb10];
     }
 
     bb8: {
-        drop(_7) -> [return: bb9, unwind continue];
+        drop(_9) -> [return: bb9, unwind continue];
     }
 
     bb9: {
@@ -167,11 +168,11 @@ fn main() -> () {
     }
 
     bb10 (cleanup): {
-        drop(_7) -> [return: bb12, unwind terminate];
+        drop(_9) -> [return: bb12, unwind terminate];
     }
 
     bb11 (cleanup): {
-        drop(_4) -> [return: bb12, unwind terminate];
+        drop(_6) -> [return: bb12, unwind terminate];
     }
 
     bb12 (cleanup): {
@@ -179,21 +180,10 @@ fn main() -> () {
     }
 
     bb13 (cleanup): {
-        drop(_4) -> [return: bb10, unwind terminate];
+        drop(_6) -> [return: bb10, unwind terminate];
     }
 
     bb14 (cleanup): {
-        switchInt(_13) -> [0: bb10, otherwise: bb13];
-    }
-}
-
-promoted[0] in main: &Foo = {
-    let mut _0: &Foo;
-    let mut _1: Foo;
-
-    bb0: {
-        _1 = Foo;
-        _0 = &_1;
-        return;
+        switchInt(_14) -> [0: bb10, otherwise: bb13];
     }
 }

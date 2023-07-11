@@ -13,7 +13,7 @@ fn <impl at ui/array-slice-vec/show-boxed-slice.rs:3:10: 3:15>::fmt(_1: &Foo, _2
         _3 = const "Foo";
         _6 = &((*_1).0: std::boxed::Box<[u8]>);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
         _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
     }
 
@@ -27,36 +27,38 @@ fn main() -> () {
     let _1: ();
     let mut _2: std::fmt::Arguments<'_>;
     let mut _3: &[&str];
-    let mut _4: &[core::fmt::rt::Argument<'_>];
-    let _5: &[core::fmt::rt::Argument<'_>; 1];
-    let _6: [core::fmt::rt::Argument<'_>; 1];
-    let mut _7: core::fmt::rt::Argument<'_>;
-    let _8: &Foo;
-    let _9: Foo;
-    let mut _10: std::boxed::Box<[u8]>;
-    let mut _11: std::boxed::Box<[u8; 3]>;
-    let mut _12: [u8; 3];
-    let mut _13: &[&str; 2];
+    let _4: &[&str; 2];
+    let _5: [&str; 2];
+    let mut _6: &[core::fmt::rt::Argument<'_>];
+    let _7: &[core::fmt::rt::Argument<'_>; 1];
+    let _8: [core::fmt::rt::Argument<'_>; 1];
+    let mut _9: core::fmt::rt::Argument<'_>;
+    let _10: &Foo;
+    let _11: Foo;
+    let mut _12: std::boxed::Box<[u8]>;
+    let mut _13: std::boxed::Box<[u8; 3]>;
+    let mut _14: [u8; 3];
 
     bb0: {
-        _13 = const _;
-        _3 = _13 as &[&str] (Pointer(Unsize));
-        _12 = [const 0_u8, const 1_u8, const 2_u8];
-        _11 = Box::<[u8; 3]>::new(move _12) -> [return: bb1, unwind continue];
+        _5 = [const "", const "\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _14 = [const 0_u8, const 1_u8, const 2_u8];
+        _13 = Box::<[u8; 3]>::new(move _14) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _10 = move _11 as std::boxed::Box<[u8]> (Pointer(Unsize));
-        _9 = Foo(move _10);
-        _8 = &_9;
-        _7 = core::fmt::rt::Argument::<'_>::new_debug::<Foo>(_8) -> [return: bb2, unwind: bb6];
+        _12 = move _13 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
+        _11 = Foo(move _12);
+        _10 = &_11;
+        _9 = core::fmt::rt::Argument::<'_>::new_debug::<Foo>(_10) -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _6 = [move _7];
-        _5 = &_6;
-        _4 = _5 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _4) -> [return: bb3, unwind: bb6];
+        _8 = [move _9];
+        _7 = &_8;
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb3, unwind: bb6];
     }
 
     bb3: {
@@ -64,7 +66,7 @@ fn main() -> () {
     }
 
     bb4: {
-        drop(_9) -> [return: bb5, unwind continue];
+        drop(_11) -> [return: bb5, unwind continue];
     }
 
     bb5: {
@@ -72,22 +74,11 @@ fn main() -> () {
     }
 
     bb6 (cleanup): {
-        drop(_9) -> [return: bb7, unwind terminate];
+        drop(_11) -> [return: bb7, unwind terminate];
     }
 
     bb7 (cleanup): {
         resume;
-    }
-}
-
-promoted[0] in main: &[&str; 2] = {
-    let mut _0: &[&str; 2];
-    let mut _1: [&str; 2];
-
-    bb0: {
-        _1 = [const "", const "\n"];
-        _0 = &_1;
-        return;
     }
 }
 
