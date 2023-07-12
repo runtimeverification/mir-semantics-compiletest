@@ -1,503 +1,291 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: RefCell<String>) -> String {
-    debug x => _1;                       // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:13:8: 13:9
-    let mut _0: std::string::String;     // return place in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:13:31: 13:37
-    let mut _2: &std::string::String;    // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-    let _3: &std::string::String;        // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-    let mut _4: &std::cell::Ref<'_, std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-    let _5: std::cell::Ref<'_, std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:15
-    let mut _6: &std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:15
+    debug x => _1;
+    let mut _0: std::string::String;
+    let mut _2: &std::string::String;
+    let _3: &std::string::String;
+    let mut _4: &std::cell::Ref<'_, std::string::String>;
+    let _5: std::cell::Ref<'_, std::string::String>;
+    let mut _6: &std::cell::RefCell<std::string::String>;
 
     bb0: {
-        _6 = &_1;                        // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:15
-        _5 = RefCell::<String>::borrow(move _6) -> [return: bb1, unwind: bb7]; // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:15
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:7: 14:13
-                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<String>) -> Ref<'a, String> {RefCell::<String>::borrow}, val: Value(<ZST>) }
+        _6 = &_1;
+        _5 = RefCell::<String>::borrow(move _6) -> [return: bb1, unwind: bb7];
     }
 
     bb1: {
-        _4 = &_5;                        // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-        _3 = <Ref<'_, String> as Deref>::deref(move _4) -> [return: bb2, unwind: bb6]; // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-                                         // + literal: Const { ty: for<'a> fn(&'a Ref<'_, String>) -> &'a <Ref<'_, String> as Deref>::Target {<Ref<'_, String> as Deref>::deref}, val: Value(<ZST>) }
+        _4 = &_5;
+        _3 = <Ref<'_, String> as Deref>::deref(move _4) -> [return: bb2, unwind: bb6];
     }
 
     bb2: {
-        _2 = _3;                         // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-        _0 = <String as Clone>::clone(move _2) -> [return: bb3, unwind: bb6]; // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:5: 14:23
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:14:16: 14:21
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> String {<String as Clone>::clone}, val: Value(<ZST>) }
+        _2 = _3;
+        _0 = <String as Clone>::clone(move _2) -> [return: bb3, unwind: bb6];
     }
 
     bb3: {
-        drop(_5) -> [return: bb4, unwind: bb7]; // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:15:1: 15:2
+        drop(_5) -> [return: bb4, unwind: bb7];
     }
 
     bb4: {
-        drop(_1) -> bb5;                 // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:15:1: 15:2
+        drop(_1) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:15:2: 15:2
+        return;
     }
 
     bb6 (cleanup): {
-        drop(_5) -> bb7;                 // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:15:1: 15:2
+        drop(_5) -> [return: bb7, unwind terminate];
     }
 
     bb7 (cleanup): {
-        drop(_1) -> bb8;                 // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:15:1: 15:2
+        drop(_1) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:13:1: 15:2
+        resume;
     }
 }
 
 fn foo2(_1: RefCell<String>) -> String {
-    debug x => _1;                       // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:17:9: 17:10
-    let _2: std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:18:9: 18:10
-    let mut _3: &std::string::String;    // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-    let _4: &std::string::String;        // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-    let mut _5: &std::cell::Ref<'_, std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-    let _6: std::cell::Ref<'_, std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:19
-    let mut _7: &std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:19
+    debug x => _1;
+    let mut _0: std::string::String;
+    let _2: std::cell::RefCell<std::string::String>;
+    let mut _4: &std::string::String;
+    let _5: &std::string::String;
+    let mut _6: &std::cell::Ref<'_, std::string::String>;
+    let _7: std::cell::Ref<'_, std::string::String>;
+    let mut _8: &std::cell::RefCell<std::string::String>;
     scope 1 {
-        debug y => _2;                   // in scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:18:9: 18:10
-        let mut _0: std::string::String; // return place in scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:19:9: 19:12
+        debug y => _2;
+        let _3: std::string::String;
         scope 2 {
-            debug ret => _0;             // in scope 2 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:19:9: 19:12
+            debug ret => _3;
         }
     }
 
     bb0: {
-        _2 = move _1;                    // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:18:13: 18:14
-        _7 = &_2;                        // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:19
-        _6 = RefCell::<String>::borrow(move _7) -> [return: bb1, unwind: bb8]; // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:19
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:11: 20:17
-                                         // + literal: Const { ty: for<'a> fn(&'a RefCell<String>) -> Ref<'a, String> {RefCell::<String>::borrow}, val: Value(<ZST>) }
+        _2 = move _1;
+        _8 = &_2;
+        _7 = RefCell::<String>::borrow(move _8) -> [return: bb1, unwind: bb8];
     }
 
     bb1: {
-        _5 = &_6;                        // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-        _4 = <Ref<'_, String> as Deref>::deref(move _5) -> [return: bb2, unwind: bb7]; // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-                                         // + literal: Const { ty: for<'a> fn(&'a Ref<'_, String>) -> &'a <Ref<'_, String> as Deref>::Target {<Ref<'_, String> as Deref>::deref}, val: Value(<ZST>) }
+        _6 = &_7;
+        _5 = <Ref<'_, String> as Deref>::deref(move _6) -> [return: bb2, unwind: bb7];
     }
 
     bb2: {
-        _3 = _4;                         // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-        _0 = <String as Clone>::clone(move _3) -> [return: bb3, unwind: bb7]; // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:9: 20:27
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:20:20: 20:25
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> String {<String as Clone>::clone}, val: Value(<ZST>) }
+        _4 = _5;
+        _3 = <String as Clone>::clone(move _4) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        drop(_6) -> [return: bb4, unwind: bb6]; // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:21:6: 21:7
+        drop(_7) -> [return: bb4, unwind: bb6];
     }
 
     bb4: {
-        drop(_2) -> bb5;                 // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:23:1: 23:2
+        _0 = move _3;
+        drop(_2) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:23:2: 23:2
+        return;
     }
 
     bb6 (cleanup): {
-        drop(_0) -> bb8;                 // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:23:1: 23:2
+        drop(_3) -> [return: bb8, unwind terminate];
     }
 
     bb7 (cleanup): {
-        drop(_6) -> bb8;                 // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:21:6: 21:7
+        drop(_7) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        drop(_2) -> bb9;                 // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:23:1: 23:2
+        drop(_2) -> [return: bb9, unwind terminate];
     }
 
     bb9 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:17:1: 23:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:25:15: 25:15
-    let _1: std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:9: 26:10
-    let mut _2: std::string::String;     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:117:23: 120:6
-    let _3: std::string::String;         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
-    let mut _4: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _5: &[&str];                 // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-    let mut _6: &[&str; 1];              // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-    let _7: &[&str; 1];                  // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-    let mut _8: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _9: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let _10: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _11: (&std::string::String, &&str); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _12: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _13: std::string::String;        // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:16: 27:22
-    let mut _14: std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:20: 27:21
-    let mut _15: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _18: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _19: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _20: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _21: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _23: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _24: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _25: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _26: &std::string::String;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _27: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _28: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _29: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _31: std::string::String;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:117:23: 120:6
-    let mut _33: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _34: &[&str];                // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-    let mut _35: &[&str; 1];             // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-    let _36: &[&str; 1];                 // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-    let mut _37: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _38: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let _39: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _40: (&std::string::String, &&str); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _41: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _42: std::string::String;        // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:16: 29:23
-    let mut _43: std::cell::RefCell<std::string::String>; // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:21: 29:22
-    let mut _44: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _47: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _48: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _49: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _50: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _52: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _53: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _54: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _55: &std::string::String;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _56: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _57: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _58: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _63: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _64: &[&str; 1];             // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
+    let mut _0: ();
+    let _1: std::cell::RefCell<std::string::String>;
+    let mut _2: std::string::String;
+    let _3: std::string::String;
+    let mut _4: std::fmt::Arguments<'_>;
+    let mut _5: &[&str];
+    let _6: &[&str; 1];
+    let _7: [&str; 1];
+    let mut _8: (&std::string::String, &&str);
+    let mut _9: &std::string::String;
+    let _10: std::string::String;
+    let mut _11: std::cell::RefCell<std::string::String>;
+    let mut _12: &&str;
+    let _13: &str;
+    let mut _16: bool;
+    let mut _17: bool;
+    let _19: !;
+    let mut _20: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _22: std::string::String;
+    let mut _24: std::fmt::Arguments<'_>;
+    let mut _25: &[&str];
+    let _26: &[&str; 1];
+    let _27: [&str; 1];
+    let mut _28: (&std::string::String, &&str);
+    let mut _29: &std::string::String;
+    let _30: std::string::String;
+    let mut _31: std::cell::RefCell<std::string::String>;
+    let mut _32: &&str;
+    let _33: &str;
+    let mut _36: bool;
+    let mut _37: bool;
+    let _39: !;
+    let mut _40: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug r => _1;                   // in scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:9: 26:10
-        let _16: &std::string::String;   // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _17: &&str;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _30: std::cell::RefCell<std::string::String>; // in scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:9: 28:10
-        let _32: std::string::String;    // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
-        let mut _60: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        let mut _61: &[&str; 1];         // in scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-        let mut _62: &&str;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug r => _1;
+        let _14: &std::string::String;
+        let _15: &&str;
+        let _21: std::cell::RefCell<std::string::String>;
+        let _23: std::string::String;
         scope 3 {
-            debug left_val => _16;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _17;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _22: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _14;
+            debug right_val => _15;
+            let _18: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _22;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _18;
             }
         }
         scope 5 {
-            debug r => _30;              // in scope 5 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:9: 28:10
-            let _45: &std::string::String; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _46: &&str;              // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _59: &&str;          // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug r => _21;
+            let _34: &std::string::String;
+            let _35: &&str;
             scope 7 {
-                debug left_val => _45;   // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _46;  // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _51: core::panicking::AssertKind; // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _34;
+                debug right_val => _35;
+                let _38: core::panicking::AssertKind;
                 scope 8 {
-                    debug kind => _51;   // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _38;
                 }
             }
         }
         scope 6 {
-            debug res => _32;            // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
+            debug res => _23;
         }
     }
     scope 2 {
-        debug res => _3;                 // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:13: 118:16
+        debug res => _3;
     }
 
     bb0: {
-        _64 = const _;                   // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[5])) }
-        _7 = _64;                        // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-        _6 = _7;                         // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-        _5 = move _6 as &[&str] (Pointer(Unsize)); // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-        _63 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(main, [], Some(promoted[4])) }
-        _10 = _63;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _9 = _10;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _8 = move _9 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _7 = [const "data"];
+        _6 = &_7;
+        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _4 = Arguments::<'_>::new_const(move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = format(move _4) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:80
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:38
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) -> String {format}, val: Value(<ZST>) }
+        _3 = format(move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _2 = move _3;                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:119:9: 119:12
-        _1 = RefCell::<String>::new(move _2) -> bb3; // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:13: 26:42
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:13: 26:25
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(String) -> RefCell<String> {RefCell::<String>::new}, val: Value(<ZST>) }
+        _2 = move _3;
+        _1 = RefCell::<String>::new(move _2) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _14 = move _1;                   // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:20: 27:21
-        _13 = foo(move _14) -> bb4;      // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:16: 27:22
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:16: 27:19
-                                         // + literal: Const { ty: fn(RefCell<String>) -> String {foo}, val: Value(<ZST>) }
+        _11 = move _1;
+        _10 = foo(move _11) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _12 = &_13;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _62 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[3])) }
-        _15 = _62;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _11 = (move _12, move _15);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _16 = (_11.0: &std::string::String); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _17 = (_11.1: &&str);            // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _20 = _16;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _21 = _17;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _19 = <String as PartialEq<&str>>::eq(move _20, move _21) -> [return: bb5, unwind: bb18]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+        _9 = &_10;
+        _13 = const "data";
+        _12 = &_13;
+        _8 = (move _9, move _12);
+        _14 = (_8.0: &std::string::String);
+        _15 = (_8.1: &&str);
+        _17 = <String as PartialEq<&str>>::eq(_14, _15) -> [return: bb5, unwind: bb18];
     }
 
     bb5: {
-        _18 = Not(move _19);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _18) -> [0: bb7, otherwise: bb6]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _16 = Not(move _17);
+        switchInt(move _16) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _22 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _24 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _26 = _16;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _25 = _26;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _28 = _17;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _27 = _28;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _29 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _23 = core::panicking::assert_failed::<String, &str>(move _24, move _25, move _27, move _29) -> bb18; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a String, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<String, &str>}, val: Value(<ZST>) }
+        _18 = core::panicking::AssertKind::Eq;
+        _20 = Option::<Arguments<'_>>::None;
+        _19 = core::panicking::assert_failed::<String, &str>(move _18, _14, _15, move _20) -> bb18;
     }
 
     bb7: {
-        drop(_13) -> bb8;                // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_10) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _61 = const _;                   // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[2])) }
-        _36 = _61;                       // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-        _35 = _36;                       // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-        _34 = move _35 as &[&str] (Pointer(Unsize)); // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-        _60 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(main, [], Some(promoted[1])) }
-        _39 = _60;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _38 = _39;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _37 = move _38 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _33 = Arguments::<'_>::new_v1(move _34, move _37) -> bb9; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-                                         // + user_ty: UserType(3)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _27 = [const "data"];
+        _26 = &_27;
+        _25 = _26 as &[&str] (PointerCoercion(Unsize));
+        _24 = Arguments::<'_>::new_const(move _25) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        _32 = format(move _33) -> bb10;  // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:80
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:19: 118:38
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) -> String {format}, val: Value(<ZST>) }
+        _23 = format(move _24) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _31 = move _32;                  // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:119:9: 119:12
-        _30 = RefCell::<String>::new(move _31) -> bb11; // scope 1 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:13: 28:42
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:13: 28:25
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(String) -> RefCell<String> {RefCell::<String>::new}, val: Value(<ZST>) }
+        _22 = move _23;
+        _21 = RefCell::<String>::new(move _22) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        _43 = move _30;                  // scope 5 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:21: 29:22
-        _42 = foo2(move _43) -> bb12;    // scope 5 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:16: 29:23
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:16: 29:20
-                                         // + literal: Const { ty: fn(RefCell<String>) -> String {foo2}, val: Value(<ZST>) }
+        _31 = move _21;
+        _30 = foo2(move _31) -> [return: bb12, unwind continue];
     }
 
     bb12: {
-        _41 = &_42;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _59 = const _;                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
-        _44 = _59;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _40 = (move _41, move _44);      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _45 = (_40.0: &std::string::String); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _46 = (_40.1: &&str);            // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _49 = _45;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _50 = _46;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _48 = <String as PartialEq<&str>>::eq(move _49, move _50) -> [return: bb13, unwind: bb17]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+        _29 = &_30;
+        _33 = const "data";
+        _32 = &_33;
+        _28 = (move _29, move _32);
+        _34 = (_28.0: &std::string::String);
+        _35 = (_28.1: &&str);
+        _37 = <String as PartialEq<&str>>::eq(_34, _35) -> [return: bb13, unwind: bb17];
     }
 
     bb13: {
-        _47 = Not(move _48);             // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _47) -> [0: bb15, otherwise: bb14]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _36 = Not(move _37);
+        switchInt(move _36) -> [0: bb15, otherwise: bb14];
     }
 
     bb14: {
-        _51 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _53 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _55 = _45;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _54 = _55;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _57 = _46;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _56 = _57;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _58 = Option::<Arguments<'_>>::None; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _52 = core::panicking::assert_failed::<String, &str>(move _53, move _54, move _56, move _58) -> bb17; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a String, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<String, &str>}, val: Value(<ZST>) }
+        _38 = core::panicking::AssertKind::Eq;
+        _40 = Option::<Arguments<'_>>::None;
+        _39 = core::panicking::assert_failed::<String, &str>(move _38, _34, _35, move _40) -> bb17;
     }
 
     bb15: {
-        drop(_42) -> bb16;               // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_30) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        return;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:30:2: 30:2
+        return;
     }
 
     bb17 (cleanup): {
-        drop(_42) -> bb19;               // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_30) -> [return: bb19, unwind terminate];
     }
 
     bb18 (cleanup): {
-        drop(_13) -> bb19;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_10) -> [return: bb19, unwind terminate];
     }
 
     bb19 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:25:1: 30:2
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: &str;                    // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:25: 29:31
-
-    bb0: {
-        _1 = const "data";               // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:25: 29:31
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:29:25: 29:31
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[1] in main: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-
-    bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    }
-}
-
-promoted[2] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-    let mut _1: [&str; 1];               // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-
-    bb0: {
-        _1 = [const "data"];             // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-        return;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:28:34: 28:40
-    }
-}
-
-promoted[3] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: &str;                    // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:24: 27:30
-
-    bb0: {
-        _1 = const "data";               // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:24: 27:30
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:27:24: 27:30
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[4] in main: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-
-    bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/alloc/src/macros.rs:118:39: 118:79
-    }
-}
-
-promoted[5] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-    let mut _1: [&str; 1];               // in scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-
-    bb0: {
-        _1 = [const "data"];             // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-                                         // mir::Constant
-                                         // + span: ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
-        return;                          // scope 0 at ui/borrowck/issue-23338-params-outlive-temps-of-body.rs:26:34: 26:40
+        resume;
     }
 }

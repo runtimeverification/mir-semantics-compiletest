@@ -1,98 +1,66 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn a() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-96169.rs:4:11: 4:16
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/issue-96169.rs:4:19: 4:20
-        return;                          // scope 0 at ui/consts/issue-96169.rs:4:22: 4:22
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn bar(_1: u32) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-96169.rs:6:16: 6:16
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/issue-96169.rs:6:18: 6:18
+        return;
     }
 }
 
 fn baz() -> *const dyn Fn(u32) {
-    let mut _0: *const dyn std::ops::Fn(u32); // return place in scope 0 at ui/consts/issue-96169.rs:8:13: 8:31
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
+    let mut _0: *const dyn std::ops::Fn(u32);
+    let mut _1: !;
 
     bb0: {
-        _1 = core::panicking::panic(const "not implemented"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:52
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:9: 706:33
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:706:34: 706:51
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _1 = core::panicking::panic(const "not implemented") -> unwind continue;
     }
 }
 
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-96169.rs:10:10: 10:10
-    let mut _1: bool;                    // in scope 0 at ui/consts/issue-96169.rs:12:14: 12:43
-    let mut _2: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:14: 12:19
-    let _3: *const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:14: 12:19
-    let mut _4: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-    let mut _5: &*const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
+    let mut _0: ();
+    let mut _1: bool;
+    let mut _2: &*const dyn std::ops::Fn(u32);
+    let _3: *const dyn std::ops::Fn(u32);
+    let mut _4: &*const dyn std::ops::Fn(u32);
+    let _5: *const dyn std::ops::Fn(u32);
+    let mut _6: *const dyn std::ops::Fn(u32);
+    let _7: &dyn std::ops::Fn(u32);
+    let _8: &fn(u32) {bar};
+    let _9: fn(u32) {bar};
 
     bb0: {
-        _3 = baz() -> bb1;               // scope 0 at ui/consts/issue-96169.rs:12:14: 12:19
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-96169.rs:12:14: 12:17
-                                         // + literal: Const { ty: fn() -> *const (dyn Fn(u32) + 'static) {baz}, val: Value(<ZST>) }
+        _3 = baz() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &_3;                        // scope 0 at ui/consts/issue-96169.rs:12:14: 12:19
-        _5 = const _;                    // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-96169.rs:12:23: 12:43
-                                         // + literal: Const { ty: &*const dyn Fn(u32), val: Unevaluated(foo, [], Some(promoted[0])) }
-        _4 = _5;                         // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> bb2; // scope 0 at ui/consts/issue-96169.rs:12:14: 12:43
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-96169.rs:12:14: 12:43
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a *const dyn Fn(u32), &'b *const dyn Fn(u32)) -> bool {<*const dyn Fn(u32) as PartialEq>::eq}, val: Value(<ZST>) }
+        _2 = &_3;
+        _8 = &_9;
+        _7 = _8 as &dyn std::ops::Fn(u32) (PointerCoercion(Unsize));
+        _6 = &raw const (*_7);
+        _5 = move _6;
+        _4 = &_5;
+        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/consts/issue-96169.rs:15:2: 15:2
-    }
-}
-
-promoted[0] in foo: &*const dyn Fn(u32) = {
-    let mut _0: &*const dyn std::ops::Fn(u32); // return place in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-    let mut _1: *const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-    let mut _2: *const dyn std::ops::Fn(u32); // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-    let mut _3: &dyn std::ops::Fn(u32);  // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-    let mut _4: &fn(u32) {bar};          // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:27
-    let mut _5: &fn(u32) {bar};          // in scope 0 at ui/consts/issue-96169.rs:12:23: 12:27
-    let mut _6: fn(u32) {bar};           // in scope 0 at ui/consts/issue-96169.rs:12:24: 12:27
-
-    bb0: {
-        _6 = bar;                        // scope 0 at ui/consts/issue-96169.rs:12:24: 12:27
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-96169.rs:12:24: 12:27
-                                         // + literal: Const { ty: fn(u32) {bar}, val: Value(<ZST>) }
-        _5 = &_6;                        // scope 0 at ui/consts/issue-96169.rs:12:23: 12:27
-        _4 = &(*_5);                     // scope 0 at ui/consts/issue-96169.rs:12:23: 12:27
-        _3 = move _4 as &dyn std::ops::Fn(u32) (Pointer(Unsize)); // scope 0 at ui/consts/issue-96169.rs:12:23: 12:27
-        _2 = &raw const (*_3);           // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-        _1 = move _2 as *const dyn std::ops::Fn(u32) (Pointer(Unsize)); // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-        _0 = &_1;                        // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
-        return;                          // scope 0 at ui/consts/issue-96169.rs:12:23: 12:43
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-96169.rs:17:11: 17:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/issue-96169.rs:18:2: 18:2
+        return;
     }
 }

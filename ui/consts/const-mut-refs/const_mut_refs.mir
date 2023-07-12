@@ -1,110 +1,107 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> Foo {
-    let mut _0: Foo;                     // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:8:19: 8:22
+    let mut _0: Foo;
 
     bb0: {
-        _0 = const Foo {{ x: 0_usize }}; // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:9:5: 9:17
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:9:5: 9:17
-                                         // + literal: Const { ty: Foo, val: Value(Scalar(0x0000000000000000)) }
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:10:2: 10:2
+        _0 = Foo { x: const 0_usize };
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo() -> Foo {
-    let mut _0: Foo;                     // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:8:19: 8:22
+    let mut _0: Foo;
 
     bb0: {
-        _0 = Foo { x: const 0_usize };   // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:9:5: 9:17
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:10:2: 10:2
+        _0 = Foo { x: const 0_usize };
+        return;
     }
 }
 
 fn <impl at ui/consts/const-mut-refs/const_mut_refs.rs:12:1: 12:9>::bar(_1: &mut Foo) -> usize {
-    debug self => _1;                    // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:13:18: 13:27
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:13:32: 13:37
+    debug self => _1;
+    let mut _0: usize;
 
     bb0: {
-        ((*_1).0: usize) = const 1_usize; // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:14:9: 14:19
-        _0 = ((*_1).0: usize);           // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:15:9: 15:15
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:16:6: 16:6
+        ((*_1).0: usize) = const 1_usize;
+        _0 = ((*_1).0: usize);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn <impl at ui/consts/const-mut-refs/const_mut_refs.rs:12:1: 12:9>::bar(_1: &mut Foo) -> usize {
-    debug self => _1;                    // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:13:18: 13:27
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:13:32: 13:37
+    debug self => _1;
+    let mut _0: usize;
 
     bb0: {
-        ((*_1).0: usize) = const 1_usize; // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:14:9: 14:19
-        _0 = ((*_1).0: usize);           // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:15:9: 15:15
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:16:6: 16:6
+        ((*_1).0: usize) = const 1_usize;
+        _0 = ((*_1).0: usize);
+        return;
     }
 }
 
 fn baz(_1: &mut Foo) -> usize {
-    debug foo => _1;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:20:14: 20:17
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:20:32: 20:37
-    let _2: &mut usize;                  // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:21:9: 21:10
+    debug foo => _1;
+    let mut _0: usize;
+    let _2: &mut usize;
     scope 1 {
-        debug x => _2;                   // in scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:21:9: 21:10
+        debug x => _2;
     }
 
     bb0: {
-        _2 = &mut ((*_1).0: usize);      // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:21:13: 21:23
-        (*_2) = const 2_usize;           // scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:22:5: 22:11
-        _0 = (*_2);                      // scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:23:5: 23:7
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:24:2: 24:2
+        _2 = &mut ((*_1).0: usize);
+        (*_2) = const 2_usize;
+        _0 = (*_2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn baz(_1: &mut Foo) -> usize {
-    debug foo => _1;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:20:14: 20:17
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:20:32: 20:37
-    let _2: &mut usize;                  // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:21:9: 21:10
+    debug foo => _1;
+    let mut _0: usize;
+    let _2: &mut usize;
     scope 1 {
-        debug x => _2;                   // in scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:21:9: 21:10
+        debug x => _2;
     }
 
     bb0: {
-        StorageLive(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:21:9: 21:10
-        _2 = &mut ((*_1).0: usize);      // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:21:13: 21:23
-        (*_2) = const 2_usize;           // scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:22:5: 22:11
-        _0 = (*_2);                      // scope 1 at ui/consts/const-mut-refs/const_mut_refs.rs:23:5: 23:7
-        StorageDead(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:24:1: 24:2
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:24:2: 24:2
+        StorageLive(_2);
+        _2 = &mut ((*_1).0: usize);
+        (*_2) = const 2_usize;
+        _0 = (*_2);
+        StorageDead(_2);
+        return;
     }
 }
 
 fn bazz(_1: &mut Foo) -> usize {
-    debug foo => _1;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:26:15: 26:18
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:26:33: 26:38
+    debug foo => _1;
+    let mut _0: usize;
 
     bb0: {
-        ((*_1).0: usize) = const 3_usize; // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:27:5: 27:14
-        _0 = ((*_1).0: usize);           // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:28:5: 28:10
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:29:2: 29:2
+        ((*_1).0: usize) = const 3_usize;
+        _0 = ((*_1).0: usize);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn bazz(_1: &mut Foo) -> usize {
-    debug foo => _1;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:26:15: 26:18
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:26:33: 26:38
+    debug foo => _1;
+    let mut _0: usize;
 
     bb0: {
-        ((*_1).0: usize) = const 3_usize; // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:27:5: 27:14
-        _0 = ((*_1).0: usize);           // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:28:5: 28:10
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:29:2: 29:2
+        ((*_1).0: usize) = const 3_usize;
+        _0 = ((*_1).0: usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:31:11: 31:11
+    let mut _0: ();
     scope 1 {
         scope 2 {
             scope 3 {
@@ -113,134 +110,116 @@ fn main() -> () {
     }
 
     bb0: {
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:35:2: 35:2
+        return;
     }
 }
 
 main::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:37: 32:38
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:37: 32:38
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:37: 32:38
+        _0 = const 1_usize;
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-    let mut _1: &mut Foo;                // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-    let mut _2: Foo;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:22
+    let mut _0: usize;
+    let mut _1: &mut Foo;
+    let mut _2: Foo;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-        StorageLive(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:22
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:22
-        _2 = foo() -> bb1;               // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:22
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:20
-                                         // + literal: Const { ty: fn() -> Foo {foo}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        ConstEvalCounter;
+        _2 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = &mut _2;                    // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-        _0 = Foo::bar(move _1) -> bb2;   // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:32:23: 32:26
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo) -> usize {Foo::bar}, val: Value(<ZST>) }
+        _1 = &mut _2;
+        ConstEvalCounter;
+        _0 = Foo::bar(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:27: 32:28
-        StorageDead(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:27: 32:28
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:32:17: 32:28
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
 main::{constant#3}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:41: 33:42
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 2_usize;              // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:41: 33:42
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:41: 33:42
+        _0 = const 2_usize;
+        return;
     }
 }
 
 main::{constant#2}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:17: 33:32
-    let mut _1: &mut Foo;                // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-    let mut _2: &mut Foo;                // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-    let mut _3: Foo;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:26: 33:31
+    let mut _0: usize;
+    let mut _1: &mut Foo;
+    let mut _2: &mut Foo;
+    let mut _3: Foo;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-        StorageLive(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-        StorageLive(_3);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:26: 33:31
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:26: 33:31
-        _3 = foo() -> bb1;               // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:26: 33:31
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:33:26: 33:29
-                                         // + literal: Const { ty: fn() -> Foo {foo}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        ConstEvalCounter;
+        _3 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &mut _3;                    // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-        _1 = &mut (*_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:21: 33:31
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:17: 33:32
-        _0 = baz(move _1) -> bb2;        // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:17: 33:32
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:33:17: 33:20
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo) -> usize {baz}, val: Value(<ZST>) }
+        _2 = &mut _3;
+        _1 = &mut (*_2);
+        ConstEvalCounter;
+        _0 = baz(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_3);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:31: 33:32
-        StorageDead(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:31: 33:32
-        StorageDead(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:31: 33:32
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:33:17: 33:32
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
 main::{constant#5}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:42: 34:43
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 3_usize;              // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:42: 34:43
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:42: 34:43
+        _0 = const 3_usize;
+        return;
     }
 }
 
 main::{constant#4}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:17: 34:33
-    let mut _1: &mut Foo;                // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-    let mut _2: &mut Foo;                // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-    let mut _3: Foo;                     // in scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:27: 34:32
+    let mut _0: usize;
+    let mut _1: &mut Foo;
+    let mut _2: &mut Foo;
+    let mut _3: Foo;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-        StorageLive(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-        StorageLive(_3);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:27: 34:32
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:27: 34:32
-        _3 = foo() -> bb1;               // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:27: 34:32
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:34:27: 34:30
-                                         // + literal: Const { ty: fn() -> Foo {foo}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        ConstEvalCounter;
+        _3 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &mut _3;                    // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-        _1 = &mut (*_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:22: 34:32
-        ConstEvalCounter;                // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:17: 34:33
-        _0 = bazz(move _1) -> bb2;       // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:17: 34:33
-                                         // mir::Constant
-                                         // + span: ui/consts/const-mut-refs/const_mut_refs.rs:34:17: 34:21
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo) -> usize {bazz}, val: Value(<ZST>) }
+        _2 = &mut _3;
+        _1 = &mut (*_2);
+        ConstEvalCounter;
+        _0 = bazz(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_3);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:32: 34:33
-        StorageDead(_2);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:32: 34:33
-        StorageDead(_1);                 // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:32: 34:33
-        return;                          // scope 0 at ui/consts/const-mut-refs/const_mut_refs.rs:34:17: 34:33
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }

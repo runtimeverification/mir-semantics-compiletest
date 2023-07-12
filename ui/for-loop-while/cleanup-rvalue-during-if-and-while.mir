@@ -1,34 +1,57 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static mut DROPPED: isize = {
-    let mut _0: isize;                   // return place in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:7:21: 7:26
+    let mut _0: isize;
 
     bb0: {
-        _0 = const 0_isize;              // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:7:29: 7:30
-        return;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:7:1: 7:31
+        _0 = const 0_isize;
+        return;
     }
 }
 
 fn <impl at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:9:1: 9:24>::drop(_1: &mut Temporary) -> () {
-    debug self => _1;                    // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:10:13: 10:22
-    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:10:24: 10:24
-    let mut _2: *mut isize;              // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:25
-    let mut _3: (isize, bool);           // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:30
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: *mut isize;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
+        let mut _9: *const ();
+        let mut _10: usize;
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: bool;
     }
 
     bb0: {
-        _2 = const {alloc1: *mut isize}; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:25
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:25
-                                         // + literal: Const { ty: *mut isize, val: Value(Scalar(alloc1)) }
-        _3 = CheckedAdd((*_2), const 1_isize); // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:30
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_2), const 1_isize) -> bb1; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:30
+        _2 = const {alloc1: *mut isize};
+        _9 = _2 as *const () (PtrToPtr);
+        _10 = _9 as usize (Transmute);
+        _11 = AlignOf(isize);
+        _12 = Sub(_11, const 1_usize);
+        _13 = BitAnd(_10, _12);
+        _14 = Eq(_13, const 0_usize);
+        assert(_14, "misaligned pointer dereference: address must be a multiple of {} but is {}", _11, _10) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_2) = move (_3.0: isize);      // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:11:18: 11:30
-        return;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:12:6: 12:6
+        (*_2) = Add((*_2), const 1_isize);
+        return;
+    }
+
+    bb2: {
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(isize);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -37,267 +60,258 @@ alloc1 (static: DROPPED, size: 8, align: 8) {
 }
 
 fn <impl at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:15:1: 15:15>::do_stuff(_1: &Temporary) -> bool {
-    debug self => _1;                    // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:16:17: 16:22
-    let mut _0: bool;                    // return place in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:16:27: 16:31
+    debug self => _1;
+    let mut _0: bool;
 
     bb0: {
-        _0 = const true;                 // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:16:33: 16:37
-        return;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:16:38: 16:38
+        _0 = const true;
+        return;
     }
 }
 
 fn borrow() -> Box<Temporary> {
-    let mut _0: std::boxed::Box<Temporary>; // return place in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:19:16: 19:30
-    let mut _1: Temporary;               // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:19:42: 19:51
+    let mut _0: std::boxed::Box<Temporary>;
 
     bb0: {
-        _0 = Box::<Temporary>::new(move _1) -> bb1; // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:19:33: 19:52
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:19:33: 19:41
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(Temporary) -> Box<Temporary> {Box::<Temporary>::new}, val: Value(<ZST>) }
+        _0 = Box::<Temporary>::new(const Temporary) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:19:54: 19:54
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:22:15: 22:15
-    let mut _1: isize;                   // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:23:9: 23:14
-    let mut _2: bool;                    // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
-    let mut _3: &Temporary;              // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
-    let _4: std::boxed::Box<Temporary>;  // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:19
-    let mut _5: (isize, bool);           // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:29:9: 29:15
-    let mut _6: (&isize, &isize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _7: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _8: *mut isize;                  // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:30:29: 30:36
-    let mut _9: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _12: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _13: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _14: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _15: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _17: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _18: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _19: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _20: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _21: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _22: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _23: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _24: bool;                   // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:31:12: 31:17
-    let mut _25: isize;                  // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:31:12: 31:13
-    let mut _26: bool;                   // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
-    let mut _27: &Temporary;             // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
-    let _28: std::boxed::Box<Temporary>; // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:16
-    let mut _29: (&isize, &isize);       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _30: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _31: *mut isize;                 // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:29: 39:36
-    let mut _32: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _33: isize;                      // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:43
-    let mut _34: isize;                  // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:39
-    let mut _35: (isize, bool);          // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:43
-    let mut _38: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _39: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _40: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _41: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _43: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _44: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _45: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _46: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _47: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _48: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _49: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _50: *const Temporary;       // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:19
-    let mut _51: *const Temporary;       // in scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:16
+    let mut _0: ();
+    let mut _1: isize;
+    let mut _2: bool;
+    let mut _3: &Temporary;
+    let _4: std::boxed::Box<Temporary>;
+    let mut _5: (&isize, &isize);
+    let mut _6: &isize;
+    let _7: *mut isize;
+    let mut _8: &isize;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: isize;
+    let mut _14: isize;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: bool;
+    let mut _19: isize;
+    let mut _20: bool;
+    let mut _21: &Temporary;
+    let _22: std::boxed::Box<Temporary>;
+    let mut _23: (&isize, &isize);
+    let mut _24: &isize;
+    let _25: *mut isize;
+    let mut _26: &isize;
+    let _27: isize;
+    let mut _28: isize;
+    let mut _31: bool;
+    let mut _32: bool;
+    let mut _33: isize;
+    let mut _34: isize;
+    let _36: !;
+    let mut _37: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _38: *const Temporary;
+    let mut _39: *const Temporary;
     scope 1 {
-        debug i => _1;                   // in scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:23:9: 23:14
+        debug i => _1;
+        let mut _46: *const ();
+        let mut _47: usize;
+        let mut _48: usize;
+        let mut _49: usize;
+        let mut _50: usize;
+        let mut _51: bool;
+        let mut _58: *const ();
+        let mut _59: usize;
+        let mut _60: usize;
+        let mut _61: usize;
+        let mut _62: usize;
+        let mut _63: bool;
         scope 2 {
-            let _10: &isize;             // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _11: &isize;             // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+            let _9: &isize;
+            let _10: &isize;
+            let mut _52: *const ();
+            let mut _53: usize;
+            let mut _54: usize;
+            let mut _55: usize;
+            let mut _56: usize;
+            let mut _57: bool;
             scope 3 {
-                debug left_val => _10;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _11;  // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _16: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _9;
+                debug right_val => _10;
+                let _15: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _16;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _15;
                 }
             }
         }
         scope 5 {
-            let _36: &isize;             // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _37: &isize;             // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+            let _29: &isize;
+            let _30: &isize;
+            let mut _40: *const ();
+            let mut _41: usize;
+            let mut _42: usize;
+            let mut _43: usize;
+            let mut _44: usize;
+            let mut _45: bool;
             scope 6 {
-                debug left_val => _36;   // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _37;  // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _42: core::panicking::AssertKind; // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _29;
+                debug right_val => _30;
+                let _35: core::panicking::AssertKind;
                 scope 7 {
-                    debug kind => _42;   // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _35;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = const 0_isize;              // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:23:17: 23:18
-        goto -> bb1;                     // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:5: 34:6
+        _1 = const 0_isize;
+        goto -> bb1;
     }
 
     bb1: {
-        _4 = borrow() -> bb2;            // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:19
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:17
-                                         // + literal: Const { ty: fn() -> Box<Temporary> {borrow}, val: Value(<ZST>) }
+        _4 = borrow() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _50 = (((_4.0: std::ptr::Unique<Temporary>).0: std::ptr::NonNull<Temporary>).0: *const Temporary); // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
-        _3 = &(*_50);                    // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
-        _2 = Temporary::do_stuff(move _3) -> [return: bb3, unwind: bb18]; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:20: 28:28
-                                         // + literal: Const { ty: for<'a> fn(&'a Temporary) -> bool {Temporary::do_stuff}, val: Value(<ZST>) }
+        _38 = (((_4.0: std::ptr::Unique<Temporary>).0: std::ptr::NonNull<Temporary>).0: *const Temporary);
+        _58 = _38 as *const () (PtrToPtr);
+        _59 = _58 as usize (Transmute);
+        _60 = AlignOf(Temporary);
+        _61 = Sub(_60, const 1_usize);
+        _62 = BitAnd(_59, _61);
+        _63 = Eq(_62, const 0_usize);
+        assert(_63, "misaligned pointer dereference: address must be a multiple of {} but is {}", _60, _59) -> [success: bb21, unwind unreachable];
     }
 
     bb3: {
-        drop(_4) -> bb4;                 // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:29: 28:30
+        drop(_4) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        switchInt(move _2) -> [0: bb9, otherwise: bb5]; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:11: 28:30
+        switchInt(move _2) -> [0: bb8, otherwise: bb5];
     }
 
     bb5: {
-        _5 = CheckedAdd(_1, const 1_isize); // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:29:9: 29:15
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", _1, const 1_isize) -> bb6; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:29:9: 29:15
+        _1 = Add(_1, const 1_isize);
+        _7 = const {alloc1: *mut isize};
+        _52 = _7 as *const () (PtrToPtr);
+        _53 = _52 as usize (Transmute);
+        _54 = AlignOf(isize);
+        _55 = Sub(_54, const 1_usize);
+        _56 = BitAnd(_53, _55);
+        _57 = Eq(_56, const 0_usize);
+        assert(_57, "misaligned pointer dereference: address must be a multiple of {} but is {}", _54, _53) -> [success: bb20, unwind unreachable];
     }
 
     bb6: {
-        _1 = move (_5.0: isize);         // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:29:9: 29:15
-        _8 = const {alloc1: *mut isize}; // scope 2 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:30:29: 30:36
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:30:29: 30:36
-                                         // + literal: Const { ty: *mut isize, val: Value(Scalar(alloc1)) }
-        _7 = &(*_8);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _9 = &_1;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _6 = (move _7, move _9);         // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _10 = (_6.0: &isize);            // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _11 = (_6.1: &isize);            // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _14 = (*_10);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _15 = (*_11);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _13 = Eq(move _14, move _15);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _12 = Not(move _13);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _12) -> [0: bb8, otherwise: bb7]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<isize, isize>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb7: {
-        _16 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _18 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _20 = _10;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _20;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _22 = _11;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _21 = _22;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _23 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _17 = core::panicking::assert_failed::<isize, isize>(move _18, move _19, move _21, move _23); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+        _19 = _1;
+        _18 = Gt(move _19, const 5_isize);
+        switchInt(move _18) -> [0: bb1, otherwise: bb8];
     }
 
     bb8: {
-        _25 = _1;                        // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:31:12: 31:13
-        _24 = Gt(move _25, const 5_isize); // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:31:12: 31:17
-        switchInt(move _24) -> [0: bb1, otherwise: bb9]; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:31:12: 31:17
+        _22 = borrow() -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        _28 = borrow() -> bb10;          // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:16
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:14
-                                         // + literal: Const { ty: fn() -> Box<Temporary> {borrow}, val: Value(<ZST>) }
+        _39 = (((_22.0: std::ptr::Unique<Temporary>).0: std::ptr::NonNull<Temporary>).0: *const Temporary);
+        _46 = _39 as *const () (PtrToPtr);
+        _47 = _46 as usize (Transmute);
+        _48 = AlignOf(Temporary);
+        _49 = Sub(_48, const 1_usize);
+        _50 = BitAnd(_47, _49);
+        _51 = Eq(_50, const 0_usize);
+        assert(_51, "misaligned pointer dereference: address must be a multiple of {} but is {}", _48, _47) -> [success: bb19, unwind unreachable];
     }
 
     bb10: {
-        _51 = (((_28.0: std::ptr::Unique<Temporary>).0: std::ptr::NonNull<Temporary>).0: *const Temporary); // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
-        _27 = &(*_51);                   // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
-        _26 = Temporary::do_stuff(move _27) -> [return: bb11, unwind: bb17]; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:17: 38:25
-                                         // + literal: Const { ty: for<'a> fn(&'a Temporary) -> bool {Temporary::do_stuff}, val: Value(<ZST>) }
+        drop(_22) -> [return: bb11, unwind continue];
     }
 
     bb11: {
-        drop(_28) -> bb12;               // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:26: 38:27
+        switchInt(move _20) -> [0: bb14, otherwise: bb12];
     }
 
     bb12: {
-        switchInt(move _26) -> [0: bb16, otherwise: bb13]; // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:8: 38:27
+        _25 = const {alloc1: *mut isize};
+        _40 = _25 as *const () (PtrToPtr);
+        _41 = _40 as usize (Transmute);
+        _42 = AlignOf(isize);
+        _43 = Sub(_42, const 1_usize);
+        _44 = BitAnd(_41, _43);
+        _45 = Eq(_44, const 0_usize);
+        assert(_45, "misaligned pointer dereference: address must be a multiple of {} but is {}", _42, _41) -> [success: bb18, unwind unreachable];
     }
 
     bb13: {
-        _31 = const {alloc1: *mut isize}; // scope 5 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:29: 39:36
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:29: 39:36
-                                         // + literal: Const { ty: *mut isize, val: Value(Scalar(alloc1)) }
-        _30 = &(*_31);                   // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _34 = _1;                        // scope 5 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:39
-        _35 = CheckedAdd(_34, const 1_isize); // scope 5 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:43
-        assert(!move (_35.1: bool), "attempt to compute `{} + {}`, which would overflow", move _34, const 1_isize) -> bb14; // scope 5 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:43
+        _35 = core::panicking::AssertKind::Eq;
+        _37 = Option::<Arguments<'_>>::None;
+        _36 = core::panicking::assert_failed::<isize, isize>(move _35, _29, _30, move _37) -> unwind continue;
     }
 
     bb14: {
-        _33 = move (_35.0: isize);       // scope 5 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:39:38: 39:43
-        _32 = &_33;                      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _29 = (move _30, move _32);      // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _36 = (_29.0: &isize);           // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _37 = (_29.1: &isize);           // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _40 = (*_36);                    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _41 = (*_37);                    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _39 = Eq(move _40, move _41);    // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _38 = Not(move _39);             // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _38) -> [0: bb16, otherwise: bb15]; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        return;
     }
 
-    bb15: {
-        _42 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _44 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _46 = _36;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _45 = _46;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _48 = _37;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _47 = _48;                       // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _49 = Option::<Arguments<'_>>::None; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _43 = core::panicking::assert_failed::<isize, isize>(move _44, move _45, move _47, move _49); // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+    bb15 (cleanup): {
+        drop(_22) -> [return: bb17, unwind terminate];
     }
 
-    bb16: {
-        return;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:41:2: 41:2
+    bb16 (cleanup): {
+        drop(_4) -> [return: bb17, unwind terminate];
     }
 
     bb17 (cleanup): {
-        drop(_28) -> bb19;               // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:38:26: 38:27
+        resume;
     }
 
-    bb18 (cleanup): {
-        drop(_4) -> bb19;                // scope 1 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:28:29: 28:30
+    bb18: {
+        _24 = &(*_25);
+        _28 = _1;
+        _27 = Add(move _28, const 1_isize);
+        _26 = &_27;
+        _23 = (move _24, move _26);
+        _29 = (_23.0: &isize);
+        _30 = (_23.1: &isize);
+        _33 = (*_29);
+        _34 = (*_30);
+        _32 = Eq(move _33, move _34);
+        _31 = Not(move _32);
+        switchInt(move _31) -> [0: bb14, otherwise: bb13];
     }
 
-    bb19 (cleanup): {
-        resume;                          // scope 0 at ui/for-loop-while/cleanup-rvalue-during-if-and-while.rs:22:1: 41:2
+    bb19: {
+        _21 = &(*_39);
+        _20 = Temporary::do_stuff(move _21) -> [return: bb10, unwind: bb15];
+    }
+
+    bb20: {
+        _6 = &(*_7);
+        _8 = &_1;
+        _5 = (move _6, move _8);
+        _9 = (_5.0: &isize);
+        _10 = (_5.1: &isize);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb7, otherwise: bb6];
+    }
+
+    bb21: {
+        _3 = &(*_38);
+        _2 = Temporary::do_stuff(move _3) -> [return: bb3, unwind: bb16];
     }
 }
 

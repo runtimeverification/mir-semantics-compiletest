@@ -1,73 +1,82 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn tuple() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-2.rs:2:12: 2:12
-    let _1: (i32,);                      // in scope 0 at ui/binding/pat-tuple-2.rs:3:9: 3:10
+    let mut _0: ();
+    let _1: (i32,);
+    let mut _2: !;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/binding/pat-tuple-2.rs:3:9: 3:10
+        debug x => _1;
     }
 
     bb0: {
-        _1 = const (1_i32,);             // scope 0 at ui/binding/pat-tuple-2.rs:3:13: 3:17
-        return;                          // scope 0 at ui/binding/pat-tuple-2.rs:8:2: 8:2
+        _1 = (const 1_i32,);
+        switchInt((_1.0: i32)) -> [2: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        return;
+    }
+
+    bb2: {
+        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }
 
 fn tuple_struct() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-2.rs:10:19: 10:19
-    let _1: tuple_struct::S;             // in scope 0 at ui/binding/pat-tuple-2.rs:13:9: 13:10
+    let mut _0: ();
+    let _1: tuple_struct::S;
+    let mut _2: !;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/binding/pat-tuple-2.rs:13:9: 13:10
+        debug x => _1;
     }
 
     bb0: {
-        _1 = const S(1_u8);              // scope 0 at ui/binding/pat-tuple-2.rs:13:13: 13:17
-                                         // mir::Constant
-                                         // + span: ui/binding/pat-tuple-2.rs:13:13: 13:17
-                                         // + literal: Const { ty: S, val: Value(Scalar(0x01)) }
-        return;                          // scope 0 at ui/binding/pat-tuple-2.rs:18:2: 18:2
+        _1 = S(const 1_u8);
+        switchInt((_1.0: u8)) -> [2: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        return;
+    }
+
+    bb2: {
+        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/pat-tuple-2.rs:20:11: 20:11
-    let _1: ();                          // in scope 0 at ui/binding/pat-tuple-2.rs:21:5: 21:12
-    let _2: ();                          // in scope 0 at ui/binding/pat-tuple-2.rs:22:5: 22:19
+    let mut _0: ();
+    let _1: ();
+    let _2: ();
 
     bb0: {
-        _1 = tuple() -> bb1;             // scope 0 at ui/binding/pat-tuple-2.rs:21:5: 21:12
-                                         // mir::Constant
-                                         // + span: ui/binding/pat-tuple-2.rs:21:5: 21:10
-                                         // + literal: Const { ty: fn() {tuple}, val: Value(<ZST>) }
+        _1 = tuple() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = tuple_struct() -> bb2;      // scope 0 at ui/binding/pat-tuple-2.rs:22:5: 22:19
-                                         // mir::Constant
-                                         // + span: ui/binding/pat-tuple-2.rs:22:5: 22:17
-                                         // + literal: Const { ty: fn() {tuple_struct}, val: Value(<ZST>) }
+        _2 = tuple_struct() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/binding/pat-tuple-2.rs:23:2: 23:2
+        return;
     }
 }
 
 fn S(_1: u8) -> S {
-    let mut _0: tuple_struct::S;         // return place in scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
+    let mut _0: tuple_struct::S;
 
     bb0: {
-        _0 = S(move _1);                 // scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
-        return;                          // scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
+        _0 = S(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn S(_1: u8) -> S {
-    let mut _0: tuple_struct::S;         // return place in scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
+    let mut _0: tuple_struct::S;
 
     bb0: {
-        _0 = S(move _1);                 // scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
-        return;                          // scope 0 at ui/binding/pat-tuple-2.rs:11:5: 11:13
+        _0 = S(move _1);
+        return;
     }
 }

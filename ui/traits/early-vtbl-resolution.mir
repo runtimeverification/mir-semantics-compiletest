@@ -1,60 +1,54 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/traits/early-vtbl-resolution.rs:10:1: 10:27>::foo(_1: &isize) -> Option<A> {
-    debug self => _1;                    // in scope 0 at ui/traits/early-vtbl-resolution.rs:11:12: 11:17
-    let mut _0: std::option::Option<A>;  // return place in scope 0 at ui/traits/early-vtbl-resolution.rs:11:22: 11:31
+    debug self => _1;
+    let mut _0: std::option::Option<A>;
 
     bb0: {
-        _0 = Option::<A>::None;          // scope 0 at ui/traits/early-vtbl-resolution.rs:11:34: 11:38
-        return;                          // scope 0 at ui/traits/early-vtbl-resolution.rs:11:40: 11:40
+        _0 = Option::<A>::None;
+        return;
     }
 }
 
 fn foo_func(_1: B) -> Option<A> {
-    debug x => _1;                       // in scope 0 at ui/traits/early-vtbl-resolution.rs:13:29: 13:30
-    let mut _0: std::option::Option<A>;  // return place in scope 0 at ui/traits/early-vtbl-resolution.rs:13:38: 13:47
-    let mut _2: &B;                      // in scope 0 at ui/traits/early-vtbl-resolution.rs:13:50: 13:57
+    debug x => _1;
+    let mut _0: std::option::Option<A>;
+    let mut _2: &B;
 
     bb0: {
-        _2 = &_1;                        // scope 0 at ui/traits/early-vtbl-resolution.rs:13:50: 13:57
-        _0 = <B as thing<A>>::foo(move _2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/traits/early-vtbl-resolution.rs:13:50: 13:57
-                                         // mir::Constant
-                                         // + span: ui/traits/early-vtbl-resolution.rs:13:52: 13:55
-                                         // + literal: Const { ty: for<'a> fn(&'a B) -> Option<A> {<B as thing<A>>::foo}, val: Value(<ZST>) }
+        _2 = &_1;
+        _0 = <B as thing<A>>::foo(move _2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/traits/early-vtbl-resolution.rs:13:58: 13:59
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/traits/early-vtbl-resolution.rs:13:59: 13:59
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/traits/early-vtbl-resolution.rs:13:58: 13:59
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/traits/early-vtbl-resolution.rs:13:1: 13:59
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/early-vtbl-resolution.rs:17:15: 17:15
-    let _1: std::option::Option<f64>;    // in scope 0 at ui/traits/early-vtbl-resolution.rs:18:9: 18:11
+    let mut _0: ();
+    let _1: std::option::Option<f64>;
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/traits/early-vtbl-resolution.rs:18:9: 18:11
+        debug _x => _1;
     }
 
     bb0: {
-        _1 = foo_func::<f64, isize>(const 0_isize) -> bb1; // scope 0 at ui/traits/early-vtbl-resolution.rs:18:27: 18:38
-                                         // mir::Constant
-                                         // + span: ui/traits/early-vtbl-resolution.rs:18:27: 18:35
-                                         // + literal: Const { ty: fn(isize) -> Option<f64> {foo_func::<f64, isize>}, val: Value(<ZST>) }
+        _1 = foo_func::<f64, isize>(const 0_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/traits/early-vtbl-resolution.rs:19:2: 19:2
+        return;
     }
 }

@@ -1,369 +1,231 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn call_f(_1: F) -> () {
-    debug f => _1;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:5:22: 5:27
-    let mut _0: ();                      // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:5:32: 5:32
-    let _2: ();                          // in scope 0 at ui/bare-fn-implements-fn-mut.rs:6:5: 6:8
-    let mut _3: &mut F;                  // in scope 0 at ui/bare-fn-implements-fn-mut.rs:6:5: 6:6
-    let mut _4: ();                      // in scope 0 at ui/bare-fn-implements-fn-mut.rs:6:5: 6:8
+    debug f => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &mut F;
 
     bb0: {
-        _3 = &mut _1;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:6:5: 6:6
-        _2 = <F as FnMut<()>>::call_mut(move _3, move _4) -> [return: bb1, unwind: bb3]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:6:5: 6:8
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:6:5: 6:6
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut F, ()) -> <F as FnOnce<()>>::Output {<F as FnMut<()>>::call_mut}, val: Value(<ZST>) }
+        _3 = &mut _1;
+        _2 = <F as FnMut<()>>::call_mut(move _3, const ()) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:7:1: 7:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:7:2: 7:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:7:1: 7:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:5:1: 7:2
+        resume;
     }
 }
 
 fn f() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:9:8: 9:8
-    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _3: &[&str];                 // in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-    let mut _4: &[&str; 1];              // in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-    let _5: &[&str; 1];                  // in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _7: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _8: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _9: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _10: &[&str; 1];             // in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let mut _3: &[&str];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
 
     bb0: {
-        _10 = const _;                   // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(f, [], Some(promoted[1])) }
-        _5 = _10;                        // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-        _4 = _5;                         // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-        _9 = const _;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(f, [], Some(promoted[0])) }
-        _8 = _9;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _5 = [const "hello\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = _print(move _2) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _1 = _print(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:11:2: 11:2
-    }
-}
-
-promoted[0] in f: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-
-    bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    }
-}
-
-promoted[1] in f: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-    let mut _1: [&str; 1];               // in scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-
-    bb0: {
-        _1 = [const "hello\n"];          // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:10:14: 10:21
+        return;
     }
 }
 
 fn call_g(_1: G, _2: String, _3: String) -> String {
-    debug g => _1;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:13:45: 13:50
-    debug x => _2;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:13:55: 13:56
-    debug y => _3;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:13:66: 13:67
-    let mut _0: std::string::String;     // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:14:14: 14:20
-    let mut _4: &mut G;                  // in scope 0 at ui/bare-fn-implements-fn-mut.rs:15:5: 15:6
-    let mut _5: (std::string::String, std::string::String); // in scope 0 at ui/bare-fn-implements-fn-mut.rs:15:5: 15:12
-    let mut _6: std::string::String;     // in scope 0 at ui/bare-fn-implements-fn-mut.rs:15:7: 15:8
-    let mut _7: std::string::String;     // in scope 0 at ui/bare-fn-implements-fn-mut.rs:15:10: 15:11
+    debug g => _1;
+    debug x => _2;
+    debug y => _3;
+    let mut _0: std::string::String;
+    let mut _4: &mut G;
+    let mut _5: (std::string::String, std::string::String);
 
     bb0: {
-        _4 = &mut _1;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:15:5: 15:6
-        _6 = move _2;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:15:7: 15:8
-        _7 = move _3;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:15:10: 15:11
-        _5 = (move _6, move _7);         // scope 0 at ui/bare-fn-implements-fn-mut.rs:15:5: 15:12
-        _0 = <G as FnMut<(String, String)>>::call_mut(move _4, move _5) -> [return: bb1, unwind: bb3]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:15:5: 15:12
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:15:5: 15:6
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a mut G, (String, String)) -> <G as FnOnce<(String, String)>>::Output {<G as FnMut<(String, String)>>::call_mut}, val: Value(<ZST>) }
+        _4 = &mut _1;
+        _5 = (move _2, move _3);
+        _0 = <G as FnMut<(String, String)>>::call_mut(move _4, move _5) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:16:1: 16:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:16:2: 16:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:16:1: 16:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:13:1: 16:2
+        resume;
     }
 }
 
 fn g(_1: String, _2: String) -> String {
-    debug x => _1;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:18:6: 18:11
-    debug y => _2;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:18:21: 18:22
-    let mut _0: std::string::String;     // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:18:35: 18:41
-    let _3: ();                          // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-    let mut _4: &mut std::string::String; // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-    let mut _5: &str;                    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-    let _6: &str;                        // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-    let mut _7: &std::string::String;    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-    let _8: &std::string::String;        // in scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-    let mut _9: bool;                    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:21:1: 21:2
+    debug x => _1;
+    debug y => _2;
+    let mut _0: std::string::String;
+    let _3: ();
+    let mut _4: &mut std::string::String;
+    let mut _5: &str;
+    let _6: &str;
+    let _7: &std::string::String;
+    let mut _8: bool;
 
     bb0: {
-        _9 = const false;                // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-        _9 = const true;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-        _4 = &mut _1;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-        _8 = &_2;                        // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-        _7 = _8;                         // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-        _6 = <String as Deref>::deref(move _7) -> [return: bb1, unwind: bb4]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-                                         // + literal: Const { ty: for<'a> fn(&'a String) -> &'a <String as Deref>::Target {<String as Deref>::deref}, val: Value(<ZST>) }
+        _8 = const false;
+        _8 = const true;
+        _4 = &mut _1;
+        _7 = &_2;
+        _6 = <String as Deref>::deref(_7) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _5 = _6;                         // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:16: 19:18
-        _3 = String::push_str(move _4, move _5) -> [return: bb2, unwind: bb4]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:19:5: 19:19
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:19:7: 19:15
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut String, &'b str) {String::push_str}, val: Value(<ZST>) }
+        _5 = _6;
+        _3 = String::push_str(move _4, move _5) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        _9 = const false;                // scope 0 at ui/bare-fn-implements-fn-mut.rs:20:5: 20:6
-        _0 = move _1;                    // scope 0 at ui/bare-fn-implements-fn-mut.rs:20:5: 20:6
-        drop(_2) -> [return: bb3, unwind: bb7]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:21:1: 21:2
+        _8 = const false;
+        _0 = move _1;
+        drop(_2) -> [return: bb3, unwind: bb7];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:21:2: 21:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_2) -> bb7;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:21:1: 21:2
+        drop(_2) -> [return: bb7, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:18:1: 21:2
+        resume;
     }
 
     bb6 (cleanup): {
-        drop(_1) -> bb5;                 // scope 0 at ui/bare-fn-implements-fn-mut.rs:21:1: 21:2
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
     bb7 (cleanup): {
-        switchInt(_9) -> [0: bb5, otherwise: bb6]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:21:1: 21:2
+        switchInt(_8) -> [0: bb5, otherwise: bb6];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/bare-fn-implements-fn-mut.rs:23:11: 23:11
-    let _1: ();                          // in scope 0 at ui/bare-fn-implements-fn-mut.rs:24:5: 24:14
-    let mut _2: (&std::string::String, &&str); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _3: &std::string::String;    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _4: std::string::String;         // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:16: 25:63
-    let mut _5: std::string::String;     // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:43
-    let mut _6: &str;                    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:43
-    let _7: &str;                        // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:31
-    let mut _8: std::string::String;     // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:62
-    let mut _9: &str;                    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:62
-    let _10: &str;                       // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:50
-    let mut _11: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _12: &std::string::String;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _13: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _16: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _17: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _19: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _20: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _21: &std::string::String;   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _22: &std::string::String;       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _23: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _24: &&str;                      // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _25: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _26: &&str;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _27: bool;                   // in scope 0 at ui/bare-fn-implements-fn-mut.rs:25:62: 25:63
+    let mut _0: ();
+    let _1: ();
+    let mut _2: (&std::string::String, &&str);
+    let mut _3: &std::string::String;
+    let _4: std::string::String;
+    let mut _5: std::string::String;
+    let _6: &str;
+    let mut _7: std::string::String;
+    let _8: &str;
+    let mut _9: &&str;
+    let _10: &str;
+    let _11: &std::string::String;
+    let _12: &&str;
+    let mut _13: bool;
+    let mut _14: bool;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: bool;
     scope 1 {
-        debug left_val => _12;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _13;          // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _18: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _11;
+        debug right_val => _12;
+        let _15: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _18;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _15;
         }
     }
 
     bb0: {
-        _27 = const false;               // scope 0 at ui/bare-fn-implements-fn-mut.rs:24:5: 24:14
-        _1 = call_f::<fn() {f}>(f) -> bb1; // scope 0 at ui/bare-fn-implements-fn-mut.rs:24:5: 24:14
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:24:5: 24:11
-                                         // + literal: Const { ty: fn(fn() {f}) {call_f::<fn() {f}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:24:12: 24:13
-                                         // + literal: Const { ty: fn() {f}, val: Value(<ZST>) }
+        _18 = const false;
+        _1 = call_f::<fn() {f}>(f) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = const "foo";                // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:31
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:26: 25:31
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _6 = _7;                         // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:43
-        _27 = const true;                // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:43
-        _5 = <str as ToString>::to_string(move _6) -> bb2; // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:26: 25:43
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:32: 25:41
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+        _6 = const "foo";
+        _18 = const true;
+        _5 = <str as ToString>::to_string(_6) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = const "bar";               // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:50
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:45: 25:50
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _9 = _10;                        // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:62
-        _8 = <str as ToString>::to_string(move _9) -> [return: bb3, unwind: bb12]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:45: 25:62
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:51: 25:60
-                                         // + literal: Const { ty: for<'a> fn(&'a str) -> String {<str as ToString>::to_string}, val: Value(<ZST>) }
+        _8 = const "bar";
+        _7 = <str as ToString>::to_string(_8) -> [return: bb3, unwind: bb12];
     }
 
     bb3: {
-        _27 = const false;               // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:16: 25:63
-        _4 = call_g::<fn(String, String) -> String {g}>(g, move _5, move _8) -> [return: bb4, unwind: bb12]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:16: 25:63
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:16: 25:22
-                                         // + literal: Const { ty: fn(fn(String, String) -> String {g}, String, String) -> String {call_g::<fn(String, String) -> String {g}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:25:23: 25:24
-                                         // + literal: Const { ty: fn(String, String) -> String {g}, val: Value(<ZST>) }
+        _18 = const false;
+        _4 = call_g::<fn(String, String) -> String {g}>(g, move _5, move _7) -> [return: bb4, unwind: bb12];
     }
 
     bb4: {
-        _27 = const false;               // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:62: 25:63
-        _3 = &_4;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _26 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &&str, val: Unevaluated(main, [], Some(promoted[0])) }
-        _11 = _26;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _2 = (move _3, move _11);        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _12 = (_2.0: &std::string::String); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _13 = (_2.1: &&str);             // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _16 = _12;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _17 = _13;                       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _15 = <String as PartialEq<&str>>::eq(move _16, move _17) -> [return: bb5, unwind: bb9]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a String, &'b &str) -> bool {<String as PartialEq<&str>>::eq}, val: Value(<ZST>) }
+        _18 = const false;
+        _3 = &_4;
+        _10 = const "foobar";
+        _9 = &_10;
+        _2 = (move _3, move _9);
+        _11 = (_2.0: &std::string::String);
+        _12 = (_2.1: &&str);
+        _14 = <String as PartialEq<&str>>::eq(_11, _12) -> [return: bb5, unwind: bb9];
     }
 
     bb5: {
-        _14 = Not(move _15);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _14) -> [0: bb7, otherwise: bb6]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _18 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _20 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _22 = _12;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _21 = _22;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _24 = _13;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _23 = _24;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _25 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _19 = core::panicking::assert_failed::<String, &str>(move _20, move _21, move _23, move _25) -> bb9; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a String, &'b &str, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<String, &str>}, val: Value(<ZST>) }
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<String, &str>(move _15, _11, _12, move _17) -> bb9;
     }
 
     bb7: {
-        drop(_4) -> bb8;                 // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_4) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        return;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:27:2: 27:2
+        return;
     }
 
     bb9 (cleanup): {
-        drop(_4) -> bb10;                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:48:9: 48:10
+        drop(_4) -> [return: bb10, unwind terminate];
     }
 
     bb10 (cleanup): {
-        resume;                          // scope 0 at ui/bare-fn-implements-fn-mut.rs:23:1: 27:2
+        resume;
     }
 
     bb11 (cleanup): {
-        drop(_5) -> bb10;                // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:62: 25:63
+        drop(_5) -> [return: bb10, unwind terminate];
     }
 
     bb12 (cleanup): {
-        switchInt(_27) -> [0: bb10, otherwise: bb11]; // scope 0 at ui/bare-fn-implements-fn-mut.rs:25:62: 25:63
-    }
-}
-
-promoted[0] in main: &&str = {
-    let mut _0: &&str;                   // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: &str;                    // in scope 0 at ui/bare-fn-implements-fn-mut.rs:26:16: 26:24
-
-    bb0: {
-        _1 = const "foobar";             // scope 0 at ui/bare-fn-implements-fn-mut.rs:26:16: 26:24
-                                         // mir::Constant
-                                         // + span: ui/bare-fn-implements-fn-mut.rs:26:16: 26:24
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        switchInt(_18) -> [0: bb10, otherwise: bb11];
     }
 }

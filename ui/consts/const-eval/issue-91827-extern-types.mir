@@ -1,205 +1,171 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 List::data::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:19:15: 19:16
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:19:15: 19:16
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:19:15: 19:16
+        _0 = const 0_usize;
+        return;
     }
 }
 
 ListImpl::data::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:26:15: 26:16
+    let mut _0: usize;
 
     bb0: {
-        _0 = const N;                    // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:26:15: 26:16
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:26:15: 26:16
+        _0 = const N;
+        return;
     }
 }
 
 fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:29:1: 29:16>::as_slice(_1: &List<T>) -> &[T] {
-    debug self => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:30:23: 30:28
-    let mut _0: &[T];                    // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-    let mut _2: *const T;                // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _3: &[T];                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _4: &[T; 0];                 // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _5: usize;                   // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:65: 31:73
+    debug self => _1;
+    let mut _0: &[T];
+    let mut _3: *const Opaque;
+    let _4: &[T];
+    let mut _5: usize;
     scope 1 {
+        let _2: *const T;
+        scope 2 {
+            debug ptr => _2;
+        }
     }
 
     bb0: {
-        _4 = &((*_1).1: [T; 0]);         // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        _3 = move _4 as &[T] (Pointer(Unsize)); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        _2 = core::slice::<impl [T]>::as_ptr(move _3) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:31:55: 31:61
-                                         // + literal: Const { ty: for<'a> fn(&'a [T]) -> *const T {core::slice::<impl [T]>::as_ptr}, val: Value(<ZST>) }
+        _3 = &raw const ((*_1).2: Opaque);
+        _2 = move _3 as *const T (PtrToPtr);
+        _5 = ((*_1).0: usize);
+        _4 = std::slice::from_raw_parts::<'_, T>(_2, move _5) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _5 = ((*_1).0: usize);           // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:65: 31:73
-        _0 = std::slice::from_raw_parts::<'_, T>(move _2, move _5) -> bb2; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:44
-                                         // + literal: Const { ty: unsafe fn(*const T, usize) -> &[T] {std::slice::from_raw_parts::<'_, T>}, val: Value(<ZST>) }
-    }
-
-    bb2: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:32:6: 32:6
+        _0 = _4;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:29:1: 29:16>::as_slice(_1: &List<T>) -> &[T] {
-    debug self => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:30:23: 30:28
-    let mut _0: &[T];                    // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:30:33: 30:37
-    let _2: &[T];                        // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-    let mut _3: *const T;                // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _4: &[T];                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _5: &[T; 0];                 // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-    let mut _6: usize;                   // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:31:65: 31:73
+    debug self => _1;
+    let mut _0: &[T];
+    let mut _3: *const Opaque;
+    let _4: &[T];
+    let mut _5: *const T;
+    let mut _6: usize;
+    scope 1 {
+        let _2: *const T;
+        scope 2 {
+            debug ptr => _2;
+        }
+    }
+
+    bb0: {
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &raw const ((*_1).2: Opaque);
+        _2 = move _3 as *const T (PtrToPtr);
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = _2;
+        StorageLive(_6);
+        _6 = ((*_1).0: usize);
+        ConstEvalCounter;
+        _4 = std::slice::from_raw_parts::<'_, T>(move _5, move _6) -> [return: bb1, unwind continue];
+    }
+
+    bb1: {
+        _0 = &(*_4);
+        StorageDead(_6);
+        StorageDead(_5);
+        StorageDead(_2);
+        StorageDead(_4);
+        return;
+    }
+}
+
+<impl at ui/consts/const-eval/issue-91827-extern-types.rs:38:1: 38:39>::{constant#0}: usize = {
+    let mut _0: usize;
+
+    bb0: {
+        _0 = const N;
+        return;
+    }
+}
+
+fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:38:1: 38:39>::as_list(_1: &ListImpl<T, N>) -> &List<T> {
+    debug self => _1;
+    let mut _0: &List<T>;
     scope 1 {
     }
 
     bb0: {
-        StorageLive(_2);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-        StorageLive(_3);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        StorageLive(_4);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        StorageLive(_5);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        _5 = &((*_1).1: [T; 0]);         // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        _4 = move _5 as &[T] (Pointer(Unsize)); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        StorageDead(_5);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:53: 31:54
-        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-        _3 = core::slice::<impl [T]>::as_ptr(move _4) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:45: 31:63
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:31:55: 31:61
-                                         // + literal: Const { ty: for<'a> fn(&'a [T]) -> *const T {core::slice::<impl [T]>::as_ptr}, val: Value(<ZST>) }
-    }
-
-    bb1: {
-        StorageDead(_4);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:62: 31:63
-        StorageLive(_6);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:65: 31:73
-        _6 = ((*_1).0: usize);           // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:65: 31:73
-        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-        _2 = std::slice::from_raw_parts::<'_, T>(move _3, move _6) -> bb2; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:44
-                                         // + literal: Const { ty: unsafe fn(*const T, usize) -> &[T] {std::slice::from_raw_parts::<'_, T>}, val: Value(<ZST>) }
-    }
-
-    bb2: {
-        _0 = &(*_2);                     // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:18: 31:74
-        StorageDead(_6);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:73: 31:74
-        StorageDead(_3);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:31:73: 31:74
-        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:32:5: 32:6
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:32:6: 32:6
-    }
-}
-
-<impl at ui/consts/const-eval/issue-91827-extern-types.rs:35:1: 35:39>::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:35:37: 35:38
-
-    bb0: {
-        _0 = const N;                    // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:35:37: 35:38
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:35:37: 35:38
-    }
-}
-
-fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:35:1: 35:39>::as_list(_1: &ListImpl<T, N>) -> &List<T> {
-    debug self => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:36:22: 36:27
-    let mut _0: &List<T>;                // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:36:32: 36:40
-    let mut _2: &ListImpl<T, N>;         // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:37:38: 37:42
-    scope 1 {
-    }
-
-    bb0: {
-        _2 = _1;                         // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:38: 37:42
-        _0 = transmute::<&ListImpl<T, N>, &List<T>>(move _2) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:18: 37:43
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:37:18: 37:37
-                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&ListImpl<T, N>) -> &List<T> {transmute::<&ListImpl<T, N>, &List<T>>}, val: Value(<ZST>) }
-    }
-
-    bb1: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:38:6: 38:6
+        _0 = _1 as &List<T> (Transmute);
+        return;
     }
 }
 
 // MIR FOR CTFE
-fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:35:1: 35:39>::as_list(_1: &ListImpl<T, N>) -> &List<T> {
-    debug self => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:36:22: 36:27
-    let mut _0: &List<T>;                // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:36:32: 36:40
-    let mut _2: &ListImpl<T, N>;         // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:37:38: 37:42
+fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:38:1: 38:39>::as_list(_1: &ListImpl<T, N>) -> &List<T> {
+    debug self => _1;
+    let mut _0: &List<T>;
+    let mut _2: &ListImpl<T, N>;
     scope 1 {
     }
 
     bb0: {
-        StorageLive(_2);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:38: 37:42
-        _2 = _1;                         // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:38: 37:42
-        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:18: 37:43
-        _0 = transmute::<&ListImpl<T, N>, &List<T>>(move _2) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:18: 37:43
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:37:18: 37:37
-                                         // + literal: Const { ty: unsafe extern "rust-intrinsic" fn(&ListImpl<T, N>) -> &List<T> {transmute::<&ListImpl<T, N>, &List<T>>}, val: Value(<ZST>) }
-    }
-
-    bb1: {
-        StorageDead(_2);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:37:42: 37:43
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:38:6: 38:6
+        StorageLive(_2);
+        _2 = _1;
+        _0 = move _2 as &List<T> (Transmute);
+        StorageDead(_2);
+        return;
     }
 }
 
 static A: ListImpl<u128, 3> = {
-    let mut _0: ListImpl<u128, 3>;       // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:15: 41:32
-    let mut _1: [u128; 3];               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:43:11: 43:20
+    let mut _0: ListImpl<u128, 3>;
+    let mut _1: [u128; 3];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:43:11: 43:20
-        _1 = [const 5_u128, const 6_u128, const 7_u128]; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:43:11: 43:20
-        _0 = ListImpl::<u128, 3> { len: const 3_usize, data: move _1 }; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:35: 44:2
-        StorageDead(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:44:1: 44:2
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:1: 44:3
+        StorageLive(_1);
+        _1 = [const 5_u128, const 6_u128, const 7_u128];
+        _0 = ListImpl::<u128, 3> { len: const 3_usize, data: move _1 };
+        StorageDead(_1);
+        return;
     }
 }
 
 A::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:30: 41:31
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 3_usize;              // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:30: 41:31
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:41:30: 41:31
+        _0 = const 3_usize;
+        return;
     }
 }
 
 static A_REF: &List<u128> = {
-    let mut _0: &List<u128>;             // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:19: 45:38
-    let _1: &List<u128>;                 // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-    let mut _2: &ListImpl<u128, 3>;      // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-    let _3: &ListImpl<u128, 3>;          // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:42
+    let mut _0: &List<u128>;
+    let _1: &List<u128>;
+    let mut _2: &ListImpl<u128, 3>;
+    let _3: &ListImpl<u128, 3>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-        StorageLive(_2);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-        StorageLive(_3);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:42
-        _3 = const {alloc1: &ListImpl<u128, 3>}; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:42
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:42
-                                         // + literal: Const { ty: &ListImpl<u128, 3>, val: Value(Scalar(alloc1)) }
-        _2 = &(*_3);                     // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-        ConstEvalCounter;                // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-        _1 = ListImpl::<u128, 3>::as_list(move _2) -> bb1; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:45:43: 45:50
-                                         // + literal: Const { ty: for<'a> fn(&'a ListImpl<u128, 3>) -> &'a List<u128> {ListImpl::<u128, 3>::as_list}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = const {alloc1: &ListImpl<u128, 3>};
+        _2 = &(*_3);
+        ConstEvalCounter;
+        _1 = ListImpl::<u128, 3>::as_list(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = &(*_1);                     // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:41: 45:52
-        StorageDead(_3);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:51: 45:52
-        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:51: 45:52
-        StorageDead(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:51: 45:52
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:45:1: 45:53
+        _0 = &(*_1);
+        StorageDead(_3);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
@@ -211,44 +177,35 @@ alloc1 (static: A, size: 56, align: 8) {
 }
 
 static A_TAIL_OFFSET: isize = {
-    let mut _0: isize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:27: 46:32
-    let mut _1: &List<u128>;             // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-    let _2: &List<u128>;                 // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-    let mut _3: &ListImpl<u128, 3>;      // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-    let _4: &ListImpl<u128, 3>;          // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:48
+    let mut _0: isize;
+    let mut _1: &List<u128>;
+    let _2: &List<u128>;
+    let mut _3: &ListImpl<u128, 3>;
+    let _4: &ListImpl<u128, 3>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        StorageLive(_2);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        StorageLive(_3);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        StorageLive(_4);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:48
-        _4 = const {alloc1: &ListImpl<u128, 3>}; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:48
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:48
-                                         // + literal: Const { ty: &ListImpl<u128, 3>, val: Value(Scalar(alloc1)) }
-        _3 = &(*_4);                     // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        ConstEvalCounter;                // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        _2 = ListImpl::<u128, 3>::as_list(move _3) -> bb1; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:46:49: 46:56
-                                         // + literal: Const { ty: for<'a> fn(&'a ListImpl<u128, 3>) -> &'a List<u128> {ListImpl::<u128, 3>::as_list}, val: Value(<ZST>) }
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = const {alloc1: &ListImpl<u128, 3>};
+        _3 = &(*_4);
+        ConstEvalCounter;
+        _2 = ListImpl::<u128, 3>::as_list(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = &(*_2);                     // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:47: 46:58
-        StorageDead(_3);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:57: 46:58
-        ConstEvalCounter;                // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:35: 46:59
-        _0 = tail_offset::<u128>(move _1) -> bb2; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:35: 46:59
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:46:35: 46:46
-                                         // + literal: Const { ty: for<'a> fn(&'a List<u128>) -> isize {tail_offset::<u128>}, val: Value(<ZST>) }
+        _1 = &(*_2);
+        StorageDead(_3);
+        ConstEvalCounter;
+        _0 = tail_offset::<u128>(move _1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_4);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:58: 46:59
-        StorageDead(_2);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:58: 46:59
-        StorageDead(_1);                 // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:58: 46:59
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:46:1: 46:60
+        StorageDead(_4);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
@@ -260,236 +217,163 @@ alloc1 (static: A, size: 56, align: 8) {
 }
 
 fn tail_offset(_1: &List<T>) -> isize {
-    debug list => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:48:25: 48:29
-    let mut _0: isize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:48:44: 48:49
-    let mut _2: *const u8;               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:48
-    let mut _3: *const Opaque;           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/ptr/mod.rs:2044:5: 2044:22
-    let mut _4: *const u8;               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:96
-    let mut _5: *const List<T>;          // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:83
+    debug list => _1;
+    let mut _0: isize;
+    let mut _2: *const u8;
+    let mut _3: *const Opaque;
+    let mut _4: *const u8;
+    let mut _5: *const List<T>;
     scope 1 {
     }
 
     bb0: {
-        _3 = &raw const ((*_1).2: Opaque); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/ptr/mod.rs:2044:5: 2044:22
-        _2 = move _3 as *const u8 (PtrToPtr); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:48
-        _5 = &raw const (*_1);           // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:65
-        _4 = move _5 as *const u8 (PtrToPtr); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:96
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:97
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:49:49: 49:60
-                                         // + literal: Const { ty: unsafe fn(*const u8, *const u8) -> isize {ptr::const_ptr::<impl *const u8>::offset_from}, val: Value(<ZST>) }
+        _3 = &raw const ((*_1).2: Opaque);
+        _2 = move _3 as *const u8 (PtrToPtr);
+        _5 = &raw const (*_1);
+        _4 = move _5 as *const u8 (PtrToPtr);
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:50:2: 50:2
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn tail_offset(_1: &List<T>) -> isize {
-    debug list => _1;                    // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:48:25: 48:29
-    let mut _0: isize;                   // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:48:44: 48:49
-    let mut _2: *const u8;               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:48
-    let mut _3: *const Opaque;           // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/ptr/mod.rs:2044:5: 2044:22
-    let mut _4: *const u8;               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:96
-    let mut _5: *const List<T>;          // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:83
+    debug list => _1;
+    let mut _0: isize;
+    let mut _2: *const u8;
+    let mut _3: *const Opaque;
+    let mut _4: *const u8;
+    let mut _5: *const List<T>;
     scope 1 {
     }
 
     bb0: {
-        StorageLive(_2);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:48
-        StorageLive(_3);                 // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/ptr/mod.rs:2044:5: 2044:22
-        _3 = &raw const ((*_1).2: Opaque); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/ptr/mod.rs:2044:5: 2044:22
-        _2 = move _3 as *const u8 (PtrToPtr); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:48
-        StorageDead(_3);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:47: 49:48
-        StorageLive(_4);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:96
-        StorageLive(_5);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:83
-        _5 = &raw const (*_1);           // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:65
-        _4 = move _5 as *const u8 (PtrToPtr); // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:61: 49:96
-        StorageDead(_5);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:95: 49:96
-        ConstEvalCounter;                // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:97
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> bb1; // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:14: 49:97
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:49:49: 49:60
-                                         // + literal: Const { ty: unsafe fn(*const u8, *const u8) -> isize {ptr::const_ptr::<impl *const u8>::offset_from}, val: Value(<ZST>) }
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = &raw const ((*_1).2: Opaque);
+        _2 = move _3 as *const u8 (PtrToPtr);
+        StorageDead(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &raw const (*_1);
+        _4 = move _5 as *const u8 (PtrToPtr);
+        StorageDead(_5);
+        ConstEvalCounter;
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        StorageDead(_4);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:96: 49:97
-        StorageDead(_2);                 // scope 1 at ui/consts/const-eval/issue-91827-extern-types.rs:49:96: 49:97
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:50:2: 50:2
+        StorageDead(_4);
+        StorageDead(_2);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:52:11: 52:11
-    let mut _1: (&&[u128], &&[u128; 3]); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &&[u128];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _3: &[u128];                     // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:32
-    let mut _4: &List<u128>;             // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:32
-    let _5: &&List<u128>;                // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:21
-    let mut _6: &&[u128; 3];             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _7: &&[u128];                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _8: &&[u128; 3];                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _11: &&[u128];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _12: &&[u128; 3];            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _16: &&[u128];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _17: &&[u128];                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _18: &&[u128; 3];            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _19: &&[u128; 3];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _21: (&isize, &isize);       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _22: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _23: &isize;                     // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:16: 55:29
-    let mut _24: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _25: isize;                      // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:31: 55:49
-    let mut _26: &List<u128>;            // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-    let _27: &&List<u128>;               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-    let _28: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _29: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _30: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _31: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _32: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _33: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _35: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _36: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _37: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _38: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _39: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _40: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _41: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _42: &&[u128; 3];            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _43: &List<u128>;            // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:21
-    let mut _44: &List<u128>;            // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
+    let mut _0: ();
+    let mut _1: (&&[u128], &&[u128; 3]);
+    let mut _2: &&[u128];
+    let _3: &[u128];
+    let _4: &&List<u128>;
+    let mut _5: &&[u128; 3];
+    let _6: &[u128; 3];
+    let _7: [u128; 3];
+    let _8: &&[u128];
+    let _9: &&[u128; 3];
+    let mut _10: bool;
+    let mut _11: bool;
+    let _13: !;
+    let mut _14: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _15: (&isize, &isize);
+    let _16: &isize;
+    let mut _17: &isize;
+    let _18: isize;
+    let _19: &&List<u128>;
+    let _20: &isize;
+    let _21: &isize;
+    let mut _22: bool;
+    let mut _23: bool;
+    let mut _24: isize;
+    let mut _25: isize;
+    let _27: !;
+    let mut _28: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _29: &List<u128>;
+    let mut _30: &List<u128>;
     scope 1 {
-        debug left_val => _7;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _8;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _13: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _8;
+        debug right_val => _9;
+        let _12: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _13;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _12;
         }
     }
     scope 3 {
-        debug left_val => _28;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _29;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _34: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _20;
+        debug right_val => _21;
+        let _26: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _34;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _26;
         }
     }
 
     bb0: {
-        _5 = const {alloc2: &&List<u128>}; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:21
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:21
-                                         // + literal: Const { ty: &&List<u128>, val: Value(Scalar(alloc2)) }
-        _43 = deref_copy (*_5);          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:32
-        _4 = _43;                        // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:32
-        _3 = List::<u128>::as_slice(move _4) -> bb1; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:16: 53:32
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:53:22: 53:30
-                                         // + literal: Const { ty: for<'a> fn(&'a List<u128>) -> &'a [u128] {List::<u128>::as_slice}, val: Value(<ZST>) }
+        _4 = const {alloc2: &&List<u128>};
+        _29 = deref_copy (*_4);
+        _3 = List::<u128>::as_slice(_29) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _42 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &&[u128; 3], val: Unevaluated(main, [], Some(promoted[0])) }
-        _6 = _42;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _6);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _7 = (_1.0: &&[u128]);           // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _8 = (_1.1: &&[u128; 3]);        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _11 = _7;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _12 = _8;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _10 = <&[u128] as PartialEq<&[u128; 3]>>::eq(move _11, move _12) -> bb2; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a &[u128], &'b &[u128; 3]) -> bool {<&[u128] as PartialEq<&[u128; 3]>>::eq}, val: Value(<ZST>) }
+        _2 = &_3;
+        _7 = [const 5_u128, const 6_u128, const 7_u128];
+        _6 = &_7;
+        _5 = &_6;
+        _1 = (move _2, move _5);
+        _8 = (_1.0: &&[u128]);
+        _9 = (_1.1: &&[u128; 3]);
+        _11 = <&[u128] as PartialEq<&[u128; 3]>>::eq(_8, _9) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = Not(move _10);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _9) -> [0: bb4, otherwise: bb3]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _13 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _17 = _7;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _16 = _17;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _8;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = _19;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _14 = core::panicking::assert_failed::<&[u128], &[u128; 3]>(move _15, move _16, move _18, move _20); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a &[u128], &'b &[u128; 3], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<&[u128], &[u128; 3]>}, val: Value(<ZST>) }
+        _12 = core::panicking::AssertKind::Eq;
+        _14 = Option::<Arguments<'_>>::None;
+        _13 = core::panicking::assert_failed::<&[u128], &[u128; 3]>(move _12, _8, _9, move _14) -> unwind continue;
     }
 
     bb4: {
-        _23 = const {alloc3: &isize};    // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:16: 55:29
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:55:16: 55:29
-                                         // + literal: Const { ty: &isize, val: Value(Scalar(alloc3)) }
-        _22 = _23;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _27 = const {alloc2: &&List<u128>}; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-                                         // + literal: Const { ty: &&List<u128>, val: Value(Scalar(alloc2)) }
-        _44 = deref_copy (*_27);         // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-        _26 = _44;                       // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:43: 55:48
-        _25 = tail_offset::<u128>(move _26) -> bb5; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:55:31: 55:49
-                                         // mir::Constant
-                                         // + span: ui/consts/const-eval/issue-91827-extern-types.rs:55:31: 55:42
-                                         // + literal: Const { ty: for<'a> fn(&'a List<u128>) -> isize {tail_offset::<u128>}, val: Value(<ZST>) }
+        _16 = const {alloc3: &isize};
+        _19 = const {alloc2: &&List<u128>};
+        _30 = deref_copy (*_19);
+        _18 = tail_offset::<u128>(_30) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _24 = &_25;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _21 = (move _22, move _24);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _28 = (_21.0: &isize);           // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _29 = (_21.1: &isize);           // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _32 = const 8_isize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _33 = (*_29);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _31 = Eq(move _32, move _33);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _30 = Not(move _31);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _30) -> [0: bb7, otherwise: bb6]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _17 = &_18;
+        _15 = (_16, move _17);
+        _20 = (_15.0: &isize);
+        _21 = (_15.1: &isize);
+        _24 = (*_20);
+        _25 = (*_21);
+        _23 = Eq(move _24, move _25);
+        _22 = Not(move _23);
+        switchInt(move _22) -> [0: bb7, otherwise: bb6];
     }
 
     bb6: {
-        _34 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _36 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _38 = _28;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _37 = _38;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _40 = _29;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _39 = _40;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _41 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _35 = core::panicking::assert_failed::<isize, isize>(move _36, move _37, move _39, move _41); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+        _26 = core::panicking::AssertKind::Eq;
+        _28 = Option::<Arguments<'_>>::None;
+        _27 = core::panicking::assert_failed::<isize, isize>(move _26, _20, _21, move _28) -> unwind continue;
     }
 
     bb7: {
-        return;                          // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:56:2: 56:2
+        return;
     }
 }
 
@@ -506,17 +390,4 @@ alloc1 (static: A, size: 56, align: 8) {
     0x10 │ 00 00 00 00 00 00 00 00 06 00 00 00 00 00 00 00 │ ................
     0x20 │ 00 00 00 00 00 00 00 00 07 00 00 00 00 00 00 00 │ ................
     0x30 │ 00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in main: &&[u128; 3] = {
-    let mut _0: &&[u128; 3];             // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: &[u128; 3];              // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:34: 53:44
-    let mut _2: [u128; 3];               // in scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:35: 53:44
-
-    bb0: {
-        _2 = [const 5_u128, const 6_u128, const 7_u128]; // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:35: 53:44
-        _1 = &_2;                        // scope 0 at ui/consts/const-eval/issue-91827-extern-types.rs:53:34: 53:44
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
 }

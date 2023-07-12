@@ -1,49 +1,42 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn assert_static(_1: T) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:3:36: 3:36
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:3:37: 3:38
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:3:38: 3:38
+        return;
     }
 }
 
 fn capture_lifetime() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:7:31: 7:31
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:7:33: 7:33
+        return;
     }
 }
 
 fn test_lifetime() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:9:24: 9:24
-    let _1: ();                          // in scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:10:5: 10:42
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = assert_static::<fn() {capture_lifetime::<'_>}>(capture_lifetime::<'_>) -> bb1; // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:10:5: 10:42
-                                         // mir::Constant
-                                         // + span: ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:10:5: 10:18
-                                         // + literal: Const { ty: fn(fn() {capture_lifetime::<'_>}) {assert_static::<fn() {capture_lifetime::<'_>}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:10:19: 10:41
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() {capture_lifetime::<'_>}, val: Value(<ZST>) }
+        _1 = assert_static::<fn() {capture_lifetime::<'_>}>(capture_lifetime::<'_>) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:11:2: 11:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:13:11: 13:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/lifetimes/issue-70917-lifetimes-in-fn-def.rs:13:13: 13:13
+        return;
     }
 }

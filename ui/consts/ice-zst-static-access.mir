@@ -1,56 +1,78 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/consts/ice-zst-static-access.rs:8:16: 8:21>::clone(_1: &Glfw) -> Glfw {
-    debug self => _1;                    // in scope 0 at ui/consts/ice-zst-static-access.rs:8:16: 8:21
-    let mut _0: Glfw;                    // return place in scope 0 at ui/consts/ice-zst-static-access.rs:8:16: 8:21
+    debug self => _1;
+    let mut _0: Glfw;
 
     bb0: {
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:8:21: 8:21
+        return;
     }
 }
 
 static mut GLFW: Option<Glfw> = {
-    let mut _0: std::option::Option<Glfw>; // return place in scope 0 at ui/consts/ice-zst-static-access.rs:11:18: 11:30
+    let mut _0: std::option::Option<Glfw>;
 
     bb0: {
-        _0 = Option::<Glfw>::None;       // scope 0 at ui/consts/ice-zst-static-access.rs:11:33: 11:37
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:11:1: 11:38
+        _0 = Option::<Glfw>::None;
+        return;
     }
 }
 
 fn new() -> Glfw {
-    let mut _0: Glfw;                    // return place in scope 0 at ui/consts/ice-zst-static-access.rs:12:17: 12:21
-    let mut _1: *mut std::option::Option<Glfw>; // in scope 0 at ui/consts/ice-zst-static-access.rs:14:29: 14:33
-    let mut _2: isize;                   // in scope 0 at ui/consts/ice-zst-static-access.rs:14:16: 14:26
-    let mut _4: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
+    let mut _0: Glfw;
+    let mut _1: *mut std::option::Option<Glfw>;
+    let mut _2: isize;
+    let mut _3: !;
     scope 1 {
         scope 2 {
-            debug glfw => _3;            // in scope 2 at ui/consts/ice-zst-static-access.rs:14:21: 14:25
-            let _3: Glfw;                // in scope 2 at ui/consts/ice-zst-static-access.rs:14:21: 14:25
+            debug glfw => const Glfw;
+            let mut _4: *const ();
+            let mut _5: usize;
+            let mut _6: usize;
+            let mut _7: usize;
+            let mut _8: usize;
+            let mut _9: bool;
+            let mut _10: *const ();
+            let mut _11: usize;
+            let mut _12: usize;
+            let mut _13: usize;
+            let mut _14: usize;
+            let mut _15: bool;
         }
     }
 
     bb0: {
-        _1 = const {alloc1: *mut Option<Glfw>}; // scope 2 at ui/consts/ice-zst-static-access.rs:14:29: 14:33
-                                         // mir::Constant
-                                         // + span: ui/consts/ice-zst-static-access.rs:14:29: 14:33
-                                         // + literal: Const { ty: *mut Option<Glfw>, val: Value(Scalar(alloc1)) }
-        _2 = discriminant((*_1));        // scope 2 at ui/consts/ice-zst-static-access.rs:14:16: 14:26
-        switchInt(move _2) -> [1: bb1, otherwise: bb2]; // scope 2 at ui/consts/ice-zst-static-access.rs:14:16: 14:26
+        _1 = const {alloc1: *mut Option<Glfw>};
+        _10 = _1 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(std::option::Option<Glfw>);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb4, unwind unreachable];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:20:2: 20:2
+        _4 = _1 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(std::option::Option<Glfw>);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb3, unwind unreachable];
     }
 
     bb2: {
-        _4 = core::panicking::panic(const "not yet implemented"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:56
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:9: 773:33
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:773:34: 773:55
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+    }
+
+    bb3: {
+        return;
+    }
+
+    bb4: {
+        _2 = discriminant((*_1));
+        switchInt(move _2) -> [1: bb1, otherwise: bb2];
     }
 }
 
@@ -59,58 +81,52 @@ alloc1 (static: GLFW, size: 1, align: 1) {
 }
 
 _dispatch_queue_attr_concurrent::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/ice-zst-static-access.rs:23:50: 23:51
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/ice-zst-static-access.rs:23:50: 23:51
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:23:50: 23:51
+        _0 = const 0_usize;
+        return;
     }
 }
 
 static DISPATCH_QUEUE_CONCURRENT: &[u8; 0] = {
-    let mut _0: &[u8; 0];                // return place in scope 0 at ui/consts/ice-zst-static-access.rs:26:35: 26:51
-    let _1: &[u8; 0];                    // in scope 0 at ui/consts/ice-zst-static-access.rs:27:14: 27:46
-    let _2: *const [u8; 0];              // in scope 0 at ui/consts/ice-zst-static-access.rs:27:15: 27:46
+    let mut _0: &[u8; 0];
+    let _1: &[u8; 0];
+    let _2: *const [u8; 0];
     scope 1 {
     }
 
     bb0: {
-        StorageLive(_1);                 // scope 1 at ui/consts/ice-zst-static-access.rs:27:14: 27:46
-        StorageLive(_2);                 // scope 1 at ui/consts/ice-zst-static-access.rs:27:15: 27:46
-        _2 = const {alloc2: *const [u8; 0]}; // scope 1 at ui/consts/ice-zst-static-access.rs:27:15: 27:46
-                                         // mir::Constant
-                                         // + span: ui/consts/ice-zst-static-access.rs:27:15: 27:46
-                                         // + literal: Const { ty: *const [u8; 0], val: Value(Scalar(alloc2)) }
-        _1 = &(*_2);                     // scope 1 at ui/consts/ice-zst-static-access.rs:27:14: 27:46
-        _0 = &(*_1);                     // scope 1 at ui/consts/ice-zst-static-access.rs:27:14: 27:46
-        StorageDead(_1);                 // scope 0 at ui/consts/ice-zst-static-access.rs:27:47: 27:48
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:26:1: 27:49
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = const {alloc2: *const [u8; 0]};
+        _1 = &(*_2);
+        _0 = &(*_1);
+        StorageDead(_1);
+        return;
     }
 }
 
 alloc2 (extern static: _dispatch_queue_attr_concurrent)
 
 DISPATCH_QUEUE_CONCURRENT::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/ice-zst-static-access.rs:26:49: 26:50
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/consts/ice-zst-static-access.rs:26:49: 26:50
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:26:49: 26:50
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/ice-zst-static-access.rs:29:11: 29:11
-    let _1: Glfw;                        // in scope 0 at ui/consts/ice-zst-static-access.rs:31:5: 31:10
+    let mut _0: ();
+    let _1: Glfw;
 
     bb0: {
-        _1 = new() -> bb1;               // scope 0 at ui/consts/ice-zst-static-access.rs:31:5: 31:10
-                                         // mir::Constant
-                                         // + span: ui/consts/ice-zst-static-access.rs:31:5: 31:8
-                                         // + literal: Const { ty: fn() -> Glfw {new}, val: Value(<ZST>) }
+        _1 = new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/ice-zst-static-access.rs:32:2: 32:2
+        return;
     }
 }

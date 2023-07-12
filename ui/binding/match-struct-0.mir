@@ -1,52 +1,46 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/binding/match-struct-0.rs:7:15: 7:15
-    let _1: Foo;                         // in scope 0 at ui/binding/match-struct-0.rs:8:9: 8:10
-    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-    let mut _4: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: ();
+    let _1: Foo;
+    let mut _2: !;
+    let mut _3: !;
+    let mut _5: !;
     scope 1 {
-        debug f => _1;                   // in scope 1 at ui/binding/match-struct-0.rs:8:9: 8:10
-        let _3: isize;                   // in scope 1 at ui/binding/match-struct-0.rs:15:16: 15:18
+        debug f => _1;
+        let _4: isize;
         scope 2 {
-            debug _f => _3;              // in scope 2 at ui/binding/match-struct-0.rs:15:16: 15:18
+            debug _f => _4;
         }
     }
 
     bb0: {
-        _1 = const Foo {{ f: 1_isize }}; // scope 0 at ui/binding/match-struct-0.rs:8:13: 8:22
-                                         // mir::Constant
-                                         // + span: ui/binding/match-struct-0.rs:8:13: 8:22
-                                         // + literal: Const { ty: Foo, val: Value(Scalar(0x0000000000000001)) }
-        switchInt((_1.0: isize)) -> [0: bb2, otherwise: bb1]; // scope 1 at ui/binding/match-struct-0.rs:13:5: 13:12
+        _1 = Foo { f: const 1_isize };
+        switchInt((_1.0: isize)) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _3 = (_1.0: isize);              // scope 1 at ui/binding/match-struct-0.rs:15:16: 15:18
-        switchInt((_1.0: isize)) -> [0: bb4, otherwise: bb3]; // scope 1 at ui/binding/match-struct-0.rs:17:5: 17:12
+        switchInt((_1.0: isize)) -> [0: bb4, otherwise: bb3];
     }
 
     bb2: {
-        _2 = begin_panic::<&str>(const "explicit panic"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 
     bb3: {
-        return;                          // scope 0 at ui/binding/match-struct-0.rs:21:2: 21:2
+        _4 = (_1.0: isize);
+        switchInt((_1.0: isize)) -> [0: bb6, otherwise: bb5];
     }
 
     bb4: {
-        _4 = begin_panic::<&str>(const "explicit panic"); // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+    }
+
+    bb5: {
+        return;
+    }
+
+    bb6: {
+        _5 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }

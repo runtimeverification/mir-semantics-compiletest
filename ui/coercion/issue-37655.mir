@@ -1,54 +1,43 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/coercion/issue-37655.rs:15:1: 15:28>::get_me(_1: &[T], _2: I) -> &<I as SliceIndex<T>>::Output {
-    debug self => _1;                    // in scope 0 at ui/coercion/issue-37655.rs:18:18: 18:23
-    debug index => _2;                   // in scope 0 at ui/coercion/issue-37655.rs:18:25: 18:30
-    let mut _0: &<I as SliceIndex<T>>::Output; // return place in scope 0 at ui/coercion/issue-37655.rs:18:38: 18:48
-    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    debug self => _1;
+    debug index => _2;
+    let mut _0: &<I as SliceIndex<T>>::Output;
+    let mut _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = begin_panic::<&str>(const "explicit panic") -> bb1;
     }
 
     bb1 (cleanup): {
-        drop(_2) -> bb2;                 // scope 0 at ui/coercion/issue-37655.rs:22:5: 22:6
+        drop(_2) -> [return: bb2, unwind terminate];
     }
 
     bb2 (cleanup): {
-        resume;                          // scope 0 at ui/coercion/issue-37655.rs:18:5: 22:6
+        resume;
     }
 }
 
 fn foo(_1: &[&[u8]]) -> &[u8] {
-    debug split => _1;                   // in scope 0 at ui/coercion/issue-37655.rs:33:16: 33:21
-    let mut _0: &[u8];                   // return place in scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
-    let _2: &&[u8];                      // in scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
-    let mut _3: &[&[u8]];                // in scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
+    debug split => _1;
+    let mut _0: &[u8];
+    let _2: &&[u8];
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
-        _2 = <[&[u8]] as SliceExt<&[u8]>>::get_me::<usize>(move _3, const 0_usize) -> bb1; // scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
-                                         // mir::Constant
-                                         // + span: ui/coercion/issue-37655.rs:34:11: 34:17
-                                         // + literal: Const { ty: for<'a> fn(&'a [&[u8]], usize) -> &'a <usize as SliceIndex<<[&[u8]] as SliceExt<&[u8]>>::Item>>::Output {<[&[u8]] as SliceExt<&[u8]>>::get_me::<usize>}, val: Value(<ZST>) }
+        _2 = <[&[u8]] as SliceExt<&[u8]>>::get_me::<usize>(_1, const 0_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = deref_copy (*_2);           // scope 0 at ui/coercion/issue-37655.rs:34:5: 34:20
-        return;                          // scope 0 at ui/coercion/issue-37655.rs:35:2: 35:2
+        _0 = deref_copy (*_2);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/coercion/issue-37655.rs:37:11: 37:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/coercion/issue-37655.rs:37:14: 37:14
+        return;
     }
 }

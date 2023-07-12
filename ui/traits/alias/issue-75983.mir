@@ -1,27 +1,24 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn new() -> impl Baz {
-    let mut _0: impl Baz;                // return place in scope 0 at ui/traits/alias/issue-75983.rs:11:13: 11:21
+    let mut _0: impl Baz;
 
     bb0: {
-        return;                          // scope 0 at ui/traits/alias/issue-75983.rs:13:2: 13:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/alias/issue-75983.rs:15:11: 15:11
-    let mut _1: impl Baz;                // in scope 0 at ui/traits/alias/issue-75983.rs:16:13: 16:18
+    let mut _0: ();
+    let mut _1: impl Baz;
     scope 1 {
     }
 
     bb0: {
-        _1 = new() -> bb1;               // scope 0 at ui/traits/alias/issue-75983.rs:16:13: 16:18
-                                         // mir::Constant
-                                         // + span: ui/traits/alias/issue-75983.rs:16:13: 16:16
-                                         // + literal: Const { ty: fn() -> impl Baz {new}, val: Value(<ZST>) }
+        _1 = new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/traits/alias/issue-75983.rs:17:2: 17:2
+        return;
     }
 }

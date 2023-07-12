@@ -1,87 +1,65 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/traits/issue-6128.rs:10:1: 10:50>::f(_1: &HashMap<isize, isize>, _2: E) -> () {
-    debug self => _1;                    // in scope 0 at ui/traits/issue-6128.rs:11:10: 11:15
-    debug _e => _2;                      // in scope 0 at ui/traits/issue-6128.rs:11:17: 11:19
-    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-6128.rs:11:24: 11:24
-    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    debug self => _1;
+    debug _e => _2;
+    let mut _0: ();
+    let mut _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = begin_panic::<&str>(const "explicit panic") -> bb1;
     }
 
     bb1 (cleanup): {
-        drop(_2) -> bb2;                 // scope 0 at ui/traits/issue-6128.rs:13:5: 13:6
+        drop(_2) -> [return: bb2, unwind terminate];
     }
 
     bb2 (cleanup): {
-        resume;                          // scope 0 at ui/traits/issue-6128.rs:11:5: 13:6
+        resume;
     }
 }
 
 fn <impl at ui/traits/issue-6128.rs:10:1: 10:50>::g(_1: &HashMap<isize, isize>, _2: isize) -> () {
-    debug self => _1;                    // in scope 0 at ui/traits/issue-6128.rs:14:10: 14:15
-    debug _e => _2;                      // in scope 0 at ui/traits/issue-6128.rs:14:17: 14:19
-    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-6128.rs:14:28: 14:28
-    let mut _3: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    debug self => _1;
+    debug _e => _2;
+    let mut _0: ();
+    let mut _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-6128.rs:19:15: 19:15
-    let _1: std::boxed::Box<std::collections::HashMap<isize, isize>>; // in scope 0 at ui/traits/issue-6128.rs:20:9: 20:10
-    let mut _2: std::collections::HashMap<isize, isize>; // in scope 0 at ui/traits/issue-6128.rs:20:50: 20:64
-    let mut _4: std::boxed::Box<dyn Graph<isize, isize>>; // in scope 0 at ui/traits/issue-6128.rs:21:45: 21:77
-    let mut _5: std::boxed::Box<dyn Graph<isize, isize>>; // in scope 0 at ui/traits/issue-6128.rs:21:45: 21:77
-    let mut _6: std::boxed::Box<std::collections::HashMap<isize, isize>>; // in scope 0 at ui/traits/issue-6128.rs:21:45: 21:46
+    let mut _0: ();
+    let _1: std::boxed::Box<std::collections::HashMap<isize, isize>>;
+    let mut _2: std::collections::HashMap<isize, isize>;
+    let mut _4: std::boxed::Box<dyn Graph<isize, isize>>;
+    let mut _5: std::boxed::Box<std::collections::HashMap<isize, isize>>;
     scope 1 {
-        debug g => _1;                   // in scope 1 at ui/traits/issue-6128.rs:20:9: 20:10
-        let _3: std::boxed::Box<dyn Graph<isize, isize>>; // in scope 1 at ui/traits/issue-6128.rs:21:9: 21:12
+        debug g => _1;
+        let _3: std::boxed::Box<dyn Graph<isize, isize>>;
         scope 2 {
-            debug _g2 => _3;             // in scope 2 at ui/traits/issue-6128.rs:21:9: 21:12
+            debug _g2 => _3;
         }
     }
 
     bb0: {
-        _2 = HashMap::<isize, isize>::new() -> bb1; // scope 0 at ui/traits/issue-6128.rs:20:50: 20:64
-                                         // mir::Constant
-                                         // + span: ui/traits/issue-6128.rs:20:50: 20:62
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn() -> HashMap<isize, isize> {HashMap::<isize, isize>::new}, val: Value(<ZST>) }
+        _2 = HashMap::<isize, isize>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Box::<HashMap<isize, isize>>::new(move _2) -> bb2; // scope 0 at ui/traits/issue-6128.rs:20:41: 20:65
-                                         // mir::Constant
-                                         // + span: ui/traits/issue-6128.rs:20:41: 20:49
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(HashMap<isize, isize>) -> Box<HashMap<isize, isize>> {Box::<HashMap<isize, isize>>::new}, val: Value(<ZST>) }
+        _1 = Box::<HashMap<isize, isize>>::new(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _6 = move _1;                    // scope 1 at ui/traits/issue-6128.rs:21:45: 21:46
-        _5 = move _6 as std::boxed::Box<dyn Graph<isize, isize>> (Pointer(Unsize)); // scope 1 at ui/traits/issue-6128.rs:21:45: 21:46
-        _4 = move _5;                    // scope 1 at ui/traits/issue-6128.rs:21:45: 21:77
-        _3 = move _4 as std::boxed::Box<dyn Graph<isize, isize>> (Pointer(Unsize)); // scope 1 at ui/traits/issue-6128.rs:21:45: 21:77
-        drop(_3) -> bb3;                 // scope 1 at ui/traits/issue-6128.rs:22:1: 22:2
+        _5 = move _1;
+        _4 = move _5 as std::boxed::Box<dyn Graph<isize, isize>> (PointerCoercion(Unsize));
+        _3 = move _4;
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/traits/issue-6128.rs:22:2: 22:2
+        return;
     }
 }

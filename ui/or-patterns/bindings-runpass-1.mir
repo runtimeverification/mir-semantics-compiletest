@@ -1,1310 +1,680 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn two_bindings(_1: &((bool, bool), u8)) -> u8 {
-    debug x => _1;                       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:3:17: 3:18
-    let mut _0: u8;                      // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:3:44: 3:46
-    let _2: bool;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:18: 5:19
-    let _3: u8;                          // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:34: 5:35
-    let mut _4: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:59
-    let mut _5: bool;                    // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:51: 5:52
-    let mut _6: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:62: 5:63
-    let mut _7: (u8, bool);              // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:63
+    debug x => _1;
+    let mut _0: u8;
+    let _2: bool;
+    let _3: u8;
+    let mut _4: u8;
+    let mut _5: bool;
+    let mut _6: u8;
     scope 1 {
-        debug y => _2;                   // in scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:18: 5:19
-        debug z => _3;                   // in scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:34: 5:35
+        debug y => _2;
+        debug z => _3;
     }
 
     bb0: {
-        switchInt((((*_1).0: (bool, bool)).0: bool)) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:11: 5:32
+        switchInt((((*_1).0: (bool, bool)).0: bool)) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        switchInt(((*_1).1: u8)) -> [0: bb6, 4: bb6, otherwise: bb4]; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:39: 5:44
+        switchInt(((*_1).1: u8)) -> [0: bb6, 4: bb6, otherwise: bb4];
     }
 
     bb2: {
-        switchInt((((*_1).0: (bool, bool)).1: bool)) -> [0: bb4, otherwise: bb3]; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:11: 5:32
+        switchInt((((*_1).0: (bool, bool)).1: bool)) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        switchInt(((*_1).1: u8)) -> [0: bb7, 4: bb7, otherwise: bb4]; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:39: 5:44
+        switchInt(((*_1).1: u8)) -> [0: bb7, 4: bb7, otherwise: bb4];
     }
 
     bb4: {
-        _0 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:6:14: 6:16
-        goto -> bb9;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:6:14: 6:16
+        _0 = const 20_u8;
+        goto -> bb8;
     }
 
     bb5: {
-        _5 = _2;                         // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:51: 5:52
-        _4 = move _5 as u8 (IntToInt);   // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:59
-        _6 = _3;                         // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:62: 5:63
-        _7 = CheckedAdd(_4, _6);         // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:63
-        assert(!move (_7.1: bool), "attempt to compute `{} + {}`, which would overflow", move _4, move _6) -> bb8; // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:63
+        _5 = _2;
+        _4 = move _5 as u8 (IntToInt);
+        _6 = _3;
+        _0 = Add(move _4, move _6);
+        goto -> bb8;
     }
 
     bb6: {
-        _3 = ((*_1).1: u8);              // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:34: 5:35
-        _2 = (((*_1).0: (bool, bool)).1: bool); // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:18: 5:19
-        goto -> bb5;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:4:5: 7:6
+        _3 = ((*_1).1: u8);
+        _2 = (((*_1).0: (bool, bool)).1: bool);
+        goto -> bb5;
     }
 
     bb7: {
-        _3 = ((*_1).1: u8);              // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:34: 5:35
-        _2 = (((*_1).0: (bool, bool)).0: bool); // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:24: 5:25
-        goto -> bb5;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:4:5: 7:6
+        _3 = ((*_1).1: u8);
+        _2 = (((*_1).0: (bool, bool)).0: bool);
+        goto -> bb5;
     }
 
     bb8: {
-        _0 = move (_7.0: u8);            // scope 1 at ui/or-patterns/bindings-runpass-1.rs:5:50: 5:63
-        goto -> bb9;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:5:62: 5:63
-    }
-
-    bb9: {
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:8:2: 8:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:10:11: 10:11
-    let mut _1: (&u8, &u8);              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _3: u8;                          // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:16: 11:50
-    let mut _4: &((bool, bool), u8);     // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-    let _5: &((bool, bool), u8);         // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-    let mut _6: &u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _7: &u8;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _8: &u8;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _9: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _11: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _12: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _14: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _15: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _16: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _17: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _18: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _19: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _20: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _21: (&u8, &u8);             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _22: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _23: u8;                         // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:16: 12:49
-    let mut _24: &((bool, bool), u8);    // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-    let _25: &((bool, bool), u8);        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-    let mut _26: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _27: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _28: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _29: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _30: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _31: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _32: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _34: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _35: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _36: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _37: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _38: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _39: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _40: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _41: (&u8, &u8);             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _42: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _43: u8;                         // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:16: 13:49
-    let mut _44: &((bool, bool), u8);    // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-    let _45: &((bool, bool), u8);        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-    let mut _46: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _47: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _48: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _49: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _50: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _51: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _52: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _54: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _55: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _56: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _57: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _58: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _59: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _60: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _61: (&u8, &u8);             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _62: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _63: u8;                         // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:16: 14:48
-    let mut _64: &((bool, bool), u8);    // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-    let _65: &((bool, bool), u8);        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-    let mut _66: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _67: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _68: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _69: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _70: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _71: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _72: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _74: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _75: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _76: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _77: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _78: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _79: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _80: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _81: (&u8, &u8);             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _82: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _83: u8;                         // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:16: 15:50
-    let mut _84: &((bool, bool), u8);    // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-    let _85: &((bool, bool), u8);        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-    let mut _86: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _87: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _88: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _89: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _90: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _91: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _92: u8;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _94: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _95: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _96: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _97: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _98: &u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _99: &u8;                        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _100: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _101: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _102: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _103: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:16: 16:49
-    let mut _104: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-    let _105: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-    let mut _106: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _107: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _108: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _109: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _110: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _111: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _112: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _114: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _115: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _116: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _117: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _118: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _119: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _120: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _121: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _122: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _123: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:16: 17:49
-    let mut _124: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-    let _125: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-    let mut _126: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _127: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _128: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _129: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _130: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _131: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _132: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _134: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _135: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _136: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _137: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _138: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _139: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _140: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _141: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _142: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _143: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:16: 18:48
-    let mut _144: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-    let _145: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-    let mut _146: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _147: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _148: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _149: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _150: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _151: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _152: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _154: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _155: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _156: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _157: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _158: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _159: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _160: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _161: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _162: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _163: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:16: 19:50
-    let mut _164: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-    let _165: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-    let mut _166: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _167: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _168: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _169: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _170: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _171: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _172: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _174: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _175: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _176: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _177: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _178: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _179: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _180: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _181: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _182: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _183: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:16: 20:49
-    let mut _184: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-    let _185: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-    let mut _186: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _187: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _188: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _189: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _190: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _191: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _192: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _194: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _195: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _196: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _197: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _198: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _199: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _200: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _201: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _202: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _203: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:16: 21:49
-    let mut _204: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-    let _205: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-    let mut _206: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _207: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _208: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _209: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _210: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _211: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _212: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _214: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _215: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _216: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _217: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _218: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _219: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _220: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _221: (&u8, &u8);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _222: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _223: u8;                        // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:16: 22:48
-    let mut _224: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-    let _225: &((bool, bool), u8);       // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-    let mut _226: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _227: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _228: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _229: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _230: bool;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _231: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _232: u8;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _234: !;                         // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _235: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _236: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _237: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _238: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _239: &u8;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _240: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _241: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _242: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-    let mut _243: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _244: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-    let mut _245: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _246: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-    let mut _247: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _248: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-    let mut _249: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _250: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-    let mut _251: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _252: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-    let mut _253: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _254: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-    let mut _255: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _256: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-    let mut _257: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _258: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-    let mut _259: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _260: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-    let mut _261: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _262: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-    let mut _263: &u8;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _264: &((bool, bool), u8);   // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
+    let mut _0: ();
+    let mut _1: (&u8, &u8);
+    let mut _2: &u8;
+    let _3: u8;
+    let _4: &((bool, bool), u8);
+    let _5: ((bool, bool), u8);
+    let mut _6: (bool, bool);
+    let mut _7: &u8;
+    let _8: u8;
+    let _9: &u8;
+    let _10: &u8;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: u8;
+    let mut _14: u8;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: (&u8, &u8);
+    let mut _19: &u8;
+    let _20: u8;
+    let _21: &((bool, bool), u8);
+    let _22: ((bool, bool), u8);
+    let mut _23: (bool, bool);
+    let mut _24: &u8;
+    let _25: u8;
+    let _26: &u8;
+    let _27: &u8;
+    let mut _28: bool;
+    let mut _29: bool;
+    let mut _30: u8;
+    let mut _31: u8;
+    let _33: !;
+    let mut _34: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _35: (&u8, &u8);
+    let mut _36: &u8;
+    let _37: u8;
+    let _38: &((bool, bool), u8);
+    let _39: ((bool, bool), u8);
+    let mut _40: (bool, bool);
+    let mut _41: &u8;
+    let _42: u8;
+    let _43: &u8;
+    let _44: &u8;
+    let mut _45: bool;
+    let mut _46: bool;
+    let mut _47: u8;
+    let mut _48: u8;
+    let _50: !;
+    let mut _51: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _52: (&u8, &u8);
+    let mut _53: &u8;
+    let _54: u8;
+    let _55: &((bool, bool), u8);
+    let _56: ((bool, bool), u8);
+    let mut _57: (bool, bool);
+    let mut _58: &u8;
+    let _59: u8;
+    let _60: &u8;
+    let _61: &u8;
+    let mut _62: bool;
+    let mut _63: bool;
+    let mut _64: u8;
+    let mut _65: u8;
+    let _67: !;
+    let mut _68: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _69: (&u8, &u8);
+    let mut _70: &u8;
+    let _71: u8;
+    let _72: &((bool, bool), u8);
+    let _73: ((bool, bool), u8);
+    let mut _74: (bool, bool);
+    let mut _75: &u8;
+    let _76: u8;
+    let _77: &u8;
+    let _78: &u8;
+    let mut _79: bool;
+    let mut _80: bool;
+    let mut _81: u8;
+    let mut _82: u8;
+    let _84: !;
+    let mut _85: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _86: (&u8, &u8);
+    let mut _87: &u8;
+    let _88: u8;
+    let _89: &((bool, bool), u8);
+    let _90: ((bool, bool), u8);
+    let mut _91: (bool, bool);
+    let mut _92: &u8;
+    let _93: u8;
+    let _94: &u8;
+    let _95: &u8;
+    let mut _96: bool;
+    let mut _97: bool;
+    let mut _98: u8;
+    let mut _99: u8;
+    let _101: !;
+    let mut _102: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _103: (&u8, &u8);
+    let mut _104: &u8;
+    let _105: u8;
+    let _106: &((bool, bool), u8);
+    let _107: ((bool, bool), u8);
+    let mut _108: (bool, bool);
+    let mut _109: &u8;
+    let _110: u8;
+    let _111: &u8;
+    let _112: &u8;
+    let mut _113: bool;
+    let mut _114: bool;
+    let mut _115: u8;
+    let mut _116: u8;
+    let _118: !;
+    let mut _119: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _120: (&u8, &u8);
+    let mut _121: &u8;
+    let _122: u8;
+    let _123: &((bool, bool), u8);
+    let _124: ((bool, bool), u8);
+    let mut _125: (bool, bool);
+    let mut _126: &u8;
+    let _127: u8;
+    let _128: &u8;
+    let _129: &u8;
+    let mut _130: bool;
+    let mut _131: bool;
+    let mut _132: u8;
+    let mut _133: u8;
+    let _135: !;
+    let mut _136: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _137: (&u8, &u8);
+    let mut _138: &u8;
+    let _139: u8;
+    let _140: &((bool, bool), u8);
+    let _141: ((bool, bool), u8);
+    let mut _142: (bool, bool);
+    let mut _143: &u8;
+    let _144: u8;
+    let _145: &u8;
+    let _146: &u8;
+    let mut _147: bool;
+    let mut _148: bool;
+    let mut _149: u8;
+    let mut _150: u8;
+    let _152: !;
+    let mut _153: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _154: (&u8, &u8);
+    let mut _155: &u8;
+    let _156: u8;
+    let _157: &((bool, bool), u8);
+    let _158: ((bool, bool), u8);
+    let mut _159: (bool, bool);
+    let mut _160: &u8;
+    let _161: u8;
+    let _162: &u8;
+    let _163: &u8;
+    let mut _164: bool;
+    let mut _165: bool;
+    let mut _166: u8;
+    let mut _167: u8;
+    let _169: !;
+    let mut _170: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _171: (&u8, &u8);
+    let mut _172: &u8;
+    let _173: u8;
+    let _174: &((bool, bool), u8);
+    let _175: ((bool, bool), u8);
+    let mut _176: (bool, bool);
+    let mut _177: &u8;
+    let _178: u8;
+    let _179: &u8;
+    let _180: &u8;
+    let mut _181: bool;
+    let mut _182: bool;
+    let mut _183: u8;
+    let mut _184: u8;
+    let _186: !;
+    let mut _187: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _188: (&u8, &u8);
+    let mut _189: &u8;
+    let _190: u8;
+    let _191: &((bool, bool), u8);
+    let _192: ((bool, bool), u8);
+    let mut _193: (bool, bool);
+    let mut _194: &u8;
+    let _195: u8;
+    let _196: &u8;
+    let _197: &u8;
+    let mut _198: bool;
+    let mut _199: bool;
+    let mut _200: u8;
+    let mut _201: u8;
+    let _203: !;
+    let mut _204: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _7;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _8;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _13: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _9;
+        debug right_val => _10;
+        let _15: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _13;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _15;
         }
     }
     scope 3 {
-        debug left_val => _27;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _28;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _33: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _26;
+        debug right_val => _27;
+        let _32: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _33;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _32;
         }
     }
     scope 5 {
-        debug left_val => _47;           // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _48;          // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _53: core::panicking::AssertKind; // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _43;
+        debug right_val => _44;
+        let _49: core::panicking::AssertKind;
         scope 6 {
-            debug kind => _53;           // in scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _49;
         }
     }
     scope 7 {
-        debug left_val => _67;           // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _68;          // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _73: core::panicking::AssertKind; // in scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _60;
+        debug right_val => _61;
+        let _66: core::panicking::AssertKind;
         scope 8 {
-            debug kind => _73;           // in scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _66;
         }
     }
     scope 9 {
-        debug left_val => _87;           // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _88;          // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _93: core::panicking::AssertKind; // in scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _77;
+        debug right_val => _78;
+        let _83: core::panicking::AssertKind;
         scope 10 {
-            debug kind => _93;           // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _83;
         }
     }
     scope 11 {
-        debug left_val => _107;          // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _108;         // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _113: core::panicking::AssertKind; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _94;
+        debug right_val => _95;
+        let _100: core::panicking::AssertKind;
         scope 12 {
-            debug kind => _113;          // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _100;
         }
     }
     scope 13 {
-        debug left_val => _127;          // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _128;         // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _133: core::panicking::AssertKind; // in scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _111;
+        debug right_val => _112;
+        let _117: core::panicking::AssertKind;
         scope 14 {
-            debug kind => _133;          // in scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _117;
         }
     }
     scope 15 {
-        debug left_val => _147;          // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _148;         // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _153: core::panicking::AssertKind; // in scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _128;
+        debug right_val => _129;
+        let _134: core::panicking::AssertKind;
         scope 16 {
-            debug kind => _153;          // in scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _134;
         }
     }
     scope 17 {
-        debug left_val => _167;          // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _168;         // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _173: core::panicking::AssertKind; // in scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _145;
+        debug right_val => _146;
+        let _151: core::panicking::AssertKind;
         scope 18 {
-            debug kind => _173;          // in scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _151;
         }
     }
     scope 19 {
-        debug left_val => _187;          // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _188;         // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _193: core::panicking::AssertKind; // in scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _162;
+        debug right_val => _163;
+        let _168: core::panicking::AssertKind;
         scope 20 {
-            debug kind => _193;          // in scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _168;
         }
     }
     scope 21 {
-        debug left_val => _207;          // in scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _208;         // in scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _213: core::panicking::AssertKind; // in scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _179;
+        debug right_val => _180;
+        let _185: core::panicking::AssertKind;
         scope 22 {
-            debug kind => _213;          // in scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _185;
         }
     }
     scope 23 {
-        debug left_val => _227;          // in scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _228;         // in scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _233: core::panicking::AssertKind; // in scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _196;
+        debug right_val => _197;
+        let _202: core::panicking::AssertKind;
         scope 24 {
-            debug kind => _233;          // in scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _202;
         }
     }
 
     bb0: {
-        _264 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[23])) }
-        _5 = _264;                       // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-        _4 = _5;                         // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-        _3 = two_bindings(move _4) -> bb1; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:16: 11:50
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:11:16: 11:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _6 = (const false, const false);
+        _5 = (move _6, const 0_u8);
+        _4 = &_5;
+        _3 = two_bindings(_4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &_3;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _263 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[22])) }
-        _6 = _263;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _6);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _7 = (_1.0: &u8);                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _8 = (_1.1: &u8);                // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _11 = (*_7);                     // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _12 = const 20_u8;               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _10 = Eq(move _11, move _12);    // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _9 = Not(move _10);              // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _9) -> [0: bb3, otherwise: bb2]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _2 = &_3;
+        _8 = const 20_u8;
+        _7 = &_8;
+        _1 = (move _2, move _7);
+        _9 = (_1.0: &u8);
+        _10 = (_1.1: &u8);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _13 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _17 = _7;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _16 = _17;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _19 = _8;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = _19;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _20 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _14 = core::panicking::assert_failed::<u8, u8>(move _15, move _16, move _18, move _20); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
     }
 
     bb3: {
-        _262 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[21])) }
-        _25 = _262;                      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-        _24 = _25;                       // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-        _23 = two_bindings(move _24) -> bb4; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:16: 12:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:12:16: 12:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _23 = (const false, const true);
+        _22 = (move _23, const 0_u8);
+        _21 = &_22;
+        _20 = two_bindings(_21) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _22 = &_23;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _261 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[20])) }
-        _26 = _261;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _21 = (move _22, move _26);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _27 = (_21.0: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _28 = (_21.1: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _31 = (*_27);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _32 = const 0_u8;                // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _30 = Eq(move _31, move _32);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _29 = Not(move _30);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _29) -> [0: bb6, otherwise: bb5]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _19 = &_20;
+        _25 = const 0_u8;
+        _24 = &_25;
+        _18 = (move _19, move _24);
+        _26 = (_18.0: &u8);
+        _27 = (_18.1: &u8);
+        _30 = (*_26);
+        _31 = (*_27);
+        _29 = Eq(move _30, move _31);
+        _28 = Not(move _29);
+        switchInt(move _28) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _33 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _35 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _37 = _27;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _36 = _37;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _39 = _28;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _38 = _39;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _40 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _34 = core::panicking::assert_failed::<u8, u8>(move _35, move _36, move _38, move _40); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _32 = core::panicking::AssertKind::Eq;
+        _34 = Option::<Arguments<'_>>::None;
+        _33 = core::panicking::assert_failed::<u8, u8>(move _32, _26, _27, move _34) -> unwind continue;
     }
 
     bb6: {
-        _260 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[19])) }
-        _45 = _260;                      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-        _44 = _45;                       // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-        _43 = two_bindings(move _44) -> bb7; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:16: 13:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:13:16: 13:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _40 = (const true, const false);
+        _39 = (move _40, const 0_u8);
+        _38 = &_39;
+        _37 = two_bindings(_38) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _42 = &_43;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _259 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[18])) }
-        _46 = _259;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _41 = (move _42, move _46);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _47 = (_41.0: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _48 = (_41.1: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _51 = (*_47);                    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _52 = const 0_u8;                // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _50 = Eq(move _51, move _52);    // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _49 = Not(move _50);             // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _49) -> [0: bb9, otherwise: bb8]; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _36 = &_37;
+        _42 = const 0_u8;
+        _41 = &_42;
+        _35 = (move _36, move _41);
+        _43 = (_35.0: &u8);
+        _44 = (_35.1: &u8);
+        _47 = (*_43);
+        _48 = (*_44);
+        _46 = Eq(move _47, move _48);
+        _45 = Not(move _46);
+        switchInt(move _45) -> [0: bb9, otherwise: bb8];
     }
 
     bb8: {
-        _53 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _55 = const core::panicking::AssertKind::Eq; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _57 = _47;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _56 = _57;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _59 = _48;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _58 = _59;                       // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _60 = Option::<Arguments<'_>>::None; // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _54 = core::panicking::assert_failed::<u8, u8>(move _55, move _56, move _58, move _60); // scope 6 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _49 = core::panicking::AssertKind::Eq;
+        _51 = Option::<Arguments<'_>>::None;
+        _50 = core::panicking::assert_failed::<u8, u8>(move _49, _43, _44, move _51) -> unwind continue;
     }
 
     bb9: {
-        _258 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[17])) }
-        _65 = _258;                      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-        _64 = _65;                       // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-        _63 = two_bindings(move _64) -> bb10; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:16: 14:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:14:16: 14:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _57 = (const true, const true);
+        _56 = (move _57, const 0_u8);
+        _55 = &_56;
+        _54 = two_bindings(_55) -> [return: bb10, unwind continue];
     }
 
     bb10: {
-        _62 = &_63;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _257 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[16])) }
-        _66 = _257;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _61 = (move _62, move _66);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _67 = (_61.0: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _68 = (_61.1: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _71 = (*_67);                    // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _72 = const 1_u8;                // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _70 = Eq(move _71, move _72);    // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _69 = Not(move _70);             // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _69) -> [0: bb12, otherwise: bb11]; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _53 = &_54;
+        _59 = const 1_u8;
+        _58 = &_59;
+        _52 = (move _53, move _58);
+        _60 = (_52.0: &u8);
+        _61 = (_52.1: &u8);
+        _64 = (*_60);
+        _65 = (*_61);
+        _63 = Eq(move _64, move _65);
+        _62 = Not(move _63);
+        switchInt(move _62) -> [0: bb12, otherwise: bb11];
     }
 
     bb11: {
-        _73 = const core::panicking::AssertKind::Eq; // scope 7 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _75 = const core::panicking::AssertKind::Eq; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _77 = _67;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _76 = _77;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _79 = _68;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _78 = _79;                       // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _80 = Option::<Arguments<'_>>::None; // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _74 = core::panicking::assert_failed::<u8, u8>(move _75, move _76, move _78, move _80); // scope 8 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _66 = core::panicking::AssertKind::Eq;
+        _68 = Option::<Arguments<'_>>::None;
+        _67 = core::panicking::assert_failed::<u8, u8>(move _66, _60, _61, move _68) -> unwind continue;
     }
 
     bb12: {
-        _256 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[15])) }
-        _85 = _256;                      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-        _84 = _85;                       // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-        _83 = two_bindings(move _84) -> bb13; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:16: 15:50
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:15:16: 15:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _74 = (const false, const false);
+        _73 = (move _74, const 4_u8);
+        _72 = &_73;
+        _71 = two_bindings(_72) -> [return: bb13, unwind continue];
     }
 
     bb13: {
-        _82 = &_83;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _255 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[14])) }
-        _86 = _255;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _81 = (move _82, move _86);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _87 = (_81.0: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _88 = (_81.1: &u8);              // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _91 = (*_87);                    // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _92 = const 20_u8;               // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _90 = Eq(move _91, move _92);    // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _89 = Not(move _90);             // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _89) -> [0: bb15, otherwise: bb14]; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _70 = &_71;
+        _76 = const 20_u8;
+        _75 = &_76;
+        _69 = (move _70, move _75);
+        _77 = (_69.0: &u8);
+        _78 = (_69.1: &u8);
+        _81 = (*_77);
+        _82 = (*_78);
+        _80 = Eq(move _81, move _82);
+        _79 = Not(move _80);
+        switchInt(move _79) -> [0: bb15, otherwise: bb14];
     }
 
     bb14: {
-        _93 = const core::panicking::AssertKind::Eq; // scope 9 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _95 = const core::panicking::AssertKind::Eq; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _97 = _87;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _96 = _97;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _99 = _88;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _98 = _99;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _100 = Option::<Arguments<'_>>::None; // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _94 = core::panicking::assert_failed::<u8, u8>(move _95, move _96, move _98, move _100); // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _83 = core::panicking::AssertKind::Eq;
+        _85 = Option::<Arguments<'_>>::None;
+        _84 = core::panicking::assert_failed::<u8, u8>(move _83, _77, _78, move _85) -> unwind continue;
     }
 
     bb15: {
-        _254 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[13])) }
-        _105 = _254;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-        _104 = _105;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-        _103 = two_bindings(move _104) -> bb16; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:16: 16:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:16:16: 16:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _91 = (const false, const true);
+        _90 = (move _91, const 4_u8);
+        _89 = &_90;
+        _88 = two_bindings(_89) -> [return: bb16, unwind continue];
     }
 
     bb16: {
-        _102 = &_103;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _253 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[12])) }
-        _106 = _253;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _101 = (move _102, move _106);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _107 = (_101.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _108 = (_101.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _111 = (*_107);                  // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _112 = const 4_u8;               // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _110 = Eq(move _111, move _112); // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _109 = Not(move _110);           // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _109) -> [0: bb18, otherwise: bb17]; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _87 = &_88;
+        _93 = const 4_u8;
+        _92 = &_93;
+        _86 = (move _87, move _92);
+        _94 = (_86.0: &u8);
+        _95 = (_86.1: &u8);
+        _98 = (*_94);
+        _99 = (*_95);
+        _97 = Eq(move _98, move _99);
+        _96 = Not(move _97);
+        switchInt(move _96) -> [0: bb18, otherwise: bb17];
     }
 
     bb17: {
-        _113 = const core::panicking::AssertKind::Eq; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _115 = const core::panicking::AssertKind::Eq; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _117 = _107;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _116 = _117;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _119 = _108;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _118 = _119;                     // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _120 = Option::<Arguments<'_>>::None; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _114 = core::panicking::assert_failed::<u8, u8>(move _115, move _116, move _118, move _120); // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _100 = core::panicking::AssertKind::Eq;
+        _102 = Option::<Arguments<'_>>::None;
+        _101 = core::panicking::assert_failed::<u8, u8>(move _100, _94, _95, move _102) -> unwind continue;
     }
 
     bb18: {
-        _252 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[11])) }
-        _125 = _252;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-        _124 = _125;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-        _123 = two_bindings(move _124) -> bb19; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:16: 17:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:17:16: 17:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _108 = (const true, const false);
+        _107 = (move _108, const 4_u8);
+        _106 = &_107;
+        _105 = two_bindings(_106) -> [return: bb19, unwind continue];
     }
 
     bb19: {
-        _122 = &_123;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _251 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[10])) }
-        _126 = _251;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _121 = (move _122, move _126);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _127 = (_121.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _128 = (_121.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _131 = (*_127);                  // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _132 = const 4_u8;               // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _130 = Eq(move _131, move _132); // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _129 = Not(move _130);           // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _129) -> [0: bb21, otherwise: bb20]; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _104 = &_105;
+        _110 = const 4_u8;
+        _109 = &_110;
+        _103 = (move _104, move _109);
+        _111 = (_103.0: &u8);
+        _112 = (_103.1: &u8);
+        _115 = (*_111);
+        _116 = (*_112);
+        _114 = Eq(move _115, move _116);
+        _113 = Not(move _114);
+        switchInt(move _113) -> [0: bb21, otherwise: bb20];
     }
 
     bb20: {
-        _133 = const core::panicking::AssertKind::Eq; // scope 13 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _135 = const core::panicking::AssertKind::Eq; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _137 = _127;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _136 = _137;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _139 = _128;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _138 = _139;                     // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _140 = Option::<Arguments<'_>>::None; // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _134 = core::panicking::assert_failed::<u8, u8>(move _135, move _136, move _138, move _140); // scope 14 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _117 = core::panicking::AssertKind::Eq;
+        _119 = Option::<Arguments<'_>>::None;
+        _118 = core::panicking::assert_failed::<u8, u8>(move _117, _111, _112, move _119) -> unwind continue;
     }
 
     bb21: {
-        _250 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[9])) }
-        _145 = _250;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-        _144 = _145;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-        _143 = two_bindings(move _144) -> bb22; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:16: 18:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:18:16: 18:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _125 = (const true, const true);
+        _124 = (move _125, const 4_u8);
+        _123 = &_124;
+        _122 = two_bindings(_123) -> [return: bb22, unwind continue];
     }
 
     bb22: {
-        _142 = &_143;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _249 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[8])) }
-        _146 = _249;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _141 = (move _142, move _146);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _147 = (_141.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _148 = (_141.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _151 = (*_147);                  // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _152 = const 5_u8;               // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _150 = Eq(move _151, move _152); // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _149 = Not(move _150);           // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _149) -> [0: bb24, otherwise: bb23]; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _121 = &_122;
+        _127 = const 5_u8;
+        _126 = &_127;
+        _120 = (move _121, move _126);
+        _128 = (_120.0: &u8);
+        _129 = (_120.1: &u8);
+        _132 = (*_128);
+        _133 = (*_129);
+        _131 = Eq(move _132, move _133);
+        _130 = Not(move _131);
+        switchInt(move _130) -> [0: bb24, otherwise: bb23];
     }
 
     bb23: {
-        _153 = const core::panicking::AssertKind::Eq; // scope 15 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _155 = const core::panicking::AssertKind::Eq; // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _157 = _147;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _156 = _157;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _159 = _148;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _158 = _159;                     // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _160 = Option::<Arguments<'_>>::None; // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _154 = core::panicking::assert_failed::<u8, u8>(move _155, move _156, move _158, move _160); // scope 16 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _134 = core::panicking::AssertKind::Eq;
+        _136 = Option::<Arguments<'_>>::None;
+        _135 = core::panicking::assert_failed::<u8, u8>(move _134, _128, _129, move _136) -> unwind continue;
     }
 
     bb24: {
-        _248 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[7])) }
-        _165 = _248;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-        _164 = _165;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-        _163 = two_bindings(move _164) -> bb25; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:16: 19:50
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:19:16: 19:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _142 = (const false, const false);
+        _141 = (move _142, const 3_u8);
+        _140 = &_141;
+        _139 = two_bindings(_140) -> [return: bb25, unwind continue];
     }
 
     bb25: {
-        _162 = &_163;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _247 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[6])) }
-        _166 = _247;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _161 = (move _162, move _166);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _167 = (_161.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _168 = (_161.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _171 = (*_167);                  // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _172 = const 20_u8;              // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _170 = Eq(move _171, move _172); // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _169 = Not(move _170);           // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _169) -> [0: bb27, otherwise: bb26]; // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _138 = &_139;
+        _144 = const 20_u8;
+        _143 = &_144;
+        _137 = (move _138, move _143);
+        _145 = (_137.0: &u8);
+        _146 = (_137.1: &u8);
+        _149 = (*_145);
+        _150 = (*_146);
+        _148 = Eq(move _149, move _150);
+        _147 = Not(move _148);
+        switchInt(move _147) -> [0: bb27, otherwise: bb26];
     }
 
     bb26: {
-        _173 = const core::panicking::AssertKind::Eq; // scope 17 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _175 = const core::panicking::AssertKind::Eq; // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _177 = _167;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _176 = _177;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _179 = _168;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _178 = _179;                     // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _180 = Option::<Arguments<'_>>::None; // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _174 = core::panicking::assert_failed::<u8, u8>(move _175, move _176, move _178, move _180); // scope 18 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _151 = core::panicking::AssertKind::Eq;
+        _153 = Option::<Arguments<'_>>::None;
+        _152 = core::panicking::assert_failed::<u8, u8>(move _151, _145, _146, move _153) -> unwind continue;
     }
 
     bb27: {
-        _246 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[5])) }
-        _185 = _246;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-        _184 = _185;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-        _183 = two_bindings(move _184) -> bb28; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:16: 20:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:20:16: 20:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _159 = (const false, const true);
+        _158 = (move _159, const 3_u8);
+        _157 = &_158;
+        _156 = two_bindings(_157) -> [return: bb28, unwind continue];
     }
 
     bb28: {
-        _182 = &_183;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _245 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[4])) }
-        _186 = _245;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _181 = (move _182, move _186);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _187 = (_181.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _188 = (_181.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _191 = (*_187);                  // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _192 = const 20_u8;              // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _190 = Eq(move _191, move _192); // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _189 = Not(move _190);           // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _189) -> [0: bb30, otherwise: bb29]; // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _155 = &_156;
+        _161 = const 20_u8;
+        _160 = &_161;
+        _154 = (move _155, move _160);
+        _162 = (_154.0: &u8);
+        _163 = (_154.1: &u8);
+        _166 = (*_162);
+        _167 = (*_163);
+        _165 = Eq(move _166, move _167);
+        _164 = Not(move _165);
+        switchInt(move _164) -> [0: bb30, otherwise: bb29];
     }
 
     bb29: {
-        _193 = const core::panicking::AssertKind::Eq; // scope 19 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _195 = const core::panicking::AssertKind::Eq; // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _197 = _187;                     // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _196 = _197;                     // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _199 = _188;                     // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _198 = _199;                     // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _200 = Option::<Arguments<'_>>::None; // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _194 = core::panicking::assert_failed::<u8, u8>(move _195, move _196, move _198, move _200); // scope 20 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _168 = core::panicking::AssertKind::Eq;
+        _170 = Option::<Arguments<'_>>::None;
+        _169 = core::panicking::assert_failed::<u8, u8>(move _168, _162, _163, move _170) -> unwind continue;
     }
 
     bb30: {
-        _244 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[3])) }
-        _205 = _244;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-        _204 = _205;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-        _203 = two_bindings(move _204) -> bb31; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:16: 21:49
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:21:16: 21:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _176 = (const true, const false);
+        _175 = (move _176, const 3_u8);
+        _174 = &_175;
+        _173 = two_bindings(_174) -> [return: bb31, unwind continue];
     }
 
     bb31: {
-        _202 = &_203;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _243 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[2])) }
-        _206 = _243;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _201 = (move _202, move _206);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _207 = (_201.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _208 = (_201.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _211 = (*_207);                  // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _212 = const 20_u8;              // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _210 = Eq(move _211, move _212); // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _209 = Not(move _210);           // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _209) -> [0: bb33, otherwise: bb32]; // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _172 = &_173;
+        _178 = const 20_u8;
+        _177 = &_178;
+        _171 = (move _172, move _177);
+        _179 = (_171.0: &u8);
+        _180 = (_171.1: &u8);
+        _183 = (*_179);
+        _184 = (*_180);
+        _182 = Eq(move _183, move _184);
+        _181 = Not(move _182);
+        switchInt(move _181) -> [0: bb33, otherwise: bb32];
     }
 
     bb32: {
-        _213 = const core::panicking::AssertKind::Eq; // scope 21 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _215 = const core::panicking::AssertKind::Eq; // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _217 = _207;                     // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _216 = _217;                     // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _219 = _208;                     // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _218 = _219;                     // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _220 = Option::<Arguments<'_>>::None; // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _214 = core::panicking::assert_failed::<u8, u8>(move _215, move _216, move _218, move _220); // scope 22 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _185 = core::panicking::AssertKind::Eq;
+        _187 = Option::<Arguments<'_>>::None;
+        _186 = core::panicking::assert_failed::<u8, u8>(move _185, _179, _180, move _187) -> unwind continue;
     }
 
     bb33: {
-        _242 = const _;                  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-                                         // + literal: Const { ty: &((bool, bool), u8), val: Unevaluated(main, [], Some(promoted[1])) }
-        _225 = _242;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-        _224 = _225;                     // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-        _223 = two_bindings(move _224) -> bb34; // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:16: 22:48
-                                         // mir::Constant
-                                         // + span: ui/or-patterns/bindings-runpass-1.rs:22:16: 22:28
-                                         // + literal: Const { ty: for<'a> fn(&'a ((bool, bool), u8)) -> u8 {two_bindings}, val: Value(<ZST>) }
+        _193 = (const true, const true);
+        _192 = (move _193, const 3_u8);
+        _191 = &_192;
+        _190 = two_bindings(_191) -> [return: bb34, unwind continue];
     }
 
     bb34: {
-        _222 = &_223;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _241 = const _;                  // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u8, val: Unevaluated(main, [], Some(promoted[0])) }
-        _226 = _241;                     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _221 = (move _222, move _226);   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _227 = (_221.0: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _228 = (_221.1: &u8);            // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _231 = (*_227);                  // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _232 = const 20_u8;              // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _230 = Eq(move _231, move _232); // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _229 = Not(move _230);           // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _229) -> [0: bb36, otherwise: bb35]; // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _189 = &_190;
+        _195 = const 20_u8;
+        _194 = &_195;
+        _188 = (move _189, move _194);
+        _196 = (_188.0: &u8);
+        _197 = (_188.1: &u8);
+        _200 = (*_196);
+        _201 = (*_197);
+        _199 = Eq(move _200, move _201);
+        _198 = Not(move _199);
+        switchInt(move _198) -> [0: bb36, otherwise: bb35];
     }
 
     bb35: {
-        _233 = const core::panicking::AssertKind::Eq; // scope 23 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _235 = const core::panicking::AssertKind::Eq; // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _237 = _227;                     // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _236 = _237;                     // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _239 = _228;                     // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _238 = _239;                     // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _240 = Option::<Arguments<'_>>::None; // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _234 = core::panicking::assert_failed::<u8, u8>(move _235, move _236, move _238, move _240); // scope 24 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u8, &'b u8, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u8, u8>}, val: Value(<ZST>) }
+        _202 = core::panicking::AssertKind::Eq;
+        _204 = Option::<Arguments<'_>>::None;
+        _203 = core::panicking::assert_failed::<u8, u8>(move _202, _196, _197, move _204) -> unwind continue;
     }
 
     bb36: {
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:23:2: 23:2
-    }
-}
-
-promoted[0] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:50: 22:52
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:50: 22:52
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[1] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:30: 22:47
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:31: 22:43
-
-    bb0: {
-        _2 = (const true, const true);   // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:31: 22:43
-        _1 = (move _2, const 3_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:30: 22:47
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:22:29: 22:47
-    }
-}
-
-promoted[2] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:51: 21:53
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:51: 21:53
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[3] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:30: 21:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:31: 21:44
-
-    bb0: {
-        _2 = (const true, const false);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:31: 21:44
-        _1 = (move _2, const 3_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:30: 21:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:21:29: 21:48
-    }
-}
-
-promoted[4] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:51: 20:53
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:51: 20:53
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[5] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:30: 20:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:31: 20:44
-
-    bb0: {
-        _2 = (const false, const true);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:31: 20:44
-        _1 = (move _2, const 3_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:30: 20:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:20:29: 20:48
-    }
-}
-
-promoted[6] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:52: 19:54
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:52: 19:54
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[7] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:30: 19:49
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:31: 19:45
-
-    bb0: {
-        _2 = (const false, const false); // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:31: 19:45
-        _1 = (move _2, const 3_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:30: 19:49
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:19:29: 19:49
-    }
-}
-
-promoted[8] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:50: 18:51
-
-    bb0: {
-        _1 = const 5_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:50: 18:51
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[9] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:30: 18:47
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:31: 18:43
-
-    bb0: {
-        _2 = (const true, const true);   // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:31: 18:43
-        _1 = (move _2, const 4_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:30: 18:47
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:18:29: 18:47
-    }
-}
-
-promoted[10] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:51: 17:52
-
-    bb0: {
-        _1 = const 4_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:51: 17:52
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[11] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:30: 17:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:31: 17:44
-
-    bb0: {
-        _2 = (const true, const false);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:31: 17:44
-        _1 = (move _2, const 4_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:30: 17:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:17:29: 17:48
-    }
-}
-
-promoted[12] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:51: 16:52
-
-    bb0: {
-        _1 = const 4_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:51: 16:52
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[13] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:30: 16:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:31: 16:44
-
-    bb0: {
-        _2 = (const false, const true);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:31: 16:44
-        _1 = (move _2, const 4_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:30: 16:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:16:29: 16:48
-    }
-}
-
-promoted[14] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:52: 15:54
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:52: 15:54
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[15] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:30: 15:49
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:31: 15:45
-
-    bb0: {
-        _2 = (const false, const false); // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:31: 15:45
-        _1 = (move _2, const 4_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:30: 15:49
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:15:29: 15:49
-    }
-}
-
-promoted[16] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:50: 14:51
-
-    bb0: {
-        _1 = const 1_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:50: 14:51
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[17] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:30: 14:47
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:31: 14:43
-
-    bb0: {
-        _2 = (const true, const true);   // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:31: 14:43
-        _1 = (move _2, const 0_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:30: 14:47
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:14:29: 14:47
-    }
-}
-
-promoted[18] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:51: 13:52
-
-    bb0: {
-        _1 = const 0_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:51: 13:52
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[19] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:30: 13:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:31: 13:44
-
-    bb0: {
-        _2 = (const true, const false);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:31: 13:44
-        _1 = (move _2, const 0_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:30: 13:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:13:29: 13:48
-    }
-}
-
-promoted[20] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:51: 12:52
-
-    bb0: {
-        _1 = const 0_u8;                 // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:51: 12:52
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[21] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:30: 12:48
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:31: 12:44
-
-    bb0: {
-        _2 = (const false, const true);  // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:31: 12:44
-        _1 = (move _2, const 0_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:30: 12:48
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:12:29: 12:48
-    }
-}
-
-promoted[22] in main: &u8 = {
-    let mut _0: &u8;                     // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u8;                      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:52: 11:54
-
-    bb0: {
-        _1 = const 20_u8;                // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:52: 11:54
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
-promoted[23] in main: &((bool, bool), u8) = {
-    let mut _0: &((bool, bool), u8);     // return place in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-    let mut _1: ((bool, bool), u8);      // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:30: 11:49
-    let mut _2: (bool, bool);            // in scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:31: 11:45
-
-    bb0: {
-        _2 = (const false, const false); // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:31: 11:45
-        _1 = (move _2, const 0_u8);      // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:30: 11:49
-        _0 = &_1;                        // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
-        return;                          // scope 0 at ui/or-patterns/bindings-runpass-1.rs:11:29: 11:49
+        return;
     }
 }

@@ -1,72 +1,74 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn take(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:6:9: 6:10
-    let mut _0: isize;                   // return place in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:6:22: 6:27
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:6:29: 6:30
-        return;                          // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:6:31: 6:31
+        _0 = _1;
+        return;
     }
 }
 
 fn the_loop() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:8:15: 8:15
-    let mut _1: std::vec::Vec<isize>;    // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:9:9: 9:17
-    let _3: ();                          // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:13:13: 13:31
-    let mut _4: &mut std::vec::Vec<isize>; // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:13:13: 13:31
-    let mut _5: isize;                   // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:13:23: 13:30
-    let mut _6: isize;                   // in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:13:28: 13:29
+    let mut _0: ();
+    let mut _1: std::vec::Vec<isize>;
+    let mut _3: bool;
+    let _4: ();
+    let mut _5: &mut std::vec::Vec<isize>;
+    let mut _6: isize;
     scope 1 {
-        debug list => _1;                // in scope 1 at ui/for-loop-while/liveness-move-in-loop.rs:9:9: 9:17
-        let _2: isize;                   // in scope 1 at ui/for-loop-while/liveness-move-in-loop.rs:11:13: 11:14
+        debug list => _1;
+        let _2: isize;
         scope 2 {
-            debug x => _2;               // in scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:11:13: 11:14
+            debug x => _2;
         }
     }
 
     bb0: {
-        _1 = Vec::<isize>::new() -> bb1; // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:9:20: 9:30
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/liveness-move-in-loop.rs:9:20: 9:28
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> Vec<isize> {Vec::<isize>::new}, val: Value(<ZST>) }
+        _1 = Vec::<isize>::new() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = const 5_isize;              // scope 1 at ui/for-loop-while/liveness-move-in-loop.rs:11:17: 11:18
-        _4 = &mut _1;                    // scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:13:13: 13:31
-        _6 = _2;                         // scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:13:28: 13:29
-        _5 = take(move _6) -> [return: bb2, unwind: bb3]; // scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:13:23: 13:30
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/liveness-move-in-loop.rs:13:23: 13:27
-                                         // + literal: Const { ty: fn(isize) -> isize {take}, val: Value(<ZST>) }
+        _2 = const 5_isize;
+        _3 = Gt(_2, const 3_isize);
+        switchInt(move _3) -> [0: bb4, otherwise: bb2];
     }
 
     bb2: {
-        _3 = Vec::<isize>::push(move _4, move _5) -> [return: bb5, unwind: bb3]; // scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:13:13: 13:31
-                                         // mir::Constant
-                                         // + span: ui/for-loop-while/liveness-move-in-loop.rs:13:18: 13:22
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Vec<isize>, isize) {Vec::<isize>::push}, val: Value(<ZST>) }
+        _5 = &mut _1;
+        _6 = take(_2) -> [return: bb3, unwind: bb6];
     }
 
-    bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:18:1: 18:2
+    bb3: {
+        _4 = Vec::<isize>::push(move _5, move _6) -> [return: bb8, unwind: bb6];
     }
 
-    bb4 (cleanup): {
-        resume;                          // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:8:1: 18:2
+    bb4: {
+        drop(_1) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        goto -> bb1;                     // scope 2 at ui/for-loop-while/liveness-move-in-loop.rs:13:13: 13:31
+        return;
+    }
+
+    bb6 (cleanup): {
+        drop(_1) -> [return: bb7, unwind terminate];
+    }
+
+    bb7 (cleanup): {
+        resume;
+    }
+
+    bb8: {
+        goto -> bb1;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:20:15: 20:15
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/for-loop-while/liveness-move-in-loop.rs:20:17: 20:17
+        return;
     }
 }

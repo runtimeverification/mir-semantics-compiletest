@@ -1,57 +1,54 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/traits/issue-56202.rs:11:1: 11:28>::foo(_1: T) -> FooStruct {
-    let mut _0: FooStruct;               // return place in scope 0 at ui/traits/issue-56202.rs:12:34: 12:38
-    let mut _2: u32;                     // in scope 0 at ui/traits/issue-56202.rs:13:14: 13:28
+    let mut _0: FooStruct;
+    let mut _2: u32;
 
     bb0: {
-        _2 = <u32 as Default>::default() -> [return: bb1, unwind: bb3]; // scope 0 at ui/traits/issue-56202.rs:13:14: 13:28
-                                         // mir::Constant
-                                         // + span: ui/traits/issue-56202.rs:13:14: 13:26
-                                         // + literal: Const { ty: fn() -> u32 {<u32 as Default>::default}, val: Value(<ZST>) }
+        _2 = <u32 as Default>::default() -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        _0 = FooStruct(move _2);         // scope 0 at ui/traits/issue-56202.rs:13:9: 13:29
-        drop(_1) -> bb2;                 // scope 0 at ui/traits/issue-56202.rs:14:5: 14:6
+        _0 = FooStruct(move _2);
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/traits/issue-56202.rs:14:6: 14:6
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/traits/issue-56202.rs:14:5: 14:6
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/traits/issue-56202.rs:12:5: 14:6
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/issue-56202.rs:17:11: 17:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/traits/issue-56202.rs:17:13: 17:13
+        return;
     }
 }
 
 fn FooStruct(_1: u32) -> FooStruct {
-    let mut _0: FooStruct;               // return place in scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
+    let mut _0: FooStruct;
 
     bb0: {
-        _0 = FooStruct(move _1);         // scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
-        return;                          // scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
+        _0 = FooStruct(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn FooStruct(_1: u32) -> FooStruct {
-    let mut _0: FooStruct;               // return place in scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
+    let mut _0: FooStruct;
 
     bb0: {
-        _0 = FooStruct(move _1);         // scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
-        return;                          // scope 0 at ui/traits/issue-56202.rs:9:1: 9:17
+        _0 = FooStruct(move _1);
+        return;
     }
 }

@@ -1,65 +1,58 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generics/generic-tag.rs:11:15: 11:15
-    let mut _1: option<isize>;           // in scope 0 at ui/generics/generic-tag.rs:12:9: 12:14
-    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/generics/generic-tag.rs:12:54: 12:66
-    let mut _3: option<isize>;           // in scope 0 at ui/generics/generic-tag.rs:13:9: 13:30
+    let mut _0: ();
+    let mut _1: option<isize>;
+    let mut _2: std::boxed::Box<isize>;
+    let mut _3: option<isize>;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/generics/generic-tag.rs:12:9: 12:14
+        debug a => _1;
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 10_isize) -> bb1; // scope 0 at ui/generics/generic-tag.rs:12:54: 12:66
-                                         // mir::Constant
-                                         // + span: ui/generics/generic-tag.rs:12:54: 12:62
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _2 = Box::<isize>::new(const 10_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = option::<isize>::some(move _2); // scope 0 at ui/generics/generic-tag.rs:12:32: 12:67
-        _3 = const option::<isize>::none; // scope 1 at ui/generics/generic-tag.rs:13:9: 13:30
-                                         // mir::Constant
-                                         // + span: ui/generics/generic-tag.rs:13:9: 13:30
-                                         // + literal: Const { ty: option<isize>, val: Value(Scalar(0x0000000000000000)) }
-        drop(_1) -> [return: bb5, unwind: bb4]; // scope 1 at ui/generics/generic-tag.rs:13:5: 13:6
+        _1 = option::<isize>::some(move _2);
+        _3 = option::<isize>::none;
+        drop(_1) -> [return: bb2, unwind: bb3];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/generics/generic-tag.rs:14:2: 14:2
+        _1 = move _3;
+        drop(_1) -> [return: bb4, unwind continue];
     }
 
     bb3 (cleanup): {
-        resume;                          // scope 0 at ui/generics/generic-tag.rs:11:1: 14:2
+        _1 = move _3;
+        drop(_1) -> [return: bb5, unwind terminate];
     }
 
-    bb4 (cleanup): {
-        _1 = move _3;                    // scope 1 at ui/generics/generic-tag.rs:13:5: 13:6
-        drop(_1) -> bb3;                 // scope 0 at ui/generics/generic-tag.rs:14:1: 14:2
+    bb4: {
+        return;
     }
 
-    bb5: {
-        _1 = move _3;                    // scope 1 at ui/generics/generic-tag.rs:13:5: 13:6
-        drop(_1) -> bb2;                 // scope 0 at ui/generics/generic-tag.rs:14:1: 14:2
+    bb5 (cleanup): {
+        resume;
     }
 }
 
 fn option::some(_1: Box<T>) -> option<T> {
-    let mut _0: option<T>;               // return place in scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
+    let mut _0: option<T>;
 
     bb0: {
-        _0 = option::<T>::some(move _1); // scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
-        return;                          // scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
+        _0 = option::<T>::some(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn option::some(_1: Box<T>) -> option<T> {
-    let mut _0: option<T>;               // return place in scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
+    let mut _0: option<T>;
 
     bb0: {
-        _0 = option::<T>::some(move _1); // scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
-        return;                          // scope 0 at ui/generics/generic-tag.rs:9:18: 9:22
+        _0 = option::<T>::some(move _1);
+        return;
     }
 }

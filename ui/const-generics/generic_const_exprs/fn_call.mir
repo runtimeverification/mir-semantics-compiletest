@@ -1,456 +1,342 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn test_me(_1: usize, _2: usize) -> usize {
-    debug a => _1;                       // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:21: 5:22
-    debug b => _2;                       // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:31: 5:32
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:44: 5:49
-    let mut _3: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
-    let mut _4: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:9
-    let mut _5: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
+    debug a => _1;
+    debug b => _2;
+    let mut _0: usize;
+    let mut _3: bool;
 
     bb0: {
-        _4 = _1;                         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:9
-        _5 = _2;                         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
-        _3 = Lt(move _4, move _5);       // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
-        switchInt(move _3) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
+        _3 = Lt(_1, _2);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _0 = std::mem::size_of::<T>() -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:7:9: 7:33
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:7:9: 7:31
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        _0 = std::mem::size_of::<T>() -> [return: bb3, unwind continue];
     }
 
     bb2: {
-        _0 = const _;                    // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:9:9: 9:19
-        goto -> bb3;                     // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:5: 10:6
+        _0 = const _;
+        goto -> bb3;
     }
 
     bb3: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:11:2: 11:2
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn test_me(_1: usize, _2: usize) -> usize {
-    debug a => _1;                       // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:21: 5:22
-    debug b => _2;                       // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:31: 5:32
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:5:44: 5:49
-    let mut _3: bool;                    // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
-    let mut _4: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:9
-    let mut _5: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
+    debug a => _1;
+    debug b => _2;
+    let mut _0: usize;
+    let mut _3: bool;
+    let mut _4: usize;
+    let mut _5: usize;
 
     bb0: {
-        StorageLive(_3);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
-        StorageLive(_4);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:9
-        _4 = _1;                         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:9
-        StorageLive(_5);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
-        _5 = _2;                         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
-        _3 = Lt(move _4, move _5);       // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
-        StorageDead(_5);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
-        StorageDead(_4);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:12: 6:13
-        switchInt(move _3) -> [0: bb2, otherwise: bb1]; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:8: 6:13
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = _1;
+        StorageLive(_5);
+        _5 = _2;
+        _3 = Lt(move _4, move _5);
+        StorageDead(_5);
+        StorageDead(_4);
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:7:9: 7:33
-        _0 = std::mem::size_of::<T>() -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:7:9: 7:33
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:7:9: 7:31
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = std::mem::size_of::<T>() -> [return: bb3, unwind continue];
     }
 
     bb2: {
-        _0 = const _;                    // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:9:9: 9:19
-        goto -> bb3;                     // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:6:5: 10:6
+        _0 = const _;
+        goto -> bb3;
     }
 
     bb3: {
-        StorageDead(_3);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:10:5: 10:6
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:11:2: 11:2
+        StorageDead(_3);
+        return;
     }
 }
 
 fn test_simple() -> [u8; std::mem::size_of::<T>()] {
-    let mut _0: [u8; std::mem::size_of::<T>()]; // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:13:24: 13:54
+    let mut _0: [u8; std::mem::size_of::<T>()];
 
     bb0: {
-        _0 = [const 0_u8; std::mem::size_of::<T>()]; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:17:5: 17:34
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:18:2: 18:2
+        _0 = [const 0_u8; std::mem::size_of::<T>()];
+        return;
     }
 }
 
 test_simple::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:13:29: 13:53
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:13:29: 13:53
-        _0 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:13:29: 13:53
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:13:29: 13:51
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:13:29: 13:53
+        return;
     }
 }
 
 test_simple::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:15:10: 15:34
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:15:10: 15:34
-        _0 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:15:10: 15:34
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:15:10: 15:32
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:15:10: 15:34
+        return;
     }
 }
 
 test_simple::{constant#2}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:17:9: 17:33
+    let mut _0: usize;
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:17:9: 17:33
-        _0 = std::mem::size_of::<T>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:17:9: 17:33
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:17:9: 17:31
-                                         // + literal: Const { ty: fn() -> usize {std::mem::size_of::<T>}, val: Value(<ZST>) }
+        ConstEvalCounter;
+        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:17:9: 17:33
+        return;
     }
 }
 
 fn test_with_args() -> [u8; test_me::<T>(N, N + 1) + N] {
-    let mut _0: [u8; test_me::<T>(N, N + 1) + N]; // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:43: 20:75
+    let mut _0: [u8; test_me::<T>(N, N + 1) + N];
 
     bb0: {
-        _0 = [const 0_u8; test_me::<T>(N, N + 1) + N]; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:5: 24:36
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:25:2: 25:2
+        _0 = [const 0_u8; test_me::<T>(N, N + 1) + N];
+        return;
     }
 }
 
 test_with_args::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:70
-    let mut _2: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
-    let mut _3: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
-    let mut _4: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
+    let mut _0: usize;
+    let mut _1: usize;
+    let mut _2: usize;
+    let mut _3: (usize, bool);
+    let mut _4: (usize, bool);
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:70
-        StorageLive(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
-        _3 = CheckedAdd(const N, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
+        StorageLive(_1);
+        StorageLive(_2);
+        _3 = CheckedAdd(const N, const 1_usize);
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_3.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:64: 20:69
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:70
-        _1 = test_me::<T>(const N, move _2) -> bb2; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:70
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:60
-                                         // + literal: Const { ty: fn(usize, usize) -> usize {test_me::<T>}, val: Value(<ZST>) }
+        _2 = move (_3.0: usize);
+        ConstEvalCounter;
+        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:69: 20:70
-        _4 = CheckedAdd(_1, const N);    // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
+        StorageDead(_2);
+        _4 = CheckedAdd(_1, const N);
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
     }
 
     bb3: {
-        _0 = move (_4.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:73: 20:74
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:20:48: 20:74
+        _0 = move (_4.0: usize);
+        StorageDead(_1);
+        return;
     }
 }
 
 test_with_args::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:32
-    let mut _2: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
-    let mut _3: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
-    let mut _4: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
+    let mut _0: usize;
+    let mut _1: usize;
+    let mut _2: usize;
+    let mut _3: (usize, bool);
+    let mut _4: (usize, bool);
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:32
-        StorageLive(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
-        _3 = CheckedAdd(const N, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
+        StorageLive(_1);
+        StorageLive(_2);
+        _3 = CheckedAdd(const N, const 1_usize);
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_3.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:26: 22:31
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:32
-        _1 = test_me::<T>(const N, move _2) -> bb2; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:32
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:22
-                                         // + literal: Const { ty: fn(usize, usize) -> usize {test_me::<T>}, val: Value(<ZST>) }
+        _2 = move (_3.0: usize);
+        ConstEvalCounter;
+        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:31: 22:32
-        _4 = CheckedAdd(_1, const N);    // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
+        StorageDead(_2);
+        _4 = CheckedAdd(_1, const N);
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
     }
 
     bb3: {
-        _0 = move (_4.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:35: 22:36
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:22:10: 22:36
+        _0 = move (_4.0: usize);
+        StorageDead(_1);
+        return;
     }
 }
 
 test_with_args::{constant#2}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
-    let mut _1: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:31
-    let mut _2: usize;                   // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
-    let mut _3: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
-    let mut _4: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
+    let mut _0: usize;
+    let mut _1: usize;
+    let mut _2: usize;
+    let mut _3: (usize, bool);
+    let mut _4: (usize, bool);
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:31
-        StorageLive(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
-        _3 = CheckedAdd(const N, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
+        StorageLive(_1);
+        StorageLive(_2);
+        _3 = CheckedAdd(const N, const 1_usize);
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move (_3.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:25: 24:30
-        ConstEvalCounter;                // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:31
-        _1 = test_me::<T>(const N, move _2) -> bb2; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:31
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:21
-                                         // + literal: Const { ty: fn(usize, usize) -> usize {test_me::<T>}, val: Value(<ZST>) }
+        _2 = move (_3.0: usize);
+        ConstEvalCounter;
+        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        StorageDead(_2);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:30: 24:31
-        _4 = CheckedAdd(_1, const N);    // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
+        StorageDead(_2);
+        _4 = CheckedAdd(_1, const N);
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
     }
 
     bb3: {
-        _0 = move (_4.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
-        StorageDead(_1);                 // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:34: 24:35
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:24:9: 24:35
+        _0 = move (_4.0: usize);
+        StorageDead(_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:27:11: 27:11
-    let mut _1: (&[u8; 8], &[u8; std::mem::size_of::<T>()]); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _2: &[u8; 8];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _3: &[u8; std::mem::size_of::<T>()]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _4: [u8; std::mem::size_of::<T>()]; // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:24: 28:44
-    let _5: &[u8; 8];                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _6: &[u8; std::mem::size_of::<T>()]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _7: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _8: bool;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _9: &[u8; 8];                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _10: &[u8; std::mem::size_of::<T>()]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _12: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _13: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _14: &[u8; 8];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _15: &[u8; 8];                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _16: &[u8; std::mem::size_of::<T>()]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _17: &[u8; std::mem::size_of::<T>()]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _18: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _19: (&[u8; 12], &[u8; test_me::<T>(N, N + 1) + N]); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _20: &[u8; 12];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _21: &[u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _22: [u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:25: 29:51
-    let _23: &[u8; 12];                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-    let _24: &[u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-    let mut _25: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _26: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _27: &[u8; 12];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _28: &[u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _30: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _31: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _32: &[u8; 12];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _33: &[u8; 12];                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _34: &[u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _35: &[u8; test_me::<T>(N, N + 1) + N]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _36: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _37: &[u8; 12];              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _38: &[u8; 8];               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+    let mut _0: ();
+    let mut _1: (&[u8; 8], &[u8; std::mem::size_of::<T>()]);
+    let mut _2: &[u8; 8];
+    let _3: [u8; 8];
+    let mut _4: &[u8; std::mem::size_of::<T>()];
+    let _5: [u8; std::mem::size_of::<T>()];
+    let _6: &[u8; 8];
+    let _7: &[u8; std::mem::size_of::<T>()];
+    let mut _8: bool;
+    let mut _9: bool;
+    let _11: !;
+    let mut _12: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _13: (&[u8; 12], &[u8; test_me::<T>(N, N + 1) + N]);
+    let mut _14: &[u8; 12];
+    let _15: [u8; 12];
+    let mut _16: &[u8; test_me::<T>(N, N + 1) + N];
+    let _17: [u8; test_me::<T>(N, N + 1) + N];
+    let _18: &[u8; 12];
+    let _19: &[u8; test_me::<T>(N, N + 1) + N];
+    let mut _20: bool;
+    let mut _21: bool;
+    let _23: !;
+    let mut _24: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug left_val => _5;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _6;           // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _11: core::panicking::AssertKind; // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _6;
+        debug right_val => _7;
+        let _10: core::panicking::AssertKind;
         scope 2 {
-            debug kind => _11;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _10;
         }
     }
     scope 3 {
-        debug left_val => _23;           // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        debug right_val => _24;          // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _29: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+        debug left_val => _18;
+        debug right_val => _19;
+        let _22: core::panicking::AssertKind;
         scope 4 {
-            debug kind => _29;           // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug kind => _22;
         }
     }
 
     bb0: {
-        _38 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &[u8; 8], val: Unevaluated(main, [], Some(promoted[1])) }
-        _2 = _38;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _4 = test_simple::<u64>() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:24: 28:44
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:28:24: 28:42
-                                         // + literal: Const { ty: fn() -> [u8; std::mem::size_of::<T>()] {test_simple::<u64>}, val: Value(<ZST>) }
+        _3 = [const 0_u8; 8];
+        _2 = &_3;
+        _5 = test_simple::<u64>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = &_4;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _1 = (move _2, move _3);         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _5 = (_1.0: &[u8; 8]);           // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _6 = (_1.1: &[u8; std::mem::size_of::<T>()]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _9 = _5;                         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _10 = _6;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _8 = <[u8; 8] as PartialEq<[u8; std::mem::size_of::<T>()]>>::eq(move _9, move _10) -> bb2; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a [u8; 8], &'b [u8; std::mem::size_of::<T>()]) -> bool {<[u8; 8] as PartialEq<[u8; std::mem::size_of::<T>()]>>::eq}, val: Value(<ZST>) }
+        _4 = &_5;
+        _1 = (move _2, move _4);
+        _6 = (_1.0: &[u8; 8]);
+        _7 = (_1.1: &[u8; std::mem::size_of::<T>()]);
+        _9 = <[u8; 8] as PartialEq<[u8; std::mem::size_of::<T>()]>>::eq(_6, _7) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _7 = Not(move _8);               // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _7) -> [0: bb4, otherwise: bb3]; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _8 = Not(move _9);
+        switchInt(move _8) -> [0: bb4, otherwise: bb3];
     }
 
     bb3: {
-        _11 = const core::panicking::AssertKind::Eq; // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _13 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _15 = _5;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _14 = _15;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _17 = _6;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _16 = _17;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _18 = Option::<Arguments<'_>>::None; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _12 = core::panicking::assert_failed::<[u8; 8], [u8; std::mem::size_of::<T>()]>(move _13, move _14, move _16, move _18); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a [u8; 8], &'b [u8; std::mem::size_of::<T>()], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<[u8; 8], [u8; std::mem::size_of::<T>()]>}, val: Value(<ZST>) }
+        _10 = core::panicking::AssertKind::Eq;
+        _12 = Option::<Arguments<'_>>::None;
+        _11 = core::panicking::assert_failed::<[u8; 8], [u8; std::mem::size_of::<T>()]>(move _10, _6, _7, move _12) -> unwind continue;
     }
 
     bb4: {
-        _37 = const _;                   // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-                                         // + literal: Const { ty: &[u8; 12], val: Unevaluated(main, [], Some(promoted[0])) }
-        _20 = _37;                       // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _22 = test_with_args::<u64, 4>() -> bb5; // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:25: 29:51
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/fn_call.rs:29:25: 29:49
-                                         // + literal: Const { ty: fn() -> [u8; test_me::<T>(N, N + 1) + N] {test_with_args::<u64, 4>}, val: Value(<ZST>) }
+        _15 = [const 0_u8; 12];
+        _14 = &_15;
+        _17 = test_with_args::<u64, 4>() -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _21 = &_22;                      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _19 = (move _20, move _21);      // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _23 = (_19.0: &[u8; 12]);        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _24 = (_19.1: &[u8; test_me::<T>(N, N + 1) + N]); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _27 = _23;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _28 = _24;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _26 = <[u8; 12] as PartialEq<[u8; test_me::<T>(N, N + 1) + N]>>::eq(move _27, move _28) -> bb6; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a [u8; 12], &'b [u8; test_me::<T>(N, N + 1) + N]) -> bool {<[u8; 12] as PartialEq<[u8; test_me::<T>(N, N + 1) + N]>>::eq}, val: Value(<ZST>) }
+        _16 = &_17;
+        _13 = (move _14, move _16);
+        _18 = (_13.0: &[u8; 12]);
+        _19 = (_13.1: &[u8; test_me::<T>(N, N + 1) + N]);
+        _21 = <[u8; 12] as PartialEq<[u8; test_me::<T>(N, N + 1) + N]>>::eq(_18, _19) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _25 = Not(move _26);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _25) -> [0: bb8, otherwise: bb7]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _20 = Not(move _21);
+        switchInt(move _20) -> [0: bb8, otherwise: bb7];
     }
 
     bb7: {
-        _29 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _31 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _33 = _23;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _32 = _33;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _35 = _24;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _34 = _35;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _36 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _30 = core::panicking::assert_failed::<[u8; 12], [u8; test_me::<T>(N, N + 1) + N]>(move _31, move _32, move _34, move _36); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a [u8; 12], &'b [u8; test_me::<T>(N, N + 1) + N], Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<[u8; 12], [u8; test_me::<T>(N, N + 1) + N]>}, val: Value(<ZST>) }
+        _22 = core::panicking::AssertKind::Eq;
+        _24 = Option::<Arguments<'_>>::None;
+        _23 = core::panicking::assert_failed::<[u8; 12], [u8; test_me::<T>(N, N + 1) + N]>(move _22, _18, _19, move _24) -> unwind continue;
     }
 
     bb8: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:30:2: 30:2
-    }
-}
-
-promoted[0] in main: &[u8; 12] = {
-    let mut _0: &[u8; 12];               // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: [u8; 12];                // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:16: 29:23
-
-    bb0: {
-        _1 = [const 0_u8; 12];           // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:16: 29:23
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    }
-}
-
-promoted[1] in main: &[u8; 8] = {
-    let mut _0: &[u8; 8];                // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let mut _1: [u8; 8];                 // in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:16: 28:22
-
-    bb0: {
-        _1 = [const 0_u8; 8];            // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:16: 28:22
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
+        return;
     }
 }
 
 main::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:20: 28:21
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 8_usize;              // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:20: 28:21
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:28:20: 28:21
+        _0 = const 8_usize;
+        return;
     }
 }
 
 main::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:20: 29:22
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 12_usize;             // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:20: 29:22
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:20: 29:22
+        _0 = const 12_usize;
+        return;
     }
 }
 
 main::{constant#2}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:47: 29:48
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 4_usize;              // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:47: 29:48
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/fn_call.rs:29:47: 29:48
+        _0 = const 4_usize;
+        return;
     }
 }

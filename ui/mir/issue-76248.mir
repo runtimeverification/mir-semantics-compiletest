@@ -1,74 +1,65 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 const N: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/mir/issue-76248.rs:8:10: 8:15
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/mir/issue-76248.rs:8:18: 8:19
-        return;                          // scope 0 at ui/mir/issue-76248.rs:8:1: 8:20
+        _0 = const 1_usize;
+        return;
     }
 }
 
 Elem::x::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/mir/issue-76248.rs:11:20: 11:21
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/mir/issue-76248.rs:11:20: 11:21
-        return;                          // scope 0 at ui/mir/issue-76248.rs:11:20: 11:21
+        _0 = const _;
+        return;
     }
 }
 
 fn f() -> Elem<()> {
-    let mut _0: Elem<()>;                // return place in scope 0 at ui/mir/issue-76248.rs:15:15: 15:23
-    let mut _1: ();                      // in scope 0 at ui/mir/issue-76248.rs:16:7: 16:9
+    let mut _0: Elem<()>;
 
     bb0: {
-        _0 = g::<()>(move _1) -> bb1;    // scope 0 at ui/mir/issue-76248.rs:16:5: 16:10
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-76248.rs:16:5: 16:6
-                                         // + literal: Const { ty: fn(()) -> Elem<()> {g::<()>}, val: Value(<ZST>) }
+        _0 = g::<()>(const ()) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/issue-76248.rs:17:2: 17:2
+        return;
     }
 }
 
 fn g(_1: M) -> Elem<M> {
-    debug m => _1;                       // in scope 0 at ui/mir/issue-76248.rs:20:13: 20:14
-    let mut _0: Elem<M>;                 // return place in scope 0 at ui/mir/issue-76248.rs:20:22: 20:29
-    let mut _2: [usize; 1];              // in scope 0 at ui/mir/issue-76248.rs:22:12: 22:18
-    let mut _3: M;                       // in scope 0 at ui/mir/issue-76248.rs:23:9: 23:10
+    debug m => _1;
+    let mut _0: Elem<M>;
+    let mut _2: [usize; 1];
 
     bb0: {
-        _2 = [const 0_usize; 1];         // scope 0 at ui/mir/issue-76248.rs:22:12: 22:18
-        _3 = move _1;                    // scope 0 at ui/mir/issue-76248.rs:23:9: 23:10
-        _0 = Elem::<M> { x: move _2, m: move _3 }; // scope 0 at ui/mir/issue-76248.rs:21:5: 24:6
-        return;                          // scope 0 at ui/mir/issue-76248.rs:25:2: 25:2
+        _2 = [const 0_usize; 1];
+        _0 = Elem::<M> { x: move _2, m: move _1 };
+        return;
     }
 }
 
 g::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/mir/issue-76248.rs:22:16: 22:17
+    let mut _0: usize;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/mir/issue-76248.rs:22:16: 22:17
-        return;                          // scope 0 at ui/mir/issue-76248.rs:22:16: 22:17
+        _0 = const _;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/issue-76248.rs:27:15: 27:15
-    let _1: Elem<()>;                    // in scope 0 at ui/mir/issue-76248.rs:28:5: 28:8
+    let mut _0: ();
+    let _1: Elem<()>;
 
     bb0: {
-        _1 = f() -> bb1;                 // scope 0 at ui/mir/issue-76248.rs:28:5: 28:8
-                                         // mir::Constant
-                                         // + span: ui/mir/issue-76248.rs:28:5: 28:6
-                                         // + literal: Const { ty: fn() -> Elem<()> {f}, val: Value(<ZST>) }
+        _1 = f() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/issue-76248.rs:29:2: 29:2
+        return;
     }
 }

@@ -1,59 +1,55 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/const-generics/issues/issue-85031-2.rs:11:1: 11:17>::foo() -> [(); A - 0] {
-    let mut _0: [(); A - 0];             // return place in scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:37: 12:48
+    let mut _0: [(); A - 0];
 
     bb0: {
-        _0 = Ref::<'_>::foo::<A>() -> bb1; // scope 0 at ui/const-generics/issues/issue-85031-2.rs:13:9: 13:20
-                                         // mir::Constant
-                                         // + span: ui/const-generics/issues/issue-85031-2.rs:13:9: 13:18
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> [(); A - 0] {Ref::<'_>::foo::<A>}, val: Value(<ZST>) }
+        _0 = Ref::<'_>::foo::<A>() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/issues/issue-85031-2.rs:14:6: 14:6
+        return;
     }
 }
 
 <impl at ui/const-generics/issues/issue-85031-2.rs:11:1: 11:17>::foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
-    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedSub(const A, const 0_usize); // scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const A, const 0_usize) -> bb1; // scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
+        _1 = CheckedSub(const A, const 0_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const A, const 0_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
-        return;                          // scope 0 at ui/const-generics/issues/issue-85031-2.rs:12:42: 12:47
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/issues/issue-85031-2.rs:17:11: 17:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/const-generics/issues/issue-85031-2.rs:17:13: 17:13
+        return;
     }
 }
 
 fn Ref(_1: &i32) -> Ref<'_> {
-    let mut _0: Ref<'_>;                 // return place in scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
+    let mut _0: Ref<'_>;
 
     bb0: {
-        _0 = Ref::<'_>(move _1);         // scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
-        return;                          // scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
+        _0 = Ref::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Ref(_1: &i32) -> Ref<'_> {
-    let mut _0: Ref<'_>;                 // return place in scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
+    let mut _0: Ref<'_>;
 
     bb0: {
-        _0 = Ref::<'_>(move _1);         // scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
-        return;                          // scope 0 at ui/const-generics/issues/issue-85031-2.rs:9:1: 9:19
+        _0 = Ref::<'_>(move _1);
+        return;
     }
 }

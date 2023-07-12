@@ -1,77 +1,62 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn dispose(_1: Arc<bool>) -> () {
-    debug _x => _1;                      // in scope 0 at ui/bind-by-move.rs:4:12: 4:14
-    let mut _0: ();                      // return place in scope 0 at ui/bind-by-move.rs:4:27: 4:27
+    debug _x => _1;
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/bind-by-move.rs:4:29: 4:30
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/bind-by-move.rs:4:30: 4:30
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/bind-by-move.rs:6:15: 6:15
-    let _1: std::sync::Arc<bool>;        // in scope 0 at ui/bind-by-move.rs:7:9: 7:10
-    let mut _3: std::sync::Arc<bool>;    // in scope 0 at ui/bind-by-move.rs:8:18: 8:19
-    let mut _4: isize;                   // in scope 0 at ui/bind-by-move.rs:10:9: 10:16
-    let _6: ();                          // in scope 0 at ui/bind-by-move.rs:10:22: 10:32
-    let mut _7: std::sync::Arc<bool>;    // in scope 0 at ui/bind-by-move.rs:10:30: 10:31
-    let mut _8: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: ();
+    let _1: std::sync::Arc<bool>;
+    let mut _3: std::sync::Arc<bool>;
+    let mut _4: isize;
+    let _6: ();
+    let mut _7: !;
     scope 1 {
-        debug p => _1;                   // in scope 1 at ui/bind-by-move.rs:7:9: 7:10
-        let _2: std::option::Option<std::sync::Arc<bool>>; // in scope 1 at ui/bind-by-move.rs:8:9: 8:10
+        debug p => _1;
+        let _2: std::option::Option<std::sync::Arc<bool>>;
         scope 2 {
-            debug x => _2;               // in scope 2 at ui/bind-by-move.rs:8:9: 8:10
-            let _5: std::sync::Arc<bool>; // in scope 2 at ui/bind-by-move.rs:10:14: 10:15
+            debug x => _2;
+            let _5: std::sync::Arc<bool>;
             scope 3 {
-                debug z => _5;           // in scope 3 at ui/bind-by-move.rs:10:14: 10:15
+                debug z => _5;
             }
         }
     }
 
     bb0: {
-        _1 = Arc::<bool>::new(const true) -> bb1; // scope 0 at ui/bind-by-move.rs:7:13: 7:27
-                                         // mir::Constant
-                                         // + span: ui/bind-by-move.rs:7:13: 7:21
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(bool) -> Arc<bool> {Arc::<bool>::new}, val: Value(<ZST>) }
+        _1 = Arc::<bool>::new(const true) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = move _1;                    // scope 1 at ui/bind-by-move.rs:8:18: 8:19
-        _2 = Option::<Arc<bool>>::Some(move _3); // scope 1 at ui/bind-by-move.rs:8:13: 8:20
-        _4 = discriminant(_2);           // scope 2 at ui/bind-by-move.rs:9:11: 9:12
-        switchInt(move _4) -> [0: bb2, 1: bb4, otherwise: bb3]; // scope 2 at ui/bind-by-move.rs:9:5: 9:12
+        _3 = move _1;
+        _2 = Option::<Arc<bool>>::Some(move _3);
+        _4 = discriminant(_2);
+        switchInt(move _4) -> [0: bb2, 1: bb4, otherwise: bb3];
     }
 
     bb2: {
-        _8 = begin_panic::<&str>(const "explicit panic"); // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _7 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 
     bb3: {
-        unreachable;                     // scope 2 at ui/bind-by-move.rs:9:11: 9:12
+        unreachable;
     }
 
     bb4: {
-        _5 = move ((_2 as Some).0: std::sync::Arc<bool>); // scope 2 at ui/bind-by-move.rs:10:14: 10:15
-        _7 = move _5;                    // scope 3 at ui/bind-by-move.rs:10:30: 10:31
-        _6 = dispose(move _7) -> bb5;    // scope 3 at ui/bind-by-move.rs:10:22: 10:32
-                                         // mir::Constant
-                                         // + span: ui/bind-by-move.rs:10:22: 10:29
-                                         // + literal: Const { ty: fn(Arc<bool>) {dispose}, val: Value(<ZST>) }
+        _5 = move ((_2 as Some).0: std::sync::Arc<bool>);
+        _6 = dispose(move _5) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        return;                          // scope 0 at ui/bind-by-move.rs:13:2: 13:2
+        return;
     }
 }

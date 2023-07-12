@@ -1,71 +1,61 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Foo::bar() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:11:14: 11:14
-    let _1: &mut [u8];                   // in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:38
-    let mut _2: &mut <Self as Foo>::Baz; // in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:38
-    let mut _3: <Self as Foo>::Baz;      // in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:29
+    let mut _0: ();
+    let _1: &mut [u8];
+    let mut _2: &mut <Self as Foo>::Baz;
+    let mut _3: <Self as Foo>::Baz;
 
     bb0: {
-        _3 = <<Self as Foo>::Baz as Default>::default() -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:29
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:27
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn() -> <Self as Foo>::Baz {<<Self as Foo>::Baz as Default>::default}, val: Value(<ZST>) }
+        _3 = <<Self as Foo>::Baz as Default>::default() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &mut _3;                    // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:38
-        _1 = <<Self as Foo>::Baz as AsMut<[u8]>>::as_mut(move _2) -> [return: bb2, unwind: bb4]; // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:9: 12:38
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-73298.rs:12:30: 12:36
-                                         // + literal: Const { ty: for<'a> fn(&'a mut <Self as Foo>::Baz) -> &'a mut [u8] {<<Self as Foo>::Baz as AsMut<[u8]>>::as_mut}, val: Value(<ZST>) }
+        _2 = &mut _3;
+        _1 = <<Self as Foo>::Baz as AsMut<[u8]>>::as_mut(move _2) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_3) -> bb3;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:38: 12:39
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:13:6: 13:6
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_3) -> bb5;                 // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:12:38: 12:39
+        drop(_3) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:11:5: 13:6
+        resume;
     }
 }
 
 <impl at ui/const-generics/generic_const_exprs/issue-73298.rs:16:1: 16:16>::Baz::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
-    let mut _1: (usize, bool);           // in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
+    let mut _0: usize;
+    let mut _1: (usize, bool);
 
     bb0: {
-        _1 = CheckedMul(const 1_usize, const 1_usize); // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1_usize, const 1_usize) -> bb1; // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
+        _1 = CheckedMul(const 1_usize, const 1_usize);
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1_usize, const 1_usize) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: usize);         // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:17:21: 17:26
+        _0 = move (_1.0: usize);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:21:11: 21:11
-    let _1: ();                          // in scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:22:5: 22:23
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = <() as Foo>::bar() -> bb1;  // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:22:5: 22:23
-                                         // mir::Constant
-                                         // + span: ui/const-generics/generic_const_exprs/issue-73298.rs:22:5: 22:21
-                                         // + literal: Const { ty: fn() {<() as Foo>::bar}, val: Value(<ZST>) }
+        _1 = <() as Foo>::bar() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/const-generics/generic_const_exprs/issue-73298.rs:23:2: 23:2
+        return;
     }
 }

@@ -1,70 +1,64 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn generic(_1: <F as Foo>::T, _2: A, _3: B) -> bool {
-    debug t => _1;                       // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:12:24: 12:25
-    debug a => _2;                       // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:12:33: 12:34
-    debug b => _3;                       // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:12:39: 12:40
-    let mut _0: bool;                    // return place in scope 0 at ui/associated-item/associated-item-two-bounds.rs:12:48: 12:52
-    let mut _4: bool;                    // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:11
-    let mut _5: &<F as Foo>::T;          // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:6
-    let mut _6: &A;                      // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:10: 13:11
-    let mut _7: bool;                    // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:15: 13:21
-    let mut _8: &<F as Foo>::T;          // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:15: 13:16
-    let mut _9: &B;                      // in scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:20: 13:21
+    debug t => _1;
+    debug a => const A;
+    debug b => const B;
+    let mut _0: bool;
+    let mut _4: bool;
+    let mut _5: &<F as Foo>::T;
+    let mut _6: &A;
+    let mut _7: bool;
+    let mut _8: &<F as Foo>::T;
+    let mut _9: &B;
 
     bb0: {
-        _5 = &_1;                        // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:6
-        _6 = &_2;                        // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:10: 13:11
-        _4 = <<F as Foo>::T as PartialEq<A>>::eq(move _5, move _6) -> [return: bb4, unwind: bb7]; // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:11
-                                         // mir::Constant
-                                         // + span: ui/associated-item/associated-item-two-bounds.rs:13:5: 13:11
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a <F as Foo>::T, &'b A) -> bool {<<F as Foo>::T as PartialEq<A>>::eq}, val: Value(<ZST>) }
+        _5 = &_1;
+        _6 = &_2;
+        _4 = <<F as Foo>::T as PartialEq<A>>::eq(move _5, move _6) -> [return: bb4, unwind: bb7];
     }
 
     bb1: {
-        _0 = const false;                // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:21
-        goto -> bb3;                     // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:21
+        _0 = const false;
+        goto -> bb3;
     }
 
     bb2: {
-        _8 = &_1;                        // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:15: 13:16
-        _9 = &_3;                        // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:20: 13:21
-        _7 = <<F as Foo>::T as PartialEq<B>>::eq(move _8, move _9) -> [return: bb5, unwind: bb7]; // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:15: 13:21
-                                         // mir::Constant
-                                         // + span: ui/associated-item/associated-item-two-bounds.rs:13:15: 13:21
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a <F as Foo>::T, &'b B) -> bool {<<F as Foo>::T as PartialEq<B>>::eq}, val: Value(<ZST>) }
+        _8 = &_1;
+        _9 = &_3;
+        _7 = <<F as Foo>::T as PartialEq<B>>::eq(move _8, move _9) -> [return: bb5, unwind: bb7];
     }
 
     bb3: {
-        drop(_1) -> bb6;                 // scope 0 at ui/associated-item/associated-item-two-bounds.rs:14:1: 14:2
+        drop(_1) -> [return: bb6, unwind continue];
     }
 
     bb4: {
-        switchInt(move _4) -> [0: bb1, otherwise: bb2]; // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:21
+        switchInt(move _4) -> [0: bb1, otherwise: bb2];
     }
 
     bb5: {
-        _0 = move _7;                    // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:21
-        goto -> bb3;                     // scope 0 at ui/associated-item/associated-item-two-bounds.rs:13:5: 13:21
+        _0 = move _7;
+        goto -> bb3;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/associated-item/associated-item-two-bounds.rs:14:2: 14:2
+        return;
     }
 
     bb7 (cleanup): {
-        drop(_1) -> bb8;                 // scope 0 at ui/associated-item/associated-item-two-bounds.rs:14:1: 14:2
+        drop(_1) -> [return: bb8, unwind terminate];
     }
 
     bb8 (cleanup): {
-        resume;                          // scope 0 at ui/associated-item/associated-item-two-bounds.rs:12:1: 14:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/associated-item/associated-item-two-bounds.rs:16:15: 16:15
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/associated-item/associated-item-two-bounds.rs:16:17: 16:17
+        return;
     }
 }

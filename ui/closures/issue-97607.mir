@@ -1,65 +1,44 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn test(_1: F) -> Box<dyn Fn(T) -> U> {
-    debug f => _1;                       // in scope 0 at ui/closures/issue-97607.rs:4:18: 4:19
-    let mut _0: std::boxed::Box<dyn std::ops::Fn(T) -> U>; // return place in scope 0 at ui/closures/issue-97607.rs:4:27: 4:56
-    let mut _2: std::boxed::Box<dyn std::ops::Fn(T) -> U>; // in scope 0 at ui/closures/issue-97607.rs:9:5: 9:28
-    let mut _3: std::boxed::Box<[closure@ui/closures/issue-97607.rs:9:14: 9:22]>; // in scope 0 at ui/closures/issue-97607.rs:9:5: 9:28
-    let mut _4: [closure@ui/closures/issue-97607.rs:9:14: 9:22]; // in scope 0 at ui/closures/issue-97607.rs:9:14: 9:27
+    debug f => _1;
+    let mut _0: std::boxed::Box<dyn std::ops::Fn(T) -> U>;
+    let mut _2: std::boxed::Box<[closure@ui/closures/issue-97607.rs:9:14: 9:22]>;
+    let mut _3: [closure@ui/closures/issue-97607.rs:9:14: 9:22];
 
     bb0: {
-        _4 = [closure@ui/closures/issue-97607.rs:9:14: 9:22] { f: move _1 }; // scope 0 at ui/closures/issue-97607.rs:9:14: 9:27
-                                         // closure
-                                         // + def_id: DefId(0:8 ~ issue_97607[b1cb]::test::{closure#0})
-                                         // + substs: [
-                                         //     T,
-                                         //     F,
-                                         //     U,
-                                         //     i8,
-                                         //     extern "rust-call" fn((T,)) -> U,
-                                         //     (F,),
-                                         // ]
-        _3 = Box::<[closure@ui/closures/issue-97607.rs:9:14: 9:22]>::new(move _4) -> bb1; // scope 0 at ui/closures/issue-97607.rs:9:5: 9:28
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-97607.rs:9:5: 9:13
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn([closure@ui/closures/issue-97607.rs:9:14: 9:22]) -> Box<[closure@ui/closures/issue-97607.rs:9:14: 9:22]> {Box::<[closure@ui/closures/issue-97607.rs:9:14: 9:22]>::new}, val: Value(<ZST>) }
+        _3 = [closure@ui/closures/issue-97607.rs:9:14: 9:22] { f: move _1 };
+        _2 = Box::<[closure@ui/closures/issue-97607.rs:9:14: 9:22]>::new(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn std::ops::Fn(T) -> U> (Pointer(Unsize)); // scope 0 at ui/closures/issue-97607.rs:9:5: 9:28
-        _0 = move _2 as std::boxed::Box<dyn std::ops::Fn(T) -> U> (Pointer(Unsize)); // scope 0 at ui/closures/issue-97607.rs:9:5: 9:28
-        return;                          // scope 0 at ui/closures/issue-97607.rs:10:2: 10:2
+        _0 = move _2 as std::boxed::Box<dyn std::ops::Fn(T) -> U> (PointerCoercion(Unsize));
+        return;
     }
 }
 
 fn test::{closure#0}(_1: &[closure@ui/closures/issue-97607.rs:9:14: 9:22], _2: T) -> U {
-    debug t => _2;                       // in scope 0 at ui/closures/issue-97607.rs:9:20: 9:21
-    debug f => ((*_1).0: F);             // in scope 0 at ui/closures/issue-97607.rs:4:18: 4:19
-    let mut _0: U;                       // return place in scope 0 at ui/closures/issue-97607.rs:9:23: 9:23
-    let mut _3: &F;                      // in scope 0 at ui/closures/issue-97607.rs:9:23: 9:24
-    let mut _4: (T,);                    // in scope 0 at ui/closures/issue-97607.rs:9:23: 9:27
-    let mut _5: T;                       // in scope 0 at ui/closures/issue-97607.rs:9:25: 9:26
+    debug t => _2;
+    debug f => ((*_1).0: F);
+    let mut _0: U;
+    let mut _3: &F;
+    let mut _4: (T,);
 
     bb0: {
-        _3 = &((*_1).0: F);              // scope 0 at ui/closures/issue-97607.rs:9:23: 9:24
-        _5 = move _2;                    // scope 0 at ui/closures/issue-97607.rs:9:25: 9:26
-        _4 = (move _5,);                 // scope 0 at ui/closures/issue-97607.rs:9:23: 9:27
-        _0 = <F as Fn<(T,)>>::call(move _3, move _4) -> bb1; // scope 0 at ui/closures/issue-97607.rs:9:23: 9:27
-                                         // mir::Constant
-                                         // + span: ui/closures/issue-97607.rs:9:23: 9:24
-                                         // + literal: Const { ty: for<'a> extern "rust-call" fn(&'a F, (T,)) -> <F as FnOnce<(T,)>>::Output {<F as Fn<(T,)>>::call}, val: Value(<ZST>) }
+        _3 = &((*_1).0: F);
+        _4 = (move _2,);
+        _0 = <F as Fn<(T,)>>::call(move _3, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/closures/issue-97607.rs:9:27: 9:27
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/closures/issue-97607.rs:12:11: 12:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/closures/issue-97607.rs:12:13: 12:13
+        return;
     }
 }

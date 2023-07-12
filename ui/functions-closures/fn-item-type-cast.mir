@@ -1,201 +1,149 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:8: 7:9
-    let mut _0: isize;                   // return place in scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:21: 7:26
-    let mut _2: isize;                   // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:30
-    let mut _3: (isize, bool);           // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:34
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:30
-        _3 = CheckedMul(_2, const 2_isize); // scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:34
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_isize) -> bb1; // scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:34
-    }
-
-    bb1: {
-        _0 = move (_3.0: isize);         // scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:29: 7:34
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:7:36: 7:36
+        _0 = Mul(_1, const 2_isize);
+        return;
     }
 }
 
 fn bar(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:8: 8:9
-    let mut _0: isize;                   // return place in scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:21: 8:26
-    let mut _2: isize;                   // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:30
-    let mut _3: (isize, bool);           // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:34
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:30
-        _3 = CheckedMul(_2, const 4_isize); // scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:34
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 4_isize) -> bb1; // scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:34
-    }
-
-    bb1: {
-        _0 = move (_3.0: isize);         // scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:29: 8:34
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:8:36: 8:36
+        _0 = Mul(_1, const 4_isize);
+        return;
     }
 }
 
 fn eq(_1: T, _2: T) -> () {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:10: 11:11
-    debug y => _2;                       // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:16: 11:17
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:22: 11:22
+    debug x => _1;
+    debug y => _2;
+    let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:24: 11:25
+        drop(_2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:24: 11:25
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:25: 11:25
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:24: 11:25
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:11:1: 11:25
+        resume;
     }
 }
 
 static TEST: Option<fn(isize) -> isize> = {
-    let mut _0: std::option::Option<fn(isize) -> isize>; // return place in scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:14: 13:28
-    let mut _1: fn(isize) -> isize;      // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:36: 13:49
+    let mut _0: std::option::Option<fn(isize) -> isize>;
+    let mut _1: fn(isize) -> isize;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:36: 13:49
-        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:36: 13:39
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:13:36: 13:39
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _0 = Option::<fn(isize) -> isize>::Some(move _1); // scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:31: 13:50
-        StorageDead(_1);                 // scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:49: 13:50
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:13:1: 13:51
+        StorageLive(_1);
+        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _0 = Option::<fn(isize) -> isize>::Some(move _1);
+        StorageDead(_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-item-type-cast.rs:15:11: 15:11
-    let _1: fn(isize) -> isize;          // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:16:9: 16:10
-    let mut _3: (&isize, &isize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _4: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _5: isize;                       // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:19:16: 19:20
-    let mut _6: fn(isize) -> isize;      // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:19:16: 19:17
-    let mut _7: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _12: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _13: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _15: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _16: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _17: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _18: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _19: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _20: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _21: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let _22: ();                         // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:21:5: 21:37
-    let mut _23: fn(isize) -> isize;     // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:21:8: 21:21
-    let mut _24: fn(isize) -> isize;     // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:21:23: 21:36
+    let mut _0: ();
+    let _1: fn(isize) -> isize;
+    let mut _3: bool;
+    let mut _4: (&isize, &isize);
+    let mut _5: &isize;
+    let _6: isize;
+    let mut _7: fn(isize) -> isize;
+    let mut _8: &isize;
+    let _9: isize;
+    let mut _12: bool;
+    let mut _13: bool;
+    let mut _14: isize;
+    let mut _15: isize;
+    let _17: !;
+    let mut _18: std::option::Option<std::fmt::Arguments<'_>>;
+    let _19: ();
+    let mut _20: fn(isize) -> isize;
+    let mut _21: fn(isize) -> isize;
     scope 1 {
-        debug f => _1;                   // in scope 1 at ui/functions-closures/fn-item-type-cast.rs:16:9: 16:10
-        let _2: fn(isize) -> isize;      // in scope 1 at ui/functions-closures/fn-item-type-cast.rs:18:9: 18:10
+        debug f => _1;
+        let _2: fn(isize) -> isize;
         scope 2 {
-            debug f => _2;               // in scope 2 at ui/functions-closures/fn-item-type-cast.rs:18:9: 18:10
-            let _8: &isize;              // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _9: &isize;              // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _25: &isize;         // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            debug f => _2;
+            let _10: &isize;
+            let _11: &isize;
             scope 3 {
-                debug left_val => _8;    // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _9;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _14: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _10;
+                debug right_val => _11;
+                let _16: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _14;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _16;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 0 at ui/functions-closures/fn-item-type-cast.rs:16:13: 16:16
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:16:13: 16:16
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _2 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 1 at ui/functions-closures/fn-item-type-cast.rs:18:23: 18:26
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:18:23: 18:26
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _6 = _2;                         // scope 2 at ui/functions-closures/fn-item-type-cast.rs:19:16: 19:17
-        _5 = move _6(const 4_isize) -> bb1; // scope 2 at ui/functions-closures/fn-item-type-cast.rs:19:16: 19:20
+        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _3 = const true;
+        switchInt(move _3) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _4 = &_5;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _25 = const _;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &isize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _7 = _25;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _3 = (move _4, move _7);         // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _8 = (_3.0: &isize);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _9 = (_3.1: &isize);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _12 = (*_8);                     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _13 = const 8_isize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _11 = Eq(move _12, move _13);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _10 = Not(move _11);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _10) -> [0: bb3, otherwise: bb2]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _2 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        goto -> bb3;
     }
 
     bb2: {
-        _14 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _16 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _18 = _8;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _17 = _18;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _20 = _9;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _19 = _20;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _21 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _15 = core::panicking::assert_failed::<isize, isize>(move _16, move _17, move _19, move _21); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+        _2 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        goto -> bb3;
     }
 
     bb3: {
-        _23 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 2 at ui/functions-closures/fn-item-type-cast.rs:21:8: 21:11
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:21:8: 21:11
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _24 = bar as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 2 at ui/functions-closures/fn-item-type-cast.rs:21:23: 21:26
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:21:23: 21:26
-                                         // + literal: Const { ty: fn(isize) -> isize {bar}, val: Value(<ZST>) }
-        _22 = eq::<fn(isize) -> isize>(move _23, move _24) -> bb4; // scope 2 at ui/functions-closures/fn-item-type-cast.rs:21:5: 21:37
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-cast.rs:21:5: 21:7
-                                         // + literal: Const { ty: fn(fn(isize) -> isize, fn(isize) -> isize) {eq::<fn(isize) -> isize>}, val: Value(<ZST>) }
+        _7 = _2;
+        _6 = move _7(const 4_isize) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-cast.rs:22:2: 22:2
+        _5 = &_6;
+        _9 = const 8_isize;
+        _8 = &_9;
+        _4 = (move _5, move _8);
+        _10 = (_4.0: &isize);
+        _11 = (_4.1: &isize);
+        _14 = (*_10);
+        _15 = (*_11);
+        _13 = Eq(move _14, move _15);
+        _12 = Not(move _13);
+        switchInt(move _12) -> [0: bb6, otherwise: bb5];
     }
-}
 
-promoted[0] in main: &isize = {
-    let mut _0: &isize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: isize;                   // in scope 0 at ui/functions-closures/fn-item-type-cast.rs:19:22: 19:23
+    bb5: {
+        _16 = core::panicking::AssertKind::Eq;
+        _18 = Option::<Arguments<'_>>::None;
+        _17 = core::panicking::assert_failed::<isize, isize>(move _16, _10, _11, move _18) -> unwind continue;
+    }
 
-    bb0: {
-        _1 = const 8_isize;              // scope 0 at ui/functions-closures/fn-item-type-cast.rs:19:22: 19:23
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    bb6: {
+        _20 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _21 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _19 = eq::<fn(isize) -> isize>(move _20, move _21) -> [return: bb7, unwind continue];
+    }
+
+    bb7: {
+        return;
     }
 }

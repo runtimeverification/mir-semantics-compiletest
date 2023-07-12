@@ -1,175 +1,106 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Greeter::test_func(_1: &Self, _2: &str) -> impl TestTrait<Output = ()> {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:38:18: 38:23
-    debug func => _2;                    // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:38:25: 38:29
-    let mut _0: impl TestTrait<Output = ()>; // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:38:40: 38:67
-    let mut _3: bool;                    // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:13: 40:23
-    let mut _4: bool;                    // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:13: 41:25
+    debug self => _1;
+    debug func => _2;
+    let mut _0: impl TestTrait<Output = ()>;
+    let mut _3: bool;
+    let mut _4: bool;
 
     bb0: {
-        _3 = <str as PartialEq>::eq(_2, const "SayHello") -> bb1; // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:13: 40:23
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:13: 40:23
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:13: 40:23
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _3 = <str as PartialEq>::eq(_2, const "SayHello") -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        switchInt(move _3) -> [0: bb2, otherwise: bb5]; // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:13: 40:23
+        switchInt(move _3) -> [0: bb2, otherwise: bb5];
     }
 
     bb2: {
-        _4 = <str as PartialEq>::eq(_2, const "SayGoodbye") -> bb3; // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:13: 41:25
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:13: 41:25
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a str, &'b str) -> bool {<str as PartialEq>::eq}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:13: 41:25
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _4 = <str as PartialEq>::eq(_2, const "SayGoodbye") -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        switchInt(move _4) -> [0: bb4, otherwise: bb6]; // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:13: 41:25
+        switchInt(move _4) -> [0: bb4, otherwise: bb6];
     }
 
     bb4: {
-        _0 = const GreeterOutput::<TestA, TestB>::SayHello(TestA {{  }}); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:42:18: 42:51
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:42:18: 42:51
-                                         // + literal: Const { ty: GreeterOutput<TestA, TestB>, val: Value(Scalar(0x00)) }
-        goto -> bb7;                     // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:42:50: 42:51
+        _0 = GreeterOutput::<TestA, TestB>::SayHello(const TestA {{  }});
+        goto -> bb7;
     }
 
     bb5: {
-        _0 = const GreeterOutput::<TestA, TestB>::SayHello(TestA {{  }}); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:27: 40:60
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:27: 40:60
-                                         // + literal: Const { ty: GreeterOutput<TestA, TestB>, val: Value(Scalar(0x00)) }
-        goto -> bb7;                     // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:40:59: 40:60
+        _0 = GreeterOutput::<TestA, TestB>::SayHello(const TestA {{  }});
+        goto -> bb7;
     }
 
     bb6: {
-        _0 = const GreeterOutput::<TestA, TestB>::SayGoodbye(TestB {{  }}); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:29: 41:64
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:29: 41:64
-                                         // + literal: Const { ty: GreeterOutput<TestA, TestB>, val: Value(Scalar(0x01)) }
-        goto -> bb7;                     // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:41:63: 41:64
+        _0 = GreeterOutput::<TestA, TestB>::SayGoodbye(const TestB {{  }});
+        goto -> bb7;
     }
 
     bb7: {
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:44:6: 44:6
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:47:11: 47:11
-    let _1: ();                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-    let mut _2: std::fmt::Arguments<'_>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _3: &[&str];                 // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-    let mut _4: &[&str; 1];              // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-    let _5: &[&str; 1];                  // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-    let mut _6: &[core::fmt::ArgumentV1<'_>]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _7: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let _8: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _9: &[core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _10: &[&str; 1];             // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
+    let mut _0: ();
+    let _1: ();
+    let mut _2: std::fmt::Arguments<'_>;
+    let mut _3: &[&str];
+    let _4: &[&str; 1];
+    let _5: [&str; 1];
 
     bb0: {
-        _10 = const _;                   // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-                                         // + literal: Const { ty: &[&str; 1], val: Unevaluated(main, [], Some(promoted[1])) }
-        _5 = _10;                        // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-        _4 = _5;                         // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-        _3 = move _4 as &[&str] (Pointer(Unsize)); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-        _9 = const _;                    // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + literal: Const { ty: &[core::fmt::ArgumentV1<'_>; 0], val: Unevaluated(main, [], Some(promoted[0])) }
-        _8 = _9;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _7 = _8;                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _6 = move _7 as &[core::fmt::ArgumentV1<'_>] (Pointer(Unsize)); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb1; // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&[&'static str], &[core::fmt::ArgumentV1<'_>]) -> Arguments<'_> {Arguments::<'_>::new_v1}, val: Value(<ZST>) }
+        _5 = [const "Hello, world!\n"];
+        _4 = &_5;
+        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = _print(move _2) -> bb2;     // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:62
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:9: 137:27
-                                         // + literal: Const { ty: for<'a> fn(Arguments<'a>) {_print}, val: Value(<ZST>) }
+        _1 = _print(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:49:2: 49:2
-    }
-}
-
-promoted[0] in main: &[core::fmt::ArgumentV1<'_>; 0] = {
-    let mut _0: &[core::fmt::ArgumentV1<'_>; 0]; // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    let mut _1: [core::fmt::ArgumentV1<'_>; 0]; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-
-    bb0: {
-        _1 = [];                         // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/macros.rs:137:28: 137:61
-    }
-}
-
-promoted[1] in main: &[&str; 1] = {
-    let mut _0: &[&str; 1];              // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-    let mut _1: [&str; 1];               // in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-
-    bb0: {
-        _1 = [const "Hello, world!\n"];  // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
-        _0 = &_1;                        // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:48:14: 48:29
+        return;
     }
 }
 
 fn GreeterOutput::SayHello(_1: A) -> GreeterOutput<A, B> {
-    let mut _0: GreeterOutput<A, B>;     // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
+    let mut _0: GreeterOutput<A, B>;
 
     bb0: {
-        _0 = GreeterOutput::<A, B>::SayHello(move _1); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
+        _0 = GreeterOutput::<A, B>::SayHello(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn GreeterOutput::SayHello(_1: A) -> GreeterOutput<A, B> {
-    let mut _0: GreeterOutput<A, B>;     // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
+    let mut _0: GreeterOutput<A, B>;
 
     bb0: {
-        _0 = GreeterOutput::<A, B>::SayHello(move _1); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:33:5: 33:13
+        _0 = GreeterOutput::<A, B>::SayHello(move _1);
+        return;
     }
 }
 
 fn GreeterOutput::SayGoodbye(_1: B) -> GreeterOutput<A, B> {
-    let mut _0: GreeterOutput<A, B>;     // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
+    let mut _0: GreeterOutput<A, B>;
 
     bb0: {
-        _0 = GreeterOutput::<A, B>::SayGoodbye(move _1); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
+        _0 = GreeterOutput::<A, B>::SayGoodbye(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn GreeterOutput::SayGoodbye(_1: B) -> GreeterOutput<A, B> {
-    let mut _0: GreeterOutput<A, B>;     // return place in scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
+    let mut _0: GreeterOutput<A, B>;
 
     bb0: {
-        _0 = GreeterOutput::<A, B>::SayGoodbye(move _1); // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
-        return;                          // scope 0 at ui/impl-trait/in-trait/box-coerce-span-in-default.rs:34:5: 34:15
+        _0 = GreeterOutput::<A, B>::SayGoodbye(move _1);
+        return;
     }
 }

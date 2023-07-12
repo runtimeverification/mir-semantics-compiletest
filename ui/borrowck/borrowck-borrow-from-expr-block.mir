@@ -1,233 +1,221 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn borrow(_1: &isize, _2: F) -> () {
-    debug x => _1;                       // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:3:14: 3:15
-    debug f => _2;                       // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:3:25: 3:26
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:3:31: 3:31
-    let mut _3: F;                       // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:6
-    let mut _4: (&isize,);               // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:9
-    let mut _5: &isize;                  // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:7: 4:8
+    debug x => _1;
+    debug f => _2;
+    let mut _0: ();
+    let mut _3: (&isize,);
 
     bb0: {
-        _3 = move _2;                    // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:6
-        _5 = _1;                         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:7: 4:8
-        _4 = (move _5,);                 // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:9
-        _0 = <F as FnOnce<(&isize,)>>::call_once(move _3, move _4) -> bb1; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:9
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:4:5: 4:6
-                                         // + literal: Const { ty: extern "rust-call" fn(F, (&isize,)) -> <F as FnOnce<(&isize,)>>::Output {<F as FnOnce<(&isize,)>>::call_once}, val: Value(<ZST>) }
+        _3 = (_1,);
+        _0 = <F as FnOnce<(&isize,)>>::call_once(move _2, move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:5:2: 5:2
+        return;
     }
 }
 
 fn test1(_1: &Box<isize>) -> () {
-    debug x => _1;                       // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:7:10: 7:11
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:7:26: 7:26
-    let mut _2: &isize;                  // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:12: 8:26
-    let _3: &isize;                      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:12: 8:26
-    let _4: std::boxed::Box<isize>;      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:14: 8:26
-    let mut _5: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:14: 8:26
-    let mut _6: [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31]; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-    let mut _7: &&std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-    let mut _8: *const isize;            // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:14: 8:26
+    debug x => _1;
+    let mut _0: ();
+    let _2: &isize;
+    let _3: std::boxed::Box<isize>;
+    let mut _4: &std::boxed::Box<isize>;
+    let mut _5: [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31];
+    let mut _6: &&std::boxed::Box<isize>;
+    let mut _7: *const isize;
+    let mut _8: *const ();
+    let mut _9: usize;
+    let mut _10: usize;
+    let mut _11: usize;
+    let mut _12: usize;
+    let mut _13: bool;
 
     bb0: {
-        _5 = _1;                         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:14: 8:26
-        _4 = <Box<isize> as Clone>::clone(move _5) -> bb1; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:14: 8:26
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:8:19: 8:24
-                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) -> Box<isize> {<Box<isize> as Clone>::clone}, val: Value(<ZST>) }
+        _4 = _1;
+        _3 = <Box<isize> as Clone>::clone(move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _8 = (((_4.0: std::ptr::Unique<isize>).0: std::ptr::NonNull<isize>).0: *const isize); // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:12: 8:26
-        _3 = &(*_8);                     // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:12: 8:26
-        _2 = _3;                         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:12: 8:26
-        _7 = &_1;                        // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-        _6 = [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31] { x: move _7 }; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-                                         // closure
-                                         // + def_id: DefId(0:6 ~ borrowck_borrow_from_expr_block[0a51]::test1::{closure#0})
-                                         // + substs: [
-                                         //     i32,
-                                         //     for<'a> extern "rust-call" fn((&'a isize,)),
-                                         //     (&&std::boxed::Box<isize>,),
-                                         // ]
-        _0 = borrow::<[closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31]>(move _2, move _6) -> [return: bb2, unwind: bb4]; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:5: 12:7
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:8:5: 8:11
-                                         // + literal: Const { ty: for<'a> fn(&'a isize, [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31]) {borrow::<[closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31]>}, val: Value(<ZST>) }
+        _7 = (((_3.0: std::ptr::Unique<isize>).0: std::ptr::NonNull<isize>).0: *const isize);
+        _8 = _7 as *const () (PtrToPtr);
+        _9 = _8 as usize (Transmute);
+        _10 = AlignOf(isize);
+        _11 = Sub(_10, const 1_usize);
+        _12 = BitAnd(_9, _11);
+        _13 = Eq(_12, const 0_usize);
+        assert(_13, "misaligned pointer dereference: address must be a multiple of {} but is {}", _10, _9) -> [success: bb6, unwind unreachable];
     }
 
     bb2: {
-        drop(_4) -> bb3;                 // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:13:1: 13:2
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:13:2: 13:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_4) -> bb5;                 // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:13:1: 13:2
+        drop(_3) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:7:1: 13:2
+        resume;
+    }
+
+    bb6: {
+        _2 = &(*_7);
+        _6 = &_1;
+        _5 = [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31] { x: move _6 };
+        _0 = borrow::<[closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31]>(_2, move _5) -> [return: bb2, unwind: bb4];
     }
 }
 
 fn test1::{closure#0}(_1: [closure@ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 8:31], _2: &isize) -> () {
-    debug p => _2;                       // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:29: 8:30
-    debug x => (*(_1.0: &&std::boxed::Box<isize>)); // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:7:10: 7:11
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:32: 8:32
-    let _3: *const isize;                // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:13: 9:16
-    let _4: &isize;                      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-    let mut _5: bool;                    // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
-    let mut _6: bool;                    // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:17: 10:63
-    let mut _7: usize;                   // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:17: 10:31
-    let mut _8: *const isize;            // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:18: 10:21
-    let mut _9: usize;                   // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:35: 10:63
-    let mut _10: *const isize;           // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:36: 10:53
-    let mut _11: !;                      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
-    let mut _12: (&isize, &isize);       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _13: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _14: isize;                      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:11:20: 11:32
-    let mut _15: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _18: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _19: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _20: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _21: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _23: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _24: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _25: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _26: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _27: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _28: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _29: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _30: &&std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-    let mut _31: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-    let mut _32: std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
-    let mut _33: *const isize;           // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:8:28: 12:6
+    debug p => _2;
+    debug x => (*(_1.0: &&std::boxed::Box<isize>));
+    let mut _0: ();
+    let _3: *const isize;
+    let _4: &isize;
+    let mut _5: bool;
+    let mut _6: bool;
+    let mut _7: usize;
+    let mut _8: usize;
+    let mut _9: *const isize;
+    let mut _10: !;
+    let mut _11: (&isize, &isize);
+    let mut _12: &isize;
+    let _13: isize;
+    let mut _16: bool;
+    let mut _17: bool;
+    let mut _18: isize;
+    let mut _19: isize;
+    let _21: !;
+    let mut _22: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _23: &&std::boxed::Box<isize>;
+    let mut _24: &std::boxed::Box<isize>;
+    let mut _25: std::boxed::Box<isize>;
+    let mut _26: *const isize;
+    let mut _33: *const ();
+    let mut _34: usize;
+    let mut _35: usize;
+    let mut _36: usize;
+    let mut _37: usize;
+    let mut _38: bool;
     scope 1 {
-        debug x_a => _3;                 // in scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:13: 9:16
-        let _16: &isize;                 // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _17: &isize;                 // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        debug x_a => _3;
+        let _14: &isize;
+        let _15: &isize;
         scope 2 {
+            let mut _27: *const ();
+            let mut _28: usize;
+            let mut _29: usize;
+            let mut _30: usize;
+            let mut _31: usize;
+            let mut _32: bool;
         }
         scope 3 {
-            debug left_val => _16;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _17;      // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _22: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _14;
+            debug right_val => _15;
+            let _20: core::panicking::AssertKind;
             scope 4 {
-                debug kind => _22;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _20;
             }
         }
     }
 
     bb0: {
-        _30 = deref_copy (_1.0: &&std::boxed::Box<isize>); // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _31 = deref_copy (*_30);         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _32 = deref_copy (*_31);         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _33 = (((_32.0: std::ptr::Unique<isize>).0: std::ptr::NonNull<isize>).0: *const isize); // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _4 = &(*_33);                    // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _3 = &raw const (*_4);           // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:9:19: 9:23
-        _8 = _3;                         // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:18: 10:21
-        _7 = move _8 as usize (PointerExposeAddress); // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:17: 10:31
-        _10 = &raw const (*_2);          // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:36: 10:37
-        _9 = move _10 as usize (PointerExposeAddress); // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:35: 10:63
-        _6 = Ne(move _7, move _9);       // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:17: 10:63
-        _5 = Not(move _6);               // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
-        switchInt(move _5) -> [0: bb2, otherwise: bb1]; // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
+        _23 = deref_copy (_1.0: &&std::boxed::Box<isize>);
+        _24 = deref_copy (*_23);
+        _25 = deref_copy (*_24);
+        _26 = (((_25.0: std::ptr::Unique<isize>).0: std::ptr::NonNull<isize>).0: *const isize);
+        _33 = _26 as *const () (PtrToPtr);
+        _34 = _33 as usize (Transmute);
+        _35 = AlignOf(isize);
+        _36 = Sub(_35, const 1_usize);
+        _37 = BitAnd(_34, _36);
+        _38 = Eq(_37, const 0_usize);
+        assert(_38, "misaligned pointer dereference: address must be a multiple of {} but is {}", _35, _34) -> [success: bb6, unwind unreachable];
     }
 
     bb1: {
-        _11 = core::panicking::panic(const "assertion failed: (x_a as usize) != (p as *const isize as usize)"); // scope 1 at ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:10:9: 10:64
-                                         // + literal: Const { ty: fn(&'static str) -> ! {core::panicking::panic}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: no-location
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _10 = core::panicking::panic(const "assertion failed: (x_a as usize) != (p as *const isize as usize)") -> unwind continue;
     }
 
     bb2: {
-        _14 = (*_3);                     // scope 2 at ui/borrowck/borrowck-borrow-from-expr-block.rs:11:27: 11:31
-        _13 = &_14;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _15 = _2;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _12 = (move _13, move _15);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _16 = (_12.0: &isize);           // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _17 = (_12.1: &isize);           // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _20 = (*_16);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _21 = (*_17);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _19 = Eq(move _20, move _21);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _18 = Not(move _19);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _18) -> [0: bb4, otherwise: bb3]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _27 = _3 as *const () (PtrToPtr);
+        _28 = _27 as usize (Transmute);
+        _29 = AlignOf(isize);
+        _30 = Sub(_29, const 1_usize);
+        _31 = BitAnd(_28, _30);
+        _32 = Eq(_31, const 0_usize);
+        assert(_32, "misaligned pointer dereference: address must be a multiple of {} but is {}", _29, _28) -> [success: bb5, unwind unreachable];
     }
 
     bb3: {
-        _22 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _24 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _26 = _16;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _25 = _26;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _28 = _17;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _27 = _28;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _29 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _23 = core::panicking::assert_failed::<isize, isize>(move _24, move _25, move _27, move _29); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+        _20 = core::panicking::AssertKind::Eq;
+        _22 = Option::<Arguments<'_>>::None;
+        _21 = core::panicking::assert_failed::<isize, isize>(move _20, _14, _15, move _22) -> unwind continue;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:12:6: 12:6
+        return;
+    }
+
+    bb5: {
+        _13 = (*_3);
+        _12 = &_13;
+        _11 = (move _12, _2);
+        _14 = (_11.0: &isize);
+        _15 = (_11.1: &isize);
+        _18 = (*_14);
+        _19 = (*_15);
+        _17 = Eq(move _18, move _19);
+        _16 = Not(move _17);
+        switchInt(move _16) -> [0: bb4, otherwise: bb3];
+    }
+
+    bb6: {
+        _4 = &(*_26);
+        _3 = &raw const (*_4);
+        _7 = _3 as usize (PointerExposeAddress);
+        _9 = &raw const (*_2);
+        _8 = move _9 as usize (PointerExposeAddress);
+        _6 = Ne(move _7, move _8);
+        _5 = Not(move _6);
+        switchInt(move _5) -> [0: bb2, otherwise: bb1];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:15:15: 15:15
-    let _1: ();                          // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:5: 16:25
-    let mut _2: &std::boxed::Box<isize>; // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:11: 16:24
-    let _3: &std::boxed::Box<isize>;     // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:11: 16:24
-    let _4: std::boxed::Box<isize>;      // in scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:12: 16:24
+    let mut _0: ();
+    let _1: ();
+    let _2: &std::boxed::Box<isize>;
+    let _3: std::boxed::Box<isize>;
 
     bb0: {
-        _4 = Box::<isize>::new(const 22_isize) -> bb1; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:12: 16:24
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:16:12: 16:20
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _3 = Box::<isize>::new(const 22_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _3 = &_4;                        // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:11: 16:24
-        _2 = _3;                         // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:11: 16:24
-        _1 = test1(move _2) -> [return: bb2, unwind: bb4]; // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:5: 16:25
-                                         // mir::Constant
-                                         // + span: ui/borrowck/borrowck-borrow-from-expr-block.rs:16:5: 16:10
-                                         // + literal: Const { ty: for<'a> fn(&'a Box<isize>) {test1}, val: Value(<ZST>) }
+        _2 = &_3;
+        _1 = test1(_2) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_4) -> bb3;                 // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:25: 16:26
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:17:2: 17:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_4) -> bb5;                 // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:16:25: 16:26
+        drop(_3) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/borrowck/borrowck-borrow-from-expr-block.rs:15:1: 17:2
+        resume;
     }
 }

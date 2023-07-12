@@ -1,90 +1,90 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/dropck/dropck_traits.rs:17:1: 17:24>::drop(_1: &mut Foo<L>) -> () {
-    debug self => _1;                    // in scope 0 at ui/dropck/dropck_traits.rs:21:13: 21:22
-    let mut _0: ();                      // return place in scope 0 at ui/dropck/dropck_traits.rs:21:24: 21:24
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:21:26: 21:26
+        return;
     }
 }
 
 fn <impl at ui/dropck/dropck_traits.rs:32:1: 32:47>::drop(_1: &mut Foo2<T>) -> () {
-    debug self => _1;                    // in scope 0 at ui/dropck/dropck_traits.rs:36:13: 36:22
-    let mut _0: ();                      // return place in scope 0 at ui/dropck/dropck_traits.rs:36:24: 36:24
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:36:26: 36:26
+        return;
     }
 }
 
 fn <impl at ui/dropck/dropck_traits.rs:50:1: 50:24>::drop(_1: &mut Bar<L>) -> () {
-    debug self => _1;                    // in scope 0 at ui/dropck/dropck_traits.rs:54:13: 54:22
-    let mut _0: ();                      // return place in scope 0 at ui/dropck/dropck_traits.rs:54:24: 54:24
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:54:26: 54:26
+        return;
     }
 }
 
 fn <impl at ui/dropck/dropck_traits.rs:60:1: 60:85>::drop(_1: &mut FnHolder<T>) -> () {
-    debug self => _1;                    // in scope 0 at ui/dropck/dropck_traits.rs:61:13: 61:22
-    let mut _0: ();                      // return place in scope 0 at ui/dropck/dropck_traits.rs:61:24: 61:24
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:61:26: 61:26
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/dropck/dropck_traits.rs:64:11: 64:11
-    let _1: Foo<i32>;                    // in scope 0 at ui/dropck/dropck_traits.rs:65:9: 65:13
+    let mut _0: ();
+    let _1: Foo<i32>;
     scope 1 {
-        debug _foo => _1;                // in scope 1 at ui/dropck/dropck_traits.rs:65:9: 65:13
-        let _2: Bar<i32>;                // in scope 1 at ui/dropck/dropck_traits.rs:67:9: 67:13
+        debug _foo => _1;
+        let _2: Bar<i32>;
         scope 2 {
-            debug _bar => _2;            // in scope 2 at ui/dropck/dropck_traits.rs:67:9: 67:13
+            debug _bar => _2;
         }
     }
 
     bb0: {
-        _1 = Foo::<i32> { l: const 0_i32 }; // scope 0 at ui/dropck/dropck_traits.rs:65:16: 65:28
-        _2 = Bar::<i32> { l: const 0_i32 }; // scope 1 at ui/dropck/dropck_traits.rs:67:16: 67:28
-        drop(_2) -> [return: bb1, unwind: bb3]; // scope 1 at ui/dropck/dropck_traits.rs:68:1: 68:2
+        _1 = Foo::<i32> { l: const 0_i32 };
+        _2 = Bar::<i32> { l: const 0_i32 };
+        drop(_2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/dropck/dropck_traits.rs:68:1: 68:2
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:68:2: 68:2
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/dropck/dropck_traits.rs:68:1: 68:2
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/dropck/dropck_traits.rs:64:1: 68:2
+        resume;
     }
 }
 
 fn FnHolder(_1: T) -> FnHolder<T> {
-    let mut _0: FnHolder<T>;             // return place in scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
+    let mut _0: FnHolder<T>;
 
     bb0: {
-        _0 = FnHolder::<T>(move _1);     // scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
+        _0 = FnHolder::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn FnHolder(_1: T) -> FnHolder<T> {
-    let mut _0: FnHolder<T>;             // return place in scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
+    let mut _0: FnHolder<T>;
 
     bb0: {
-        _0 = FnHolder::<T>(move _1);     // scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
-        return;                          // scope 0 at ui/dropck/dropck_traits.rs:58:1: 58:75
+        _0 = FnHolder::<T>(move _1);
+        return;
     }
 }

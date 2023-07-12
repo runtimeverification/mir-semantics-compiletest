@@ -1,20 +1,25 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/match/expr-match-panic.rs:5:11: 5:11
-    let _1: i32;                         // in scope 0 at ui/match/expr-match-panic.rs:6:9: 6:11
-    let mut _2: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: ();
+    let _1: i32;
+    let mut _2: bool;
+    let mut _3: !;
     scope 1 {
-        debug _x => _1;                  // in scope 1 at ui/match/expr-match-panic.rs:6:9: 6:11
+        debug _x => _1;
     }
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _2 = const true;
+        switchInt(_2) -> [0: bb2, otherwise: bb1];
+    }
+
+    bb1: {
+        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+    }
+
+    bb2: {
+        _1 = const 0_i32;
+        return;
     }
 }

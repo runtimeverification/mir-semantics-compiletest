@@ -1,58 +1,51 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: fn(Vec<u32>) -> usize) -> () {
-    debug f => _1;                       // in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:5:8: 5:9
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:5:34: 5:34
+    debug f => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:5:37: 5:37
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:7:11: 7:11
-    let mut _1: fn(std::vec::Vec<u32>) -> usize; // in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:20
-    let mut _2: [closure@ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:12]; // in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:20
+    let mut _0: ();
+    let mut _1: fn(std::vec::Vec<u32>) -> usize;
 
     bb0: {
-        _1 = move _2 as fn(std::vec::Vec<u32>) -> usize (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:20
-        _0 = foo(move _1) -> bb1;        // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:5: 8:21
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:5: 8:8
-                                         // + literal: Const { ty: fn(fn(Vec<u32>) -> usize) {foo}, val: Value(<ZST>) }
+        _1 = const ZeroSized: [closure@ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:12] as fn(std::vec::Vec<u32>) -> usize (PointerCoercion(ClosureFnPointer(Normal)));
+        _0 = foo(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:9:2: 9:2
+        return;
     }
 }
 
 fn main::{closure#0}(_1: &[closure@ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:12], _2: Vec<u32>) -> usize {
-    debug x => _2;                       // in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:10: 8:11
-    let mut _0: usize;                   // return place in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:13: 8:13
-    let mut _3: &std::vec::Vec<u32>;     // in scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:13: 8:20
+    debug x => _2;
+    let mut _0: usize;
+    let mut _3: &std::vec::Vec<u32>;
 
     bb0: {
-        _3 = &_2;                        // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:13: 8:20
-        _0 = Vec::<u32>::len(move _3) -> [return: bb1, unwind: bb3]; // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:13: 8:20
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:15: 8:18
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<u32>) -> usize {Vec::<u32>::len}, val: Value(<ZST>) }
+        _3 = &_2;
+        _0 = Vec::<u32>::len(move _3) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_2) -> bb2;                 // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:19: 8:20
+        drop(_2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:20: 8:20
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_2) -> bb4;                 // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:19: 8:20
+        drop(_2) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/functions-closures/closure_to_fn_coercion-expected-types.rs:8:9: 8:20
+        resume;
     }
 }

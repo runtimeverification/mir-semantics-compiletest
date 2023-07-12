@@ -1,48 +1,70 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/inline-const/const-match-pat-inference.rs:6:11: 6:11
+    let mut _0: ();
+    let mut _1: u64;
+    let mut _2: bool;
+    let mut _3: bool;
 
     bb0: {
-        return;                          // scope 0 at ui/inline-const/const-match-pat-inference.rs:12:2: 12:2
+        _1 = const 1_u64;
+        switchInt(_1) -> [0: bb4, 1: bb4, otherwise: bb1];
+    }
+
+    bb1: {
+        _2 = Le(const 1_u64, _1);
+        switchInt(move _2) -> [0: bb3, otherwise: bb2];
+    }
+
+    bb2: {
+        _3 = Le(_1, const u64::MAX);
+        switchInt(move _3) -> [0: bb3, otherwise: bb4];
+    }
+
+    bb3: {
+        unreachable;
+    }
+
+    bb4: {
+        return;
     }
 }
 
 main::{constant#0}: u64 = {
-    let mut _0: u64;                     // return place in scope 0 at ui/inline-const/const-match-pat-inference.rs:9:15: 9:24
-    let mut _1: (u64, bool);             // in scope 0 at ui/inline-const/const-match-pat-inference.rs:9:17: 9:22
+    let mut _0: u64;
+    let mut _1: (u64, bool);
 
     bb0: {
-        _1 = CheckedAdd(const 0_u64, const 1_u64); // scope 0 at ui/inline-const/const-match-pat-inference.rs:9:17: 9:22
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 0_u64, const 1_u64) -> bb1; // scope 0 at ui/inline-const/const-match-pat-inference.rs:9:17: 9:22
+        _1 = CheckedAdd(const 0_u64, const 1_u64);
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 0_u64, const 1_u64) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: u64);           // scope 0 at ui/inline-const/const-match-pat-inference.rs:9:17: 9:22
-        return;                          // scope 0 at ui/inline-const/const-match-pat-inference.rs:9:15: 9:24
+        _0 = move (_1.0: u64);
+        return;
     }
 }
 
 main::{constant#1}: u64 = {
-    let mut _0: u64;                     // return place in scope 0 at ui/inline-const/const-match-pat-inference.rs:10:15: 10:24
-    let mut _1: (u64, bool);             // in scope 0 at ui/inline-const/const-match-pat-inference.rs:10:17: 10:22
+    let mut _0: u64;
+    let mut _1: (u64, bool);
 
     bb0: {
-        _1 = CheckedSub(const 2_u64, const 1_u64); // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:17: 10:22
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 2_u64, const 1_u64) -> bb1; // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:17: 10:22
+        _1 = CheckedSub(const 2_u64, const 1_u64);
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 2_u64, const 1_u64) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = move (_1.0: u64);           // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:17: 10:22
-        return;                          // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:15: 10:24
+        _0 = move (_1.0: u64);
+        return;
     }
 }
 
 main::{constant#2}: u64 = {
-    let mut _0: u64;                     // return place in scope 0 at ui/inline-const/const-match-pat-inference.rs:10:35: 10:47
+    let mut _0: u64;
 
     bb0: {
-        _0 = const _;                    // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:37: 10:45
-        return;                          // scope 0 at ui/inline-const/const-match-pat-inference.rs:10:35: 10:47
+        _0 = const _;
+        return;
     }
 }

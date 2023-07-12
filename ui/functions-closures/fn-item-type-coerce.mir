@@ -1,97 +1,69 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:8: 7:9
-    let mut _0: isize;                   // return place in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:21: 7:26
-    let mut _2: isize;                   // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:30
-    let mut _3: (isize, bool);           // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:34
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:30
-        _3 = CheckedMul(_2, const 2_isize); // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:34
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_isize) -> bb1; // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:34
-    }
-
-    bb1: {
-        _0 = move (_3.0: isize);         // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:29: 7:34
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:7:36: 7:36
+        _0 = Mul(_1, const 2_isize);
+        return;
     }
 }
 
 fn bar(_1: isize) -> isize {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:8: 8:9
-    let mut _0: isize;                   // return place in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:21: 8:26
-    let mut _2: isize;                   // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:30
-    let mut _3: (isize, bool);           // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:34
+    debug x => _1;
+    let mut _0: isize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:30
-        _3 = CheckedMul(_2, const 4_isize); // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:34
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 4_isize) -> bb1; // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:34
-    }
-
-    bb1: {
-        _0 = move (_3.0: isize);         // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:29: 8:34
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:8:36: 8:36
+        _0 = Mul(_1, const 4_isize);
+        return;
     }
 }
 
 fn eq(_1: T, _2: T) -> () {
-    debug x => _1;                       // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:10: 11:11
-    debug y => _2;                       // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:16: 11:17
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:22: 11:22
+    debug x => _1;
+    debug y => _2;
+    let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:24: 11:25
+        drop(_2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:24: 11:25
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:25: 11:25
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:24: 11:25
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:11:1: 11:25
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:13:11: 13:11
-    let _1: fn(isize) -> isize;          // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:14:9: 14:10
-    let _2: ();                          // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:16:5: 16:27
-    let mut _3: fn(isize) -> isize;      // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:16:18: 16:21
-    let mut _4: fn(isize) -> isize;      // in scope 0 at ui/functions-closures/fn-item-type-coerce.rs:16:23: 16:26
+    let mut _0: ();
+    let _1: fn(isize) -> isize;
+    let _2: ();
+    let mut _3: fn(isize) -> isize;
+    let mut _4: fn(isize) -> isize;
     scope 1 {
-        debug f => _1;                   // in scope 1 at ui/functions-closures/fn-item-type-coerce.rs:14:9: 14:10
+        debug f => _1;
     }
 
     bb0: {
-        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:14:21: 14:24
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-coerce.rs:14:21: 14:24
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _3 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 1 at ui/functions-closures/fn-item-type-coerce.rs:16:18: 16:21
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-coerce.rs:16:18: 16:21
-                                         // + literal: Const { ty: fn(isize) -> isize {foo}, val: Value(<ZST>) }
-        _4 = bar as fn(isize) -> isize (Pointer(ReifyFnPointer)); // scope 1 at ui/functions-closures/fn-item-type-coerce.rs:16:23: 16:26
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-coerce.rs:16:23: 16:26
-                                         // + literal: Const { ty: fn(isize) -> isize {bar}, val: Value(<ZST>) }
-        _2 = eq::<fn(isize) -> isize>(move _3, move _4) -> bb1; // scope 1 at ui/functions-closures/fn-item-type-coerce.rs:16:5: 16:27
-                                         // mir::Constant
-                                         // + span: ui/functions-closures/fn-item-type-coerce.rs:16:5: 16:17
-                                         // + literal: Const { ty: fn(fn(isize) -> isize, fn(isize) -> isize) {eq::<fn(isize) -> isize>}, val: Value(<ZST>) }
+        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _3 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _4 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _2 = eq::<fn(isize) -> isize>(move _3, move _4) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/functions-closures/fn-item-type-coerce.rs:17:2: 17:2
+        return;
     }
 }

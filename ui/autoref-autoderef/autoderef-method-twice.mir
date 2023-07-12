@@ -1,167 +1,139 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/autoref-autoderef/autoderef-method-twice.rs:8:1: 8:22>::double(_1: Box<usize>) -> usize {
-    debug self => _1;                    // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:15: 9:19
-    let mut _0: usize;                   // return place in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:36: 9:41
-    let mut _2: usize;                   // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:49
-    let mut _3: (usize, bool);           // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:53
-    let mut _4: *const usize;            // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:15: 9:19
+    debug self => _1;
+    let mut _0: usize;
+    let mut _2: usize;
+    let mut _3: *const usize;
+    let mut _4: *const ();
+    let mut _5: usize;
+    let mut _6: usize;
+    let mut _7: usize;
+    let mut _8: usize;
+    let mut _9: bool;
 
     bb0: {
-        _4 = (((_1.0: std::ptr::Unique<usize>).0: std::ptr::NonNull<usize>).0: *const usize); // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:49
-        _2 = (*_4);                      // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:49
-        _3 = CheckedMul(_2, const 2_usize); // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:53
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_usize) -> [success: bb1, unwind: bb3]; // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:53
+        _3 = (((_1.0: std::ptr::Unique<usize>).0: std::ptr::NonNull<usize>).0: *const usize);
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        _0 = move (_3.0: usize);         // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:44: 9:53
-        drop(_1) -> bb2;                 // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:54: 9:55
+        return;
     }
 
     bb2: {
-        return;                          // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:55: 9:55
-    }
-
-    bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:54: 9:55
-    }
-
-    bb4 (cleanup): {
-        resume;                          // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:9:5: 9:55
+        _2 = (*_3);
+        _0 = Mul(move _2, const 2_usize);
+        drop(_1) -> [return: bb1, unwind continue];
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:12:15: 12:15
-    let _1: std::boxed::Box<std::boxed::Box<usize>>; // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:13:9: 13:10
-    let mut _2: std::boxed::Box<usize>;  // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:13:35: 13:46
-    let mut _3: (&usize, &usize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _4: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _5: usize;                       // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:14:16: 14:26
-    let mut _6: std::boxed::Box<usize>;  // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:14:16: 14:26
-    let mut _7: &usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _12: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _13: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _15: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _16: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _17: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _18: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _19: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _20: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _21: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _23: ();                     // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-    let mut _24: ();                     // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-    let mut _25: *const std::boxed::Box<usize>; // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:13:9: 13:10
+    let mut _0: ();
+    let _1: std::boxed::Box<std::boxed::Box<usize>>;
+    let mut _2: std::boxed::Box<usize>;
+    let mut _3: (&usize, &usize);
+    let mut _4: &usize;
+    let _5: usize;
+    let mut _6: std::boxed::Box<usize>;
+    let mut _7: &usize;
+    let _8: usize;
+    let mut _11: bool;
+    let mut _12: bool;
+    let mut _13: usize;
+    let mut _14: usize;
+    let _16: !;
+    let mut _17: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _18: &mut std::boxed::Box<std::boxed::Box<usize>>;
+    let mut _19: ();
+    let mut _20: &mut std::boxed::Box<std::boxed::Box<usize>>;
+    let mut _21: ();
+    let mut _22: *const std::boxed::Box<usize>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/autoref-autoderef/autoderef-method-twice.rs:13:9: 13:10
-        let _8: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _9: &usize;                  // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let mut _22: &usize;             // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+        debug x => _1;
+        let _9: &usize;
+        let _10: &usize;
+        let mut _23: *const ();
+        let mut _24: usize;
+        let mut _25: usize;
+        let mut _26: usize;
+        let mut _27: usize;
+        let mut _28: bool;
         scope 2 {
-            debug left_val => _8;        // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _9;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _14: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _9;
+            debug right_val => _10;
+            let _15: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _14;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _15;
             }
         }
     }
 
     bb0: {
-        _2 = Box::<usize>::new(const 3_usize) -> bb1; // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:13:35: 13:46
-                                         // mir::Constant
-                                         // + span: ui/autoref-autoderef/autoderef-method-twice.rs:13:35: 13:43
-                                         // + user_ty: UserType(2)
-                                         // + literal: Const { ty: fn(usize) -> Box<usize> {Box::<usize>::new}, val: Value(<ZST>) }
+        _2 = Box::<usize>::new(const 3_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Box::<Box<usize>>::new(move _2) -> bb2; // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:13:26: 13:47
-                                         // mir::Constant
-                                         // + span: ui/autoref-autoderef/autoderef-method-twice.rs:13:26: 13:34
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Box<usize>) -> Box<Box<usize>> {Box::<Box<usize>>::new}, val: Value(<ZST>) }
+        _1 = Box::<Box<usize>>::new(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _25 = (((_1.0: std::ptr::Unique<std::boxed::Box<usize>>).0: std::ptr::NonNull<std::boxed::Box<usize>>).0: *const std::boxed::Box<usize>); // scope 1 at ui/autoref-autoderef/autoderef-method-twice.rs:14:16: 14:26
-        _6 = move (*_25);                // scope 1 at ui/autoref-autoderef/autoderef-method-twice.rs:14:16: 14:26
-        _5 = <usize as double>::double(move _6) -> [return: bb3, unwind: bb8]; // scope 1 at ui/autoref-autoderef/autoderef-method-twice.rs:14:16: 14:26
-                                         // mir::Constant
-                                         // + span: ui/autoref-autoderef/autoderef-method-twice.rs:14:18: 14:24
-                                         // + literal: Const { ty: fn(Box<usize>) -> usize {<usize as double>::double}, val: Value(<ZST>) }
+        _22 = (((_1.0: std::ptr::Unique<std::boxed::Box<usize>>).0: std::ptr::NonNull<std::boxed::Box<usize>>).0: *const std::boxed::Box<usize>);
+        _23 = _22 as *const () (PtrToPtr);
+        _24 = _23 as usize (Transmute);
+        _25 = AlignOf(std::boxed::Box<usize>);
+        _26 = Sub(_25, const 1_usize);
+        _27 = BitAnd(_24, _26);
+        _28 = Eq(_27, const 0_usize);
+        assert(_28, "misaligned pointer dereference: address must be a multiple of {} but is {}", _25, _24) -> [success: bb9, unwind unreachable];
     }
 
     bb3: {
-        _4 = &_5;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _22 = const _;                   // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _7 = _22;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _3 = (move _4, move _7);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _8 = (_3.0: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _9 = (_3.1: &usize);             // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _12 = (*_8);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _13 = const 6_usize;             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _11 = Eq(move _12, move _13);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _10 = Not(move _11);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _10) -> [0: bb5, otherwise: bb4]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _4 = &_5;
+        _8 = const 6_usize;
+        _7 = &_8;
+        _3 = (move _4, move _7);
+        _9 = (_3.0: &usize);
+        _10 = (_3.1: &usize);
+        _13 = (*_9);
+        _14 = (*_10);
+        _12 = Eq(move _13, move _14);
+        _11 = Not(move _12);
+        switchInt(move _11) -> [0: bb5, otherwise: bb4];
     }
 
     bb4: {
-        _14 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _16 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _18 = _8;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _17 = _18;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _20 = _9;                        // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _19 = _20;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _21 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _15 = core::panicking::assert_failed::<usize, usize>(move _16, move _17, move _19, move _21) -> bb8; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<usize, usize>}, val: Value(<ZST>) }
+        _15 = core::panicking::AssertKind::Eq;
+        _17 = Option::<Arguments<'_>>::None;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> bb8;
     }
 
     bb5: {
-        _23 = alloc::alloc::box_free::<Box<usize>, std::alloc::Global>(move (_1.0: std::ptr::Unique<std::boxed::Box<usize>>), move (_1.1: std::alloc::Global)) -> bb6; // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-                                         // mir::Constant
-                                         // + span: ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-                                         // + literal: Const { ty: unsafe fn(Unique<Box<usize>>, std::alloc::Global) {alloc::alloc::box_free::<Box<usize>, std::alloc::Global>}, val: Value(<ZST>) }
+        _18 = &mut _1;
+        _19 = <Box<Box<usize>> as Drop>::drop(move _18) -> [return: bb7, unwind continue];
     }
 
-    bb6: {
-        return;                          // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:15:2: 15:2
+    bb6 (cleanup): {
+        resume;
     }
 
-    bb7 (cleanup): {
-        resume;                          // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:12:1: 15:2
+    bb7: {
+        return;
     }
 
     bb8 (cleanup): {
-        _24 = alloc::alloc::box_free::<Box<usize>, std::alloc::Global>(move (_1.0: std::ptr::Unique<std::boxed::Box<usize>>), move (_1.1: std::alloc::Global)) -> bb7; // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-                                         // mir::Constant
-                                         // + span: ui/autoref-autoderef/autoderef-method-twice.rs:15:1: 15:2
-                                         // + literal: Const { ty: unsafe fn(Unique<Box<usize>>, std::alloc::Global) {alloc::alloc::box_free::<Box<usize>, std::alloc::Global>}, val: Value(<ZST>) }
+        _20 = &mut _1;
+        _21 = <Box<Box<usize>> as Drop>::drop(move _20) -> [return: bb6, unwind terminate];
     }
-}
 
-promoted[0] in main: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: usize;                   // in scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:14:28: 14:29
-
-    bb0: {
-        _1 = const 6_usize;              // scope 0 at ui/autoref-autoderef/autoderef-method-twice.rs:14:28: 14:29
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+    bb9: {
+        _6 = move (*_22);
+        _5 = <usize as double>::double(move _6) -> [return: bb3, unwind: bb8];
     }
 }

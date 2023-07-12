@@ -2,17 +2,21 @@
 
 This suite consists of single-file Rust programs taken from [the Rust compiler](https://github.com/rust-lang/rust/tree/master/tests/ui)'s test suite and their [MIR](https://github.com/rust-lang/rfcs/blob/master/text/1211-mir.md) representations generated using `rustc`. Expected outputs are stored in `<test-name>.run.stdout` and `<test-name>.run.stderr`. If these files do not exist, the output should be empty.
 
+Tests are compiled with projects target toolchain, and manual update should not occur unless `kmir` is compatible with that toolchain.
+
 ## How to use tests
 
 Expected result of running a test case is determined by the [header commands](https://rustc-dev-guide.rust-lang.org/tests/ui.html#controlling-passfail-expectations) in the source code.
 
 ## Creating MIR files
 
-By default, all the MIR files are created using the following command:
+By default, all the MIR files are created using the following command (with our preferred flags):
 
 ```sh
-rustc --emit mir -o <output_file.mir> <input_file.rs>
+-rustc --emit mir -C overflow-checks=off -Zmir-enable-passes=-ConstDebugInfo,-PromoteTemps -o <output_file.mir> <input_file.rs>
 ```
+
+Note that due to the `-` preceding `rustc`, this will not block if an error is encountered when attempting to compile a test.
 
 To re-create all the MIR files, run:
 
@@ -21,23 +25,14 @@ make clean          # remove all MIR files under subdirectories
 make ui-mir         # compile all '.rs' files and emit MIR
 ```
 
-Some test cases may require specific Rust editions or additional compiler flags.
-
-| Path | Edition | Flags |
-| ---  | ---     | ----- |
-| ui/numbers-arithmetic/promoted_overflow_opt.rs | default | `-O` |
-| ui/try-block/try-is-identifier-edition2015.rs | 2015 | |
-| ui/test-attrs/*.rs | default | `--test` |
-| ui/closures/2229_closure_analysis/run_pass/*.rs | 2021 | |
-| ui/try-block/*.rs | 2018 | |
-| ui/async-await/*.rs | 2021 | |
-| ui/*.rs | default | |
-
-See [Makefile](./Makefile) for exact recipes.
-
 ### Rust toolchain version
 
 ```
 nightly-x86_64-unknown-linux-gnu (default)
-rustc 1.69.0-nightly (bd39bbb4b 2023-02-07)
+rustc 1.72.0-nightly (839e9a6e1 2023-07-09)
+```
+
+If using `rustup`, this can be installed and made default with
+```
+rustup default nightly-2023-07-09
 ```

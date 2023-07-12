@@ -1,93 +1,109 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-79152-const-array-index.rs:6:16: 6:16
-    let mut _1: [[i32; 1]; 1];           // in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:9: 7:18
-    let mut _2: [i32; 1];                // in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:22: 7:28
-    let _3: usize;                       // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:11: 8:12
-    let _4: usize;                       // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:14: 8:15
+    let mut _0: ();
+    let mut _1: [[i32; 1]; 1];
+    let mut _2: [i32; 1];
+    let _3: usize;
+    let mut _4: usize;
+    let mut _5: bool;
+    let _6: usize;
+    let mut _7: usize;
+    let mut _8: bool;
     scope 1 {
-        debug array => _1;               // in scope 1 at ui/consts/issue-79152-const-array-index.rs:7:9: 7:18
+        debug array => _1;
     }
 
     bb0: {
-        _2 = [const 0_i32; 1];           // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:22: 7:28
-        _1 = [move _2; 1];               // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:21: 7:32
-        _3 = const 0_usize;              // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:11: 8:12
-        _4 = const 0_usize;              // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:14: 8:15
-        _1[_3][_4] = const 1_i32;        // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:20
-        return;                          // scope 0 at ui/consts/issue-79152-const-array-index.rs:9:2: 9:2
+        _2 = [const 0_i32; 1];
+        _1 = [move _2; 1];
+        _3 = const 0_usize;
+        _4 = const 1_usize;
+        _5 = Lt(_3, _4);
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+    }
+
+    bb1: {
+        _6 = const 0_usize;
+        _7 = const 1_usize;
+        _8 = Lt(_6, _7);
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb2, unwind continue];
+    }
+
+    bb2: {
+        _1[_3][_6] = const 1_i32;
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-79152-const-array-index.rs:6:16: 6:16
-    let mut _1: [[i32; 1]; 1];           // in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:9: 7:18
-    let mut _2: [i32; 1];                // in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:22: 7:28
-    let _3: usize;                       // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:11: 8:12
-    let mut _4: usize;                   // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:13
-    let mut _5: bool;                    // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:13
-    let _6: usize;                       // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:14: 8:15
-    let mut _7: usize;                   // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:16
-    let mut _8: bool;                    // in scope 0 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:16
+    let mut _0: ();
+    let mut _1: [[i32; 1]; 1];
+    let mut _2: [i32; 1];
+    let _3: usize;
+    let mut _4: usize;
+    let mut _5: bool;
+    let _6: usize;
+    let mut _7: usize;
+    let mut _8: bool;
     scope 1 {
-        debug array => _1;               // in scope 1 at ui/consts/issue-79152-const-array-index.rs:7:9: 7:18
+        debug array => _1;
     }
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:9: 7:18
-        StorageLive(_2);                 // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:22: 7:28
-        _2 = [const 0_i32; 1];           // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:22: 7:28
-        _1 = [move _2; 1];               // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:21: 7:32
-        StorageDead(_2);                 // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:31: 7:32
-        StorageLive(_3);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:11: 8:12
-        _3 = const 0_usize;              // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:11: 8:12
-        _4 = Len(_1);                    // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:13
-        _5 = Lt(_3, _4);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:13
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1; // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:13
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = [const 0_i32; 1];
+        _1 = [move _2; 1];
+        StorageDead(_2);
+        StorageLive(_3);
+        _3 = const 0_usize;
+        _4 = Len(_1);
+        _5 = Lt(_3, _4);
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
     }
 
     bb1: {
-        StorageLive(_6);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:14: 8:15
-        _6 = const 0_usize;              // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:14: 8:15
-        _7 = Len(_1[_3]);                // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:16
-        _8 = Lt(_6, _7);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:16
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb2; // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:16
+        StorageLive(_6);
+        _6 = const 0_usize;
+        _7 = Len(_1[_3]);
+        _8 = Lt(_6, _7);
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb2, unwind continue];
     }
 
     bb2: {
-        _1[_3][_6] = const 1_i32;        // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:5: 8:20
-        StorageDead(_6);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:20: 8:21
-        StorageDead(_3);                 // scope 1 at ui/consts/issue-79152-const-array-index.rs:8:20: 8:21
-        _0 = const ();                   // scope 0 at ui/consts/issue-79152-const-array-index.rs:6:16: 9:2
-        StorageDead(_1);                 // scope 0 at ui/consts/issue-79152-const-array-index.rs:9:1: 9:2
-        return;                          // scope 0 at ui/consts/issue-79152-const-array-index.rs:9:2: 9:2
+        _1[_3][_6] = const 1_i32;
+        StorageDead(_6);
+        StorageDead(_3);
+        _0 = const ();
+        StorageDead(_1);
+        return;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:26: 7:27
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:26: 7:27
-        return;                          // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:26: 7:27
+        _0 = const 1_usize;
+        return;
     }
 }
 
 foo::{constant#1}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/issue-79152-const-array-index.rs:7:30: 7:31
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 1_usize;              // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:30: 7:31
-        return;                          // scope 0 at ui/consts/issue-79152-const-array-index.rs:7:30: 7:31
+        _0 = const 1_usize;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-79152-const-array-index.rs:11:11: 11:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/issue-79152-const-array-index.rs:11:13: 11:13
+        return;
     }
 }

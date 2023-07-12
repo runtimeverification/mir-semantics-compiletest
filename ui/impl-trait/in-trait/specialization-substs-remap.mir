@@ -1,47 +1,30 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/impl-trait/in-trait/specialization-substs-remap.rs:11:1: 11:18>::bar(_1: &U) -> U {
-    debug self => _1;                    // in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:15:12: 15:17
-    let mut _0: U;                       // return place in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:15:22: 15:23
+    debug self => _1;
+    let mut _0: U;
 
     bb0: {
-        _0 = (*_1);                      // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:16:9: 16:14
-        return;                          // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:17:6: 17:6
+        _0 = (*_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:22:11: 22:11
-    let mut _1: i32;                     // in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-    let mut _2: &i32;                    // in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-    let mut _3: &i32;                    // in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
+    let mut _0: ();
+    let mut _1: i32;
+    let mut _2: &i32;
+    let _3: i32;
     scope 1 {
     }
 
     bb0: {
-        _3 = const _;                    // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-                                         // + literal: Const { ty: &i32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _2 = _3;                         // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-        _1 = <i32 as Foo>::bar(move _2) -> bb1; // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-                                         // mir::Constant
-                                         // + span: ui/impl-trait/in-trait/specialization-substs-remap.rs:23:23: 23:26
-                                         // + literal: Const { ty: for<'a> fn(&'a i32) -> impl Sized {<i32 as Foo>::bar}, val: Value(<ZST>) }
+        _3 = const 1_i32;
+        _2 = &_3;
+        _1 = <i32 as Foo>::bar(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:24:2: 24:2
-    }
-}
-
-promoted[0] in main: &i32 = {
-    let mut _0: &i32;                    // return place in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-    let mut _1: i32;                     // in scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:22
-
-    bb0: {
-        _1 = const 1_i32;                // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:22
-        _0 = &_1;                        // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
-        return;                          // scope 0 at ui/impl-trait/in-trait/specialization-substs-remap.rs:23:18: 23:28
+        return;
     }
 }

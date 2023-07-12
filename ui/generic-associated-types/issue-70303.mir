@@ -1,66 +1,52 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/generic-associated-types/issue-70303.rs:11:1: 11:31>::cursor(_1: &DocumentImpl) -> DocCursorImpl<'_> {
-    debug self => _1;                    // in scope 0 at ui/generic-associated-types/issue-70303.rs:14:15: 14:20
-    let mut _0: DocCursorImpl<'_>;       // return place in scope 0 at ui/generic-associated-types/issue-70303.rs:14:25: 14:41
-    let mut _2: &DocumentImpl;           // in scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
-    let _3: &&DocumentImpl;              // in scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
-    let mut _4: &DocumentImpl;           // in scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
+    debug self => _1;
+    let mut _0: DocCursorImpl<'_>;
+    let _2: &&DocumentImpl;
+    let mut _3: &DocumentImpl;
 
     bb0: {
-        _3 = &_1;                        // scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
-        _4 = deref_copy (*_3);           // scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
-        _2 = _4;                         // scope 0 at ui/generic-associated-types/issue-70303.rs:16:23: 16:28
-        _0 = DocCursorImpl::<'_> { document: move _2 }; // scope 0 at ui/generic-associated-types/issue-70303.rs:15:9: 17:10
-        return;                          // scope 0 at ui/generic-associated-types/issue-70303.rs:18:6: 18:6
+        _2 = &_1;
+        _3 = deref_copy (*_2);
+        _0 = DocCursorImpl::<'_> { document: _3 };
+        return;
     }
 }
 
 fn <impl at ui/generic-associated-types/issue-70303.rs:39:1: 39:35>::from(_1: &Doc) -> Lexer<'_, Cursor> {
-    debug document => _1;                // in scope 0 at ui/generic-associated-types/issue-70303.rs:43:22: 43:30
-    let mut _0: Lexer<'_, Cursor>;       // return place in scope 0 at ui/generic-associated-types/issue-70303.rs:43:44: 43:61
-    let mut _2: Cursor;                  // in scope 0 at ui/generic-associated-types/issue-70303.rs:48:21: 48:38
-    let mut _3: &Doc;                    // in scope 0 at ui/generic-associated-types/issue-70303.rs:48:21: 48:38
-    let mut _4: std::marker::PhantomData<&()>; // in scope 0 at ui/generic-associated-types/issue-70303.rs:49:23: 49:47
+    debug document => _1;
+    let mut _0: Lexer<'_, Cursor>;
+    let mut _2: Cursor;
 
     bb0: {
-        _3 = _1;                         // scope 0 at ui/generic-associated-types/issue-70303.rs:48:21: 48:38
-        _2 = <Doc as Document>::cursor(move _3) -> bb1; // scope 0 at ui/generic-associated-types/issue-70303.rs:48:21: 48:38
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-70303.rs:48:30: 48:36
-                                         // + literal: Const { ty: for<'a> fn(&'a Doc) -> <Doc as Document>::Cursor<'a> {<Doc as Document>::cursor}, val: Value(<ZST>) }
+        _2 = <Doc as Document>::cursor(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = Lexer::<'_, Cursor> { cursor: move _2, _phantom: move _4 }; // scope 0 at ui/generic-associated-types/issue-70303.rs:47:9: 50:10
-        return;                          // scope 0 at ui/generic-associated-types/issue-70303.rs:51:6: 51:6
+        _0 = Lexer::<'_, Cursor> { cursor: move _2, _phantom: const PhantomData::<&()> };
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-70303.rs:54:15: 54:15
-    let _1: DocumentImpl;                // in scope 0 at ui/generic-associated-types/issue-70303.rs:55:9: 55:12
-    let mut _3: &DocumentImpl;           // in scope 0 at ui/generic-associated-types/issue-70303.rs:56:59: 56:63
-    let _4: &DocumentImpl;               // in scope 0 at ui/generic-associated-types/issue-70303.rs:56:59: 56:63
+    let mut _0: ();
+    let _1: DocumentImpl;
+    let _3: &DocumentImpl;
     scope 1 {
-        debug doc => _1;                 // in scope 1 at ui/generic-associated-types/issue-70303.rs:55:9: 55:12
-        let _2: Lexer<'_, DocCursorImpl<'_>>; // in scope 1 at ui/generic-associated-types/issue-70303.rs:56:9: 56:14
+        debug doc => const DocumentImpl {{  }};
+        let _2: Lexer<'_, DocCursorImpl<'_>>;
         scope 2 {
-            debug lexer => _2;           // in scope 2 at ui/generic-associated-types/issue-70303.rs:56:9: 56:14
+            debug lexer => _2;
         }
     }
 
     bb0: {
-        _4 = &_1;                        // scope 1 at ui/generic-associated-types/issue-70303.rs:56:59: 56:63
-        _3 = _4;                         // scope 1 at ui/generic-associated-types/issue-70303.rs:56:59: 56:63
-        _2 = Lexer::<'_, DocCursorImpl<'_>>::from::<DocumentImpl>(move _3) -> bb1; // scope 1 at ui/generic-associated-types/issue-70303.rs:56:47: 56:64
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-70303.rs:56:47: 56:58
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(&DocumentImpl) -> Lexer<'_, DocCursorImpl<'_>> {Lexer::<'_, DocCursorImpl<'_>>::from::<DocumentImpl>}, val: Value(<ZST>) }
+        _3 = &_1;
+        _2 = Lexer::<'_, DocCursorImpl<'_>>::from::<DocumentImpl>(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-70303.rs:57:2: 57:2
+        return;
     }
 }

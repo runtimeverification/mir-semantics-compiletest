@@ -1,44 +1,32 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn diverging_fn() -> ! {
-    let mut _0: !;                       // return place in scope 0 at ui/mir/mir_codegen_calls_diverging.rs:5:22: 5:23
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
+    let mut _0: !;
+    let _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "diverging_fn called"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:38
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:22:9: 22:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_codegen_calls_diverging.rs:6:12: 6:33
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _1 = begin_panic::<&str>(const "diverging_fn called") -> unwind continue;
     }
 }
 
 fn mir() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_codegen_calls_diverging.rs:9:10: 9:10
-    let _1: !;                           // in scope 0 at ui/mir/mir_codegen_calls_diverging.rs:10:5: 10:19
+    let mut _0: ();
+    let _1: !;
 
     bb0: {
-        _1 = diverging_fn();             // scope 0 at ui/mir/mir_codegen_calls_diverging.rs:10:5: 10:19
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_codegen_calls_diverging.rs:10:5: 10:17
-                                         // + literal: Const { ty: fn() -> ! {diverging_fn}, val: Value(<ZST>) }
+        _1 = diverging_fn() -> unwind continue;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_codegen_calls_diverging.rs:13:11: 13:11
-    let _1: ();                          // in scope 0 at ui/mir/mir_codegen_calls_diverging.rs:14:5: 14:10
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = mir() -> bb1;               // scope 0 at ui/mir/mir_codegen_calls_diverging.rs:14:5: 14:10
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_codegen_calls_diverging.rs:14:5: 14:8
-                                         // + literal: Const { ty: fn() {mir}, val: Value(<ZST>) }
+        _1 = mir() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir_codegen_calls_diverging.rs:15:2: 15:2
+        return;
     }
 }

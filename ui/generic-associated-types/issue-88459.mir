@@ -1,51 +1,46 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn f(_1: T, _2: impl Fn(T::Assoc<'_>)) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-88459.rs:7:48: 7:48
+    let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind: bb3]; // scope 0 at ui/generic-associated-types/issue-88459.rs:7:49: 7:50
+        drop(_2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/generic-associated-types/issue-88459.rs:7:49: 7:50
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-88459.rs:7:50: 7:50
+        return;
     }
 
     bb3 (cleanup): {
-        drop(_1) -> bb4;                 // scope 0 at ui/generic-associated-types/issue-88459.rs:7:49: 7:50
+        drop(_1) -> [return: bb4, unwind terminate];
     }
 
     bb4 (cleanup): {
-        resume;                          // scope 0 at ui/generic-associated-types/issue-88459.rs:7:1: 7:50
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-88459.rs:15:11: 15:11
-    let _1: ();                          // in scope 0 at ui/generic-associated-types/issue-88459.rs:16:5: 16:19
-    let mut _2: Type;                    // in scope 0 at ui/generic-associated-types/issue-88459.rs:16:7: 16:11
-    let mut _3: [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]; // in scope 0 at ui/generic-associated-types/issue-88459.rs:16:13: 16:18
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = f::<Type, [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]>(move _2, move _3) -> bb1; // scope 0 at ui/generic-associated-types/issue-88459.rs:16:5: 16:19
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-88459.rs:16:5: 16:6
-                                         // + literal: Const { ty: fn(Type, [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]) {f::<Type, [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]>}, val: Value(<ZST>) }
+        _1 = f::<Type, [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]>(const Type, const ZeroSized: [closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-88459.rs:17:2: 17:2
+        return;
     }
 }
 
 fn main::{closure#0}(_1: &[closure@ui/generic-associated-types/issue-88459.rs:16:13: 16:16], _2: ()) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-88459.rs:16:16: 16:16
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-88459.rs:16:18: 16:18
+        return;
     }
 }

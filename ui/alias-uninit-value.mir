@@ -1,38 +1,31 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn mk_raw_ty(_1: sty, _2: Option<String>) -> RawT {
-    debug st => _1;                      // in scope 0 at ui/alias-uninit-value.rs:16:14: 16:16
-    debug cname => _2;                   // in scope 0 at ui/alias-uninit-value.rs:16:23: 16:28
-    let mut _0: RawT;                    // return place in scope 0 at ui/alias-uninit-value.rs:16:49: 16:53
-    let mut _3: sty;                     // in scope 0 at ui/alias-uninit-value.rs:17:27: 17:29
-    let mut _4: std::option::Option<std::string::String>; // in scope 0 at ui/alias-uninit-value.rs:17:38: 17:43
+    debug st => const sty::ty_nil;
+    debug cname => _2;
+    let mut _0: RawT;
 
     bb0: {
-        _4 = move _2;                    // scope 0 at ui/alias-uninit-value.rs:17:38: 17:43
-        _0 = RawT { struct_: move _3, cname: move _4, hash: const 0_usize }; // scope 0 at ui/alias-uninit-value.rs:17:12: 17:53
-        return;                          // scope 0 at ui/alias-uninit-value.rs:18:2: 18:2
+        _0 = RawT { struct_: const sty::ty_nil, cname: move _2, hash: const 0_usize };
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/alias-uninit-value.rs:20:15: 20:15
-    let _1: RawT;                        // in scope 0 at ui/alias-uninit-value.rs:20:17: 20:55
-    let mut _2: sty;                     // in scope 0 at ui/alias-uninit-value.rs:20:27: 20:38
-    let mut _3: std::option::Option<std::string::String>; // in scope 0 at ui/alias-uninit-value.rs:20:40: 20:54
+    let mut _0: ();
+    let _1: RawT;
+    let mut _2: std::option::Option<std::string::String>;
 
     bb0: {
-        _3 = Option::<String>::None;     // scope 0 at ui/alias-uninit-value.rs:20:40: 20:54
-        _1 = mk_raw_ty(move _2, move _3) -> bb1; // scope 0 at ui/alias-uninit-value.rs:20:17: 20:55
-                                         // mir::Constant
-                                         // + span: ui/alias-uninit-value.rs:20:17: 20:26
-                                         // + literal: Const { ty: fn(sty, Option<String>) -> RawT {mk_raw_ty}, val: Value(<ZST>) }
+        _2 = Option::<String>::None;
+        _1 = mk_raw_ty(const sty::ty_nil, move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        drop(_1) -> bb2;                 // scope 0 at ui/alias-uninit-value.rs:20:55: 20:56
+        drop(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/alias-uninit-value.rs:20:58: 20:58
+        return;
     }
 }

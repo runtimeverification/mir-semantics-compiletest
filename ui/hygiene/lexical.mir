@@ -1,63 +1,54 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn baz::f() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/hygiene/lexical.rs:8:20: 8:20
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/hygiene/lexical.rs:8:22: 8:22
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/hygiene/lexical.rs:21:11: 21:11
-    let _1: ();                          // in scope 0 at ui/hygiene/lexical.rs:12:9: 12:17
-    let mut _2: i32;                     // in scope 0 at ui/hygiene/lexical.rs:13:22: 13:26
-    let mut _3: u32;                     // in scope 0 at ui/hygiene/lexical.rs:16:26: 16:30
+    let mut _0: ();
+    let _1: ();
+    let mut _2: i32;
+    let mut _3: u32;
     scope 1 {
         scope 2 {
         }
     }
 
     bb0: {
-        _1 = baz::f() -> bb1;            // scope 0 at ui/hygiene/lexical.rs:12:9: 12:17
-                                         // mir::Constant
-                                         // + span: ui/hygiene/lexical.rs:12:9: 12:15
-                                         // + literal: Const { ty: fn() {baz::f}, val: Value(<ZST>) }
+        _1 = baz::f() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = main::f() -> bb2;           // scope 0 at ui/hygiene/lexical.rs:13:22: 13:26
-                                         // mir::Constant
-                                         // + span: ui/hygiene/lexical.rs:13:22: 13:24
-                                         // + literal: Const { ty: fn() -> i32 {main::f}, val: Value(<ZST>) }
+        _2 = main::f() -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _3 = main::f() -> bb3;           // scope 1 at ui/hygiene/lexical.rs:16:26: 16:30
-                                         // mir::Constant
-                                         // + span: ui/hygiene/lexical.rs:16:26: 16:28
-                                         // + literal: Const { ty: fn() -> u32 {main::f}, val: Value(<ZST>) }
+        _3 = main::f() -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/hygiene/lexical.rs:24:2: 24:2
+        return;
     }
 }
 
 fn main::f() -> i32 {
-    let mut _0: i32;                     // return place in scope 0 at ui/hygiene/lexical.rs:22:15: 22:18
+    let mut _0: i32;
 
     bb0: {
-        _0 = const 0_i32;                // scope 0 at ui/hygiene/lexical.rs:22:21: 22:22
-        return;                          // scope 0 at ui/hygiene/lexical.rs:22:24: 22:24
+        _0 = const 0_i32;
+        return;
     }
 }
 
 fn main::f() -> u32 {
-    let mut _0: u32;                     // return place in scope 0 at ui/hygiene/lexical.rs:15:24: 15:27
+    let mut _0: u32;
 
     bb0: {
-        _0 = const 0_u32;                // scope 0 at ui/hygiene/lexical.rs:15:30: 15:31
-        return;                          // scope 0 at ui/hygiene/lexical.rs:15:33: 15:33
+        _0 = const 0_u32;
+        return;
     }
 }

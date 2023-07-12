@@ -1,86 +1,83 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 const C: (Demo, Demo) = {
-    let mut _0: (Demo, Demo);            // return place in scope 0 at ui/consts/issue-94371.rs:9:10: 9:22
-    let mut _1: Demo;                    // in scope 0 at ui/consts/issue-94371.rs:10:9: 10:14
-    let _3: ();                          // in scope 0 at ui/consts/issue-94371.rs:12:5: 12:35
-    let mut _4: &mut Demo;               // in scope 0 at ui/consts/issue-94371.rs:12:20: 12:26
-    let mut _5: &mut Demo;               // in scope 0 at ui/consts/issue-94371.rs:12:20: 12:26
-    let mut _6: &mut Demo;               // in scope 0 at ui/consts/issue-94371.rs:12:28: 12:34
-    let mut _7: &mut Demo;               // in scope 0 at ui/consts/issue-94371.rs:12:28: 12:34
-    let mut _8: Demo;                    // in scope 0 at ui/consts/issue-94371.rs:13:6: 13:7
-    let mut _9: Demo;                    // in scope 0 at ui/consts/issue-94371.rs:13:9: 13:10
+    let mut _0: (Demo, Demo);
+    let mut _1: Demo;
+    let _3: ();
+    let mut _4: &mut Demo;
+    let mut _5: &mut Demo;
+    let mut _6: &mut Demo;
+    let mut _7: &mut Demo;
+    let mut _8: Demo;
+    let mut _9: Demo;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/consts/issue-94371.rs:10:9: 10:14
-        let mut _2: Demo;                // in scope 1 at ui/consts/issue-94371.rs:11:9: 11:14
+        debug x => _1;
+        let mut _2: Demo;
         scope 2 {
-            debug y => _2;               // in scope 2 at ui/consts/issue-94371.rs:11:9: 11:14
+            debug y => _2;
         }
     }
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/issue-94371.rs:10:9: 10:14
-        _1 = Demo(const 1_u64, const true, const 3_u64, const 4_u32, const 5_u64, const 6_u64, const 7_u64); // scope 0 at ui/consts/issue-94371.rs:10:17: 10:45
-        StorageLive(_2);                 // scope 1 at ui/consts/issue-94371.rs:11:9: 11:14
-        _2 = Demo(const 10_u64, const false, const 12_u64, const 13_u32, const 14_u64, const 15_u64, const 16_u64); // scope 1 at ui/consts/issue-94371.rs:11:17: 11:52
-        StorageLive(_3);                 // scope 2 at ui/consts/issue-94371.rs:12:5: 12:35
-        StorageLive(_4);                 // scope 2 at ui/consts/issue-94371.rs:12:20: 12:26
-        StorageLive(_5);                 // scope 2 at ui/consts/issue-94371.rs:12:20: 12:26
-        _5 = &mut _1;                    // scope 2 at ui/consts/issue-94371.rs:12:20: 12:26
-        _4 = &mut (*_5);                 // scope 2 at ui/consts/issue-94371.rs:12:20: 12:26
-        StorageLive(_6);                 // scope 2 at ui/consts/issue-94371.rs:12:28: 12:34
-        StorageLive(_7);                 // scope 2 at ui/consts/issue-94371.rs:12:28: 12:34
-        _7 = &mut _2;                    // scope 2 at ui/consts/issue-94371.rs:12:28: 12:34
-        _6 = &mut (*_7);                 // scope 2 at ui/consts/issue-94371.rs:12:28: 12:34
-        ConstEvalCounter;                // scope 2 at ui/consts/issue-94371.rs:12:5: 12:35
-        _3 = std::mem::swap::<Demo>(move _4, move _6) -> bb1; // scope 2 at ui/consts/issue-94371.rs:12:5: 12:35
-                                         // mir::Constant
-                                         // + span: ui/consts/issue-94371.rs:12:5: 12:19
-                                         // + literal: Const { ty: for<'a, 'b> fn(&'a mut Demo, &'b mut Demo) {std::mem::swap::<Demo>}, val: Value(<ZST>) }
+        StorageLive(_1);
+        _1 = Demo(const 1_u64, const true, const 3_u64, const 4_u32, const 5_u64, const 6_u64, const 7_u64);
+        StorageLive(_2);
+        _2 = Demo(const 10_u64, const false, const 12_u64, const 13_u32, const 14_u64, const 15_u64, const 16_u64);
+        StorageLive(_3);
+        StorageLive(_4);
+        StorageLive(_5);
+        _5 = &mut _1;
+        _4 = &mut (*_5);
+        StorageLive(_6);
+        StorageLive(_7);
+        _7 = &mut _2;
+        _6 = &mut (*_7);
+        ConstEvalCounter;
+        _3 = std::mem::swap::<Demo>(move _4, move _6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        StorageDead(_6);                 // scope 2 at ui/consts/issue-94371.rs:12:34: 12:35
-        StorageDead(_4);                 // scope 2 at ui/consts/issue-94371.rs:12:34: 12:35
-        StorageDead(_7);                 // scope 2 at ui/consts/issue-94371.rs:12:35: 12:36
-        StorageDead(_5);                 // scope 2 at ui/consts/issue-94371.rs:12:35: 12:36
-        StorageDead(_3);                 // scope 2 at ui/consts/issue-94371.rs:12:35: 12:36
-        StorageLive(_8);                 // scope 2 at ui/consts/issue-94371.rs:13:6: 13:7
-        _8 = move _1;                    // scope 2 at ui/consts/issue-94371.rs:13:6: 13:7
-        StorageLive(_9);                 // scope 2 at ui/consts/issue-94371.rs:13:9: 13:10
-        _9 = move _2;                    // scope 2 at ui/consts/issue-94371.rs:13:9: 13:10
-        _0 = (move _8, move _9);         // scope 2 at ui/consts/issue-94371.rs:13:5: 13:11
-        StorageDead(_9);                 // scope 2 at ui/consts/issue-94371.rs:13:10: 13:11
-        StorageDead(_8);                 // scope 2 at ui/consts/issue-94371.rs:13:10: 13:11
-        StorageDead(_2);                 // scope 1 at ui/consts/issue-94371.rs:14:1: 14:2
-        StorageDead(_1);                 // scope 0 at ui/consts/issue-94371.rs:14:1: 14:2
-        return;                          // scope 0 at ui/consts/issue-94371.rs:9:1: 14:3
+        StorageDead(_6);
+        StorageDead(_4);
+        StorageDead(_7);
+        StorageDead(_5);
+        StorageDead(_3);
+        StorageLive(_8);
+        _8 = move _1;
+        StorageLive(_9);
+        _9 = move _2;
+        _0 = (move _8, move _9);
+        StorageDead(_9);
+        StorageDead(_8);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/issue-94371.rs:16:11: 16:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/issue-94371.rs:16:13: 16:13
+        return;
     }
 }
 
 fn Demo(_1: u64, _2: bool, _3: u64, _4: u32, _5: u64, _6: u64, _7: u64) -> Demo {
-    let mut _0: Demo;                    // return place in scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
+    let mut _0: Demo;
 
     bb0: {
-        _0 = Demo(move _1, move _2, move _3, move _4, move _5, move _6, move _7); // scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
-        return;                          // scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
+        _0 = Demo(move _1, move _2, move _3, move _4, move _5, move _6, move _7);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Demo(_1: u64, _2: bool, _3: u64, _4: u32, _5: u64, _6: u64, _7: u64) -> Demo {
-    let mut _0: Demo;                    // return place in scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
+    let mut _0: Demo;
 
     bb0: {
-        _0 = Demo(move _1, move _2, move _3, move _4, move _5, move _6, move _7); // scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
-        return;                          // scope 0 at ui/consts/issue-94371.rs:7:1: 7:12
+        _0 = Demo(move _1, move _2, move _3, move _4, move _5, move _6, move _7);
+        return;
     }
 }

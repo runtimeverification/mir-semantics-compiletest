@@ -1,115 +1,75 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
-fn <impl at ui/traits/impl-evaluation-order.rs:16:1: 16:29>::clone(_1: &G<T, U>) -> G<T, U> {
-    debug self => _1;                    // in scope 0 at ui/traits/impl-evaluation-order.rs:17:14: 17:19
-    let mut _0: G<T, U>;                 // return place in scope 0 at ui/traits/impl-evaluation-order.rs:17:24: 17:28
+fn <impl at ui/traits/impl-evaluation-order.rs:18:1: 18:29>::clone(_1: &G<T, U>) -> G<T, U> {
+    debug self => _1;
+    let mut _0: G<T, U>;
 
     bb0: {
-        _0 = G::<T, U>(((*_1).0: *const T), ((*_1).1: *const U)); // scope 0 at ui/traits/impl-evaluation-order.rs:18:9: 18:22
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:19:6: 19:6
+        _0 = G::<T, U>(((*_1).0: *const T), ((*_1).1: *const U));
+        return;
     }
 }
 
 fn is_m(_1: T) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/impl-evaluation-order.rs:33:21: 33:21
+    let mut _0: ();
 
     bb0: {
-        drop(_1) -> bb1;                 // scope 0 at ui/traits/impl-evaluation-order.rs:33:22: 33:23
+        drop(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:33:23: 33:23
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/traits/impl-evaluation-order.rs:35:11: 35:11
-    let _1: G<(), ()>;                   // in scope 0 at ui/traits/impl-evaluation-order.rs:36:9: 36:10
-    let mut _2: *const ();               // in scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-    let _3: &();                         // in scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-    let mut _4: *const ();               // in scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-    let _5: &();                         // in scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-    let _6: ();                          // in scope 0 at ui/traits/impl-evaluation-order.rs:37:5: 37:12
-    let mut _7: G<(), ()>;               // in scope 0 at ui/traits/impl-evaluation-order.rs:37:10: 37:11
-    let _8: ();                          // in scope 0 at ui/traits/impl-evaluation-order.rs:38:5: 38:12
-    let mut _9: G<(), ()>;               // in scope 0 at ui/traits/impl-evaluation-order.rs:38:10: 38:11
-    let mut _10: &();                    // in scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-    let mut _11: &();                    // in scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
+    let mut _0: ();
+    let _1: G<(), ()>;
+    let mut _2: *const ();
+    let _3: &();
+    let _4: ();
+    let mut _5: *const ();
+    let _6: &();
+    let _7: ();
+    let _8: ();
+    let _9: ();
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/traits/impl-evaluation-order.rs:36:9: 36:10
+        debug x => _1;
     }
 
     bb0: {
-        _11 = const _;                   // scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-                                         // mir::Constant
-                                         // + span: ui/traits/impl-evaluation-order.rs:36:15: 36:18
-                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[1])) }
-        _3 = _11;                        // scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-        _2 = &raw const (*_3);           // scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-        _10 = const _;                   // scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-                                         // mir::Constant
-                                         // + span: ui/traits/impl-evaluation-order.rs:36:20: 36:23
-                                         // + literal: Const { ty: &(), val: Unevaluated(main, [], Some(promoted[0])) }
-        _5 = _10;                        // scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-        _4 = &raw const (*_5);           // scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-        _1 = G::<(), ()>(move _2, move _4); // scope 0 at ui/traits/impl-evaluation-order.rs:36:13: 36:24
-        _7 = _1;                         // scope 1 at ui/traits/impl-evaluation-order.rs:37:10: 37:11
-        _6 = std::mem::drop::<G<(), ()>>(move _7) -> bb1; // scope 1 at ui/traits/impl-evaluation-order.rs:37:5: 37:12
-                                         // mir::Constant
-                                         // + span: ui/traits/impl-evaluation-order.rs:37:5: 37:9
-                                         // + literal: Const { ty: fn(G<(), ()>) {std::mem::drop::<G<(), ()>>}, val: Value(<ZST>) }
+        _3 = &_4;
+        _2 = &raw const (*_3);
+        _6 = &_7;
+        _5 = &raw const (*_6);
+        _1 = G::<(), ()>(move _2, move _5);
+        _8 = std::mem::drop::<G<(), ()>>(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _9 = _1;                         // scope 1 at ui/traits/impl-evaluation-order.rs:38:10: 38:11
-        _8 = std::mem::drop::<G<(), ()>>(move _9) -> bb2; // scope 1 at ui/traits/impl-evaluation-order.rs:38:5: 38:12
-                                         // mir::Constant
-                                         // + span: ui/traits/impl-evaluation-order.rs:38:5: 38:9
-                                         // + literal: Const { ty: fn(G<(), ()>) {std::mem::drop::<G<(), ()>>}, val: Value(<ZST>) }
+        _9 = std::mem::drop::<G<(), ()>>(_1) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:39:2: 39:2
-    }
-}
-
-promoted[0] in main: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-    let mut _1: ();                      // in scope 0 at ui/traits/impl-evaluation-order.rs:36:21: 36:23
-
-    bb0: {
-        _1 = ();                         // scope 0 at ui/traits/impl-evaluation-order.rs:36:21: 36:23
-        _0 = &_1;                        // scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:36:20: 36:23
-    }
-}
-
-promoted[1] in main: &() = {
-    let mut _0: &();                     // return place in scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-    let mut _1: ();                      // in scope 0 at ui/traits/impl-evaluation-order.rs:36:16: 36:18
-
-    bb0: {
-        _1 = ();                         // scope 0 at ui/traits/impl-evaluation-order.rs:36:16: 36:18
-        _0 = &_1;                        // scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:36:15: 36:18
+        return;
     }
 }
 
 fn G(_1: *const T, _2: *const U) -> G<T, U> {
-    let mut _0: G<T, U>;                 // return place in scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
+    let mut _0: G<T, U>;
 
     bb0: {
-        _0 = G::<T, U>(move _1, move _2); // scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
+        _0 = G::<T, U>(move _1, move _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn G(_1: *const T, _2: *const U) -> G<T, U> {
-    let mut _0: G<T, U>;                 // return place in scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
+    let mut _0: G<T, U>;
 
     bb0: {
-        _0 = G::<T, U>(move _1, move _2); // scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
-        return;                          // scope 0 at ui/traits/impl-evaluation-order.rs:14:1: 14:15
+        _0 = G::<T, U>(move _1, move _2);
+        return;
     }
 }

@@ -1,36 +1,59 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static mut COUNT: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/array-slice-vec/slice.rs:9:19: 9:24
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 0_usize;              // scope 0 at ui/array-slice-vec/slice.rs:9:27: 9:28
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:9:1: 9:29
+        _0 = const 0_usize;
+        return;
     }
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:13:1: 13:31>::index(_1: &Foo, _2: std::ops::Range<Foo>) -> &Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:15:14: 15:19
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:15:21: 15:26
-    let mut _0: &Foo;                    // return place in scope 0 at ui/array-slice-vec/slice.rs:15:43: 15:47
-    let mut _3: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:16:18: 16:23
-    let mut _4: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:16:18: 16:28
+    debug self => _1;
+    debug index => const std::ops::Range::<Foo> {{ start: Foo, end: Foo }};
+    let mut _0: &Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _3 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:16:18: 16:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:16:18: 16:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _4 = CheckedAdd((*_3), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:16:18: 16:28
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_3), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:16:18: 16:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_3) = move (_4.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:16:18: 16:28
-        _0 = _1;                         // scope 0 at ui/array-slice-vec/slice.rs:17:9: 17:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:18:6: 18:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -39,27 +62,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:20:1: 20:33>::index(_1: &Foo, _2: RangeTo<Foo>) -> &Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:22:14: 22:19
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:22:21: 22:26
-    let mut _0: &Foo;                    // return place in scope 0 at ui/array-slice-vec/slice.rs:22:45: 22:49
-    let mut _3: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:23:18: 23:23
-    let mut _4: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:23:18: 23:28
+    debug self => _1;
+    debug index => const RangeTo::<Foo> {{ end: Foo }};
+    let mut _0: &Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _3 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:23:18: 23:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:23:18: 23:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _4 = CheckedAdd((*_3), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:23:18: 23:28
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_3), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:23:18: 23:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_3) = move (_4.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:23:18: 23:28
-        _0 = _1;                         // scope 0 at ui/array-slice-vec/slice.rs:24:9: 24:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:25:6: 25:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -68,27 +114,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:27:1: 27:35>::index(_1: &Foo, _2: RangeFrom<Foo>) -> &Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:29:14: 29:19
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:29:21: 29:26
-    let mut _0: &Foo;                    // return place in scope 0 at ui/array-slice-vec/slice.rs:29:47: 29:51
-    let mut _3: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:30:18: 30:23
-    let mut _4: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:30:18: 30:28
+    debug self => _1;
+    debug index => const RangeFrom::<Foo> {{ start: Foo }};
+    let mut _0: &Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _3 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:30:18: 30:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:30:18: 30:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _4 = CheckedAdd((*_3), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:30:18: 30:28
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_3), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:30:18: 30:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_3) = move (_4.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:30:18: 30:28
-        _0 = _1;                         // scope 0 at ui/array-slice-vec/slice.rs:31:9: 31:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:32:6: 32:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -97,27 +166,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:34:1: 34:30>::index(_1: &Foo, _2: RangeFull) -> &Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:36:14: 36:19
-    debug _index => _2;                  // in scope 0 at ui/array-slice-vec/slice.rs:36:21: 36:27
-    let mut _0: &Foo;                    // return place in scope 0 at ui/array-slice-vec/slice.rs:36:43: 36:47
-    let mut _3: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:37:18: 37:23
-    let mut _4: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:37:18: 37:28
+    debug self => _1;
+    debug _index => const RangeFull;
+    let mut _0: &Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _3 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:37:18: 37:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:37:18: 37:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _4 = CheckedAdd((*_3), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:37:18: 37:28
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_3), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:37:18: 37:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_3) = move (_4.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:37:18: 37:28
-        _0 = _1;                         // scope 0 at ui/array-slice-vec/slice.rs:38:9: 38:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:39:6: 39:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -126,29 +218,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:42:1: 42:34>::index_mut(_1: &mut Foo, _2: std::ops::Range<Foo>) -> &mut Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:43:18: 43:27
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:43:29: 43:34
-    let mut _0: &mut Foo;                // return place in scope 0 at ui/array-slice-vec/slice.rs:43:51: 43:59
-    let mut _3: &mut Foo;                // in scope 0 at ui/array-slice-vec/slice.rs:45:9: 45:13
-    let mut _4: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:44:18: 44:23
-    let mut _5: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:44:18: 44:28
+    debug self => _1;
+    debug index => const std::ops::Range::<Foo> {{ start: Foo, end: Foo }};
+    let mut _0: &mut Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _4 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:44:18: 44:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:44:18: 44:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _5 = CheckedAdd((*_4), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:44:18: 44:28
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:44:18: 44:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_4) = move (_5.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:44:18: 44:28
-        _3 = &mut (*_1);                 // scope 0 at ui/array-slice-vec/slice.rs:45:9: 45:13
-        _0 = &mut (*_3);                 // scope 0 at ui/array-slice-vec/slice.rs:45:9: 45:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:46:6: 46:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -157,29 +270,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:48:1: 48:36>::index_mut(_1: &mut Foo, _2: RangeTo<Foo>) -> &mut Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:49:18: 49:27
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:49:29: 49:34
-    let mut _0: &mut Foo;                // return place in scope 0 at ui/array-slice-vec/slice.rs:49:53: 49:61
-    let mut _3: &mut Foo;                // in scope 0 at ui/array-slice-vec/slice.rs:51:9: 51:13
-    let mut _4: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:50:18: 50:23
-    let mut _5: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:50:18: 50:28
+    debug self => _1;
+    debug index => const RangeTo::<Foo> {{ end: Foo }};
+    let mut _0: &mut Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _4 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:50:18: 50:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:50:18: 50:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _5 = CheckedAdd((*_4), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:50:18: 50:28
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:50:18: 50:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_4) = move (_5.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:50:18: 50:28
-        _3 = &mut (*_1);                 // scope 0 at ui/array-slice-vec/slice.rs:51:9: 51:13
-        _0 = &mut (*_3);                 // scope 0 at ui/array-slice-vec/slice.rs:51:9: 51:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:52:6: 52:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -188,29 +322,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:54:1: 54:38>::index_mut(_1: &mut Foo, _2: RangeFrom<Foo>) -> &mut Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:55:18: 55:27
-    debug index => _2;                   // in scope 0 at ui/array-slice-vec/slice.rs:55:29: 55:34
-    let mut _0: &mut Foo;                // return place in scope 0 at ui/array-slice-vec/slice.rs:55:55: 55:63
-    let mut _3: &mut Foo;                // in scope 0 at ui/array-slice-vec/slice.rs:57:9: 57:13
-    let mut _4: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:56:18: 56:23
-    let mut _5: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:56:18: 56:28
+    debug self => _1;
+    debug index => const RangeFrom::<Foo> {{ start: Foo }};
+    let mut _0: &mut Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _4 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:56:18: 56:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:56:18: 56:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _5 = CheckedAdd((*_4), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:56:18: 56:28
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:56:18: 56:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_4) = move (_5.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:56:18: 56:28
-        _3 = &mut (*_1);                 // scope 0 at ui/array-slice-vec/slice.rs:57:9: 57:13
-        _0 = &mut (*_3);                 // scope 0 at ui/array-slice-vec/slice.rs:57:9: 57:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:58:6: 58:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -219,29 +374,50 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn <impl at ui/array-slice-vec/slice.rs:60:1: 60:33>::index_mut(_1: &mut Foo, _2: RangeFull) -> &mut Foo {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice.rs:61:18: 61:27
-    debug _index => _2;                  // in scope 0 at ui/array-slice-vec/slice.rs:61:29: 61:35
-    let mut _0: &mut Foo;                // return place in scope 0 at ui/array-slice-vec/slice.rs:61:51: 61:59
-    let mut _3: &mut Foo;                // in scope 0 at ui/array-slice-vec/slice.rs:63:9: 63:13
-    let mut _4: *mut usize;              // in scope 0 at ui/array-slice-vec/slice.rs:62:18: 62:23
-    let mut _5: (usize, bool);           // in scope 0 at ui/array-slice-vec/slice.rs:62:18: 62:28
+    debug self => _1;
+    debug _index => const RangeFull;
+    let mut _0: &mut Foo;
+    let mut _3: *mut usize;
     scope 1 {
+        let mut _4: *const ();
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: usize;
+        let mut _9: bool;
+        let mut _10: *const ();
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: usize;
+        let mut _15: bool;
     }
 
     bb0: {
-        _4 = const {alloc1: *mut usize}; // scope 1 at ui/array-slice-vec/slice.rs:62:18: 62:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:62:18: 62:23
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _5 = CheckedAdd((*_4), const 1_usize); // scope 1 at ui/array-slice-vec/slice.rs:62:18: 62:28
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_4), const 1_usize) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:62:18: 62:28
+        _3 = const {alloc1: *mut usize};
+        _10 = _3 as *const () (PtrToPtr);
+        _11 = _10 as usize (Transmute);
+        _12 = AlignOf(usize);
+        _13 = Sub(_12, const 1_usize);
+        _14 = BitAnd(_11, _13);
+        _15 = Eq(_14, const 0_usize);
+        assert(_15, "misaligned pointer dereference: address must be a multiple of {} but is {}", _12, _11) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_4) = move (_5.0: usize);      // scope 1 at ui/array-slice-vec/slice.rs:62:18: 62:28
-        _3 = &mut (*_1);                 // scope 0 at ui/array-slice-vec/slice.rs:63:9: 63:13
-        _0 = &mut (*_3);                 // scope 0 at ui/array-slice-vec/slice.rs:63:9: 63:13
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:64:6: 64:6
+        (*_3) = Add((*_3), const 1_usize);
+        _0 = _1;
+        return;
+    }
+
+    bb2: {
+        _4 = _3 as *const () (PtrToPtr);
+        _5 = _4 as usize (Transmute);
+        _6 = AlignOf(usize);
+        _7 = Sub(_6, const 1_usize);
+        _8 = BitAnd(_5, _7);
+        _9 = Eq(_8, const 0_usize);
+        assert(_9, "misaligned pointer dereference: address must be a multiple of {} but is {}", _6, _5) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -250,49 +426,37 @@ alloc1 (static: COUNT, size: 8, align: 8) {
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/slice.rs:68:11: 68:11
-    let mut _1: Foo;                     // in scope 0 at ui/array-slice-vec/slice.rs:69:9: 69:14
-    let _2: &Foo;                        // in scope 0 at ui/array-slice-vec/slice.rs:70:14: 70:19
-    let mut _3: &Foo;                    // in scope 0 at ui/array-slice-vec/slice.rs:70:14: 70:15
-    let mut _4: std::ops::RangeFull;     // in scope 0 at ui/array-slice-vec/slice.rs:70:16: 70:18
-    let _5: &Foo;                        // in scope 0 at ui/array-slice-vec/slice.rs:71:14: 71:22
-    let mut _6: &Foo;                    // in scope 0 at ui/array-slice-vec/slice.rs:71:14: 71:15
-    let mut _7: std::ops::RangeFrom<Foo>; // in scope 0 at ui/array-slice-vec/slice.rs:71:16: 71:21
-    let _8: &Foo;                        // in scope 0 at ui/array-slice-vec/slice.rs:72:14: 72:22
-    let mut _9: &Foo;                    // in scope 0 at ui/array-slice-vec/slice.rs:72:14: 72:15
-    let mut _10: std::ops::RangeTo<Foo>; // in scope 0 at ui/array-slice-vec/slice.rs:72:16: 72:21
-    let _11: &Foo;                       // in scope 0 at ui/array-slice-vec/slice.rs:73:14: 73:25
-    let mut _12: &Foo;                   // in scope 0 at ui/array-slice-vec/slice.rs:73:14: 73:15
-    let mut _13: std::ops::Range<Foo>;   // in scope 0 at ui/array-slice-vec/slice.rs:73:16: 73:24
-    let mut _14: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:74:18: 74:23
-    let mut _15: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:74:18: 74:19
-    let mut _16: std::ops::RangeFull;    // in scope 0 at ui/array-slice-vec/slice.rs:74:20: 74:22
-    let mut _17: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:75:18: 75:26
-    let mut _18: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:75:18: 75:19
-    let mut _19: std::ops::RangeFrom<Foo>; // in scope 0 at ui/array-slice-vec/slice.rs:75:20: 75:25
-    let mut _20: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:76:18: 76:26
-    let mut _21: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:76:18: 76:19
-    let mut _22: std::ops::RangeTo<Foo>; // in scope 0 at ui/array-slice-vec/slice.rs:76:20: 76:25
-    let mut _23: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:77:18: 77:29
-    let mut _24: &mut Foo;               // in scope 0 at ui/array-slice-vec/slice.rs:77:18: 77:19
-    let mut _25: std::ops::Range<Foo>;   // in scope 0 at ui/array-slice-vec/slice.rs:77:20: 77:28
-    let mut _26: (&usize, &usize);       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _27: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _28: *mut usize;                 // in scope 0 at ui/array-slice-vec/slice.rs:79:20: 79:25
-    let mut _29: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _32: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _33: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _34: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _35: usize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _37: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _38: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _39: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _40: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _41: &usize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _42: &usize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _43: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let mut _1: Foo;
+    let _2: &Foo;
+    let mut _3: &Foo;
+    let _4: &Foo;
+    let mut _5: &Foo;
+    let _6: &Foo;
+    let mut _7: &Foo;
+    let _8: &Foo;
+    let mut _9: &Foo;
+    let mut _10: &mut Foo;
+    let mut _11: &mut Foo;
+    let mut _12: &mut Foo;
+    let mut _13: &mut Foo;
+    let mut _14: &mut Foo;
+    let mut _15: &mut Foo;
+    let mut _16: &mut Foo;
+    let mut _17: &mut Foo;
+    let mut _18: (&usize, &usize);
+    let mut _19: &usize;
+    let _20: *mut usize;
+    let mut _21: &usize;
+    let _22: usize;
+    let mut _25: bool;
+    let mut _26: bool;
+    let mut _27: usize;
+    let mut _28: usize;
+    let _30: !;
+    let mut _31: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/array-slice-vec/slice.rs:69:9: 69:14
+        debug x => const Foo;
         scope 2 {
             scope 3 {
                 scope 4 {
@@ -302,15 +466,20 @@ fn main() -> () {
                                 scope 8 {
                                     scope 9 {
                                         scope 10 {
-                                            let _30: &usize; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                                            let _31: &usize; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                                            let mut _44: &usize; // in scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+                                            let _23: &usize;
+                                            let _24: &usize;
+                                            let mut _32: *const ();
+                                            let mut _33: usize;
+                                            let mut _34: usize;
+                                            let mut _35: usize;
+                                            let mut _36: usize;
+                                            let mut _37: bool;
                                             scope 11 {
-                                                debug left_val => _30; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                                                debug right_val => _31; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                                                let _36: core::panicking::AssertKind; // in scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                                debug left_val => _23;
+                                                debug right_val => _24;
+                                                let _29: core::panicking::AssertKind;
                                                 scope 12 {
-                                                    debug kind => _36; // in scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                                                    debug kind => _29;
                                                 }
                                             }
                                         }
@@ -325,126 +494,81 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = &_1;                        // scope 1 at ui/array-slice-vec/slice.rs:70:14: 70:15
-        _2 = <Foo as Index<RangeFull>>::index(move _3, move _4) -> bb1; // scope 1 at ui/array-slice-vec/slice.rs:70:14: 70:19
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:70:14: 70:19
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo, RangeFull) -> &'a <Foo as Index<RangeFull>>::Output {<Foo as Index<RangeFull>>::index}, val: Value(<ZST>) }
+        _3 = &_1;
+        _2 = <Foo as Index<RangeFull>>::index(move _3, const RangeFull) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _6 = &_1;                        // scope 2 at ui/array-slice-vec/slice.rs:71:14: 71:15
-        _5 = <Foo as Index<RangeFrom<Foo>>>::index(move _6, move _7) -> bb2; // scope 2 at ui/array-slice-vec/slice.rs:71:14: 71:22
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:71:14: 71:22
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo, RangeFrom<Foo>) -> &'a <Foo as Index<RangeFrom<Foo>>>::Output {<Foo as Index<RangeFrom<Foo>>>::index}, val: Value(<ZST>) }
+        _5 = &_1;
+        _4 = <Foo as Index<RangeFrom<Foo>>>::index(move _5, const RangeFrom::<Foo> {{ start: Foo }}) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = &_1;                        // scope 3 at ui/array-slice-vec/slice.rs:72:14: 72:15
-        _8 = <Foo as Index<RangeTo<Foo>>>::index(move _9, move _10) -> bb3; // scope 3 at ui/array-slice-vec/slice.rs:72:14: 72:22
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:72:14: 72:22
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo, RangeTo<Foo>) -> &'a <Foo as Index<RangeTo<Foo>>>::Output {<Foo as Index<RangeTo<Foo>>>::index}, val: Value(<ZST>) }
+        _7 = &_1;
+        _6 = <Foo as Index<RangeTo<Foo>>>::index(move _7, const RangeTo::<Foo> {{ end: Foo }}) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _12 = &_1;                       // scope 4 at ui/array-slice-vec/slice.rs:73:14: 73:15
-        _11 = <Foo as Index<std::ops::Range<Foo>>>::index(move _12, move _13) -> bb4; // scope 4 at ui/array-slice-vec/slice.rs:73:14: 73:25
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:73:14: 73:25
-                                         // + literal: Const { ty: for<'a> fn(&'a Foo, std::ops::Range<Foo>) -> &'a <Foo as Index<std::ops::Range<Foo>>>::Output {<Foo as Index<std::ops::Range<Foo>>>::index}, val: Value(<ZST>) }
+        _9 = &_1;
+        _8 = <Foo as Index<std::ops::Range<Foo>>>::index(move _9, const std::ops::Range::<Foo> {{ start: Foo, end: Foo }}) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _15 = &mut _1;                   // scope 5 at ui/array-slice-vec/slice.rs:74:18: 74:19
-        _14 = <Foo as IndexMut<RangeFull>>::index_mut(move _15, move _16) -> bb5; // scope 5 at ui/array-slice-vec/slice.rs:74:18: 74:23
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:74:18: 74:23
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo, RangeFull) -> &'a mut <Foo as Index<RangeFull>>::Output {<Foo as IndexMut<RangeFull>>::index_mut}, val: Value(<ZST>) }
+        _11 = &mut _1;
+        _10 = <Foo as IndexMut<RangeFull>>::index_mut(move _11, const RangeFull) -> [return: bb5, unwind continue];
     }
 
     bb5: {
-        _18 = &mut _1;                   // scope 6 at ui/array-slice-vec/slice.rs:75:18: 75:19
-        _17 = <Foo as IndexMut<RangeFrom<Foo>>>::index_mut(move _18, move _19) -> bb6; // scope 6 at ui/array-slice-vec/slice.rs:75:18: 75:26
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:75:18: 75:26
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo, RangeFrom<Foo>) -> &'a mut <Foo as Index<RangeFrom<Foo>>>::Output {<Foo as IndexMut<RangeFrom<Foo>>>::index_mut}, val: Value(<ZST>) }
+        _13 = &mut _1;
+        _12 = <Foo as IndexMut<RangeFrom<Foo>>>::index_mut(move _13, const RangeFrom::<Foo> {{ start: Foo }}) -> [return: bb6, unwind continue];
     }
 
     bb6: {
-        _21 = &mut _1;                   // scope 7 at ui/array-slice-vec/slice.rs:76:18: 76:19
-        _20 = <Foo as IndexMut<RangeTo<Foo>>>::index_mut(move _21, move _22) -> bb7; // scope 7 at ui/array-slice-vec/slice.rs:76:18: 76:26
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:76:18: 76:26
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo, RangeTo<Foo>) -> &'a mut <Foo as Index<RangeTo<Foo>>>::Output {<Foo as IndexMut<RangeTo<Foo>>>::index_mut}, val: Value(<ZST>) }
+        _15 = &mut _1;
+        _14 = <Foo as IndexMut<RangeTo<Foo>>>::index_mut(move _15, const RangeTo::<Foo> {{ end: Foo }}) -> [return: bb7, unwind continue];
     }
 
     bb7: {
-        _24 = &mut _1;                   // scope 8 at ui/array-slice-vec/slice.rs:77:18: 77:19
-        _23 = <Foo as IndexMut<std::ops::Range<Foo>>>::index_mut(move _24, move _25) -> bb8; // scope 8 at ui/array-slice-vec/slice.rs:77:18: 77:29
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:77:18: 77:29
-                                         // + literal: Const { ty: for<'a> fn(&'a mut Foo, std::ops::Range<Foo>) -> &'a mut <Foo as Index<std::ops::Range<Foo>>>::Output {<Foo as IndexMut<std::ops::Range<Foo>>>::index_mut}, val: Value(<ZST>) }
+        _17 = &mut _1;
+        _16 = <Foo as IndexMut<std::ops::Range<Foo>>>::index_mut(move _17, const std::ops::Range::<Foo> {{ start: Foo, end: Foo }}) -> [return: bb8, unwind continue];
     }
 
     bb8: {
-        _28 = const {alloc1: *mut usize}; // scope 10 at ui/array-slice-vec/slice.rs:79:20: 79:25
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice.rs:79:20: 79:25
-                                         // + literal: Const { ty: *mut usize, val: Value(Scalar(alloc1)) }
-        _27 = &(*_28);                   // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _44 = const _;                   // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &usize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _29 = _44;                       // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _26 = (move _27, move _29);      // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _30 = (_26.0: &usize);           // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _31 = (_26.1: &usize);           // scope 10 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _34 = (*_30);                    // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _35 = const 8_usize;             // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _33 = Eq(move _34, move _35);    // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _32 = Not(move _33);             // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _32) -> [0: bb10, otherwise: bb9]; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _20 = const {alloc1: *mut usize};
+        _32 = _20 as *const () (PtrToPtr);
+        _33 = _32 as usize (Transmute);
+        _34 = AlignOf(usize);
+        _35 = Sub(_34, const 1_usize);
+        _36 = BitAnd(_33, _35);
+        _37 = Eq(_36, const 0_usize);
+        assert(_37, "misaligned pointer dereference: address must be a multiple of {} but is {}", _34, _33) -> [success: bb11, unwind unreachable];
     }
 
     bb9: {
-        _36 = const core::panicking::AssertKind::Eq; // scope 11 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: AssertKind, val: Value(Scalar(0x00)) }
-        _38 = const core::panicking::AssertKind::Eq; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: AssertKind, val: Value(Scalar(0x00)) }
-        _40 = _30;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _39 = _40;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _42 = _31;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _41 = _42;                       // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _43 = Option::<Arguments<'_>>::None; // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _37 = assert_failed::<usize, usize>(move _38, move _39, move _41, move _43); // scope 12 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(AssertKind, &'a usize, &'b usize, Option<Arguments<'c>>) -> ! {assert_failed::<usize, usize>}, val: Value(<ZST>) }
+        _29 = core::panicking::AssertKind::Eq;
+        _31 = Option::<Arguments<'_>>::None;
+        _30 = assert_failed::<usize, usize>(move _29, _23, _24, move _31) -> unwind continue;
     }
 
     bb10: {
-        return;                          // scope 0 at ui/array-slice-vec/slice.rs:81:2: 81:2
+        return;
+    }
+
+    bb11: {
+        _19 = &(*_20);
+        _22 = const 8_usize;
+        _21 = &_22;
+        _18 = (move _19, move _21);
+        _23 = (_18.0: &usize);
+        _24 = (_18.1: &usize);
+        _27 = (*_23);
+        _28 = (*_24);
+        _26 = Eq(move _27, move _28);
+        _25 = Not(move _26);
+        switchInt(move _25) -> [0: bb10, otherwise: bb9];
     }
 }
 
 alloc1 (static: COUNT, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
-}
-
-promoted[0] in main: &usize = {
-    let mut _0: &usize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: usize;                   // in scope 0 at ui/array-slice-vec/slice.rs:79:27: 79:28
-
-    bb0: {
-        _1 = const 8_usize;              // scope 0 at ui/array-slice-vec/slice.rs:79:27: 79:28
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
 }

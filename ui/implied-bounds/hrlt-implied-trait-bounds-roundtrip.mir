@@ -1,81 +1,74 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:10:1: 10:27>::id(_1: &T) -> &T {
-    debug value => _1;                   // in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:11:14: 11:19
-    let mut _0: &T;                      // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:11:36: 11:46
+    debug value => _1;
+    let mut _0: &T;
 
     bb0: {
-        _0 = _1;                         // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:12:9: 12:14
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:13:6: 13:6
+        _0 = _1;
+        return;
     }
 }
 
 fn could_use_implied_bounds(_1: Foo<'_>, _2: &T) -> &T {
-    debug x => _2;                       // in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:16:48: 16:49
-    let mut _0: &T;                      // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:16:61: 16:71
-    let mut _3: &T;                      // in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:20:14: 20:15
+    debug x => _2;
+    let mut _0: &T;
 
     bb0: {
-        _3 = _2;                         // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:20:14: 20:15
-        _0 = <() as Trait<'_>>::id::<T>(move _3) -> bb1; // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:20:5: 20:16
-                                         // mir::Constant
-                                         // + span: ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:20:5: 20:13
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(&T) -> &'static T {<() as Trait<'_>>::id::<T>}, val: Value(<ZST>) }
+        _0 = <() as Trait<'_>>::id::<T>(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:21:2: 21:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:23:11: 23:11
-    let _1: for<'a, 'b> fn(Foo<'a>, &'b ()); // in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:9: 24:12
-    let mut _2: [closure@ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:54]; // in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:57
+    let mut _0: ();
+    let _1: for<'a, 'b> fn(Foo<'a>, &'b ());
     scope 1 {
-        debug bar => _1;                 // in scope 1 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:9: 24:12
-        let _3: for<'a> fn(Foo<'a>, &'a ()); // in scope 1 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:29:9: 29:12
+        debug bar => _1;
+        let _2: for<'a> fn(Foo<'a>, &'a ());
         scope 2 {
-            debug bar => _3;             // in scope 2 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:29:9: 29:12
-            let _4: for<'a, 'b> fn(Foo<'a>, &'b ()); // in scope 2 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:34:9: 34:13
+            debug bar => _2;
+            let _3: for<'a, 'b> fn(Foo<'a>, &'b ());
             scope 3 {
-                debug _bar => _4;        // in scope 3 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:34:9: 34:13
+                debug _bar => _3;
             }
         }
     }
 
     bb0: {
-        _1 = move _2 as for<'a, 'b> fn(Foo<'a>, &'b ()) (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:57
-        _3 = _1;                         // scope 1 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:29:44: 29:47
-        _4 = _3;                         // scope 2 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:34:49: 34:52
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:35:2: 35:2
+        _1 = const ZeroSized: [closure@ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:54] as for<'a, 'b> fn(Foo<'a>, &'b ()) (PointerCoercion(ClosureFnPointer(Normal)));
+        _2 = _1;
+        _3 = _2;
+        return;
     }
 }
 
 fn main::{closure#0}(_1: &[closure@ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:54], _2: Foo<'_>, _3: &()) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:55: 24:55
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:57: 24:57
+        return;
     }
 }
 
 fn Foo(_1: &()) -> Foo<'_> {
-    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
+    let mut _0: Foo<'_>;
 
     bb0: {
-        _0 = Foo::<'_>(move _1);         // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
+        _0 = Foo::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: &()) -> Foo<'_> {
-    let mut _0: Foo<'_>;                 // return place in scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
+    let mut _0: Foo<'_>;
 
     bb0: {
-        _0 = Foo::<'_>(move _1);         // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
-        return;                          // scope 0 at ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:2:1: 2:15
+        _0 = Foo::<'_>(move _1);
+        return;
     }
 }

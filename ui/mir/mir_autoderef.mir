@@ -1,247 +1,185 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/mir/mir_autoderef.rs:6:1: 6:21>::deref(_1: &MyRef) -> &u32 {
-    debug self => _1;                    // in scope 0 at ui/mir/mir_autoderef.rs:8:14: 8:19
-    let mut _0: &u32;                    // return place in scope 0 at ui/mir/mir_autoderef.rs:8:31: 8:38
+    debug self => _1;
+    let mut _0: &u32;
 
     bb0: {
-        _0 = &((*_1).0: u32);            // scope 0 at ui/mir/mir_autoderef.rs:8:31: 8:38
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:8:40: 8:40
+        _0 = &((*_1).0: u32);
+        return;
     }
 }
 
 fn <impl at ui/mir/mir_autoderef.rs:11:1: 11:24>::deref_mut(_1: &mut MyRef) -> &mut u32 {
-    debug self => _1;                    // in scope 0 at ui/mir/mir_autoderef.rs:12:18: 12:27
-    let mut _0: &mut u32;                // return place in scope 0 at ui/mir/mir_autoderef.rs:12:32: 12:40
-    let mut _2: &mut u32;                // in scope 0 at ui/mir/mir_autoderef.rs:12:43: 12:54
-    let mut _3: &mut u32;                // in scope 0 at ui/mir/mir_autoderef.rs:12:43: 12:54
+    debug self => _1;
+    let mut _0: &mut u32;
 
     bb0: {
-        _3 = &mut ((*_1).0: u32);        // scope 0 at ui/mir/mir_autoderef.rs:12:43: 12:54
-        _2 = &mut (*_3);                 // scope 0 at ui/mir/mir_autoderef.rs:12:43: 12:54
-        _0 = &mut (*_2);                 // scope 0 at ui/mir/mir_autoderef.rs:12:43: 12:54
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:12:56: 12:56
+        _0 = &mut ((*_1).0: u32);
+        return;
     }
 }
 
 fn deref(_1: &MyRef) -> &u32 {
-    debug x => _1;                       // in scope 0 at ui/mir/mir_autoderef.rs:16:10: 16:11
-    let mut _0: &u32;                    // return place in scope 0 at ui/mir/mir_autoderef.rs:17:5: 17:6
-    let mut _2: &MyRef;                  // in scope 0 at ui/mir/mir_autoderef.rs:17:5: 17:6
+    debug x => _1;
+    let mut _0: &u32;
+    let _2: &u32;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/mir/mir_autoderef.rs:17:5: 17:6
-        _0 = <MyRef as Deref>::deref(move _2) -> bb1; // scope 0 at ui/mir/mir_autoderef.rs:17:5: 17:6
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_autoderef.rs:17:5: 17:6
-                                         // + literal: Const { ty: for<'a> fn(&'a MyRef) -> &'a <MyRef as Deref>::Target {<MyRef as Deref>::deref}, val: Value(<ZST>) }
+        _2 = <MyRef as Deref>::deref(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:18:2: 18:2
+        _0 = _2;
+        return;
     }
 }
 
 fn deref_mut(_1: &mut MyRef) -> &mut u32 {
-    debug x => _1;                       // in scope 0 at ui/mir/mir_autoderef.rs:20:14: 20:15
-    let mut _0: &mut u32;                // return place in scope 0 at ui/mir/mir_autoderef.rs:20:32: 20:40
-    let mut _2: &mut u32;                // in scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-    let mut _3: &mut u32;                // in scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-    let mut _4: &mut MyRef;              // in scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
+    debug x => _1;
+    let mut _0: &mut u32;
+    let mut _2: &mut u32;
 
     bb0: {
-        _4 = &mut (*_1);                 // scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-        _3 = <MyRef as DerefMut>::deref_mut(move _4) -> bb1; // scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_autoderef.rs:21:5: 21:6
-                                         // + literal: Const { ty: for<'a> fn(&'a mut MyRef) -> &'a mut <MyRef as Deref>::Target {<MyRef as DerefMut>::deref_mut}, val: Value(<ZST>) }
+        _2 = <MyRef as DerefMut>::deref_mut(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _2 = &mut (*_3);                 // scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-        _0 = &mut (*_2);                 // scope 0 at ui/mir/mir_autoderef.rs:21:5: 21:6
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:22:2: 22:2
+        _0 = _2;
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir_autoderef.rs:24:11: 24:11
-    let mut _1: MyRef;                   // in scope 0 at ui/mir/mir_autoderef.rs:25:9: 25:14
-    let mut _2: (&*const u32, &*const u32); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _3: &*const u32;             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _4: *const u32;                  // in scope 0 at ui/mir/mir_autoderef.rs:26:16: 26:37
-    let _5: &u32;                        // in scope 0 at ui/mir/mir_autoderef.rs:26:16: 26:25
-    let mut _6: &MyRef;                  // in scope 0 at ui/mir/mir_autoderef.rs:26:22: 26:24
-    let _7: &MyRef;                      // in scope 0 at ui/mir/mir_autoderef.rs:26:22: 26:24
-    let mut _8: &*const u32;             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _9: *const u32;                  // in scope 0 at ui/mir/mir_autoderef.rs:26:39: 26:55
-    let _10: &u32;                       // in scope 0 at ui/mir/mir_autoderef.rs:26:39: 26:43
-    let mut _13: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _15: *const u32;             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _16: *const u32;             // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _18: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _19: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _20: &*const u32;            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _21: &*const u32;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _22: &*const u32;            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _23: &*const u32;                // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _24: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-    let mut _25: (&*mut u32, &*mut u32); // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _26: &*mut u32;              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _27: *mut u32;                   // in scope 0 at ui/mir/mir_autoderef.rs:27:16: 27:43
-    let mut _28: &mut u32;               // in scope 0 at ui/mir/mir_autoderef.rs:27:16: 27:33
-    let mut _29: &mut MyRef;             // in scope 0 at ui/mir/mir_autoderef.rs:27:26: 27:32
-    let mut _30: &mut MyRef;             // in scope 0 at ui/mir/mir_autoderef.rs:27:26: 27:32
-    let mut _31: &*mut u32;              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let _32: *mut u32;                   // in scope 0 at ui/mir/mir_autoderef.rs:27:45: 27:63
-    let mut _33: &mut u32;               // in scope 0 at ui/mir/mir_autoderef.rs:27:45: 27:53
-    let mut _36: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _37: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _38: *mut u32;               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _39: *mut u32;               // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _41: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _42: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _43: &*mut u32;              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _44: &*mut u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _45: &*mut u32;              // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _46: &*mut u32;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _47: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let mut _1: MyRef;
+    let mut _2: (&*const u32, &*const u32);
+    let mut _3: &*const u32;
+    let _4: *const u32;
+    let _5: &u32;
+    let _6: &MyRef;
+    let mut _7: &*const u32;
+    let _8: *const u32;
+    let _9: &u32;
+    let mut _12: bool;
+    let mut _13: bool;
+    let mut _14: *const u32;
+    let mut _15: *const u32;
+    let _17: !;
+    let mut _18: std::option::Option<std::fmt::Arguments<'_>>;
+    let mut _19: (&*mut u32, &*mut u32);
+    let mut _20: &*mut u32;
+    let _21: *mut u32;
+    let mut _22: &mut u32;
+    let mut _23: &mut MyRef;
+    let mut _24: &*mut u32;
+    let _25: *mut u32;
+    let mut _26: &mut u32;
+    let mut _29: bool;
+    let mut _30: bool;
+    let mut _31: *mut u32;
+    let mut _32: *mut u32;
+    let _34: !;
+    let mut _35: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug r => _1;                   // in scope 1 at ui/mir/mir_autoderef.rs:25:9: 25:14
-        let _11: &*const u32;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _12: &*const u32;            // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        let _34: &*mut u32;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        let _35: &*mut u32;              // in scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
+        debug r => _1;
+        let _10: &*const u32;
+        let _11: &*const u32;
+        let _27: &*mut u32;
+        let _28: &*mut u32;
         scope 2 {
-            debug left_val => _11;       // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _12;      // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _17: core::panicking::AssertKind; // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _10;
+            debug right_val => _11;
+            let _16: core::panicking::AssertKind;
             scope 3 {
-                debug kind => _17;       // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _16;
             }
         }
         scope 4 {
-            debug left_val => _34;       // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            debug right_val => _35;      // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let _40: core::panicking::AssertKind; // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+            debug left_val => _27;
+            debug right_val => _28;
+            let _33: core::panicking::AssertKind;
             scope 5 {
-                debug kind => _40;       // in scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug kind => _33;
             }
         }
     }
 
     bb0: {
-        _1 = MyRef(const 2_u32);         // scope 0 at ui/mir/mir_autoderef.rs:25:17: 25:25
-        _7 = &_1;                        // scope 1 at ui/mir/mir_autoderef.rs:26:22: 26:24
-        _6 = _7;                         // scope 1 at ui/mir/mir_autoderef.rs:26:22: 26:24
-        _5 = deref(move _6) -> bb1;      // scope 1 at ui/mir/mir_autoderef.rs:26:16: 26:25
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_autoderef.rs:26:16: 26:21
-                                         // + literal: Const { ty: for<'a> fn(&'a MyRef) -> &'a u32 {deref}, val: Value(<ZST>) }
+        _1 = MyRef(const 2_u32);
+        _6 = &_1;
+        _5 = deref(_6) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = &raw const (*_5);           // scope 1 at ui/mir/mir_autoderef.rs:26:16: 26:25
-        _3 = &_4;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _10 = &(_1.0: u32);              // scope 1 at ui/mir/mir_autoderef.rs:26:39: 26:43
-        _9 = &raw const (*_10);          // scope 1 at ui/mir/mir_autoderef.rs:26:39: 26:43
-        _8 = &_9;                        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _2 = (move _3, move _8);         // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _11 = (_2.0: &*const u32);       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _12 = (_2.1: &*const u32);       // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _15 = (*_11);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _16 = (*_12);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _14 = Eq(move _15, move _16);    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _13 = Not(move _14);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _13) -> [0: bb3, otherwise: bb2]; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _4 = &raw const (*_5);
+        _3 = &_4;
+        _9 = &(_1.0: u32);
+        _8 = &raw const (*_9);
+        _7 = &_8;
+        _2 = (move _3, move _7);
+        _10 = (_2.0: &*const u32);
+        _11 = (_2.1: &*const u32);
+        _14 = (*_10);
+        _15 = (*_11);
+        _13 = Eq(move _14, move _15);
+        _12 = Not(move _13);
+        switchInt(move _12) -> [0: bb3, otherwise: bb2];
     }
 
     bb2: {
-        _17 = const core::panicking::AssertKind::Eq; // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _19 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _21 = _11;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _20 = _21;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _23 = _12;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _22 = _23;                       // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _24 = Option::<Arguments<'_>>::None; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _18 = core::panicking::assert_failed::<*const u32, *const u32>(move _19, move _20, move _22, move _24); // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a *const u32, &'b *const u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<*const u32, *const u32>}, val: Value(<ZST>) }
+        _16 = core::panicking::AssertKind::Eq;
+        _18 = Option::<Arguments<'_>>::None;
+        _17 = core::panicking::assert_failed::<*const u32, *const u32>(move _16, _10, _11, move _18) -> unwind continue;
     }
 
     bb3: {
-        _30 = &mut _1;                   // scope 1 at ui/mir/mir_autoderef.rs:27:26: 27:32
-        _29 = &mut (*_30);               // scope 1 at ui/mir/mir_autoderef.rs:27:26: 27:32
-        _28 = deref_mut(move _29) -> bb4; // scope 1 at ui/mir/mir_autoderef.rs:27:16: 27:33
-                                         // mir::Constant
-                                         // + span: ui/mir/mir_autoderef.rs:27:16: 27:25
-                                         // + literal: Const { ty: for<'a> fn(&'a mut MyRef) -> &'a mut u32 {deref_mut}, val: Value(<ZST>) }
+        _23 = &mut _1;
+        _22 = deref_mut(_23) -> [return: bb4, unwind continue];
     }
 
     bb4: {
-        _27 = &raw mut (*_28);           // scope 1 at ui/mir/mir_autoderef.rs:27:16: 27:33
-        _26 = &_27;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _33 = &mut (_1.0: u32);          // scope 1 at ui/mir/mir_autoderef.rs:27:45: 27:53
-        _32 = &raw mut (*_33);           // scope 1 at ui/mir/mir_autoderef.rs:27:45: 27:53
-        _31 = &_32;                      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _25 = (move _26, move _31);      // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _34 = (_25.0: &*mut u32);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _35 = (_25.1: &*mut u32);        // scope 1 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _38 = (*_34);                    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _39 = (*_35);                    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _37 = Eq(move _38, move _39);    // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _36 = Not(move _37);             // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _36) -> [0: bb6, otherwise: bb5]; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _21 = &raw mut (*_22);
+        _20 = &_21;
+        _26 = &mut (_1.0: u32);
+        _25 = &raw mut (*_26);
+        _24 = &_25;
+        _19 = (move _20, move _24);
+        _27 = (_19.0: &*mut u32);
+        _28 = (_19.1: &*mut u32);
+        _31 = (*_27);
+        _32 = (*_28);
+        _30 = Eq(move _31, move _32);
+        _29 = Not(move _30);
+        switchInt(move _29) -> [0: bb6, otherwise: bb5];
     }
 
     bb5: {
-        _40 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _42 = const core::panicking::AssertKind::Eq; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _44 = _34;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _43 = _44;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _46 = _35;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _45 = _46;                       // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _47 = Option::<Arguments<'_>>::None; // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _41 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _42, move _43, move _45, move _47); // scope 5 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a *mut u32, &'b *mut u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<*mut u32, *mut u32>}, val: Value(<ZST>) }
+        _33 = core::panicking::AssertKind::Eq;
+        _35 = Option::<Arguments<'_>>::None;
+        _34 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _33, _27, _28, move _35) -> unwind continue;
     }
 
     bb6: {
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:28:2: 28:2
+        return;
     }
 }
 
 fn MyRef(_1: u32) -> MyRef {
-    let mut _0: MyRef;                   // return place in scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
+    let mut _0: MyRef;
 
     bb0: {
-        _0 = MyRef(move _1);             // scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
+        _0 = MyRef(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn MyRef(_1: u32) -> MyRef {
-    let mut _0: MyRef;                   // return place in scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
+    let mut _0: MyRef;
 
     bb0: {
-        _0 = MyRef(move _1);             // scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
-        return;                          // scope 0 at ui/mir/mir_autoderef.rs:4:1: 4:17
+        _0 = MyRef(move _1);
+        return;
     }
 }

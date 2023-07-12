@@ -1,133 +1,129 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/array-to-slice-cast.rs:3:11: 3:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:3:13: 3:13
+        return;
     }
 }
 
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/array-to-slice-cast.rs:5:16: 5:16
-    let _1: [i32; 5];                    // in scope 0 at ui/consts/array-to-slice-cast.rs:6:9: 6:10
-    let mut _3: &[i32; 5];               // in scope 0 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-    let _4: &[i32; 5];                   // in scope 0 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-    let mut _6: [u8; 3];                 // in scope 0 at ui/consts/array-to-slice-cast.rs:11:37: 11:46
-    let mut _8: &foo::Foo<[u8; 3]>;      // in scope 0 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-    let _9: &foo::Foo<[u8; 3]>;          // in scope 0 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
+    let mut _0: ();
+    let _1: [i32; 5];
+    let _3: &[i32; 5];
+    let mut _5: [u8; 3];
+    let _7: &foo::Foo<[u8; 3]>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/consts/array-to-slice-cast.rs:6:9: 6:10
-        let _2: &[i32];                  // in scope 1 at ui/consts/array-to-slice-cast.rs:7:9: 7:10
+        debug x => _1;
+        let _2: &[i32];
         scope 2 {
-            debug y => _2;               // in scope 2 at ui/consts/array-to-slice-cast.rs:7:9: 7:10
-            let _5: foo::Foo<[u8; 3]>;   // in scope 2 at ui/consts/array-to-slice-cast.rs:11:9: 11:10
+            debug y => _2;
+            let _4: foo::Foo<[u8; 3]>;
             scope 3 {
-                debug x => _5;           // in scope 3 at ui/consts/array-to-slice-cast.rs:11:9: 11:10
-                let _7: &foo::Foo<[u8]>; // in scope 3 at ui/consts/array-to-slice-cast.rs:12:9: 12:10
+                debug x => _4;
+                let _6: &foo::Foo<[u8]>;
                 scope 4 {
-                    debug y => _7;       // in scope 4 at ui/consts/array-to-slice-cast.rs:12:9: 12:10
+                    debug y => _6;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32]; // scope 0 at ui/consts/array-to-slice-cast.rs:6:13: 6:28
-        _4 = &_1;                        // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _3 = _4;                         // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _2 = move _3 as &[i32] (Pointer(Unsize)); // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _6 = [const 1_u8, const 2_u8, const 3_u8]; // scope 2 at ui/consts/array-to-slice-cast.rs:11:37: 11:46
-        _5 = Foo::<[u8; 3]>(const true, move _6); // scope 2 at ui/consts/array-to-slice-cast.rs:11:27: 11:47
-        _9 = &_5;                        // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        _8 = _9;                         // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        _7 = move _8 as &foo::Foo<[u8]> (Pointer(Unsize)); // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:13:2: 13:2
+        _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32];
+        _3 = &_1;
+        _2 = _3 as &[i32] (PointerCoercion(Unsize));
+        _5 = [const 1_u8, const 2_u8, const 3_u8];
+        _4 = Foo::<[u8; 3]>(const true, move _5);
+        _7 = &_4;
+        _6 = _7 as &foo::Foo<[u8]> (PointerCoercion(Unsize));
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/array-to-slice-cast.rs:5:16: 5:16
-    let _1: [i32; 5];                    // in scope 0 at ui/consts/array-to-slice-cast.rs:6:9: 6:10
-    let mut _3: &[i32; 5];               // in scope 0 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-    let _4: &[i32; 5];                   // in scope 0 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-    let mut _6: [u8; 3];                 // in scope 0 at ui/consts/array-to-slice-cast.rs:11:37: 11:46
-    let mut _8: &foo::Foo<[u8; 3]>;      // in scope 0 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-    let _9: &foo::Foo<[u8; 3]>;          // in scope 0 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
+    let mut _0: ();
+    let _1: [i32; 5];
+    let mut _3: &[i32; 5];
+    let _4: &[i32; 5];
+    let mut _6: [u8; 3];
+    let mut _8: &foo::Foo<[u8; 3]>;
+    let _9: &foo::Foo<[u8; 3]>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/consts/array-to-slice-cast.rs:6:9: 6:10
-        let _2: &[i32];                  // in scope 1 at ui/consts/array-to-slice-cast.rs:7:9: 7:10
+        debug x => _1;
+        let _2: &[i32];
         scope 2 {
-            debug y => _2;               // in scope 2 at ui/consts/array-to-slice-cast.rs:7:9: 7:10
-            let _5: foo::Foo<[u8; 3]>;   // in scope 2 at ui/consts/array-to-slice-cast.rs:11:9: 11:10
+            debug y => _2;
+            let _5: foo::Foo<[u8; 3]>;
             scope 3 {
-                debug x => _5;           // in scope 3 at ui/consts/array-to-slice-cast.rs:11:9: 11:10
-                let _7: &foo::Foo<[u8]>; // in scope 3 at ui/consts/array-to-slice-cast.rs:12:9: 12:10
+                debug x => _5;
+                let _7: &foo::Foo<[u8]>;
                 scope 4 {
-                    debug y => _7;       // in scope 4 at ui/consts/array-to-slice-cast.rs:12:9: 12:10
+                    debug y => _7;
                 }
             }
         }
     }
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/array-to-slice-cast.rs:6:9: 6:10
-        _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32]; // scope 0 at ui/consts/array-to-slice-cast.rs:6:13: 6:28
-        StorageLive(_2);                 // scope 1 at ui/consts/array-to-slice-cast.rs:7:9: 7:10
-        StorageLive(_3);                 // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        StorageLive(_4);                 // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _4 = &_1;                        // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _3 = &(*_4);                     // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        _2 = move _3 as &[i32] (Pointer(Unsize)); // scope 1 at ui/consts/array-to-slice-cast.rs:7:19: 7:21
-        StorageDead(_3);                 // scope 1 at ui/consts/array-to-slice-cast.rs:7:20: 7:21
-        StorageDead(_4);                 // scope 1 at ui/consts/array-to-slice-cast.rs:7:21: 7:22
-        StorageLive(_5);                 // scope 2 at ui/consts/array-to-slice-cast.rs:11:9: 11:10
-        StorageLive(_6);                 // scope 2 at ui/consts/array-to-slice-cast.rs:11:37: 11:46
-        _6 = [const 1_u8, const 2_u8, const 3_u8]; // scope 2 at ui/consts/array-to-slice-cast.rs:11:37: 11:46
-        _5 = Foo::<[u8; 3]>(const true, move _6); // scope 2 at ui/consts/array-to-slice-cast.rs:11:27: 11:47
-        StorageDead(_6);                 // scope 2 at ui/consts/array-to-slice-cast.rs:11:46: 11:47
-        StorageLive(_7);                 // scope 3 at ui/consts/array-to-slice-cast.rs:12:9: 12:10
-        StorageLive(_8);                 // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        StorageLive(_9);                 // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        _9 = &_5;                        // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        _8 = &(*_9);                     // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        _7 = move _8 as &foo::Foo<[u8]> (Pointer(Unsize)); // scope 3 at ui/consts/array-to-slice-cast.rs:12:25: 12:27
-        StorageDead(_8);                 // scope 3 at ui/consts/array-to-slice-cast.rs:12:26: 12:27
-        StorageDead(_9);                 // scope 3 at ui/consts/array-to-slice-cast.rs:12:27: 12:28
-        _0 = const ();                   // scope 0 at ui/consts/array-to-slice-cast.rs:5:16: 13:2
-        StorageDead(_7);                 // scope 3 at ui/consts/array-to-slice-cast.rs:13:1: 13:2
-        StorageDead(_5);                 // scope 2 at ui/consts/array-to-slice-cast.rs:13:1: 13:2
-        StorageDead(_2);                 // scope 1 at ui/consts/array-to-slice-cast.rs:13:1: 13:2
-        StorageDead(_1);                 // scope 0 at ui/consts/array-to-slice-cast.rs:13:1: 13:2
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:13:2: 13:2
+        StorageLive(_1);
+        _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32];
+        StorageLive(_2);
+        StorageLive(_3);
+        StorageLive(_4);
+        _4 = &_1;
+        _3 = &(*_4);
+        _2 = move _3 as &[i32] (PointerCoercion(Unsize));
+        StorageDead(_3);
+        StorageDead(_4);
+        StorageLive(_5);
+        StorageLive(_6);
+        _6 = [const 1_u8, const 2_u8, const 3_u8];
+        _5 = Foo::<[u8; 3]>(const true, move _6);
+        StorageDead(_6);
+        StorageLive(_7);
+        StorageLive(_8);
+        StorageLive(_9);
+        _9 = &_5;
+        _8 = &(*_9);
+        _7 = move _8 as &foo::Foo<[u8]> (PointerCoercion(Unsize));
+        StorageDead(_8);
+        StorageDead(_9);
+        _0 = const ();
+        StorageDead(_7);
+        StorageDead(_5);
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
 foo::{constant#0}: usize = {
-    let mut _0: usize;                   // return place in scope 0 at ui/consts/array-to-slice-cast.rs:11:21: 11:22
+    let mut _0: usize;
 
     bb0: {
-        _0 = const 3_usize;              // scope 0 at ui/consts/array-to-slice-cast.rs:11:21: 11:22
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:11:21: 11:22
+        _0 = const 3_usize;
+        return;
     }
 }
 
 fn Foo(_1: bool, _2: T) -> Foo<T> {
-    let mut _0: foo::Foo<T>;             // return place in scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
+    let mut _0: foo::Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1, move _2); // scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
+        _0 = Foo::<T>(move _1, move _2);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Foo(_1: bool, _2: T) -> Foo<T> {
-    let mut _0: foo::Foo<T>;             // return place in scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
+    let mut _0: foo::Foo<T>;
 
     bb0: {
-        _0 = Foo::<T>(move _1, move _2); // scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
-        return;                          // scope 0 at ui/consts/array-to-slice-cast.rs:9:5: 9:26
+        _0 = Foo::<T>(move _1, move _2);
+        return;
     }
 }

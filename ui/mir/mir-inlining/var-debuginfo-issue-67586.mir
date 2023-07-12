@@ -1,35 +1,27 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn foo(_1: usize) -> usize {
-    debug bar => _1;                     // in scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:5:12: 5:15
-    let mut _0: usize;                   // return place in scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:5:27: 5:32
-    let mut _2: usize;                   // in scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:6:28: 6:31
+    debug bar => _1;
+    let mut _0: usize;
 
     bb0: {
-        _2 = _1;                         // scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:6:28: 6:31
-        _0 = identity::<usize>(move _2) -> bb1; // scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:6:5: 6:32
-                                         // mir::Constant
-                                         // + span: ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:6:5: 6:27
-                                         // + literal: Const { ty: fn(usize) -> usize {identity::<usize>}, val: Value(<ZST>) }
+        _0 = identity::<usize>(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:7:2: 7:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:9:11: 9:11
-    let _1: usize;                       // in scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:10:5: 10:11
+    let mut _0: ();
+    let _1: usize;
 
     bb0: {
-        _1 = foo(const 0_usize) -> bb1;  // scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:10:5: 10:11
-                                         // mir::Constant
-                                         // + span: ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:10:5: 10:8
-                                         // + literal: Const { ty: fn(usize) -> usize {foo}, val: Value(<ZST>) }
+        _1 = foo(const 0_usize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/mir/mir-inlining/var-debuginfo-issue-67586.rs:11:2: 11:2
+        return;
     }
 }

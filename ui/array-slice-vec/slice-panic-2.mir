@@ -1,34 +1,57 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static mut DTOR_COUNT: isize = {
-    let mut _0: isize;                   // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:13:24: 13:29
+    let mut _0: isize;
 
     bb0: {
-        _0 = const 0_isize;              // scope 0 at ui/array-slice-vec/slice-panic-2.rs:13:32: 13:33
-        return;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:13:1: 13:34
+        _0 = const 0_isize;
+        return;
     }
 }
 
 fn <impl at ui/array-slice-vec/slice-panic-2.rs:15:1: 15:18>::drop(_1: &mut Foo) -> () {
-    debug self => _1;                    // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:16:13: 16:22
-    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:16:24: 16:24
-    let mut _2: *mut isize;              // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:45
-    let mut _3: (isize, bool);           // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:50
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: *mut isize;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
+        let mut _9: *const ();
+        let mut _10: usize;
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: bool;
     }
 
     bb0: {
-        _2 = const {alloc1: *mut isize}; // scope 1 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:45
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:16:35: 16:45
-                                         // + literal: Const { ty: *mut isize, val: Value(Scalar(alloc1)) }
-        _3 = CheckedAdd((*_2), const 1_isize); // scope 1 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:50
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_2), const 1_isize) -> bb1; // scope 1 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:50
+        _2 = const {alloc1: *mut isize};
+        _9 = _2 as *const () (PtrToPtr);
+        _10 = _9 as usize (Transmute);
+        _11 = AlignOf(isize);
+        _12 = Sub(_11, const 1_usize);
+        _13 = BitAnd(_10, _12);
+        _14 = Eq(_13, const 0_usize);
+        assert(_14, "misaligned pointer dereference: address must be a multiple of {} but is {}", _11, _10) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_2) = move (_3.0: isize);      // scope 1 at ui/array-slice-vec/slice-panic-2.rs:16:35: 16:50
-        return;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:16:55: 16:55
+        (*_2) = Add((*_2), const 1_isize);
+        return;
+    }
+
+    bb2: {
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(isize);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -37,169 +60,137 @@ alloc1 (static: DTOR_COUNT, size: 8, align: 8) {
 }
 
 fn bar() -> usize {
-    let mut _0: usize;                   // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:19:13: 19:18
-    let mut _1: !;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
+    let mut _0: usize;
+    let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic"); // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:50
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:9: 19:32
-                                         // + literal: Const { ty: fn(&str) -> ! {begin_panic::<&str>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/std/src/panic.rs:19:33: 19:49
-                                         // + literal: Const { ty: &str, val: Value(Slice(..)) }
+        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
     }
 }
 
 fn foo() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:23:10: 23:10
-    let _1: &[Foo];                      // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:9: 24:10
-    let mut _2: &[Foo; 2];               // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:19: 24:30
-    let _3: &[Foo; 2];                   // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:19: 24:30
-    let _4: [Foo; 2];                    // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:20: 24:30
-    let _5: &[Foo];                      // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:25:14: 25:25
-    let mut _6: &[Foo];                  // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:25:14: 25:15
-    let mut _7: std::ops::Range<usize>;  // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:25:16: 25:24
-    let mut _8: usize;                   // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:25:19: 25:24
+    let mut _0: ();
+    let _1: &[Foo];
+    let _2: &[Foo; 2];
+    let _3: [Foo; 2];
+    let _4: &[Foo];
+    let mut _5: std::ops::Range<usize>;
+    let mut _6: usize;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/array-slice-vec/slice-panic-2.rs:24:9: 24:10
+        debug x => _1;
         scope 2 {
         }
     }
 
     bb0: {
-        _3 = &_4;                        // scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:19: 24:30
-        _2 = _3;                         // scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:19: 24:30
-        _1 = move _2 as &[Foo] (Pointer(Unsize)); // scope 0 at ui/array-slice-vec/slice-panic-2.rs:24:19: 24:30
-        _6 = _1;                         // scope 1 at ui/array-slice-vec/slice-panic-2.rs:25:14: 25:15
-        _8 = bar() -> [return: bb1, unwind: bb4]; // scope 1 at ui/array-slice-vec/slice-panic-2.rs:25:19: 25:24
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:25:19: 25:22
-                                         // + literal: Const { ty: fn() -> usize {bar}, val: Value(<ZST>) }
+        _2 = &_3;
+        _1 = _2 as &[Foo] (PointerCoercion(Unsize));
+        _6 = bar() -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        _7 = std::ops::Range::<usize> { start: const 3_usize, end: move _8 }; // scope 1 at ui/array-slice-vec/slice-panic-2.rs:25:16: 25:24
-        _5 = <[Foo] as Index<std::ops::Range<usize>>>::index(move _6, move _7) -> [return: bb2, unwind: bb4]; // scope 1 at ui/array-slice-vec/slice-panic-2.rs:25:14: 25:25
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:25:14: 25:25
-                                         // + literal: Const { ty: for<'a> fn(&'a [Foo], std::ops::Range<usize>) -> &'a <[Foo] as Index<std::ops::Range<usize>>>::Output {<[Foo] as Index<std::ops::Range<usize>>>::index}, val: Value(<ZST>) }
+        _5 = std::ops::Range::<usize> { start: const 3_usize, end: move _6 };
+        _4 = <[Foo] as Index<std::ops::Range<usize>>>::index(_1, move _5) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_4) -> bb3;                 // scope 0 at ui/array-slice-vec/slice-panic-2.rs:26:1: 26:2
+        drop(_3) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:26:2: 26:2
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_4) -> bb5;                 // scope 0 at ui/array-slice-vec/slice-panic-2.rs:26:1: 26:2
+        drop(_3) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        resume;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:23:1: 26:2
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:28:11: 28:11
-    let mut _1: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>; // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:13: 29:47
-    let mut _2: std::thread::JoinHandle<()>; // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:13: 29:40
-    let mut _3: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]; // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:27: 29:39
-    let mut _4: (&isize, &isize);        // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _5: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _6: *mut isize;                  // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:30:25: 30:35
-    let mut _7: &isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _10: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _11: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _12: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _13: isize;                  // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _15: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _16: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _17: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _18: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _19: &isize;                 // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _20: &isize;                     // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _21: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let mut _1: std::result::Result<(), std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
+    let mut _2: std::thread::JoinHandle<()>;
+    let mut _3: (&isize, &isize);
+    let mut _4: &isize;
+    let _5: *mut isize;
+    let mut _6: &isize;
+    let _7: isize;
+    let mut _10: bool;
+    let mut _11: bool;
+    let mut _12: isize;
+    let mut _13: isize;
+    let _15: !;
+    let mut _16: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
         scope 2 {
-            let _8: &isize;              // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _9: &isize;              // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _22: &isize;         // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            let _8: &isize;
+            let _9: &isize;
+            let mut _17: *const ();
+            let mut _18: usize;
+            let mut _19: usize;
+            let mut _20: usize;
+            let mut _21: usize;
+            let mut _22: bool;
             scope 3 {
-                debug left_val => _8;    // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _9;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _14: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _8;
+                debug right_val => _9;
+                let _14: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _14;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _14;
                 }
             }
         }
     }
 
     bb0: {
-        _2 = spawn::<[closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33], ()>(move _3) -> bb1; // scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:13: 29:40
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:29:13: 29:26
-                                         // + literal: Const { ty: fn([closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]) -> JoinHandle<()> {spawn::<[closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33], ()>}, val: Value(<ZST>) }
+        _2 = spawn::<[closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33], ()>(const ZeroSized: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = JoinHandle::<()>::join(move _2) -> bb2; // scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:13: 29:47
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:29:41: 29:45
-                                         // + literal: Const { ty: fn(JoinHandle<()>) -> Result<(), Box<(dyn Any + Send + 'static)>> {JoinHandle::<()>::join}, val: Value(<ZST>) }
+        _1 = JoinHandle::<()>::join(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:47: 29:48
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _6 = const {alloc1: *mut isize}; // scope 2 at ui/array-slice-vec/slice-panic-2.rs:30:25: 30:35
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:30:25: 30:35
-                                         // + literal: Const { ty: *mut isize, val: Value(Scalar(alloc1)) }
-        _5 = &(*_6);                     // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _22 = const _;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &isize, val: Unevaluated(main, [], Some(promoted[0])) }
-        _7 = _22;                        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _4 = (move _5, move _7);         // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _8 = (_4.0: &isize);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _9 = (_4.1: &isize);             // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _12 = (*_8);                     // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _13 = const 2_isize;             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _11 = Eq(move _12, move _13);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _10 = Not(move _11);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _10) -> [0: bb5, otherwise: bb4]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _5 = const {alloc1: *mut isize};
+        _17 = _5 as *const () (PtrToPtr);
+        _18 = _17 as usize (Transmute);
+        _19 = AlignOf(isize);
+        _20 = Sub(_19, const 1_usize);
+        _21 = BitAnd(_18, _20);
+        _22 = Eq(_21, const 0_usize);
+        assert(_22, "misaligned pointer dereference: address must be a multiple of {} but is {}", _19, _18) -> [success: bb6, unwind unreachable];
     }
 
     bb4: {
-        _14 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _16 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _18 = _8;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _17 = _18;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _20 = _9;                        // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _19 = _20;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _21 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _15 = core::panicking::assert_failed::<isize, isize>(move _16, move _17, move _19, move _21); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a isize, &'b isize, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<isize, isize>}, val: Value(<ZST>) }
+        _14 = core::panicking::AssertKind::Eq;
+        _16 = Option::<Arguments<'_>>::None;
+        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16) -> unwind continue;
     }
 
     bb5: {
-        return;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:31:2: 31:2
+        return;
+    }
+
+    bb6: {
+        _4 = &(*_5);
+        _7 = const 2_isize;
+        _6 = &_7;
+        _3 = (move _4, move _6);
+        _8 = (_3.0: &isize);
+        _9 = (_3.1: &isize);
+        _12 = (*_8);
+        _13 = (*_9);
+        _11 = Eq(move _12, move _13);
+        _10 = Not(move _11);
+        switchInt(move _10) -> [0: bb5, otherwise: bb4];
     }
 }
 
@@ -207,28 +198,14 @@ alloc1 (static: DTOR_COUNT, size: 8, align: 8) {
     00 00 00 00 00 00 00 00                         │ ........
 }
 
-promoted[0] in main: &isize = {
-    let mut _0: &isize;                  // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: isize;                   // in scope 0 at ui/array-slice-vec/slice-panic-2.rs:30:37: 30:38
-
-    bb0: {
-        _1 = const 2_isize;              // scope 0 at ui/array-slice-vec/slice-panic-2.rs:30:37: 30:38
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
-}
-
 fn main::{closure#0}(_1: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:34: 29:34
+    let mut _0: ();
 
     bb0: {
-        _0 = foo() -> bb1;               // scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:34: 29:39
-                                         // mir::Constant
-                                         // + span: ui/array-slice-vec/slice-panic-2.rs:29:34: 29:37
-                                         // + literal: Const { ty: fn() {foo}, val: Value(<ZST>) }
+        _0 = foo() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/array-slice-vec/slice-panic-2.rs:29:39: 29:39
+        return;
     }
 }

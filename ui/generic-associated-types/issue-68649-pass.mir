@@ -1,53 +1,42 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn Fun::identity(_1: <Self as Fun>::F<'_>) -> <Self as Fun>::F<'_> {
-    debug t => _1;                       // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:6:21: 6:22
-    let mut _0: <Self as Fun>::F<'_>;    // return place in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:6:40: 6:51
+    debug t => _1;
+    let mut _0: <Self as Fun>::F<'_>;
 
     bb0: {
-        _0 = move _1;                    // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:6:54: 6:55
-        return;                          // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:6:57: 6:57
+        _0 = move _1;
+        return;
     }
 }
 
 fn bug(_1: T) -> T {
-    debug t => _1;                       // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:13:31: 13:32
-    let mut _0: T;                       // return place in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:13:40: 13:48
-    let mut _2: T;                       // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:14:17: 14:18
+    debug t => _1;
+    let mut _0: T;
 
     bb0: {
-        _2 = move _1;                    // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:14:17: 14:18
-        _0 = <T as Fun>::identity::<'_>(move _2) -> bb1; // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:14:5: 14:19
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-68649-pass.rs:14:5: 14:16
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(<T as Fun>::F<'_>) -> <T as Fun>::F<'_> {<T as Fun>::identity::<'_>}, val: Value(<ZST>) }
+        _0 = <T as Fun>::identity::<'_>(move _1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:15:2: 15:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:18:11: 18:11
-    let _1: i32;                         // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:19:9: 19:10
-    let _2: i32;                         // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:21:5: 21:11
-    let mut _3: i32;                     // in scope 0 at ui/generic-associated-types/issue-68649-pass.rs:21:9: 21:10
+    let mut _0: ();
+    let _1: i32;
+    let _2: i32;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/generic-associated-types/issue-68649-pass.rs:19:9: 19:10
+        debug x => _1;
     }
 
     bb0: {
-        _1 = const 10_i32;               // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:19:13: 19:15
-        _3 = const 10_i32;               // scope 1 at ui/generic-associated-types/issue-68649-pass.rs:21:9: 21:10
-        _2 = bug::<'_, i32>(move _3) -> bb1; // scope 1 at ui/generic-associated-types/issue-68649-pass.rs:21:5: 21:11
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-68649-pass.rs:21:5: 21:8
-                                         // + literal: Const { ty: fn(i32) -> <i32 as Fun>::F<'_> {bug::<'_, i32>}, val: Value(<ZST>) }
+        _1 = const 10_i32;
+        _2 = bug::<'_, i32>(_1) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-68649-pass.rs:22:2: 22:2
+        return;
     }
 }

@@ -1,101 +1,79 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn takes_fn_ptr(_1: fn()) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:9:32: 9:32
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:9:34: 9:34
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn takes_fn_ptr(_1: fn()) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:9:32: 9:32
+    let mut _0: ();
 
     bb0: {
-        _0 = const ();                   // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:9:32: 9:34
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:9:34: 9:34
+        _0 = const ();
+        return;
     }
 }
 
 const FN: fn() = {
-    let mut _0: fn();                    // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:11: 11:15
-    let mut _1: [closure@ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:20]; // in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:23
+    let mut _0: fn();
+    let mut _1: [closure@ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:20];
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:23
-        _1 = [closure@ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:20]; // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:23
-                                         // closure
-                                         // + def_id: DefId(0:5 ~ allow_const_fn_ptr_run_pass[b7d6]::FN::{closure#0})
-                                         // + substs: [
-                                         //     i8,
-                                         //     extern "rust-call" fn(()),
-                                         //     (),
-                                         // ]
-        _0 = move _1 as fn() (Pointer(ClosureFnPointer(Normal))); // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:23
-        StorageDead(_1);                 // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:19: 11:20
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:1: 11:24
+        StorageLive(_1);
+        _1 = [closure@ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:20];
+        _0 = move _1 as fn() (PointerCoercion(ClosureFnPointer(Normal)));
+        StorageDead(_1);
+        return;
     }
 }
 
 fn FN::{closure#0}(_1: &[closure@ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:18: 11:20]) -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:21: 11:21
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:11:23: 11:23
+        return;
     }
 }
 
 fn gives_fn_ptr() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:13:25: 13:25
+    let mut _0: ();
 
     bb0: {
-        _0 = takes_fn_ptr(const _) -> bb1; // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:5: 14:21
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:5: 14:17
-                                         // + literal: Const { ty: fn(fn()) {takes_fn_ptr}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:18: 14:20
-                                         // + literal: Const { ty: fn(), val: Unevaluated(FN, [], None) }
+        _0 = takes_fn_ptr(const _) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:15:2: 15:2
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn gives_fn_ptr() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:13:25: 13:25
+    let mut _0: ();
 
     bb0: {
-        ConstEvalCounter;                // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:5: 14:21
-        _0 = takes_fn_ptr(const _) -> bb1; // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:5: 14:21
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:5: 14:17
-                                         // + literal: Const { ty: fn(fn()) {takes_fn_ptr}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:14:18: 14:20
-                                         // + literal: Const { ty: fn(), val: Unevaluated(FN, [], None) }
+        ConstEvalCounter;
+        _0 = takes_fn_ptr(const _) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:15:2: 15:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:17:11: 17:11
-    let _1: ();                          // in scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:18:5: 18:19
+    let mut _0: ();
+    let _1: ();
 
     bb0: {
-        _1 = gives_fn_ptr() -> bb1;      // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:18:5: 18:19
-                                         // mir::Constant
-                                         // + span: ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:18:5: 18:17
-                                         // + literal: Const { ty: fn() {gives_fn_ptr}, val: Value(<ZST>) }
+        _1 = gives_fn_ptr() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/consts/min_const_fn/allow_const_fn_ptr_run_pass.rs:19:2: 19:2
+        return;
     }
 }

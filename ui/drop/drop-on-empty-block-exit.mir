@@ -1,51 +1,47 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/drop/drop-on-empty-block-exit.rs:7:15: 7:15
-    let _1: t;                           // in scope 0 at ui/drop/drop-on-empty-block-exit.rs:8:9: 8:11
-    let mut _2: std::boxed::Box<isize>;  // in scope 0 at ui/drop/drop-on-empty-block-exit.rs:8:21: 8:33
+    let mut _0: ();
+    let _1: t;
+    let mut _2: std::boxed::Box<isize>;
     scope 1 {
-        debug tt => _1;                  // in scope 1 at ui/drop/drop-on-empty-block-exit.rs:8:9: 8:11
-        let _3: std::boxed::Box<isize>;  // in scope 1 at ui/drop/drop-on-empty-block-exit.rs:9:23: 9:25
+        debug tt => _1;
+        let _3: std::boxed::Box<isize>;
         scope 2 {
-            debug _z => _3;              // in scope 2 at ui/drop/drop-on-empty-block-exit.rs:9:23: 9:25
+            debug _z => _3;
         }
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 10_isize) -> bb1; // scope 0 at ui/drop/drop-on-empty-block-exit.rs:8:21: 8:33
-                                         // mir::Constant
-                                         // + span: ui/drop/drop-on-empty-block-exit.rs:8:21: 8:29
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> Box<isize> {Box::<isize>::new}, val: Value(<ZST>) }
+        _2 = Box::<isize>::new(const 10_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = t::foo(move _2);            // scope 0 at ui/drop/drop-on-empty-block-exit.rs:8:14: 8:34
-        _3 = move ((_1 as foo).0: std::boxed::Box<isize>); // scope 1 at ui/drop/drop-on-empty-block-exit.rs:9:23: 9:25
-        drop(_3) -> bb2;                 // scope 1 at ui/drop/drop-on-empty-block-exit.rs:9:32: 9:33
+        _1 = t::foo(move _2);
+        _3 = move ((_1 as foo).0: std::boxed::Box<isize>);
+        drop(_3) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/drop/drop-on-empty-block-exit.rs:10:2: 10:2
+        return;
     }
 }
 
 fn t::foo(_1: Box<isize>) -> t {
-    let mut _0: t;                       // return place in scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
+    let mut _0: t;
 
     bb0: {
-        _0 = t::foo(move _1);            // scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
-        return;                          // scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
+        _0 = t::foo(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn t::foo(_1: Box<isize>) -> t {
-    let mut _0: t;                       // return place in scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
+    let mut _0: t;
 
     bb0: {
-        _0 = t::foo(move _1);            // scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
-        return;                          // scope 0 at ui/drop/drop-on-empty-block-exit.rs:5:10: 5:13
+        _0 = t::foo(move _1);
+        return;
     }
 }

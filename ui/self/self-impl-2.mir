@@ -1,66 +1,63 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/self/self-impl-2.rs:11:1: 11:9>::foo(_1: Foo, _2: &Foo, _3: Box<Foo>) -> Foo {
-    debug _x => _1;                      // in scope 0 at ui/self/self-impl-2.rs:12:12: 12:14
-    debug _y => _2;                      // in scope 0 at ui/self/self-impl-2.rs:12:22: 12:24
-    debug _z => _3;                      // in scope 0 at ui/self/self-impl-2.rs:12:33: 12:35
-    let mut _0: Foo;                     // return place in scope 0 at ui/self/self-impl-2.rs:12:51: 12:55
+    debug _x => const Foo;
+    debug _y => _2;
+    debug _z => _3;
+    let mut _0: Foo;
 
     bb0: {
-        drop(_3) -> bb1;                 // scope 0 at ui/self/self-impl-2.rs:14:5: 14:6
+        drop(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:14:6: 14:6
+        return;
     }
 }
 
 fn <impl at ui/self/self-impl-2.rs:11:1: 11:9>::baz() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/self-impl-2.rs:16:14: 16:14
-    let _1: ();                          // in scope 0 at ui/self/self-impl-2.rs:20:9: 20:22
+    let mut _0: ();
+    let _1: ();
     scope 1 {
     }
 
     bb0: {
-        _1 = Foo::empty() -> bb1;        // scope 0 at ui/self/self-impl-2.rs:20:9: 20:22
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:20:9: 20:20
-                                         // + literal: Const { ty: fn() {Foo::empty}, val: Value(<ZST>) }
+        _1 = Foo::empty() -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:23:6: 23:6
+        return;
     }
 }
 
 fn <impl at ui/self/self-impl-2.rs:11:1: 11:9>::empty() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/self-impl-2.rs:25:16: 25:16
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:25:18: 25:18
+        return;
     }
 }
 
 fn Bar::dummy(_1: &Self, _2: X) -> () {
-    debug self => _1;                    // in scope 0 at ui/self/self-impl-2.rs:41:14: 41:19
-    debug x => _2;                       // in scope 0 at ui/self/self-impl-2.rs:41:21: 41:22
-    let mut _0: ();                      // return place in scope 0 at ui/self/self-impl-2.rs:41:27: 41:27
+    debug self => _1;
+    debug x => _2;
+    let mut _0: ();
 
     bb0: {
-        drop(_2) -> bb1;                 // scope 0 at ui/self/self-impl-2.rs:41:29: 41:30
+        drop(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:41:30: 41:30
+        return;
     }
 }
 
 fn <impl at ui/self/self-impl-2.rs:48:1: 48:36>::bar(_1: Box<Baz<isize>>, _2: &Box<Baz<isize>>, _3: Box<Box<Baz<isize>>>, _4: bool) -> Box<Baz<isize>> {
-    debug _x => _1;                      // in scope 0 at ui/self/self-impl-2.rs:51:12: 51:14
-    debug _y => _2;                      // in scope 0 at ui/self/self-impl-2.rs:51:22: 51:24
-    debug _z => _3;                      // in scope 0 at ui/self/self-impl-2.rs:51:33: 51:35
-    let mut _0: std::boxed::Box<Baz<isize>>; // return place in scope 0 at ui/self/self-impl-2.rs:51:70: 51:74
-    let mut _5: Baz<isize>;              // in scope 0 at ui/self/self-impl-2.rs:58:18: 58:31
+    debug _x => _1;
+    debug _y => _2;
+    debug _z => _3;
+    let mut _0: std::boxed::Box<Baz<isize>>;
+    let mut _5: Baz<isize>;
     scope 1 {
         scope 2 {
             scope 3 {
@@ -71,185 +68,122 @@ fn <impl at ui/self/self-impl-2.rs:48:1: 48:36>::bar(_1: Box<Baz<isize>>, _2: &B
     }
 
     bb0: {
-        _5 = const Baz::<isize> {{ f: 42_isize }}; // scope 4 at ui/self/self-impl-2.rs:58:18: 58:31
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:58:18: 58:31
-                                         // + literal: Const { ty: Baz<isize>, val: Value(Scalar(0x000000000000002a)) }
-        _0 = Box::<Baz<isize>>::new(move _5) -> [return: bb1, unwind: bb4]; // scope 4 at ui/self/self-impl-2.rs:58:9: 58:32
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:58:9: 58:17
-                                         // + user_ty: UserType(8)
-                                         // + literal: Const { ty: fn(Baz<isize>) -> Box<Baz<isize>> {Box::<Baz<isize>>::new}, val: Value(<ZST>) }
+        _5 = Baz::<isize> { f: const 42_isize };
+        _0 = Box::<Baz<isize>>::new(move _5) -> [return: bb1, unwind: bb4];
     }
 
     bb1: {
-        drop(_3) -> [return: bb2, unwind: bb5]; // scope 0 at ui/self/self-impl-2.rs:59:5: 59:6
+        drop(_3) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        drop(_1) -> bb3;                 // scope 0 at ui/self/self-impl-2.rs:59:5: 59:6
+        drop(_1) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:59:6: 59:6
+        return;
     }
 
     bb4 (cleanup): {
-        drop(_3) -> bb5;                 // scope 0 at ui/self/self-impl-2.rs:59:5: 59:6
+        drop(_3) -> [return: bb5, unwind terminate];
     }
 
     bb5 (cleanup): {
-        drop(_1) -> bb6;                 // scope 0 at ui/self/self-impl-2.rs:59:5: 59:6
+        drop(_1) -> [return: bb6, unwind terminate];
     }
 
     bb6 (cleanup): {
-        resume;                          // scope 0 at ui/self/self-impl-2.rs:51:5: 59:6
+        resume;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/self-impl-2.rs:62:11: 62:11
-    let mut _1: Foo;                     // in scope 0 at ui/self/self-impl-2.rs:63:18: 63:52
-    let mut _2: Foo;                     // in scope 0 at ui/self/self-impl-2.rs:63:27: 63:30
-    let mut _3: &Foo;                    // in scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-    let _4: &Foo;                        // in scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-    let mut _5: std::boxed::Box<Foo>;    // in scope 0 at ui/self/self-impl-2.rs:63:38: 63:51
-    let mut _6: Foo;                     // in scope 0 at ui/self/self-impl-2.rs:63:47: 63:50
-    let mut _7: std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:64:30: 67:44
-    let mut _8: std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:64:39: 64:62
-    let mut _9: Baz<isize>;              // in scope 0 at ui/self/self-impl-2.rs:64:48: 64:61
-    let mut _10: &std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:65:39: 65:63
-    let _11: &std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:65:39: 65:63
-    let _12: std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:65:40: 65:63
-    let mut _13: Baz<isize>;             // in scope 0 at ui/self/self-impl-2.rs:65:49: 65:62
-    let mut _14: std::boxed::Box<std::boxed::Box<Baz<isize>>>; // in scope 0 at ui/self/self-impl-2.rs:66:39: 66:72
-    let mut _15: std::boxed::Box<Baz<isize>>; // in scope 0 at ui/self/self-impl-2.rs:66:48: 66:71
-    let mut _16: Baz<isize>;             // in scope 0 at ui/self/self-impl-2.rs:66:57: 66:70
-    let mut _17: &Foo;                   // in scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-    let mut _18: bool;                   // in scope 0 at ui/self/self-impl-2.rs:67:43: 67:44
+    let mut _0: ();
+    let mut _1: Foo;
+    let _2: &Foo;
+    let _3: Foo;
+    let mut _4: std::boxed::Box<Foo>;
+    let mut _5: std::boxed::Box<Baz<isize>>;
+    let mut _6: std::boxed::Box<Baz<isize>>;
+    let mut _7: Baz<isize>;
+    let _8: &std::boxed::Box<Baz<isize>>;
+    let _9: std::boxed::Box<Baz<isize>>;
+    let mut _10: Baz<isize>;
+    let mut _11: std::boxed::Box<std::boxed::Box<Baz<isize>>>;
+    let mut _12: std::boxed::Box<Baz<isize>>;
+    let mut _13: Baz<isize>;
+    let mut _14: bool;
     scope 1 {
         scope 2 {
         }
     }
 
     bb0: {
-        _18 = const false;               // scope 0 at ui/self/self-impl-2.rs:63:18: 63:52
-        _17 = const _;                   // scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:63:32: 63:36
-                                         // + literal: Const { ty: &Foo, val: Unevaluated(main, [], Some(promoted[0])) }
-        _4 = _17;                        // scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-        _3 = _4;                         // scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-        _5 = Box::<Foo>::new(move _6) -> bb1; // scope 0 at ui/self/self-impl-2.rs:63:38: 63:51
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:63:38: 63:46
-                                         // + user_ty: UserType(1)
-                                         // + literal: Const { ty: fn(Foo) -> Box<Foo> {Box::<Foo>::new}, val: Value(<ZST>) }
+        _14 = const false;
+        _2 = &_3;
+        _4 = Box::<Foo>::new(const Foo) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _1 = Foo::foo(move _2, move _3, move _5) -> bb2; // scope 0 at ui/self/self-impl-2.rs:63:18: 63:52
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:63:18: 63:26
-                                         // + literal: Const { ty: for<'a> fn(Foo, &'a Foo, Box<Foo>) -> Foo {Foo::foo}, val: Value(<ZST>) }
+        _1 = Foo::foo(const Foo, _2, move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _9 = const Baz::<isize> {{ f: 42_isize }}; // scope 1 at ui/self/self-impl-2.rs:64:48: 64:61
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:64:48: 64:61
-                                         // + literal: Const { ty: Baz<isize>, val: Value(Scalar(0x000000000000002a)) }
-        _18 = const true;                // scope 1 at ui/self/self-impl-2.rs:64:39: 64:62
-        _8 = Box::<Baz<isize>>::new(move _9) -> bb3; // scope 1 at ui/self/self-impl-2.rs:64:39: 64:62
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:64:39: 64:47
-                                         // + user_ty: UserType(4)
-                                         // + literal: Const { ty: fn(Baz<isize>) -> Box<Baz<isize>> {Box::<Baz<isize>>::new}, val: Value(<ZST>) }
+        _7 = Baz::<isize> { f: const 42_isize };
+        _14 = const true;
+        _6 = Box::<Baz<isize>>::new(move _7) -> [return: bb3, unwind continue];
     }
 
     bb3: {
-        _13 = const Baz::<isize> {{ f: 42_isize }}; // scope 1 at ui/self/self-impl-2.rs:65:49: 65:62
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:65:49: 65:62
-                                         // + literal: Const { ty: Baz<isize>, val: Value(Scalar(0x000000000000002a)) }
-        _12 = Box::<Baz<isize>>::new(move _13) -> [return: bb4, unwind: bb11]; // scope 1 at ui/self/self-impl-2.rs:65:40: 65:63
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:65:40: 65:48
-                                         // + user_ty: UserType(5)
-                                         // + literal: Const { ty: fn(Baz<isize>) -> Box<Baz<isize>> {Box::<Baz<isize>>::new}, val: Value(<ZST>) }
+        _10 = Baz::<isize> { f: const 42_isize };
+        _9 = Box::<Baz<isize>>::new(move _10) -> [return: bb4, unwind: bb11];
     }
 
     bb4: {
-        _11 = &_12;                      // scope 1 at ui/self/self-impl-2.rs:65:39: 65:63
-        _10 = _11;                       // scope 1 at ui/self/self-impl-2.rs:65:39: 65:63
-        _16 = const Baz::<isize> {{ f: 42_isize }}; // scope 1 at ui/self/self-impl-2.rs:66:57: 66:70
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:66:57: 66:70
-                                         // + literal: Const { ty: Baz<isize>, val: Value(Scalar(0x000000000000002a)) }
-        _15 = Box::<Baz<isize>>::new(move _16) -> [return: bb5, unwind: bb14]; // scope 1 at ui/self/self-impl-2.rs:66:48: 66:71
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:66:48: 66:56
-                                         // + user_ty: UserType(7)
-                                         // + literal: Const { ty: fn(Baz<isize>) -> Box<Baz<isize>> {Box::<Baz<isize>>::new}, val: Value(<ZST>) }
+        _8 = &_9;
+        _13 = Baz::<isize> { f: const 42_isize };
+        _12 = Box::<Baz<isize>>::new(move _13) -> [return: bb5, unwind: bb14];
     }
 
     bb5: {
-        _14 = Box::<Box<Baz<isize>>>::new(move _15) -> [return: bb6, unwind: bb14]; // scope 1 at ui/self/self-impl-2.rs:66:39: 66:72
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:66:39: 66:47
-                                         // + user_ty: UserType(6)
-                                         // + literal: Const { ty: fn(Box<Baz<isize>>) -> Box<Box<Baz<isize>>> {Box::<Box<Baz<isize>>>::new}, val: Value(<ZST>) }
+        _11 = Box::<Box<Baz<isize>>>::new(move _12) -> [return: bb6, unwind: bb14];
     }
 
     bb6: {
-        _18 = const false;               // scope 1 at ui/self/self-impl-2.rs:64:30: 67:44
-        _7 = <Box<Baz<isize>> as Bar<isize>>::bar(move _8, move _10, move _14, const true) -> [return: bb7, unwind: bb14]; // scope 1 at ui/self/self-impl-2.rs:64:30: 67:44
-                                         // mir::Constant
-                                         // + span: ui/self/self-impl-2.rs:64:30: 64:38
-                                         // + literal: Const { ty: for<'a> fn(Box<Baz<isize>>, &'a Box<Baz<isize>>, Box<Box<Baz<isize>>>, <Box<Baz<isize>> as SuperBar>::SuperQux) -> Box<Baz<isize>> {<Box<Baz<isize>> as Bar<isize>>::bar}, val: Value(<ZST>) }
+        _14 = const false;
+        _5 = <Box<Baz<isize>> as Bar<isize>>::bar(move _6, _8, move _11, const true) -> [return: bb7, unwind: bb14];
     }
 
     bb7: {
-        _18 = const false;               // scope 1 at ui/self/self-impl-2.rs:67:43: 67:44
-        drop(_7) -> [return: bb8, unwind: bb10]; // scope 1 at ui/self/self-impl-2.rs:67:44: 67:45
+        _14 = const false;
+        drop(_5) -> [return: bb8, unwind: bb10];
     }
 
     bb8: {
-        drop(_12) -> bb9;                // scope 1 at ui/self/self-impl-2.rs:67:44: 67:45
+        drop(_9) -> [return: bb9, unwind continue];
     }
 
     bb9: {
-        return;                          // scope 0 at ui/self/self-impl-2.rs:68:2: 68:2
+        return;
     }
 
     bb10 (cleanup): {
-        drop(_12) -> bb12;               // scope 1 at ui/self/self-impl-2.rs:67:44: 67:45
+        drop(_9) -> [return: bb12, unwind terminate];
     }
 
     bb11 (cleanup): {
-        drop(_8) -> bb12;                // scope 1 at ui/self/self-impl-2.rs:67:43: 67:44
+        drop(_6) -> [return: bb12, unwind terminate];
     }
 
     bb12 (cleanup): {
-        resume;                          // scope 0 at ui/self/self-impl-2.rs:62:1: 68:2
+        resume;
     }
 
     bb13 (cleanup): {
-        drop(_8) -> bb10;                // scope 1 at ui/self/self-impl-2.rs:67:43: 67:44
+        drop(_6) -> [return: bb10, unwind terminate];
     }
 
     bb14 (cleanup): {
-        switchInt(_18) -> [0: bb10, otherwise: bb13]; // scope 1 at ui/self/self-impl-2.rs:67:43: 67:44
-    }
-}
-
-promoted[0] in main: &Foo = {
-    let mut _0: &Foo;                    // return place in scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-    let mut _1: Foo;                     // in scope 0 at ui/self/self-impl-2.rs:63:33: 63:36
-
-    bb0: {
-        _1 = Foo;                        // scope 0 at ui/self/self-impl-2.rs:63:33: 63:36
-        _0 = &_1;                        // scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
-        return;                          // scope 0 at ui/self/self-impl-2.rs:63:32: 63:36
+        switchInt(_14) -> [0: bb10, otherwise: bb13];
     }
 }

@@ -1,93 +1,79 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/statics/issue-17718-static-unsafe-interior.rs:18:1: 18:20>::forbidden(_1: &MyUnsafe<T>) -> () {
-    debug self => _1;                    // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:19:18: 19:23
-    let mut _0: ();                      // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:19:25: 19:25
+    debug self => _1;
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:19:27: 19:27
+        return;
     }
 }
 
 static STATIC1: UnsafeEnum<isize> = {
-    let mut _0: UnsafeEnum<isize>;       // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:31:17: 31:34
+    let mut _0: UnsafeEnum<isize>;
 
     bb0: {
-        _0 = UnsafeEnum::<isize>::VariantSafe; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:31:37: 31:60
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:31:1: 31:61
+        _0 = UnsafeEnum::<isize>::VariantSafe;
+        return;
     }
 }
 
 static STATIC2: MyUnsafePack<isize> = {
-    let mut _0: MyUnsafePack<isize>;     // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:17: 33:36
-    let mut _1: std::cell::UnsafeCell<isize>; // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:52: 33:70
+    let mut _0: MyUnsafePack<isize>;
+    let mut _1: std::cell::UnsafeCell<isize>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:52: 33:70
-        ConstEvalCounter;                // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:52: 33:70
-        _1 = UnsafeCell::<isize>::new(const 1_isize) -> bb1; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:52: 33:70
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:33:52: 33:67
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> UnsafeCell<isize> {UnsafeCell::<isize>::new}, val: Value(<ZST>) }
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = UnsafeCell::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = MyUnsafePack::<isize>(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:39: 33:71
-        StorageDead(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:70: 33:71
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:33:1: 33:72
+        _0 = MyUnsafePack::<isize>(move _1);
+        StorageDead(_1);
+        return;
     }
 }
 
 const CONST: MyUnsafePack<isize> = {
-    let mut _0: MyUnsafePack<isize>;     // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:14: 34:33
-    let mut _1: std::cell::UnsafeCell<isize>; // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:49: 34:67
+    let mut _0: MyUnsafePack<isize>;
+    let mut _1: std::cell::UnsafeCell<isize>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:49: 34:67
-        ConstEvalCounter;                // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:49: 34:67
-        _1 = UnsafeCell::<isize>::new(const 1_isize) -> bb1; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:49: 34:67
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:34:49: 34:64
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> UnsafeCell<isize> {UnsafeCell::<isize>::new}, val: Value(<ZST>) }
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = UnsafeCell::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = MyUnsafePack::<isize>(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:36: 34:68
-        StorageDead(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:67: 34:68
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:34:1: 34:69
+        _0 = MyUnsafePack::<isize>(move _1);
+        StorageDead(_1);
+        return;
     }
 }
 
 static STATIC3: MyUnsafe<isize> = {
-    let mut _0: MyUnsafe<isize>;         // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:35:17: 35:32
+    let mut _0: MyUnsafe<isize>;
 
     bb0: {
-        _0 = MyUnsafe::<isize> { value: const _ }; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:35:35: 35:57
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:35:51: 35:56
-                                         // + literal: Const { ty: MyUnsafePack<isize>, val: Unevaluated(CONST, [], None) }
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:35:1: 35:58
+        _0 = MyUnsafe::<isize> { value: const _ };
+        return;
     }
 }
 
 static STATIC4: &MyUnsafePack<isize> = {
-    let mut _0: &MyUnsafePack<isize>;    // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:17: 37:45
-    let _1: &MyUnsafePack<isize>;        // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:48: 37:56
-    let _2: &MyUnsafePack<isize>;        // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:49: 37:56
+    let mut _0: &MyUnsafePack<isize>;
+    let _1: &MyUnsafePack<isize>;
+    let _2: &MyUnsafePack<isize>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:48: 37:56
-        StorageLive(_2);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:49: 37:56
-        _2 = const {alloc1: &MyUnsafePack<isize>}; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:49: 37:56
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:37:49: 37:56
-                                         // + literal: Const { ty: &MyUnsafePack<isize>, val: Value(Scalar(alloc1)) }
-        _1 = &(*_2);                     // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:48: 37:56
-        _0 = &(*_1);                     // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:48: 37:56
-        StorageDead(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:55: 37:56
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:37:1: 37:57
+        StorageLive(_1);
+        StorageLive(_2);
+        _2 = const {alloc1: &MyUnsafePack<isize>};
+        _1 = &(*_2);
+        _0 = &(*_1);
+        StorageDead(_1);
+        return;
     }
 }
 
@@ -96,46 +82,39 @@ alloc1 (static: STATIC2, size: 8, align: 8) {
 }
 
 static UNSAFE: MyUnsafePack<isize> = {
-    let mut _0: MyUnsafePack<isize>;     // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:16: 45:35
-    let mut _1: std::cell::UnsafeCell<isize>; // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:51: 45:69
+    let mut _0: MyUnsafePack<isize>;
+    let mut _1: std::cell::UnsafeCell<isize>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:51: 45:69
-        ConstEvalCounter;                // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:51: 45:69
-        _1 = UnsafeCell::<isize>::new(const 2_isize) -> bb1; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:51: 45:69
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:45:51: 45:66
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(isize) -> UnsafeCell<isize> {UnsafeCell::<isize>::new}, val: Value(<ZST>) }
+        StorageLive(_1);
+        ConstEvalCounter;
+        _1 = UnsafeCell::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = MyUnsafePack::<isize>(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:38: 45:70
-        StorageDead(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:69: 45:70
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:45:1: 45:71
+        _0 = MyUnsafePack::<isize>(move _1);
+        StorageDead(_1);
+        return;
     }
 }
 
 static WRAPPED_UNSAFE: Wrap<&MyUnsafePack<isize>> = {
-    let mut _0: Wrap<&MyUnsafePack<isize>>; // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:24: 46:58
-    let mut _1: &MyUnsafePack<isize>;    // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-    let _2: &MyUnsafePack<isize>;        // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-    let _3: &MyUnsafePack<isize>;        // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:76: 46:82
+    let mut _0: Wrap<&MyUnsafePack<isize>>;
+    let mut _1: &MyUnsafePack<isize>;
+    let _2: &MyUnsafePack<isize>;
+    let _3: &MyUnsafePack<isize>;
 
     bb0: {
-        StorageLive(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-        StorageLive(_2);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-        StorageLive(_3);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:76: 46:82
-        _3 = const {alloc2: &MyUnsafePack<isize>}; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:76: 46:82
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:46:76: 46:82
-                                         // + literal: Const { ty: &MyUnsafePack<isize>, val: Value(Scalar(alloc2)) }
-        _2 = &(*_3);                     // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-        _1 = &(*_2);                     // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:75: 46:82
-        _0 = Wrap::<&MyUnsafePack<isize>> { value: move _1 }; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:61: 46:84
-        StorageDead(_2);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:83: 46:84
-        StorageDead(_1);                 // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:83: 46:84
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:46:1: 46:85
+        StorageLive(_1);
+        StorageLive(_2);
+        StorageLive(_3);
+        _3 = const {alloc2: &MyUnsafePack<isize>};
+        _2 = &(*_3);
+        _1 = &(*_2);
+        _0 = Wrap::<&MyUnsafePack<isize>> { value: move _1 };
+        StorageDead(_2);
+        StorageDead(_1);
+        return;
     }
 }
 
@@ -144,34 +123,21 @@ alloc2 (static: UNSAFE, size: 8, align: 8) {
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:48:11: 48:11
-    let _1: &UnsafeEnum<isize>;          // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:49:9: 49:10
-    let _2: &UnsafeEnum<isize>;          // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:49:14: 49:21
-    let mut _3: &MyUnsafe<isize>;        // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:24
-    let _4: &MyUnsafe<isize>;            // in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:12
+    let mut _0: ();
+    let _1: &UnsafeEnum<isize>;
+    let _2: &MyUnsafe<isize>;
     scope 1 {
-        debug a => _1;                   // in scope 1 at ui/statics/issue-17718-static-unsafe-interior.rs:49:9: 49:10
+        debug a => _1;
     }
 
     bb0: {
-        _2 = const {alloc3: &UnsafeEnum<isize>}; // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:49:14: 49:21
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:49:14: 49:21
-                                         // + literal: Const { ty: &UnsafeEnum<isize>, val: Value(Scalar(alloc3)) }
-        _1 = _2;                         // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:49:13: 49:21
-        _4 = const {alloc4: &MyUnsafe<isize>}; // scope 1 at ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:12
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:12
-                                         // + literal: Const { ty: &MyUnsafe<isize>, val: Value(Scalar(alloc4)) }
-        _3 = _4;                         // scope 1 at ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:24
-        _0 = MyUnsafe::<isize>::forbidden(move _3) -> bb1; // scope 1 at ui/statics/issue-17718-static-unsafe-interior.rs:51:5: 51:24
-                                         // mir::Constant
-                                         // + span: ui/statics/issue-17718-static-unsafe-interior.rs:51:13: 51:22
-                                         // + literal: Const { ty: for<'a> fn(&'a MyUnsafe<isize>) {MyUnsafe::<isize>::forbidden}, val: Value(<ZST>) }
+        _1 = const {alloc3: &UnsafeEnum<isize>};
+        _2 = const {alloc4: &MyUnsafe<isize>};
+        _0 = MyUnsafe::<isize>::forbidden(_2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:52:2: 52:2
+        return;
     }
 }
 
@@ -184,39 +150,39 @@ alloc3 (static: STATIC1, size: 16, align: 8) {
 }
 
 fn MyUnsafePack(_1: UnsafeCell<T>) -> MyUnsafePack<T> {
-    let mut _0: MyUnsafePack<T>;         // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
+    let mut _0: MyUnsafePack<T>;
 
     bb0: {
-        _0 = MyUnsafePack::<T>(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
+        _0 = MyUnsafePack::<T>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn MyUnsafePack(_1: UnsafeCell<T>) -> MyUnsafePack<T> {
-    let mut _0: MyUnsafePack<T>;         // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
+    let mut _0: MyUnsafePack<T>;
 
     bb0: {
-        _0 = MyUnsafePack::<T>(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:10:1: 10:23
+        _0 = MyUnsafePack::<T>(move _1);
+        return;
     }
 }
 
 fn UnsafeEnum::VariantUnsafe(_1: UnsafeCell<T>) -> UnsafeEnum<T> {
-    let mut _0: UnsafeEnum<T>;           // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
+    let mut _0: UnsafeEnum<T>;
 
     bb0: {
-        _0 = UnsafeEnum::<T>::VariantUnsafe(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
+        _0 = UnsafeEnum::<T>::VariantUnsafe(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn UnsafeEnum::VariantUnsafe(_1: UnsafeCell<T>) -> UnsafeEnum<T> {
-    let mut _0: UnsafeEnum<T>;           // return place in scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
+    let mut _0: UnsafeEnum<T>;
 
     bb0: {
-        _0 = UnsafeEnum::<T>::VariantUnsafe(move _1); // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
-        return;                          // scope 0 at ui/statics/issue-17718-static-unsafe-interior.rs:26:5: 26:18
+        _0 = UnsafeEnum::<T>::VariantUnsafe(move _1);
+        return;
     }
 }

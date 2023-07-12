@@ -1,95 +1,84 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn <impl at ui/associated-types/issue-50301.rs:13:1: 13:20>::get(_1: &Impl) -> ImplIntoIter {
-    debug self => _1;                    // in scope 0 at ui/associated-types/issue-50301.rs:15:12: 15:17
-    let mut _0: ImplIntoIter;            // return place in scope 0 at ui/associated-types/issue-50301.rs:15:22: 15:36
-    let mut _2: std::vec::Vec<u32>;      // in scope 0 at ui/associated-types/issue-50301.rs:16:22: 16:36
-    let mut _3: &std::vec::Vec<u32>;     // in scope 0 at ui/associated-types/issue-50301.rs:16:22: 16:36
+    debug self => _1;
+    let mut _0: ImplIntoIter;
+    let mut _2: std::vec::Vec<u32>;
+    let mut _3: &std::vec::Vec<u32>;
 
     bb0: {
-        _3 = &((*_1).0: std::vec::Vec<u32>); // scope 0 at ui/associated-types/issue-50301.rs:16:22: 16:36
-        _2 = <Vec<u32> as Clone>::clone(move _3) -> bb1; // scope 0 at ui/associated-types/issue-50301.rs:16:22: 16:36
-                                         // mir::Constant
-                                         // + span: ui/associated-types/issue-50301.rs:16:29: 16:34
-                                         // + literal: Const { ty: for<'a> fn(&'a Vec<u32>) -> Vec<u32> {<Vec<u32> as Clone>::clone}, val: Value(<ZST>) }
+        _3 = &((*_1).0: std::vec::Vec<u32>);
+        _2 = <Vec<u32> as Clone>::clone(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = ImplIntoIter(move _2);      // scope 0 at ui/associated-types/issue-50301.rs:16:9: 16:37
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:17:6: 17:6
+        _0 = ImplIntoIter(move _2);
+        return;
     }
 }
 
 fn <impl at ui/associated-types/issue-50301.rs:22:1: 22:43>::into_iter(_1: &ImplIntoIter) -> Cloned<std::slice::Iter<'_, u32>> {
-    debug self => _1;                    // in scope 0 at ui/associated-types/issue-50301.rs:25:18: 25:22
-    let mut _0: std::iter::Cloned<std::slice::Iter<'_, u32>>; // return place in scope 0 at ui/associated-types/issue-50301.rs:25:27: 25:41
-    let mut _2: std::slice::Iter<'_, u32>; // in scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:30
-    let mut _3: &std::vec::Vec<u32>;     // in scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:30
-    let _4: &std::vec::Vec<u32>;         // in scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:18
+    debug self => _1;
+    let mut _0: std::iter::Cloned<std::slice::Iter<'_, u32>>;
+    let mut _2: std::slice::Iter<'_, u32>;
+    let _3: &std::vec::Vec<u32>;
 
     bb0: {
-        _4 = &((*_1).0: std::vec::Vec<u32>); // scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:18
-        _3 = _4;                         // scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:30
-        _2 = <&Vec<u32> as IntoIterator>::into_iter(move _3) -> bb1; // scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:30
-                                         // mir::Constant
-                                         // + span: ui/associated-types/issue-50301.rs:26:19: 26:28
-                                         // + literal: Const { ty: fn(&Vec<u32>) -> <&Vec<u32> as IntoIterator>::IntoIter {<&Vec<u32> as IntoIterator>::into_iter}, val: Value(<ZST>) }
+        _3 = &((*_1).0: std::vec::Vec<u32>);
+        _2 = <&Vec<u32> as IntoIterator>::into_iter(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _0 = <std::slice::Iter<'_, u32> as Iterator>::cloned::<'_, u32>(move _2) -> bb2; // scope 0 at ui/associated-types/issue-50301.rs:26:9: 26:39
-                                         // mir::Constant
-                                         // + span: ui/associated-types/issue-50301.rs:26:31: 26:37
-                                         // + literal: Const { ty: fn(std::slice::Iter<'_, u32>) -> Cloned<std::slice::Iter<'_, u32>> {<std::slice::Iter<'_, u32> as Iterator>::cloned::<'_, u32>}, val: Value(<ZST>) }
+        _0 = <std::slice::Iter<'_, u32> as Iterator>::cloned::<'_, u32>(move _2) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:27:6: 27:6
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/associated-types/issue-50301.rs:30:11: 30:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:31:2: 31:2
+        return;
     }
 }
 
 fn Impl(_1: Vec<u32>) -> Impl {
-    let mut _0: Impl;                    // return place in scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
+    let mut _0: Impl;
 
     bb0: {
-        _0 = Impl(move _1);              // scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
+        _0 = Impl(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Impl(_1: Vec<u32>) -> Impl {
-    let mut _0: Impl;                    // return place in scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
+    let mut _0: Impl;
 
     bb0: {
-        _0 = Impl(move _1);              // scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:11:1: 11:12
+        _0 = Impl(move _1);
+        return;
     }
 }
 
 fn ImplIntoIter(_1: Vec<u32>) -> ImplIntoIter {
-    let mut _0: ImplIntoIter;            // return place in scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
+    let mut _0: ImplIntoIter;
 
     bb0: {
-        _0 = ImplIntoIter(move _1);      // scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
+        _0 = ImplIntoIter(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn ImplIntoIter(_1: Vec<u32>) -> ImplIntoIter {
-    let mut _0: ImplIntoIter;            // return place in scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
+    let mut _0: ImplIntoIter;
 
     bb0: {
-        _0 = ImplIntoIter(move _1);      // scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
-        return;                          // scope 0 at ui/associated-types/issue-50301.rs:20:1: 20:20
+        _0 = ImplIntoIter(move _1);
+        return;
     }
 }

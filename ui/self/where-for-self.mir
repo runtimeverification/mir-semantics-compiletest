@@ -1,34 +1,57 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 static mut COUNT: u32 = {
-    let mut _0: u32;                     // return place in scope 0 at ui/self/where-for-self.rs:6:19: 6:22
+    let mut _0: u32;
 
     bb0: {
-        _0 = const 1_u32;                // scope 0 at ui/self/where-for-self.rs:6:25: 6:26
-        return;                          // scope 0 at ui/self/where-for-self.rs:6:1: 6:27
+        _0 = const 1_u32;
+        return;
     }
 }
 
 fn <impl at ui/self/where-for-self.rs:17:1: 17:33>::bar(_1: &&u32) -> () {
-    debug self => _1;                    // in scope 0 at ui/self/where-for-self.rs:18:12: 18:17
-    let mut _0: ();                      // return place in scope 0 at ui/self/where-for-self.rs:18:19: 18:19
-    let mut _2: *mut u32;                // in scope 0 at ui/self/where-for-self.rs:19:18: 19:23
-    let mut _3: (u32, bool);             // in scope 0 at ui/self/where-for-self.rs:19:18: 19:28
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: *mut u32;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
+        let mut _9: *const ();
+        let mut _10: usize;
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: bool;
     }
 
     bb0: {
-        _2 = const {alloc1: *mut u32};   // scope 1 at ui/self/where-for-self.rs:19:18: 19:23
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:19:18: 19:23
-                                         // + literal: Const { ty: *mut u32, val: Value(Scalar(alloc1)) }
-        _3 = CheckedMul((*_2), const 2_u32); // scope 1 at ui/self/where-for-self.rs:19:18: 19:28
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", (*_2), const 2_u32) -> bb1; // scope 1 at ui/self/where-for-self.rs:19:18: 19:28
+        _2 = const {alloc1: *mut u32};
+        _9 = _2 as *const () (PtrToPtr);
+        _10 = _9 as usize (Transmute);
+        _11 = AlignOf(u32);
+        _12 = Sub(_11, const 1_usize);
+        _13 = BitAnd(_10, _12);
+        _14 = Eq(_13, const 0_usize);
+        assert(_14, "misaligned pointer dereference: address must be a multiple of {} but is {}", _11, _10) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_2) = move (_3.0: u32);        // scope 1 at ui/self/where-for-self.rs:19:18: 19:28
-        return;                          // scope 0 at ui/self/where-for-self.rs:20:6: 20:6
+        (*_2) = Mul((*_2), const 2_u32);
+        return;
+    }
+
+    bb2: {
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(u32);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -37,25 +60,48 @@ alloc1 (static: COUNT, size: 4, align: 4) {
 }
 
 fn <impl at ui/self/where-for-self.rs:23:1: 23:33>::baz(_1: &&u32) -> () {
-    debug self => _1;                    // in scope 0 at ui/self/where-for-self.rs:24:12: 24:17
-    let mut _0: ();                      // return place in scope 0 at ui/self/where-for-self.rs:24:19: 24:19
-    let mut _2: *mut u32;                // in scope 0 at ui/self/where-for-self.rs:25:18: 25:23
-    let mut _3: (u32, bool);             // in scope 0 at ui/self/where-for-self.rs:25:18: 25:28
+    debug self => _1;
+    let mut _0: ();
+    let mut _2: *mut u32;
     scope 1 {
+        let mut _3: *const ();
+        let mut _4: usize;
+        let mut _5: usize;
+        let mut _6: usize;
+        let mut _7: usize;
+        let mut _8: bool;
+        let mut _9: *const ();
+        let mut _10: usize;
+        let mut _11: usize;
+        let mut _12: usize;
+        let mut _13: usize;
+        let mut _14: bool;
     }
 
     bb0: {
-        _2 = const {alloc1: *mut u32};   // scope 1 at ui/self/where-for-self.rs:25:18: 25:23
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:25:18: 25:23
-                                         // + literal: Const { ty: *mut u32, val: Value(Scalar(alloc1)) }
-        _3 = CheckedMul((*_2), const 3_u32); // scope 1 at ui/self/where-for-self.rs:25:18: 25:28
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", (*_2), const 3_u32) -> bb1; // scope 1 at ui/self/where-for-self.rs:25:18: 25:28
+        _2 = const {alloc1: *mut u32};
+        _9 = _2 as *const () (PtrToPtr);
+        _10 = _9 as usize (Transmute);
+        _11 = AlignOf(u32);
+        _12 = Sub(_11, const 1_usize);
+        _13 = BitAnd(_10, _12);
+        _14 = Eq(_13, const 0_usize);
+        assert(_14, "misaligned pointer dereference: address must be a multiple of {} but is {}", _11, _10) -> [success: bb2, unwind unreachable];
     }
 
     bb1: {
-        (*_2) = move (_3.0: u32);        // scope 1 at ui/self/where-for-self.rs:25:18: 25:28
-        return;                          // scope 0 at ui/self/where-for-self.rs:26:6: 26:6
+        (*_2) = Mul((*_2), const 3_u32);
+        return;
+    }
+
+    bb2: {
+        _3 = _2 as *const () (PtrToPtr);
+        _4 = _3 as usize (Transmute);
+        _5 = AlignOf(u32);
+        _6 = Sub(_5, const 1_usize);
+        _7 = BitAnd(_4, _6);
+        _8 = Eq(_7, const 0_usize);
+        assert(_8, "misaligned pointer dereference: address must be a multiple of {} but is {}", _5, _4) -> [success: bb1, unwind unreachable];
     }
 }
 
@@ -64,168 +110,129 @@ alloc1 (static: COUNT, size: 4, align: 4) {
 }
 
 fn foo1(_1: &T) -> () {
-    debug x => _1;                       // in scope 0 at ui/self/where-for-self.rs:30:12: 30:13
-    let mut _0: ();                      // return place in scope 0 at ui/self/where-for-self.rs:31:5: 31:5
-    let mut _2: &&T;                     // in scope 0 at ui/self/where-for-self.rs:33:5: 33:12
+    debug x => _1;
+    let mut _0: ();
+    let mut _2: &&T;
 
     bb0: {
-        _2 = &_1;                        // scope 0 at ui/self/where-for-self.rs:33:5: 33:12
-        _0 = <&T as Bar<'_>>::bar(move _2) -> bb1; // scope 0 at ui/self/where-for-self.rs:33:5: 33:12
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:33:7: 33:10
-                                         // + literal: Const { ty: for<'a> fn(&'a &T) {<&T as Bar<'_>>::bar}, val: Value(<ZST>) }
+        _2 = &_1;
+        _0 = <&T as Bar<'_>>::bar(move _2) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/self/where-for-self.rs:34:2: 34:2
+        return;
     }
 }
 
 fn foo2(_1: &T) -> () {
-    debug x => _1;                       // in scope 0 at ui/self/where-for-self.rs:37:12: 37:13
-    let mut _0: ();                      // return place in scope 0 at ui/self/where-for-self.rs:38:5: 38:5
-    let _2: ();                          // in scope 0 at ui/self/where-for-self.rs:40:5: 40:12
-    let mut _3: &&T;                     // in scope 0 at ui/self/where-for-self.rs:40:5: 40:12
-    let mut _4: &&T;                     // in scope 0 at ui/self/where-for-self.rs:41:5: 41:12
+    debug x => _1;
+    let mut _0: ();
+    let _2: ();
+    let mut _3: &&T;
+    let mut _4: &&T;
 
     bb0: {
-        _3 = &_1;                        // scope 0 at ui/self/where-for-self.rs:40:5: 40:12
-        _2 = <&T as Baz<'_>>::baz(move _3) -> bb1; // scope 0 at ui/self/where-for-self.rs:40:5: 40:12
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:40:7: 40:10
-                                         // + literal: Const { ty: for<'a> fn(&'a &T) {<&T as Baz<'_>>::baz}, val: Value(<ZST>) }
+        _3 = &_1;
+        _2 = <&T as Baz<'_>>::baz(move _3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _4 = &_1;                        // scope 0 at ui/self/where-for-self.rs:41:5: 41:12
-        _0 = <&T as Bar<'_>>::bar(move _4) -> bb2; // scope 0 at ui/self/where-for-self.rs:41:5: 41:12
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:41:7: 41:10
-                                         // + literal: Const { ty: for<'a> fn(&'a &T) {<&T as Bar<'_>>::bar}, val: Value(<ZST>) }
+        _4 = &_1;
+        _0 = <&T as Bar<'_>>::bar(move _4) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        return;                          // scope 0 at ui/self/where-for-self.rs:42:2: 42:2
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/self/where-for-self.rs:44:11: 44:11
-    let _1: u32;                         // in scope 0 at ui/self/where-for-self.rs:45:9: 45:10
-    let _2: ();                          // in scope 0 at ui/self/where-for-self.rs:46:5: 46:13
-    let mut _3: &u32;                    // in scope 0 at ui/self/where-for-self.rs:46:10: 46:12
-    let _4: &u32;                        // in scope 0 at ui/self/where-for-self.rs:46:10: 46:12
-    let _5: ();                          // in scope 0 at ui/self/where-for-self.rs:47:5: 47:13
-    let mut _6: &u32;                    // in scope 0 at ui/self/where-for-self.rs:47:10: 47:12
-    let _7: &u32;                        // in scope 0 at ui/self/where-for-self.rs:47:10: 47:12
-    let mut _8: (&u32, &u32);            // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-    let mut _9: &u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-    let _10: *mut u32;                   // in scope 0 at ui/self/where-for-self.rs:49:20: 49:25
-    let mut _11: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _14: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-    let mut _15: bool;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-    let mut _16: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-    let mut _17: u32;                    // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-    let _19: !;                          // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-    let mut _20: core::panicking::AssertKind; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-    let mut _21: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let _22: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-    let mut _23: &u32;                   // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let _24: &u32;                       // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-    let mut _25: std::option::Option<std::fmt::Arguments<'_>>; // in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
+    let mut _0: ();
+    let _1: u32;
+    let _2: ();
+    let _3: &u32;
+    let _4: ();
+    let _5: &u32;
+    let mut _6: (&u32, &u32);
+    let mut _7: &u32;
+    let _8: *mut u32;
+    let mut _9: &u32;
+    let _10: u32;
+    let mut _13: bool;
+    let mut _14: bool;
+    let mut _15: u32;
+    let mut _16: u32;
+    let _18: !;
+    let mut _19: std::option::Option<std::fmt::Arguments<'_>>;
     scope 1 {
-        debug x => _1;                   // in scope 1 at ui/self/where-for-self.rs:45:9: 45:10
+        debug x => _1;
         scope 2 {
-            let _12: &u32;               // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-            let _13: &u32;               // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-            let mut _26: &u32;           // in scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
+            let _11: &u32;
+            let _12: &u32;
+            let mut _20: *const ();
+            let mut _21: usize;
+            let mut _22: usize;
+            let mut _23: usize;
+            let mut _24: usize;
+            let mut _25: bool;
             scope 3 {
-                debug left_val => _12;   // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-                debug right_val => _13;  // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-                let _18: core::panicking::AssertKind; // in scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                debug left_val => _11;
+                debug right_val => _12;
+                let _17: core::panicking::AssertKind;
                 scope 4 {
-                    debug kind => _18;   // in scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:25: 41:29
+                    debug kind => _17;
                 }
             }
         }
     }
 
     bb0: {
-        _1 = const 42_u32;               // scope 0 at ui/self/where-for-self.rs:45:13: 45:15
-        _4 = &_1;                        // scope 1 at ui/self/where-for-self.rs:46:10: 46:12
-        _3 = _4;                         // scope 1 at ui/self/where-for-self.rs:46:10: 46:12
-        _2 = foo1::<u32>(move _3) -> bb1; // scope 1 at ui/self/where-for-self.rs:46:5: 46:13
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:46:5: 46:9
-                                         // + literal: Const { ty: for<'a> fn(&'a u32) {foo1::<u32>}, val: Value(<ZST>) }
+        _1 = const 42_u32;
+        _3 = &_1;
+        _2 = foo1::<u32>(_3) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        _7 = &_1;                        // scope 1 at ui/self/where-for-self.rs:47:10: 47:12
-        _6 = _7;                         // scope 1 at ui/self/where-for-self.rs:47:10: 47:12
-        _5 = foo2::<u32>(move _6) -> bb2; // scope 1 at ui/self/where-for-self.rs:47:5: 47:13
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:47:5: 47:9
-                                         // + literal: Const { ty: for<'a> fn(&'a u32) {foo2::<u32>}, val: Value(<ZST>) }
+        _5 = &_1;
+        _4 = foo2::<u32>(_5) -> [return: bb2, unwind continue];
     }
 
     bb2: {
-        _10 = const {alloc1: *mut u32};  // scope 2 at ui/self/where-for-self.rs:49:20: 49:25
-                                         // mir::Constant
-                                         // + span: ui/self/where-for-self.rs:49:20: 49:25
-                                         // + literal: Const { ty: *mut u32, val: Value(Scalar(alloc1)) }
-        _9 = &(*_10);                    // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:16: 38:22
-        _26 = const _;                   // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-                                         // + literal: Const { ty: &u32, val: Unevaluated(main, [], Some(promoted[0])) }
-        _11 = _26;                       // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        _8 = (move _9, move _11);        // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:15: 38:32
-        _12 = (_8.0: &u32);              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:14: 39:22
-        _13 = (_8.1: &u32);              // scope 2 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:39:24: 39:33
-        _16 = (*_12);                    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:22: 40:31
-        _17 = const 12_u32;              // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:35: 40:45
-        _15 = Eq(move _16, move _17);    // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:21: 40:46
-        _14 = Not(move _15);             // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
-        switchInt(move _14) -> [0: bb4, otherwise: bb3]; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:40:20: 40:46
+        _8 = const {alloc1: *mut u32};
+        _20 = _8 as *const () (PtrToPtr);
+        _21 = _20 as usize (Transmute);
+        _22 = AlignOf(u32);
+        _23 = Sub(_22, const 1_usize);
+        _24 = BitAnd(_21, _23);
+        _25 = Eq(_24, const 0_usize);
+        assert(_25, "misaligned pointer dereference: address must be a multiple of {} but is {}", _22, _21) -> [success: bb5, unwind unreachable];
     }
 
     bb3: {
-        _18 = const core::panicking::AssertKind::Eq; // scope 3 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:41:32: 41:65
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _20 = const core::panicking::AssertKind::Eq; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:54: 45:58
-                                         // + literal: Const { ty: core::panicking::AssertKind, val: Value(Scalar(0x00)) }
-        _22 = _12;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _21 = _22;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:60: 45:70
-        _24 = _13;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _23 = _24;                       // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:72: 45:83
-        _25 = Option::<Arguments<'_>>::None; // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:85: 45:113
-        _19 = core::panicking::assert_failed::<u32, u32>(move _20, move _21, move _23, move _25); // scope 4 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:114
-                                         // mir::Constant
-                                         // + span: /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:45:21: 45:53
-                                         // + literal: Const { ty: for<'a, 'b, 'c> fn(core::panicking::AssertKind, &'a u32, &'b u32, Option<Arguments<'c>>) -> ! {core::panicking::assert_failed::<u32, u32>}, val: Value(<ZST>) }
+        _17 = core::panicking::AssertKind::Eq;
+        _19 = Option::<Arguments<'_>>::None;
+        _18 = core::panicking::assert_failed::<u32, u32>(move _17, _11, _12, move _19) -> unwind continue;
     }
 
     bb4: {
-        return;                          // scope 0 at ui/self/where-for-self.rs:51:2: 51:2
+        return;
+    }
+
+    bb5: {
+        _7 = &(*_8);
+        _10 = const 12_u32;
+        _9 = &_10;
+        _6 = (move _7, move _9);
+        _11 = (_6.0: &u32);
+        _12 = (_6.1: &u32);
+        _15 = (*_11);
+        _16 = (*_12);
+        _14 = Eq(move _15, move _16);
+        _13 = Not(move _14);
+        switchInt(move _13) -> [0: bb4, otherwise: bb3];
     }
 }
 
 alloc1 (static: COUNT, size: 4, align: 4) {
     01 00 00 00                                     │ ....
-}
-
-promoted[0] in main: &u32 = {
-    let mut _0: &u32;                    // return place in scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    let mut _1: u32;                     // in scope 0 at ui/self/where-for-self.rs:49:27: 49:29
-
-    bb0: {
-        _1 = const 12_u32;               // scope 0 at ui/self/where-for-self.rs:49:27: 49:29
-        _0 = &_1;                        // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-        return;                          // scope 0 at /rustc/bd39bbb4bb92df439bf6d85470e296cc6a47ffbd/library/core/src/macros/mod.rs:38:24: 38:31
-    }
 }

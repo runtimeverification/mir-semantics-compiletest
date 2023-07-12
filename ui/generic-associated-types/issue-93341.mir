@@ -1,202 +1,176 @@
 // WARNING: This output format is intended for human consumers only
 // and is subject to change without notice. Knock yourself out.
 fn new_id() -> Id<'_> {
-    let mut _0: Id<'_>;                  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:7:16: 7:27
+    let mut _0: Id<'_>;
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:9:2: 9:2
+        return;
     }
 }
 
 fn <impl at ui/generic-associated-types/issue-93341.rs:17:1: 17:44>::new(_1: F) -> ExistentialLifetime<S> {
-    debug f => _1;                       // in scope 0 at ui/generic-associated-types/issue-93341.rs:18:19: 18:20
-    let mut _0: ExistentialLifetime<S>;  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:18:28: 18:50
-    let mut _2: <S as HasLifetime>::AtLifetime<'_>; // in scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:40
-    let mut _3: F;                       // in scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:30
-    let mut _4: (Id<'_>,);               // in scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:40
-    let mut _5: Id<'_>;                  // in scope 0 at ui/generic-associated-types/issue-93341.rs:20:31: 20:39
-    let mut _6: bool;                    // in scope 0 at ui/generic-associated-types/issue-93341.rs:20:39: 20:40
+    debug f => _1;
+    let mut _0: ExistentialLifetime<S>;
+    let mut _2: <S as HasLifetime>::AtLifetime<'_>;
+    let mut _3: F;
+    let mut _4: Id<'_>;
+    let mut _5: bool;
 
     bb0: {
-        _6 = const false;                // scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:40
-        _6 = const true;                 // scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:30
-        _3 = move _1;                    // scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:30
-        _5 = new_id() -> [return: bb1, unwind: bb5]; // scope 0 at ui/generic-associated-types/issue-93341.rs:20:31: 20:39
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:20:31: 20:37
-                                         // + literal: Const { ty: fn() -> Id<'static> {new_id}, val: Value(<ZST>) }
+        _5 = const false;
+        _5 = const true;
+        _3 = move _1;
+        _4 = new_id() -> [return: bb1, unwind: bb5];
     }
 
     bb1: {
-        _6 = const false;                // scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:40
-        _2 = <F as FnOnce<(Id<'_>,)>>::call_once(move _3, move _4) -> [return: bb2, unwind: bb5]; // scope 0 at ui/generic-associated-types/issue-93341.rs:20:29: 20:40
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:20:29: 20:30
-                                         // + literal: Const { ty: extern "rust-call" fn(F, (Id<'_>,)) -> <F as FnOnce<(Id<'_>,)>>::Output {<F as FnOnce<(Id<'_>,)>>::call_once}, val: Value(<ZST>) }
+        _5 = const false;
+        _2 = <F as FnOnce<(Id<'_>,)>>::call_once(move _3, const (Id::<'_>(PhantomData::<fn(&()) -> &()>),)) -> [return: bb2, unwind: bb5];
     }
 
     bb2: {
-        _6 = const false;                // scope 0 at ui/generic-associated-types/issue-93341.rs:20:39: 20:40
-        _0 = ExistentialLifetime::<S>(move _2); // scope 0 at ui/generic-associated-types/issue-93341.rs:20:9: 20:41
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:21:6: 21:6
+        _5 = const false;
+        _0 = ExistentialLifetime::<S>(move _2);
+        return;
     }
 
     bb3 (cleanup): {
-        resume;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:18:5: 21:6
+        resume;
     }
 
     bb4 (cleanup): {
-        drop(_3) -> bb3;                 // scope 0 at ui/generic-associated-types/issue-93341.rs:20:39: 20:40
+        drop(_3) -> [return: bb3, unwind terminate];
     }
 
     bb5 (cleanup): {
-        switchInt(_6) -> [0: bb3, otherwise: bb4]; // scope 0 at ui/generic-associated-types/issue-93341.rs:20:39: 20:40
+        switchInt(_5) -> [0: bb3, otherwise: bb4];
     }
 }
 
 fn broken0() -> ExistentialLifetime<ExampleMarker> {
-    let mut _0: ExistentialLifetime<ExampleMarker>; // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:34:17: 34:51
+    let mut _0: ExistentialLifetime<ExampleMarker>;
 
     bb0: {
-        _0 = ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> ExampleS<'id> {broken0::new_helper}>(broken0::new_helper) -> bb1; // scope 0 at ui/generic-associated-types/issue-93341.rs:39:5: 39:58
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:39:5: 39:46
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(for<'id> fn(Id<'id>) -> ExampleS<'id> {broken0::new_helper}) -> ExistentialLifetime<ExampleMarker> {ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> ExampleS<'id> {broken0::new_helper}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:39:47: 39:57
-                                         // + literal: Const { ty: for<'id> fn(Id<'id>) -> ExampleS<'id> {broken0::new_helper}, val: Value(<ZST>) }
+        _0 = ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> ExampleS<'id> {broken0::new_helper}>(broken0::new_helper) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:40:2: 40:2
+        return;
     }
 }
 
 fn broken0::new_helper(_1: Id<'_>) -> ExampleS<'_> {
-    debug id => _1;                      // in scope 0 at ui/generic-associated-types/issue-93341.rs:35:24: 35:26
-    let mut _0: ExampleS<'_>;            // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:35:40: 35:53
+    debug id => const Id::<'_>(PhantomData::<fn(&()) -> &()>);
+    let mut _0: ExampleS<'_>;
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:37:6: 37:6
+        return;
     }
 }
 
 fn broken1() -> ExistentialLifetime<ExampleMarker> {
-    let mut _0: ExistentialLifetime<ExampleMarker>; // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:42:17: 42:51
+    let mut _0: ExistentialLifetime<ExampleMarker>;
 
     bb0: {
-        _0 = ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> <ExampleMarker as HasLifetime>::AtLifetime<'id> {broken1::new_helper}>(broken1::new_helper) -> bb1; // scope 0 at ui/generic-associated-types/issue-93341.rs:47:5: 47:58
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:47:5: 47:46
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn(for<'id> fn(Id<'id>) -> <ExampleMarker as HasLifetime>::AtLifetime<'id> {broken1::new_helper}) -> ExistentialLifetime<ExampleMarker> {ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> <ExampleMarker as HasLifetime>::AtLifetime<'id> {broken1::new_helper}>}, val: Value(<ZST>) }
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:47:47: 47:57
-                                         // + literal: Const { ty: for<'id> fn(Id<'id>) -> <ExampleMarker as HasLifetime>::AtLifetime<'id> {broken1::new_helper}, val: Value(<ZST>) }
+        _0 = ExistentialLifetime::<ExampleMarker>::new::<for<'id> fn(Id<'id>) -> <ExampleMarker as HasLifetime>::AtLifetime<'id> {broken1::new_helper}>(broken1::new_helper) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:48:2: 48:2
+        return;
     }
 }
 
 fn broken1::new_helper(_1: Id<'_>) -> ExampleS<'_> {
-    debug id => _1;                      // in scope 0 at ui/generic-associated-types/issue-93341.rs:43:24: 43:26
-    let mut _0: ExampleS<'_>;            // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:43:40: 43:87
+    debug id => const Id::<'_>(PhantomData::<fn(&()) -> &()>);
+    let mut _0: ExampleS<'_>;
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:45:6: 45:6
+        return;
     }
 }
 
 fn broken2() -> ExistentialLifetime<ExampleMarker> {
-    let mut _0: ExistentialLifetime<ExampleMarker>; // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:50:17: 50:51
-    let mut _1: [closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]; // in scope 0 at ui/generic-associated-types/issue-93341.rs:51:47: 51:64
+    let mut _0: ExistentialLifetime<ExampleMarker>;
 
     bb0: {
-        _0 = ExistentialLifetime::<ExampleMarker>::new::<[closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]>(move _1) -> bb1; // scope 0 at ui/generic-associated-types/issue-93341.rs:51:5: 51:65
-                                         // mir::Constant
-                                         // + span: ui/generic-associated-types/issue-93341.rs:51:5: 51:46
-                                         // + user_ty: UserType(0)
-                                         // + literal: Const { ty: fn([closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]) -> ExistentialLifetime<ExampleMarker> {ExistentialLifetime::<ExampleMarker>::new::<[closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]>}, val: Value(<ZST>) }
+        _0 = ExistentialLifetime::<ExampleMarker>::new::<[closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]>(const ZeroSized: [closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51]) -> [return: bb1, unwind continue];
     }
 
     bb1: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:52:2: 52:2
+        return;
     }
 }
 
 fn broken2::{closure#0}(_1: [closure@ui/generic-associated-types/issue-93341.rs:51:47: 51:51], _2: Id<'_>) -> ExampleS<'_> {
-    debug id => _2;                      // in scope 0 at ui/generic-associated-types/issue-93341.rs:51:48: 51:50
-    let mut _0: ExampleS<'_>;            // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:51:52: 51:52
+    debug id => const Id::<'_>(PhantomData::<fn(&()) -> &()>);
+    let mut _0: ExampleS<'_>;
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:51:64: 51:64
+        return;
     }
 }
 
 fn main() -> () {
-    let mut _0: ();                      // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:54:11: 54:11
+    let mut _0: ();
 
     bb0: {
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:54:13: 54:13
+        return;
     }
 }
 
 fn Id(_1: PhantomData<fn(&()) -> &()>) -> Id<'_> {
-    let mut _0: Id<'_>;                  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
+    let mut _0: Id<'_>;
 
     bb0: {
-        _0 = Id::<'_>(move _1);          // scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
+        _0 = Id::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn Id(_1: PhantomData<fn(&()) -> &()>) -> Id<'_> {
-    let mut _0: Id<'_>;                  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
+    let mut _0: Id<'_>;
 
     bb0: {
-        _0 = Id::<'_>(move _1);          // scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:5:1: 5:19
+        _0 = Id::<'_>(move _1);
+        return;
     }
 }
 
 fn ExistentialLifetime(_1: <S as HasLifetime>::AtLifetime<'_>) -> ExistentialLifetime<S> {
-    let mut _0: ExistentialLifetime<S>;  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
+    let mut _0: ExistentialLifetime<S>;
 
     bb0: {
-        _0 = ExistentialLifetime::<S>(move _1); // scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
+        _0 = ExistentialLifetime::<S>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn ExistentialLifetime(_1: <S as HasLifetime>::AtLifetime<'_>) -> ExistentialLifetime<S> {
-    let mut _0: ExistentialLifetime<S>;  // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
+    let mut _0: ExistentialLifetime<S>;
 
     bb0: {
-        _0 = ExistentialLifetime::<S>(move _1); // scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:15:1: 15:47
+        _0 = ExistentialLifetime::<S>(move _1);
+        return;
     }
 }
 
 fn ExampleS(_1: Id<'_>) -> ExampleS<'_> {
-    let mut _0: ExampleS<'_>;            // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
+    let mut _0: ExampleS<'_>;
 
     bb0: {
-        _0 = ExampleS::<'_>(move _1);    // scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
+        _0 = ExampleS::<'_>(move _1);
+        return;
     }
 }
 
 // MIR FOR CTFE
 fn ExampleS(_1: Id<'_>) -> ExampleS<'_> {
-    let mut _0: ExampleS<'_>;            // return place in scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
+    let mut _0: ExampleS<'_>;
 
     bb0: {
-        _0 = ExampleS::<'_>(move _1);    // scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
-        return;                          // scope 0 at ui/generic-associated-types/issue-93341.rs:25:1: 25:21
+        _0 = ExampleS::<'_>(move _1);
+        return;
     }
 }
