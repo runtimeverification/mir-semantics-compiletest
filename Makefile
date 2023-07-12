@@ -1,7 +1,7 @@
  
 .PHONY: clean clean-mir default ui-mir
 
-default: ui-mir
+default: clean-mir ui-mir
 
 clean: clean-mir
 
