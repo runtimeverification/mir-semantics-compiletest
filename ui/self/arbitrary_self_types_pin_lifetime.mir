@@ -75,17 +75,17 @@ fn <impl at ui/self/arbitrary_self_types_pin_lifetime.rs:30:1: 30:35>::fields(_1
     }
 
     bb0: {
-        _2 = Pin::<&mut Bar<T, U>>::get_mut(move _1) -> [return: bb1, unwind continue];
+        _2 = Pin::<&mut Bar<T, U>>::get_mut(move _1) -> bb1;
     }
 
     bb1: {
         _4 = &mut ((*_2).0: T);
-        _3 = Pin::<&mut T>::new(_4) -> [return: bb2, unwind continue];
+        _3 = Pin::<&mut T>::new(_4) -> bb2;
     }
 
     bb2: {
         _6 = &mut ((*_2).1: U);
-        _5 = Pin::<&mut U>::new(_6) -> [return: bb3, unwind continue];
+        _5 = Pin::<&mut U>::new(_6) -> bb3;
     }
 
     bb3: {
@@ -105,12 +105,12 @@ fn <impl at ui/self/arbitrary_self_types_pin_lifetime.rs:44:1: 44:26>::poll_fill
     let _7: &mut Baz;
 
     bb0: {
-        _7 = Pin::<&mut Baz>::get_mut(move _1) -> [return: bb1, unwind continue];
+        _7 = Pin::<&mut Baz>::get_mut(move _1) -> bb1;
     }
 
     bb1: {
         _6 = &((*_7).0: std::vec::Vec<u8>);
-        _5 = <Vec<u8> as Deref>::deref(_6) -> [return: bb2, unwind continue];
+        _5 = <Vec<u8> as Deref>::deref(_6) -> bb2;
     }
 
     bb2: {
@@ -151,56 +151,56 @@ fn main() -> () {
 
     bb0: {
         _4 = &_1;
-        _3 = Pin::<&Foo>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Pin::<&Foo>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = Foo::pin_ref(move _3) -> [return: bb2, unwind continue];
+        _2 = Foo::pin_ref(move _3) -> bb2;
     }
 
     bb2: {
         _7 = &mut _1;
-        _6 = Pin::<&mut Foo>::new(move _7) -> [return: bb3, unwind continue];
+        _6 = Pin::<&mut Foo>::new(move _7) -> bb3;
     }
 
     bb3: {
-        _5 = Foo::pin_mut(move _6) -> [return: bb4, unwind continue];
+        _5 = Foo::pin_mut(move _6) -> bb4;
     }
 
     bb4: {
         _12 = &_1;
-        _11 = Pin::<&Foo>::new(move _12) -> [return: bb5, unwind continue];
+        _11 = Pin::<&Foo>::new(move _12) -> bb5;
     }
 
     bb5: {
-        _10 = Pin::<Pin<&Foo>>::new(move _11) -> [return: bb6, unwind continue];
+        _10 = Pin::<Pin<&Foo>>::new(move _11) -> bb6;
     }
 
     bb6: {
-        _9 = Pin::<Pin<Pin<&Foo>>>::new(move _10) -> [return: bb7, unwind continue];
+        _9 = Pin::<Pin<Pin<&Foo>>>::new(move _10) -> bb7;
     }
 
     bb7: {
-        _8 = Foo::pin_pin_pin_ref(move _9) -> [return: bb8, unwind continue];
+        _8 = Foo::pin_pin_pin_ref(move _9) -> bb8;
     }
 
     bb8: {
         _15 = &_1;
-        _14 = Pin::<&Foo>::new(move _15) -> [return: bb9, unwind continue];
+        _14 = Pin::<&Foo>::new(move _15) -> bb9;
     }
 
     bb9: {
-        _13 = Foo::pin_ref_impl_trait(move _14) -> [return: bb10, unwind continue];
+        _13 = Foo::pin_ref_impl_trait(move _14) -> bb10;
     }
 
     bb10: {
         _16 = Bar::<u8, u8> { field1: const 0_u8, field2: const 1_u8 };
         _19 = &mut _16;
-        _18 = Pin::<&mut Bar<u8, u8>>::new(move _19) -> [return: bb11, unwind continue];
+        _18 = Pin::<&mut Bar<u8, u8>>::new(move _19) -> bb11;
     }
 
     bb11: {
-        _17 = Bar::<u8, u8>::fields(move _18) -> [return: bb12, unwind continue];
+        _17 = Bar::<u8, u8>::fields(move _18) -> bb12;
     }
 
     bb12: {

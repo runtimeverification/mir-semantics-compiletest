@@ -10,7 +10,7 @@ fn <impl at ui/deriving/deriving-eq-ord-boxed-slice.rs:2:10: 2:19>::eq(_1: &Foo,
     bb0: {
         _3 = &((*_1).0: std::boxed::Box<[u8]>);
         _4 = &((*_2).0: std::boxed::Box<[u8]>);
-        _0 = <Box<[u8]> as PartialEq>::eq(move _3, move _4) -> [return: bb1, unwind continue];
+        _0 = <Box<[u8]> as PartialEq>::eq(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -28,7 +28,7 @@ fn <impl at ui/deriving/deriving-eq-ord-boxed-slice.rs:2:21: 2:31>::partial_cmp(
     bb0: {
         _3 = &((*_1).0: std::boxed::Box<[u8]>);
         _4 = &((*_2).0: std::boxed::Box<[u8]>);
-        _0 = <Box<[u8]> as PartialOrd>::partial_cmp(_3, _4) -> [return: bb1, unwind continue];
+        _0 = <Box<[u8]> as PartialOrd>::partial_cmp(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -57,7 +57,7 @@ fn <impl at ui/deriving/deriving-eq-ord-boxed-slice.rs:2:37: 2:40>::cmp(_1: &Foo
     bb0: {
         _3 = &((*_1).0: std::boxed::Box<[u8]>);
         _4 = &((*_2).0: std::boxed::Box<[u8]>);
-        _0 = <Box<[u8]> as Ord>::cmp(_3, _4) -> [return: bb1, unwind continue];
+        _0 = <Box<[u8]> as Ord>::cmp(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -78,8 +78,8 @@ fn <impl at ui/deriving/deriving-eq-ord-boxed-slice.rs:2:42: 2:47>::fmt(_1: &Foo
         _3 = const "Foo";
         _6 = &((*_1).0: std::boxed::Box<[u8]>);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -201,18 +201,18 @@ fn main() -> () {
 
     bb0: {
         _4 = [const 0_u8, const 1_u8, const 2_u8];
-        _3 = Box::<[u8; 3]>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<[u8; 3]>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<[u8]> (Pointer(Unsize));
         _1 = Foo(move _2);
         _8 = [const 0_u8, const 1_u8, const 2_u8];
         _7 = Box::<[u8; 3]>::new(move _8) -> [return: bb2, unwind: bb33];
     }
 
     bb2: {
-        _6 = move _7 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
+        _6 = move _7 as std::boxed::Box<[u8]> (Pointer(Unsize));
         _5 = Foo(move _6);
         _10 = &_1;
         _11 = &_5;
@@ -236,7 +236,7 @@ fn main() -> () {
     bb5: {
         _23 = [const "", const "\n"];
         _22 = &_23;
-        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _21 = _22 as &[&str] (Pointer(Unsize));
         _30 = &_1;
         _31 = &_5;
         _29 = <Foo as PartialEq>::ne(move _30, move _31) -> [return: bb6, unwind: bb32];
@@ -250,7 +250,7 @@ fn main() -> () {
     bb7: {
         _26 = [move _27];
         _25 = &_26;
-        _24 = _25 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _24 = _25 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _20 = Arguments::<'_>::new_v1(move _21, move _24) -> [return: bb8, unwind: bb32];
     }
 
@@ -261,7 +261,7 @@ fn main() -> () {
     bb9: {
         _36 = [const "", const "\n"];
         _35 = &_36;
-        _34 = _35 as &[&str] (PointerCoercion(Unsize));
+        _34 = _35 as &[&str] (Pointer(Unsize));
         _43 = &_1;
         _44 = &_5;
         _42 = <Foo as PartialOrd>::lt(move _43, move _44) -> [return: bb10, unwind: bb32];
@@ -275,7 +275,7 @@ fn main() -> () {
     bb11: {
         _39 = [move _40];
         _38 = &_39;
-        _37 = _38 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _37 = _38 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _33 = Arguments::<'_>::new_v1(move _34, move _37) -> [return: bb12, unwind: bb32];
     }
 
@@ -286,7 +286,7 @@ fn main() -> () {
     bb13: {
         _49 = [const "", const "\n"];
         _48 = &_49;
-        _47 = _48 as &[&str] (PointerCoercion(Unsize));
+        _47 = _48 as &[&str] (Pointer(Unsize));
         _56 = &_1;
         _57 = &_5;
         _55 = <Foo as PartialOrd>::le(move _56, move _57) -> [return: bb14, unwind: bb32];
@@ -300,7 +300,7 @@ fn main() -> () {
     bb15: {
         _52 = [move _53];
         _51 = &_52;
-        _50 = _51 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _50 = _51 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _46 = Arguments::<'_>::new_v1(move _47, move _50) -> [return: bb16, unwind: bb32];
     }
 
@@ -311,7 +311,7 @@ fn main() -> () {
     bb17: {
         _62 = [const "", const "\n"];
         _61 = &_62;
-        _60 = _61 as &[&str] (PointerCoercion(Unsize));
+        _60 = _61 as &[&str] (Pointer(Unsize));
         _69 = &_1;
         _70 = &_5;
         _68 = <Foo as PartialEq>::eq(move _69, move _70) -> [return: bb18, unwind: bb32];
@@ -325,7 +325,7 @@ fn main() -> () {
     bb19: {
         _65 = [move _66];
         _64 = &_65;
-        _63 = _64 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _63 = _64 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _59 = Arguments::<'_>::new_v1(move _60, move _63) -> [return: bb20, unwind: bb32];
     }
 
@@ -336,7 +336,7 @@ fn main() -> () {
     bb21: {
         _75 = [const "", const "\n"];
         _74 = &_75;
-        _73 = _74 as &[&str] (PointerCoercion(Unsize));
+        _73 = _74 as &[&str] (Pointer(Unsize));
         _82 = &_1;
         _83 = &_5;
         _81 = <Foo as PartialOrd>::gt(move _82, move _83) -> [return: bb22, unwind: bb32];
@@ -350,7 +350,7 @@ fn main() -> () {
     bb23: {
         _78 = [move _79];
         _77 = &_78;
-        _76 = _77 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _76 = _77 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _72 = Arguments::<'_>::new_v1(move _73, move _76) -> [return: bb24, unwind: bb32];
     }
 
@@ -361,7 +361,7 @@ fn main() -> () {
     bb25: {
         _88 = [const "", const "\n"];
         _87 = &_88;
-        _86 = _87 as &[&str] (PointerCoercion(Unsize));
+        _86 = _87 as &[&str] (Pointer(Unsize));
         _95 = &_1;
         _96 = &_5;
         _94 = <Foo as PartialOrd>::ge(move _95, move _96) -> [return: bb26, unwind: bb32];
@@ -375,7 +375,7 @@ fn main() -> () {
     bb27: {
         _91 = [move _92];
         _90 = &_91;
-        _89 = _90 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _89 = _90 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _85 = Arguments::<'_>::new_v1(move _86, move _89) -> [return: bb28, unwind: bb32];
     }
 
@@ -388,7 +388,7 @@ fn main() -> () {
     }
 
     bb30: {
-        drop(_1) -> [return: bb31, unwind continue];
+        drop(_1) -> bb31;
     }
 
     bb31: {

@@ -6,7 +6,7 @@ fn bind(_1: [u8; N]) -> [u8; N] {
     let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+        _2 = core::panicking::panic(const "not yet implemented");
     }
 }
 
@@ -57,18 +57,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = <[u8; 5] as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <[u8; 5] as Default>::default() -> bb1;
     }
 
     bb1: {
         _3 = _1;
-        _2 = bind::<5>(move _3) -> [return: bb2, unwind continue];
+        _2 = bind::<5>(move _3) -> bb2;
     }
 
     bb2: {
         _1 = move _2;
         _5 = _1;
-        _4 = sink(move _5) -> [return: bb3, unwind continue];
+        _4 = sink(move _5) -> bb3;
     }
 
     bb3: {

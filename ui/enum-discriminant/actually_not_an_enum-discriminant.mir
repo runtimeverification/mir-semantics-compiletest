@@ -41,7 +41,7 @@ fn check(_1: u8) -> () {
     bb1: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u8, u8>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u8, u8>(move _12, _6, _7, move _14);
     }
 
     bb2: {
@@ -59,11 +59,11 @@ fn generic() -> () {
     }
 
     bb0: {
-        _1 = Vec::<T>::new() -> [return: bb1, unwind continue];
+        _1 = Vec::<T>::new() -> bb1;
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -150,69 +150,69 @@ fn main() -> () {
         _4 = const true;
         _3 = &_4;
         _2 = discriminant((*_3));
-        _1 = check(move _2) -> [return: bb1, unwind continue];
+        _1 = check(move _2) -> bb1;
     }
 
     bb1: {
         _8 = const 'a';
         _7 = &_8;
         _6 = discriminant((*_7));
-        _5 = check(move _6) -> [return: bb2, unwind continue];
+        _5 = check(move _6) -> bb2;
     }
 
     bb2: {
         _12 = const 7_i32;
         _11 = &_12;
         _10 = discriminant((*_11));
-        _9 = check(move _10) -> [return: bb3, unwind continue];
+        _9 = check(move _10) -> bb3;
     }
 
     bb3: {
         _16 = const 7f64;
         _15 = &_16;
         _14 = discriminant((*_15));
-        _13 = check(move _14) -> [return: bb4, unwind continue];
+        _13 = check(move _14) -> bb4;
     }
 
     bb4: {
         _19 = &_20;
         _18 = discriminant((*_19));
-        _17 = check(move _18) -> [return: bb5, unwind continue];
+        _17 = check(move _18) -> bb5;
     }
 
     bb5: {
         _24 = Struct { _a: const 7_u32 };
         _23 = &_24;
         _22 = discriminant((*_23));
-        _21 = check(move _22) -> [return: bb6, unwind continue];
+        _21 = check(move _22) -> bb6;
     }
 
     bb6: {
         _28 = Union { _a: const 7_u32 };
         _27 = &_28;
         _26 = discriminant((*_27));
-        _25 = check(move _26) -> [return: bb7, unwind continue];
+        _25 = check(move _26) -> bb7;
     }
 
     bb7: {
         _32 = [const 7_i32, const 77_i32];
         _31 = &_32;
         _30 = discriminant((*_31));
-        _29 = check(move _30) -> [return: bb8, unwind continue];
+        _29 = check(move _30) -> bb8;
     }
 
     bb8: {
         _36 = const 7_usize as *const () (PointerFromExposedAddress);
         _35 = &_36;
         _34 = discriminant((*_35));
-        _33 = check(move _34) -> [return: bb9, unwind continue];
+        _33 = check(move _34) -> bb9;
     }
 
     bb9: {
         _40 = const 7_usize as *mut () (PointerFromExposedAddress);
         _39 = &_40;
         _38 = discriminant((*_39));
-        _37 = check(move _38) -> [return: bb10, unwind continue];
+        _37 = check(move _38) -> bb10;
     }
 
     bb10: {
@@ -220,7 +220,7 @@ fn main() -> () {
         _44 = &_45;
         _43 = &_44;
         _42 = discriminant((*_43));
-        _41 = check(move _42) -> [return: bb11, unwind continue];
+        _41 = check(move _42) -> bb11;
     }
 
     bb11: {
@@ -228,34 +228,34 @@ fn main() -> () {
         _49 = &mut _50;
         _48 = &_49;
         _47 = discriminant((*_48));
-        _46 = check(move _47) -> [return: bb12, unwind continue];
+        _46 = check(move _47) -> bb12;
     }
 
     bb12: {
         _53 = &_54;
         _52 = discriminant((*_53));
-        _51 = check(move _52) -> [return: bb13, unwind continue];
+        _51 = check(move _52) -> bb13;
     }
 
     bb13: {
-        _55 = check as fn(u8) (PointerCoercion(ReifyFnPointer));
+        _55 = check as fn(u8) (Pointer(ReifyFnPointer));
         _58 = &_55;
         _57 = discriminant((*_58));
-        _56 = check(move _57) -> [return: bb14, unwind continue];
+        _56 = check(move _57) -> bb14;
     }
 
     bb14: {
-        _59 = const ZeroSized: [closure@ui/enum-discriminant/actually_not_an_enum-discriminant.rs:46:48: 46:51] as for<'a> fn(&'a str) -> &'a str (PointerCoercion(ClosureFnPointer(Normal)));
+        _59 = const ZeroSized: [closure@ui/enum-discriminant/actually_not_an_enum-discriminant.rs:46:48: 46:51] as for<'a> fn(&'a str) -> &'a str (Pointer(ClosureFnPointer(Normal)));
         _62 = &_59;
         _61 = discriminant((*_62));
-        _60 = check(move _61) -> [return: bb15, unwind continue];
+        _60 = check(move _61) -> bb15;
     }
 
     bb15: {
         _66 = (const 7_i32, const 77_i32, const 777_i32);
         _65 = &_66;
         _64 = discriminant((*_65));
-        _63 = check(move _64) -> [return: bb16, unwind continue];
+        _63 = check(move _64) -> bb16;
     }
 
     bb16: {

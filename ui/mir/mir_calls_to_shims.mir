@@ -8,7 +8,7 @@ fn foo(_1: u32, _2: u32) -> u32 {
 
     bb0: {
         _3 = Eq(_2, const 0_u32);
-        assert(!move _3, "attempt to divide `{}` by zero", _1) -> [success: bb1, unwind continue];
+        assert(!move _3, "attempt to divide `{}` by zero", _1) -> bb1;
     }
 
     bb1: {
@@ -21,7 +21,7 @@ fn foo_diverges() -> ! {
     let mut _0: !;
 
     bb0: {
-        _0 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _0 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -226,7 +226,7 @@ fn assert_panics(_1: F) -> () {
     bb0: {
         _2 = AssertUnwindSafe::<F>(move _1);
         _4 = [closure@ui/mir/mir_calls_to_shims.rs:25:38: 25:45] { f: move _2 };
-        _3 = catch_unwind::<[closure@ui/mir/mir_calls_to_shims.rs:25:38: 25:45], ()>(move _4) -> [return: bb1, unwind continue];
+        _3 = catch_unwind::<[closure@ui/mir/mir_calls_to_shims.rs:25:38: 25:45], ()>(move _4) -> bb1;
     }
 
     bb1: {
@@ -239,7 +239,7 @@ fn assert_panics(_1: F) -> () {
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -262,7 +262,7 @@ fn assert_panics::{closure#0}(_1: [closure@ui/mir/mir_calls_to_shims.rs:25:38: 2
 
     bb0: {
         _2 = move ((_1.0: std::panic::AssertUnwindSafe<F>).0: F);
-        _0 = <F as FnOnce<()>>::call_once(move _2, const ()) -> [return: bb1, unwind continue];
+        _0 = <F as FnOnce<()>>::call_once(move _2, const ()) -> bb1;
     }
 
     bb1: {
@@ -347,7 +347,7 @@ fn test_fn_ptr_panic::{closure#0}(_1: [closure@ui/mir/mir_calls_to_shims.rs:37:1
 
     bb0: {
         _3 = deref_copy (_1.1: &T);
-        _2 = <T as Fn<()>>::call(_3, const ()) -> unwind continue;
+        _2 = <T as Fn<()>>::call(_3, const ());
     }
 }
 
@@ -360,7 +360,7 @@ fn test_fn_ptr_panic::{closure#1}(_1: [closure@ui/mir/mir_calls_to_shims.rs:39:1
 
     bb0: {
         _3 = deref_copy (_1.1: &mut T);
-        _2 = <T as FnMut<()>>::call_mut(_3, const ()) -> unwind continue;
+        _2 = <T as FnMut<()>>::call_mut(_3, const ());
     }
 }
 
@@ -373,7 +373,7 @@ fn test_fn_ptr_panic::{closure#2}(_1: [closure@ui/mir/mir_calls_to_shims.rs:41:1
 
     bb0: {
         _3 = move (_1.1: T);
-        _2 = <T as FnOnce<()>>::call_once(move _3, const ()) -> unwind continue;
+        _2 = <T as FnOnce<()>>::call_once(move _3, const ());
     }
 }
 
@@ -387,21 +387,21 @@ fn main() -> () {
     let mut _6: fn() -> !;
 
     bb0: {
-        _1 = test_fn_ptr::<fn(u32, u32) -> u32 {foo}>(foo) -> [return: bb1, unwind continue];
+        _1 = test_fn_ptr::<fn(u32, u32) -> u32 {foo}>(foo) -> bb1;
     }
 
     bb1: {
-        _3 = foo as fn(u32, u32) -> u32 (PointerCoercion(ReifyFnPointer));
-        _2 = test_fn_ptr::<fn(u32, u32) -> u32>(move _3) -> [return: bb2, unwind continue];
+        _3 = foo as fn(u32, u32) -> u32 (Pointer(ReifyFnPointer));
+        _2 = test_fn_ptr::<fn(u32, u32) -> u32>(move _3) -> bb2;
     }
 
     bb2: {
-        _4 = test_fn_ptr_panic::<fn() -> ! {foo_diverges}>(foo_diverges) -> [return: bb3, unwind continue];
+        _4 = test_fn_ptr_panic::<fn() -> ! {foo_diverges}>(foo_diverges) -> bb3;
     }
 
     bb3: {
-        _6 = foo_diverges as fn() -> ! (PointerCoercion(ReifyFnPointer));
-        _5 = test_fn_ptr_panic::<fn() -> !>(move _6) -> [return: bb4, unwind continue];
+        _6 = foo_diverges as fn() -> ! (Pointer(ReifyFnPointer));
+        _5 = test_fn_ptr_panic::<fn() -> !>(move _6) -> bb4;
     }
 
     bb4: {

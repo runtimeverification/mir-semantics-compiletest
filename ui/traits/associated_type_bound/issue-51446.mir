@@ -16,7 +16,7 @@ fn blah(_1: T, _2: F) -> B<<T as Foo>::Item, impl Fn(<T as Foo>::Item)> {
     bb1: {
         _5 = move _2;
         _0 = B::<<T as Foo>::Item, F> { x: move _3, f: move _5 };
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -53,7 +53,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = blah::<i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]>(const 0_i32, const ZeroSized: [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]) -> [return: bb1, unwind continue];
+        _1 = blah::<i32, [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]>(const 0_i32, const ZeroSized: [closure@ui/traits/associated_type_bound/issue-51446.rs:33:21: 33:24]) -> bb1;
     }
 
     bb1: {

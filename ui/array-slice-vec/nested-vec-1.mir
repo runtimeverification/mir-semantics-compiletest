@@ -66,7 +66,7 @@ fn main() -> () {
     bb0: {
         _4 = SizeOf([std::vec::Vec<u32>; 1]);
         _5 = AlignOf([std::vec::Vec<u32>; 1]);
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -130,7 +130,7 @@ fn main() -> () {
     }
 
     bb8: {
-        drop(_1) -> [return: bb9, unwind continue];
+        drop(_1) -> bb9;
     }
 
     bb9: {
@@ -153,13 +153,13 @@ fn main() -> () {
     bb13: {
         (*_34) = [move _8];
         _3 = move _7;
-        _2 = move _3 as std::boxed::Box<[std::vec::Vec<u32>]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [Vec<u32>]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb4, unwind continue];
+        _2 = move _3 as std::boxed::Box<[std::vec::Vec<u32>]> (Pointer(Unsize));
+        _1 = slice::<impl [Vec<u32>]>::into_vec::<std::alloc::Global>(move _2) -> bb4;
     }
 
     bb14: {
         (*_33) = [const 1_u32, const 2_u32, const 3_u32];
-        _9 = move _13 as std::boxed::Box<[u32]> (PointerCoercion(Unsize));
+        _9 = move _13 as std::boxed::Box<[u32]> (Pointer(Unsize));
         _8 = slice::<impl [u32]>::into_vec::<std::alloc::Global>(move _9) -> [return: bb3, unwind: bb12];
     }
 

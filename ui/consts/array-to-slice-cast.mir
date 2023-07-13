@@ -33,11 +33,11 @@ fn foo() -> () {
     bb0: {
         _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32];
         _3 = &_1;
-        _2 = _3 as &[i32] (PointerCoercion(Unsize));
+        _2 = _3 as &[i32] (Pointer(Unsize));
         _5 = [const 1_u8, const 2_u8, const 3_u8];
         _4 = Foo::<[u8; 3]>(const true, move _5);
         _7 = &_4;
-        _6 = _7 as &foo::Foo<[u8]> (PointerCoercion(Unsize));
+        _6 = _7 as &foo::Foo<[u8]> (Pointer(Unsize));
         return;
     }
 }
@@ -75,7 +75,7 @@ fn foo() -> () {
         StorageLive(_4);
         _4 = &_1;
         _3 = &(*_4);
-        _2 = move _3 as &[i32] (PointerCoercion(Unsize));
+        _2 = move _3 as &[i32] (Pointer(Unsize));
         StorageDead(_3);
         StorageDead(_4);
         StorageLive(_5);
@@ -88,7 +88,7 @@ fn foo() -> () {
         StorageLive(_9);
         _9 = &_5;
         _8 = &(*_9);
-        _7 = move _8 as &foo::Foo<[u8]> (PointerCoercion(Unsize));
+        _7 = move _8 as &foo::Foo<[u8]> (Pointer(Unsize));
         StorageDead(_8);
         StorageDead(_9);
         _0 = const ();

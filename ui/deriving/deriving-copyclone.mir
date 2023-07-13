@@ -5,7 +5,7 @@ static CLONED: AtomicBool = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicBool::new(const false) -> [return: bb1, unwind continue];
+        _0 = AtomicBool::new(const false) -> bb1;
     }
 
     bb1: {
@@ -23,7 +23,7 @@ fn <impl at ui/deriving/deriving-copyclone.rs:15:1: 15:20>::clone(_1: &Liar) -> 
     bb0: {
         _3 = const {alloc1: &AtomicBool};
         _4 = SeqCst;
-        _2 = AtomicBool::store(_3, const true, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicBool::store(_3, const true, move _4) -> bb1;
     }
 
     bb1: {
@@ -69,18 +69,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = Innocent::new() -> [return: bb1, unwind continue];
+        _3 = Innocent::new() -> bb1;
     }
 
     bb1: {
         _2 = &_3;
-        _1 = <Innocent as Clone>::clone(move _2) -> [return: bb2, unwind continue];
+        _1 = <Innocent as Clone>::clone(move _2) -> bb2;
     }
 
     bb2: {
         _7 = const {alloc1: &AtomicBool};
         _8 = SeqCst;
-        _6 = AtomicBool::load(_7, move _8) -> [return: bb3, unwind continue];
+        _6 = AtomicBool::load(_7, move _8) -> bb3;
     }
 
     bb3: {
@@ -90,7 +90,7 @@ fn main() -> () {
     }
 
     bb4: {
-        _9 = core::panicking::panic(const "assertion failed: !CLONED.load(Ordering::SeqCst)") -> unwind continue;
+        _9 = core::panicking::panic(const "assertion failed: !CLONED.load(Ordering::SeqCst)");
     }
 
     bb5: {

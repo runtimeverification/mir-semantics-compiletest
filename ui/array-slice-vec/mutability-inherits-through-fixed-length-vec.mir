@@ -38,7 +38,7 @@ fn test1() -> () {
         _2 = const 0_usize;
         _3 = const 32_usize;
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -46,7 +46,7 @@ fn test1() -> () {
         _7 = const 0_usize;
         _8 = const 32_usize;
         _9 = Lt(_7, _8);
-        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> [success: bb2, unwind continue];
+        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> bb2;
     }
 
     bb2: {
@@ -66,7 +66,7 @@ fn test1() -> () {
     bb3: {
         _18 = core::panicking::AssertKind::Eq;
         _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<i32, i32>(move _18, _12, _13, move _20) -> unwind continue;
+        _19 = core::panicking::assert_failed::<i32, i32>(move _18, _12, _13, move _20);
     }
 
     bb4: {
@@ -138,7 +138,7 @@ fn test2() -> () {
     bb0: {
         _1 = [const 0_i32; 32];
         _3 = &mut _1;
-        _2 = <&mut [i32; 32] as IntoIterator>::into_iter(move _3) -> [return: bb1, unwind continue];
+        _2 = <&mut [i32; 32] as IntoIterator>::into_iter(move _3) -> bb1;
     }
 
     bb1: {
@@ -148,7 +148,7 @@ fn test2() -> () {
 
     bb2: {
         _6 = &mut _4;
-        _5 = <std::slice::IterMut<'_, i32> as Iterator>::next(_6) -> [return: bb3, unwind continue];
+        _5 = <std::slice::IterMut<'_, i32> as Iterator>::next(_6) -> bb3;
     }
 
     bb3: {
@@ -168,7 +168,7 @@ fn test2() -> () {
 
     bb6: {
         _10 = &_1;
-        _9 = <&[i32; 32] as IntoIterator>::into_iter(move _10) -> [return: bb7, unwind continue];
+        _9 = <&[i32; 32] as IntoIterator>::into_iter(move _10) -> bb7;
     }
 
     bb7: {
@@ -178,7 +178,7 @@ fn test2() -> () {
 
     bb8: {
         _13 = &mut _11;
-        _12 = <std::slice::Iter<'_, i32> as Iterator>::next(_13) -> [return: bb9, unwind continue];
+        _12 = <std::slice::Iter<'_, i32> as Iterator>::next(_13) -> bb9;
     }
 
     bb9: {
@@ -207,7 +207,7 @@ fn test2() -> () {
     bb12: {
         _25 = core::panicking::AssertKind::Eq;
         _27 = Option::<Arguments<'_>>::None;
-        _26 = core::panicking::assert_failed::<i32, i32>(move _25, _19, _20, move _27) -> unwind continue;
+        _26 = core::panicking::assert_failed::<i32, i32>(move _25, _19, _20, move _27);
     }
 }
 
@@ -226,11 +226,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = test1() -> [return: bb1, unwind continue];
+        _1 = test1() -> bb1;
     }
 
     bb1: {
-        _2 = test2() -> [return: bb2, unwind continue];
+        _2 = test2() -> bb2;
     }
 
     bb2: {

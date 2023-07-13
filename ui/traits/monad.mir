@@ -63,7 +63,7 @@ fn <impl at ui/traits/monad.rs:11:1: 11:32>::bind(_1: &Vec<A>, _2: F) -> Vec<B> 
 
     bb7: {
         _0 = move _3;
-        drop(_2) -> [return: bb9, unwind continue];
+        drop(_2) -> bb9;
     }
 
     bb8: {
@@ -125,7 +125,7 @@ fn <impl at ui/traits/monad.rs:25:1: 25:38>::bind(_1: &Option<A>, _2: F) -> Opti
         _7 = const false;
         _5 = move _2;
         _6 = (_4,);
-        _0 = <F as FnOnce<(&A,)>>::call_once(move _5, move _6) -> [return: bb6, unwind continue];
+        _0 = <F as FnOnce<(&A,)>>::call_once(move _5, move _6) -> bb6;
     }
 
     bb4: {
@@ -133,7 +133,7 @@ fn <impl at ui/traits/monad.rs:25:1: 25:38>::bind(_1: &Option<A>, _2: F) -> Opti
     }
 
     bb5: {
-        drop(_2) -> [return: bb4, unwind continue];
+        drop(_2) -> bb4;
     }
 
     bb6: {
@@ -150,12 +150,12 @@ fn transform(_1: Option<isize>) -> Option<String> {
 
     bb0: {
         _4 = &_1;
-        _3 = <Option<isize> as option_monad<isize>>::bind::<isize, [closure@ui/traits/monad.rs:35:12: 35:15]>(move _4, const ZeroSized: [closure@ui/traits/monad.rs:35:12: 35:15]) -> [return: bb1, unwind continue];
+        _3 = <Option<isize> as option_monad<isize>>::bind::<isize, [closure@ui/traits/monad.rs:35:12: 35:15]>(move _4, const ZeroSized: [closure@ui/traits/monad.rs:35:12: 35:15]) -> bb1;
     }
 
     bb1: {
         _2 = &_3;
-        _0 = <Option<isize> as option_monad<isize>>::bind::<String, [closure@ui/traits/monad.rs:35:36: 35:39]>(move _2, const ZeroSized: [closure@ui/traits/monad.rs:35:36: 35:39]) -> [return: bb2, unwind continue];
+        _0 = <Option<isize> as option_monad<isize>>::bind::<String, [closure@ui/traits/monad.rs:35:36: 35:39]>(move _2, const ZeroSized: [closure@ui/traits/monad.rs:35:36: 35:39]) -> bb2;
     }
 
     bb2: {
@@ -183,7 +183,7 @@ fn transform::{closure#1}(_1: [closure@ui/traits/monad.rs:35:36: 35:39], _2: &is
     let mut _3: std::string::String;
 
     bb0: {
-        _3 = <isize as ToString>::to_string(_2) -> [return: bb1, unwind continue];
+        _3 = <isize as ToString>::to_string(_2) -> bb1;
     }
 
     bb1: {
@@ -289,7 +289,7 @@ fn main() -> () {
 
     bb0: {
         _4 = Option::<isize>::Some(const 10_isize);
-        _3 = transform(move _4) -> [return: bb1, unwind continue];
+        _3 = transform(move _4) -> bb1;
     }
 
     bb1: {
@@ -323,12 +323,12 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_3) -> [return: bb7, unwind continue];
+        drop(_3) -> bb7;
     }
 
     bb7: {
         _19 = Option::<isize>::None;
-        _18 = transform(move _19) -> [return: bb8, unwind continue];
+        _18 = transform(move _19) -> bb8;
     }
 
     bb8: {
@@ -357,13 +357,13 @@ fn main() -> () {
     }
 
     bb12: {
-        drop(_18) -> [return: bb13, unwind continue];
+        drop(_18) -> bb13;
     }
 
     bb13: {
         _38 = SizeOf([std::string::String; 1]);
         _39 = AlignOf([std::string::String; 1]);
-        _40 = alloc::alloc::exchange_malloc(move _38, move _39) -> [return: bb14, unwind continue];
+        _40 = alloc::alloc::exchange_malloc(move _38, move _39) -> bb14;
     }
 
     bb14: {
@@ -447,7 +447,7 @@ fn main() -> () {
     }
 
     bb28: {
-        drop(_35) -> [return: bb29, unwind continue];
+        drop(_35) -> bb29;
     }
 
     bb29: {
@@ -510,8 +510,8 @@ fn main() -> () {
     bb43: {
         (*_63) = [move _42];
         _37 = move _41;
-        _36 = move _37 as std::boxed::Box<[std::string::String]> (PointerCoercion(Unsize));
-        _35 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _36) -> [return: bb16, unwind continue];
+        _36 = move _37 as std::boxed::Box<[std::string::String]> (Pointer(Unsize));
+        _35 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _36) -> bb16;
     }
 
     bb44 (cleanup): {
@@ -559,7 +559,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/traits/monad.rs:42:15: 42:18], _2: &St
     bb0: {
         _5 = SizeOf([std::string::String; 2]);
         _6 = AlignOf([std::string::String; 2]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -571,7 +571,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/traits/monad.rs:42:15: 42:18], _2: &St
     bb2: {
         _16 = [const "", const "!"];
         _15 = &_16;
-        _14 = _15 as &[&str] (PointerCoercion(Unsize));
+        _14 = _15 as &[&str] (Pointer(Unsize));
         _21 = &_2;
         _20 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_21) -> [return: bb3, unwind: bb7];
     }
@@ -579,7 +579,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/traits/monad.rs:42:15: 42:18], _2: &St
     bb3: {
         _19 = [move _20];
         _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _17 = _18 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _13 = Arguments::<'_>::new_v1(move _14, move _17) -> [return: bb4, unwind: bb7];
     }
 
@@ -619,8 +619,8 @@ fn main::{closure#0}(_1: &mut [closure@ui/traits/monad.rs:42:15: 42:18], _2: &St
     bb10: {
         (*_24) = [move _9, move _11];
         _4 = move _8;
-        _3 = move _4 as std::boxed::Box<[std::string::String]> (PointerCoercion(Unsize));
-        _0 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb6, unwind continue];
+        _3 = move _4 as std::boxed::Box<[std::string::String]> (Pointer(Unsize));
+        _0 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _3) -> bb6;
     }
 }
 
@@ -664,7 +664,7 @@ fn main::{closure#1}(_1: &mut [closure@ui/traits/monad.rs:43:15: 43:18], _2: &St
     bb0: {
         _5 = SizeOf([std::string::String; 2]);
         _6 = AlignOf([std::string::String; 2]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -676,7 +676,7 @@ fn main::{closure#1}(_1: &mut [closure@ui/traits/monad.rs:43:15: 43:18], _2: &St
     bb2: {
         _16 = [const "", const "?"];
         _15 = &_16;
-        _14 = _15 as &[&str] (PointerCoercion(Unsize));
+        _14 = _15 as &[&str] (Pointer(Unsize));
         _21 = &_2;
         _20 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_21) -> [return: bb3, unwind: bb7];
     }
@@ -684,7 +684,7 @@ fn main::{closure#1}(_1: &mut [closure@ui/traits/monad.rs:43:15: 43:18], _2: &St
     bb3: {
         _19 = [move _20];
         _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _17 = _18 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _13 = Arguments::<'_>::new_v1(move _14, move _17) -> [return: bb4, unwind: bb7];
     }
 
@@ -724,7 +724,7 @@ fn main::{closure#1}(_1: &mut [closure@ui/traits/monad.rs:43:15: 43:18], _2: &St
     bb10: {
         (*_24) = [move _9, move _11];
         _4 = move _8;
-        _3 = move _4 as std::boxed::Box<[std::string::String]> (PointerCoercion(Unsize));
-        _0 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb6, unwind continue];
+        _3 = move _4 as std::boxed::Box<[std::string::String]> (Pointer(Unsize));
+        _0 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _3) -> bb6;
     }
 }

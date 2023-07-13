@@ -149,7 +149,7 @@ fn main() -> () {
 
     bb0: {
         _1 = X { a: const 32_isize };
-        _2 = <X as Changer>::change(move _1) -> [return: bb1, unwind continue];
+        _2 = <X as Changer>::change(move _1) -> bb1;
     }
 
     bb1: {
@@ -169,17 +169,17 @@ fn main() -> () {
     bb2: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15);
     }
 
     bb3: {
         _17 = move _2;
-        _16 = Box::<X>::new(move _17) -> [return: bb4, unwind continue];
+        _16 = Box::<X>::new(move _17) -> bb4;
     }
 
     bb4: {
         _19 = move _16;
-        _18 = <X as Changer>::change_again(move _19) -> [return: bb5, unwind continue];
+        _18 = <X as Changer>::change_again(move _19) -> bb5;
     }
 
     bb5: {
@@ -200,7 +200,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_18) -> [return: bb8, unwind continue];
+        drop(_18) -> bb8;
     }
 
     bb8: {

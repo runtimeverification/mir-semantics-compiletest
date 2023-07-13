@@ -37,7 +37,7 @@ fn <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:28:1: 28:44>::c
     bb0: {
         _1 = const 1_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 32_u32);
-        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> bb1;
     }
 
     bb1: {
@@ -63,7 +63,7 @@ fn <impl at ui/const-generics/generic_const_exprs/issue-82268.rs:28:1: 28:44>::c
     bb0: {
         _1 = const 1_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 32_u32);
-        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 1_i32) -> bb1;
     }
 
     bb1: {
@@ -116,7 +116,7 @@ fn collate(_1: X) -> (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<C
     let mut _0: (<X as Collate<CollateOpImpl<MASK>>>::Pass, <X as Collate<CollateOpImpl<MASK>>>::Fail);
 
     bb0: {
-        _0 = <X as Collate<CollateOpImpl<MASK>>>::collate(move _1) -> [return: bb1, unwind continue];
+        _0 = <X as Collate<CollateOpImpl<MASK>>>::collate(move _1) -> bb1;
     }
 
     bb1: {
@@ -169,42 +169,42 @@ fn main() -> () {
         _4 = (const '!', const ());
         _3 = (const 42_i32, move _4);
         _2 = (const "Hello", move _3);
-        _1 = collate::<(&str, (i32, (char, ()))), 5>(move _2) -> [return: bb1, unwind continue];
+        _1 = collate::<(&str, (i32, (char, ()))), 5>(move _2) -> bb1;
     }
 
     bb1: {
         _5 = _1;
         _10 = [const "[ui/const-generics/generic_const_exprs/issue-82268.rs:72] collate::<_, 5>((\"Hello\", (42, ('!', ())))) = ", const "\n"];
         _9 = &_10;
-        _8 = _9 as &[&str] (PointerCoercion(Unsize));
+        _8 = _9 as &[&str] (Pointer(Unsize));
         _16 = &_5;
         _15 = &_16;
-        _14 = core::fmt::rt::Argument::<'_>::new_debug::<&((&str, (i32, (char, ()))), ())>(_15) -> [return: bb2, unwind continue];
+        _14 = core::fmt::rt::Argument::<'_>::new_debug::<&((&str, (i32, (char, ()))), ())>(_15) -> bb2;
     }
 
     bb2: {
         _13 = [move _14];
         _12 = &_13;
-        _11 = _12 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _11 = _12 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _21 = core::fmt::rt::Alignment::Unknown;
         _22 = core::fmt::rt::Count::Implied;
         _23 = core::fmt::rt::Count::Implied;
-        _20 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _21, const 4_u32, move _22, move _23) -> [return: bb3, unwind continue];
+        _20 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _21, const 4_u32, move _22, move _23) -> bb3;
     }
 
     bb3: {
         _19 = [move _20];
         _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
-        _24 = core::fmt::rt::UnsafeArg::new() -> [return: bb4, unwind continue];
+        _17 = _18 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _24 = core::fmt::rt::UnsafeArg::new() -> bb4;
     }
 
     bb4: {
-        _7 = Arguments::<'_>::new_v1_formatted(move _8, move _11, move _17, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb5, unwind continue];
+        _7 = Arguments::<'_>::new_v1_formatted(move _8, move _11, move _17, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> bb5;
     }
 
     bb5: {
-        _6 = _eprint(move _7) -> [return: bb6, unwind continue];
+        _6 = _eprint(move _7) -> bb6;
     }
 
     bb6: {

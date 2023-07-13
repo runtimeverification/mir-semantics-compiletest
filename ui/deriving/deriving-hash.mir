@@ -12,17 +12,17 @@ fn <impl at ui/deriving/deriving-hash.rs:12:10: 12:14>::hash(_1: &Person, _2: &m
 
     bb0: {
         _4 = &((*_1).0: usize);
-        _3 = <usize as Hash>::hash::<__H>(_4, _2) -> [return: bb1, unwind continue];
+        _3 = <usize as Hash>::hash::<__H>(_4, _2) -> bb1;
     }
 
     bb1: {
         _6 = &((*_1).1: std::string::String);
-        _5 = <String as Hash>::hash::<__H>(_6, _2) -> [return: bb2, unwind continue];
+        _5 = <String as Hash>::hash::<__H>(_6, _2) -> bb2;
     }
 
     bb2: {
         _7 = &((*_1).2: usize);
-        _0 = <usize as Hash>::hash::<__H>(_7, _2) -> [return: bb3, unwind continue];
+        _0 = <usize as Hash>::hash::<__H>(_7, _2) -> bb3;
     }
 
     bb3: {
@@ -51,7 +51,7 @@ fn <impl at ui/deriving/deriving-hash.rs:21:10: 21:14>::hash(_1: &Collision<__H>
 
     bb0: {
         _3 = &(((*_1) as __H).0: __H);
-        _0 = <__H as Hash>::hash::<__H>(_3, _2) -> [return: bb1, unwind continue];
+        _0 = <__H as Hash>::hash::<__H>(_3, _2) -> bb1;
     }
 
     bb1: {
@@ -81,7 +81,7 @@ fn <impl at ui/deriving/deriving-hash.rs:23:10: 23:14>::hash(_1: &E, _2: &mut __
     bb0: {
         _3 = discriminant((*_1));
         _4 = &_3;
-        _0 = <isize as Hash>::hash::<__H>(_4, _2) -> [return: bb1, unwind continue];
+        _0 = <isize as Hash>::hash::<__H>(_4, _2) -> bb1;
     }
 
     bb1: {
@@ -101,17 +101,17 @@ fn hash(_1: &T) -> u64 {
     }
 
     bb0: {
-        _2 = SipHasher::new() -> [return: bb1, unwind continue];
+        _2 = SipHasher::new() -> bb1;
     }
 
     bb1: {
         _4 = &mut _2;
-        _3 = <T as Hash>::hash::<SipHasher>(_1, _4) -> [return: bb2, unwind continue];
+        _3 = <T as Hash>::hash::<SipHasher>(_1, _4) -> bb2;
     }
 
     bb2: {
         _5 = &_2;
-        _0 = <SipHasher as Hasher>::finish(move _5) -> [return: bb3, unwind continue];
+        _0 = <SipHasher as Hasher>::finish(move _5) -> bb3;
     }
 
     bb3: {
@@ -125,7 +125,7 @@ fn <impl at ui/deriving/deriving-hash.rs:33:1: 33:35>::finish(_1: &FakeHasher<'_
     let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "not implemented") -> unwind continue;
+        _2 = core::panicking::panic(const "not implemented");
     }
 }
 
@@ -138,7 +138,7 @@ fn <impl at ui/deriving/deriving-hash.rs:33:1: 33:35>::write(_1: &mut FakeHasher
 
     bb0: {
         _4 = deref_copy ((*_1).0: &mut std::vec::Vec<u8>);
-        _3 = <Vec<u8> as Extend<&u8>>::extend::<&[u8]>(_4, _2) -> [return: bb1, unwind continue];
+        _3 = <Vec<u8> as Extend<&u8>>::extend::<&[u8]>(_4, _2) -> bb1;
     }
 
     bb1: {
@@ -163,7 +163,7 @@ fn fake_hash(_1: &mut Vec<u8>, _2: A) -> () {
     }
 
     bb1: {
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -185,7 +185,7 @@ fn <impl at ui/deriving/deriving-hash.rs:48:1: 48:34>::finish(_1: &OnlyOneByteHa
     let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _2 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 }
 
@@ -233,7 +233,7 @@ fn <impl at ui/deriving/deriving-hash.rs:48:1: 48:34>::write(_1: &mut OnlyOneByt
     bb1: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16);
     }
 
     bb2: {
@@ -345,7 +345,7 @@ fn main() -> () {
 
     bb0: {
         _3 = const "Janet";
-        _2 = <str as ToString>::to_string(_3) -> [return: bb1, unwind continue];
+        _2 = <str as ToString>::to_string(_3) -> bb1;
     }
 
     bb1: {
@@ -459,7 +459,7 @@ fn main() -> () {
         _54 = ShallowInitBox(move _53, [u8; 1]);
         _68 = (((_54.0: std::ptr::Unique<[u8; 1]>).0: std::ptr::NonNull<[u8; 1]>).0: *const [u8; 1]);
         (*_68) = [const 17_u8];
-        _50 = move _54 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
+        _50 = move _54 as std::boxed::Box<[u8]> (Pointer(Unsize));
         _49 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _50) -> [return: bb21, unwind: bb33];
     }
 
@@ -511,7 +511,7 @@ fn main() -> () {
     }
 
     bb30: {
-        drop(_1) -> [return: bb31, unwind continue];
+        drop(_1) -> bb31;
     }
 
     bb31: {
@@ -558,7 +558,7 @@ fn main::<impl at ui/deriving/deriving-hash.rs:80:14: 80:18>::hash(_1: &SingleVa
 
     bb0: {
         _3 = &(((*_1) as A).0: u8);
-        _0 = <u8 as Hash>::hash::<__H>(_3, _2) -> [return: bb1, unwind continue];
+        _0 = <u8 as Hash>::hash::<__H>(_3, _2) -> bb1;
     }
 
     bb1: {
@@ -579,7 +579,7 @@ fn main::<impl at ui/deriving/deriving-hash.rs:90:14: 90:18>::hash(_1: &main::E,
     bb0: {
         _3 = discriminant((*_1));
         _4 = &_3;
-        _0 = <u8 as Hash>::hash::<__H>(_4, _2) -> [return: bb1, unwind continue];
+        _0 = <u8 as Hash>::hash::<__H>(_4, _2) -> bb1;
     }
 
     bb1: {

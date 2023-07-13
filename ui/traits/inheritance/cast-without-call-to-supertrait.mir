@@ -81,9 +81,9 @@ fn main() -> () {
     bb0: {
         _2 = A { x: const 3_isize };
         _1 = &_2;
-        _3 = _1 as &dyn Foo (PointerCoercion(Unsize));
-        _4 = _1 as &dyn Bar (PointerCoercion(Unsize));
-        _7 = <dyn Foo as Foo>::f(_3) -> [return: bb1, unwind continue];
+        _3 = _1 as &dyn Foo (Pointer(Unsize));
+        _4 = _1 as &dyn Bar (Pointer(Unsize));
+        _7 = <dyn Foo as Foo>::f(_3) -> bb1;
     }
 
     bb1: {
@@ -103,11 +103,11 @@ fn main() -> () {
     bb2: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<isize, isize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<isize, isize>(move _16, _10, _11, move _18);
     }
 
     bb3: {
-        _21 = <dyn Bar as Bar>::g(_4) -> [return: bb4, unwind continue];
+        _21 = <dyn Bar as Bar>::g(_4) -> bb4;
     }
 
     bb4: {
@@ -127,7 +127,7 @@ fn main() -> () {
     bb5: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<isize, isize>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<isize, isize>(move _30, _24, _25, move _32);
     }
 
     bb6: {

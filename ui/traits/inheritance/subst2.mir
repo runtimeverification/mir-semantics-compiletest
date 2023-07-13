@@ -12,7 +12,7 @@ fn <impl at ui/traits/inheritance/subst2.rs:15:1: 15:28>::chomp(_1: &MyInt, _2: 
         _4 = ((*_1).0: isize);
         _5 = ((*_2).0: isize);
         _3 = Add(move _4, move _5);
-        _0 = mi(move _3) -> [return: bb1, unwind continue];
+        _0 = mi(move _3) -> bb1;
     }
 
     bb1: {
@@ -26,7 +26,7 @@ fn <impl at ui/traits/inheritance/subst2.rs:21:1: 21:33>::add(_1: &MyInt, _2: &M
     let mut _0: MyInt;
 
     bb0: {
-        _0 = <MyInt as Panda<MyInt>>::chomp(_1, _2) -> [return: bb1, unwind continue];
+        _0 = <MyInt as Panda<MyInt>>::chomp(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -65,7 +65,7 @@ fn f(_1: T, _2: T) -> T {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -136,18 +136,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _4 = mi(const 3_isize) -> [return: bb1, unwind continue];
+        _4 = mi(const 3_isize) -> bb1;
     }
 
     bb1: {
-        _5 = mi(const 5_isize) -> [return: bb2, unwind continue];
+        _5 = mi(const 5_isize) -> bb2;
     }
 
     bb2: {
         _3 = (move _4, move _5);
         _1 = move (_3.0: MyInt);
         _2 = move (_3.1: MyInt);
-        _6 = f::<MyInt>(move _1, move _2) -> [return: bb3, unwind continue];
+        _6 = f::<MyInt>(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -167,7 +167,7 @@ fn main() -> () {
     bb4: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19);
     }
 
     bb5: {

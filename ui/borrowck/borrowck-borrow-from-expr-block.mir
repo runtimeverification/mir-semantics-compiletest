@@ -8,7 +8,7 @@ fn borrow(_1: &isize, _2: F) -> () {
 
     bb0: {
         _3 = (_1,);
-        _0 = <F as FnOnce<(&isize,)>>::call_once(move _2, move _3) -> [return: bb1, unwind continue];
+        _0 = <F as FnOnce<(&isize,)>>::call_once(move _2, move _3) -> bb1;
     }
 
     bb1: {
@@ -34,7 +34,7 @@ fn test1(_1: &Box<isize>) -> () {
 
     bb0: {
         _4 = _1;
-        _3 = <Box<isize> as Clone>::clone(move _4) -> [return: bb1, unwind continue];
+        _3 = <Box<isize> as Clone>::clone(move _4) -> bb1;
     }
 
     bb1: {
@@ -49,7 +49,7 @@ fn test1(_1: &Box<isize>) -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -140,7 +140,7 @@ fn test1::{closure#0}(_1: [closure@ui/borrowck/borrowck-borrow-from-expr-block.r
     }
 
     bb1: {
-        _10 = core::panicking::panic(const "assertion failed: (x_a as usize) != (p as *const isize as usize)") -> unwind continue;
+        _10 = core::panicking::panic(const "assertion failed: (x_a as usize) != (p as *const isize as usize)");
     }
 
     bb2: {
@@ -156,7 +156,7 @@ fn test1::{closure#0}(_1: [closure@ui/borrowck/borrowck-borrow-from-expr-block.r
     bb3: {
         _20 = core::panicking::AssertKind::Eq;
         _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<isize, isize>(move _20, _14, _15, move _22) -> unwind continue;
+        _21 = core::panicking::assert_failed::<isize, isize>(move _20, _14, _15, move _22);
     }
 
     bb4: {
@@ -195,7 +195,7 @@ fn main() -> () {
     let _3: std::boxed::Box<isize>;
 
     bb0: {
-        _3 = Box::<isize>::new(const 22_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 22_isize) -> bb1;
     }
 
     bb1: {
@@ -204,7 +204,7 @@ fn main() -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {

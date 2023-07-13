@@ -17,10 +17,10 @@ static PLUS_ONE: &dyn Fn(i32) -> i32 + Sync = {
         _5 = [closure@ui/consts/issue-27890.rs:2:59: 2:67];
         _4 = &_5;
         _3 = &(*_4);
-        _2 = move _3 as &dyn std::ops::Fn(i32) -> i32 + std::marker::Sync (PointerCoercion(Unsize));
+        _2 = move _3 as &dyn std::ops::Fn(i32) -> i32 + std::marker::Sync (Pointer(Unsize));
         StorageDead(_3);
         _1 = &(*_2);
-        _0 = move _1 as &dyn std::ops::Fn(i32) -> i32 + std::marker::Sync (PointerCoercion(Unsize));
+        _0 = move _1 as &dyn std::ops::Fn(i32) -> i32 + std::marker::Sync (Pointer(Unsize));
         StorageDead(_4);
         StorageDead(_2);
         StorageDead(_1);
@@ -69,7 +69,7 @@ fn main() -> () {
         _4 = const {alloc1: &&dyn Fn(i32) -> i32 + Sync};
         _17 = deref_copy (*_4);
         _5 = (const 2_i32,);
-        _3 = <dyn Fn(i32) -> i32 + Sync as Fn<(i32,)>>::call(_17, move _5) -> [return: bb1, unwind continue];
+        _3 = <dyn Fn(i32) -> i32 + Sync as Fn<(i32,)>>::call(_17, move _5) -> bb1;
     }
 
     bb1: {
@@ -89,7 +89,7 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16);
     }
 
     bb3: {

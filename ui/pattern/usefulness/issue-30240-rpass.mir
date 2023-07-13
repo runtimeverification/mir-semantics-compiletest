@@ -65,17 +65,17 @@ fn main() -> () {
     bb0: {
         _4 = [const 0_i32];
         _3 = &_4;
-        _2 = _3 as &[i32] (PointerCoercion(Unsize));
+        _2 = _3 as &[i32] (Pointer(Unsize));
         _1 = _2;
         _6 = &_1;
         _10 = [const 0_i32];
         _9 = &_10;
-        _8 = _9 as &[i32] (PointerCoercion(Unsize));
+        _8 = _9 as &[i32] (Pointer(Unsize));
         _7 = &_8;
         _5 = (move _6, move _7);
         _11 = (_5.0: &&[i32]);
         _12 = (_5.1: &&[i32]);
-        _14 = <&[i32] as PartialEq>::eq(_11, _12) -> [return: bb1, unwind continue];
+        _14 = <&[i32] as PartialEq>::eq(_11, _12) -> bb1;
     }
 
     bb1: {
@@ -86,7 +86,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<&[i32], &[i32]>(move _15, _11, _12, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<&[i32], &[i32]>(move _15, _11, _12, move _17);
     }
 
     bb3: {
@@ -98,7 +98,7 @@ fn main() -> () {
         _20 = (move _21, move _22);
         _24 = (_20.0: &&str);
         _25 = (_20.1: &&str);
-        _27 = <&str as PartialEq>::eq(_24, _25) -> [return: bb4, unwind continue];
+        _27 = <&str as PartialEq>::eq(_24, _25) -> bb4;
     }
 
     bb4: {
@@ -109,12 +109,12 @@ fn main() -> () {
     bb5: {
         _28 = core::panicking::AssertKind::Eq;
         _30 = Option::<Arguments<'_>>::None;
-        _29 = core::panicking::assert_failed::<&str, &str>(move _28, _24, _25, move _30) -> unwind continue;
+        _29 = core::panicking::assert_failed::<&str, &str>(move _28, _24, _25, move _30);
     }
 
     bb6: {
         _31 = const "foo";
-        _32 = <str as PartialEq>::eq(_31, const "fool") -> [return: bb7, unwind continue];
+        _32 = <str as PartialEq>::eq(_31, const "fool") -> bb7;
     }
 
     bb7: {
@@ -122,7 +122,7 @@ fn main() -> () {
     }
 
     bb8: {
-        _33 = <str as PartialEq>::eq(_31, const "foo") -> [return: bb9, unwind continue];
+        _33 = <str as PartialEq>::eq(_31, const "foo") -> bb9;
     }
 
     bb9: {
@@ -131,11 +131,11 @@ fn main() -> () {
 
     bb10: {
         _35 = &_31;
-        _36 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _36 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb11: {
-        _34 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _34 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb12: {

@@ -11,12 +11,12 @@ fn <impl at ui/associated-types/issue-55846.rs:25:1: 25:31>::barify() -> () {
     bb0: {
         _5 = [const "All correct!\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
@@ -29,7 +29,7 @@ fn <impl at ui/associated-types/issue-55846.rs:31:1: 31:35>::this_shouldnt_crash
     let _1: ();
 
     bb0: {
-        _1 = <Bar<Foo> as Barifier<Foo>>::barify() -> [return: bb1, unwind continue];
+        _1 = <Bar<Foo> as Barifier<Foo>>::barify() -> bb1;
     }
 
     bb1: {
@@ -42,7 +42,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = Bar::<<Foo as Fooifier>::Assoc>::this_shouldnt_crash() -> [return: bb1, unwind continue];
+        _1 = Bar::<<Foo as Fooifier>::Assoc>::this_shouldnt_crash() -> bb1;
     }
 
     bb1: {

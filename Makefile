@@ -72,7 +72,7 @@ ui-exe: ${UI_EXE}
 
 # Default compilation
 ui/%.exe: ui/%.rs
-	$(RUSTC) -o $(RUSTC_OPTIONS) $@ ui/$*.rs
+	-$(RUSTC) $(RUSTC_OPTIONS) -o $@ ui/$*.rs
 
 # # 'async-await' tests use 2021 ed. 
 # ui/async-await/%.exe: ui/async-await/%.rs 

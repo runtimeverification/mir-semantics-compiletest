@@ -49,12 +49,12 @@ fn main() -> () {
 
     bb0: {
         _2 = S { x: const 1_isize };
-        _1 = Box::<S>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = Box::<S>::new(move _2) -> bb1;
     }
 
     bb1: {
         _5 = move _1;
-        _4 = move _5 as std::boxed::Box<dyn Foo<isize>> (PointerCoercion(Unsize));
+        _4 = move _5 as std::boxed::Box<dyn Foo<isize>> (Pointer(Unsize));
         _3 = move _4;
         _21 = (((_3.0: std::ptr::Unique<dyn Foo<isize>>).0: std::ptr::NonNull<dyn Foo<isize>>).0: *const dyn Foo<isize>);
         _9 = &(*_21);
@@ -82,7 +82,7 @@ fn main() -> () {
     }
 
     bb4: {
-        drop(_3) -> [return: bb5, unwind continue];
+        drop(_3) -> bb5;
     }
 
     bb5: {

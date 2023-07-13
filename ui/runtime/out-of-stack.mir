@@ -10,7 +10,7 @@ fn black_box(_1: T) -> () {
     }
 
     bb1: {
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -29,11 +29,11 @@ fn silent_recurse() -> () {
 
     bb0: {
         _1 = [const 0_u8; 1000];
-        _2 = black_box::<[u8; 1000]>(_1) -> [return: bb1, unwind continue];
+        _2 = black_box::<[u8; 1000]>(_1) -> bb1;
     }
 
     bb1: {
-        _3 = silent_recurse() -> [return: bb2, unwind continue];
+        _3 = silent_recurse() -> bb2;
     }
 
     bb2: {
@@ -63,20 +63,20 @@ fn loud_recurse() -> () {
     bb0: {
         _5 = [const "hello!\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
-        _6 = loud_recurse() -> [return: bb3, unwind continue];
+        _6 = loud_recurse() -> bb3;
     }
 
     bb3: {
-        _7 = black_box::<()>(const ()) -> [return: bb4, unwind continue];
+        _7 = black_box::<()>(const ()) -> bb4;
     }
 
     bb4: {
@@ -115,7 +115,7 @@ fn check_status(_1: ExitStatus) -> () {
 
     bb0: {
         _5 = &_1;
-        _4 = ExitStatus::success(move _5) -> [return: bb1, unwind continue];
+        _4 = ExitStatus::success(move _5) -> bb1;
     }
 
     bb1: {
@@ -125,12 +125,12 @@ fn check_status(_1: ExitStatus) -> () {
     }
 
     bb2: {
-        _6 = core::panicking::panic(const "assertion failed: !status.success()") -> unwind continue;
+        _6 = core::panicking::panic(const "assertion failed: !status.success()");
     }
 
     bb3: {
         _10 = &_1;
-        _9 = <ExitStatus as ExitStatusExt>::signal(move _10) -> [return: bb4, unwind continue];
+        _9 = <ExitStatus as ExitStatusExt>::signal(move _10) -> bb4;
     }
 
     bb4: {
@@ -140,7 +140,7 @@ fn check_status(_1: ExitStatus) -> () {
         _7 = (move _8, move _11);
         _13 = (_7.0: &std::option::Option<i32>);
         _14 = (_7.1: &std::option::Option<i32>);
-        _16 = <Option<i32> as PartialEq>::eq(_13, _14) -> [return: bb5, unwind continue];
+        _16 = <Option<i32> as PartialEq>::eq(_13, _14) -> bb5;
     }
 
     bb5: {
@@ -151,7 +151,7 @@ fn check_status(_1: ExitStatus) -> () {
     bb6: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _17, _13, _14, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<Option<i32>, Option<i32>>(move _17, _13, _14, move _19);
     }
 
     bb7: {
@@ -302,11 +302,11 @@ fn main() -> () {
 
     bb0: {
         _111 = const false;
-        _2 = args() -> [return: bb1, unwind continue];
+        _2 = args() -> bb1;
     }
 
     bb1: {
-        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> [return: bb2, unwind continue];
+        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> bb2;
     }
 
     bb2: {
@@ -547,7 +547,7 @@ fn main() -> () {
         _69 = ((_66 as Some).0: &str);
         _74 = [const "testing: ", const "\n"];
         _73 = &_74;
-        _72 = _73 as &[&str] (PointerCoercion(Unsize));
+        _72 = _73 as &[&str] (Pointer(Unsize));
         _79 = &_69;
         _78 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_79) -> [return: bb50, unwind: bb75];
     }
@@ -563,7 +563,7 @@ fn main() -> () {
     bb50: {
         _77 = [move _78];
         _76 = &_77;
-        _75 = _76 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _75 = _76 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _71 = Arguments::<'_>::new_v1(move _72, move _75) -> [return: bb51, unwind: bb75];
     }
 
@@ -633,7 +633,7 @@ fn main() -> () {
     bb64: {
         _105 = [const "missing overflow message: "];
         _104 = &_105;
-        _103 = _104 as &[&str] (PointerCoercion(Unsize));
+        _103 = _104 as &[&str] (Pointer(Unsize));
         _110 = &_92;
         _109 = core::fmt::rt::Argument::<'_>::new_display::<Cow<'_, str>>(_110) -> [return: bb65, unwind: bb72];
     }
@@ -641,7 +641,7 @@ fn main() -> () {
     bb65: {
         _108 = [move _109];
         _107 = &_108;
-        _106 = _107 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _106 = _107 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _102 = Arguments::<'_>::new_v1(move _103, move _106) -> [return: bb66, unwind: bb72];
     }
 
@@ -663,7 +663,7 @@ fn main() -> () {
     }
 
     bb70: {
-        drop(_1) -> [return: bb71, unwind continue];
+        drop(_1) -> bb71;
     }
 
     bb71: {
@@ -704,7 +704,7 @@ fn main() -> () {
 
     bb80: {
         (*_112) = [const "silent-thread", _55];
-        _50 = move _54 as std::boxed::Box<[&str]> (PointerCoercion(Unsize));
+        _50 = move _54 as std::boxed::Box<[&str]> (Pointer(Unsize));
         _49 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _50) -> [return: bb40, unwind: bb76];
     }
 

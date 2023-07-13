@@ -32,7 +32,7 @@ static p: isize = {
         _2 = const 2_usize;
         _3 = Len(_1);
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -56,7 +56,7 @@ const y: &[isize] = {
         _3 = [const 1_isize, const 2_isize, const 3_isize, const 4_isize];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -77,7 +77,7 @@ static q: isize = {
         _2 = const 2_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -232,58 +232,58 @@ fn main() -> () {
     bb0: {
         _5 = [const "", const "\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _3 = _4 as &[&str] (Pointer(Unsize));
         _10 = const {alloc1: &isize};
-        _9 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_10) -> [return: bb1, unwind continue];
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_10) -> bb1;
     }
 
     bb1: {
         _8 = [move _9];
         _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb2, unwind continue];
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb2;
     }
 
     bb2: {
-        _1 = _print(move _2) -> [return: bb3, unwind continue];
+        _1 = _print(move _2) -> bb3;
     }
 
     bb3: {
         _15 = [const "", const "\n"];
         _14 = &_15;
-        _13 = _14 as &[&str] (PointerCoercion(Unsize));
+        _13 = _14 as &[&str] (Pointer(Unsize));
         _20 = const {alloc2: &isize};
-        _19 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_20) -> [return: bb4, unwind continue];
+        _19 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_20) -> bb4;
     }
 
     bb4: {
         _18 = [move _19];
         _17 = &_18;
-        _16 = _17 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _12 = Arguments::<'_>::new_v1(move _13, move _16) -> [return: bb5, unwind continue];
+        _16 = _17 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _12 = Arguments::<'_>::new_v1(move _13, move _16) -> bb5;
     }
 
     bb5: {
-        _11 = _print(move _12) -> [return: bb6, unwind continue];
+        _11 = _print(move _12) -> bb6;
     }
 
     bb6: {
         _25 = [const "", const "\n"];
         _24 = &_25;
-        _23 = _24 as &[&str] (PointerCoercion(Unsize));
+        _23 = _24 as &[&str] (Pointer(Unsize));
         _30 = const {alloc3: &isize};
-        _29 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_30) -> [return: bb7, unwind continue];
+        _29 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_30) -> bb7;
     }
 
     bb7: {
         _28 = [move _29];
         _27 = &_28;
-        _26 = _27 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _22 = Arguments::<'_>::new_v1(move _23, move _26) -> [return: bb8, unwind continue];
+        _26 = _27 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _22 = Arguments::<'_>::new_v1(move _23, move _26) -> bb8;
     }
 
     bb8: {
-        _21 = _print(move _22) -> [return: bb9, unwind continue];
+        _21 = _print(move _22) -> bb9;
     }
 
     bb9: {
@@ -303,7 +303,7 @@ fn main() -> () {
     bb10: {
         _41 = core::panicking::AssertKind::Eq;
         _43 = Option::<Arguments<'_>>::None;
-        _42 = core::panicking::assert_failed::<isize, isize>(move _41, _35, _36, move _43) -> unwind continue;
+        _42 = core::panicking::assert_failed::<isize, isize>(move _41, _35, _36, move _43);
     }
 
     bb11: {
@@ -323,7 +323,7 @@ fn main() -> () {
     bb12: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<isize, isize>(move _54, _48, _49, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<isize, isize>(move _54, _48, _49, move _56);
     }
 
     bb13: {
@@ -343,7 +343,7 @@ fn main() -> () {
     bb14: {
         _67 = core::panicking::AssertKind::Eq;
         _69 = Option::<Arguments<'_>>::None;
-        _68 = core::panicking::assert_failed::<isize, isize>(move _67, _61, _62, move _69) -> unwind continue;
+        _68 = core::panicking::assert_failed::<isize, isize>(move _67, _61, _62, move _69);
     }
 
     bb15: {

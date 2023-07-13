@@ -41,7 +41,7 @@ fn example_let_else(_1: Option<String>) -> () {
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb14];
     }
 
@@ -50,7 +50,7 @@ fn example_let_else(_1: Option<String>) -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb9, unwind continue];
+        drop(_1) -> bb9;
     }
 
     bb4: {
@@ -58,7 +58,7 @@ fn example_let_else(_1: Option<String>) -> () {
         _12 = move ((_1 as Some).0: std::string::String);
         _18 = [const "inner: ", const "\n"];
         _17 = &_18;
-        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _16 = _17 as &[&str] (Pointer(Unsize));
         _23 = &_12;
         _22 = core::fmt::rt::Argument::<'_>::new_display::<String>(_23) -> [return: bb6, unwind: bb10];
     }
@@ -66,7 +66,7 @@ fn example_let_else(_1: Option<String>) -> () {
     bb5: {
         _6 = [const "other: ", const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &_1;
         _10 = core::fmt::rt::Argument::<'_>::new_debug::<Option<String>>(_11) -> [return: bb1, unwind: bb14];
     }
@@ -74,7 +74,7 @@ fn example_let_else(_1: Option<String>) -> () {
     bb6: {
         _21 = [move _22];
         _20 = &_21;
-        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb7, unwind: bb10];
     }
 
@@ -123,17 +123,17 @@ fn main() -> () {
 
     bb0: {
         _4 = const "foo";
-        _3 = <&str as Into<String>>::into(_4) -> [return: bb1, unwind continue];
+        _3 = <&str as Into<String>>::into(_4) -> bb1;
     }
 
     bb1: {
         _2 = Option::<String>::Some(move _3);
-        _1 = example_let_else(move _2) -> [return: bb2, unwind continue];
+        _1 = example_let_else(move _2) -> bb2;
     }
 
     bb2: {
         _6 = Option::<String>::None;
-        _5 = example_let_else(move _6) -> [return: bb3, unwind continue];
+        _5 = example_let_else(move _6) -> bb3;
     }
 
     bb3: {

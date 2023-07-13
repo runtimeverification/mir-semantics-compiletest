@@ -6,7 +6,7 @@ fn function_with_bytes() -> &[u8] {
 
     bb0: {
         _1 = const BYTES;
-        _0 = _1 as &[u8] (PointerCoercion(Unsize));
+        _0 = _1 as &[u8] (Pointer(Unsize));
         return;
     }
 }
@@ -63,7 +63,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = function_with_bytes::<&*b"AAAA">() -> [return: bb1, unwind continue];
+        _3 = function_with_bytes::<&*b"AAAA">() -> bb1;
     }
 
     bb1: {
@@ -74,7 +74,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _7 = (_1.0: &&[u8]);
         _8 = (_1.1: &&[u8; 4]);
-        _10 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_7, _8) -> [return: bb2, unwind continue];
+        _10 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_7, _8) -> bb2;
     }
 
     bb2: {
@@ -85,11 +85,11 @@ fn main() -> () {
     bb3: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _11, _7, _8, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _11, _7, _8, move _13);
     }
 
     bb4: {
-        _16 = function_with_bytes::<&*b"AAAA">() -> [return: bb5, unwind continue];
+        _16 = function_with_bytes::<&*b"AAAA">() -> bb5;
     }
 
     bb5: {
@@ -99,7 +99,7 @@ fn main() -> () {
         _14 = (move _15, move _17);
         _19 = (_14.0: &&[u8]);
         _20 = (_14.1: &&[u8; 4]);
-        _22 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_19, _20) -> [return: bb6, unwind continue];
+        _22 = <&[u8] as PartialEq<&[u8; 4]>>::eq(_19, _20) -> bb6;
     }
 
     bb6: {
@@ -110,7 +110,7 @@ fn main() -> () {
     bb7: {
         _23 = core::panicking::AssertKind::Eq;
         _25 = Option::<Arguments<'_>>::None;
-        _24 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _23, _19, _20, move _25) -> unwind continue;
+        _24 = core::panicking::assert_failed::<&[u8], &[u8; 4]>(move _23, _19, _20, move _25);
     }
 
     bb8: {

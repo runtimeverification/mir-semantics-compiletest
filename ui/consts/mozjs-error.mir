@@ -6,7 +6,7 @@ const CustomAutoTraceable::vftable: CustomAutoRooterVFTable = {
 
     bb0: {
         StorageLive(_1);
-        _1 = <Self as CustomAutoTraceable>::trace as unsafe extern "C" fn(*mut i32, *mut u32) (PointerCoercion(ReifyFnPointer));
+        _1 = <Self as CustomAutoTraceable>::trace as unsafe extern "C" fn(*mut i32, *mut u32) (Pointer(ReifyFnPointer));
         _0 = CustomAutoRooterVFTable { trace: move _1 };
         StorageDead(_1);
         return;
@@ -31,16 +31,16 @@ fn CustomAutoTraceable::trace(_1: *mut i32, _2: *mut u32) -> () {
 
     bb0: {
         _3 = _1 as *const Self (PtrToPtr);
-        _5 = ptr::const_ptr::<impl *const Self>::as_ref::<'_>(_3) -> [return: bb1, unwind continue];
+        _5 = ptr::const_ptr::<impl *const Self>::as_ref::<'_>(_3) -> bb1;
     }
 
     bb1: {
-        _4 = Option::<&Self>::unwrap(move _5) -> [return: bb2, unwind continue];
+        _4 = Option::<&Self>::unwrap(move _5) -> bb2;
     }
 
     bb2: {
         _7 = _4;
-        _6 = <Self as CustomAutoTraceable>::do_trace(move _7, _2) -> [return: bb3, unwind continue];
+        _6 = <Self as CustomAutoTraceable>::do_trace(move _7, _2) -> bb3;
     }
 
     bb3: {

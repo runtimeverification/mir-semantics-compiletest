@@ -40,7 +40,7 @@ fn <impl at ui/autoref-autoderef/autoderef-method-priority.rs:12:1: 12:27>::doub
     bb2: {
         _2 = (*_3);
         _0 = Mul(move _2, const 2_usize);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 }
 
@@ -74,12 +74,12 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<usize>::new(const 3_usize) -> [return: bb1, unwind continue];
+        _1 = Box::<usize>::new(const 3_usize) -> bb1;
     }
 
     bb1: {
         _5 = move _1;
-        _4 = <Box<usize> as double>::double(move _5) -> [return: bb2, unwind continue];
+        _4 = <Box<usize> as double>::double(move _5) -> bb2;
     }
 
     bb2: {
@@ -99,7 +99,7 @@ fn main() -> () {
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16);
     }
 
     bb4: {

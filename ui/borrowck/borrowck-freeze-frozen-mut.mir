@@ -13,7 +13,7 @@ fn get(_1: &MutSlice<'_, T>, _2: usize) -> &T {
         _5 = deref_copy ((*_1).0: &mut [T]);
         _3 = Len((*_5));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -189,13 +189,13 @@ fn main() -> () {
     bb0: {
         _1 = [const 1_i32, const 2_i32, const 3_i32];
         _4 = &mut _1;
-        _3 = _4 as &mut [i32] (PointerCoercion(Unsize));
+        _3 = _4 as &mut [i32] (Pointer(Unsize));
         _2 = MutSlice::<'_, i32> { data: move _3 };
         _5 = const 0_usize;
         _101 = deref_copy (_2.0: &mut [i32]);
         _6 = Len((*_101));
         _7 = Lt(_5, _6);
-        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb1, unwind continue];
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> bb1;
     }
 
     bb1: {
@@ -203,17 +203,17 @@ fn main() -> () {
         _103 = deref_copy (_2.0: &mut [i32]);
         (*_102)[_5] = Add((*_103)[_5], const 4_i32);
         _9 = &_2;
-        _8 = get::<i32>(_9, const 0_usize) -> [return: bb2, unwind continue];
+        _8 = get::<i32>(_9, const 0_usize) -> bb2;
     }
 
     bb2: {
         _11 = &_2;
-        _10 = get::<i32>(_11, const 1_usize) -> [return: bb3, unwind continue];
+        _10 = get::<i32>(_11, const 1_usize) -> bb3;
     }
 
     bb3: {
         _13 = &_2;
-        _12 = get::<i32>(_13, const 2_usize) -> [return: bb4, unwind continue];
+        _12 = get::<i32>(_13, const 2_usize) -> bb4;
     }
 
     bb4: {
@@ -233,7 +233,7 @@ fn main() -> () {
     bb5: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<i32, i32>(move _24, _18, _19, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<i32, i32>(move _24, _18, _19, move _26);
     }
 
     bb6: {
@@ -253,7 +253,7 @@ fn main() -> () {
     bb7: {
         _37 = core::panicking::AssertKind::Eq;
         _39 = Option::<Arguments<'_>>::None;
-        _38 = core::panicking::assert_failed::<i32, i32>(move _37, _31, _32, move _39) -> unwind continue;
+        _38 = core::panicking::assert_failed::<i32, i32>(move _37, _31, _32, move _39);
     }
 
     bb8: {
@@ -273,14 +273,14 @@ fn main() -> () {
     bb9: {
         _50 = core::panicking::AssertKind::Eq;
         _52 = Option::<Arguments<'_>>::None;
-        _51 = core::panicking::assert_failed::<i32, i32>(move _50, _44, _45, move _52) -> unwind continue;
+        _51 = core::panicking::assert_failed::<i32, i32>(move _50, _44, _45, move _52);
     }
 
     bb10: {
         _55 = const 0_usize;
         _56 = const 3_usize;
         _57 = Lt(_55, _56);
-        assert(move _57, "index out of bounds: the length is {} but the index is {}", move _56, _55) -> [success: bb11, unwind continue];
+        assert(move _57, "index out of bounds: the length is {} but the index is {}", move _56, _55) -> bb11;
     }
 
     bb11: {
@@ -300,14 +300,14 @@ fn main() -> () {
     bb12: {
         _66 = core::panicking::AssertKind::Eq;
         _68 = Option::<Arguments<'_>>::None;
-        _67 = core::panicking::assert_failed::<i32, i32>(move _66, _60, _61, move _68) -> unwind continue;
+        _67 = core::panicking::assert_failed::<i32, i32>(move _66, _60, _61, move _68);
     }
 
     bb13: {
         _71 = const 1_usize;
         _72 = const 3_usize;
         _73 = Lt(_71, _72);
-        assert(move _73, "index out of bounds: the length is {} but the index is {}", move _72, _71) -> [success: bb14, unwind continue];
+        assert(move _73, "index out of bounds: the length is {} but the index is {}", move _72, _71) -> bb14;
     }
 
     bb14: {
@@ -327,14 +327,14 @@ fn main() -> () {
     bb15: {
         _82 = core::panicking::AssertKind::Eq;
         _84 = Option::<Arguments<'_>>::None;
-        _83 = core::panicking::assert_failed::<i32, i32>(move _82, _76, _77, move _84) -> unwind continue;
+        _83 = core::panicking::assert_failed::<i32, i32>(move _82, _76, _77, move _84);
     }
 
     bb16: {
         _87 = const 2_usize;
         _88 = const 3_usize;
         _89 = Lt(_87, _88);
-        assert(move _89, "index out of bounds: the length is {} but the index is {}", move _88, _87) -> [success: bb17, unwind continue];
+        assert(move _89, "index out of bounds: the length is {} but the index is {}", move _88, _87) -> bb17;
     }
 
     bb17: {
@@ -354,7 +354,7 @@ fn main() -> () {
     bb18: {
         _98 = core::panicking::AssertKind::Eq;
         _100 = Option::<Arguments<'_>>::None;
-        _99 = core::panicking::assert_failed::<i32, i32>(move _98, _92, _93, move _100) -> unwind continue;
+        _99 = core::panicking::assert_failed::<i32, i32>(move _98, _92, _93, move _100);
     }
 
     bb19: {

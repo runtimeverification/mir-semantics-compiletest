@@ -6,7 +6,7 @@ Foo::test::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -40,7 +40,7 @@ fn <impl at ui/const-generics/generic_const_exprs/object-safety-ok.rs:9:1: 9:35>
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -55,7 +55,7 @@ fn <impl at ui/const-generics/generic_const_exprs/object-safety-ok.rs:9:1: 9:35>
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -88,7 +88,7 @@ fn use_dyn(_1: &dyn Foo<N>) -> () {
     }
 
     bb0: {
-        _4 = <dyn Foo<N> as Foo<N>>::test(_1) -> [return: bb1, unwind continue];
+        _4 = <dyn Foo<N> as Foo<N>>::test(_1) -> bb1;
     }
 
     bb1: {
@@ -98,7 +98,7 @@ fn use_dyn(_1: &dyn Foo<N>) -> () {
         _2 = (move _3, move _5);
         _7 = (_2.0: &[u8; N + 1]);
         _8 = (_2.1: &[u8; N + 1]);
-        _10 = <[u8; N + 1] as PartialEq<[u8; N + 1]>>::eq(_7, _8) -> [return: bb2, unwind continue];
+        _10 = <[u8; N + 1] as PartialEq<[u8; N + 1]>>::eq(_7, _8) -> bb2;
     }
 
     bb2: {
@@ -109,7 +109,7 @@ fn use_dyn(_1: &dyn Foo<N>) -> () {
     bb3: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<[u8; N + 1], [u8; N + 1]>(move _11, _7, _8, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<[u8; N + 1], [u8; N + 1]>(move _11, _7, _8, move _13);
     }
 
     bb4: {
@@ -132,7 +132,7 @@ use_dyn::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -147,7 +147,7 @@ use_dyn::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -165,8 +165,8 @@ fn main() -> () {
 
     bb0: {
         _3 = &_4;
-        _2 = _3 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _1 = use_dyn::<3>(move _2) -> [return: bb1, unwind continue];
+        _2 = _3 as &dyn Foo<3> (Pointer(Unsize));
+        _1 = use_dyn::<3>(move _2) -> bb1;
     }
 
     bb1: {

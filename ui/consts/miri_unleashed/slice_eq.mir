@@ -13,7 +13,7 @@ const EMPTY_SLICE: &[i32] = {
         _3 = [];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[i32] (PointerCoercion(Unsize));
+        _0 = move _1 as &[i32] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -38,7 +38,7 @@ const EMPTY_EQ: Option<bool> = {
         _3 = const _;
         _2 = &(*_3);
         ConstEvalCounter;
-        _1 = core::slice::<impl [i32]>::as_ptr(move _2) -> [return: bb1, unwind continue];
+        _1 = core::slice::<impl [i32]>::as_ptr(move _2) -> bb1;
     }
 
     bb1: {
@@ -51,11 +51,11 @@ const EMPTY_EQ: Option<bool> = {
         _8 = [];
         _7 = &_8;
         _6 = &raw const (*_7);
-        _5 = move _6 as *const i32 (PointerCoercion(ArrayToPointer));
+        _5 = move _6 as *const i32 (Pointer(ArrayToPointer));
         _4 = _5;
         StorageDead(_6);
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const i32>::guaranteed_eq(move _1, move _4) -> [return: bb2, unwind continue];
+        _0 = ptr::const_ptr::<impl *const i32>::guaranteed_eq(move _1, move _4) -> bb2;
     }
 
     bb2: {
@@ -87,7 +87,7 @@ const EMPTY_EQ2: Option<bool> = {
         _3 = const _;
         _2 = &(*_3);
         ConstEvalCounter;
-        _1 = core::slice::<impl [i32]>::as_ptr(move _2) -> [return: bb1, unwind continue];
+        _1 = core::slice::<impl [i32]>::as_ptr(move _2) -> bb1;
     }
 
     bb1: {
@@ -100,11 +100,11 @@ const EMPTY_EQ2: Option<bool> = {
         _8 = [const 1_i32];
         _7 = &_8;
         _6 = &raw const (*_7);
-        _5 = move _6 as *const i32 (PointerCoercion(ArrayToPointer));
+        _5 = move _6 as *const i32 (Pointer(ArrayToPointer));
         _4 = _5;
         StorageDead(_6);
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const i32>::guaranteed_eq(move _1, move _4) -> [return: bb2, unwind continue];
+        _0 = ptr::const_ptr::<impl *const i32>::guaranteed_eq(move _1, move _4) -> bb2;
     }
 
     bb2: {
@@ -134,7 +134,7 @@ fn main() -> () {
     bb0: {
         _4 = const _;
         _3 = &_4;
-        _2 = Option::<bool>::is_none(move _3) -> [return: bb1, unwind continue];
+        _2 = Option::<bool>::is_none(move _3) -> bb1;
     }
 
     bb1: {
@@ -143,13 +143,13 @@ fn main() -> () {
     }
 
     bb2: {
-        _5 = core::panicking::panic(const "assertion failed: EMPTY_EQ.is_none()") -> unwind continue;
+        _5 = core::panicking::panic(const "assertion failed: EMPTY_EQ.is_none()");
     }
 
     bb3: {
         _9 = const _;
         _8 = &_9;
-        _7 = Option::<bool>::is_none(move _8) -> [return: bb4, unwind continue];
+        _7 = Option::<bool>::is_none(move _8) -> bb4;
     }
 
     bb4: {
@@ -158,7 +158,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _10 = core::panicking::panic(const "assertion failed: EMPTY_EQ2.is_none()") -> unwind continue;
+        _10 = core::panicking::panic(const "assertion failed: EMPTY_EQ2.is_none()");
     }
 
     bb6: {

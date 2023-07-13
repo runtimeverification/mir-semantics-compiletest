@@ -90,35 +90,35 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = compute as fn(mytype) -> isize (PointerCoercion(ReifyFnPointer));
+        _3 = compute as fn(mytype) -> isize (Pointer(ReifyFnPointer));
         _2 = Mytype { compute: move _3, val: const 30_isize };
         _1 = mytype(move _2);
         _8 = [const "", const "\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
-        _14 = compute(_1) -> [return: bb1, unwind continue];
+        _6 = _7 as &[&str] (Pointer(Unsize));
+        _14 = compute(_1) -> bb1;
     }
 
     bb1: {
         _13 = &_14;
-        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> [return: bb2, unwind continue];
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> bb2;
     }
 
     bb2: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind continue];
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> bb3;
     }
 
     bb3: {
-        _4 = _print(move _5) -> [return: bb4, unwind continue];
+        _4 = _print(move _5) -> bb4;
     }
 
     bb4: {
         _15 = (_1.0: Mytype);
         _19 = (_15.0: fn(mytype) -> isize);
-        _18 = move _19(_1) -> [return: bb5, unwind continue];
+        _18 = move _19(_1) -> bb5;
     }
 
     bb5: {
@@ -138,7 +138,7 @@ fn main() -> () {
     bb6: {
         _28 = core::panicking::AssertKind::Eq;
         _30 = Option::<Arguments<'_>>::None;
-        _29 = core::panicking::assert_failed::<isize, isize>(move _28, _22, _23, move _30) -> unwind continue;
+        _29 = core::panicking::assert_failed::<isize, isize>(move _28, _22, _23, move _30);
     }
 
     bb7: {

@@ -55,7 +55,7 @@ fn from_fn_1(_1: F) -> [f32; N] {
 
     bb5: {
         _0 = _2;
-        drop(_1) -> [return: bb6, unwind continue];
+        drop(_1) -> bb6;
     }
 
     bb6: {
@@ -95,7 +95,7 @@ TestArray::{constant#0}: usize = {
 
     bb0: {
         _1 = Eq(const 2_usize, const 0_usize);
-        assert(!move _1, "attempt to divide `{}` by zero", const N) -> [success: bb1, unwind continue];
+        assert(!move _1, "attempt to divide `{}` by zero", const N) -> bb1;
     }
 
     bb1: {
@@ -110,7 +110,7 @@ TestArray::array::{constant#0}: usize = {
 
     bb0: {
         _1 = Eq(const 2_usize, const 0_usize);
-        assert(!move _1, "attempt to divide `{}` by zero", const N) -> [success: bb1, unwind continue];
+        assert(!move _1, "attempt to divide `{}` by zero", const N) -> bb1;
     }
 
     bb1: {
@@ -125,7 +125,7 @@ TestArray::array::{constant#0}: usize = {
 
     bb0: {
         _1 = Eq(const 2_usize, const 0_usize);
-        assert(!move _1, "attempt to divide `{}` by zero", const N) -> [success: bb1, unwind continue];
+        assert(!move _1, "attempt to divide `{}` by zero", const N) -> bb1;
     }
 
     bb1: {
@@ -149,7 +149,7 @@ fn <impl at ui/consts/issue-104396.rs:25:1: 25:34>::from_fn_2(_1: F) -> TestArra
     let mut _2: [f32; N / 2];
 
     bb0: {
-        _2 = from_fn_1::<N / 2, F>(move _1) -> [return: bb1, unwind continue];
+        _2 = from_fn_1::<N / 2, F>(move _1) -> bb1;
     }
 
     bb1: {
@@ -163,7 +163,7 @@ fn main() -> () {
     let _1: TestArray<4>;
 
     bb0: {
-        _1 = TestArray::<4>::from_fn_2::<[closure@ui/consts/issue-104396.rs:35:31: 35:34]>(const ZeroSized: [closure@ui/consts/issue-104396.rs:35:31: 35:34]) -> [return: bb1, unwind continue];
+        _1 = TestArray::<4>::from_fn_2::<[closure@ui/consts/issue-104396.rs:35:31: 35:34]>(const ZeroSized: [closure@ui/consts/issue-104396.rs:35:31: 35:34]) -> bb1;
     }
 
     bb1: {

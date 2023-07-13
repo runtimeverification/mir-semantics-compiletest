@@ -100,25 +100,25 @@ fn main() -> () {
         _8 = [const 42_u32, const 43_u32, const 44_u32];
         _7 = &mut _8;
         _10 = [const 42_u32, const 43_u32, const 44_u32];
-        _9 = Box::<[u32; 3]>::new(move _10) -> [return: bb1, unwind continue];
+        _9 = Box::<[u32; 3]>::new(move _10) -> bb1;
     }
 
     bb1: {
         _12 = move _9;
-        _11 = move _12 as std::boxed::Box<[u32]> (PointerCoercion(Unsize));
-        drop(_11) -> [return: bb2, unwind continue];
+        _11 = move _12 as std::boxed::Box<[u32]> (Pointer(Unsize));
+        drop(_11) -> bb2;
     }
 
     bb2: {
         _13 = &_14;
         _15 = &mut _16;
-        _17 = Box::<Bar>::new(const Bar) -> [return: bb3, unwind continue];
+        _17 = Box::<Bar>::new(const Bar) -> bb3;
     }
 
     bb3: {
         _19 = move _17;
-        _18 = move _19 as std::boxed::Box<dyn Foo> (PointerCoercion(Unsize));
-        drop(_18) -> [return: bb4, unwind continue];
+        _18 = move _19 as std::boxed::Box<dyn Foo> (Pointer(Unsize));
+        drop(_18) -> bb4;
     }
 
     bb4: {

@@ -25,14 +25,14 @@ fn e220() -> (i64, i64) {
     }
 
     bb0: {
-        _1 = get_displacement() -> [return: bb1, unwind continue];
+        _1 = get_displacement() -> bb1;
     }
 
     bb1: {
         _4 = const 0_usize;
         _5 = const 2_usize;
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb2, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb2;
     }
 
     bb2: {
@@ -40,7 +40,7 @@ fn e220() -> (i64, i64) {
         _8 = const 1_usize;
         _9 = const 2_usize;
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb3, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb3;
     }
 
     bb3: {
@@ -96,7 +96,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = e220() -> [return: bb1, unwind continue];
+        _3 = e220() -> bb1;
     }
 
     bb1: {
@@ -106,7 +106,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &(i64, i64));
         _7 = (_1.1: &(i64, i64));
-        _9 = <(i64, i64) as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <(i64, i64) as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -117,7 +117,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<(i64, i64), (i64, i64)>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<(i64, i64), (i64, i64)>(move _10, _6, _7, move _12);
     }
 
     bb4: {

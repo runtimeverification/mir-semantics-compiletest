@@ -15,7 +15,7 @@ two_args::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const M, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -30,7 +30,7 @@ two_args::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const M, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -43,7 +43,7 @@ fn yay() -> [u8; 4] {
     let mut _0: [u8; 4];
 
     bb0: {
-        _0 = two_args::<N, 2>() -> [return: bb1, unwind continue];
+        _0 = two_args::<N, 2>() -> bb1;
     }
 
     bb1: {

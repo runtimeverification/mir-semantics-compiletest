@@ -15,7 +15,7 @@ fn <impl at ui/box/large-allocator-ice.rs:9:1: 9:39>::allocate(_1: &BigAllocator
     let mut _3: !;
 
     bb0: {
-        _3 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+        _3 = core::panicking::panic(const "not yet implemented");
     }
 }
 
@@ -25,7 +25,7 @@ fn <impl at ui/box/large-allocator-ice.rs:9:1: 9:39>::deallocate(_1: &BigAllocat
     let mut _4: !;
 
     bb0: {
-        _4 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+        _4 = core::panicking::panic(const "not yet implemented");
     }
 }
 
@@ -41,25 +41,25 @@ fn main() -> () {
 
     bb0: {
         _2 = &_3;
-        _1 = Box::<(), &std::alloc::Global>::new_in(const (), move _2) -> [return: bb1, unwind continue];
+        _1 = Box::<(), &std::alloc::Global>::new_in(const (), move _2) -> bb1;
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
         _6 = [const 0_usize; 2];
         _5 = BigAllocator(move _6);
-        _4 = Box::<(), BigAllocator>::new_in(const (), move _5) -> [return: bb3, unwind continue];
+        _4 = Box::<(), BigAllocator>::new_in(const (), move _5) -> bb3;
     }
 
     bb3: {
-        drop(_4) -> [return: bb4, unwind continue];
+        drop(_4) -> bb4;
     }
 
     bb4: {
-        _7 = generic_function::<i32>(const 0_i32) -> [return: bb5, unwind continue];
+        _7 = generic_function::<i32>(const 0_i32) -> bb5;
     }
 
     bb5: {
@@ -97,7 +97,7 @@ fn generic_function(_1: T) -> () {
 
     bb0: {
         _4 = &_5;
-        _3 = Box::<T, &std::alloc::Global>::new_in(move _1, move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<T, &std::alloc::Global>::new_in(move _1, move _4) -> bb1;
     }
 
     bb1: {
@@ -121,7 +121,7 @@ fn generic_function(_1: T) -> () {
 
     bb4: {
         _6 = &mut _3;
-        _7 = <Box<T, &std::alloc::Global> as Drop>::drop(move _6) -> [return: bb3, unwind continue];
+        _7 = <Box<T, &std::alloc::Global> as Drop>::drop(move _6) -> bb3;
     }
 
     bb5 (cleanup): {

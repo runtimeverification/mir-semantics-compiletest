@@ -23,7 +23,7 @@ fn main() -> () {
     bb0: {
         _5 = SizeOf([usize; 3]);
         _6 = AlignOf([usize; 3]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -44,7 +44,7 @@ fn main() -> () {
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -61,7 +61,7 @@ fn main() -> () {
 
     bb7: {
         (*_9) = [const 1_usize, const 2_usize, const 3_usize];
-        _4 = move _8 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
-        _3 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _4) -> [return: bb2, unwind continue];
+        _4 = move _8 as std::boxed::Box<[usize]> (Pointer(Unsize));
+        _3 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _4) -> bb2;
     }
 }

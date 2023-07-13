@@ -95,7 +95,7 @@ fn use_rc(_1: Rc<T>) -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -151,29 +151,29 @@ fn use_mut_box(_1: &mut Box<T>) -> () {
 
     bb0: {
         _3 = _1;
-        _2 = use_mut::<Box<T>>(_3) -> [return: bb1, unwind continue];
+        _2 = use_mut::<Box<T>>(_3) -> bb1;
     }
 
     bb1: {
         _5 = _1;
-        _4 = use_mut::<Box<T>>(move _5) -> [return: bb2, unwind continue];
+        _4 = use_mut::<Box<T>>(move _5) -> bb2;
     }
 
     bb2: {
         _9 = &mut _1;
         _8 = &mut _9;
         _7 = &mut _8;
-        _6 = use_mut::<&mut &mut &mut Box<T>>(_7) -> [return: bb3, unwind continue];
+        _6 = use_mut::<&mut &mut &mut Box<T>>(_7) -> bb3;
     }
 
     bb3: {
         _11 = &(*_1);
-        _10 = use_ref::<Box<T>>(_11) -> [return: bb4, unwind continue];
+        _10 = use_ref::<Box<T>>(_11) -> bb4;
     }
 
     bb4: {
         _13 = &(*_1);
-        _12 = use_ref::<Box<T>>(move _13) -> [return: bb5, unwind continue];
+        _12 = use_ref::<Box<T>>(move _13) -> bb5;
     }
 
     bb5: {
@@ -183,7 +183,7 @@ fn use_mut_box(_1: &mut Box<T>) -> () {
         _17 = &_18;
         _16 = &_17;
         _15 = &_16;
-        _14 = use_ref::<&&&&&&mut Box<T>>(_15) -> [return: bb6, unwind continue];
+        _14 = use_ref::<&&&&&&mut Box<T>>(_15) -> bb6;
     }
 
     bb6: {
@@ -194,7 +194,7 @@ fn use_mut_box(_1: &mut Box<T>) -> () {
         _24 = &_25;
         _23 = &mut _24;
         _22 = &(*_23);
-        _21 = use_ref::<&&&&&&mut Box<T>>(move _22) -> [return: bb7, unwind continue];
+        _21 = use_ref::<&&&&&&mut Box<T>>(move _22) -> bb7;
     }
 
     bb7: {
@@ -204,7 +204,7 @@ fn use_mut_box(_1: &mut Box<T>) -> () {
         _32 = &mut _33;
         _31 = &_32;
         _30 = &_31;
-        _29 = use_ref::<&&mut &&&&mut Box<T>>(_30) -> [return: bb8, unwind continue];
+        _29 = use_ref::<&&mut &&&&mut Box<T>>(_30) -> bb8;
     }
 
     bb8: {
@@ -264,7 +264,7 @@ fn use_nested(_1: &Box<T>) -> () {
 
     bb1: {
         _5 = _1;
-        _4 = use_ref::<Box<T>>(move _5) -> [return: bb2, unwind continue];
+        _4 = use_ref::<Box<T>>(move _5) -> bb2;
     }
 
     bb2: {
@@ -274,7 +274,7 @@ fn use_nested(_1: &Box<T>) -> () {
         _9 = &_10;
         _8 = &_9;
         _7 = &_8;
-        _6 = use_ref::<&&&&&&Box<T>>(_7) -> [return: bb3, unwind continue];
+        _6 = use_ref::<&&&&&&Box<T>>(_7) -> bb3;
     }
 
     bb3: {
@@ -285,7 +285,7 @@ fn use_nested(_1: &Box<T>) -> () {
         _16 = &_17;
         _15 = &mut _16;
         _14 = &(*_15);
-        _13 = use_ref::<&&&&&&Box<T>>(move _14) -> [return: bb4, unwind continue];
+        _13 = use_ref::<&&&&&&Box<T>>(move _14) -> bb4;
     }
 
     bb4: {
@@ -295,7 +295,7 @@ fn use_nested(_1: &Box<T>) -> () {
         _24 = &mut _25;
         _23 = &_24;
         _22 = &_23;
-        _21 = use_ref::<&&mut &&&&Box<T>>(_22) -> [return: bb5, unwind continue];
+        _21 = use_ref::<&&mut &&&&Box<T>>(_22) -> bb5;
     }
 
     bb5: {
@@ -304,7 +304,7 @@ fn use_nested(_1: &Box<T>) -> () {
 
     bb6: {
         _3 = &(*_29);
-        _2 = use_ref::<T>(_3) -> [return: bb1, unwind continue];
+        _2 = use_ref::<T>(_3) -> bb1;
     }
 }
 
@@ -509,7 +509,7 @@ fn use_vec(_1: Vec<u8>) -> () {
     }
 
     bb16: {
-        drop(_1) -> [return: bb17, unwind continue];
+        drop(_1) -> bb17;
     }
 
     bb17: {
@@ -584,22 +584,22 @@ fn use_vec_ref(_1: &Vec<u8>) -> () {
 
     bb0: {
         _5 = _1;
-        _4 = <Vec<u8> as Index<RangeFull>>::index(move _5, const RangeFull) -> [return: bb1, unwind continue];
+        _4 = <Vec<u8> as Index<RangeFull>>::index(move _5, const RangeFull) -> bb1;
     }
 
     bb1: {
         _3 = _4;
-        _2 = use_slice(_3) -> [return: bb2, unwind continue];
+        _2 = use_slice(_3) -> bb2;
     }
 
     bb2: {
         _9 = _1;
-        _8 = <Vec<u8> as Deref>::deref(move _9) -> [return: bb3, unwind continue];
+        _8 = <Vec<u8> as Deref>::deref(move _9) -> bb3;
     }
 
     bb3: {
         _7 = _8;
-        _6 = use_slice(move _7) -> [return: bb4, unwind continue];
+        _6 = use_slice(move _7) -> bb4;
     }
 
     bb4: {
@@ -615,12 +615,12 @@ fn use_vec_ref(_1: &Vec<u8>) -> () {
         _40 = deref_copy (*_39);
         _41 = deref_copy (*_40);
         _42 = deref_copy (*_41);
-        _12 = <Vec<u8> as Deref>::deref(_42) -> [return: bb5, unwind continue];
+        _12 = <Vec<u8> as Deref>::deref(_42) -> bb5;
     }
 
     bb5: {
         _11 = _12;
-        _10 = use_slice(move _11) -> [return: bb6, unwind continue];
+        _10 = use_slice(move _11) -> bb6;
     }
 
     bb6: {
@@ -636,12 +636,12 @@ fn use_vec_ref(_1: &Vec<u8>) -> () {
         _46 = deref_copy (*_45);
         _47 = deref_copy (*_46);
         _48 = deref_copy (*_47);
-        _21 = <Vec<u8> as Deref>::deref(_48) -> [return: bb7, unwind continue];
+        _21 = <Vec<u8> as Deref>::deref(_48) -> bb7;
     }
 
     bb7: {
         _20 = _21;
-        _19 = use_slice(move _20) -> [return: bb8, unwind continue];
+        _19 = use_slice(move _20) -> bb8;
     }
 
     bb8: {
@@ -657,12 +657,12 @@ fn use_vec_ref(_1: &Vec<u8>) -> () {
         _52 = deref_copy (*_51);
         _53 = deref_copy (*_52);
         _54 = deref_copy (*_53);
-        _30 = <Vec<u8> as Deref>::deref(_54) -> [return: bb9, unwind continue];
+        _30 = <Vec<u8> as Deref>::deref(_54) -> bb9;
     }
 
     bb9: {
         _29 = _30;
-        _28 = use_slice(move _29) -> [return: bb10, unwind continue];
+        _28 = use_slice(move _29) -> bb10;
     }
 
     bb10: {
@@ -680,7 +680,7 @@ fn use_op_rhs(_1: &mut String) -> () {
     let _6: std::string::String;
 
     bb0: {
-        _6 = <String as From<&str>>::from(const " ") -> [return: bb1, unwind continue];
+        _6 = <String as From<&str>>::from(const " ") -> bb1;
     }
 
     bb1: {
@@ -694,7 +694,7 @@ fn use_op_rhs(_1: &mut String) -> () {
     }
 
     bb3: {
-        drop(_6) -> [return: bb4, unwind continue];
+        drop(_6) -> bb4;
     }
 
     bb4: {

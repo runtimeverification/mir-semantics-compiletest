@@ -7,12 +7,12 @@ const PTR: *mut u32 = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = Unique::<u32>::dangling() -> [return: bb1, unwind continue];
+        _1 = Unique::<u32>::dangling() -> bb1;
     }
 
     bb1: {
         ConstEvalCounter;
-        _0 = Unique::<u32>::as_ptr(move _1) -> [return: bb2, unwind continue];
+        _0 = Unique::<u32>::as_ptr(move _1) -> bb2;
     }
 
     bb2: {
@@ -51,16 +51,16 @@ fn main() -> () {
     bb0: {
         _3 = const _;
         _2 = &_3;
-        _8 = Unique::<u32>::dangling as fn() -> std::ptr::Unique<u32> (PointerCoercion(ReifyFnPointer));
-        _7 = test::black_box::<fn() -> Unique<u32>>(move _8) -> [return: bb1, unwind continue];
+        _8 = Unique::<u32>::dangling as fn() -> std::ptr::Unique<u32> (Pointer(ReifyFnPointer));
+        _7 = test::black_box::<fn() -> Unique<u32>>(move _8) -> bb1;
     }
 
     bb1: {
-        _6 = move _7() -> [return: bb2, unwind continue];
+        _6 = move _7() -> bb2;
     }
 
     bb2: {
-        _5 = Unique::<u32>::as_ptr(move _6) -> [return: bb3, unwind continue];
+        _5 = Unique::<u32>::as_ptr(move _6) -> bb3;
     }
 
     bb3: {
@@ -78,7 +78,7 @@ fn main() -> () {
     bb4: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _15, _9, _10, move _17);
     }
 
     bb5: {

@@ -90,7 +90,7 @@ fn sanity_check_size(_1: T) -> () {
         _7 = const 1_usize;
         _8 = const 2_usize;
         _9 = Lt(_7, _8);
-        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> [success: bb1, unwind continue];
+        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> bb1;
     }
 
     bb1: {
@@ -100,7 +100,7 @@ fn sanity_check_size(_1: T) -> () {
         _13 = const 0_usize;
         _14 = const 2_usize;
         _15 = Lt(_13, _14);
-        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> [success: bb2, unwind continue];
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _13) -> bb2;
     }
 
     bb2: {
@@ -108,11 +108,11 @@ fn sanity_check_size(_1: T) -> () {
         _11 = &raw const (*_12);
         _10 = _11 as usize (PointerExposeAddress);
         _3 = Sub(move _4, move _10);
-        _19 = std::mem::size_of::<T>() -> [return: bb3, unwind continue];
+        _19 = std::mem::size_of::<T>() -> bb3;
     }
 
     bb3: {
-        _20 = align_of::<T>() -> [return: bb4, unwind continue];
+        _20 = align_of::<T>() -> bb4;
     }
 
     bb4: {
@@ -134,13 +134,13 @@ fn sanity_check_size(_1: T) -> () {
     bb5: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<usize, usize>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<usize, usize>(move _30, _24, _25, move _32);
     }
 
     bb6: {
         _36 = _16;
         _37 = Eq(_17, const 0_usize);
-        assert(!move _37, "attempt to calculate the remainder of `{}` with a divisor of zero", _36) -> [success: bb7, unwind continue];
+        assert(!move _37, "attempt to calculate the remainder of `{}` with a divisor of zero", _36) -> bb7;
     }
 
     bb7: {
@@ -161,7 +161,7 @@ fn sanity_check_size(_1: T) -> () {
     bb8: {
         _46 = core::panicking::AssertKind::Eq;
         _48 = Option::<Arguments<'_>>::None;
-        _47 = core::panicking::assert_failed::<usize, usize>(move _46, _40, _41, move _48) -> unwind continue;
+        _47 = core::panicking::assert_failed::<usize, usize>(move _46, _40, _41, move _48);
     }
 
     bb9: {
@@ -233,7 +233,7 @@ fn main() -> () {
         _4 = Packed::<(&(), i32)>(move _5);
         _3 = Option::<Packed<(&(), i32)>>::Some(move _4);
         _2 = (move _3, const true);
-        _1 = sanity_check_size::<(Option<Packed<(&(), i32)>>, bool)>(move _2) -> [return: bb1, unwind continue];
+        _1 = sanity_check_size::<(Option<Packed<(&(), i32)>>, bool)>(move _2) -> bb1;
     }
 
     bb1: {
@@ -241,11 +241,11 @@ fn main() -> () {
         _11 = Packed::<&()>(_12);
         _10 = (move _11, const true);
         _9 = Option::<(Packed<&()>, bool)>::Some(move _10);
-        _8 = sanity_check_size::<Option<(Packed<&()>, bool)>>(move _9) -> [return: bb2, unwind continue];
+        _8 = sanity_check_size::<Option<(Packed<&()>, bool)>>(move _9) -> bb2;
     }
 
     bb2: {
-        _16 = align_of::<Option<(Packed<&()>, bool)>>() -> [return: bb3, unwind continue];
+        _16 = align_of::<Option<(Packed<&()>, bool)>>() -> bb3;
     }
 
     bb3: {
@@ -265,16 +265,16 @@ fn main() -> () {
     bb4: {
         _25 = core::panicking::AssertKind::Eq;
         _27 = Option::<Arguments<'_>>::None;
-        _26 = core::panicking::assert_failed::<usize, usize>(move _25, _19, _20, move _27) -> unwind continue;
+        _26 = core::panicking::assert_failed::<usize, usize>(move _25, _19, _20, move _27);
     }
 
     bb5: {
-        _30 = std::mem::size_of::<Option<(Packed<&()>, bool)>>() -> [return: bb6, unwind continue];
+        _30 = std::mem::size_of::<Option<(Packed<&()>, bool)>>() -> bb6;
     }
 
     bb6: {
         _29 = &_30;
-        _32 = std::mem::size_of::<(Packed<&()>, bool)>() -> [return: bb7, unwind continue];
+        _32 = std::mem::size_of::<(Packed<&()>, bool)>() -> bb7;
     }
 
     bb7: {
@@ -292,7 +292,7 @@ fn main() -> () {
     bb8: {
         _39 = core::panicking::AssertKind::Eq;
         _41 = Option::<Arguments<'_>>::None;
-        _40 = core::panicking::assert_failed::<usize, usize>(move _39, _33, _34, move _41) -> unwind continue;
+        _40 = core::panicking::assert_failed::<usize, usize>(move _39, _33, _34, move _41);
     }
 
     bb9: {

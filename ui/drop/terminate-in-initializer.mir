@@ -65,19 +65,19 @@ fn test_panic() -> () {
     let mut _3: std::thread::JoinHandle<()>;
 
     bb0: {
-        _3 = spawn::<[closure@ui/drop/terminate-in-initializer.rs:19:19: 19:25], ()>(const ZeroSized: [closure@ui/drop/terminate-in-initializer.rs:19:19: 19:25]) -> [return: bb1, unwind continue];
+        _3 = spawn::<[closure@ui/drop/terminate-in-initializer.rs:19:19: 19:25], ()>(const ZeroSized: [closure@ui/drop/terminate-in-initializer.rs:19:19: 19:25]) -> bb1;
     }
 
     bb1: {
-        _2 = JoinHandle::<()>::join(move _3) -> [return: bb2, unwind continue];
+        _2 = JoinHandle::<()>::join(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> [return: bb3, unwind continue];
+        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> bb3;
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -94,7 +94,7 @@ fn test_panic::f() -> () {
     }
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -102,7 +102,7 @@ fn test_panic::{closure#0}(_1: [closure@ui/drop/terminate-in-initializer.rs:19:1
     let mut _0: ();
 
     bb0: {
-        _0 = test_panic::f() -> [return: bb1, unwind continue];
+        _0 = test_panic::f() -> bb1;
     }
 
     bb1: {
@@ -117,19 +117,19 @@ fn test_panic_indirect() -> () {
     let mut _3: std::thread::JoinHandle<()>;
 
     bb0: {
-        _3 = spawn::<[closure@ui/drop/terminate-in-initializer.rs:25:19: 25:25], ()>(const ZeroSized: [closure@ui/drop/terminate-in-initializer.rs:25:19: 25:25]) -> [return: bb1, unwind continue];
+        _3 = spawn::<[closure@ui/drop/terminate-in-initializer.rs:25:19: 25:25], ()>(const ZeroSized: [closure@ui/drop/terminate-in-initializer.rs:25:19: 25:25]) -> bb1;
     }
 
     bb1: {
-        _2 = JoinHandle::<()>::join(move _3) -> [return: bb2, unwind continue];
+        _2 = JoinHandle::<()>::join(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> [return: bb3, unwind continue];
+        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> bb3;
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -142,7 +142,7 @@ fn test_panic_indirect::f() -> ! {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -155,7 +155,7 @@ fn g() -> () {
     }
 
     bb0: {
-        _2 = test_panic_indirect::f() -> unwind continue;
+        _2 = test_panic_indirect::f();
     }
 }
 
@@ -163,7 +163,7 @@ fn test_panic_indirect::{closure#0}(_1: [closure@ui/drop/terminate-in-initialize
     let mut _0: ();
 
     bb0: {
-        _0 = g() -> [return: bb1, unwind continue];
+        _0 = g() -> bb1;
     }
 
     bb1: {
@@ -180,23 +180,23 @@ fn main() -> () {
     let _5: ();
 
     bb0: {
-        _1 = test_break() -> [return: bb1, unwind continue];
+        _1 = test_break() -> bb1;
     }
 
     bb1: {
-        _2 = test_cont() -> [return: bb2, unwind continue];
+        _2 = test_cont() -> bb2;
     }
 
     bb2: {
-        _3 = test_ret() -> [return: bb3, unwind continue];
+        _3 = test_ret() -> bb3;
     }
 
     bb3: {
-        _4 = test_panic() -> [return: bb4, unwind continue];
+        _4 = test_panic() -> bb4;
     }
 
     bb4: {
-        _5 = test_panic_indirect() -> [return: bb5, unwind continue];
+        _5 = test_panic_indirect() -> bb5;
     }
 
     bb5: {

@@ -31,12 +31,12 @@ fn preticked() -> C {
     }
 
     bb0: {
-        _1 = <C as Counter>::new() -> [return: bb1, unwind continue];
+        _1 = <C as Counter>::new() -> bb1;
     }
 
     bb1: {
         _4 = &mut _1;
-        _3 = _4 as &mut dyn Counter (PointerCoercion(Unsize));
+        _3 = _4 as &mut dyn Counter (Pointer(Unsize));
         _2 = tick(move _3) -> [return: bb2, unwind: bb3];
     }
 
@@ -60,7 +60,7 @@ fn tick(_1: &mut dyn Counter) -> () {
     let _2: ();
 
     bb0: {
-        _2 = tick_generic::<dyn Counter>(_1) -> [return: bb1, unwind continue];
+        _2 = tick_generic::<dyn Counter>(_1) -> bb1;
     }
 
     bb1: {
@@ -75,11 +75,11 @@ fn tick_generic(_1: &mut C) -> () {
     let _3: u32;
 
     bb0: {
-        _2 = <C as Counter>::tick(_1) -> [return: bb1, unwind continue];
+        _2 = <C as Counter>::tick(_1) -> bb1;
     }
 
     bb1: {
-        _3 = <C as Counter>::tick(_1) -> [return: bb2, unwind continue];
+        _3 = <C as Counter>::tick(_1) -> bb2;
     }
 
     bb2: {
@@ -120,18 +120,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = preticked::<CCounter>() -> [return: bb1, unwind continue];
+        _1 = preticked::<CCounter>() -> bb1;
     }
 
     bb1: {
         _4 = &mut _1;
-        _3 = _4 as &mut dyn Counter (PointerCoercion(Unsize));
-        _2 = tick(move _3) -> [return: bb2, unwind continue];
+        _3 = _4 as &mut dyn Counter (Pointer(Unsize));
+        _2 = tick(move _3) -> bb2;
     }
 
     bb2: {
         _8 = &mut _1;
-        _7 = <CCounter as Counter>::tick(move _8) -> [return: bb3, unwind continue];
+        _7 = <CCounter as Counter>::tick(move _8) -> bb3;
     }
 
     bb3: {
@@ -151,7 +151,7 @@ fn main() -> () {
     bb4: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<u32, u32>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<u32, u32>(move _17, _11, _12, move _19);
     }
 
     bb5: {

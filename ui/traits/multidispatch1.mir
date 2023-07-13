@@ -92,7 +92,7 @@ fn test_eq(_1: M, _2: T) -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -133,13 +133,13 @@ fn main() -> () {
         _2 = Add(const 256_usize, const 22_usize);
         _1 = MyType { dummy: move _2 };
         _4 = (_1.0: usize);
-        _3 = test_eq::<usize, MyType>(_1, move _4) -> [return: bb1, unwind continue];
+        _3 = test_eq::<usize, MyType>(_1, move _4) -> bb1;
     }
 
     bb1: {
         _7 = (_1.0: usize);
         _6 = move _7 as u8 (IntToInt);
-        _5 = test_eq::<u8, MyType>(_1, move _6) -> [return: bb2, unwind continue];
+        _5 = test_eq::<u8, MyType>(_1, move _6) -> bb2;
     }
 
     bb2: {

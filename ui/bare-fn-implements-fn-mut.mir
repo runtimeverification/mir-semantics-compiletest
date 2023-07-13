@@ -12,7 +12,7 @@ fn call_f(_1: F) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -39,12 +39,12 @@ fn f() -> () {
     bb0: {
         _5 = [const "hello\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
@@ -67,7 +67,7 @@ fn call_g(_1: G, _2: String, _3: String) -> String {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -164,13 +164,13 @@ fn main() -> () {
 
     bb0: {
         _18 = const false;
-        _1 = call_f::<fn() {f}>(f) -> [return: bb1, unwind continue];
+        _1 = call_f::<fn() {f}>(f) -> bb1;
     }
 
     bb1: {
         _6 = const "foo";
         _18 = const true;
-        _5 = <str as ToString>::to_string(_6) -> [return: bb2, unwind continue];
+        _5 = <str as ToString>::to_string(_6) -> bb2;
     }
 
     bb2: {
@@ -206,7 +206,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_4) -> [return: bb8, unwind continue];
+        drop(_4) -> bb8;
     }
 
     bb8: {

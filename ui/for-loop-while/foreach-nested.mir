@@ -23,7 +23,7 @@ fn two(_1: F) -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -159,7 +159,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([isize; 4]);
         _4 = AlignOf([isize; 4]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -283,7 +283,7 @@ fn main() -> () {
     }
 
     bb15: {
-        drop(_1) -> [return: bb16, unwind continue];
+        drop(_1) -> bb16;
     }
 
     bb16: {
@@ -300,8 +300,8 @@ fn main() -> () {
 
     bb19: {
         (*_72) = [const -1_isize, const -1_isize, const -1_isize, const -1_isize];
-        _2 = move _6 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[isize]> (Pointer(Unsize));
+        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -320,7 +320,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/for-loop-while/foreach-nested.rs:9:9: 
         _6 = deref_copy ((*_1).1: &mut isize);
         _4 = &_2;
         _3 = [closure@ui/for-loop-while/foreach-nested.rs:10:13: 10:16] { i: _5, a: _6, p: move _4 };
-        _0 = two::<[closure@ui/for-loop-while/foreach-nested.rs:10:13: 10:16]>(move _3) -> [return: bb1, unwind continue];
+        _0 = two::<[closure@ui/for-loop-while/foreach-nested.rs:10:13: 10:16]>(move _3) -> bb1;
     }
 
     bb1: {
@@ -353,7 +353,7 @@ fn main::{closure#0}::{closure#0}(_1: &mut [closure@ui/for-loop-while/foreach-ne
         _10 = deref_copy ((*_1).1: &mut isize);
         _7 = (*_10);
         _6 = move _7 as usize (IntToInt);
-        _5 = <Vec<isize> as IndexMut<usize>>::index_mut(_9, move _6) -> [return: bb1, unwind continue];
+        _5 = <Vec<isize> as IndexMut<usize>>::index_mut(_9, move _6) -> bb1;
     }
 
     bb1: {

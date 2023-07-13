@@ -6,7 +6,7 @@ fn <impl at ui/dynamically-sized-types/dst-deref-mut.rs:11:1: 11:19>::deref(_1: 
     let mut _2: !;
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -119,7 +119,7 @@ fn foo(_1: &mut Arr) -> () {
     }
 
     bb0: {
-        _3 = <Arr as DerefMut>::deref_mut(_1) -> [return: bb1, unwind continue];
+        _3 = <Arr as DerefMut>::deref_mut(_1) -> bb1;
     }
 
     bb1: {
@@ -127,7 +127,7 @@ fn foo(_1: &mut Arr) -> () {
         _6 = const 0_usize;
         _7 = Len((*_2));
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb2, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb2;
     }
 
     bb2: {
@@ -147,14 +147,14 @@ fn foo(_1: &mut Arr) -> () {
     bb3: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19);
     }
 
     bb4: {
         _22 = const 1_usize;
         _23 = Len((*_2));
         _24 = Lt(_22, _23);
-        assert(move _24, "index out of bounds: the length is {} but the index is {}", move _23, _22) -> [success: bb5, unwind continue];
+        assert(move _24, "index out of bounds: the length is {} but the index is {}", move _23, _22) -> bb5;
     }
 
     bb5: {
@@ -174,14 +174,14 @@ fn foo(_1: &mut Arr) -> () {
     bb6: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<usize, usize>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<usize, usize>(move _33, _27, _28, move _35);
     }
 
     bb7: {
         _38 = const 2_usize;
         _39 = Len((*_2));
         _40 = Lt(_38, _39);
-        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> [success: bb8, unwind continue];
+        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> bb8;
     }
 
     bb8: {
@@ -201,7 +201,7 @@ fn foo(_1: &mut Arr) -> () {
     bb9: {
         _49 = core::panicking::AssertKind::Eq;
         _51 = Option::<Arguments<'_>>::None;
-        _50 = core::panicking::assert_failed::<usize, usize>(move _49, _43, _44, move _51) -> unwind continue;
+        _50 = core::panicking::assert_failed::<usize, usize>(move _49, _43, _44, move _51);
     }
 
     bb10: {
@@ -223,18 +223,18 @@ fn main() -> () {
 
     bb0: {
         _4 = [const 1_usize, const 2_usize, const 3_usize];
-        _3 = Box::<[usize; 3]>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<[usize; 3]>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<[usize]> (Pointer(Unsize));
         _1 = Arr { ptr: move _2 };
         _6 = &mut _1;
         _5 = foo(_6) -> [return: bb2, unwind: bb4];
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {

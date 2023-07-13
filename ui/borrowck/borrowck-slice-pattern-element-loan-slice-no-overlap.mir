@@ -67,8 +67,8 @@ fn const_index_ok(_1: &mut [i32]) -> () {
         _16 = &(*_11);
         _15 = [_5, _6, move _16, _7];
         _14 = &_15;
-        _13 = _14 as &[&i32] (PointerCoercion(Unsize));
-        _12 = nop(move _13) -> [return: bb3, unwind continue];
+        _13 = _14 as &[&i32] (Pointer(Unsize));
+        _12 = nop(move _13) -> bb3;
     }
 
     bb3: {
@@ -125,8 +125,8 @@ fn const_index_from_end_ok(_1: &mut [i32]) -> () {
         _16 = &(*_11);
         _15 = [_7, move _16, _6, _5];
         _14 = &_15;
-        _13 = _14 as &[&i32] (PointerCoercion(Unsize));
-        _12 = nop(move _13) -> [return: bb3, unwind continue];
+        _13 = _14 as &[&i32] (Pointer(Unsize));
+        _12 = nop(move _13) -> bb3;
     }
 
     bb3: {
@@ -206,8 +206,8 @@ fn const_index_mixed(_1: &mut [i32]) -> () {
         _16 = &(*_11);
         _15 = [move _16, _7, _6, _5];
         _14 = &_15;
-        _13 = _14 as &[&i32] (PointerCoercion(Unsize));
-        _12 = nop(move _13) -> [return: bb3, unwind continue];
+        _13 = _14 as &[&i32] (Pointer(Unsize));
+        _12 = nop(move _13) -> bb3;
     }
 
     bb3: {
@@ -232,8 +232,8 @@ fn const_index_mixed(_1: &mut [i32]) -> () {
         _31 = &(*_26);
         _30 = [_20, _21, _22, move _31];
         _29 = &_30;
-        _28 = _29 as &[&i32] (PointerCoercion(Unsize));
-        _27 = nop(move _28) -> [return: bb6, unwind continue];
+        _28 = _29 as &[&i32] (Pointer(Unsize));
+        _27 = nop(move _28) -> bb6;
     }
 
     bb6: {
@@ -287,13 +287,13 @@ fn const_index_and_subslice_ok(_1: &mut [i32]) -> () {
         _10 = &mut (*_1)[2:];
         _14 = [_5, _6];
         _13 = &_14;
-        _12 = _13 as &[&i32] (PointerCoercion(Unsize));
-        _11 = nop(move _12) -> [return: bb3, unwind continue];
+        _12 = _13 as &[&i32] (Pointer(Unsize));
+        _11 = nop(move _12) -> bb3;
     }
 
     bb3: {
         _16 = &(*_10);
-        _15 = nop_subslice(move _16) -> [return: bb4, unwind continue];
+        _15 = nop_subslice(move _16) -> bb4;
     }
 
     bb4: {
@@ -347,13 +347,13 @@ fn const_index_and_subslice_from_end_ok(_1: &mut [i32]) -> () {
         _10 = &mut (*_1)[:-2];
         _14 = [_6, _5];
         _13 = &_14;
-        _12 = _13 as &[&i32] (PointerCoercion(Unsize));
-        _11 = nop(move _12) -> [return: bb3, unwind continue];
+        _12 = _13 as &[&i32] (Pointer(Unsize));
+        _11 = nop(move _12) -> bb3;
     }
 
     bb3: {
         _16 = &(*_10);
-        _15 = nop_subslice(move _16) -> [return: bb4, unwind continue];
+        _15 = nop_subslice(move _16) -> bb4;
     }
 
     bb4: {
@@ -383,26 +383,26 @@ fn main() -> () {
     bb0: {
         _1 = [const 1_i32, const 2_i32, const 3_i32, const 4_i32];
         _4 = &mut _1;
-        _3 = _4 as &mut [i32] (PointerCoercion(Unsize));
-        _2 = const_index_ok(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &mut [i32] (Pointer(Unsize));
+        _2 = const_index_ok(move _3) -> bb1;
     }
 
     bb1: {
         _7 = &mut _1;
-        _6 = _7 as &mut [i32] (PointerCoercion(Unsize));
-        _5 = const_index_from_end_ok(move _6) -> [return: bb2, unwind continue];
+        _6 = _7 as &mut [i32] (Pointer(Unsize));
+        _5 = const_index_from_end_ok(move _6) -> bb2;
     }
 
     bb2: {
         _10 = &mut _1;
-        _9 = _10 as &mut [i32] (PointerCoercion(Unsize));
-        _8 = const_index_and_subslice_ok(move _9) -> [return: bb3, unwind continue];
+        _9 = _10 as &mut [i32] (Pointer(Unsize));
+        _8 = const_index_and_subslice_ok(move _9) -> bb3;
     }
 
     bb3: {
         _13 = &mut _1;
-        _12 = _13 as &mut [i32] (PointerCoercion(Unsize));
-        _11 = const_index_and_subslice_from_end_ok(move _12) -> [return: bb4, unwind continue];
+        _12 = _13 as &mut [i32] (Pointer(Unsize));
+        _11 = const_index_and_subslice_from_end_ok(move _12) -> bb4;
     }
 
     bb4: {

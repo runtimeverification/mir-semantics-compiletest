@@ -57,14 +57,14 @@ fn main() -> () {
         _8 = const 3_usize;
         _9 = const 5_usize;
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb1, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb1;
     }
 
     bb1: {
         _6 = _7[_8];
         _11 = const 5_usize;
         _12 = Lt(_6, _11);
-        assert(move _12, "index out of bounds: the length is {} but the index is {}", move _11, _6) -> [success: bb2, unwind continue];
+        assert(move _12, "index out of bounds: the length is {} but the index is {}", move _11, _6) -> bb2;
     }
 
     bb2: {
@@ -82,7 +82,7 @@ fn main() -> () {
     bb3: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21);
     }
 
     bb4: {

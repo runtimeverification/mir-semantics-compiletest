@@ -28,7 +28,7 @@ fn <impl at ui/self/objects-owned-object-owned-method.rs:14:1: 14:28>::foo(_1: B
 
     bb2: {
         _0 = ((*_2).0: usize);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 }
 
@@ -64,14 +64,14 @@ fn main() -> () {
 
     bb0: {
         _3 = BarStruct { x: const 22_usize };
-        _2 = Box::<BarStruct>::new(move _3) -> [return: bb1, unwind continue];
+        _2 = Box::<BarStruct>::new(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as std::boxed::Box<dyn FooTrait> (PointerCoercion(Unsize));
+        _1 = move _2 as std::boxed::Box<dyn FooTrait> (Pointer(Unsize));
         _6 = const 22_usize;
         _5 = &_6;
-        _8 = <dyn FooTrait as FooTrait>::foo(move _1) -> [return: bb2, unwind continue];
+        _8 = <dyn FooTrait as FooTrait>::foo(move _1) -> bb2;
     }
 
     bb2: {
@@ -89,7 +89,7 @@ fn main() -> () {
     bb3: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17);
     }
 
     bb4: {

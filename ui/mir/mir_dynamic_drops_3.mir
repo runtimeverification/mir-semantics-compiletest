@@ -37,43 +37,43 @@ fn <impl at ui/mir/mir_dynamic_drops_3.rs:11:1: 11:32>::drop(_1: &mut Droppable<
     bb1: {
         _7 = [const "", const " dropped twice\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _12 = &((*_1).1: u32);
-        _11 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_12) -> [return: bb2, unwind continue];
+        _11 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_12) -> bb2;
     }
 
     bb2: {
         _10 = [move _11];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind continue];
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb3;
     }
 
     bb3: {
-        _3 = _eprint(move _4) -> [return: bb4, unwind continue];
+        _3 = _eprint(move _4) -> bb4;
     }
 
     bb4: {
-        _13 = exit(const 1_i32) -> unwind continue;
+        _13 = exit(const 1_i32);
     }
 
     bb5: {
         _18 = [const "drop ", const "\n"];
         _17 = &_18;
-        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _16 = _17 as &[&str] (Pointer(Unsize));
         _23 = &((*_1).1: u32);
-        _22 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_23) -> [return: bb6, unwind continue];
+        _22 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_23) -> bb6;
     }
 
     bb6: {
         _21 = [move _22];
         _20 = &_21;
-        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb7, unwind continue];
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _15 = Arguments::<'_>::new_v1(move _16, move _19) -> bb7;
     }
 
     bb7: {
-        _14 = _eprint(move _15) -> [return: bb8, unwind continue];
+        _14 = _eprint(move _15) -> bb8;
     }
 
     bb8: {
@@ -88,7 +88,7 @@ fn may_panic() -> Droppable<'_> {
     let _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "unwind happens") -> unwind continue;
+        _1 = begin_panic::<&str>(const "unwind happens");
     }
 }
 
@@ -132,7 +132,7 @@ fn mir(_1: Droppable<'_>) -> () {
 
     bb1: {
         _7 = [move _8, move _10, move _11, move _12];
-        drop(_7) -> [return: bb2, unwind continue];
+        drop(_7) -> bb2;
     }
 
     bb2: {
@@ -170,7 +170,7 @@ fn main() -> () {
         _1 = const false;
         _4 = &mut _1;
         _3 = Droppable::<'_>(_4, const 3_u32);
-        _2 = mir(move _3) -> [return: bb1, unwind continue];
+        _2 = mir(move _3) -> bb1;
     }
 
     bb1: {

@@ -15,7 +15,7 @@ fn bar(_1: fn(i32) -> i32) -> unsafe fn(i32) -> i32 {
     let mut _0: unsafe fn(i32) -> i32;
 
     bb0: {
-        _0 = _1 as unsafe fn(i32) -> i32 (PointerCoercion(UnsafeFnPointer));
+        _0 = _1 as unsafe fn(i32) -> i32 (Pointer(UnsafeFnPointer));
         return;
     }
 }
@@ -56,13 +56,13 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = foo as fn(i32) -> i32 (PointerCoercion(ReifyFnPointer));
-        _1 = bar(move _2) -> [return: bb1, unwind continue];
+        _2 = foo as fn(i32) -> i32 (Pointer(ReifyFnPointer));
+        _1 = bar(move _2) -> bb1;
     }
 
     bb1: {
         _4 = _1;
-        _3 = move _4(const 2_i32) -> [return: bb2, unwind continue];
+        _3 = move _4(const 2_i32) -> bb2;
     }
 
     bb2: {
@@ -82,7 +82,7 @@ fn main() -> () {
     bb3: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17);
     }
 
     bb4: {

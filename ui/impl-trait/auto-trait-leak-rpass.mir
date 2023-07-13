@@ -8,7 +8,7 @@ fn before() -> impl FnMut(i32) {
     }
 
     bb0: {
-        _1 = Box::<i32>::new(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = Box::<i32>::new(const 0_i32) -> bb1;
     }
 
     bb1: {
@@ -52,7 +52,7 @@ fn send(_1: T) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -68,19 +68,19 @@ fn main() -> () {
     let mut _4: impl FnMut(i32);
 
     bb0: {
-        _2 = before() -> [return: bb1, unwind continue];
+        _2 = before() -> bb1;
     }
 
     bb1: {
-        _1 = send::<impl FnMut(i32)>(move _2) -> [return: bb2, unwind continue];
+        _1 = send::<impl FnMut(i32)>(move _2) -> bb2;
     }
 
     bb2: {
-        _4 = after() -> [return: bb3, unwind continue];
+        _4 = after() -> bb3;
     }
 
     bb3: {
-        _3 = send::<impl FnMut(i32)>(move _4) -> [return: bb4, unwind continue];
+        _3 = send::<impl FnMut(i32)>(move _4) -> bb4;
     }
 
     bb4: {
@@ -96,7 +96,7 @@ fn after() -> impl FnMut(i32) {
     }
 
     bb0: {
-        _1 = Box::<i32>::new(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = Box::<i32>::new(const 0_i32) -> bb1;
     }
 
     bb1: {

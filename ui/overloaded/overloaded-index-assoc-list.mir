@@ -10,7 +10,7 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:10:10: 10:15>::clone(_1
 
     bb0: {
         _3 = &((*_1).0: K);
-        _2 = <K as Clone>::clone(_3) -> [return: bb1, unwind continue];
+        _2 = <K as Clone>::clone(_3) -> bb1;
     }
 
     bb1: {
@@ -44,7 +44,7 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:16:1: 16:31>::push(_1: 
     bb0: {
         _5 = &mut ((*_1).0: std::vec::Vec<AssociationPair<K, V>>);
         _6 = AssociationPair::<K, V> { key: move _2, value: move _3 };
-        _4 = Vec::<AssociationPair<K, V>>::push(move _5, move _6) -> [return: bb1, unwind continue];
+        _4 = Vec::<AssociationPair<K, V>>::push(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -85,7 +85,7 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:22:1: 22:88>::index(_1:
 
     bb0: {
         _4 = &((*_1).0: std::vec::Vec<AssociationPair<K, V>>);
-        _3 = <&Vec<AssociationPair<K, V>> as IntoIterator>::into_iter(move _4) -> [return: bb1, unwind continue];
+        _3 = <&Vec<AssociationPair<K, V>> as IntoIterator>::into_iter(move _4) -> bb1;
     }
 
     bb1: {
@@ -95,7 +95,7 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:22:1: 22:88>::index(_1:
 
     bb2: {
         _7 = &mut _5;
-        _6 = <std::slice::Iter<'_, AssociationPair<K, V>> as Iterator>::next(_7) -> [return: bb3, unwind continue];
+        _6 = <std::slice::Iter<'_, AssociationPair<K, V>> as Iterator>::next(_7) -> bb3;
     }
 
     bb3: {
@@ -107,7 +107,7 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:22:1: 22:88>::index(_1:
         _9 = ((_6 as Some).0: &AssociationPair<K, V>);
         _11 = &((*_9).0: K);
         _12 = _2;
-        _10 = <K as PartialEq>::eq(move _11, move _12) -> [return: bb7, unwind continue];
+        _10 = <K as PartialEq>::eq(move _11, move _12) -> bb7;
     }
 
     bb5: {
@@ -117,9 +117,9 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:22:1: 22:88>::index(_1:
     bb6: {
         _17 = [const "No value found for key: "];
         _16 = &_17;
-        _15 = _16 as &[&str] (PointerCoercion(Unsize));
+        _15 = _16 as &[&str] (Pointer(Unsize));
         _22 = &_2;
-        _21 = core::fmt::rt::Argument::<'_>::new_debug::<&K>(_22) -> [return: bb9, unwind continue];
+        _21 = core::fmt::rt::Argument::<'_>::new_debug::<&K>(_22) -> bb9;
     }
 
     bb7: {
@@ -134,12 +134,12 @@ fn <impl at ui/overloaded/overloaded-index-assoc-list.rs:22:1: 22:88>::index(_1:
     bb9: {
         _20 = [move _21];
         _19 = &_20;
-        _18 = _19 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _14 = Arguments::<'_>::new_v1(move _15, move _18) -> [return: bb10, unwind continue];
+        _18 = _19 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _14 = Arguments::<'_>::new_v1(move _15, move _18) -> bb10;
     }
 
     bb10: {
-        _13 = panic_fmt(move _14) -> unwind continue;
+        _13 = panic_fmt(move _14);
     }
 }
 
@@ -263,7 +263,7 @@ fn main() -> () {
 
     bb0: {
         _2 = const "foo";
-        _1 = <str as ToString>::to_string(_2) -> [return: bb1, unwind continue];
+        _1 = <str as ToString>::to_string(_2) -> bb1;
     }
 
     bb1: {
@@ -409,7 +409,7 @@ fn main() -> () {
     }
 
     bb21: {
-        drop(_1) -> [return: bb22, unwind continue];
+        drop(_1) -> bb22;
     }
 
     bb22: {

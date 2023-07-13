@@ -16,7 +16,7 @@ fn foo() -> () {
     }
 
     bb0: {
-        _2 = uninitialized::<[u8; SIZE]>() -> [return: bb1, unwind continue];
+        _2 = uninitialized::<[u8; SIZE]>() -> bb1;
     }
 
     bb1: {
@@ -58,11 +58,11 @@ fn bar() -> () {
     }
 
     bb0: {
-        _3 = MaybeUninit::<[u8; SIZE]>::uninit() -> [return: bb1, unwind continue];
+        _3 = MaybeUninit::<[u8; SIZE]>::uninit() -> bb1;
     }
 
     bb1: {
-        _2 = MaybeUninit::<[u8; SIZE]>::assume_init(move _3) -> [return: bb2, unwind continue];
+        _2 = MaybeUninit::<[u8; SIZE]>::assume_init(move _3) -> bb2;
     }
 
     bb2: {

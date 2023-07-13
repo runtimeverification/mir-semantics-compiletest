@@ -208,7 +208,7 @@ fn a(_1: &dyn Foo<N>) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = <dyn Foo<N> as Foo<N>>::myfun(_1) -> [return: bb1, unwind continue];
+        _0 = <dyn Foo<N> as Foo<N>>::myfun(_1) -> bb1;
     }
 
     bb1: {
@@ -230,7 +230,7 @@ fn b(_1: &dyn Foo<3>) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = <dyn Foo<3> as Foo<3>>::myfun(_1) -> [return: bb1, unwind continue];
+        _0 = <dyn Foo<3> as Foo<3>>::myfun(_1) -> bb1;
     }
 
     bb1: {
@@ -255,12 +255,12 @@ fn c(_1: T) -> usize {
 
     bb0: {
         _3 = &_1;
-        _2 = _3 as &dyn Foo<N> (PointerCoercion(Unsize));
+        _2 = _3 as &dyn Foo<N> (Pointer(Unsize));
         _0 = a::<N>(move _2) -> [return: bb1, unwind: bb3];
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -299,7 +299,7 @@ fn d(_1: &T) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = <T as Foo<3>>::myfun(_1) -> [return: bb1, unwind continue];
+        _0 = <T as Foo<3>>::myfun(_1) -> bb1;
     }
 
     bb1: {
@@ -321,7 +321,7 @@ fn e(_1: &dyn Bar<3>) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = d::<dyn Bar<3>>(_1) -> [return: bb1, unwind continue];
+        _0 = d::<dyn Bar<3>>(_1) -> bb1;
     }
 
     bb1: {
@@ -458,8 +458,8 @@ fn main() -> () {
 
     bb0: {
         _6 = &_1;
-        _5 = _6 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _4 = a::<3>(move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn Foo<3> (Pointer(Unsize));
+        _4 = a::<3>(move _5) -> bb1;
     }
 
     bb1: {
@@ -469,13 +469,13 @@ fn main() -> () {
     }
 
     bb2: {
-        _7 = core::panicking::panic(const "assertion failed: a(&foo) == 3") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: a(&foo) == 3");
     }
 
     bb3: {
         _12 = &_1;
-        _11 = _12 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _10 = b(move _11) -> [return: bb4, unwind continue];
+        _11 = _12 as &dyn Foo<3> (Pointer(Unsize));
+        _10 = b(move _11) -> bb4;
     }
 
     bb4: {
@@ -485,12 +485,12 @@ fn main() -> () {
     }
 
     bb5: {
-        _13 = core::panicking::panic(const "assertion failed: b(&foo) == 3") -> unwind continue;
+        _13 = core::panicking::panic(const "assertion failed: b(&foo) == 3");
     }
 
     bb6: {
         _17 = &_1;
-        _16 = d::<FooType<3>>(_17) -> [return: bb7, unwind continue];
+        _16 = d::<FooType<3>>(_17) -> bb7;
     }
 
     bb7: {
@@ -500,13 +500,13 @@ fn main() -> () {
     }
 
     bb8: {
-        _18 = core::panicking::panic(const "assertion failed: d(&foo) == 3") -> unwind continue;
+        _18 = core::panicking::panic(const "assertion failed: d(&foo) == 3");
     }
 
     bb9: {
         _24 = &_19;
-        _23 = _24 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _22 = a::<3>(move _23) -> [return: bb10, unwind continue];
+        _23 = _24 as &dyn Foo<3> (Pointer(Unsize));
+        _22 = a::<3>(move _23) -> bb10;
     }
 
     bb10: {
@@ -516,13 +516,13 @@ fn main() -> () {
     }
 
     bb11: {
-        _25 = core::panicking::panic(const "assertion failed: a(&bar) == 4") -> unwind continue;
+        _25 = core::panicking::panic(const "assertion failed: a(&bar) == 4");
     }
 
     bb12: {
         _30 = &_19;
-        _29 = _30 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _28 = b(move _29) -> [return: bb13, unwind continue];
+        _29 = _30 as &dyn Foo<3> (Pointer(Unsize));
+        _28 = b(move _29) -> bb13;
     }
 
     bb13: {
@@ -532,12 +532,12 @@ fn main() -> () {
     }
 
     bb14: {
-        _31 = core::panicking::panic(const "assertion failed: b(&bar) == 4") -> unwind continue;
+        _31 = core::panicking::panic(const "assertion failed: b(&bar) == 4");
     }
 
     bb15: {
         _35 = &_19;
-        _34 = d::<BarType<3>>(_35) -> [return: bb16, unwind continue];
+        _34 = d::<BarType<3>>(_35) -> bb16;
     }
 
     bb16: {
@@ -547,13 +547,13 @@ fn main() -> () {
     }
 
     bb17: {
-        _36 = core::panicking::panic(const "assertion failed: d(&bar) == 4") -> unwind continue;
+        _36 = core::panicking::panic(const "assertion failed: d(&bar) == 4");
     }
 
     bb18: {
         _41 = &_19;
-        _40 = _41 as &dyn Bar<3> (PointerCoercion(Unsize));
-        _39 = e(move _40) -> [return: bb19, unwind continue];
+        _40 = _41 as &dyn Bar<3> (Pointer(Unsize));
+        _39 = e(move _40) -> bb19;
     }
 
     bb19: {
@@ -563,13 +563,13 @@ fn main() -> () {
     }
 
     bb20: {
-        _42 = core::panicking::panic(const "assertion failed: e(&bar) == 4") -> unwind continue;
+        _42 = core::panicking::panic(const "assertion failed: e(&bar) == 4");
     }
 
     bb21: {
         _48 = &_43;
-        _47 = _48 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _46 = a::<3>(move _47) -> [return: bb22, unwind continue];
+        _47 = _48 as &dyn Foo<3> (Pointer(Unsize));
+        _46 = a::<3>(move _47) -> bb22;
     }
 
     bb22: {
@@ -579,13 +579,13 @@ fn main() -> () {
     }
 
     bb23: {
-        _49 = core::panicking::panic(const "assertion failed: a(&baz) == 999") -> unwind continue;
+        _49 = core::panicking::panic(const "assertion failed: a(&baz) == 999");
     }
 
     bb24: {
         _54 = &_43;
-        _53 = _54 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _52 = b(move _53) -> [return: bb25, unwind continue];
+        _53 = _54 as &dyn Foo<3> (Pointer(Unsize));
+        _52 = b(move _53) -> bb25;
     }
 
     bb25: {
@@ -595,12 +595,12 @@ fn main() -> () {
     }
 
     bb26: {
-        _55 = core::panicking::panic(const "assertion failed: b(&baz) == 999") -> unwind continue;
+        _55 = core::panicking::panic(const "assertion failed: b(&baz) == 999");
     }
 
     bb27: {
         _59 = &_43;
-        _58 = d::<BazType>(_59) -> [return: bb28, unwind continue];
+        _58 = d::<BazType>(_59) -> bb28;
     }
 
     bb28: {
@@ -610,13 +610,13 @@ fn main() -> () {
     }
 
     bb29: {
-        _60 = core::panicking::panic(const "assertion failed: d(&baz) == 999") -> unwind continue;
+        _60 = core::panicking::panic(const "assertion failed: d(&baz) == 999");
     }
 
     bb30: {
         _66 = &_61;
-        _65 = _66 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _64 = a::<3>(move _65) -> [return: bb31, unwind continue];
+        _65 = _66 as &dyn Foo<3> (Pointer(Unsize));
+        _64 = a::<3>(move _65) -> bb31;
     }
 
     bb31: {
@@ -626,13 +626,13 @@ fn main() -> () {
     }
 
     bb32: {
-        _67 = core::panicking::panic(const "assertion failed: a(&boz) == 9999") -> unwind continue;
+        _67 = core::panicking::panic(const "assertion failed: a(&boz) == 9999");
     }
 
     bb33: {
         _72 = &_61;
-        _71 = _72 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _70 = b(move _71) -> [return: bb34, unwind continue];
+        _71 = _72 as &dyn Foo<3> (Pointer(Unsize));
+        _70 = b(move _71) -> bb34;
     }
 
     bb34: {
@@ -642,12 +642,12 @@ fn main() -> () {
     }
 
     bb35: {
-        _73 = core::panicking::panic(const "assertion failed: b(&boz) == 9999") -> unwind continue;
+        _73 = core::panicking::panic(const "assertion failed: b(&boz) == 9999");
     }
 
     bb36: {
         _77 = &_61;
-        _76 = d::<BozType>(_77) -> [return: bb37, unwind continue];
+        _76 = d::<BozType>(_77) -> bb37;
     }
 
     bb37: {
@@ -657,13 +657,13 @@ fn main() -> () {
     }
 
     bb38: {
-        _78 = core::panicking::panic(const "assertion failed: d(&boz) == 9999") -> unwind continue;
+        _78 = core::panicking::panic(const "assertion failed: d(&boz) == 9999");
     }
 
     bb39: {
         _84 = &_79;
-        _83 = _84 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _82 = a::<3>(move _83) -> [return: bb40, unwind continue];
+        _83 = _84 as &dyn Foo<3> (Pointer(Unsize));
+        _82 = a::<3>(move _83) -> bb40;
     }
 
     bb40: {
@@ -673,13 +673,13 @@ fn main() -> () {
     }
 
     bb41: {
-        _85 = core::panicking::panic(const "assertion failed: a(&bok) == 5") -> unwind continue;
+        _85 = core::panicking::panic(const "assertion failed: a(&bok) == 5");
     }
 
     bb42: {
         _90 = &_79;
-        _89 = _90 as &dyn Foo<3> (PointerCoercion(Unsize));
-        _88 = b(move _89) -> [return: bb43, unwind continue];
+        _89 = _90 as &dyn Foo<3> (Pointer(Unsize));
+        _88 = b(move _89) -> bb43;
     }
 
     bb43: {
@@ -689,12 +689,12 @@ fn main() -> () {
     }
 
     bb44: {
-        _91 = core::panicking::panic(const "assertion failed: b(&bok) == 5") -> unwind continue;
+        _91 = core::panicking::panic(const "assertion failed: b(&bok) == 5");
     }
 
     bb45: {
         _95 = &_79;
-        _94 = d::<BokType<3>>(_95) -> [return: bb46, unwind continue];
+        _94 = d::<BokType<3>>(_95) -> bb46;
     }
 
     bb46: {
@@ -704,11 +704,11 @@ fn main() -> () {
     }
 
     bb47: {
-        _96 = core::panicking::panic(const "assertion failed: d(&bok) == 5") -> unwind continue;
+        _96 = core::panicking::panic(const "assertion failed: d(&bok) == 5");
     }
 
     bb48: {
-        _99 = c::<BokType<3>, 3>(const BokType::<3>) -> [return: bb49, unwind continue];
+        _99 = c::<BokType<3>, 3>(const BokType::<3>) -> bb49;
     }
 
     bb49: {
@@ -718,7 +718,7 @@ fn main() -> () {
     }
 
     bb50: {
-        _100 = core::panicking::panic(const "assertion failed: c(BokType::<3> {}) == 5") -> unwind continue;
+        _100 = core::panicking::panic(const "assertion failed: c(BokType::<3> {}) == 5");
     }
 
     bb51: {

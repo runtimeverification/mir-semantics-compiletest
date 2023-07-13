@@ -36,25 +36,25 @@ fn split_first(_1: [T; N]) -> (T, [T; N - 1]) {
     }
 
     bb0: {
-        _2 = ManuallyDrop::<[T; N]>::new(move _1) -> [return: bb1, unwind continue];
+        _2 = ManuallyDrop::<[T; N]>::new(move _1) -> bb1;
     }
 
     bb1: {
         _7 = &_2;
-        _6 = <ManuallyDrop<[T; N]> as Deref>::deref(move _7) -> [return: bb2, unwind continue];
+        _6 = <ManuallyDrop<[T; N]> as Deref>::deref(move _7) -> bb2;
     }
 
     bb2: {
         _8 = const 0_usize;
         _9 = const N;
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb3, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb3;
     }
 
     bb3: {
         _5 = &(*_6)[_8];
         _4 = &raw const (*_5);
-        _3 = std::ptr::read::<T>(move _4) -> [return: bb4, unwind continue];
+        _3 = std::ptr::read::<T>(move _4) -> bb4;
     }
 
     bb4: {
@@ -106,7 +106,7 @@ split_first::{constant#2}: usize = {
 
     bb0: {
         _1 = CheckedSub(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -121,7 +121,7 @@ split_first::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedSub(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -136,7 +136,7 @@ split_first::{constant#3}: usize = {
 
     bb0: {
         _1 = CheckedSub(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -199,7 +199,7 @@ fn main() -> () {
 
     bb0: {
         _1 = [const 0_i32, const 1_i32, const 2_i32, const 3_i32, const 4_i32];
-        _4 = split_first::<i32, 5>(_1) -> [return: bb1, unwind continue];
+        _4 = split_first::<i32, 5>(_1) -> bb1;
     }
 
     bb1: {
@@ -221,7 +221,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17);
     }
 
     bb3: {
@@ -231,7 +231,7 @@ fn main() -> () {
         _18 = (move _19, move _20);
         _22 = (_18.0: &[i32; N - 1]);
         _23 = (_18.1: &[i32; 4]);
-        _25 = <[i32; N - 1] as PartialEq<[i32; 4]>>::eq(_22, _23) -> [return: bb4, unwind continue];
+        _25 = <[i32; N - 1] as PartialEq<[i32; 4]>>::eq(_22, _23) -> bb4;
     }
 
     bb4: {
@@ -242,7 +242,7 @@ fn main() -> () {
     bb5: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<[i32; N - 1], [i32; 4]>(move _26, _22, _23, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<[i32; N - 1], [i32; 4]>(move _26, _22, _23, move _28);
     }
 
     bb6: {

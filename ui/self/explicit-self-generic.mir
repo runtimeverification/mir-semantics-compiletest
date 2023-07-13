@@ -19,7 +19,7 @@ fn linear_map() -> HashMap<K, V> {
 
     bb0: {
         _1 = LM { resize_at: const 32_usize, size: const 0_usize };
-        _2 = Vec::<(K, V)>::new() -> [return: bb1, unwind continue];
+        _2 = Vec::<(K, V)>::new() -> bb1;
     }
 
     bb1: {
@@ -81,11 +81,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = linear_map::<(), ()>() -> [return: bb1, unwind continue];
+        _2 = linear_map::<(), ()>() -> bb1;
     }
 
     bb1: {
-        _1 = Box::<HashMap<(), ()>>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<HashMap<(), ()>>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -120,7 +120,7 @@ fn main() -> () {
     }
 
     bb5: {
-        drop(_1) -> [return: bb6, unwind continue];
+        drop(_1) -> bb6;
     }
 
     bb6: {

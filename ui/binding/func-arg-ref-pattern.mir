@@ -35,7 +35,7 @@ fn getaddr(_1: Box<usize>) -> *const usize {
     bb2: {
         _2 = &(*_3);
         _0 = &raw const (*_2);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 }
 
@@ -71,7 +71,7 @@ fn checkval(_1: Box<usize>) -> usize {
     bb2: {
         _2 = &(*_3);
         _0 = (*_2);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 }
 
@@ -145,7 +145,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<usize>::new(const 1_usize) -> [return: bb1, unwind continue];
+        _1 = Box::<usize>::new(const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -175,16 +175,16 @@ fn main() -> () {
     bb3: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<*const usize, *const usize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<*const usize, *const usize>(move _15, _9, _10, move _17);
     }
 
     bb4: {
-        _18 = Box::<usize>::new(const 22_usize) -> [return: bb5, unwind continue];
+        _18 = Box::<usize>::new(const 22_usize) -> bb5;
     }
 
     bb5: {
         _22 = move _18;
-        _21 = checkval(move _22) -> [return: bb6, unwind continue];
+        _21 = checkval(move _22) -> bb6;
     }
 
     bb6: {
@@ -204,7 +204,7 @@ fn main() -> () {
     bb7: {
         _31 = core::panicking::AssertKind::Eq;
         _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33) -> unwind continue;
+        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33);
     }
 
     bb8: {
@@ -215,6 +215,6 @@ fn main() -> () {
         _3 = &(*_34);
         _2 = &raw const (*_3);
         _5 = move _1;
-        _4 = getaddr(move _5) -> [return: bb2, unwind continue];
+        _4 = getaddr(move _5) -> bb2;
     }
 }

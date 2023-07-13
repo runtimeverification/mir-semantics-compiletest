@@ -4,7 +4,7 @@ fn worker() -> ! {
     let mut _0: !;
 
     bb0: {
-        _0 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _0 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -14,15 +14,15 @@ fn main() -> () {
     let mut _2: std::result::Result<!, std::boxed::Box<dyn std::any::Any + std::marker::Send>>;
 
     bb0: {
-        _2 = catch_unwind::<fn() -> ! {worker}, !>(worker) -> [return: bb1, unwind continue];
+        _2 = catch_unwind::<fn() -> ! {worker}, !>(worker) -> bb1;
     }
 
     bb1: {
-        _1 = Result::<!, Box<dyn Any + Send>>::unwrap_err(move _2) -> [return: bb2, unwind continue];
+        _1 = Result::<!, Box<dyn Any + Send>>::unwrap_err(move _2) -> bb2;
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {

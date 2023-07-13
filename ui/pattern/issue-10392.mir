@@ -5,7 +5,7 @@ fn mka() -> A {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -14,7 +14,7 @@ fn mkb() -> B {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -53,29 +53,29 @@ fn test() -> () {
     }
 
     bb0: {
-        _2 = mka() -> [return: bb1, unwind continue];
+        _2 = mka() -> bb1;
     }
 
     bb1: {
         _1 = (_2.0: isize);
-        _4 = mka() -> [return: bb2, unwind continue];
+        _4 = mka() -> bb2;
     }
 
     bb2: {
         _3 = (_4.0: isize);
-        _8 = mkb() -> [return: bb3, unwind continue];
+        _8 = mkb() -> bb3;
     }
 
     bb3: {
         _5 = (_8.0: isize);
         _6 = (_8.1: isize);
         _7 = (_8.2: isize);
-        _9 = mka() -> [return: bb4, unwind continue];
+        _9 = mka() -> bb4;
     }
 
     bb4: {
         _10 = (_9.0: isize);
-        _12 = mka() -> [return: bb5, unwind continue];
+        _12 = mka() -> bb5;
     }
 
     bb5: {
@@ -108,7 +108,7 @@ fn main() -> () {
     }
 
     bb1: {
-        _0 = test() -> [return: bb2, unwind continue];
+        _0 = test() -> bb2;
     }
 
     bb2: {

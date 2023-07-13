@@ -5,7 +5,7 @@ static DROP: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -23,7 +23,7 @@ fn <impl at ui/generator/resume-live-across-yield.rs:11:10: 11:19>::eq(_1: &Drop
     bb0: {
         _3 = &((*_1).0: std::string::String);
         _4 = &((*_2).0: std::string::String);
-        _0 = <String as PartialEq>::eq(move _3, move _4) -> [return: bb1, unwind continue];
+        _0 = <String as PartialEq>::eq(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -55,8 +55,8 @@ fn <impl at ui/generator/resume-live-across-yield.rs:11:25: 11:30>::fmt(_1: &Dro
         _3 = const "Dropper";
         _6 = &((*_1).0: std::string::String);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -74,7 +74,7 @@ fn <impl at ui/generator/resume-live-across-yield.rs:14:1: 14:22>::drop(_1: &mut
     bb0: {
         _3 = const {alloc1: &AtomicUsize};
         _4 = SeqCst;
-        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> bb1;
     }
 
     bb1: {
@@ -466,7 +466,7 @@ fn main() -> () {
     }
 
     bb31: {
-        drop(_1) -> [return: bb32, unwind continue];
+        drop(_1) -> bb32;
     }
 
     bb32: {
@@ -578,11 +578,11 @@ fn main::{closure#0}(_1: Pin<&mut [generator@ui/generator/resume-live-across-yie
     }
 
     bb6: {
-        assert(const false, "generator resumed after panicking") -> [success: bb6, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb6;
     }
 
     bb7: {
-        assert(const false, "generator resumed after completion") -> [success: bb7, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb7;
     }
 
     bb8: {

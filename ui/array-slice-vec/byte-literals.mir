@@ -19,7 +19,7 @@ static BAR: &[u8] = {
         StorageLive(_2);
         _2 = const b"a\xf0\t";
         _1 = &(*_2);
-        _0 = move _1 as &[u8] (PointerCoercion(Unsize));
+        _0 = move _1 as &[u8] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -62,7 +62,7 @@ static BAZ: &[u8] = {
         StorageLive(_2);
         _2 = const b"a\\n";
         _1 = &(*_2);
-        _0 = move _1 as &[u8] (PointerCoercion(Unsize));
+        _0 = move _1 as &[u8] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -579,7 +579,7 @@ fn main() -> () {
 
     bb0: {
         _2 = const b"a\xf0\t";
-        _1 = _2 as &[u8] (PointerCoercion(Unsize));
+        _1 = _2 as &[u8] (Pointer(Unsize));
         _3 = const b"a\xf0\t";
         _6 = const 97_u8;
         _5 = &_6;
@@ -598,7 +598,7 @@ fn main() -> () {
     bb1: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17);
     }
 
     bb2: {
@@ -619,7 +619,7 @@ fn main() -> () {
     bb3: {
         _29 = core::panicking::AssertKind::Eq;
         _31 = Option::<Arguments<'_>>::None;
-        _30 = core::panicking::assert_failed::<u8, u8>(move _29, _23, _24, move _31) -> unwind continue;
+        _30 = core::panicking::assert_failed::<u8, u8>(move _29, _23, _24, move _31);
     }
 
     bb4: {
@@ -640,7 +640,7 @@ fn main() -> () {
     bb5: {
         _43 = core::panicking::AssertKind::Eq;
         _45 = Option::<Arguments<'_>>::None;
-        _44 = core::panicking::assert_failed::<u8, u8>(move _43, _37, _38, move _45) -> unwind continue;
+        _44 = core::panicking::assert_failed::<u8, u8>(move _43, _37, _38, move _45);
     }
 
     bb6: {
@@ -661,7 +661,7 @@ fn main() -> () {
     bb7: {
         _57 = core::panicking::AssertKind::Eq;
         _59 = Option::<Arguments<'_>>::None;
-        _58 = core::panicking::assert_failed::<u8, u8>(move _57, _51, _52, move _59) -> unwind continue;
+        _58 = core::panicking::assert_failed::<u8, u8>(move _57, _51, _52, move _59);
     }
 
     bb8: {
@@ -682,7 +682,7 @@ fn main() -> () {
     bb9: {
         _71 = core::panicking::AssertKind::Eq;
         _73 = Option::<Arguments<'_>>::None;
-        _72 = core::panicking::assert_failed::<u8, u8>(move _71, _65, _66, move _73) -> unwind continue;
+        _72 = core::panicking::assert_failed::<u8, u8>(move _71, _65, _66, move _73);
     }
 
     bb10: {
@@ -703,7 +703,7 @@ fn main() -> () {
     bb11: {
         _85 = core::panicking::AssertKind::Eq;
         _87 = Option::<Arguments<'_>>::None;
-        _86 = core::panicking::assert_failed::<u8, u8>(move _85, _79, _80, move _87) -> unwind continue;
+        _86 = core::panicking::assert_failed::<u8, u8>(move _85, _79, _80, move _87);
     }
 
     bb12: {
@@ -724,7 +724,7 @@ fn main() -> () {
     bb13: {
         _99 = core::panicking::AssertKind::Eq;
         _101 = Option::<Arguments<'_>>::None;
-        _100 = core::panicking::assert_failed::<u8, u8>(move _99, _93, _94, move _101) -> unwind continue;
+        _100 = core::panicking::assert_failed::<u8, u8>(move _99, _93, _94, move _101);
     }
 
     bb14: {
@@ -745,7 +745,7 @@ fn main() -> () {
     bb15: {
         _113 = core::panicking::AssertKind::Eq;
         _115 = Option::<Arguments<'_>>::None;
-        _114 = core::panicking::assert_failed::<u8, u8>(move _113, _107, _108, move _115) -> unwind continue;
+        _114 = core::panicking::assert_failed::<u8, u8>(move _113, _107, _108, move _115);
     }
 
     bb16: {
@@ -766,7 +766,7 @@ fn main() -> () {
     bb17: {
         _127 = core::panicking::AssertKind::Eq;
         _129 = Option::<Arguments<'_>>::None;
-        _128 = core::panicking::assert_failed::<u8, u8>(move _127, _121, _122, move _129) -> unwind continue;
+        _128 = core::panicking::assert_failed::<u8, u8>(move _127, _121, _122, move _129);
     }
 
     bb18: {
@@ -786,7 +786,7 @@ fn main() -> () {
     bb19: {
         _140 = core::panicking::AssertKind::Eq;
         _142 = Option::<Arguments<'_>>::None;
-        _141 = core::panicking::assert_failed::<u8, u8>(move _140, _134, _135, move _142) -> unwind continue;
+        _141 = core::panicking::assert_failed::<u8, u8>(move _140, _134, _135, move _142);
     }
 
     bb20: {
@@ -795,7 +795,7 @@ fn main() -> () {
     }
 
     bb21: {
-        _144 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _144 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb22: {
@@ -810,20 +810,20 @@ fn main() -> () {
     }
 
     bb24: {
-        _148 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _148 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb25: {
         _151 = [const 97_u8, const 10_u8, const 13_u8, const 9_u8, const 92_u8, const 39_u8, const 34_u8, const 0_u8, const 240_u8];
         _150 = &_151;
-        _149 = _150 as &[u8] (PointerCoercion(Unsize));
+        _149 = _150 as &[u8] (Pointer(Unsize));
         _154 = const b"a\n\r\t\\\'\"\x00\xf0";
         _153 = &_154;
         _155 = &_149;
         _152 = (move _153, move _155);
         _156 = (_152.0: &&[u8; 9]);
         _157 = (_152.1: &&[u8]);
-        _159 = <&[u8; 9] as PartialEq<&[u8]>>::eq(_156, _157) -> [return: bb26, unwind continue];
+        _159 = <&[u8; 9] as PartialEq<&[u8]>>::eq(_156, _157) -> bb26;
     }
 
     bb26: {
@@ -834,20 +834,20 @@ fn main() -> () {
     bb27: {
         _160 = core::panicking::AssertKind::Eq;
         _162 = Option::<Arguments<'_>>::None;
-        _161 = core::panicking::assert_failed::<&[u8; 9], &[u8]>(move _160, _156, _157, move _162) -> unwind continue;
+        _161 = core::panicking::assert_failed::<&[u8; 9], &[u8]>(move _160, _156, _157, move _162);
     }
 
     bb28: {
         _165 = [const 97_u8, const 98_u8];
         _164 = &_165;
-        _163 = _164 as &[u8] (PointerCoercion(Unsize));
+        _163 = _164 as &[u8] (Pointer(Unsize));
         _168 = const b"ab";
         _167 = &_168;
         _169 = &_163;
         _166 = (move _167, move _169);
         _170 = (_166.0: &&[u8; 2]);
         _171 = (_166.1: &&[u8]);
-        _173 = <&[u8; 2] as PartialEq<&[u8]>>::eq(_170, _171) -> [return: bb29, unwind continue];
+        _173 = <&[u8; 2] as PartialEq<&[u8]>>::eq(_170, _171) -> bb29;
     }
 
     bb29: {
@@ -858,19 +858,19 @@ fn main() -> () {
     bb30: {
         _174 = core::panicking::AssertKind::Eq;
         _176 = Option::<Arguments<'_>>::None;
-        _175 = core::panicking::assert_failed::<&[u8; 2], &[u8]>(move _174, _170, _171, move _176) -> unwind continue;
+        _175 = core::panicking::assert_failed::<&[u8; 2], &[u8]>(move _174, _170, _171, move _176);
     }
 
     bb31: {
         _179 = [const 97_u8, const 240_u8, const 9_u8];
         _178 = &_179;
-        _177 = _178 as &[u8] (PointerCoercion(Unsize));
+        _177 = _178 as &[u8] (Pointer(Unsize));
         _181 = const {alloc5: &&[u8]};
         _182 = &_177;
         _180 = (_181, move _182);
         _183 = (_180.0: &&[u8]);
         _184 = (_180.1: &&[u8]);
-        _186 = <&[u8] as PartialEq>::eq(_183, _184) -> [return: bb32, unwind continue];
+        _186 = <&[u8] as PartialEq>::eq(_183, _184) -> bb32;
     }
 
     bb32: {
@@ -881,7 +881,7 @@ fn main() -> () {
     bb33: {
         _187 = core::panicking::AssertKind::Eq;
         _189 = Option::<Arguments<'_>>::None;
-        _188 = core::panicking::assert_failed::<&[u8], &[u8]>(move _187, _183, _184, move _189) -> unwind continue;
+        _188 = core::panicking::assert_failed::<&[u8], &[u8]>(move _187, _183, _184, move _189);
     }
 
     bb34: {
@@ -890,7 +890,7 @@ fn main() -> () {
         _190 = (_191, move _192);
         _193 = (_190.0: &&[u8; 3]);
         _194 = (_190.1: &&[u8]);
-        _196 = <&[u8; 3] as PartialEq<&[u8]>>::eq(_193, _194) -> [return: bb35, unwind continue];
+        _196 = <&[u8; 3] as PartialEq<&[u8]>>::eq(_193, _194) -> bb35;
     }
 
     bb35: {
@@ -901,7 +901,7 @@ fn main() -> () {
     bb36: {
         _197 = core::panicking::AssertKind::Eq;
         _199 = Option::<Arguments<'_>>::None;
-        _198 = core::panicking::assert_failed::<&[u8; 3], &[u8]>(move _197, _193, _194, move _199) -> unwind continue;
+        _198 = core::panicking::assert_failed::<&[u8; 3], &[u8]>(move _197, _193, _194, move _199);
     }
 
     bb37: {
@@ -910,7 +910,7 @@ fn main() -> () {
         _200 = (move _201, move _202);
         _203 = (_200.0: &&[u8]);
         _204 = (_200.1: &&[u8]);
-        _206 = <&[u8] as PartialEq>::eq(_203, _204) -> [return: bb38, unwind continue];
+        _206 = <&[u8] as PartialEq>::eq(_203, _204) -> bb38;
     }
 
     bb38: {
@@ -921,7 +921,7 @@ fn main() -> () {
     bb39: {
         _207 = core::panicking::AssertKind::Eq;
         _209 = Option::<Arguments<'_>>::None;
-        _208 = core::panicking::assert_failed::<&[u8], &[u8]>(move _207, _203, _204, move _209) -> unwind continue;
+        _208 = core::panicking::assert_failed::<&[u8], &[u8]>(move _207, _203, _204, move _209);
     }
 
     bb40: {
@@ -930,7 +930,7 @@ fn main() -> () {
         _210 = (move _211, move _212);
         _213 = (_210.0: &&[u8; 3]);
         _214 = (_210.1: &&[u8]);
-        _216 = <&[u8; 3] as PartialEq<&[u8]>>::eq(_213, _214) -> [return: bb41, unwind continue];
+        _216 = <&[u8; 3] as PartialEq<&[u8]>>::eq(_213, _214) -> bb41;
     }
 
     bb41: {
@@ -941,7 +941,7 @@ fn main() -> () {
     bb42: {
         _217 = core::panicking::AssertKind::Eq;
         _219 = Option::<Arguments<'_>>::None;
-        _218 = core::panicking::assert_failed::<&[u8; 3], &[u8]>(move _217, _213, _214, move _219) -> unwind continue;
+        _218 = core::panicking::assert_failed::<&[u8; 3], &[u8]>(move _217, _213, _214, move _219);
     }
 
     bb43: {
@@ -955,21 +955,21 @@ fn main() -> () {
     }
 
     bb45: {
-        _222 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _222 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb46: {
         _225 = SizeOf([u8; 4]);
         _226 = AlignOf([u8; 4]);
-        _227 = alloc::alloc::exchange_malloc(move _225, move _226) -> [return: bb47, unwind continue];
+        _227 = alloc::alloc::exchange_malloc(move _225, move _226) -> bb47;
     }
 
     bb47: {
         _228 = ShallowInitBox(move _227, [u8; 4]);
         _315 = (((_228.0: std::ptr::Unique<[u8; 4]>).0: std::ptr::NonNull<[u8; 4]>).0: *const [u8; 4]);
         (*_315) = [const 97_u8, const 98_u8, const 99_u8, const 100_u8];
-        _224 = move _228 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
-        _223 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _224) -> [return: bb48, unwind continue];
+        _224 = move _228 as std::boxed::Box<[u8]> (Pointer(Unsize));
+        _223 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _224) -> bb48;
     }
 
     bb48: {
@@ -1044,7 +1044,7 @@ fn main() -> () {
     bb60: {
         _252 = [const 97_u8, const 92_u8, const 110_u8];
         _251 = &_252;
-        _250 = _251 as &[u8] (PointerCoercion(Unsize));
+        _250 = _251 as &[u8] (Pointer(Unsize));
         _254 = const {alloc7: &&[u8]};
         _255 = &_250;
         _253 = (_254, move _255);
@@ -1067,7 +1067,7 @@ fn main() -> () {
     bb63: {
         _265 = [const 97_u8, const 92_u8, const 110_u8];
         _264 = &_265;
-        _263 = _264 as &[u8] (PointerCoercion(Unsize));
+        _263 = _264 as &[u8] (Pointer(Unsize));
         _268 = const b"a\\n";
         _267 = &_268;
         _269 = &_263;
@@ -1113,7 +1113,7 @@ fn main() -> () {
     bb69: {
         _291 = [const 97_u8, const 34_u8, const 35_u8, const 35_u8, const 98_u8];
         _290 = &_291;
-        _289 = _290 as &[u8] (PointerCoercion(Unsize));
+        _289 = _290 as &[u8] (Pointer(Unsize));
         _294 = const b"a\"##b";
         _293 = &_294;
         _295 = &_289;
@@ -1157,7 +1157,7 @@ fn main() -> () {
     }
 
     bb75: {
-        drop(_223) -> [return: bb76, unwind continue];
+        drop(_223) -> bb76;
     }
 
     bb76: {

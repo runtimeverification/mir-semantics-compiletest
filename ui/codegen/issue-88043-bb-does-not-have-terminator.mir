@@ -5,7 +5,7 @@ fn bump() -> Option<usize> {
     let mut _1: !;
 
     bb0: {
-        _1 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _1 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 }
 
@@ -30,7 +30,7 @@ fn take_until(_1: impl Fn() -> bool) -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb4: {
@@ -61,12 +61,12 @@ fn main() -> () {
     let mut _3: std::option::Option<std::string::String>;
 
     bb0: {
-        _1 = take_until::<[closure@ui/codegen/issue-88043-bb-does-not-have-terminator.rs:24:16: 24:18]>(const ZeroSized: [closure@ui/codegen/issue-88043-bb-does-not-have-terminator.rs:24:16: 24:18]) -> [return: bb1, unwind continue];
+        _1 = take_until::<[closure@ui/codegen/issue-88043-bb-does-not-have-terminator.rs:24:16: 24:18]>(const ZeroSized: [closure@ui/codegen/issue-88043-bb-does-not-have-terminator.rs:24:16: 24:18]) -> bb1;
     }
 
     bb1: {
         _3 = Option::<String>::None;
-        _2 = f(move _3) -> [return: bb2, unwind continue];
+        _2 = f(move _3) -> bb2;
     }
 
     bb2: {

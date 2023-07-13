@@ -30,7 +30,7 @@ fn test(_1: usize) -> fn(usize, usize) -> usize {
 
     bb0: {
         _3 = Eq(const 2_usize, const 0_usize);
-        assert(!move _3, "attempt to calculate the remainder of `{}` with a divisor of zero", _1) -> [success: bb1, unwind continue];
+        assert(!move _3, "attempt to calculate the remainder of `{}` with a divisor of zero", _1) -> bb1;
     }
 
     bb1: {
@@ -39,12 +39,12 @@ fn test(_1: usize) -> fn(usize, usize) -> usize {
     }
 
     bb2: {
-        _0 = foo as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = foo as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         goto -> bb4;
     }
 
     bb3: {
-        _0 = bar as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = bar as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         goto -> bb4;
     }
 
@@ -57,7 +57,7 @@ const FOO: fn(usize, usize) -> usize = {
     let mut _0: fn(usize, usize) -> usize;
 
     bb0: {
-        _0 = foo as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = foo as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -66,7 +66,7 @@ const BAR: fn(usize, usize) -> usize = {
     let mut _0: fn(usize, usize) -> usize;
 
     bb0: {
-        _0 = bar as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = bar as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -92,11 +92,11 @@ fn main() -> () {
 
     bb0: {
         _3 = const _;
-        _2 = core::str::<impl str>::len(_3) -> [return: bb1, unwind continue];
+        _2 = core::str::<impl str>::len(_3) -> bb1;
     }
 
     bb1: {
-        _1 = test(move _2) -> [return: bb2, unwind continue];
+        _1 = test(move _2) -> bb2;
     }
 
     bb2: {
@@ -110,29 +110,29 @@ fn main() -> () {
     }
 
     bb4: {
-        _16 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _16 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb5: {
         _10 = [const "foo\n"];
         _9 = &_10;
-        _8 = _9 as &[&str] (PointerCoercion(Unsize));
-        _7 = Arguments::<'_>::new_const(move _8) -> [return: bb6, unwind continue];
+        _8 = _9 as &[&str] (Pointer(Unsize));
+        _7 = Arguments::<'_>::new_const(move _8) -> bb6;
     }
 
     bb6: {
-        _6 = _print(move _7) -> [return: bb9, unwind continue];
+        _6 = _print(move _7) -> bb9;
     }
 
     bb7: {
         _15 = [const "bar\n"];
         _14 = &_15;
-        _13 = _14 as &[&str] (PointerCoercion(Unsize));
-        _12 = Arguments::<'_>::new_const(move _13) -> [return: bb8, unwind continue];
+        _13 = _14 as &[&str] (Pointer(Unsize));
+        _12 = Arguments::<'_>::new_const(move _13) -> bb8;
     }
 
     bb8: {
-        _11 = _print(move _12) -> [return: bb9, unwind continue];
+        _11 = _print(move _12) -> bb9;
     }
 
     bb9: {

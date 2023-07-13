@@ -15,12 +15,12 @@ fn main() -> () {
 
     bb0: {
         _2 = std::ops::Range::<i32> { start: const 0_i32, end: const 0_i32 };
-        _1 = <std::ops::Range<i32> as Iterator>::map::<FutureResult<u32, ()>, [closure@ui/traits/issue-38033.rs:6:30: 6:33]>(move _2, const ZeroSized: [closure@ui/traits/issue-38033.rs:6:30: 6:33]) -> [return: bb1, unwind continue];
+        _1 = <std::ops::Range<i32> as Iterator>::map::<FutureResult<u32, ()>, [closure@ui/traits/issue-38033.rs:6:30: 6:33]>(move _2, const ZeroSized: [closure@ui/traits/issue-38033.rs:6:30: 6:33]) -> bb1;
     }
 
     bb1: {
         _7 = move _1;
-        _6 = join_all::<Map<std::ops::Range<i32>, [closure@ui/traits/issue-38033.rs:6:30: 6:33]>>(move _7) -> [return: bb2, unwind continue];
+        _6 = join_all::<Map<std::ops::Range<i32>, [closure@ui/traits/issue-38033.rs:6:30: 6:33]>>(move _7) -> bb2;
     }
 
     bb2: {
@@ -33,7 +33,7 @@ fn main() -> () {
     }
 
     bb4: {
-        drop(_6) -> [return: bb5, unwind continue];
+        drop(_6) -> bb5;
     }
 
     bb5: {
@@ -53,7 +53,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/traits/issue-38033.rs:6:30: 6:33], _2:
     let mut _0: FutureResult<u32, ()>;
 
     bb0: {
-        _0 = result::<u32, ()>() -> [return: bb1, unwind continue];
+        _0 = result::<u32, ()>() -> bb1;
     }
 
     bb1: {
@@ -106,7 +106,7 @@ fn join_all(_1: I) -> JoinAll<I> {
 
     bb1: {
         _0 = JoinAll::<I> { elems: move _2 };
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -138,24 +138,24 @@ fn <impl at ui/traits/issue-38033.rs:66:1: 66:30>::poll(_1: &mut JoinAll<I>) -> 
 
     bb0: {
         _3 = &mut ((*_1).0: std::vec::Vec<<<I as std::iter::IntoIterator>::Item as IntoFuture>::Item>);
-        _4 = Vec::<<<I as IntoIterator>::Item as IntoFuture>::Item>::new() -> [return: bb1, unwind continue];
+        _4 = Vec::<<<I as IntoIterator>::Item as IntoFuture>::Item>::new() -> bb1;
     }
 
     bb1: {
-        _2 = std::mem::replace::<Vec<<<I as IntoIterator>::Item as IntoFuture>::Item>>(_3, move _4) -> [return: bb2, unwind continue];
+        _2 = std::mem::replace::<Vec<<<I as IntoIterator>::Item as IntoFuture>::Item>>(_3, move _4) -> bb2;
     }
 
     bb2: {
         _8 = move _2;
-        _7 = <Vec<<<I as IntoIterator>::Item as IntoFuture>::Item> as IntoIterator>::into_iter(move _8) -> [return: bb3, unwind continue];
+        _7 = <Vec<<<I as IntoIterator>::Item as IntoFuture>::Item> as IntoIterator>::into_iter(move _8) -> bb3;
     }
 
     bb3: {
-        _6 = <std::vec::IntoIter<<<I as IntoIterator>::Item as IntoFuture>::Item> as Iterator>::map::<<<I as IntoIterator>::Item as IntoFuture>::Item, [closure@ui/traits/issue-38033.rs:75:34: 75:37]>(move _7, const ZeroSized: [closure@ui/traits/issue-38033.rs:75:34: 75:37]) -> [return: bb4, unwind continue];
+        _6 = <std::vec::IntoIter<<<I as IntoIterator>::Item as IntoFuture>::Item> as Iterator>::map::<<<I as IntoIterator>::Item as IntoFuture>::Item, [closure@ui/traits/issue-38033.rs:75:34: 75:37]>(move _7, const ZeroSized: [closure@ui/traits/issue-38033.rs:75:34: 75:37]) -> bb4;
     }
 
     bb4: {
-        _5 = <Map<std::vec::IntoIter<<<I as IntoIterator>::Item as IntoFuture>::Item>, [closure@ui/traits/issue-38033.rs:75:34: 75:37]> as Iterator>::collect::<Vec<<<I as IntoIterator>::Item as IntoFuture>::Item>>(move _6) -> [return: bb5, unwind continue];
+        _5 = <Map<std::vec::IntoIter<<<I as IntoIterator>::Item as IntoFuture>::Item>, [closure@ui/traits/issue-38033.rs:75:34: 75:37]> as Iterator>::collect::<Vec<<<I as IntoIterator>::Item as IntoFuture>::Item>>(move _6) -> bb5;
     }
 
     bb5: {

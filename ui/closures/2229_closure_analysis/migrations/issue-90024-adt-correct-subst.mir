@@ -5,7 +5,7 @@ fn graph() -> Graph<N, E, i32> {
     let mut _1: !;
 
     bb0: {
-        _1 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+        _1 = core::panicking::panic(const "not yet implemented");
     }
 }
 
@@ -20,12 +20,12 @@ fn first_ice() -> () {
     }
 
     bb0: {
-        _1 = graph::<i32, i32>() -> [return: bb1, unwind continue];
+        _1 = graph::<i32, i32>() -> bb1;
     }
 
     bb1: {
         _2 = [closure@ui/closures/2229_closure_analysis/migrations/issue-90024-adt-correct-subst.rs:19:13: 19:15] { g: move _1 };
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -56,7 +56,7 @@ fn second_ice() -> () {
     }
 
     bb0: {
-        _2 = Vec::<()>::new() -> [return: bb1, unwind continue];
+        _2 = Vec::<()>::new() -> bb1;
     }
 
     bb1: {
@@ -68,7 +68,7 @@ fn second_ice() -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -94,7 +94,7 @@ fn second_ice::{closure#0}(_1: &[closure@ui/closures/2229_closure_analysis/migra
     bb0: {
         _4 = deref_copy ((*_1).0: &Foo<std::iter::Empty<()>>);
         _3 = &((*_4).0: std::vec::Vec<()>);
-        _2 = <Vec<()> as Index<usize>>::index(move _3, const 0_usize) -> [return: bb1, unwind continue];
+        _2 = <Vec<()> as Index<usize>>::index(move _3, const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -108,11 +108,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = first_ice() -> [return: bb1, unwind continue];
+        _1 = first_ice() -> bb1;
     }
 
     bb1: {
-        _2 = second_ice() -> [return: bb2, unwind continue];
+        _2 = second_ice() -> bb2;
     }
 
     bb2: {

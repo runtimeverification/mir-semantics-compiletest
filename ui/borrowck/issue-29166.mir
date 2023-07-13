@@ -7,15 +7,15 @@ fn main() -> () {
     let _3: ();
 
     bb0: {
-        _1 = original_report() -> [return: bb1, unwind continue];
+        _1 = original_report() -> bb1;
     }
 
     bb1: {
-        _2 = revision_1() -> [return: bb2, unwind continue];
+        _2 = revision_1() -> bb2;
     }
 
     bb2: {
-        _3 = revision_2() -> [return: bb3, unwind continue];
+        _3 = revision_2() -> bb3;
     }
 
     bb3: {
@@ -47,7 +47,7 @@ fn original_report() -> () {
     bb0: {
         _4 = SizeOf([&(); 1]);
         _5 = AlignOf([&(); 1]);
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -64,11 +64,11 @@ fn original_report() -> () {
     }
 
     bb2: {
-        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> [return: bb3, unwind continue];
+        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> bb3;
     }
 
     bb3: {
-        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> [return: bb4, unwind continue];
+        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> bb4;
     }
 
     bb4: {
@@ -77,8 +77,8 @@ fn original_report() -> () {
 
     bb5: {
         (*_10) = [move _8];
-        _3 = move _7 as std::boxed::Box<[&()]> (PointerCoercion(Unsize));
-        _2 = slice::<impl [&()]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb2, unwind continue];
+        _3 = move _7 as std::boxed::Box<[&()]> (Pointer(Unsize));
+        _2 = slice::<impl [&()]>::into_vec::<std::alloc::Global>(move _3) -> bb2;
     }
 }
 
@@ -95,20 +95,20 @@ fn revision_1() -> () {
     bb0: {
         _6 = &_7;
         _5 = [move _6];
-        _4 = Box::<[&(); 1]>::new(move _5) -> [return: bb1, unwind continue];
+        _4 = Box::<[&(); 1]>::new(move _5) -> bb1;
     }
 
     bb1: {
-        _3 = move _4 as std::boxed::Box<[&()]> (PointerCoercion(Unsize));
-        _2 = slice::<impl [&()]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb2, unwind continue];
+        _3 = move _4 as std::boxed::Box<[&()]> (Pointer(Unsize));
+        _2 = slice::<impl [&()]>::into_vec::<std::alloc::Global>(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> [return: bb3, unwind continue];
+        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> bb3;
     }
 
     bb3: {
-        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> [return: bb4, unwind continue];
+        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> bb4;
     }
 
     bb4: {
@@ -134,7 +134,7 @@ fn revision_2() -> () {
     }
 
     bb0: {
-        _4 = Vec::<&()>::new() -> [return: bb1, unwind continue];
+        _4 = Vec::<&()>::new() -> bb1;
     }
 
     bb1: {
@@ -148,11 +148,11 @@ fn revision_2() -> () {
 
     bb2: {
         _2 = move _7;
-        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> [return: bb3, unwind continue];
+        _1 = <Vec<&()> as IntoIterator>::into_iter(move _2) -> bb3;
     }
 
     bb3: {
-        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> [return: bb4, unwind continue];
+        _0 = std::mem::drop::<std::vec::IntoIter<&()>>(move _1) -> bb4;
     }
 
     bb4: {

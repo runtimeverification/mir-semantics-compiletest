@@ -13,7 +13,7 @@ fn wants_foo(_1: Box<dyn Foo<Output = i32>>) -> i32 {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -60,13 +60,13 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<[closure@ui/traits/issue-24010.rs:12:22: 12:25]>::new(const ZeroSized: [closure@ui/traits/issue-24010.rs:12:22: 12:25]) -> [return: bb1, unwind continue];
+        _1 = Box::<[closure@ui/traits/issue-24010.rs:12:22: 12:25]>::new(const ZeroSized: [closure@ui/traits/issue-24010.rs:12:22: 12:25]) -> bb1;
     }
 
     bb1: {
         _6 = move _1;
-        _5 = move _6 as std::boxed::Box<dyn Foo<Output = i32>> (PointerCoercion(Unsize));
-        _4 = wants_foo(move _5) -> [return: bb2, unwind continue];
+        _5 = move _6 as std::boxed::Box<dyn Foo<Output = i32>> (Pointer(Unsize));
+        _4 = wants_foo(move _5) -> bb2;
     }
 
     bb2: {
@@ -86,7 +86,7 @@ fn main() -> () {
     bb3: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17);
     }
 
     bb4: {

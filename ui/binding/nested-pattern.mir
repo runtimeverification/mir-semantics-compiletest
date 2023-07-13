@@ -29,8 +29,8 @@ fn nested(_1: t) -> () {
     bb1: {
         _15 = [const "succeeded\n"];
         _14 = &_15;
-        _13 = _14 as &[&str] (PointerCoercion(Unsize));
-        _12 = Arguments::<'_>::new_const(move _13) -> [return: bb6, unwind continue];
+        _13 = _14 as &[&str] (Pointer(Unsize));
+        _12 = Arguments::<'_>::new_const(move _13) -> bb6;
     }
 
     bb2: {
@@ -42,20 +42,20 @@ fn nested(_1: t) -> () {
         _4 = ((_1 as bar).0: isize);
         _9 = [const "wrong pattern matched\n"];
         _8 = &_9;
-        _7 = _8 as &[&str] (PointerCoercion(Unsize));
-        _6 = Arguments::<'_>::new_const(move _7) -> [return: bb4, unwind continue];
+        _7 = _8 as &[&str] (Pointer(Unsize));
+        _6 = Arguments::<'_>::new_const(move _7) -> bb4;
     }
 
     bb4: {
-        _5 = _print(move _6) -> [return: bb5, unwind continue];
+        _5 = _print(move _6) -> bb5;
     }
 
     bb5: {
-        _10 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _10 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb6: {
-        _11 = _print(move _12) -> [return: bb7, unwind continue];
+        _11 = _print(move _12) -> bb7;
     }
 
     bb7: {
@@ -72,7 +72,7 @@ fn main() -> () {
     bb0: {
         _3 = Option::<isize>::None;
         _2 = t::bar(const 1_isize, move _3);
-        _1 = nested(move _2) -> [return: bb1, unwind continue];
+        _1 = nested(move _2) -> bb1;
     }
 
     bb1: {

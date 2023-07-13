@@ -8,7 +8,7 @@ const LEN: usize = {
     bb0: {
         _1 = const 15_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 64_u32);
-        assert(move _2, "attempt to shift left by `{}`, which would overflow", const 15_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift left by `{}`, which would overflow", const 15_i32) -> bb1;
     }
 
     bb1: {
@@ -35,7 +35,7 @@ fn main() -> () {
     bb0: {
         _12 = const false;
         _12 = const true;
-        _8 = Builder::new() -> [return: bb1, unwind continue];
+        _8 = Builder::new() -> bb1;
     }
 
     bb1: {
@@ -51,15 +51,15 @@ fn main() -> () {
 
     bb3: {
         _12 = const false;
-        _6 = Builder::spawn::<[closure@ui/codegen/issue-28950.rs:16:54: 16:56], ()>(move _7, const ZeroSized: [closure@ui/codegen/issue-28950.rs:16:54: 16:56]) -> [return: bb4, unwind continue];
+        _6 = Builder::spawn::<[closure@ui/codegen/issue-28950.rs:16:54: 16:56], ()>(move _7, const ZeroSized: [closure@ui/codegen/issue-28950.rs:16:54: 16:56]) -> bb4;
     }
 
     bb4: {
-        _5 = Result::<JoinHandle<()>, std::io::Error>::unwrap(move _6) -> [return: bb5, unwind continue];
+        _5 = Result::<JoinHandle<()>, std::io::Error>::unwrap(move _6) -> bb5;
     }
 
     bb5: {
-        _4 = JoinHandle::<()>::join(move _5) -> [return: bb6, unwind continue];
+        _4 = JoinHandle::<()>::join(move _5) -> bb6;
     }
 
     bb6: {
@@ -69,7 +69,7 @@ fn main() -> () {
 
     bb7: {
         _1 = Not(move _2);
-        drop(_4) -> [return: bb8, unwind continue];
+        drop(_4) -> bb8;
     }
 
     bb8: {
@@ -77,7 +77,7 @@ fn main() -> () {
     }
 
     bb9: {
-        _11 = core::panicking::panic(const "assertion failed: Builder::new().stack_size(LEN /\\n                        2).spawn(||\\n                    {\\n                        let vec =\\n                            vec![unsafe { std :: mem :: zeroed :: < [u8 ; LEN] > () }];\\n                        assert_eq!(vec.len(), 1);\\n                    }).unwrap().join().is_ok()") -> unwind continue;
+        _11 = core::panicking::panic(const "assertion failed: Builder::new().stack_size(LEN /\\n                        2).spawn(||\\n                    {\\n                        let vec =\\n                            vec![unsafe { std :: mem :: zeroed :: < [u8 ; LEN] > () }];\\n                        assert_eq!(vec.len(), 1);\\n                    }).unwrap().join().is_ok()");
     }
 
     bb10: {
@@ -153,7 +153,7 @@ fn main::{closure#0}(_1: [closure@ui/codegen/issue-28950.rs:16:54: 16:56]) -> ()
     bb0: {
         _5 = SizeOf([[u8; 32768]; 1]);
         _6 = AlignOf([[u8; 32768]; 1]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -198,7 +198,7 @@ fn main::{closure#0}(_1: [closure@ui/codegen/issue-28950.rs:16:54: 16:56]) -> ()
     }
 
     bb6: {
-        drop(_2) -> [return: bb7, unwind continue];
+        drop(_2) -> bb7;
     }
 
     bb7: {
@@ -221,8 +221,8 @@ fn main::{closure#0}(_1: [closure@ui/codegen/issue-28950.rs:16:54: 16:56]) -> ()
     bb11: {
         (*_27) = [move _9];
         _4 = move _8;
-        _3 = move _4 as std::boxed::Box<[[u8; 32768]]> (PointerCoercion(Unsize));
-        _2 = slice::<impl [[u8; 32768]]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb3, unwind continue];
+        _3 = move _4 as std::boxed::Box<[[u8; 32768]]> (Pointer(Unsize));
+        _2 = slice::<impl [[u8; 32768]]>::into_vec::<std::alloc::Global>(move _3) -> bb3;
     }
 
     bb12 (cleanup): {

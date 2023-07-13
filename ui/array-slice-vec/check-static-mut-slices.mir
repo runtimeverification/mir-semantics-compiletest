@@ -13,7 +13,7 @@ static mut TEST: &mut [isize] = {
         _3 = [const 1_isize];
         _2 = &mut _3;
         _1 = &mut (*_2);
-        _0 = move _1 as &mut [isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &mut [isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -33,7 +33,7 @@ static mut EMPTY: &mut [isize] = {
         _3 = [];
         _2 = &mut _3;
         _1 = &mut (*_2);
-        _0 = move _1 as &mut [isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &mut [isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -143,7 +143,7 @@ fn main() -> () {
     bb3: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<isize, isize>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<isize, isize>(move _19, _13, _14, move _21);
     }
 
     bb4: {
@@ -169,7 +169,7 @@ fn main() -> () {
         _25 = deref_copy (*_7);
         _9 = Len((*_25));
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb2, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb2;
     }
 
     bb7: {
@@ -201,7 +201,7 @@ fn main() -> () {
         _22 = deref_copy (*_1);
         _3 = Len((*_22));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 }
 

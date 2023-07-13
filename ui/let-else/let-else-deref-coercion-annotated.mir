@@ -65,7 +65,7 @@ fn <impl at ui/let-else/let-else-deref-coercion-annotated.rs:37:1: 37:9>::set_ba
     }
 
     bb0: {
-        _5 = <Foo as DerefMut>::deref_mut(_1) -> [return: bb1, unwind continue];
+        _5 = <Foo as DerefMut>::deref_mut(_1) -> bb1;
     }
 
     bb1: {
@@ -122,17 +122,17 @@ fn main() -> () {
         _2 = Bar::Present(const 1_u32);
         _1 = Foo(move _2);
         _4 = &mut _1;
-        _3 = Foo::set_bar_annotated(move _4, const 42_u32) -> [return: bb1, unwind continue];
+        _3 = Foo::set_bar_annotated(move _4, const 42_u32) -> bb1;
     }
 
     bb1: {
         _10 = &_1;
-        _9 = <Foo as Deref>::deref(move _10) -> [return: bb2, unwind continue];
+        _9 = <Foo as Deref>::deref(move _10) -> bb2;
     }
 
     bb2: {
         _8 = _9;
-        _7 = Bar::bar(move _8) -> [return: bb3, unwind continue];
+        _7 = Bar::bar(move _8) -> bb3;
     }
 
     bb3: {
@@ -142,7 +142,7 @@ fn main() -> () {
         _5 = (move _6, move _11);
         _13 = (_5.0: &std::option::Option<u32>);
         _14 = (_5.1: &std::option::Option<u32>);
-        _16 = <Option<u32> as PartialEq>::eq(_13, _14) -> [return: bb4, unwind continue];
+        _16 = <Option<u32> as PartialEq>::eq(_13, _14) -> bb4;
     }
 
     bb4: {
@@ -153,11 +153,11 @@ fn main() -> () {
     bb5: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<Option<u32>, Option<u32>>(move _17, _13, _14, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<Option<u32>, Option<u32>>(move _17, _13, _14, move _19);
     }
 
     bb6: {
-        _20 = inner() -> [return: bb7, unwind continue];
+        _20 = inner() -> bb7;
     }
 
     bb7: {
@@ -216,7 +216,7 @@ fn foo(_1: &mut irrefutable::Foo) -> () {
     }
 
     bb0: {
-        _4 = <irrefutable::Foo as DerefMut>::deref_mut(_1) -> [return: bb1, unwind continue];
+        _4 = <irrefutable::Foo as DerefMut>::deref_mut(_1) -> bb1;
     }
 
     bb1: {
@@ -239,7 +239,7 @@ fn foo(_1: &mut irrefutable::Foo) -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<u32, u32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<u32, u32>(move _15, _9, _10, move _17);
     }
 
     bb3: {
@@ -258,7 +258,7 @@ fn inner() -> () {
         _4 = irrefutable::Bar(const 1_u32);
         _3 = irrefutable::Foo(move _4);
         _2 = &mut _3;
-        _1 = foo(_2) -> [return: bb1, unwind continue];
+        _1 = foo(_2) -> bb1;
     }
 
     bb1: {

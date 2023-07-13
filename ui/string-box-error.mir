@@ -25,11 +25,11 @@ fn main() -> () {
 
     bb0: {
         _3 = const "test";
-        _2 = <str as ToString>::to_string(_3) -> [return: bb1, unwind continue];
+        _2 = <str as ToString>::to_string(_3) -> bb1;
     }
 
     bb1: {
-        _1 = <Box<dyn std::error::Error + Send + Sync> as From<String>>::from(move _2) -> [return: bb2, unwind continue];
+        _1 = <Box<dyn std::error::Error + Send + Sync> as From<String>>::from(move _2) -> bb2;
     }
 
     bb2: {
@@ -62,7 +62,7 @@ fn main() -> () {
     }
 
     bb9: {
-        drop(_1) -> [return: bb10, unwind continue];
+        drop(_1) -> bb10;
     }
 
     bb10: {

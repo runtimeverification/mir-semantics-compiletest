@@ -5,7 +5,7 @@ fn f() -> ! {
     let _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "quux") -> unwind continue;
+        _1 = begin_panic::<&str>(const "quux");
     }
 }
 
@@ -14,7 +14,7 @@ fn g() -> isize {
     let mut _1: !;
 
     bb0: {
-        _1 = f() -> unwind continue;
+        _1 = f();
     }
 }
 
@@ -23,7 +23,7 @@ fn main() -> () {
     let _1: isize;
 
     bb0: {
-        _1 = g() -> [return: bb1, unwind continue];
+        _1 = g() -> bb1;
     }
 
     bb1: {

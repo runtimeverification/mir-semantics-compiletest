@@ -69,7 +69,7 @@ fn <impl at ui/self/ufcs-explicit-self.rs:9:1: 9:9>::baz(_1: Box<Foo>, _2: isize
     bb2: {
         _3 = ((*_4).0: isize);
         _0 = Add(move _3, _2);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 }
 
@@ -81,7 +81,7 @@ fn <impl at ui/self/ufcs-explicit-self.rs:21:16: 21:21>::clone(_1: &Bar<T>) -> B
 
     bb0: {
         _3 = &((*_1).0: T);
-        _2 = <T as Clone>::clone(_3) -> [return: bb1, unwind continue];
+        _2 = <T as Clone>::clone(_3) -> bb1;
     }
 
     bb1: {
@@ -97,7 +97,7 @@ fn <impl at ui/self/ufcs-explicit-self.rs:26:1: 26:15>::foo(_1: Bar<T>, _2: isiz
 
     bb0: {
         _0 = _2;
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -123,7 +123,7 @@ fn <impl at ui/self/ufcs-explicit-self.rs:26:1: 26:15>::baz(_1: Bar<T>, _2: isiz
 
     bb0: {
         _0 = _2;
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -271,13 +271,13 @@ fn main() -> () {
         _66 = const false;
         _2 = Foo { f: const 1_isize };
         _67 = const true;
-        _1 = Box::<Foo>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = Box::<Foo>::new(move _2) -> bb1;
     }
 
     bb1: {
         _7 = [const "", const " ", const " ", const "\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _68 = (((_1.0: std::ptr::Unique<Foo>).0: std::ptr::NonNull<Foo>).0: *const Foo);
         _118 = _68 as *const () (PtrToPtr);
         _119 = _118 as usize (Transmute);
@@ -323,7 +323,7 @@ fn main() -> () {
     bb7: {
         _10 = [move _11, move _15, move _19];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb8, unwind: bb33];
     }
 
@@ -340,7 +340,7 @@ fn main() -> () {
         _66 = const true;
         _29 = [const "", const " ", const " ", const "\n"];
         _28 = &_29;
-        _27 = _28 as &[&str] (PointerCoercion(Unsize));
+        _27 = _28 as &[&str] (Pointer(Unsize));
         _70 = (((_23.0: std::ptr::Unique<Bar<isize>>).0: std::ptr::NonNull<Bar<isize>>).0: *const Bar<isize>);
         _106 = _70 as *const () (PtrToPtr);
         _107 = _106 as usize (Transmute);
@@ -391,7 +391,7 @@ fn main() -> () {
     bb16: {
         _32 = [move _33, move _37, move _41];
         _31 = &_32;
-        _30 = _31 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _30 = _31 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _26 = Arguments::<'_>::new_v1(move _27, move _30) -> [return: bb17, unwind: bb31];
     }
 
@@ -404,7 +404,7 @@ fn main() -> () {
         _45 = move _23;
         _50 = [const "", const " ", const " ", const "\n"];
         _49 = &_50;
-        _48 = _49 as &[&str] (PointerCoercion(Unsize));
+        _48 = _49 as &[&str] (Pointer(Unsize));
         _73 = (((_45.0: std::ptr::Unique<Bar<isize>>).0: std::ptr::NonNull<Bar<isize>>).0: *const Bar<isize>);
         _88 = _73 as *const () (PtrToPtr);
         _89 = _88 as usize (Transmute);
@@ -455,7 +455,7 @@ fn main() -> () {
     bb24: {
         _53 = [move _54, move _58, move _62];
         _52 = &_53;
-        _51 = _52 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _51 = _52 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _47 = Arguments::<'_>::new_v1(move _48, move _51) -> [return: bb25, unwind: bb28];
     }
 

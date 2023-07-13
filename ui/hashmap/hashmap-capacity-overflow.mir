@@ -17,18 +17,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = std::mem::size_of::<(u64, u64, u64)>() -> [return: bb1, unwind continue];
+        _2 = std::mem::size_of::<(u64, u64, u64)>() -> bb1;
     }
 
     bb1: {
         _3 = Eq(_2, const 0_usize);
-        assert(!move _3, "attempt to divide `{}` by zero", const _) -> [success: bb2, unwind continue];
+        assert(!move _3, "attempt to divide `{}` by zero", const _) -> bb2;
     }
 
     bb2: {
         _1 = Div(const _, move _2);
         _5 = Add(_1, const 100_usize);
-        _4 = HashMap::<u64, u64>::with_capacity(move _5) -> [return: bb3, unwind continue];
+        _4 = HashMap::<u64, u64>::with_capacity(move _5) -> bb3;
     }
 
     bb3: {
@@ -37,7 +37,7 @@ fn main() -> () {
     }
 
     bb4: {
-        drop(_4) -> [return: bb5, unwind continue];
+        drop(_4) -> bb5;
     }
 
     bb5: {

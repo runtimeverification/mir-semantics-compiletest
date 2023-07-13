@@ -23,7 +23,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = parse() -> [return: bb1, unwind continue];
+        _3 = parse() -> bb1;
     }
 
     bb1: {
@@ -33,7 +33,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &std::result::Result<i32, std::num::ParseIntError>);
         _7 = (_1.1: &std::result::Result<i32, std::num::ParseIntError>);
-        _9 = <Result<i32, ParseIntError> as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <Result<i32, ParseIntError> as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -44,7 +44,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<Result<i32, ParseIntError>, Result<i32, ParseIntError>>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<Result<i32, ParseIntError>, Result<i32, ParseIntError>>(move _10, _6, _7, move _12);
     }
 
     bb4: {
@@ -73,11 +73,11 @@ fn parse() -> Result<i32, ParseIntError> {
 
     bb0: {
         _3 = const "1";
-        _2 = core::str::<impl str>::parse::<i32>(_3) -> [return: bb1, unwind continue];
+        _2 = core::str::<impl str>::parse::<i32>(_3) -> bb1;
     }
 
     bb1: {
-        _1 = <Result<i32, ParseIntError> as Try>::branch(move _2) -> [return: bb2, unwind continue];
+        _1 = <Result<i32, ParseIntError> as Try>::branch(move _2) -> bb2;
     }
 
     bb2: {
@@ -97,7 +97,7 @@ fn parse() -> Result<i32, ParseIntError> {
 
     bb5: {
         _5 = move ((_1 as Break).0: std::result::Result<std::convert::Infallible, std::num::ParseIntError>);
-        _0 = <Result<i32, ParseIntError> as FromResidual<Result<Infallible, ParseIntError>>>::from_residual(move _5) -> [return: bb6, unwind continue];
+        _0 = <Result<i32, ParseIntError> as FromResidual<Result<Infallible, ParseIntError>>>::from_residual(move _5) -> bb6;
     }
 
     bb6: {

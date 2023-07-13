@@ -77,7 +77,7 @@ fn main() -> () {
         _47 = const false;
         _4 = const {alloc1: &AtomicUsize};
         _5 = SeqCst;
-        _3 = AtomicUsize::fetch_add(_4, const 0_usize, move _5) -> [return: bb1, unwind continue];
+        _3 = AtomicUsize::fetch_add(_4, const 0_usize, move _5) -> bb1;
     }
 
     bb1: {
@@ -97,12 +97,12 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = assert_failed::<usize, usize>(move _14, _8, _9, move _16);
     }
 
     bb3: {
         _47 = const true;
-        _17 = take_hook() -> [return: bb4, unwind continue];
+        _17 = take_hook() -> bb4;
     }
 
     bb4: {
@@ -110,7 +110,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _19 = move _20 as std::boxed::Box<dyn for<'a, 'b> core::ops::Fn(&'a core::panic::PanicInfo<'b>) + core::marker::Send + core::marker::Sync> (PointerCoercion(Unsize));
+        _19 = move _20 as std::boxed::Box<dyn for<'a, 'b> core::ops::Fn(&'a core::panic::PanicInfo<'b>) + core::marker::Send + core::marker::Sync> (Pointer(Unsize));
         _18 = set_hook(move _19) -> [return: bb6, unwind: bb20];
     }
 
@@ -126,7 +126,7 @@ fn main() -> () {
     bb8: {
         _47 = const false;
         _26 = move _17;
-        _25 = move _26 as std::boxed::Box<dyn for<'a, 'b> core::ops::Fn(&'a core::panic::PanicInfo<'b>) + core::marker::Send + core::marker::Sync> (PointerCoercion(Unsize));
+        _25 = move _26 as std::boxed::Box<dyn for<'a, 'b> core::ops::Fn(&'a core::panic::PanicInfo<'b>) + core::marker::Send + core::marker::Sync> (Pointer(Unsize));
         _24 = set_hook(move _25) -> [return: bb9, unwind: bb17];
     }
 
@@ -205,7 +205,7 @@ static SHARED: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -252,7 +252,7 @@ fn main::{closure#1}::<impl at ui/extern/issue-64655-allow-unwind-when-calling-p
     bb0: {
         _3 = const {alloc1: &AtomicUsize};
         _4 = SeqCst;
-        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> bb1;
     }
 
     bb1: {

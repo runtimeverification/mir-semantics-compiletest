@@ -125,7 +125,7 @@ fn <impl at ui/binding/order-drop-with-match.rs:13:1: 13:16>::drop(_1: &mut A) -
     bb5: {
         _5 = const 3_usize;
         _6 = Lt(_3, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> bb1;
     }
 
     bb6: {
@@ -247,7 +247,7 @@ fn <impl at ui/binding/order-drop-with-match.rs:23:1: 23:16>::drop(_1: &mut B) -
     bb5: {
         _5 = const 3_usize;
         _6 = Lt(_3, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> bb1;
     }
 
     bb6: {
@@ -369,7 +369,7 @@ fn <impl at ui/binding/order-drop-with-match.rs:33:1: 33:16>::drop(_1: &mut C) -
     bb5: {
         _5 = const 3_usize;
         _6 = Lt(_3, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _3) -> bb1;
     }
 
     bb6: {
@@ -452,13 +452,13 @@ fn main() -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
         _6 = [const 1_usize, const 2_usize, const 3_usize];
         _5 = &_6;
-        _4 = _5 as &[usize] (PointerCoercion(Unsize));
+        _4 = _5 as &[usize] (Pointer(Unsize));
         _8 = &_4;
         _10 = const {alloc1: *mut [usize; 3]};
         _18 = _10 as *const () (PtrToPtr);
@@ -478,7 +478,7 @@ fn main() -> () {
     bb5: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<&[usize], [usize; 3]>(move _15, _11, _12, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<&[usize], [usize; 3]>(move _15, _11, _12, move _17);
     }
 
     bb6: {
@@ -498,7 +498,7 @@ fn main() -> () {
         _7 = (move _8, move _9);
         _11 = (_7.0: &&[usize]);
         _12 = (_7.1: &[usize; 3]);
-        _14 = <&[usize] as PartialEq<[usize; 3]>>::eq(_11, _12) -> [return: bb4, unwind continue];
+        _14 = <&[usize] as PartialEq<[usize; 3]>>::eq(_11, _12) -> bb4;
     }
 }
 

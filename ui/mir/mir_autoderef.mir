@@ -26,7 +26,7 @@ fn deref(_1: &MyRef) -> &u32 {
     let _2: &u32;
 
     bb0: {
-        _2 = <MyRef as Deref>::deref(_1) -> [return: bb1, unwind continue];
+        _2 = <MyRef as Deref>::deref(_1) -> bb1;
     }
 
     bb1: {
@@ -41,7 +41,7 @@ fn deref_mut(_1: &mut MyRef) -> &mut u32 {
     let mut _2: &mut u32;
 
     bb0: {
-        _2 = <MyRef as DerefMut>::deref_mut(_1) -> [return: bb1, unwind continue];
+        _2 = <MyRef as DerefMut>::deref_mut(_1) -> bb1;
     }
 
     bb1: {
@@ -108,7 +108,7 @@ fn main() -> () {
     bb0: {
         _1 = MyRef(const 2_u32);
         _6 = &_1;
-        _5 = deref(_6) -> [return: bb1, unwind continue];
+        _5 = deref(_6) -> bb1;
     }
 
     bb1: {
@@ -130,12 +130,12 @@ fn main() -> () {
     bb2: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<*const u32, *const u32>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<*const u32, *const u32>(move _16, _10, _11, move _18);
     }
 
     bb3: {
         _23 = &mut _1;
-        _22 = deref_mut(_23) -> [return: bb4, unwind continue];
+        _22 = deref_mut(_23) -> bb4;
     }
 
     bb4: {
@@ -157,7 +157,7 @@ fn main() -> () {
     bb5: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<*mut u32, *mut u32>(move _33, _27, _28, move _35);
     }
 
     bb6: {

@@ -8,7 +8,7 @@ fn Greeter::test_func(_1: &Self, _2: &str) -> impl TestTrait<Output = ()> {
     let mut _4: bool;
 
     bb0: {
-        _3 = <str as PartialEq>::eq(_2, const "SayHello") -> [return: bb1, unwind continue];
+        _3 = <str as PartialEq>::eq(_2, const "SayHello") -> bb1;
     }
 
     bb1: {
@@ -16,7 +16,7 @@ fn Greeter::test_func(_1: &Self, _2: &str) -> impl TestTrait<Output = ()> {
     }
 
     bb2: {
-        _4 = <str as PartialEq>::eq(_2, const "SayGoodbye") -> [return: bb3, unwind continue];
+        _4 = <str as PartialEq>::eq(_2, const "SayGoodbye") -> bb3;
     }
 
     bb3: {
@@ -54,12 +54,12 @@ fn main() -> () {
     bb0: {
         _5 = [const "Hello, world!\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {

@@ -14,7 +14,7 @@ fn init(_1: &mut [u8; 1024]) -> () {
         _2 = const 33_usize;
         _3 = const 1024_usize;
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -22,7 +22,7 @@ fn init(_1: &mut [u8; 1024]) -> () {
         _5 = const 444_usize;
         _6 = const 1024_usize;
         _7 = Lt(_5, _6);
-        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb2, unwind continue];
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> bb2;
     }
 
     bb2: {
@@ -47,7 +47,7 @@ fn init(_1: &mut [u8; 1024]) -> () {
         _2 = const 33_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -57,7 +57,7 @@ fn init(_1: &mut [u8; 1024]) -> () {
         _5 = const 444_usize;
         _6 = Len((*_1));
         _7 = Lt(_5, _6);
-        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb2, unwind continue];
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> bb2;
     }
 
     bb2: {
@@ -89,7 +89,7 @@ fn nrvo() -> [u8; 1024] {
     bb0: {
         _1 = [const 0_u8; 1024];
         _3 = &mut _1;
-        _2 = init(_3) -> [return: bb1, unwind continue];
+        _2 = init(_3) -> bb1;
     }
 
     bb1: {
@@ -118,7 +118,7 @@ fn nrvo() -> [u8; 1024] {
         _4 = &mut _1;
         _3 = &mut (*_4);
         ConstEvalCounter;
-        _2 = init(move _3) -> [return: bb1, unwind continue];
+        _2 = init(move _3) -> bb1;
     }
 
     bb1: {
@@ -154,7 +154,7 @@ const BUF: [u8; 1024] = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = nrvo() -> [return: bb1, unwind continue];
+        _0 = nrvo() -> bb1;
     }
 
     bb1: {
@@ -251,7 +251,7 @@ fn main() -> () {
         _4 = const 33_usize;
         _5 = const 1024_usize;
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb1;
     }
 
     bb1: {
@@ -271,7 +271,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17);
     }
 
     bb3: {
@@ -279,7 +279,7 @@ fn main() -> () {
         _21 = const 19_usize;
         _22 = const 1024_usize;
         _23 = Lt(_21, _22);
-        assert(move _23, "index out of bounds: the length is {} but the index is {}", move _22, _21) -> [success: bb4, unwind continue];
+        assert(move _23, "index out of bounds: the length is {} but the index is {}", move _22, _21) -> bb4;
     }
 
     bb4: {
@@ -299,7 +299,7 @@ fn main() -> () {
     bb5: {
         _32 = core::panicking::AssertKind::Eq;
         _34 = Option::<Arguments<'_>>::None;
-        _33 = core::panicking::assert_failed::<u8, u8>(move _32, _26, _27, move _34) -> unwind continue;
+        _33 = core::panicking::assert_failed::<u8, u8>(move _32, _26, _27, move _34);
     }
 
     bb6: {
@@ -307,7 +307,7 @@ fn main() -> () {
         _38 = const 444_usize;
         _39 = const 1024_usize;
         _40 = Lt(_38, _39);
-        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> [success: bb7, unwind continue];
+        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> bb7;
     }
 
     bb7: {
@@ -327,7 +327,7 @@ fn main() -> () {
     bb8: {
         _49 = core::panicking::AssertKind::Eq;
         _51 = Option::<Arguments<'_>>::None;
-        _50 = core::panicking::assert_failed::<u8, u8>(move _49, _43, _44, move _51) -> unwind continue;
+        _50 = core::panicking::assert_failed::<u8, u8>(move _49, _43, _44, move _51);
     }
 
     bb9: {

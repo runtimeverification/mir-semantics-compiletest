@@ -26,7 +26,7 @@ fn <impl at ui/traits/issue-6128.rs:10:1: 10:50>::g(_1: &HashMap<isize, isize>, 
     let mut _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _3 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -45,18 +45,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = HashMap::<isize, isize>::new() -> [return: bb1, unwind continue];
+        _2 = HashMap::<isize, isize>::new() -> bb1;
     }
 
     bb1: {
-        _1 = Box::<HashMap<isize, isize>>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<HashMap<isize, isize>>::new(move _2) -> bb2;
     }
 
     bb2: {
         _5 = move _1;
-        _4 = move _5 as std::boxed::Box<dyn Graph<isize, isize>> (PointerCoercion(Unsize));
+        _4 = move _5 as std::boxed::Box<dyn Graph<isize, isize>> (Pointer(Unsize));
         _3 = move _4;
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {

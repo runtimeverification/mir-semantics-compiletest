@@ -100,17 +100,17 @@ fn main() -> () {
 
     bb0: {
         _2 = const {alloc1: &u8};
-        _1 = _2 as &dyn std::fmt::Display (PointerCoercion(Unsize));
+        _1 = _2 as &dyn std::fmt::Display (Pointer(Unsize));
         _6 = const {alloc1: &u8};
         _5 = (*_6);
-        _4 = Box::<u8>::new(move _5) -> [return: bb1, unwind continue];
+        _4 = Box::<u8>::new(move _5) -> bb1;
     }
 
     bb1: {
-        _3 = move _4 as std::boxed::Box<dyn std::fmt::Display> (PointerCoercion(Unsize));
+        _3 = move _4 as std::boxed::Box<dyn std::fmt::Display> (Pointer(Unsize));
         _12 = [const ""];
         _11 = &_12;
-        _10 = _11 as &[&str] (PointerCoercion(Unsize));
+        _10 = _11 as &[&str] (Pointer(Unsize));
         _17 = &_1;
         _16 = core::fmt::rt::Argument::<'_>::new_display::<&dyn std::fmt::Display>(_17) -> [return: bb2, unwind: bb19];
     }
@@ -118,7 +118,7 @@ fn main() -> () {
     bb2: {
         _15 = [move _16];
         _14 = &_15;
-        _13 = _14 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _13 = _14 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _9 = Arguments::<'_>::new_v1(move _10, move _13) -> [return: bb3, unwind: bb19];
     }
 
@@ -130,7 +130,7 @@ fn main() -> () {
         _7 = move _8;
         _23 = [const ""];
         _22 = &_23;
-        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _21 = _22 as &[&str] (Pointer(Unsize));
         _28 = &_3;
         _27 = core::fmt::rt::Argument::<'_>::new_display::<Box<dyn std::fmt::Display>>(_28) -> [return: bb5, unwind: bb18];
     }
@@ -138,7 +138,7 @@ fn main() -> () {
     bb5: {
         _26 = [move _27];
         _25 = &_26;
-        _24 = _25 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _24 = _25 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _20 = Arguments::<'_>::new_v1(move _21, move _24) -> [return: bb6, unwind: bb18];
     }
 
@@ -198,7 +198,7 @@ fn main() -> () {
     }
 
     bb15: {
-        drop(_3) -> [return: bb16, unwind continue];
+        drop(_3) -> bb16;
     }
 
     bb16: {

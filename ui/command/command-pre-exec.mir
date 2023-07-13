@@ -285,7 +285,7 @@ fn main() -> () {
 
     bb0: {
         _203 = const false;
-        _3 = args() -> [return: bb1, unwind continue];
+        _3 = args() -> bb1;
     }
 
     bb1: {
@@ -340,7 +340,7 @@ fn main() -> () {
     bb12: {
         _53 = [const "unknown argument: "];
         _52 = &_53;
-        _51 = _52 as &[&str] (PointerCoercion(Unsize));
+        _51 = _52 as &[&str] (Pointer(Unsize));
         _58 = &_5;
         _57 = core::fmt::rt::Argument::<'_>::new_display::<String>(_58) -> [return: bb30, unwind: bb140];
     }
@@ -348,7 +348,7 @@ fn main() -> () {
     bb13: {
         _17 = [const "hello2\n"];
         _16 = &_17;
-        _15 = _16 as &[&str] (PointerCoercion(Unsize));
+        _15 = _16 as &[&str] (Pointer(Unsize));
         _14 = Arguments::<'_>::new_const(move _15) -> [return: bb14, unwind: bb140];
     }
 
@@ -439,7 +439,7 @@ fn main() -> () {
     bb30: {
         _56 = [move _57];
         _55 = &_56;
-        _54 = _55 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _54 = _55 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _50 = Arguments::<'_>::new_v1(move _51, move _54) -> [return: bb31, unwind: bb140];
     }
 
@@ -456,15 +456,15 @@ fn main() -> () {
     }
 
     bb34: {
-        drop(_3) -> [return: bb35, unwind continue];
+        drop(_3) -> bb35;
     }
 
     bb35: {
-        _60 = current_exe() -> [return: bb36, unwind continue];
+        _60 = current_exe() -> bb36;
     }
 
     bb36: {
-        _59 = Result::<PathBuf, std::io::Error>::unwrap(move _60) -> [return: bb37, unwind continue];
+        _59 = Result::<PathBuf, std::io::Error>::unwrap(move _60) -> bb37;
     }
 
     bb37: {
@@ -897,11 +897,11 @@ fn main() -> () {
     }
 
     bb123: {
-        drop(_59) -> [return: bb125, unwind continue];
+        drop(_59) -> bb125;
     }
 
     bb124: {
-        drop(_3) -> [return: bb125, unwind continue];
+        drop(_3) -> bb125;
     }
 
     bb125: {
@@ -1004,12 +1004,12 @@ fn main::{closure#0}(_1: &mut [closure@ui/command/command-pre-exec.rs:38:23: 38:
     bb0: {
         _6 = [const "hello\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _print(move _3) -> [return: bb2, unwind continue];
+        _2 = _print(move _3) -> bb2;
     }
 
     bb2: {
@@ -1024,11 +1024,11 @@ fn main::{closure#1}(_1: &mut [closure@ui/command/command-pre-exec.rs:52:23: 52:
     let mut _3: std::result::Result<(), std::io::Error>;
 
     bb0: {
-        _3 = set_current_dir::<&str>(const "/") -> [return: bb1, unwind continue];
+        _3 = set_current_dir::<&str>(const "/") -> bb1;
     }
 
     bb1: {
-        _2 = Result::<(), std::io::Error>::unwrap(move _3) -> [return: bb2, unwind continue];
+        _2 = Result::<(), std::io::Error>::unwrap(move _3) -> bb2;
     }
 
     bb2: {
@@ -1042,7 +1042,7 @@ fn main::{closure#2}(_1: &mut [closure@ui/command/command-pre-exec.rs:66:23: 66:
     let mut _2: std::io::Error;
 
     bb0: {
-        _2 = std::io::Error::from_raw_os_error(const 102_i32) -> [return: bb1, unwind continue];
+        _2 = std::io::Error::from_raw_os_error(const 102_i32) -> bb1;
     }
 
     bb1: {
@@ -1069,7 +1069,7 @@ fn main::{closure#3}(_1: &mut [closure@ui/command/command-pre-exec.rs:77:23: 77:
     }
 
     bb0: {
-        _2 = getpid() -> [return: bb1, unwind continue];
+        _2 = getpid() -> bb1;
     }
 
     bb1: {
@@ -1080,7 +1080,7 @@ fn main::{closure#3}(_1: &mut [closure@ui/command/command-pre-exec.rs:77:23: 77:
     }
 
     bb2: {
-        _6 = core::panicking::panic(const "assertion failed: child >= 0") -> unwind continue;
+        _6 = core::panicking::panic(const "assertion failed: child >= 0");
     }
 
     bb3: {
@@ -1092,7 +1092,7 @@ fn main::{closure#3}(_1: &mut [closure@ui/command/command-pre-exec.rs:77:23: 77:
     }
 
     bb4: {
-        _11 = core::panicking::panic(const "assertion failed: pid != child") -> unwind continue;
+        _11 = core::panicking::panic(const "assertion failed: pid != child");
     }
 
     bb5: {
@@ -1132,13 +1132,13 @@ fn main::{closure#4}(_1: &mut [closure@ui/command/command-pre-exec.rs:95:23: 95:
 
     bb0: {
         _7 = &((*_1).0: std::sync::Arc<std::sync::atomic::AtomicUsize>);
-        _6 = <Arc<AtomicUsize> as Deref>::deref(move _7) -> [return: bb1, unwind continue];
+        _6 = <Arc<AtomicUsize> as Deref>::deref(move _7) -> bb1;
     }
 
     bb1: {
         _5 = _6;
         _8 = SeqCst;
-        _4 = AtomicUsize::fetch_add(move _5, const 1_usize, move _8) -> [return: bb2, unwind continue];
+        _4 = AtomicUsize::fetch_add(move _5, const 1_usize, move _8) -> bb2;
     }
 
     bb2: {
@@ -1158,7 +1158,7 @@ fn main::{closure#4}(_1: &mut [closure@ui/command/command-pre-exec.rs:95:23: 95:
     bb3: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19);
     }
 
     bb4: {

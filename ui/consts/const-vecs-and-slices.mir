@@ -31,7 +31,7 @@ static y: &[isize] = {
         _3 = [const 1_isize, const 2_isize, const 3_isize, const 4_isize];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -76,7 +76,7 @@ static zz: &[isize] = {
         _3 = [const 1_isize, const 2_isize, const 3_isize, const 4_isize];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -390,114 +390,114 @@ fn main() -> () {
     bb0: {
         _5 = [const "", const "\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _3 = _4 as &[&str] (Pointer(Unsize));
         _11 = const {alloc1: &[isize; 4]};
         _12 = const 1_usize;
         _13 = const 4_usize;
         _14 = Lt(_12, _13);
-        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> [success: bb1, unwind continue];
+        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> bb1;
     }
 
     bb1: {
         _10 = &(*_11)[_12];
-        _9 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_10) -> [return: bb2, unwind continue];
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_10) -> bb2;
     }
 
     bb2: {
         _8 = [move _9];
         _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb3, unwind continue];
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb3;
     }
 
     bb3: {
-        _1 = _print(move _2) -> [return: bb4, unwind continue];
+        _1 = _print(move _2) -> bb4;
     }
 
     bb4: {
         _19 = [const "", const "\n"];
         _18 = &_19;
-        _17 = _18 as &[&str] (PointerCoercion(Unsize));
+        _17 = _18 as &[&str] (Pointer(Unsize));
         _25 = const {alloc2: &&[isize]};
         _26 = const 1_usize;
         _219 = deref_copy (*_25);
         _27 = Len((*_219));
         _28 = Lt(_26, _27);
-        assert(move _28, "index out of bounds: the length is {} but the index is {}", move _27, _26) -> [success: bb5, unwind continue];
+        assert(move _28, "index out of bounds: the length is {} but the index is {}", move _27, _26) -> bb5;
     }
 
     bb5: {
         _220 = deref_copy (*_25);
         _24 = &(*_220)[_26];
-        _23 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_24) -> [return: bb6, unwind continue];
+        _23 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_24) -> bb6;
     }
 
     bb6: {
         _22 = [move _23];
         _21 = &_22;
-        _20 = _21 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _16 = Arguments::<'_>::new_v1(move _17, move _20) -> [return: bb7, unwind continue];
+        _20 = _21 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _16 = Arguments::<'_>::new_v1(move _17, move _20) -> bb7;
     }
 
     bb7: {
-        _15 = _print(move _16) -> [return: bb8, unwind continue];
+        _15 = _print(move _16) -> bb8;
     }
 
     bb8: {
         _33 = [const "", const "\n"];
         _32 = &_33;
-        _31 = _32 as &[&str] (PointerCoercion(Unsize));
+        _31 = _32 as &[&str] (Pointer(Unsize));
         _39 = const {alloc3: &&[isize; 4]};
         _40 = const 1_usize;
         _41 = const 4_usize;
         _42 = Lt(_40, _41);
-        assert(move _42, "index out of bounds: the length is {} but the index is {}", move _41, _40) -> [success: bb9, unwind continue];
+        assert(move _42, "index out of bounds: the length is {} but the index is {}", move _41, _40) -> bb9;
     }
 
     bb9: {
         _221 = deref_copy (*_39);
         _38 = &(*_221)[_40];
-        _37 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_38) -> [return: bb10, unwind continue];
+        _37 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_38) -> bb10;
     }
 
     bb10: {
         _36 = [move _37];
         _35 = &_36;
-        _34 = _35 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _30 = Arguments::<'_>::new_v1(move _31, move _34) -> [return: bb11, unwind continue];
+        _34 = _35 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _30 = Arguments::<'_>::new_v1(move _31, move _34) -> bb11;
     }
 
     bb11: {
-        _29 = _print(move _30) -> [return: bb12, unwind continue];
+        _29 = _print(move _30) -> bb12;
     }
 
     bb12: {
         _47 = [const "", const "\n"];
         _46 = &_47;
-        _45 = _46 as &[&str] (PointerCoercion(Unsize));
+        _45 = _46 as &[&str] (Pointer(Unsize));
         _53 = const {alloc4: &&[isize]};
         _54 = const 1_usize;
         _222 = deref_copy (*_53);
         _55 = Len((*_222));
         _56 = Lt(_54, _55);
-        assert(move _56, "index out of bounds: the length is {} but the index is {}", move _55, _54) -> [success: bb13, unwind continue];
+        assert(move _56, "index out of bounds: the length is {} but the index is {}", move _55, _54) -> bb13;
     }
 
     bb13: {
         _223 = deref_copy (*_53);
         _52 = &(*_223)[_54];
-        _51 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_52) -> [return: bb14, unwind continue];
+        _51 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_52) -> bb14;
     }
 
     bb14: {
         _50 = [move _51];
         _49 = &_50;
-        _48 = _49 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _44 = Arguments::<'_>::new_v1(move _45, move _48) -> [return: bb15, unwind continue];
+        _48 = _49 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _44 = Arguments::<'_>::new_v1(move _45, move _48) -> bb15;
     }
 
     bb15: {
-        _43 = _print(move _44) -> [return: bb16, unwind continue];
+        _43 = _print(move _44) -> bb16;
     }
 
     bb16: {
@@ -505,7 +505,7 @@ fn main() -> () {
         _60 = const 1_usize;
         _61 = const 4_usize;
         _62 = Lt(_60, _61);
-        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _60) -> [success: bb17, unwind continue];
+        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _60) -> bb17;
     }
 
     bb17: {
@@ -525,7 +525,7 @@ fn main() -> () {
     bb18: {
         _71 = core::panicking::AssertKind::Eq;
         _73 = Option::<Arguments<'_>>::None;
-        _72 = core::panicking::assert_failed::<isize, isize>(move _71, _65, _66, move _73) -> unwind continue;
+        _72 = core::panicking::assert_failed::<isize, isize>(move _71, _65, _66, move _73);
     }
 
     bb19: {
@@ -533,7 +533,7 @@ fn main() -> () {
         _77 = const 3_usize;
         _78 = const 4_usize;
         _79 = Lt(_77, _78);
-        assert(move _79, "index out of bounds: the length is {} but the index is {}", move _78, _77) -> [success: bb20, unwind continue];
+        assert(move _79, "index out of bounds: the length is {} but the index is {}", move _78, _77) -> bb20;
     }
 
     bb20: {
@@ -553,7 +553,7 @@ fn main() -> () {
     bb21: {
         _88 = core::panicking::AssertKind::Eq;
         _90 = Option::<Arguments<'_>>::None;
-        _89 = core::panicking::assert_failed::<isize, isize>(move _88, _82, _83, move _90) -> unwind continue;
+        _89 = core::panicking::assert_failed::<isize, isize>(move _88, _82, _83, move _90);
     }
 
     bb22: {
@@ -561,7 +561,7 @@ fn main() -> () {
         _94 = const 3_usize;
         _95 = const 4_usize;
         _96 = Lt(_94, _95);
-        assert(move _96, "index out of bounds: the length is {} but the index is {}", move _95, _94) -> [success: bb23, unwind continue];
+        assert(move _96, "index out of bounds: the length is {} but the index is {}", move _95, _94) -> bb23;
     }
 
     bb23: {
@@ -571,7 +571,7 @@ fn main() -> () {
         _224 = deref_copy (*_98);
         _100 = Len((*_224));
         _101 = Lt(_99, _100);
-        assert(move _101, "index out of bounds: the length is {} but the index is {}", move _100, _99) -> [success: bb24, unwind continue];
+        assert(move _101, "index out of bounds: the length is {} but the index is {}", move _100, _99) -> bb24;
     }
 
     bb24: {
@@ -590,7 +590,7 @@ fn main() -> () {
     bb25: {
         _108 = core::panicking::AssertKind::Eq;
         _110 = Option::<Arguments<'_>>::None;
-        _109 = core::panicking::assert_failed::<isize, isize>(move _108, _102, _103, move _110) -> unwind continue;
+        _109 = core::panicking::assert_failed::<isize, isize>(move _108, _102, _103, move _110);
     }
 
     bb26: {
@@ -598,7 +598,7 @@ fn main() -> () {
         _114 = const 1_usize;
         _115 = const 4_usize;
         _116 = Lt(_114, _115);
-        assert(move _116, "index out of bounds: the length is {} but the index is {}", move _115, _114) -> [success: bb27, unwind continue];
+        assert(move _116, "index out of bounds: the length is {} but the index is {}", move _115, _114) -> bb27;
     }
 
     bb27: {
@@ -619,7 +619,7 @@ fn main() -> () {
     bb28: {
         _125 = core::panicking::AssertKind::Eq;
         _127 = Option::<Arguments<'_>>::None;
-        _126 = core::panicking::assert_failed::<isize, isize>(move _125, _119, _120, move _127) -> unwind continue;
+        _126 = core::panicking::assert_failed::<isize, isize>(move _125, _119, _120, move _127);
     }
 
     bb29: {
@@ -627,7 +627,7 @@ fn main() -> () {
         _131 = const 3_usize;
         _132 = const 4_usize;
         _133 = Lt(_131, _132);
-        assert(move _133, "index out of bounds: the length is {} but the index is {}", move _132, _131) -> [success: bb30, unwind continue];
+        assert(move _133, "index out of bounds: the length is {} but the index is {}", move _132, _131) -> bb30;
     }
 
     bb30: {
@@ -648,7 +648,7 @@ fn main() -> () {
     bb31: {
         _142 = core::panicking::AssertKind::Eq;
         _144 = Option::<Arguments<'_>>::None;
-        _143 = core::panicking::assert_failed::<isize, isize>(move _142, _136, _137, move _144) -> unwind continue;
+        _143 = core::panicking::assert_failed::<isize, isize>(move _142, _136, _137, move _144);
     }
 
     bb32: {
@@ -656,7 +656,7 @@ fn main() -> () {
         _148 = const 3_usize;
         _149 = const 4_usize;
         _150 = Lt(_148, _149);
-        assert(move _150, "index out of bounds: the length is {} but the index is {}", move _149, _148) -> [success: bb33, unwind continue];
+        assert(move _150, "index out of bounds: the length is {} but the index is {}", move _149, _148) -> bb33;
     }
 
     bb33: {
@@ -667,7 +667,7 @@ fn main() -> () {
         _229 = deref_copy (*_152);
         _154 = Len((*_229));
         _155 = Lt(_153, _154);
-        assert(move _155, "index out of bounds: the length is {} but the index is {}", move _154, _153) -> [success: bb34, unwind continue];
+        assert(move _155, "index out of bounds: the length is {} but the index is {}", move _154, _153) -> bb34;
     }
 
     bb34: {
@@ -686,7 +686,7 @@ fn main() -> () {
     bb35: {
         _162 = core::panicking::AssertKind::Eq;
         _164 = Option::<Arguments<'_>>::None;
-        _163 = core::panicking::assert_failed::<isize, isize>(move _162, _156, _157, move _164) -> unwind continue;
+        _163 = core::panicking::assert_failed::<isize, isize>(move _162, _156, _157, move _164);
     }
 
     bb36: {
@@ -695,7 +695,7 @@ fn main() -> () {
         _231 = deref_copy (*_167);
         _169 = Len((*_231));
         _170 = Lt(_168, _169);
-        assert(move _170, "index out of bounds: the length is {} but the index is {}", move _169, _168) -> [success: bb37, unwind continue];
+        assert(move _170, "index out of bounds: the length is {} but the index is {}", move _169, _168) -> bb37;
     }
 
     bb37: {
@@ -716,7 +716,7 @@ fn main() -> () {
     bb38: {
         _179 = core::panicking::AssertKind::Eq;
         _181 = Option::<Arguments<'_>>::None;
-        _180 = core::panicking::assert_failed::<isize, isize>(move _179, _173, _174, move _181) -> unwind continue;
+        _180 = core::panicking::assert_failed::<isize, isize>(move _179, _173, _174, move _181);
     }
 
     bb39: {
@@ -725,7 +725,7 @@ fn main() -> () {
         _233 = deref_copy (*_184);
         _186 = Len((*_233));
         _187 = Lt(_185, _186);
-        assert(move _187, "index out of bounds: the length is {} but the index is {}", move _186, _185) -> [success: bb40, unwind continue];
+        assert(move _187, "index out of bounds: the length is {} but the index is {}", move _186, _185) -> bb40;
     }
 
     bb40: {
@@ -746,7 +746,7 @@ fn main() -> () {
     bb41: {
         _196 = core::panicking::AssertKind::Eq;
         _198 = Option::<Arguments<'_>>::None;
-        _197 = core::panicking::assert_failed::<isize, isize>(move _196, _190, _191, move _198) -> unwind continue;
+        _197 = core::panicking::assert_failed::<isize, isize>(move _196, _190, _191, move _198);
     }
 
     bb42: {
@@ -755,7 +755,7 @@ fn main() -> () {
         _235 = deref_copy (*_201);
         _203 = Len((*_235));
         _204 = Lt(_202, _203);
-        assert(move _204, "index out of bounds: the length is {} but the index is {}", move _203, _202) -> [success: bb43, unwind continue];
+        assert(move _204, "index out of bounds: the length is {} but the index is {}", move _203, _202) -> bb43;
     }
 
     bb43: {
@@ -766,7 +766,7 @@ fn main() -> () {
         _237 = deref_copy (*_206);
         _208 = Len((*_237));
         _209 = Lt(_207, _208);
-        assert(move _209, "index out of bounds: the length is {} but the index is {}", move _208, _207) -> [success: bb44, unwind continue];
+        assert(move _209, "index out of bounds: the length is {} but the index is {}", move _208, _207) -> bb44;
     }
 
     bb44: {
@@ -785,7 +785,7 @@ fn main() -> () {
     bb45: {
         _216 = core::panicking::AssertKind::Eq;
         _218 = Option::<Arguments<'_>>::None;
-        _217 = core::panicking::assert_failed::<isize, isize>(move _216, _210, _211, move _218) -> unwind continue;
+        _217 = core::panicking::assert_failed::<isize, isize>(move _216, _210, _211, move _218);
     }
 
     bb46: {

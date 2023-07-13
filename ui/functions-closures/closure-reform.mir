@@ -24,7 +24,7 @@ fn call_it(_1: F) -> () {
         _17 = const false;
         _6 = [const "", const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _17 = const true;
         _13 = move _1;
         _16 = const "Fred";
@@ -46,7 +46,7 @@ fn call_it(_1: F) -> () {
     bb3: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb4, unwind: bb7];
     }
 
@@ -55,7 +55,7 @@ fn call_it(_1: F) -> () {
     }
 
     bb5: {
-        drop(_12) -> [return: bb6, unwind continue];
+        drop(_12) -> bb6;
     }
 
     bb6: {
@@ -85,7 +85,7 @@ fn call_a_thunk(_1: F) -> () {
     let _2: ();
 
     bb0: {
-        _2 = <F as FnOnce<()>>::call_once(move _1, const ()) -> [return: bb1, unwind continue];
+        _2 = <F as FnOnce<()>>::call_once(move _1, const ()) -> bb1;
     }
 
     bb1: {
@@ -103,7 +103,7 @@ fn call_this(_1: F) -> () {
     bb0: {
         _4 = const "Hello!";
         _3 = (_4,);
-        _2 = <F as FnOnce<(&str,)>>::call_once(move _1, move _3) -> [return: bb1, unwind continue];
+        _2 = <F as FnOnce<(&str,)>>::call_once(move _1, move _3) -> bb1;
     }
 
     bb1: {
@@ -118,7 +118,7 @@ fn call_bare(_1: for<'a> fn(&'a str)) -> () {
 
     bb0: {
         _2 = const "Hello world!";
-        _0 = _1(_2) -> [return: bb1, unwind continue];
+        _0 = _1(_2) -> bb1;
     }
 
     bb1: {
@@ -133,7 +133,7 @@ fn call_bare_again(_1: for<'a> fn(&'a str)) -> () {
 
     bb0: {
         _2 = const "Goodbye world!";
-        _0 = _1(_2) -> [return: bb1, unwind continue];
+        _0 = _1(_2) -> bb1;
     }
 
     bb1: {
@@ -176,7 +176,7 @@ fn main() -> () {
 
     bb0: {
         _2 = const "Hello ";
-        _1 = <str as ToString>::to_string(_2) -> [return: bb1, unwind continue];
+        _1 = <str as ToString>::to_string(_2) -> bb1;
     }
 
     bb1: {
@@ -216,12 +216,12 @@ fn main() -> () {
     }
 
     bb8: {
-        _19 = foo as for<'a> fn(&'a str) (PointerCoercion(ReifyFnPointer));
+        _19 = foo as for<'a> fn(&'a str) (Pointer(ReifyFnPointer));
         _18 = call_bare(move _19) -> [return: bb9, unwind: bb14];
     }
 
     bb9: {
-        _21 = foo as for<'a> fn(&'a str) (PointerCoercion(ReifyFnPointer));
+        _21 = foo as for<'a> fn(&'a str) (Pointer(ReifyFnPointer));
         _20 = call_bare_again(move _21) -> [return: bb10, unwind: bb14];
     }
 
@@ -234,7 +234,7 @@ fn main() -> () {
     }
 
     bb12: {
-        drop(_1) -> [return: bb13, unwind continue];
+        drop(_1) -> bb13;
     }
 
     bb13: {
@@ -281,7 +281,7 @@ fn main::{closure#0}(_1: [closure@ui/functions-closures/closure-reform.rs:32:13:
     bb0: {
         _7 = [const "", const ""];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _14 = deref_copy (_1.0: &std::string::String);
         _11 = core::fmt::rt::Argument::<'_>::new_display::<String>(_14) -> [return: bb1, unwind: bb6];
     }
@@ -294,7 +294,7 @@ fn main::{closure#0}(_1: [closure@ui/functions-closures/closure-reform.rs:32:13:
     bb2: {
         _10 = [move _11, move _12];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb6];
     }
 
@@ -304,7 +304,7 @@ fn main::{closure#0}(_1: [closure@ui/functions-closures/closure-reform.rs:32:13:
 
     bb4: {
         _0 = move _3;
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb5: {
@@ -343,7 +343,7 @@ fn main::{closure#1}(_1: [closure@ui/functions-closures/closure-reform.rs:37:13:
     bb0: {
         _7 = [const "", const ""];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _14 = deref_copy (_1.0: &std::string::String);
         _11 = core::fmt::rt::Argument::<'_>::new_display::<String>(_14) -> [return: bb1, unwind: bb6];
     }
@@ -356,7 +356,7 @@ fn main::{closure#1}(_1: [closure@ui/functions-closures/closure-reform.rs:37:13:
     bb2: {
         _10 = [move _11, move _12];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb6];
     }
 
@@ -366,7 +366,7 @@ fn main::{closure#1}(_1: [closure@ui/functions-closures/closure-reform.rs:37:13:
 
     bb4: {
         _0 = move _3;
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb5: {
@@ -405,7 +405,7 @@ fn main::{closure#2}(_1: [closure@ui/functions-closures/closure-reform.rs:40:13:
     bb0: {
         _7 = [const "", const ""];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _14 = deref_copy (_1.0: &std::string::String);
         _11 = core::fmt::rt::Argument::<'_>::new_display::<String>(_14) -> [return: bb1, unwind: bb6];
     }
@@ -418,7 +418,7 @@ fn main::{closure#2}(_1: [closure@ui/functions-closures/closure-reform.rs:40:13:
     bb2: {
         _10 = [move _11, move _12];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb6];
     }
 
@@ -428,7 +428,7 @@ fn main::{closure#2}(_1: [closure@ui/functions-closures/closure-reform.rs:40:13:
 
     bb4: {
         _0 = move _3;
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb5: {
@@ -455,12 +455,12 @@ fn main::{closure#3}(_1: [closure@ui/functions-closures/closure-reform.rs:46:18:
     bb0: {
         _6 = [const "Hello world!\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _print(move _3) -> [return: bb2, unwind continue];
+        _2 = _print(move _3) -> bb2;
     }
 
     bb2: {
@@ -485,20 +485,20 @@ fn main::{closure#4}(_1: [closure@ui/functions-closures/closure-reform.rs:48:15:
     bb0: {
         _7 = [const "", const "\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _12 = &_2;
-        _11 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_12) -> [return: bb1, unwind continue];
+        _11 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_12) -> bb1;
     }
 
     bb1: {
         _10 = [move _11];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb2, unwind continue];
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb2;
     }
 
     bb2: {
-        _3 = _print(move _4) -> [return: bb3, unwind continue];
+        _3 = _print(move _4) -> bb3;
     }
 
     bb3: {

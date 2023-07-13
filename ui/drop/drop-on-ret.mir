@@ -16,12 +16,12 @@ fn f() -> isize {
 
     bb1: {
         _3 = const "should not leak";
-        _2 = <str as ToString>::to_string(_3) -> [return: bb2, unwind continue];
+        _2 = <str as ToString>::to_string(_3) -> bb2;
     }
 
     bb2: {
         _0 = const 1_isize;
-        drop(_2) -> [return: bb4, unwind continue];
+        drop(_2) -> bb4;
     }
 
     bb3: {
@@ -39,7 +39,7 @@ fn main() -> () {
     let _1: isize;
 
     bb0: {
-        _1 = f() -> [return: bb1, unwind continue];
+        _1 = f() -> bb1;
     }
 
     bb1: {

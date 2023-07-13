@@ -26,7 +26,7 @@ fn <impl at ui/consts/const_let_assign2.rs:7:1: 7:8>::new() -> AA {
         _3 = const 0_usize;
         _4 = const 10_usize;
         _5 = Lt(_3, _4);
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1;
     }
 
     bb1: {
@@ -58,7 +58,7 @@ fn <impl at ui/consts/const_let_assign2.rs:7:1: 7:8>::new() -> AA {
         _3 = const 0_usize;
         _4 = Len((_1.0: [u8; 10]));
         _5 = Lt(_3, _4);
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1;
     }
 
     bb1: {
@@ -84,7 +84,7 @@ static mut BB: AA = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AA::new() -> [return: bb1, unwind continue];
+        _0 = AA::new() -> bb1;
     }
 
     bb1: {
@@ -145,7 +145,7 @@ fn main() -> () {
     }
 
     bb1: {
-        _3 = <std::slice::Iter<'_, u8> as IntoIterator>::into_iter(move _4) -> [return: bb2, unwind continue];
+        _3 = <std::slice::Iter<'_, u8> as IntoIterator>::into_iter(move _4) -> bb2;
     }
 
     bb2: {
@@ -155,7 +155,7 @@ fn main() -> () {
 
     bb3: {
         _9 = &mut _7;
-        _8 = <std::slice::Iter<'_, u8> as Iterator>::next(_9) -> [return: bb4, unwind continue];
+        _8 = <std::slice::Iter<'_, u8> as Iterator>::next(_9) -> bb4;
     }
 
     bb4: {
@@ -167,9 +167,9 @@ fn main() -> () {
         _11 = ((_8 as Some).0: &u8);
         _16 = [const "", const "\n"];
         _15 = &_16;
-        _14 = _15 as &[&str] (PointerCoercion(Unsize));
+        _14 = _15 as &[&str] (Pointer(Unsize));
         _21 = &_11;
-        _20 = core::fmt::rt::Argument::<'_>::new_display::<&u8>(_21) -> [return: bb8, unwind continue];
+        _20 = core::fmt::rt::Argument::<'_>::new_display::<&u8>(_21) -> bb8;
     }
 
     bb6: {
@@ -183,19 +183,19 @@ fn main() -> () {
     bb8: {
         _19 = [move _20];
         _18 = &_19;
-        _17 = _18 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _13 = Arguments::<'_>::new_v1(move _14, move _17) -> [return: bb9, unwind continue];
+        _17 = _18 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _13 = Arguments::<'_>::new_v1(move _14, move _17) -> bb9;
     }
 
     bb9: {
-        _12 = _print(move _13) -> [return: bb3, unwind continue];
+        _12 = _print(move _13) -> bb3;
     }
 
     bb10: {
         _1 = &mut (*_2);
         _6 = &((*_1).0: [u8; 10]);
-        _5 = move _6 as &[u8] (PointerCoercion(Unsize));
-        _4 = core::slice::<impl [u8]>::iter(move _5) -> [return: bb1, unwind continue];
+        _5 = move _6 as &[u8] (Pointer(Unsize));
+        _4 = core::slice::<impl [u8]>::iter(move _5) -> bb1;
     }
 }
 

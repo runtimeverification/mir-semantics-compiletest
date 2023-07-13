@@ -43,7 +43,7 @@ fn main() -> () {
         _8 = Foo::E;
         _3 = [move _4, move _5, move _6, move _7, move _8];
         _2 = &_3;
-        _1 = <&[Foo; 5] as IntoIterator>::into_iter(move _2) -> [return: bb1, unwind continue];
+        _1 = <&[Foo; 5] as IntoIterator>::into_iter(move _2) -> bb1;
     }
 
     bb1: {
@@ -53,7 +53,7 @@ fn main() -> () {
 
     bb2: {
         _11 = &mut _9;
-        _10 = <std::slice::Iter<'_, Foo> as Iterator>::next(_11) -> [return: bb3, unwind continue];
+        _10 = <std::slice::Iter<'_, Foo> as Iterator>::next(_11) -> bb3;
     }
 
     bb3: {
@@ -78,19 +78,19 @@ fn main() -> () {
     bb7: {
         _19 = [const "A\n"];
         _18 = &_19;
-        _17 = _18 as &[&str] (PointerCoercion(Unsize));
-        _16 = Arguments::<'_>::new_const(move _17) -> [return: bb8, unwind continue];
+        _17 = _18 as &[&str] (Pointer(Unsize));
+        _16 = Arguments::<'_>::new_const(move _17) -> bb8;
     }
 
     bb8: {
-        _15 = _print(move _16) -> [return: bb2, unwind continue];
+        _15 = _print(move _16) -> bb2;
     }
 
     bb9: {
         _26 = [const "BC!\n"];
         _25 = &_26;
-        _24 = _25 as &[&str] (PointerCoercion(Unsize));
-        _23 = Arguments::<'_>::new_const(move _24) -> [return: bb12, unwind continue];
+        _24 = _25 as &[&str] (Pointer(Unsize));
+        _23 = Arguments::<'_>::new_const(move _24) -> bb12;
     }
 
     bb10: {
@@ -104,6 +104,6 @@ fn main() -> () {
     }
 
     bb12: {
-        _22 = _print(move _23) -> [return: bb2, unwind continue];
+        _22 = _print(move _23) -> bb2;
     }
 }

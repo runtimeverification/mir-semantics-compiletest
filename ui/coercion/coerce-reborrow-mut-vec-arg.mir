@@ -6,7 +6,7 @@ fn reverse(_1: &mut [usize]) -> () {
     let _2: ();
 
     bb0: {
-        _2 = core::slice::<impl [usize]>::reverse(_1) -> [return: bb1, unwind continue];
+        _2 = core::slice::<impl [usize]>::reverse(_1) -> bb1;
     }
 
     bb1: {
@@ -22,15 +22,15 @@ fn bar(_1: &mut [usize]) -> () {
     let _4: ();
 
     bb0: {
-        _2 = reverse(_1) -> [return: bb1, unwind continue];
+        _2 = reverse(_1) -> bb1;
     }
 
     bb1: {
-        _3 = reverse(_1) -> [return: bb2, unwind continue];
+        _3 = reverse(_1) -> bb2;
     }
 
     bb2: {
-        _4 = reverse(_1) -> [return: bb3, unwind continue];
+        _4 = reverse(_1) -> bb3;
     }
 
     bb3: {
@@ -84,7 +84,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([usize; 4]);
         _4 = AlignOf([usize; 4]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -131,7 +131,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {
@@ -148,7 +148,7 @@ fn main() -> () {
 
     bb11: {
         (*_22) = [const 1_usize, const 2_usize, const 3_usize, const 100_usize];
-        _2 = move _6 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[usize]> (Pointer(Unsize));
+        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

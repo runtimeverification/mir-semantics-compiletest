@@ -28,7 +28,7 @@ fn insignificant_drop_does_not_need_migration() -> () {
         _3 = InsignificantDropPoint { x: const 4_i32, y: const 9_i32 };
         _1 = (move _2, move _3);
         _4 = [closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:23:13: 23:15] { t: move _1 };
-        _5 = <[closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:23:13: 23:15] as FnOnce<()>>::call_once(move _4, const ()) -> [return: bb1, unwind continue];
+        _5 = <[closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:23:13: 23:15] as FnOnce<()>>::call_once(move _4, const ()) -> bb1;
     }
 
     bb1: {
@@ -50,7 +50,7 @@ fn insignificant_drop_does_not_need_migration::{closure#0}(_1: [closure@ui/closu
     }
 
     bb1: {
-        drop(((_1.0: (InsignificantDropPoint, InsignificantDropPoint)).1: InsignificantDropPoint)) -> [return: bb3, unwind continue];
+        drop(((_1.0: (InsignificantDropPoint, InsignificantDropPoint)).1: InsignificantDropPoint)) -> bb3;
     }
 
     bb2 (cleanup): {
@@ -85,7 +85,7 @@ fn generic_struct_with_insignificant_drop_does_not_need_migration() -> () {
         _3 = InsignificantDropPoint { x: const 4_i32, y: const 9_i32 };
         _1 = GenericStruct::<InsignificantDropPoint>(move _2, move _3);
         _4 = [closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:35:13: 35:15] { t: move _1 };
-        _5 = <[closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:35:13: 35:15] as FnOnce<()>>::call_once(move _4, const ()) -> [return: bb1, unwind continue];
+        _5 = <[closure@ui/closures/2229_closure_analysis/migrations/insignificant_drop_attr_no_migrations.rs:35:13: 35:15] as FnOnce<()>>::call_once(move _4, const ()) -> bb1;
     }
 
     bb1: {
@@ -107,7 +107,7 @@ fn generic_struct_with_insignificant_drop_does_not_need_migration::{closure#0}(_
     }
 
     bb1: {
-        drop(((_1.0: GenericStruct<InsignificantDropPoint>).1: InsignificantDropPoint)) -> [return: bb3, unwind continue];
+        drop(((_1.0: GenericStruct<InsignificantDropPoint>).1: InsignificantDropPoint)) -> bb3;
     }
 
     bb2 (cleanup): {
@@ -129,11 +129,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = insignificant_drop_does_not_need_migration() -> [return: bb1, unwind continue];
+        _1 = insignificant_drop_does_not_need_migration() -> bb1;
     }
 
     bb1: {
-        _2 = generic_struct_with_insignificant_drop_does_not_need_migration() -> [return: bb2, unwind continue];
+        _2 = generic_struct_with_insignificant_drop_does_not_need_migration() -> bb2;
     }
 
     bb2: {

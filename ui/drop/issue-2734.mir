@@ -15,11 +15,11 @@ fn perform_hax(_1: Box<T>) -> Box<dyn hax> {
     let mut _2: std::boxed::Box<std::boxed::Box<T>>;
 
     bb0: {
-        _2 = Box::<Box<T>>::new(move _1) -> [return: bb1, unwind continue];
+        _2 = Box::<Box<T>>::new(move _1) -> bb1;
     }
 
     bb1: {
-        _0 = move _2 as std::boxed::Box<dyn hax> (PointerCoercion(Unsize));
+        _0 = move _2 as std::boxed::Box<dyn hax> (Pointer(Unsize));
         return;
     }
 }
@@ -33,19 +33,19 @@ fn deadcode() -> () {
 
     bb0: {
         _4 = const "deadcode";
-        _3 = <str as ToString>::to_string(_4) -> [return: bb1, unwind continue];
+        _3 = <str as ToString>::to_string(_4) -> bb1;
     }
 
     bb1: {
-        _2 = Box::<String>::new(move _3) -> [return: bb2, unwind continue];
+        _2 = Box::<String>::new(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = perform_hax::<String>(move _2) -> [return: bb3, unwind continue];
+        _1 = perform_hax::<String>(move _2) -> bb3;
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -61,15 +61,15 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = Box::<i32>::new(const 42_i32) -> [return: bb1, unwind continue];
+        _2 = Box::<i32>::new(const 42_i32) -> bb1;
     }
 
     bb1: {
-        _1 = perform_hax::<i32>(move _2) -> [return: bb2, unwind continue];
+        _1 = perform_hax::<i32>(move _2) -> bb2;
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {

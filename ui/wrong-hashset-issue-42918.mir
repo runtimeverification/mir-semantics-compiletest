@@ -94,7 +94,7 @@ fn <impl at ui/wrong-hashset-issue-42918.rs:8:21: 8:26>::fmt(_1: &MyEnum, _2: &m
     }
 
     bb10: {
-        _0 = Formatter::<'_>::write_str(_2, move _3) -> [return: bb11, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, move _3) -> bb11;
     }
 
     bb11: {
@@ -115,7 +115,7 @@ fn <impl at ui/wrong-hashset-issue-42918.rs:8:28: 8:32>::hash(_1: &MyEnum, _2: &
     bb0: {
         _3 = discriminant((*_1));
         _4 = &_3;
-        _0 = <isize as Hash>::hash::<__H>(_4, _2) -> [return: bb1, unwind continue];
+        _0 = <isize as Hash>::hash::<__H>(_4, _2) -> bb1;
     }
 
     bb1: {
@@ -211,7 +211,7 @@ fn <impl at ui/wrong-hashset-issue-42918.rs:8:45: 8:55>::partial_cmp(_1: &MyEnum
         _4 = discriminant((*_2));
         _5 = &_3;
         _6 = &_4;
-        _0 = <isize as PartialOrd>::partial_cmp(_5, _6) -> [return: bb1, unwind continue];
+        _0 = <isize as PartialOrd>::partial_cmp(_5, _6) -> bb1;
     }
 
     bb1: {
@@ -239,7 +239,7 @@ fn <impl at ui/wrong-hashset-issue-42918.rs:8:57: 8:60>::cmp(_1: &MyEnum, _2: &M
         _4 = discriminant((*_2));
         _5 = &_3;
         _6 = &_4;
-        _0 = <isize as Ord>::cmp(_5, _6) -> [return: bb1, unwind continue];
+        _0 = <isize as Ord>::cmp(_5, _6) -> bb1;
     }
 
     bb1: {
@@ -299,25 +299,25 @@ fn main() -> () {
         _8 = MyEnum::E1;
         _6 = [move _7, move _8];
         _5 = &_6;
-        _4 = move _5 as &[MyEnum] (PointerCoercion(Unsize));
-        _3 = core::slice::<impl [MyEnum]>::iter(move _4) -> [return: bb1, unwind continue];
+        _4 = move _5 as &[MyEnum] (Pointer(Unsize));
+        _3 = core::slice::<impl [MyEnum]>::iter(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = <std::slice::Iter<'_, MyEnum> as Iterator>::cloned::<'_, MyEnum>(move _3) -> [return: bb2, unwind continue];
+        _2 = <std::slice::Iter<'_, MyEnum> as Iterator>::cloned::<'_, MyEnum>(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = <Cloned<std::slice::Iter<'_, MyEnum>> as Iterator>::collect::<HashSet<MyEnum>>(move _2) -> [return: bb3, unwind continue];
+        _1 = <Cloned<std::slice::Iter<'_, MyEnum>> as Iterator>::collect::<HashSet<MyEnum>>(move _2) -> bb3;
     }
 
     bb3: {
         _11 = move _1;
-        _10 = <HashSet<MyEnum> as IntoIterator>::into_iter(move _11) -> [return: bb4, unwind continue];
+        _10 = <HashSet<MyEnum> as IntoIterator>::into_iter(move _11) -> bb4;
     }
 
     bb4: {
-        _9 = <std::collections::hash_set::IntoIter<MyEnum> as Iterator>::collect::<Vec<MyEnum>>(move _10) -> [return: bb5, unwind continue];
+        _9 = <std::collections::hash_set::IntoIter<MyEnum> as Iterator>::collect::<Vec<MyEnum>>(move _10) -> bb5;
     }
 
     bb5: {
@@ -360,7 +360,7 @@ fn main() -> () {
     }
 
     bb11: {
-        drop(_9) -> [return: bb12, unwind continue];
+        drop(_9) -> bb12;
     }
 
     bb12: {

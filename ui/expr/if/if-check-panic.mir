@@ -27,7 +27,7 @@ fn even(_1: usize) -> bool {
 
     bb4: {
         _3 = Sub(_1, const 2_usize);
-        _0 = even(move _3) -> [return: bb5, unwind continue];
+        _0 = even(move _3) -> bb5;
     }
 
     bb5: {
@@ -54,7 +54,7 @@ fn foo(_1: usize) -> () {
 
     bb0: {
         _3 = _1;
-        _2 = even(move _3) -> [return: bb1, unwind continue];
+        _2 = even(move _3) -> bb1;
     }
 
     bb1: {
@@ -64,20 +64,20 @@ fn foo(_1: usize) -> () {
     bb2: {
         _8 = [const "", const "\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _13 = &_1;
-        _12 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_13) -> [return: bb3, unwind continue];
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_13) -> bb3;
     }
 
     bb3: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb4, unwind continue];
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> bb4;
     }
 
     bb4: {
-        _4 = _print(move _5) -> [return: bb5, unwind continue];
+        _4 = _print(move _5) -> bb5;
     }
 
     bb5: {
@@ -85,7 +85,7 @@ fn foo(_1: usize) -> () {
     }
 
     bb6: {
-        _14 = begin_panic::<&str>(const "Number is odd") -> unwind continue;
+        _14 = begin_panic::<&str>(const "Number is odd");
     }
 }
 
@@ -94,7 +94,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = foo(const 3_usize) -> [return: bb1, unwind continue];
+        _1 = foo(const 3_usize) -> bb1;
     }
 
     bb1: {

@@ -106,7 +106,7 @@ fn main() -> () {
     bb0: {
         _3 = const 1_i32;
         _2 = &_3;
-        _5 = foo::<i32>(const 1_i32) -> [return: bb1, unwind continue];
+        _5 = foo::<i32>(const 1_i32) -> bb1;
     }
 
     bb1: {
@@ -124,13 +124,13 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<i32, i32>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<i32, i32>(move _12, _6, _7, move _14);
     }
 
     bb3: {
         _17 = const 2f64;
         _16 = &_17;
-        _19 = foo::<f64>(const 2f64) -> [return: bb4, unwind continue];
+        _19 = foo::<f64>(const 2f64) -> bb4;
     }
 
     bb4: {
@@ -148,13 +148,13 @@ fn main() -> () {
     bb5: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<f64, f64>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<f64, f64>(move _26, _20, _21, move _28);
     }
 
     bb6: {
         _33 = SizeOf([i32; 1]);
         _34 = AlignOf([i32; 1]);
-        _35 = alloc::alloc::exchange_malloc(move _33, move _34) -> [return: bb7, unwind continue];
+        _35 = alloc::alloc::exchange_malloc(move _33, move _34) -> bb7;
     }
 
     bb7: {
@@ -216,7 +216,7 @@ fn main() -> () {
     }
 
     bb15: {
-        drop(_31) -> [return: bb16, unwind continue];
+        drop(_31) -> bb16;
     }
 
     bb16: {
@@ -237,13 +237,13 @@ fn main() -> () {
 
     bb20: {
         (*_53) = [const 1_i32];
-        _40 = move _44 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
+        _40 = move _44 as std::boxed::Box<[i32]> (Pointer(Unsize));
         _39 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _40) -> [return: bb10, unwind: bb18];
     }
 
     bb21: {
         (*_52) = [const 1_i32];
-        _32 = move _36 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _31 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _32) -> [return: bb8, unwind continue];
+        _32 = move _36 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _31 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _32) -> bb8;
     }
 }

@@ -15,7 +15,7 @@ fn <impl at ui/traits/issue-18412.rs:16:1: 16:15>::foo(_1: &A) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = A::bar(_1) -> [return: bb1, unwind continue];
+        _0 = A::bar(_1) -> bb1;
     }
 
     bb1: {
@@ -62,13 +62,13 @@ fn main() -> () {
     bb0: {
         _1 = A(const 42_usize);
         _5 = &_1;
-        _4 = A::bar(_5) -> [return: bb1, unwind continue];
+        _4 = A::bar(_5) -> bb1;
     }
 
     bb1: {
         _3 = &_4;
         _8 = &_1;
-        _7 = <A as Foo>::foo(_8) -> [return: bb2, unwind continue];
+        _7 = <A as Foo>::foo(_8) -> bb2;
     }
 
     bb2: {
@@ -86,7 +86,7 @@ fn main() -> () {
     bb3: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17);
     }
 
     bb4: {

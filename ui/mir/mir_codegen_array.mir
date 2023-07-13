@@ -65,13 +65,13 @@ fn main() -> () {
     bb0: {
         _3 = [const 30_u64; 1024];
         _2 = &_3;
-        _1 = _2 as &[u64] (PointerCoercion(Unsize));
-        _9 = into_inner() -> [return: bb1, unwind continue];
+        _1 = _2 as &[u64] (Pointer(Unsize));
+        _9 = into_inner() -> bb1;
     }
 
     bb1: {
         _8 = &_9;
-        _7 = <[u64; 1024] as Index<RangeFull>>::index(move _8, const RangeFull) -> [return: bb2, unwind continue];
+        _7 = <[u64; 1024] as Index<RangeFull>>::index(move _8, const RangeFull) -> bb2;
     }
 
     bb2: {
@@ -81,7 +81,7 @@ fn main() -> () {
         _4 = (move _5, move _10);
         _11 = (_4.0: &&[u64]);
         _12 = (_4.1: &&[u64]);
-        _14 = <&[u64] as PartialEq>::eq(_11, _12) -> [return: bb3, unwind continue];
+        _14 = <&[u64] as PartialEq>::eq(_11, _12) -> bb3;
     }
 
     bb3: {
@@ -92,7 +92,7 @@ fn main() -> () {
     bb4: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<&[u64], &[u64]>(move _15, _11, _12, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<&[u64], &[u64]>(move _15, _11, _12, move _17);
     }
 
     bb5: {

@@ -55,16 +55,16 @@ fn main() -> () {
         _1 = [const 1_i32; 100];
         _2 = const 0_i32;
         _7 = &_1;
-        _6 = move _7 as &[i32] (PointerCoercion(Unsize));
-        _5 = core::slice::<impl [i32]>::iter(move _6) -> [return: bb1, unwind continue];
+        _6 = move _7 as &[i32] (Pointer(Unsize));
+        _5 = core::slice::<impl [i32]>::iter(move _6) -> bb1;
     }
 
     bb1: {
-        _4 = <std::slice::Iter<'_, i32> as Iterator>::enumerate(move _5) -> [return: bb2, unwind continue];
+        _4 = <std::slice::Iter<'_, i32> as Iterator>::enumerate(move _5) -> bb2;
     }
 
     bb2: {
-        _3 = <Enumerate<std::slice::Iter<'_, i32>> as IntoIterator>::into_iter(move _4) -> [return: bb3, unwind continue];
+        _3 = <Enumerate<std::slice::Iter<'_, i32>> as IntoIterator>::into_iter(move _4) -> bb3;
     }
 
     bb3: {
@@ -74,7 +74,7 @@ fn main() -> () {
 
     bb4: {
         _10 = &mut _8;
-        _9 = <Enumerate<std::slice::Iter<'_, i32>> as Iterator>::next(_10) -> [return: bb5, unwind continue];
+        _9 = <Enumerate<std::slice::Iter<'_, i32>> as Iterator>::next(_10) -> bb5;
     }
 
     bb5: {
@@ -116,7 +116,7 @@ fn main() -> () {
     bb10: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<i32, i32>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<i32, i32>(move _26, _20, _21, move _28);
     }
 
     bb11: {

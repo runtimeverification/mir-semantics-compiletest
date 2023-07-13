@@ -26,7 +26,7 @@ fn <impl at ui/overloaded/issue-14958.rs:14:1: 14:54>::call_mut(_1: &mut Bar, _2
 
     bb0: {
         _3 = &(*_1);
-        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> [return: bb1, unwind continue];
+        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -42,7 +42,7 @@ fn <impl at ui/overloaded/issue-14958.rs:18:1: 18:55>::call_once(_1: Bar, _2: (&
 
     bb0: {
         _3 = &_1;
-        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> [return: bb1, unwind continue];
+        _0 = <Bar as Fn<(&dyn Foo,)>>::call(move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -69,9 +69,9 @@ fn main() -> () {
     bb0: {
         _2 = &_3;
         _5 = &_1;
-        _7 = _2 as &dyn Foo (PointerCoercion(Unsize));
+        _7 = _2 as &dyn Foo (Pointer(Unsize));
         _6 = (move _7,);
-        _4 = <Bar as Fn<(&dyn Foo,)>>::call(move _5, move _6) -> [return: bb1, unwind continue];
+        _4 = <Bar as Fn<(&dyn Foo,)>>::call(move _5, move _6) -> bb1;
     }
 
     bb1: {

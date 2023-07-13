@@ -6,7 +6,7 @@
 
     bb0: {
         _1 = CheckedSub(const K, const 1_u64);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const K, const 1_u64) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const K, const 1_u64) -> bb1;
     }
 
     bb1: {
@@ -40,7 +40,7 @@ fn <impl at ui/const-generics/generic_const_exprs/nested-abstract-consts-2.rs:9:
 
     bb0: {
         _1 = CheckedSub(const K, const 1_u64);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const K, const 1_u64) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const K, const 1_u64) -> bb1;
     }
 
     bb1: {
@@ -55,7 +55,7 @@ fn <impl at ui/const-generics/generic_const_exprs/nested-abstract-consts-2.rs:9:
 
     bb0: {
         _1 = CheckedAdd(const K, const 1_u64);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> bb1;
     }
 
     bb1: {
@@ -73,13 +73,13 @@ fn <impl at ui/const-generics/generic_const_exprs/nested-abstract-consts-2.rs:9:
     bb0: {
         StorageLive(_1);
         _2 = CheckedAdd(const K, const 1_u64);
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> bb1;
     }
 
     bb1: {
         _1 = move (_2.0: u64);
         _3 = CheckedSub(_1, const 1_u64);
-        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", move _1, const 1_u64) -> [success: bb2, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", move _1, const 1_u64) -> bb2;
     }
 
     bb2: {
@@ -106,7 +106,7 @@ fn <impl at ui/const-generics/generic_const_exprs/nested-abstract-consts-2.rs:18
     }
 
     bb0: {
-        _0 = Generic::<{ K + 1 }>::foo(const ZeroSized: Generic<{ K + 1 }>) -> [return: bb1, unwind continue];
+        _0 = Generic::<{ K + 1 }>::foo(const ZeroSized: Generic<{ K + 1 }>) -> bb1;
     }
 
     bb1: {
@@ -120,7 +120,7 @@ fn <impl at ui/const-generics/generic_const_exprs/nested-abstract-consts-2.rs:18
 
     bb0: {
         _1 = CheckedAdd(const K, const 1_u64);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const K, const 1_u64) -> bb1;
     }
 
     bb1: {
@@ -154,7 +154,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = Generic::<10>::bar(const Generic::<10>) -> [return: bb1, unwind continue];
+        _3 = Generic::<10>::bar(const Generic::<10>) -> bb1;
     }
 
     bb1: {
@@ -174,7 +174,7 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u64, u64>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u64, u64>(move _12, _6, _7, move _14);
     }
 
     bb3: {

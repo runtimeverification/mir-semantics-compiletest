@@ -134,7 +134,7 @@ fn <impl at ui/deriving/deriving-via-extension-struct-like-enum-variant.rs:3:21:
 
     bb1: {
         _12 = const "Y";
-        _0 = Formatter::<'_>::write_str(_2, _12) -> [return: bb4, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _12) -> bb4;
     }
 
     bb2: {
@@ -146,11 +146,11 @@ fn <impl at ui/deriving/deriving-via-extension-struct-like-enum-variant.rs:3:21:
         _5 = &(((*_1) as X).1: isize);
         _6 = const "X";
         _7 = const "x";
-        _8 = _4 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _8 = _4 as &dyn std::fmt::Debug (Pointer(Unsize));
         _9 = const "y";
         _11 = &_5;
-        _10 = _11 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _6, _7, move _8, _9, move _10) -> [return: bb4, unwind continue];
+        _10 = _11 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _6, _7, move _8, _9, move _10) -> bb4;
     }
 
     bb4: {
@@ -195,7 +195,7 @@ fn main() -> () {
         _2 = (move _3, move _4);
         _5 = (_2.0: &S);
         _6 = (_2.1: &S);
-        _8 = <S as PartialEq>::eq(_5, _6) -> [return: bb1, unwind continue];
+        _8 = <S as PartialEq>::eq(_5, _6) -> bb1;
     }
 
     bb1: {
@@ -206,13 +206,13 @@ fn main() -> () {
     bb2: {
         _9 = core::panicking::AssertKind::Eq;
         _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<S, S>(move _9, _5, _6, move _11) -> unwind continue;
+        _10 = core::panicking::assert_failed::<S, S>(move _9, _5, _6, move _11);
     }
 
     bb3: {
         _15 = &_1;
         _16 = &_1;
-        _14 = <S as PartialEq>::ne(move _15, move _16) -> [return: bb4, unwind continue];
+        _14 = <S as PartialEq>::ne(move _15, move _16) -> bb4;
     }
 
     bb4: {
@@ -222,7 +222,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _17 = core::panicking::panic(const "assertion failed: !(x != x)") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: !(x != x)");
     }
 
     bb6: {

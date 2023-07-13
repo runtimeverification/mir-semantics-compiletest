@@ -82,7 +82,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:18:1: 18:9>::bar(_1: &Foo
         _9 = _2;
         _8 = Foo::<isize> { a: move _9 };
         _7 = &_8;
-        _6 = Foo::<isize>::bar_int(move _7) -> [return: bb1, unwind continue];
+        _6 = Foo::<isize>::bar_int(move _7) -> bb1;
     }
 
     bb1: {
@@ -101,14 +101,14 @@ fn <impl at ui/generics/generic-default-type-params.rs:18:1: 18:9>::bar(_1: &Foo
     bb2: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19);
     }
 
     bb3: {
         _25 = _3;
         _24 = Foo::<char> { a: move _25 };
         _23 = &_24;
-        _22 = Foo::<char>::bar_char(move _23) -> [return: bb4, unwind continue];
+        _22 = Foo::<char>::bar_char(move _23) -> bb4;
     }
 
     bb4: {
@@ -127,7 +127,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:18:1: 18:9>::bar(_1: &Foo
     bb5: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<char, char>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<char, char>(move _33, _27, _28, move _35);
     }
 
     bb6: {
@@ -142,7 +142,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:26:1: 26:22>::baz(_1: &Fo
 
     bb0: {
         _2 = &((*_1).0: A);
-        _0 = <A as Clone>::clone(move _2) -> [return: bb1, unwind continue];
+        _0 = <A as Clone>::clone(move _2) -> bb1;
     }
 
     bb1: {
@@ -241,7 +241,7 @@ fn default_foo(_1: Foo) -> () {
     bb1: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16);
     }
 
     bb2: {
@@ -261,17 +261,17 @@ fn default_foo(_1: Foo) -> () {
     bb3: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<char, char>(move _27, _21, _22, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<char, char>(move _27, _21, _22, move _29);
     }
 
     bb4: {
         _31 = &_1;
-        _30 = Foo::bar(move _31) -> [return: bb5, unwind continue];
+        _30 = Foo::bar(move _31) -> bb5;
     }
 
     bb5: {
         _35 = &_1;
-        _34 = Foo::baz(move _35) -> [return: bb6, unwind continue];
+        _34 = Foo::baz(move _35) -> bb6;
     }
 
     bb6: {
@@ -281,7 +281,7 @@ fn default_foo(_1: Foo) -> () {
         _32 = (move _33, move _36);
         _38 = (_32.0: &(isize, char));
         _39 = (_32.1: &(isize, char));
-        _41 = <(isize, char) as PartialEq>::eq(_38, _39) -> [return: bb7, unwind continue];
+        _41 = <(isize, char) as PartialEq>::eq(_38, _39) -> bb7;
     }
 
     bb7: {
@@ -292,7 +292,7 @@ fn default_foo(_1: Foo) -> () {
     bb8: {
         _42 = core::panicking::AssertKind::Eq;
         _44 = Option::<Arguments<'_>>::None;
-        _43 = core::panicking::assert_failed::<(isize, char), (isize, char)>(move _42, _38, _39, move _44) -> unwind continue;
+        _43 = core::panicking::assert_failed::<(isize, char), (isize, char)>(move _42, _38, _39, move _44);
     }
 
     bb9: {
@@ -310,7 +310,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:41:10: 41:19>::eq(_1: &Ba
     bb0: {
         _3 = &((*_1).0: T);
         _4 = &((*_2).0: T);
-        _0 = <T as PartialEq>::eq(move _3, move _4) -> [return: bb1, unwind continue];
+        _0 = <T as PartialEq>::eq(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -331,8 +331,8 @@ fn <impl at ui/generics/generic-default-type-params.rs:41:21: 41:26>::fmt(_1: &B
         _3 = const "BazHelper";
         _6 = &((*_1).0: T);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -358,7 +358,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:44:10: 44:19>::eq(_1: &Ba
     bb0: {
         _5 = &((*_1).0: T);
         _6 = &((*_2).0: T);
-        _4 = <T as PartialEq>::eq(move _5, move _6) -> [return: bb7, unwind continue];
+        _4 = <T as PartialEq>::eq(move _5, move _6) -> bb7;
     }
 
     bb1: {
@@ -369,7 +369,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:44:10: 44:19>::eq(_1: &Ba
     bb2: {
         _11 = &((*_1).2: V);
         _12 = &((*_2).2: V);
-        _10 = <V as PartialEq>::eq(move _11, move _12) -> [return: bb9, unwind continue];
+        _10 = <V as PartialEq>::eq(move _11, move _12) -> bb9;
     }
 
     bb3: {
@@ -384,7 +384,7 @@ fn <impl at ui/generics/generic-default-type-params.rs:44:10: 44:19>::eq(_1: &Ba
     bb5: {
         _8 = &((*_1).1: U);
         _9 = &((*_2).1: U);
-        _7 = <U as PartialEq>::eq(move _8, move _9) -> [return: bb8, unwind continue];
+        _7 = <U as PartialEq>::eq(move _8, move _9) -> bb8;
     }
 
     bb6: {
@@ -422,13 +422,13 @@ fn <impl at ui/generics/generic-default-type-params.rs:44:21: 44:26>::fmt(_1: &B
     bb0: {
         _3 = const "Baz";
         _5 = &((*_1).0: T);
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
         _7 = &((*_1).1: U);
-        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
         _10 = &((*_1).2: V);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field3_finish(_2, _3, move _4, move _6, move _8) -> [return: bb1, unwind continue];
+        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field3_finish(_2, _3, move _4, move _6, move _8) -> bb1;
     }
 
     bb1: {
@@ -473,7 +473,7 @@ fn main() -> () {
     bb0: {
         _3 = (const 1_isize, const 'a');
         _2 = Foo { a: move _3 };
-        _1 = default_foo(move _2) -> [return: bb1, unwind continue];
+        _1 = default_foo(move _2) -> bb1;
     }
 
     bb1: {
@@ -490,7 +490,7 @@ fn main() -> () {
         _8 = (move _9, move _10);
         _15 = (_8.0: &Baz<bool>);
         _16 = (_8.1: &Baz<bool>);
-        _18 = <Baz<bool> as PartialEq>::eq(_15, _16) -> [return: bb2, unwind continue];
+        _18 = <Baz<bool> as PartialEq>::eq(_15, _16) -> bb2;
     }
 
     bb2: {
@@ -501,7 +501,7 @@ fn main() -> () {
     bb3: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<Baz<bool>, Baz<bool>>(move _19, _15, _16, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<Baz<bool>, Baz<bool>>(move _19, _15, _16, move _21);
     }
 
     bb4: {

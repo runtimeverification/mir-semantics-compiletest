@@ -39,14 +39,14 @@ fn foo() -> () {
         _1 = const 0_isize;
         _3 = [closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:13:27: 13:33] { i: _1 };
         _16 = const true;
-        _2 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:13:27: 13:33], ()>(move _3) -> [return: bb1, unwind continue];
+        _2 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:13:27: 13:33], ()>(move _3) -> bb1;
     }
 
     bb1: {
         _1 = Add(_1, const 1_isize);
         _8 = [const "original ", const "\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _13 = &_1;
         _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> [return: bb2, unwind: bb9];
     }
@@ -54,7 +54,7 @@ fn foo() -> () {
     bb2: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind: bb9];
     }
 
@@ -108,26 +108,26 @@ fn foo::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
 
     bb0: {
         _3 = (_1.0: isize);
-        _2 = user(move _3) -> [return: bb1, unwind continue];
+        _2 = user(move _3) -> bb1;
     }
 
     bb1: {
         _8 = [const "spawned ", const "\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _13 = &(_1.0: isize);
-        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> [return: bb2, unwind continue];
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_13) -> bb2;
     }
 
     bb2: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind continue];
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> bb3;
     }
 
     bb3: {
-        _4 = _print(move _5) -> [return: bb4, unwind continue];
+        _4 = _print(move _5) -> bb4;
     }
 
     bb4: {
@@ -164,17 +164,17 @@ fn bar() -> () {
 
     bb2: {
         _5 = [closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:27:31: 27:37] { i: _1 };
-        _4 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:27:31: 27:37], ()>(move _5) -> [return: bb3, unwind continue];
+        _4 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:27:31: 27:37], ()>(move _5) -> bb3;
     }
 
     bb3: {
         _1 = Add(_1, const 1_isize);
         _7 = move _4;
-        _6 = JoinHandle::<()>::join(move _7) -> [return: bb4, unwind continue];
+        _6 = JoinHandle::<()>::join(move _7) -> bb4;
     }
 
     bb4: {
-        drop(_6) -> [return: bb1, unwind continue];
+        drop(_6) -> bb1;
     }
 
     bb5: {
@@ -190,7 +190,7 @@ fn bar::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
 
     bb0: {
         _3 = (_1.0: isize);
-        _2 = user(move _3) -> [return: bb1, unwind continue];
+        _2 = user(move _3) -> bb1;
     }
 
     bb1: {
@@ -227,17 +227,17 @@ fn car() -> () {
 
     bb2: {
         _5 = [closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:39:31: 39:37] { i: _1 };
-        _4 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:39:31: 39:37], ()>(move _5) -> [return: bb3, unwind continue];
+        _4 = spawn::<[closure@ui/borrowck/kindck-implicit-close-over-mut-var.rs:39:31: 39:37], ()>(move _5) -> bb3;
     }
 
     bb3: {
         _1 = Add(_1, const 1_isize);
         _7 = move _4;
-        _6 = JoinHandle::<()>::join(move _7) -> [return: bb4, unwind continue];
+        _6 = JoinHandle::<()>::join(move _7) -> bb4;
     }
 
     bb4: {
-        drop(_6) -> [return: bb1, unwind continue];
+        drop(_6) -> bb1;
     }
 
     bb5: {
@@ -259,7 +259,7 @@ fn car::{closure#0}(_1: [closure@ui/borrowck/kindck-implicit-close-over-mut-var.
         _2 = (_1.0: isize);
         _2 = Add(_2, const 1_isize);
         _4 = _2;
-        _3 = user(move _4) -> [return: bb1, unwind continue];
+        _3 = user(move _4) -> bb1;
     }
 
     bb1: {

@@ -105,7 +105,7 @@ fn <impl at ui/consts/const-adt-align-mismatch.rs:7:10: 7:19>::eq(_1: &Foo, _2: 
         _15 = &(((*_22) as Bar).0: [u16; 4]);
         _23 = deref_copy (_7.1: &Foo);
         _16 = &(((*_23) as Bar).0: [u16; 4]);
-        _6 = <[u16; 4] as PartialEq>::eq(_15, _16) -> [return: bb9, unwind continue];
+        _6 = <[u16; 4] as PartialEq>::eq(_15, _16) -> bb9;
     }
 
     bb9: {
@@ -142,7 +142,7 @@ fn <impl at ui/consts/const-adt-align-mismatch.rs:7:21: 7:26>::fmt(_1: &Foo, _2:
 
     bb1: {
         _12 = const "C";
-        _0 = Formatter::<'_>::write_str(_2, _12) -> [return: bb5, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _12) -> bb5;
     }
 
     bb2: {
@@ -153,16 +153,16 @@ fn <impl at ui/consts/const-adt-align-mismatch.rs:7:21: 7:26>::fmt(_1: &Foo, _2:
         _4 = &(((*_1) as A).0: u32);
         _5 = const "A";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb5, unwind continue];
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> bb5;
     }
 
     bb4: {
         _8 = &(((*_1) as Bar).0: [u16; 4]);
         _9 = const "Bar";
         _11 = &_8;
-        _10 = _11 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _9, move _10) -> [return: bb5, unwind continue];
+        _10 = _11 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _9, move _10) -> bb5;
     }
 
     bb5: {
@@ -249,7 +249,7 @@ fn main() -> () {
         _1 = (_2, move _3);
         _5 = (_1.0: &Foo);
         _6 = (_1.1: &Foo);
-        _8 = <Foo as PartialEq>::eq(_5, _6) -> [return: bb1, unwind continue];
+        _8 = <Foo as PartialEq>::eq(_5, _6) -> bb1;
     }
 
     bb1: {
@@ -260,11 +260,11 @@ fn main() -> () {
     bb2: {
         _9 = core::panicking::AssertKind::Eq;
         _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<Foo, Foo>(move _9, _5, _6, move _11) -> unwind continue;
+        _10 = core::panicking::assert_failed::<Foo, Foo>(move _9, _5, _6, move _11);
     }
 
     bb3: {
-        _14 = std::mem::size_of::<Foo>() -> [return: bb4, unwind continue];
+        _14 = std::mem::size_of::<Foo>() -> bb4;
     }
 
     bb4: {
@@ -284,11 +284,11 @@ fn main() -> () {
     bb5: {
         _23 = core::panicking::AssertKind::Eq;
         _25 = Option::<Arguments<'_>>::None;
-        _24 = core::panicking::assert_failed::<usize, usize>(move _23, _17, _18, move _25) -> unwind continue;
+        _24 = core::panicking::assert_failed::<usize, usize>(move _23, _17, _18, move _25);
     }
 
     bb6: {
-        _28 = std::mem::min_align_of::<Foo>() -> [return: bb7, unwind continue];
+        _28 = std::mem::min_align_of::<Foo>() -> bb7;
     }
 
     bb7: {
@@ -308,7 +308,7 @@ fn main() -> () {
     bb8: {
         _37 = core::panicking::AssertKind::Eq;
         _39 = Option::<Arguments<'_>>::None;
-        _38 = core::panicking::assert_failed::<usize, usize>(move _37, _31, _32, move _39) -> unwind continue;
+        _38 = core::panicking::assert_failed::<usize, usize>(move _37, _31, _32, move _39);
     }
 
     bb9: {

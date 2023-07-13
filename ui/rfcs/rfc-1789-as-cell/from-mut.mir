@@ -81,13 +81,13 @@ fn main() -> () {
     bb0: {
         _3 = [const 1_i32, const 2_i32, const 3_i32];
         _2 = &mut _3;
-        _1 = _2 as &mut [i32] (PointerCoercion(Unsize));
-        _5 = Cell::<[i32]>::from_mut(_1) -> [return: bb1, unwind continue];
+        _1 = _2 as &mut [i32] (Pointer(Unsize));
+        _5 = Cell::<[i32]>::from_mut(_1) -> bb1;
     }
 
     bb1: {
         _4 = _5;
-        _7 = Cell::<[i32]>::as_slice_of_cells(_4) -> [return: bb2, unwind continue];
+        _7 = Cell::<[i32]>::as_slice_of_cells(_4) -> bb2;
     }
 
     bb2: {
@@ -109,18 +109,18 @@ fn main() -> () {
     bb3: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21);
     }
 
     bb4: {
         _22 = [const 1_i32, const 2_i32, const 3_i32];
         _25 = &mut _22;
-        _24 = Cell::<[i32; 3]>::from_mut(_25) -> [return: bb5, unwind continue];
+        _24 = Cell::<[i32; 3]>::from_mut(_25) -> bb5;
     }
 
     bb5: {
         _23 = _24;
-        _27 = Cell::<[i32; 3]>::as_array_of_cells(_23) -> [return: bb6, unwind continue];
+        _27 = Cell::<[i32; 3]>::as_array_of_cells(_23) -> bb6;
     }
 
     bb6: {
@@ -128,12 +128,12 @@ fn main() -> () {
         _30 = const 0_usize;
         _31 = const 3_usize;
         _32 = Lt(_30, _31);
-        assert(move _32, "index out of bounds: the length is {} but the index is {}", move _31, _30) -> [success: bb7, unwind continue];
+        assert(move _32, "index out of bounds: the length is {} but the index is {}", move _31, _30) -> bb7;
     }
 
     bb7: {
         _29 = &(*_26)[_30];
-        _28 = Cell::<i32>::set(move _29, const 99_i32) -> [return: bb8, unwind continue];
+        _28 = Cell::<i32>::set(move _29, const 99_i32) -> bb8;
     }
 
     bb8: {
@@ -143,7 +143,7 @@ fn main() -> () {
         _33 = (move _34, move _35);
         _37 = (_33.0: &[i32; 3]);
         _38 = (_33.1: &[i32; 3]);
-        _40 = <[i32; 3] as PartialEq>::eq(_37, _38) -> [return: bb9, unwind continue];
+        _40 = <[i32; 3] as PartialEq>::eq(_37, _38) -> bb9;
     }
 
     bb9: {
@@ -154,7 +154,7 @@ fn main() -> () {
     bb10: {
         _41 = core::panicking::AssertKind::Eq;
         _43 = Option::<Arguments<'_>>::None;
-        _42 = core::panicking::assert_failed::<[i32; 3], [i32; 3]>(move _41, _37, _38, move _43) -> unwind continue;
+        _42 = core::panicking::assert_failed::<[i32; 3], [i32; 3]>(move _41, _37, _38, move _43);
     }
 
     bb11: {

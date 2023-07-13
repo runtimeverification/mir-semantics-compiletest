@@ -57,7 +57,7 @@ fn iter_vec(_1: Vec<T>, _2: F) -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {
@@ -145,7 +145,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([i32; 5]);
         _4 = AlignOf([i32; 5]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -176,7 +176,7 @@ fn main() -> () {
     bb4: {
         _18 = [const "", const "\n"];
         _17 = &_18;
-        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _16 = _17 as &[&str] (Pointer(Unsize));
         _23 = &_7;
         _22 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_23) -> [return: bb5, unwind: bb11];
     }
@@ -184,7 +184,7 @@ fn main() -> () {
     bb5: {
         _21 = [move _22];
         _20 = &_21;
-        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb6, unwind: bb11];
     }
 
@@ -213,7 +213,7 @@ fn main() -> () {
     }
 
     bb9: {
-        drop(_1) -> [return: bb10, unwind continue];
+        drop(_1) -> bb10;
     }
 
     bb10: {
@@ -230,8 +230,8 @@ fn main() -> () {
 
     bb13: {
         (*_37) = [const 1_i32, const 2_i32, const 3_i32, const 4_i32, const 5_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -249,14 +249,14 @@ fn main::{closure#0}(_1: &mut [closure@ui/closures/old-closure-iter-2.rs:8:25: 8
 
     bb0: {
         _7 = deref_copy ((*_1).0: &std::vec::Vec<i32>);
-        _4 = <Vec<i32> as Clone>::clone(_7) -> [return: bb1, unwind continue];
+        _4 = <Vec<i32> as Clone>::clone(_7) -> bb1;
     }
 
     bb1: {
         _8 = deref_copy ((*_1).1: &mut i32);
         _6 = &_2;
         _5 = [closure@ui/closures/old-closure-iter-2.rs:9:29: 9:32] { i: _8, sum: move _6 };
-        _3 = iter_vec::<i32, [closure@ui/closures/old-closure-iter-2.rs:9:29: 9:32]>(move _4, move _5) -> [return: bb2, unwind continue];
+        _3 = iter_vec::<i32, [closure@ui/closures/old-closure-iter-2.rs:9:29: 9:32]>(move _4, move _5) -> bb2;
     }
 
     bb2: {

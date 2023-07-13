@@ -7,7 +7,7 @@ fn foo(_1: &mut dyn FnMut(isize, isize) -> isize) -> isize {
 
     bb0: {
         _2 = (const 1_isize, const 2_isize);
-        _0 = <dyn FnMut(isize, isize) -> isize as FnMut<(isize, isize)>>::call_mut(_1, move _2) -> [return: bb1, unwind continue];
+        _0 = <dyn FnMut(isize, isize) -> isize as FnMut<(isize, isize)>>::call_mut(_1, move _2) -> bb1;
     }
 
     bb1: {
@@ -47,8 +47,8 @@ fn main() -> () {
 
     bb0: {
         _3 = &mut _4;
-        _2 = _3 as &mut dyn std::ops::FnMut(isize, isize) -> isize (PointerCoercion(Unsize));
-        _1 = foo(move _2) -> [return: bb1, unwind continue];
+        _2 = _3 as &mut dyn std::ops::FnMut(isize, isize) -> isize (Pointer(Unsize));
+        _1 = foo(move _2) -> bb1;
     }
 
     bb1: {
@@ -68,7 +68,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<isize, isize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<isize, isize>(move _15, _9, _10, move _17);
     }
 
     bb3: {

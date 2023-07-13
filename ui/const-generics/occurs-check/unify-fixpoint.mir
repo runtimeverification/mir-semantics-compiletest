@@ -6,7 +6,7 @@ fn bind(_1: [u8; N + 2]) -> [u8; N * 2] {
     let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "not yet implemented") -> unwind continue;
+        _2 = core::panicking::panic(const "not yet implemented");
     }
 }
 
@@ -16,7 +16,7 @@ bind::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -31,7 +31,7 @@ bind::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedMul(const N, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const N, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -50,12 +50,12 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = <[u8; N + 2] as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <[u8; N + 2] as Default>::default() -> bb1;
     }
 
     bb1: {
         _3 = _1;
-        _2 = bind::<2>(move _3) -> [return: bb2, unwind continue];
+        _2 = bind::<2>(move _3) -> bb2;
     }
 
     bb2: {

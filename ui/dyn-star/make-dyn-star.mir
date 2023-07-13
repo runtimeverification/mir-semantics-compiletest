@@ -10,7 +10,7 @@ fn make_dyn_star(_1: usize) -> () {
 
     bb0: {
         _2 = _1 as dyn* std::fmt::Debug (DynStar);
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -30,7 +30,7 @@ fn make_dyn_star_explicit(_1: usize) -> () {
     bb0: {
         _3 = _1 as dyn* std::fmt::Debug (DynStar);
         _2 = move _3;
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -44,11 +44,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = make_dyn_star(const 42_usize) -> [return: bb1, unwind continue];
+        _1 = make_dyn_star(const 42_usize) -> bb1;
     }
 
     bb1: {
-        _2 = make_dyn_star_explicit(const 42_usize) -> [return: bb2, unwind continue];
+        _2 = make_dyn_star_explicit(const 42_usize) -> bb2;
     }
 
     bb2: {

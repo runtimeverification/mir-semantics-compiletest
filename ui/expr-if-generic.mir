@@ -113,7 +113,7 @@ fn test_bool() -> () {
     let _1: ();
 
     bb0: {
-        _1 = test_generic::<bool, fn(bool, bool) -> bool {compare_bool}>(const true, const false, compare_bool) -> [return: bb1, unwind continue];
+        _1 = test_generic::<bool, fn(bool, bool) -> bool {compare_bool}>(const true, const false, compare_bool) -> bb1;
     }
 
     bb1: {
@@ -159,7 +159,7 @@ fn test_rec() -> () {
     bb0: {
         _2 = Pair { a: const 1_isize, b: const 2_isize };
         _3 = Pair { a: const 2_isize, b: const 3_isize };
-        _1 = test_generic::<Pair, fn(Pair, Pair) -> bool {compare_rec}>(move _2, move _3, compare_rec) -> [return: bb1, unwind continue];
+        _1 = test_generic::<Pair, fn(Pair, Pair) -> bool {compare_rec}>(move _2, move _3, compare_rec) -> bb1;
     }
 
     bb1: {
@@ -209,11 +209,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = test_bool() -> [return: bb1, unwind continue];
+        _1 = test_bool() -> bb1;
     }
 
     bb1: {
-        _2 = test_rec() -> [return: bb2, unwind continue];
+        _2 = test_rec() -> bb2;
     }
 
     bb2: {

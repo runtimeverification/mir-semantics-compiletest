@@ -15,7 +15,7 @@ fn could_use_implied_bounds(_1: Foo<'_>, _2: &T) -> &T {
     let mut _0: &T;
 
     bb0: {
-        _0 = <() as Trait<'_>>::id::<T>(_2) -> [return: bb1, unwind continue];
+        _0 = <() as Trait<'_>>::id::<T>(_2) -> bb1;
     }
 
     bb1: {
@@ -28,20 +28,16 @@ fn main() -> () {
     let _1: for<'a, 'b> fn(Foo<'a>, &'b ());
     scope 1 {
         debug bar => _1;
-        let _2: for<'a> fn(Foo<'a>, &'a ());
         scope 2 {
-            debug bar => _2;
-            let _3: for<'a, 'b> fn(Foo<'a>, &'b ());
+            debug bar => _1;
             scope 3 {
-                debug _bar => _3;
+                debug _bar => _1;
             }
         }
     }
 
     bb0: {
-        _1 = const ZeroSized: [closure@ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:54] as for<'a, 'b> fn(Foo<'a>, &'b ()) (PointerCoercion(ClosureFnPointer(Normal)));
-        _2 = _1;
-        _3 = _2;
+        _1 = const ZeroSized: [closure@ui/implied-bounds/hrlt-implied-trait-bounds-roundtrip.rs:24:48: 24:54] as for<'a, 'b> fn(Foo<'a>, &'b ()) (Pointer(ClosureFnPointer(Normal)));
         return;
     }
 }

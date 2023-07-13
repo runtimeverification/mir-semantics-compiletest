@@ -5,7 +5,7 @@ fn <impl at ui/inference/issue-70703.rs:15:1: 15:34>::consume(_1: (), _2: P) -> 
     let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -17,7 +17,7 @@ fn make_product_consumer(_1: F) -> impl ProductConsumer<<F as Factory>::Product>
     let mut _0: impl ProductConsumer<<F as Factory>::Product>;
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -34,11 +34,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = make_product_consumer::<()>(const ()) -> [return: bb1, unwind continue];
+        _1 = make_product_consumer::<()>(const ()) -> bb1;
     }
 
     bb1: {
-        _2 = <impl ProductConsumer<<() as Factory>::Product> as ProductConsumer<()>>::consume(const ZeroSized: impl ProductConsumer<<() as Factory>::Product>, const ()) -> [return: bb2, unwind continue];
+        _2 = <impl ProductConsumer<<() as Factory>::Product> as ProductConsumer<()>>::consume(const ZeroSized: impl ProductConsumer<<() as Factory>::Product>, const ()) -> bb2;
     }
 
     bb2: {

@@ -8,7 +8,7 @@ fn <impl at ui/closures/2229_closure_analysis/run_pass/by_value.rs:7:10: 7:15>::
 
     bb0: {
         _3 = const "SomeLargeType";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -55,18 +55,18 @@ fn big_box() -> () {
     }
 
     bb0: {
-        _1 = <[SomeLargeType; 32] as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <[SomeLargeType; 32] as Default>::default() -> bb1;
     }
 
     bb1: {
-        _2 = Box::<MuchLargerType>::new(const MuchLargerType([SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType])) -> [return: bb2, unwind continue];
+        _2 = Box::<MuchLargerType>::new(const MuchLargerType([SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType, SomeLargeType])) -> bb2;
     }
 
     bb2: {
         _4 = move _2;
         _3 = (move _4, const 10_i32);
         _5 = [closure@ui/closures/2229_closure_analysis/run_pass/by_value.rs:16:13: 16:15] { t: move _3 };
-        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/by_value.rs:16:13: 16:15] as FnOnce<()>>::call_once(move _5, const ()) -> [return: bb3, unwind continue];
+        _6 = <[closure@ui/closures/2229_closure_analysis/run_pass/by_value.rs:16:13: 16:15] as FnOnce<()>>::call_once(move _5, const ()) -> bb3;
     }
 
     bb3: {
@@ -126,7 +126,7 @@ fn big_box::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run_pass/
     bb2: {
         _10 = [move _11, move _13];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind: bb7];
     }
 
@@ -136,7 +136,7 @@ fn big_box::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run_pass/
 
     bb4: {
         _16 = &mut ((_1.0: (std::boxed::Box<MuchLargerType>, i32)).0: std::boxed::Box<MuchLargerType>);
-        _17 = <Box<MuchLargerType> as Drop>::drop(move _16) -> [return: bb6, unwind continue];
+        _17 = <Box<MuchLargerType> as Drop>::drop(move _16) -> bb6;
     }
 
     bb5 (cleanup): {
@@ -155,7 +155,7 @@ fn big_box::{closure#0}(_1: [closure@ui/closures/2229_closure_analysis/run_pass/
     bb8: {
         _7 = [const "", const " ", const "\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _12 = &((_1.0: (std::boxed::Box<MuchLargerType>, i32)).1: i32);
         _11 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_12) -> [return: bb1, unwind: bb7];
     }
@@ -166,7 +166,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = big_box() -> [return: bb1, unwind continue];
+        _1 = big_box() -> bb1;
     }
 
     bb1: {

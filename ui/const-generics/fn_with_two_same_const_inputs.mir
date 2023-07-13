@@ -26,7 +26,7 @@ fn foo() -> () {
     let _1: ();
 
     bb0: {
-        _1 = bar::<N>() -> [return: bb1, unwind continue];
+        _1 = bar::<N>() -> bb1;
     }
 
     bb1: {
@@ -44,20 +44,20 @@ foo::{constant#0}: usize = {
     bb0: {
         StorageLive(_1);
         _2 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
         _1 = move (_2.0: usize);
         StorageLive(_3);
         _4 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb2, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb2;
     }
 
     bb2: {
         _3 = move (_4.0: usize);
         ConstEvalCounter;
-        _0 = both(move _1, move _3) -> [return: bb3, unwind continue];
+        _0 = both(move _1, move _3) -> bb3;
     }
 
     bb3: {
@@ -90,7 +90,7 @@ bar::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {

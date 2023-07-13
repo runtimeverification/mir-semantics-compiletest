@@ -19,7 +19,7 @@ fn <impl at ui/associated-types/associated-types-return.rs:10:21: 10:26>::fmt(_1
 
     bb0: {
         _3 = const "Bar";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -67,7 +67,7 @@ fn foo1(_1: I) -> Bar {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -94,7 +94,7 @@ fn foo2(_1: I) -> <I as Foo>::A {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -188,7 +188,7 @@ fn main() -> () {
 
     bb0: {
         _1 = const 42_isize;
-        _4 = foo2::<isize>(_1) -> [return: bb1, unwind continue];
+        _4 = foo2::<isize>(_1) -> bb1;
     }
 
     bb1: {
@@ -208,11 +208,11 @@ fn main() -> () {
     bb2: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15);
     }
 
     bb3: {
-        _18 = foo2::<Bar>(const Bar) -> [return: bb4, unwind continue];
+        _18 = foo2::<Bar>(const Bar) -> bb4;
     }
 
     bb4: {
@@ -232,16 +232,16 @@ fn main() -> () {
     bb5: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<isize, isize>(move _27, _21, _22, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<isize, isize>(move _27, _21, _22, move _29);
     }
 
     bb6: {
         _30 = const 'a';
-        _31 = foo1::<char>(_30) -> [return: bb7, unwind continue];
+        _31 = foo1::<char>(_30) -> bb7;
     }
 
     bb7: {
-        _34 = foo2::<char>(_30) -> [return: bb8, unwind continue];
+        _34 = foo2::<char>(_30) -> bb8;
     }
 
     bb8: {
@@ -250,7 +250,7 @@ fn main() -> () {
         _32 = (move _33, move _35);
         _37 = (_32.0: &Bar);
         _38 = (_32.1: &Bar);
-        _40 = <Bar as PartialEq>::eq(_37, _38) -> [return: bb9, unwind continue];
+        _40 = <Bar as PartialEq>::eq(_37, _38) -> bb9;
     }
 
     bb9: {
@@ -261,7 +261,7 @@ fn main() -> () {
     bb10: {
         _41 = core::panicking::AssertKind::Eq;
         _43 = Option::<Arguments<'_>>::None;
-        _42 = core::panicking::assert_failed::<Bar, Bar>(move _41, _37, _38, move _43) -> unwind continue;
+        _42 = core::panicking::assert_failed::<Bar, Bar>(move _41, _37, _38, move _43);
     }
 
     bb11: {

@@ -58,7 +58,7 @@ fn f_send() -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -96,7 +96,7 @@ fn f_sized() -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -134,7 +134,7 @@ fn f_sync() -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -172,7 +172,7 @@ fn f_userdefined() -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -196,19 +196,19 @@ fn main() -> () {
     let _4: ();
 
     bb0: {
-        _1 = f_send() -> [return: bb1, unwind continue];
+        _1 = f_send() -> bb1;
     }
 
     bb1: {
-        _2 = f_sized() -> [return: bb2, unwind continue];
+        _2 = f_sized() -> bb2;
     }
 
     bb2: {
-        _3 = f_sync() -> [return: bb3, unwind continue];
+        _3 = f_sync() -> bb3;
     }
 
     bb3: {
-        _4 = f_userdefined() -> [return: bb4, unwind continue];
+        _4 = f_userdefined() -> bb4;
     }
 
     bb4: {

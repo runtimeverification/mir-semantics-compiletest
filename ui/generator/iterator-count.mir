@@ -14,11 +14,11 @@ fn <impl at ui/generator/iterator-count.rs:13:1: 13:62>::next(_1: &mut W<T>) -> 
 
     bb0: {
         _4 = &mut ((*_1).0: T);
-        _3 = Pin::<&mut T>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Pin::<&mut T>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = <T as Generator>::resume(move _3, const ()) -> [return: bb2, unwind continue];
+        _2 = <T as Generator>::resume(move _3, const ()) -> bb2;
     }
 
     bb2: {
@@ -133,11 +133,11 @@ fn test::{closure#0}(_1: Pin<&mut [generator@ui/generator/iterator-count.rs:25:5
     }
 
     bb9: {
-        assert(const false, "generator resumed after panicking") -> [success: bb9, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb9;
     }
 
     bb10: {
-        assert(const false, "generator resumed after completion") -> [success: bb10, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb10;
     }
 }
 
@@ -168,24 +168,24 @@ fn main() -> () {
         _1 = const 11_u8;
         _3 = &_1;
         _2 = [closure@ui/generator/iterator-count.rs:35:24: 35:31] { end: move _3 };
-        _8 = test() -> [return: bb1, unwind continue];
+        _8 = test() -> bb1;
     }
 
     bb1: {
         _7 = W::<impl Generator<Return = (), Yield = u8> + Unpin>(move _8);
         _11 = &_2;
         _12 = (const 6_u8,);
-        _10 = <[closure@ui/generator/iterator-count.rs:35:24: 35:31] as Fn<(u8,)>>::call(move _11, move _12) -> [return: bb2, unwind continue];
+        _10 = <[closure@ui/generator/iterator-count.rs:35:24: 35:31] as Fn<(u8,)>>::call(move _11, move _12) -> bb2;
     }
 
     bb2: {
         _9 = W::<[generator@ui/generator/iterator-count.rs:36:9: 36:16]>(move _10);
-        _6 = <W<impl Generator<Return = (), Yield = u8> + Unpin> as Iterator>::chain::<W<[generator@ui/generator/iterator-count.rs:36:9: 36:16]>>(move _7, move _9) -> [return: bb3, unwind continue];
+        _6 = <W<impl Generator<Return = (), Yield = u8> + Unpin> as Iterator>::chain::<W<[generator@ui/generator/iterator-count.rs:36:9: 36:16]>>(move _7, move _9) -> bb3;
     }
 
     bb3: {
         _13 = std::ops::Range::<u8> { start: const 1_u8, end: const 11_u8 };
-        _5 = <std::iter::Chain<W<impl Generator<Return = (), Yield = u8> + Unpin>, W<[generator@ui/generator/iterator-count.rs:36:9: 36:16]>> as Iterator>::eq::<std::ops::Range<u8>>(move _6, move _13) -> [return: bb4, unwind continue];
+        _5 = <std::iter::Chain<W<impl Generator<Return = (), Yield = u8> + Unpin>, W<[generator@ui/generator/iterator-count.rs:36:9: 36:16]>> as Iterator>::eq::<std::ops::Range<u8>>(move _6, move _13) -> bb4;
     }
 
     bb4: {
@@ -194,7 +194,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _14 = core::panicking::panic(const "assertion failed: W(test()).chain(W(closure_test(6))).eq(1..11)") -> unwind continue;
+        _14 = core::panicking::panic(const "assertion failed: W(test()).chain(W(closure_test(6))).eq(1..11)");
     }
 
     bb6: {
@@ -303,11 +303,11 @@ fn main::{closure#0}::{closure#0}(_1: Pin<&mut [generator@ui/generator/iterator-
     }
 
     bb9: {
-        assert(const false, "generator resumed after panicking") -> [success: bb9, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb9;
     }
 
     bb10: {
-        assert(const false, "generator resumed after completion") -> [success: bb10, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb10;
     }
 }
 

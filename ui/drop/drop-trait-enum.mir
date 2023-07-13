@@ -52,7 +52,7 @@ fn <impl at ui/drop/drop-trait-enum.rs:11:21: 11:26>::fmt(_1: &Message, _2: &mut
     }
 
     bb4: {
-        _0 = Formatter::<'_>::write_str(_2, move _3) -> [return: bb5, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, move _3) -> bb5;
     }
 
     bb5: {
@@ -71,11 +71,11 @@ fn <impl at ui/drop/drop-trait-enum.rs:21:1: 21:25>::drop(_1: &mut SendOnDrop) -
     bb0: {
         _4 = &((*_1).0: std::sync::mpsc::Sender<Message>);
         _5 = Message::Dropped;
-        _3 = Sender::<Message>::send(move _4, move _5) -> [return: bb1, unwind continue];
+        _3 = Sender::<Message>::send(move _4, move _5) -> bb1;
     }
 
     bb1: {
-        _2 = Result::<(), SendError<Message>>::unwrap(move _3) -> [return: bb2, unwind continue];
+        _2 = Result::<(), SendError<Message>>::unwrap(move _3) -> bb2;
     }
 
     bb2: {
@@ -111,7 +111,7 @@ fn <impl at ui/drop/drop-trait-enum.rs:33:1: 33:18>::drop(_1: &mut Foo) -> () {
     }
 
     bb1: {
-        _13 = begin_panic::<&str>(const "Failed") -> unwind continue;
+        _13 = begin_panic::<&str>(const "Failed");
     }
 
     bb2: {
@@ -122,22 +122,22 @@ fn <impl at ui/drop/drop-trait-enum.rs:33:1: 33:18>::drop(_1: &mut Foo) -> () {
         _3 = &mut (((*_1) as SimpleVariant).0: std::sync::mpsc::Sender<Message>);
         _6 = &(*_3);
         _7 = Message::DestructorRan;
-        _5 = Sender::<Message>::send(move _6, move _7) -> [return: bb4, unwind continue];
+        _5 = Sender::<Message>::send(move _6, move _7) -> bb4;
     }
 
     bb4: {
-        _4 = Result::<(), SendError<Message>>::unwrap(move _5) -> [return: bb7, unwind continue];
+        _4 = Result::<(), SendError<Message>>::unwrap(move _5) -> bb7;
     }
 
     bb5: {
         _8 = &mut (((*_1) as NestedVariant).2: std::sync::mpsc::Sender<Message>);
         _11 = &(*_8);
         _12 = Message::DestructorRan;
-        _10 = Sender::<Message>::send(move _11, move _12) -> [return: bb6, unwind continue];
+        _10 = Sender::<Message>::send(move _11, move _12) -> bb6;
     }
 
     bb6: {
-        _9 = Result::<(), SendError<Message>>::unwrap(move _10) -> [return: bb7, unwind continue];
+        _9 = Result::<(), SendError<Message>>::unwrap(move _10) -> bb7;
     }
 
     bb7: {
@@ -513,7 +513,7 @@ fn main() -> () {
         _229 = const false;
         _228 = const false;
         _227 = const false;
-        _3 = channel::<Message>() -> [return: bb1, unwind continue];
+        _3 = channel::<Message>() -> bb1;
     }
 
     bb1: {
@@ -1131,7 +1131,7 @@ fn main::{closure#0}(_1: [closure@ui/drop/drop-trait-enum.rs:66:27: 66:33]) -> (
         _4 = move (_1.0: std::sync::mpsc::Sender<Message>);
         _3 = SendOnDrop { sender: move _4 };
         _2 = Foo::FailingVariant { on_drop: move _3 };
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {

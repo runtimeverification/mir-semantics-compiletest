@@ -178,7 +178,7 @@ fn main() -> () {
         _3 = &_4;
         _2 = &raw const (*_3);
         _1 = Bar::<[i32; 3]> { x: move _2 };
-        _5 = move _1 as Bar<[i32]> (PointerCoercion(Unsize));
+        _5 = move _1 as Bar<[i32]> (Pointer(Unsize));
         _8 = const 0_usize;
         _74 = deref_copy (_5.0: *const [i32]);
         _111 = _74 as *const () (PtrToPtr);
@@ -204,7 +204,7 @@ fn main() -> () {
     bb2: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<i32, i32>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<i32, i32>(move _19, _13, _14, move _21);
     }
 
     bb3: {
@@ -233,7 +233,7 @@ fn main() -> () {
     bb5: {
         _35 = core::panicking::AssertKind::Eq;
         _37 = Option::<Arguments<'_>>::None;
-        _36 = core::panicking::assert_failed::<i32, i32>(move _35, _29, _30, move _37) -> unwind continue;
+        _36 = core::panicking::assert_failed::<i32, i32>(move _35, _29, _30, move _37);
     }
 
     bb6: {
@@ -262,7 +262,7 @@ fn main() -> () {
     bb8: {
         _51 = core::panicking::AssertKind::Eq;
         _53 = Option::<Arguments<'_>>::None;
-        _52 = core::panicking::assert_failed::<i32, i32>(move _51, _45, _46, move _53) -> unwind continue;
+        _52 = core::panicking::assert_failed::<i32, i32>(move _51, _45, _46, move _53);
     }
 
     bb9: {
@@ -270,10 +270,10 @@ fn main() -> () {
         _56 = &_57;
         _55 = &raw const (*_56);
         _54 = Bar::<i32> { x: move _55 };
-        _58 = move _54 as Bar<dyn Baz> (PointerCoercion(Unsize));
+        _58 = move _54 as Bar<dyn Baz> (Pointer(Unsize));
         _80 = deref_copy (_58.0: *const dyn Baz);
         _62 = &(*_80);
-        _61 = <dyn Baz as Baz>::get(move _62) -> [return: bb10, unwind continue];
+        _61 = <dyn Baz as Baz>::get(move _62) -> bb10;
     }
 
     bb10: {
@@ -293,7 +293,7 @@ fn main() -> () {
     bb11: {
         _71 = core::panicking::AssertKind::Eq;
         _73 = Option::<Arguments<'_>>::None;
-        _72 = core::panicking::assert_failed::<i32, i32>(move _71, _65, _66, move _73) -> unwind continue;
+        _72 = core::panicking::assert_failed::<i32, i32>(move _71, _65, _66, move _73);
     }
 
     bb12: {
@@ -317,7 +317,7 @@ fn main() -> () {
     bb14: {
         _41 = Len((*_78));
         _42 = Lt(_40, _41);
-        assert(move _42, "index out of bounds: the length is {} but the index is {}", move _41, _40) -> [success: bb7, unwind continue];
+        assert(move _42, "index out of bounds: the length is {} but the index is {}", move _41, _40) -> bb7;
     }
 
     bb15: {
@@ -337,7 +337,7 @@ fn main() -> () {
     bb16: {
         _25 = Len((*_76));
         _26 = Lt(_24, _25);
-        assert(move _26, "index out of bounds: the length is {} but the index is {}", move _25, _24) -> [success: bb4, unwind continue];
+        assert(move _26, "index out of bounds: the length is {} but the index is {}", move _25, _24) -> bb4;
     }
 
     bb17: {
@@ -357,7 +357,7 @@ fn main() -> () {
     bb18: {
         _9 = Len((*_74));
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb1, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb1;
     }
 }
 

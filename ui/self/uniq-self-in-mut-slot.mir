@@ -71,12 +71,12 @@ fn main() -> () {
 
     bb0: {
         _2 = X { a: const 32_isize };
-        _1 = Box::<X>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = Box::<X>::new(move _2) -> bb1;
     }
 
     bb1: {
         _4 = move _1;
-        _3 = <X as Changer>::change(move _4) -> [return: bb2, unwind continue];
+        _3 = <X as Changer>::change(move _4) -> bb2;
     }
 
     bb2: {
@@ -97,7 +97,7 @@ fn main() -> () {
     }
 
     bb4: {
-        drop(_3) -> [return: bb5, unwind continue];
+        drop(_3) -> bb5;
     }
 
     bb5: {

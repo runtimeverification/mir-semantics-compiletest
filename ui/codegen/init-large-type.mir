@@ -6,7 +6,7 @@ const SIZE: usize = {
 
     bb0: {
         _1 = CheckedMul(const 1024_usize, const 1024_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1024_usize, const 1024_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1024_usize, const 1024_usize) -> bb1;
     }
 
     bb1: {
@@ -21,15 +21,15 @@ fn main() -> () {
     let mut _2: std::thread::JoinHandle<()>;
 
     bb0: {
-        _2 = spawn::<[closure@ui/codegen/init-large-type.rs:20:19: 20:21], ()>(const ZeroSized: [closure@ui/codegen/init-large-type.rs:20:19: 20:21]) -> [return: bb1, unwind continue];
+        _2 = spawn::<[closure@ui/codegen/init-large-type.rs:20:19: 20:21], ()>(const ZeroSized: [closure@ui/codegen/init-large-type.rs:20:19: 20:21]) -> bb1;
     }
 
     bb1: {
-        _1 = JoinHandle::<()>::join(move _2) -> [return: bb2, unwind continue];
+        _1 = JoinHandle::<()>::join(move _2) -> bb2;
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -47,7 +47,7 @@ fn main::{closure#0}(_1: [closure@ui/codegen/init-large-type.rs:20:19: 20:21]) -
     }
 
     bb0: {
-        _2 = zeroed::<[u8; 1048576]>() -> [return: bb1, unwind continue];
+        _2 = zeroed::<[u8; 1048576]>() -> bb1;
     }
 
     bb1: {

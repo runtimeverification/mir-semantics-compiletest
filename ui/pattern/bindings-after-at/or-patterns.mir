@@ -21,7 +21,7 @@ fn <impl at ui/pattern/bindings-after-at/or-patterns.rs:6:10: 6:15>::fmt(_1: &Ma
 
     bb1: {
         _8 = const "Wild";
-        _0 = Formatter::<'_>::write_str(_2, _8) -> [return: bb4, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _8) -> bb4;
     }
 
     bb2: {
@@ -32,8 +32,8 @@ fn <impl at ui/pattern/bindings-after-at/or-patterns.rs:6:10: 6:15>::fmt(_1: &Ma
         _4 = &(((*_1) as Arm).0: usize);
         _5 = const "Arm";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb4, unwind continue];
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> bb4;
     }
 
     bb4: {
@@ -167,7 +167,7 @@ fn <impl at ui/pattern/bindings-after-at/or-patterns.rs:12:10: 12:15>::fmt(_1: &
     }
 
     bb6: {
-        _0 = Formatter::<'_>::write_str(_2, move _3) -> [return: bb7, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, move _3) -> bb7;
     }
 
     bb7: {
@@ -249,7 +249,7 @@ fn test(_1: Option<Test>) -> MatchArm {
         _11 = Test::Foo;
         _10 = Option::<Test>::Some(move _11);
         _9 = &_10;
-        _7 = <Option<Test> as PartialEq>::eq(move _8, move _9) -> [return: bb9, unwind continue];
+        _7 = <Option<Test> as PartialEq>::eq(move _8, move _9) -> bb9;
     }
 
     bb4: {
@@ -272,7 +272,7 @@ fn test(_1: Option<Test>) -> MatchArm {
         _16 = Test::Bar;
         _15 = Option::<Test>::Some(move _16);
         _14 = &_15;
-        _12 = <Option<Test> as PartialEq>::eq(move _13, move _14) -> [return: bb10, unwind continue];
+        _12 = <Option<Test> as PartialEq>::eq(move _13, move _14) -> bb10;
     }
 
     bb8: {
@@ -290,7 +290,7 @@ fn test(_1: Option<Test>) -> MatchArm {
     }
 
     bb11: {
-        _17 = core::panicking::panic(const "assertion failed: bar == Some(Test::Foo) || bar == Some(Test::Bar)") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: bar == Some(Test::Foo) || bar == Some(Test::Bar)");
     }
 
     bb12: {
@@ -418,7 +418,7 @@ fn main() -> () {
     bb0: {
         _5 = Test::Foo;
         _4 = Option::<Test>::Some(move _5);
-        _3 = test(move _4) -> [return: bb1, unwind continue];
+        _3 = test(move _4) -> bb1;
     }
 
     bb1: {
@@ -428,7 +428,7 @@ fn main() -> () {
         _1 = (move _2, move _6);
         _8 = (_1.0: &MatchArm);
         _9 = (_1.1: &MatchArm);
-        _11 = <MatchArm as PartialEq>::eq(_8, _9) -> [return: bb2, unwind continue];
+        _11 = <MatchArm as PartialEq>::eq(_8, _9) -> bb2;
     }
 
     bb2: {
@@ -439,13 +439,13 @@ fn main() -> () {
     bb3: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _12, _8, _9, move _14);
     }
 
     bb4: {
         _19 = Test::Bar;
         _18 = Option::<Test>::Some(move _19);
-        _17 = test(move _18) -> [return: bb5, unwind continue];
+        _17 = test(move _18) -> bb5;
     }
 
     bb5: {
@@ -455,7 +455,7 @@ fn main() -> () {
         _15 = (move _16, move _20);
         _22 = (_15.0: &MatchArm);
         _23 = (_15.1: &MatchArm);
-        _25 = <MatchArm as PartialEq>::eq(_22, _23) -> [return: bb6, unwind continue];
+        _25 = <MatchArm as PartialEq>::eq(_22, _23) -> bb6;
     }
 
     bb6: {
@@ -466,13 +466,13 @@ fn main() -> () {
     bb7: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _26, _22, _23, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _26, _22, _23, move _28);
     }
 
     bb8: {
         _33 = Test::Baz;
         _32 = Option::<Test>::Some(move _33);
-        _31 = test(move _32) -> [return: bb9, unwind continue];
+        _31 = test(move _32) -> bb9;
     }
 
     bb9: {
@@ -482,7 +482,7 @@ fn main() -> () {
         _29 = (move _30, move _34);
         _36 = (_29.0: &MatchArm);
         _37 = (_29.1: &MatchArm);
-        _39 = <MatchArm as PartialEq>::eq(_36, _37) -> [return: bb10, unwind continue];
+        _39 = <MatchArm as PartialEq>::eq(_36, _37) -> bb10;
     }
 
     bb10: {
@@ -493,13 +493,13 @@ fn main() -> () {
     bb11: {
         _40 = core::panicking::AssertKind::Eq;
         _42 = Option::<Arguments<'_>>::None;
-        _41 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _40, _36, _37, move _42) -> unwind continue;
+        _41 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _40, _36, _37, move _42);
     }
 
     bb12: {
         _47 = Test::Qux;
         _46 = Option::<Test>::Some(move _47);
-        _45 = test(move _46) -> [return: bb13, unwind continue];
+        _45 = test(move _46) -> bb13;
     }
 
     bb13: {
@@ -509,7 +509,7 @@ fn main() -> () {
         _43 = (move _44, move _48);
         _50 = (_43.0: &MatchArm);
         _51 = (_43.1: &MatchArm);
-        _53 = <MatchArm as PartialEq>::eq(_50, _51) -> [return: bb14, unwind continue];
+        _53 = <MatchArm as PartialEq>::eq(_50, _51) -> bb14;
     }
 
     bb14: {
@@ -520,12 +520,12 @@ fn main() -> () {
     bb15: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _54, _50, _51, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _54, _50, _51, move _56);
     }
 
     bb16: {
         _60 = Option::<Test>::None;
-        _59 = test(move _60) -> [return: bb17, unwind continue];
+        _59 = test(move _60) -> bb17;
     }
 
     bb17: {
@@ -535,7 +535,7 @@ fn main() -> () {
         _57 = (move _58, move _61);
         _63 = (_57.0: &MatchArm);
         _64 = (_57.1: &MatchArm);
-        _66 = <MatchArm as PartialEq>::eq(_63, _64) -> [return: bb18, unwind continue];
+        _66 = <MatchArm as PartialEq>::eq(_63, _64) -> bb18;
     }
 
     bb18: {
@@ -546,7 +546,7 @@ fn main() -> () {
     bb19: {
         _67 = core::panicking::AssertKind::Eq;
         _69 = Option::<Arguments<'_>>::None;
-        _68 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _67, _63, _64, move _69) -> unwind continue;
+        _68 = core::panicking::assert_failed::<MatchArm, MatchArm>(move _67, _63, _64, move _69);
     }
 
     bb20: {

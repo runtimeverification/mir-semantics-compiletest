@@ -19,11 +19,11 @@ fn get(_1: &Vec<VarValue<K>>, _2: &K) -> &Option<V> {
     }
 
     bb0: {
-        _5 = <K as UnifyKey>::to_index(_2) -> [return: bb1, unwind continue];
+        _5 = <K as UnifyKey>::to_index(_2) -> bb1;
     }
 
     bb1: {
-        _4 = <Vec<VarValue<K>> as Index<usize>>::index(_1, move _5) -> [return: bb2, unwind continue];
+        _4 = <Vec<VarValue<K>> as Index<usize>>::index(_1, move _5) -> bb2;
     }
 
     bb2: {
@@ -43,7 +43,7 @@ fn get(_1: &Vec<VarValue<K>>, _2: &K) -> &Option<V> {
 
     bb5: {
         _7 = &(((*_4) as Redirect).0: K);
-        _8 = get::<K, V>(_1, _7) -> [return: bb6, unwind continue];
+        _8 = get::<K, V>(_1, _7) -> bb6;
     }
 
     bb6: {
@@ -119,7 +119,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([VarValue<usize>; 4]);
         _4 = AlignOf([VarValue<usize>; 4]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -169,7 +169,7 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -186,7 +186,7 @@ fn main() -> () {
 
     bb10: {
         (*_28) = [move _7, move _8, move _9, move _11];
-        _2 = move _6 as std::boxed::Box<[VarValue<usize>]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [VarValue<usize>]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[VarValue<usize>]> (Pointer(Unsize));
+        _1 = slice::<impl [VarValue<usize>]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

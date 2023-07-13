@@ -8,7 +8,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:25:10: 25:15>::clone(_1: &DropAcc
 
     bb0: {
         _3 = &((*_1).0: std::rc::Rc<std::cell::RefCell<std::vec::Vec<std::vec::Vec<std::string::String>>>>);
-        _2 = <Rc<RefCell<Vec<Vec<String>>>> as Clone>::clone(_3) -> [return: bb1, unwind continue];
+        _2 = <Rc<RefCell<Vec<Vec<String>>>> as Clone>::clone(_3) -> bb1;
     }
 
     bb1: {
@@ -22,7 +22,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::new() -> DropAccoun
     let mut _1: std::rc::Rc<std::cell::RefCell<std::vec::Vec<std::vec::Vec<std::string::String>>>>;
 
     bb0: {
-        _1 = <Rc<RefCell<Vec<Vec<String>>>> as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <Rc<RefCell<Vec<Vec<String>>>> as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -38,7 +38,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::build_droppy(_1: &D
     let mut _3: DropAccountant;
 
     bb0: {
-        _3 = <DropAccountant as Clone>::clone(_1) -> [return: bb1, unwind continue];
+        _3 = <DropAccountant as Clone>::clone(_1) -> bb1;
     }
 
     bb1: {
@@ -55,7 +55,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::build_droppy_enum_n
     let mut _4: DropAccountant;
 
     bb0: {
-        _4 = <DropAccountant as Clone>::clone(_1) -> [return: bb1, unwind continue];
+        _4 = <DropAccountant as Clone>::clone(_1) -> bb1;
     }
 
     bb1: {
@@ -146,7 +146,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::new_list(_1: &DropA
     }
 
     bb8: {
-        drop(_2) -> [return: bb9, unwind continue];
+        drop(_2) -> bb9;
     }
 
     bb9: {
@@ -173,7 +173,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::new_list(_1: &DropA
     bb14: {
         (*_22) = [move _18];
         _13 = move _17;
-        _12 = move _13 as std::boxed::Box<[std::string::String]> (PointerCoercion(Unsize));
+        _12 = move _13 as std::boxed::Box<[std::string::String]> (Pointer(Unsize));
         _11 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _12) -> [return: bb6, unwind: bb10];
     }
 
@@ -259,7 +259,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::push(_1: &DropAccou
 
     bb9: {
         _19 = const false;
-        drop(_2) -> [return: bb10, unwind continue];
+        drop(_2) -> bb10;
     }
 
     bb10: {
@@ -524,472 +524,499 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::print_table(_1: &Dr
     bb0: {
         _6 = [const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _print(move _3) -> [return: bb2, unwind continue];
+        _2 = _print(move _3) -> bb2;
     }
 
     bb2: {
         _10 = &((*_1).0: std::rc::Rc<std::cell::RefCell<std::vec::Vec<std::vec::Vec<std::string::String>>>>);
-        _9 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _10) -> [return: bb3, unwind continue];
+        _9 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _10) -> bb3;
     }
 
     bb3: {
         _8 = _9;
-        _7 = RefCell::<Vec<Vec<String>>>::borrow(move _8) -> [return: bb4, unwind continue];
+        _7 = RefCell::<Vec<Vec<String>>>::borrow(move _8) -> bb4;
     }
 
     bb4: {
         _15 = &_7;
-        _14 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _15) -> [return: bb5, unwind: bb86];
+        _14 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _15) -> [return: bb5, unwind: bb95];
     }
 
     bb5: {
         _13 = _14;
         _20 = &_7;
-        _19 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _20) -> [return: bb6, unwind: bb86];
+        _19 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _20) -> [return: bb6, unwind: bb95];
     }
 
     bb6: {
         _18 = _19;
-        _17 = Vec::<Vec<String>>::len(move _18) -> [return: bb7, unwind: bb86];
+        _17 = Vec::<Vec<String>>::len(move _18) -> [return: bb7, unwind: bb95];
     }
 
     bb7: {
         _16 = Sub(move _17, const 2_usize);
-        _12 = <Vec<Vec<String>> as Index<usize>>::index(move _13, move _16) -> [return: bb8, unwind: bb86];
+        _12 = <Vec<Vec<String>> as Index<usize>>::index(move _13, move _16) -> [return: bb8, unwind: bb95];
     }
 
     bb8: {
         _11 = _12;
         _25 = &_7;
-        _24 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _25) -> [return: bb9, unwind: bb86];
+        _24 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _25) -> [return: bb9, unwind: bb95];
     }
 
     bb9: {
         _23 = _24;
         _30 = &_7;
-        _29 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _30) -> [return: bb10, unwind: bb86];
+        _29 = <Ref<'_, Vec<Vec<String>>> as Deref>::deref(move _30) -> [return: bb10, unwind: bb95];
     }
 
     bb10: {
         _28 = _29;
-        _27 = Vec::<Vec<String>>::len(move _28) -> [return: bb11, unwind: bb86];
+        _27 = Vec::<Vec<String>>::len(move _28) -> [return: bb11, unwind: bb95];
     }
 
     bb11: {
         _26 = Sub(move _27, const 1_usize);
-        _22 = <Vec<Vec<String>> as Index<usize>>::index(move _23, move _26) -> [return: bb12, unwind: bb86];
+        _22 = <Vec<Vec<String>> as Index<usize>>::index(move _23, move _26) -> [return: bb12, unwind: bb95];
     }
 
     bb12: {
         _21 = _22;
-        _33 = <Vec<String> as Deref>::deref(_11) -> [return: bb13, unwind: bb86];
+        _33 = <Vec<String> as Deref>::deref(_11) -> [return: bb13, unwind: bb95];
     }
 
     bb13: {
         _32 = _33;
-        _31 = get_comma_list(move _32) -> [return: bb14, unwind: bb86];
+        _31 = get_comma_list(move _32) -> [return: bb14, unwind: bb95];
     }
 
     bb14: {
-        _36 = <Vec<String> as Deref>::deref(_21) -> [return: bb15, unwind: bb85];
+        _36 = <Vec<String> as Deref>::deref(_21) -> [return: bb15, unwind: bb94];
     }
 
     bb15: {
         _35 = _36;
-        _34 = get_comma_list(move _35) -> [return: bb16, unwind: bb85];
+        _34 = get_comma_list(move _35) -> [return: bb16, unwind: bb94];
     }
 
     bb16: {
         _41 = const _;
-        _40 = core::slice::<impl [&str]>::iter(_41) -> [return: bb17, unwind: bb84];
+        _40 = core::slice::<impl [&str]>::iter(_41) -> [return: bb17, unwind: bb93];
     }
 
     bb17: {
-        _39 = <std::slice::Iter<'_, &str> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]>(move _40, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]) -> [return: bb18, unwind: bb84];
+        _39 = <std::slice::Iter<'_, &str> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]>(move _40, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]) -> [return: bb18, unwind: bb93];
     }
 
     bb18: {
-        _38 = <Map<std::slice::Iter<'_, &str>, [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]> as Iterator>::max(move _39) -> [return: bb19, unwind: bb84];
+        _38 = <Map<std::slice::Iter<'_, &str>, [closure@ui/let-else/let-else-drop-order.rs:65:40: 65:43]> as Iterator>::max(move _39) -> [return: bb19, unwind: bb93];
     }
 
     bb19: {
-        _37 = Option::<usize>::unwrap(move _38) -> [return: bb20, unwind: bb84];
+        _37 = Option::<usize>::unwrap(move _38) -> [return: bb20, unwind: bb93];
     }
 
     bb20: {
         _48 = &_31;
-        _47 = <Vec<String> as Deref>::deref(move _48) -> [return: bb21, unwind: bb84];
+        _47 = <Vec<String> as Deref>::deref(move _48) -> [return: bb21, unwind: bb93];
     }
 
     bb21: {
         _46 = _47;
-        _45 = core::slice::<impl [String]>::iter(move _46) -> [return: bb22, unwind: bb84];
+        _45 = core::slice::<impl [String]>::iter(move _46) -> [return: bb22, unwind: bb93];
     }
 
     bb22: {
-        _44 = <std::slice::Iter<'_, String> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]>(move _45, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]) -> [return: bb23, unwind: bb84];
+        _44 = <std::slice::Iter<'_, String> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]>(move _45, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]) -> [return: bb23, unwind: bb93];
     }
 
     bb23: {
-        _43 = <Map<std::slice::Iter<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]> as Iterator>::max(move _44) -> [return: bb24, unwind: bb84];
+        _43 = <Map<std::slice::Iter<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:66:53: 66:56]> as Iterator>::max(move _44) -> [return: bb24, unwind: bb93];
     }
 
     bb24: {
-        _42 = Option::<usize>::unwrap(move _43) -> [return: bb25, unwind: bb84];
+        _42 = Option::<usize>::unwrap(move _43) -> [return: bb25, unwind: bb93];
     }
 
     bb25: {
         _55 = &_34;
-        _54 = <Vec<String> as Deref>::deref(move _55) -> [return: bb26, unwind: bb84];
+        _54 = <Vec<String> as Deref>::deref(move _55) -> [return: bb26, unwind: bb93];
     }
 
     bb26: {
         _53 = _54;
-        _52 = core::slice::<impl [String]>::iter(move _53) -> [return: bb27, unwind: bb84];
+        _52 = core::slice::<impl [String]>::iter(move _53) -> [return: bb27, unwind: bb93];
     }
 
     bb27: {
-        _51 = <std::slice::Iter<'_, String> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]>(move _52, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]) -> [return: bb28, unwind: bb84];
+        _51 = <std::slice::Iter<'_, String> as Iterator>::map::<usize, [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]>(move _52, const ZeroSized: [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]) -> [return: bb28, unwind: bb93];
     }
 
     bb28: {
-        _50 = <Map<std::slice::Iter<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]> as Iterator>::max(move _51) -> [return: bb29, unwind: bb84];
+        _50 = <Map<std::slice::Iter<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:67:44: 67:47]> as Iterator>::max(move _51) -> [return: bb29, unwind: bb93];
     }
 
     bb29: {
-        _49 = Option::<usize>::unwrap(move _50) -> [return: bb30, unwind: bb84];
+        _49 = Option::<usize>::unwrap(move _50) -> [return: bb30, unwind: bb93];
     }
 
     bb30: {
         _60 = [const "| ", const " | ", const " | ", const " |\n"];
         _59 = &_60;
-        _58 = _59 as &[&str] (PointerCoercion(Unsize));
+        _58 = _59 as &[&str] (Pointer(Unsize));
         _66 = const "construct";
         _65 = &_66;
-        _64 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_65) -> [return: bb31, unwind: bb84];
+        _64 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_65) -> [return: bb31, unwind: bb93];
     }
 
     bb31: {
         _70 = &_31;
-        _69 = <Vec<String> as Index<usize>>::index(move _70, const 0_usize) -> [return: bb32, unwind: bb84];
+        _69 = <Vec<String> as Index<usize>>::index(move _70, const 0_usize) -> [return: bb32, unwind: bb93];
     }
 
     bb32: {
         _68 = _69;
-        _67 = core::fmt::rt::Argument::<'_>::new_display::<String>(_68) -> [return: bb33, unwind: bb84];
+        _67 = core::fmt::rt::Argument::<'_>::new_display::<String>(_68) -> [return: bb33, unwind: bb93];
     }
 
     bb33: {
         _74 = &_34;
-        _73 = <Vec<String> as Index<usize>>::index(move _74, const 0_usize) -> [return: bb34, unwind: bb84];
+        _73 = <Vec<String> as Index<usize>>::index(move _74, const 0_usize) -> [return: bb34, unwind: bb93];
     }
 
     bb34: {
         _72 = _73;
-        _71 = core::fmt::rt::Argument::<'_>::new_display::<String>(_72) -> [return: bb35, unwind: bb84];
+        _71 = core::fmt::rt::Argument::<'_>::new_display::<String>(_72) -> [return: bb35, unwind: bb93];
     }
 
     bb35: {
         _76 = &_37;
-        _75 = core::fmt::rt::Argument::<'_>::from_usize(_76) -> [return: bb36, unwind: bb84];
+        _75 = core::fmt::rt::Argument::<'_>::from_usize(_76) -> [return: bb36, unwind: bb93];
     }
 
     bb36: {
         _78 = &_42;
-        _77 = core::fmt::rt::Argument::<'_>::from_usize(_78) -> [return: bb37, unwind: bb84];
+        _77 = core::fmt::rt::Argument::<'_>::from_usize(_78) -> [return: bb37, unwind: bb93];
     }
 
     bb37: {
         _80 = &_49;
-        _79 = core::fmt::rt::Argument::<'_>::from_usize(_80) -> [return: bb38, unwind: bb84];
+        _79 = core::fmt::rt::Argument::<'_>::from_usize(_80) -> [return: bb38, unwind: bb93];
     }
 
     bb38: {
         _63 = [move _64, move _67, move _71, move _75, move _77, move _79];
         _62 = &_63;
-        _61 = _62 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _61 = _62 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _85 = core::fmt::rt::Alignment::Left;
         _86 = core::fmt::rt::Count::Implied;
-        _87 = core::fmt::rt::Count::Param(const 3_usize);
-        _84 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _85, const 0_u32, move _86, move _87) -> [return: bb39, unwind: bb84];
+        _87 = core::fmt::rt::Count::Param(const 3_usize) -> [return: bb39, unwind: bb93];
     }
 
     bb39: {
-        _89 = core::fmt::rt::Alignment::Left;
-        _90 = core::fmt::rt::Count::Implied;
-        _91 = core::fmt::rt::Count::Param(const 4_usize);
-        _88 = core::fmt::rt::Placeholder::new(const 1_usize, const ' ', move _89, const 0_u32, move _90, move _91) -> [return: bb40, unwind: bb84];
+        _84 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _85, const 0_u32, move _86, move _87) -> [return: bb40, unwind: bb93];
     }
 
     bb40: {
-        _93 = core::fmt::rt::Alignment::Left;
-        _94 = core::fmt::rt::Count::Implied;
-        _95 = core::fmt::rt::Count::Param(const 5_usize);
-        _92 = core::fmt::rt::Placeholder::new(const 2_usize, const ' ', move _93, const 0_u32, move _94, move _95) -> [return: bb41, unwind: bb84];
+        _89 = core::fmt::rt::Alignment::Left;
+        _90 = core::fmt::rt::Count::Implied;
+        _91 = core::fmt::rt::Count::Param(const 4_usize) -> [return: bb41, unwind: bb93];
     }
 
     bb41: {
-        _83 = [move _84, move _88, move _92];
-        _82 = &_83;
-        _81 = _82 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
-        _96 = core::fmt::rt::UnsafeArg::new() -> [return: bb42, unwind: bb84];
+        _88 = core::fmt::rt::Placeholder::new(const 1_usize, const ' ', move _89, const 0_u32, move _90, move _91) -> [return: bb42, unwind: bb93];
     }
 
     bb42: {
-        _57 = Arguments::<'_>::new_v1_formatted(move _58, move _61, move _81, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb43, unwind: bb84];
+        _93 = core::fmt::rt::Alignment::Left;
+        _94 = core::fmt::rt::Count::Implied;
+        _95 = core::fmt::rt::Count::Param(const 5_usize) -> [return: bb43, unwind: bb93];
     }
 
     bb43: {
-        _56 = _print(move _57) -> [return: bb44, unwind: bb84];
+        _92 = core::fmt::rt::Placeholder::new(const 2_usize, const ' ', move _93, const 0_u32, move _94, move _95) -> [return: bb44, unwind: bb93];
     }
 
     bb44: {
-        _101 = [const "| ", const " | ", const " | ", const " |\n"];
-        _100 = &_101;
-        _99 = _100 as &[&str] (PointerCoercion(Unsize));
-        _107 = const "";
-        _106 = &_107;
-        _105 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_106) -> [return: bb45, unwind: bb84];
+        _83 = [move _84, move _88, move _92];
+        _82 = &_83;
+        _81 = _82 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _96 = core::fmt::rt::UnsafeArg::new() -> [return: bb45, unwind: bb93];
     }
 
     bb45: {
-        _110 = const "";
-        _109 = &_110;
-        _108 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_109) -> [return: bb46, unwind: bb84];
+        _57 = Arguments::<'_>::new_v1_formatted(move _58, move _61, move _81, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb46, unwind: bb93];
     }
 
     bb46: {
-        _113 = const "";
-        _112 = &_113;
-        _111 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_112) -> [return: bb47, unwind: bb84];
+        _56 = _print(move _57) -> [return: bb47, unwind: bb93];
     }
 
     bb47: {
-        _115 = &_37;
-        _114 = core::fmt::rt::Argument::<'_>::from_usize(_115) -> [return: bb48, unwind: bb84];
+        _101 = [const "| ", const " | ", const " | ", const " |\n"];
+        _100 = &_101;
+        _99 = _100 as &[&str] (Pointer(Unsize));
+        _107 = const "";
+        _106 = &_107;
+        _105 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_106) -> [return: bb48, unwind: bb93];
     }
 
     bb48: {
-        _117 = &_42;
-        _116 = core::fmt::rt::Argument::<'_>::from_usize(_117) -> [return: bb49, unwind: bb84];
+        _110 = const "";
+        _109 = &_110;
+        _108 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_109) -> [return: bb49, unwind: bb93];
     }
 
     bb49: {
-        _119 = &_49;
-        _118 = core::fmt::rt::Argument::<'_>::from_usize(_119) -> [return: bb50, unwind: bb84];
+        _113 = const "";
+        _112 = &_113;
+        _111 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_112) -> [return: bb50, unwind: bb93];
     }
 
     bb50: {
-        _104 = [move _105, move _108, move _111, move _114, move _116, move _118];
-        _103 = &_104;
-        _102 = _103 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _124 = core::fmt::rt::Alignment::Left;
-        _125 = core::fmt::rt::Count::Implied;
-        _126 = core::fmt::rt::Count::Param(const 3_usize);
-        _123 = core::fmt::rt::Placeholder::new(const 0_usize, const '-', move _124, const 0_u32, move _125, move _126) -> [return: bb51, unwind: bb84];
+        _115 = &_37;
+        _114 = core::fmt::rt::Argument::<'_>::from_usize(_115) -> [return: bb51, unwind: bb93];
     }
 
     bb51: {
-        _128 = core::fmt::rt::Alignment::Left;
-        _129 = core::fmt::rt::Count::Implied;
-        _130 = core::fmt::rt::Count::Param(const 4_usize);
-        _127 = core::fmt::rt::Placeholder::new(const 1_usize, const '-', move _128, const 0_u32, move _129, move _130) -> [return: bb52, unwind: bb84];
+        _117 = &_42;
+        _116 = core::fmt::rt::Argument::<'_>::from_usize(_117) -> [return: bb52, unwind: bb93];
     }
 
     bb52: {
-        _132 = core::fmt::rt::Alignment::Left;
-        _133 = core::fmt::rt::Count::Implied;
-        _134 = core::fmt::rt::Count::Param(const 5_usize);
-        _131 = core::fmt::rt::Placeholder::new(const 2_usize, const '-', move _132, const 0_u32, move _133, move _134) -> [return: bb53, unwind: bb84];
+        _119 = &_49;
+        _118 = core::fmt::rt::Argument::<'_>::from_usize(_119) -> [return: bb53, unwind: bb93];
     }
 
     bb53: {
-        _122 = [move _123, move _127, move _131];
-        _121 = &_122;
-        _120 = _121 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
-        _135 = core::fmt::rt::UnsafeArg::new() -> [return: bb54, unwind: bb84];
+        _104 = [move _105, move _108, move _111, move _114, move _116, move _118];
+        _103 = &_104;
+        _102 = _103 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _124 = core::fmt::rt::Alignment::Left;
+        _125 = core::fmt::rt::Count::Implied;
+        _126 = core::fmt::rt::Count::Param(const 3_usize) -> [return: bb54, unwind: bb93];
     }
 
     bb54: {
-        _98 = Arguments::<'_>::new_v1_formatted(move _99, move _102, move _120, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb55, unwind: bb84];
+        _123 = core::fmt::rt::Placeholder::new(const 0_usize, const '-', move _124, const 0_u32, move _125, move _126) -> [return: bb55, unwind: bb93];
     }
 
     bb55: {
-        _97 = _print(move _98) -> [return: bb56, unwind: bb84];
+        _128 = core::fmt::rt::Alignment::Left;
+        _129 = core::fmt::rt::Count::Implied;
+        _130 = core::fmt::rt::Count::Param(const 4_usize) -> [return: bb56, unwind: bb93];
     }
 
     bb56: {
-        _140 = const _;
-        _139 = core::slice::<impl [&str]>::iter(_140) -> [return: bb57, unwind: bb84];
+        _127 = core::fmt::rt::Placeholder::new(const 1_usize, const '-', move _128, const 0_u32, move _129, move _130) -> [return: bb57, unwind: bb93];
     }
 
     bb57: {
-        _144 = &_31;
-        _145 = RangeFrom::<usize> { start: const 1_usize };
-        _143 = <Vec<String> as Index<RangeFrom<usize>>>::index(move _144, move _145) -> [return: bb58, unwind: bb84];
+        _132 = core::fmt::rt::Alignment::Left;
+        _133 = core::fmt::rt::Count::Implied;
+        _134 = core::fmt::rt::Count::Param(const 5_usize) -> [return: bb58, unwind: bb93];
     }
 
     bb58: {
-        _142 = _143;
-        _141 = core::slice::<impl [String]>::iter(move _142) -> [return: bb59, unwind: bb84];
+        _131 = core::fmt::rt::Placeholder::new(const 2_usize, const '-', move _132, const 0_u32, move _133, move _134) -> [return: bb59, unwind: bb93];
     }
 
     bb59: {
-        _138 = <std::slice::Iter<'_, &str> as Iterator>::zip::<std::slice::Iter<'_, String>>(move _139, move _141) -> [return: bb60, unwind: bb84];
+        _122 = [move _123, move _127, move _131];
+        _121 = &_122;
+        _120 = _121 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _135 = core::fmt::rt::UnsafeArg::new() -> [return: bb60, unwind: bb93];
     }
 
     bb60: {
-        _149 = &_34;
-        _150 = RangeFrom::<usize> { start: const 1_usize };
-        _148 = <Vec<String> as Index<RangeFrom<usize>>>::index(move _149, move _150) -> [return: bb61, unwind: bb84];
+        _98 = Arguments::<'_>::new_v1_formatted(move _99, move _102, move _120, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb61, unwind: bb93];
     }
 
     bb61: {
-        _147 = _148;
-        _146 = core::slice::<impl [String]>::iter(move _147) -> [return: bb62, unwind: bb84];
+        _97 = _print(move _98) -> [return: bb62, unwind: bb93];
     }
 
     bb62: {
-        _137 = <Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>> as Iterator>::zip::<std::slice::Iter<'_, String>>(move _138, move _146) -> [return: bb63, unwind: bb84];
+        _140 = const _;
+        _139 = core::slice::<impl [&str]>::iter(_140) -> [return: bb63, unwind: bb93];
     }
 
     bb63: {
-        _136 = <Zip<Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>>, std::slice::Iter<'_, String>> as IntoIterator>::into_iter(move _137) -> [return: bb64, unwind: bb84];
+        _144 = &_31;
+        _145 = RangeFrom::<usize> { start: const 1_usize };
+        _143 = <Vec<String> as Index<RangeFrom<usize>>>::index(move _144, move _145) -> [return: bb64, unwind: bb93];
     }
 
     bb64: {
-        _151 = move _136;
-        goto -> bb65;
+        _142 = _143;
+        _141 = core::slice::<impl [String]>::iter(move _142) -> [return: bb65, unwind: bb93];
     }
 
     bb65: {
-        _153 = &mut _151;
-        _152 = <Zip<Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>>, std::slice::Iter<'_, String>> as Iterator>::next(_153) -> [return: bb66, unwind: bb84];
+        _138 = <std::slice::Iter<'_, &str> as Iterator>::zip::<std::slice::Iter<'_, String>>(move _139, move _141) -> [return: bb66, unwind: bb93];
     }
 
     bb66: {
-        _154 = discriminant(_152);
-        switchInt(move _154) -> [0: bb69, 1: bb67, otherwise: bb68];
+        _149 = &_34;
+        _150 = RangeFrom::<usize> { start: const 1_usize };
+        _148 = <Vec<String> as Index<RangeFrom<usize>>>::index(move _149, move _150) -> [return: bb67, unwind: bb93];
     }
 
     bb67: {
+        _147 = _148;
+        _146 = core::slice::<impl [String]>::iter(move _147) -> [return: bb68, unwind: bb93];
+    }
+
+    bb68: {
+        _137 = <Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>> as Iterator>::zip::<std::slice::Iter<'_, String>>(move _138, move _146) -> [return: bb69, unwind: bb93];
+    }
+
+    bb69: {
+        _136 = <Zip<Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>>, std::slice::Iter<'_, String>> as IntoIterator>::into_iter(move _137) -> [return: bb70, unwind: bb93];
+    }
+
+    bb70: {
+        _151 = move _136;
+        goto -> bb71;
+    }
+
+    bb71: {
+        _153 = &mut _151;
+        _152 = <Zip<Zip<std::slice::Iter<'_, &str>, std::slice::Iter<'_, String>>, std::slice::Iter<'_, String>> as Iterator>::next(_153) -> [return: bb72, unwind: bb93];
+    }
+
+    bb72: {
+        _154 = discriminant(_152);
+        switchInt(move _154) -> [0: bb75, 1: bb73, otherwise: bb74];
+    }
+
+    bb73: {
         _155 = ((((_152 as Some).0: ((&&str, &std::string::String), &std::string::String)).0: (&&str, &std::string::String)).0: &&str);
         _156 = ((((_152 as Some).0: ((&&str, &std::string::String), &std::string::String)).0: (&&str, &std::string::String)).1: &std::string::String);
         _157 = (((_152 as Some).0: ((&&str, &std::string::String), &std::string::String)).1: &std::string::String);
         _162 = [const "| ", const " | ", const " | ", const " |\n"];
         _161 = &_162;
-        _160 = _161 as &[&str] (PointerCoercion(Unsize));
+        _160 = _161 as &[&str] (Pointer(Unsize));
         _167 = &_155;
-        _166 = core::fmt::rt::Argument::<'_>::new_display::<&&str>(_167) -> [return: bb70, unwind: bb84];
-    }
-
-    bb68: {
-        unreachable;
-    }
-
-    bb69: {
-        drop(_34) -> [return: bb81, unwind: bb85];
-    }
-
-    bb70: {
-        _169 = &_156;
-        _168 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_169) -> [return: bb71, unwind: bb84];
-    }
-
-    bb71: {
-        _171 = &_157;
-        _170 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_171) -> [return: bb72, unwind: bb84];
-    }
-
-    bb72: {
-        _173 = &_37;
-        _172 = core::fmt::rt::Argument::<'_>::from_usize(_173) -> [return: bb73, unwind: bb84];
-    }
-
-    bb73: {
-        _175 = &_42;
-        _174 = core::fmt::rt::Argument::<'_>::from_usize(_175) -> [return: bb74, unwind: bb84];
+        _166 = core::fmt::rt::Argument::<'_>::new_display::<&&str>(_167) -> [return: bb76, unwind: bb93];
     }
 
     bb74: {
-        _177 = &_49;
-        _176 = core::fmt::rt::Argument::<'_>::from_usize(_177) -> [return: bb75, unwind: bb84];
+        unreachable;
     }
 
     bb75: {
-        _165 = [move _166, move _168, move _170, move _172, move _174, move _176];
-        _164 = &_165;
-        _163 = _164 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _182 = core::fmt::rt::Alignment::Left;
-        _183 = core::fmt::rt::Count::Implied;
-        _184 = core::fmt::rt::Count::Param(const 3_usize);
-        _181 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _182, const 0_u32, move _183, move _184) -> [return: bb76, unwind: bb84];
+        drop(_34) -> [return: bb90, unwind: bb94];
     }
 
     bb76: {
-        _186 = core::fmt::rt::Alignment::Left;
-        _187 = core::fmt::rt::Count::Implied;
-        _188 = core::fmt::rt::Count::Param(const 4_usize);
-        _185 = core::fmt::rt::Placeholder::new(const 1_usize, const ' ', move _186, const 0_u32, move _187, move _188) -> [return: bb77, unwind: bb84];
+        _169 = &_156;
+        _168 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_169) -> [return: bb77, unwind: bb93];
     }
 
     bb77: {
-        _190 = core::fmt::rt::Alignment::Left;
-        _191 = core::fmt::rt::Count::Implied;
-        _192 = core::fmt::rt::Count::Param(const 5_usize);
-        _189 = core::fmt::rt::Placeholder::new(const 2_usize, const ' ', move _190, const 0_u32, move _191, move _192) -> [return: bb78, unwind: bb84];
+        _171 = &_157;
+        _170 = core::fmt::rt::Argument::<'_>::new_display::<&String>(_171) -> [return: bb78, unwind: bb93];
     }
 
     bb78: {
-        _180 = [move _181, move _185, move _189];
-        _179 = &_180;
-        _178 = _179 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
-        _193 = core::fmt::rt::UnsafeArg::new() -> [return: bb79, unwind: bb84];
+        _173 = &_37;
+        _172 = core::fmt::rt::Argument::<'_>::from_usize(_173) -> [return: bb79, unwind: bb93];
     }
 
     bb79: {
-        _159 = Arguments::<'_>::new_v1_formatted(move _160, move _163, move _178, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb80, unwind: bb84];
+        _175 = &_42;
+        _174 = core::fmt::rt::Argument::<'_>::from_usize(_175) -> [return: bb80, unwind: bb93];
     }
 
     bb80: {
-        _158 = _print(move _159) -> [return: bb88, unwind: bb84];
+        _177 = &_49;
+        _176 = core::fmt::rt::Argument::<'_>::from_usize(_177) -> [return: bb81, unwind: bb93];
     }
 
     bb81: {
-        drop(_31) -> [return: bb82, unwind: bb86];
+        _165 = [move _166, move _168, move _170, move _172, move _174, move _176];
+        _164 = &_165;
+        _163 = _164 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _182 = core::fmt::rt::Alignment::Left;
+        _183 = core::fmt::rt::Count::Implied;
+        _184 = core::fmt::rt::Count::Param(const 3_usize) -> [return: bb82, unwind: bb93];
     }
 
     bb82: {
-        drop(_7) -> [return: bb83, unwind continue];
+        _181 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _182, const 0_u32, move _183, move _184) -> [return: bb83, unwind: bb93];
     }
 
     bb83: {
-        return;
+        _186 = core::fmt::rt::Alignment::Left;
+        _187 = core::fmt::rt::Count::Implied;
+        _188 = core::fmt::rt::Count::Param(const 4_usize) -> [return: bb84, unwind: bb93];
     }
 
-    bb84 (cleanup): {
-        drop(_34) -> [return: bb85, unwind terminate];
+    bb84: {
+        _185 = core::fmt::rt::Placeholder::new(const 1_usize, const ' ', move _186, const 0_u32, move _187, move _188) -> [return: bb85, unwind: bb93];
     }
 
-    bb85 (cleanup): {
-        drop(_31) -> [return: bb86, unwind terminate];
+    bb85: {
+        _190 = core::fmt::rt::Alignment::Left;
+        _191 = core::fmt::rt::Count::Implied;
+        _192 = core::fmt::rt::Count::Param(const 5_usize) -> [return: bb86, unwind: bb93];
     }
 
-    bb86 (cleanup): {
-        drop(_7) -> [return: bb87, unwind terminate];
+    bb86: {
+        _189 = core::fmt::rt::Placeholder::new(const 2_usize, const ' ', move _190, const 0_u32, move _191, move _192) -> [return: bb87, unwind: bb93];
     }
 
-    bb87 (cleanup): {
-        resume;
+    bb87: {
+        _180 = [move _181, move _185, move _189];
+        _179 = &_180;
+        _178 = _179 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _193 = core::fmt::rt::UnsafeArg::new() -> [return: bb88, unwind: bb93];
     }
 
     bb88: {
-        goto -> bb65;
+        _159 = Arguments::<'_>::new_v1_formatted(move _160, move _163, move _178, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb89, unwind: bb93];
+    }
+
+    bb89: {
+        _158 = _print(move _159) -> [return: bb97, unwind: bb93];
+    }
+
+    bb90: {
+        drop(_31) -> [return: bb91, unwind: bb95];
+    }
+
+    bb91: {
+        drop(_7) -> bb92;
+    }
+
+    bb92: {
+        return;
+    }
+
+    bb93 (cleanup): {
+        drop(_34) -> [return: bb94, unwind terminate];
+    }
+
+    bb94 (cleanup): {
+        drop(_31) -> [return: bb95, unwind terminate];
+    }
+
+    bb95 (cleanup): {
+        drop(_7) -> [return: bb96, unwind terminate];
+    }
+
+    bb96 (cleanup): {
+        resume;
+    }
+
+    bb97: {
+        goto -> bb71;
     }
 }
 
@@ -1006,7 +1033,7 @@ const LINES: &[&str] = {
         _3 = [const "vanilla", const "&", const "&mut", const "move", const "fn(this)", const "tuple", const "array", const "ref &", const "ref mut &mut"];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[&str] (PointerCoercion(Unsize));
+        _0 = move _1 as &[&str] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -1020,7 +1047,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::print_table::{closu
 
     bb0: {
         _3 = deref_copy (*_2);
-        _0 = core::str::<impl str>::len(_3) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::len(_3) -> bb1;
     }
 
     bb1: {
@@ -1033,7 +1060,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::print_table::{closu
     let mut _0: usize;
 
     bb0: {
-        _0 = String::len(_2) -> [return: bb1, unwind continue];
+        _0 = String::len(_2) -> bb1;
     }
 
     bb1: {
@@ -1046,7 +1073,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::print_table::{closu
     let mut _0: usize;
 
     bb0: {
-        _0 = String::len(_2) -> [return: bb1, unwind continue];
+        _0 = String::len(_2) -> bb1;
     }
 
     bb1: {
@@ -1125,12 +1152,12 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::assert_all_equal_to
 
     bb0: {
         _6 = &((*_1).0: std::rc::Rc<std::cell::RefCell<std::vec::Vec<std::vec::Vec<std::string::String>>>>);
-        _5 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _6) -> [return: bb1, unwind continue];
+        _5 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _6) -> bb1;
     }
 
     bb1: {
         _4 = _5;
-        _3 = RefCell::<Vec<Vec<String>>>::borrow(move _4) -> [return: bb2, unwind continue];
+        _3 = RefCell::<Vec<Vec<String>>>::borrow(move _4) -> bb2;
     }
 
     bb2: {
@@ -1237,7 +1264,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::assert_all_equal_to
     }
 
     bb22: {
-        drop(_3) -> [return: bb23, unwind continue];
+        drop(_3) -> bb23;
     }
 
     bb23: {
@@ -1334,12 +1361,12 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::assert_equality_las
 
     bb0: {
         _5 = &((*_1).0: std::rc::Rc<std::cell::RefCell<std::vec::Vec<std::vec::Vec<std::string::String>>>>);
-        _4 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _5) -> [return: bb1, unwind continue];
+        _4 = <Rc<RefCell<Vec<Vec<String>>>> as Deref>::deref(move _5) -> bb1;
     }
 
     bb1: {
         _3 = _4;
-        _2 = RefCell::<Vec<Vec<String>>>::borrow(move _3) -> [return: bb2, unwind continue];
+        _2 = RefCell::<Vec<Vec<String>>>::borrow(move _3) -> bb2;
     }
 
     bb2: {
@@ -1442,7 +1469,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:28:1: 28:20>::assert_equality_las
     }
 
     bb21: {
-        drop(_2) -> [return: bb32, unwind continue];
+        drop(_2) -> bb32;
     }
 
     bb22: {
@@ -1531,16 +1558,16 @@ fn get_comma_list(_1: &[String]) -> Vec<String> {
         _6 = const 0_usize;
         _7 = Len((*_1));
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb1, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb1;
     }
 
     bb1: {
         _5 = &(*_1)[_6];
-        _4 = <String as Clone>::clone(move _5) -> [return: bb2, unwind continue];
+        _4 = <String as Clone>::clone(move _5) -> bb2;
     }
 
     bb2: {
-        _3 = once::<String>(move _4) -> [return: bb3, unwind continue];
+        _3 = once::<String>(move _4) -> bb3;
     }
 
     bb3: {
@@ -1565,7 +1592,7 @@ fn get_comma_list(_1: &[String]) -> Vec<String> {
 
     bb7: {
         _14 = const false;
-        _0 = <std::iter::Chain<std::iter::Once<String>, Map<Chunks<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:108:38: 108:41]>> as Iterator>::collect::<Vec<String>>(move _2) -> [return: bb8, unwind continue];
+        _0 = <std::iter::Chain<std::iter::Once<String>, Map<Chunks<'_, String>, [closure@ui/let-else/let-else-drop-order.rs:108:38: 108:41]>> as Iterator>::collect::<Vec<String>>(move _2) -> bb8;
     }
 
     bb8: {
@@ -1592,7 +1619,7 @@ fn get_comma_list::{closure#0}(_1: &mut [closure@ui/let-else/let-else-drop-order
 
     bb0: {
         _3 = const ",";
-        _0 = slice::<impl [String]>::join::<&str>(_2, _3) -> [return: bb1, unwind continue];
+        _0 = slice::<impl [String]>::join::<&str>(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -1608,7 +1635,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:114:1: 114:27>::drop(_1: &mut Dro
 
     bb0: {
         _3 = &((*_1).0: DropAccountant);
-        _2 = DropAccountant::push::<&str>(move _3, const "drop") -> [return: bb1, unwind continue];
+        _2 = DropAccountant::push::<&str>(move _3, const "drop") -> bb1;
     }
 
     bb1: {
@@ -1658,7 +1685,7 @@ fn <impl at ui/let-else/let-else-drop-order.rs:126:1: 126:31>::drop(_1: &mut Dro
 
     bb4: {
         _3 = &(*_4);
-        _2 = DropAccountant::push::<&str>(move _3, const "drop") -> [return: bb5, unwind continue];
+        _2 = DropAccountant::push::<&str>(move _3, const "drop") -> bb5;
     }
 
     bb5: {
@@ -2287,13 +2314,13 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = DropAccountant::new() -> [return: bb1, unwind continue];
+        _1 = DropAccountant::new() -> bb1;
     }
 
     bb1: {
         _6 = [const " --- matching cases ---\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_const(move _4) -> [return: bb2, unwind: bb395];
     }
 
@@ -2842,7 +2869,7 @@ fn main() -> () {
     bb125: {
         _147 = [const "\n"];
         _146 = &_147;
-        _145 = _146 as &[&str] (PointerCoercion(Unsize));
+        _145 = _146 as &[&str] (Pointer(Unsize));
         _144 = Arguments::<'_>::new_const(move _145) -> [return: bb126, unwind: bb395];
     }
 
@@ -2853,7 +2880,7 @@ fn main() -> () {
     bb127: {
         _152 = [const " --- mismatching cases ---\n"];
         _151 = &_152;
-        _150 = _151 as &[&str] (PointerCoercion(Unsize));
+        _150 = _151 as &[&str] (Pointer(Unsize));
         _149 = Arguments::<'_>::new_const(move _150) -> [return: bb128, unwind: bb395];
     }
 
@@ -3875,7 +3902,7 @@ fn main() -> () {
     }
 
     bb361: {
-        drop(_1) -> [return: bb362, unwind continue];
+        drop(_1) -> bb362;
     }
 
     bb362: {

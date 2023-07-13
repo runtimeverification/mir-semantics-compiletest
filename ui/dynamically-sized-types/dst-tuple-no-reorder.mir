@@ -105,7 +105,7 @@ fn nonzero_size() -> () {
         _2 = [const 456_u32, const 789_u32];
         _1 = (const 123_u8, move _2);
         _4 = &_1;
-        _3 = _4 as &(u8, [u32]) (PointerCoercion(Unsize));
+        _3 = _4 as &(u8, [u32]) (Pointer(Unsize));
         _6 = &((*_3).0: u8);
         _8 = const 123_u8;
         _7 = &_8;
@@ -122,7 +122,7 @@ fn nonzero_size() -> () {
     bb1: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<u8, u8>(move _15, _9, _10, move _17);
     }
 
     bb2: {
@@ -144,14 +144,14 @@ fn nonzero_size() -> () {
     bb3: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<usize, usize>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<usize, usize>(move _30, _24, _25, move _32);
     }
 
     bb4: {
         _35 = const 0_usize;
         _36 = Len(((*_3).1: [u32]));
         _37 = Lt(_35, _36);
-        assert(move _37, "index out of bounds: the length is {} but the index is {}", move _36, _35) -> [success: bb5, unwind continue];
+        assert(move _37, "index out of bounds: the length is {} but the index is {}", move _36, _35) -> bb5;
     }
 
     bb5: {
@@ -171,14 +171,14 @@ fn nonzero_size() -> () {
     bb6: {
         _46 = core::panicking::AssertKind::Eq;
         _48 = Option::<Arguments<'_>>::None;
-        _47 = core::panicking::assert_failed::<u32, u32>(move _46, _40, _41, move _48) -> unwind continue;
+        _47 = core::panicking::assert_failed::<u32, u32>(move _46, _40, _41, move _48);
     }
 
     bb7: {
         _51 = const 1_usize;
         _52 = Len(((*_3).1: [u32]));
         _53 = Lt(_51, _52);
-        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _51) -> [success: bb8, unwind continue];
+        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _51) -> bb8;
     }
 
     bb8: {
@@ -198,7 +198,7 @@ fn nonzero_size() -> () {
     bb9: {
         _62 = core::panicking::AssertKind::Eq;
         _64 = Option::<Arguments<'_>>::None;
-        _63 = core::panicking::assert_failed::<u32, u32>(move _62, _56, _57, move _64) -> unwind continue;
+        _63 = core::panicking::assert_failed::<u32, u32>(move _62, _56, _57, move _64);
     }
 
     bb10: {
@@ -272,7 +272,7 @@ fn zst() -> () {
     bb0: {
         _1 = (const 123_u8, const []);
         _3 = &_1;
-        _2 = _3 as &(u8, [u32]) (PointerCoercion(Unsize));
+        _2 = _3 as &(u8, [u32]) (Pointer(Unsize));
         _5 = &((*_2).0: u8);
         _7 = const 123_u8;
         _6 = &_7;
@@ -289,7 +289,7 @@ fn zst() -> () {
     bb1: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<u8, u8>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<u8, u8>(move _14, _8, _9, move _16);
     }
 
     bb2: {
@@ -311,7 +311,7 @@ fn zst() -> () {
     bb3: {
         _29 = core::panicking::AssertKind::Eq;
         _31 = Option::<Arguments<'_>>::None;
-        _30 = core::panicking::assert_failed::<usize, usize>(move _29, _23, _24, move _31) -> unwind continue;
+        _30 = core::panicking::assert_failed::<usize, usize>(move _29, _23, _24, move _31);
     }
 
     bb4: {
@@ -334,11 +334,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = nonzero_size() -> [return: bb1, unwind continue];
+        _1 = nonzero_size() -> bb1;
     }
 
     bb1: {
-        _2 = zst() -> [return: bb2, unwind continue];
+        _2 = zst() -> bb2;
     }
 
     bb2: {

@@ -96,14 +96,14 @@ fn foo(_1: &Fat<[isize]>) -> () {
     bb1: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17);
     }
 
     bb2: {
         _20 = const 0_usize;
         _21 = Len((*_2));
         _22 = Lt(_20, _21);
-        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _20) -> [success: bb3, unwind continue];
+        assert(move _22, "index out of bounds: the length is {} but the index is {}", move _21, _20) -> bb3;
     }
 
     bb3: {
@@ -123,14 +123,14 @@ fn foo(_1: &Fat<[isize]>) -> () {
     bb4: {
         _31 = core::panicking::AssertKind::Eq;
         _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<isize, isize>(move _31, _25, _26, move _33) -> unwind continue;
+        _32 = core::panicking::assert_failed::<isize, isize>(move _31, _25, _26, move _33);
     }
 
     bb5: {
         _36 = const 1_usize;
         _37 = Len(((*_1).0: [isize]));
         _38 = Lt(_36, _37);
-        assert(move _38, "index out of bounds: the length is {} but the index is {}", move _37, _36) -> [success: bb6, unwind continue];
+        assert(move _38, "index out of bounds: the length is {} but the index is {}", move _37, _36) -> bb6;
     }
 
     bb6: {
@@ -150,7 +150,7 @@ fn foo(_1: &Fat<[isize]>) -> () {
     bb7: {
         _47 = core::panicking::AssertKind::Eq;
         _49 = Option::<Arguments<'_>>::None;
-        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49) -> unwind continue;
+        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49);
     }
 
     bb8: {
@@ -256,19 +256,19 @@ fn foo2(_1: &Fat<[T]>) -> () {
     bb1: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18);
     }
 
     bb2: {
         _23 = const 0_usize;
         _24 = Len((*_2));
         _25 = Lt(_23, _24);
-        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _23) -> [success: bb3, unwind continue];
+        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _23) -> bb3;
     }
 
     bb3: {
         _22 = &(*_2)[_23];
-        _21 = <T as ToBar>::to_bar(move _22) -> [return: bb4, unwind continue];
+        _21 = <T as ToBar>::to_bar(move _22) -> bb4;
     }
 
     bb4: {
@@ -277,7 +277,7 @@ fn foo2(_1: &Fat<[T]>) -> () {
         _19 = (move _20, move _26);
         _27 = (_19.0: &Bar);
         _28 = (_19.1: &Bar);
-        _30 = <Bar as PartialEq>::eq(_27, _28) -> [return: bb5, unwind continue];
+        _30 = <Bar as PartialEq>::eq(_27, _28) -> bb5;
     }
 
     bb5: {
@@ -288,19 +288,19 @@ fn foo2(_1: &Fat<[T]>) -> () {
     bb6: {
         _31 = core::panicking::AssertKind::Eq;
         _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<Bar, Bar>(move _31, _27, _28, move _33) -> unwind continue;
+        _32 = core::panicking::assert_failed::<Bar, Bar>(move _31, _27, _28, move _33);
     }
 
     bb7: {
         _38 = const 1_usize;
         _39 = Len(((*_1).0: [T]));
         _40 = Lt(_38, _39);
-        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> [success: bb8, unwind continue];
+        assert(move _40, "index out of bounds: the length is {} but the index is {}", move _39, _38) -> bb8;
     }
 
     bb8: {
         _37 = &((*_1).0: [T])[_38];
-        _36 = <T as ToBar>::to_bar(move _37) -> [return: bb9, unwind continue];
+        _36 = <T as ToBar>::to_bar(move _37) -> bb9;
     }
 
     bb9: {
@@ -309,7 +309,7 @@ fn foo2(_1: &Fat<[T]>) -> () {
         _34 = (move _35, move _41);
         _42 = (_34.0: &Bar);
         _43 = (_34.1: &Bar);
-        _45 = <Bar as PartialEq>::eq(_42, _43) -> [return: bb10, unwind continue];
+        _45 = <Bar as PartialEq>::eq(_42, _43) -> bb10;
     }
 
     bb10: {
@@ -320,7 +320,7 @@ fn foo2(_1: &Fat<[T]>) -> () {
     bb11: {
         _46 = core::panicking::AssertKind::Eq;
         _48 = Option::<Arguments<'_>>::None;
-        _47 = core::panicking::assert_failed::<Bar, Bar>(move _46, _42, _43, move _48) -> unwind continue;
+        _47 = core::panicking::assert_failed::<Bar, Bar>(move _46, _42, _43, move _48);
     }
 
     bb12: {
@@ -365,7 +365,7 @@ fn <impl at ui/dynamically-sized-types/dst-struct-sole.rs:25:38: 25:43>::fmt(_1:
 
     bb0: {
         _3 = const "Bar";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -555,73 +555,73 @@ fn main() -> () {
         _2 = [const 1_isize, const 2_isize, const 3_isize];
         _1 = Fat::<[isize; 3]> { ptr: move _2 };
         _5 = &_1;
-        _4 = _5 as &Fat<[isize]> (PointerCoercion(Unsize));
-        _3 = foo(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &Fat<[isize]> (Pointer(Unsize));
+        _3 = foo(move _4) -> bb1;
     }
 
     bb1: {
         _6 = &_1;
-        _8 = _6 as &Fat<[isize]> (PointerCoercion(Unsize));
-        _7 = foo(move _8) -> [return: bb2, unwind continue];
+        _8 = _6 as &Fat<[isize]> (Pointer(Unsize));
+        _7 = foo(move _8) -> bb2;
     }
 
     bb2: {
-        _9 = _6 as &Fat<[isize]> (PointerCoercion(Unsize));
-        _10 = foo(_9) -> [return: bb3, unwind continue];
+        _9 = _6 as &Fat<[isize]> (Pointer(Unsize));
+        _10 = foo(_9) -> bb3;
     }
 
     bb3: {
         _12 = &_1;
-        _11 = _12 as &Fat<[isize]> (PointerCoercion(Unsize));
-        _13 = foo(_11) -> [return: bb4, unwind continue];
+        _11 = _12 as &Fat<[isize]> (Pointer(Unsize));
+        _13 = foo(_11) -> bb4;
     }
 
     bb4: {
         _17 = [const 1_isize, const 2_isize, const 3_isize];
         _16 = Fat::<[isize; 3]> { ptr: move _17 };
         _15 = &_16;
-        _14 = _15 as &Fat<[isize]> (PointerCoercion(Unsize));
-        _18 = foo(_14) -> [return: bb5, unwind continue];
+        _14 = _15 as &Fat<[isize]> (Pointer(Unsize));
+        _18 = foo(_14) -> bb5;
     }
 
     bb5: {
         _22 = &_19;
-        _21 = _22 as &Fat<[Bar]> (PointerCoercion(Unsize));
-        _20 = foo2::<Bar>(move _21) -> [return: bb6, unwind continue];
+        _21 = _22 as &Fat<[Bar]> (Pointer(Unsize));
+        _20 = foo2::<Bar>(move _21) -> bb6;
     }
 
     bb6: {
         _23 = &_19;
-        _25 = _23 as &Fat<[Bar]> (PointerCoercion(Unsize));
-        _24 = foo2::<Bar>(move _25) -> [return: bb7, unwind continue];
+        _25 = _23 as &Fat<[Bar]> (Pointer(Unsize));
+        _24 = foo2::<Bar>(move _25) -> bb7;
     }
 
     bb7: {
-        _26 = _23 as &Fat<[Bar]> (PointerCoercion(Unsize));
-        _27 = foo2::<Bar>(_26) -> [return: bb8, unwind continue];
+        _26 = _23 as &Fat<[Bar]> (Pointer(Unsize));
+        _27 = foo2::<Bar>(_26) -> bb8;
     }
 
     bb8: {
         _29 = &_19;
-        _28 = _29 as &Fat<[Bar]> (PointerCoercion(Unsize));
-        _30 = foo2::<Bar>(_28) -> [return: bb9, unwind continue];
+        _28 = _29 as &Fat<[Bar]> (Pointer(Unsize));
+        _30 = foo2::<Bar>(_28) -> bb9;
     }
 
     bb9: {
         _32 = &_33;
-        _31 = _32 as &Fat<[Bar]> (PointerCoercion(Unsize));
-        _34 = foo2::<Bar>(_31) -> [return: bb10, unwind continue];
+        _31 = _32 as &Fat<[Bar]> (Pointer(Unsize));
+        _34 = foo2::<Bar>(_31) -> bb10;
     }
 
     bb10: {
         _38 = [const 1_isize, const 2_isize, const 3_isize];
         _37 = Fat::<[isize; 3]> { ptr: move _38 };
         _36 = &mut _37;
-        _35 = _36 as &mut Fat<[isize]> (PointerCoercion(Unsize));
+        _35 = _36 as &mut Fat<[isize]> (Pointer(Unsize));
         _39 = const 1_usize;
         _40 = Len(((*_35).0: [isize]));
         _41 = Lt(_39, _40);
-        assert(move _41, "index out of bounds: the length is {} but the index is {}", move _40, _39) -> [success: bb11, unwind continue];
+        assert(move _41, "index out of bounds: the length is {} but the index is {}", move _40, _39) -> bb11;
     }
 
     bb11: {
@@ -629,7 +629,7 @@ fn main() -> () {
         _44 = const 0_usize;
         _45 = Len(((*_35).0: [isize]));
         _46 = Lt(_44, _45);
-        assert(move _46, "index out of bounds: the length is {} but the index is {}", move _45, _44) -> [success: bb12, unwind continue];
+        assert(move _46, "index out of bounds: the length is {} but the index is {}", move _45, _44) -> bb12;
     }
 
     bb12: {
@@ -649,14 +649,14 @@ fn main() -> () {
     bb13: {
         _55 = core::panicking::AssertKind::Eq;
         _57 = Option::<Arguments<'_>>::None;
-        _56 = core::panicking::assert_failed::<isize, isize>(move _55, _49, _50, move _57) -> unwind continue;
+        _56 = core::panicking::assert_failed::<isize, isize>(move _55, _49, _50, move _57);
     }
 
     bb14: {
         _60 = const 1_usize;
         _61 = Len(((*_35).0: [isize]));
         _62 = Lt(_60, _61);
-        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _60) -> [success: bb15, unwind continue];
+        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _60) -> bb15;
     }
 
     bb15: {
@@ -676,14 +676,14 @@ fn main() -> () {
     bb16: {
         _71 = core::panicking::AssertKind::Eq;
         _73 = Option::<Arguments<'_>>::None;
-        _72 = core::panicking::assert_failed::<isize, isize>(move _71, _65, _66, move _73) -> unwind continue;
+        _72 = core::panicking::assert_failed::<isize, isize>(move _71, _65, _66, move _73);
     }
 
     bb17: {
         _76 = const 2_usize;
         _77 = Len(((*_35).0: [isize]));
         _78 = Lt(_76, _77);
-        assert(move _78, "index out of bounds: the length is {} but the index is {}", move _77, _76) -> [success: bb18, unwind continue];
+        assert(move _78, "index out of bounds: the length is {} but the index is {}", move _77, _76) -> bb18;
     }
 
     bb18: {
@@ -703,14 +703,14 @@ fn main() -> () {
     bb19: {
         _87 = core::panicking::AssertKind::Eq;
         _89 = Option::<Arguments<'_>>::None;
-        _88 = core::panicking::assert_failed::<isize, isize>(move _87, _81, _82, move _89) -> unwind continue;
+        _88 = core::panicking::assert_failed::<isize, isize>(move _87, _81, _82, move _89);
     }
 
     bb20: {
         _91 = &_92;
-        _90 = _91 as &Fat<[isize]> (PointerCoercion(Unsize));
+        _90 = _91 as &Fat<[isize]> (Pointer(Unsize));
         _95 = &((*_90).0: [isize]);
-        _94 = core::slice::<impl [isize]>::is_empty(move _95) -> [return: bb21, unwind continue];
+        _94 = core::slice::<impl [isize]>::is_empty(move _95) -> bb21;
     }
 
     bb21: {
@@ -719,14 +719,14 @@ fn main() -> () {
     }
 
     bb22: {
-        _96 = core::panicking::panic(const "assertion failed: f5.ptr.is_empty()") -> unwind continue;
+        _96 = core::panicking::panic(const "assertion failed: f5.ptr.is_empty()");
     }
 
     bb23: {
         _98 = &_99;
-        _97 = _98 as &Fat<[Bar]> (PointerCoercion(Unsize));
+        _97 = _98 as &Fat<[Bar]> (Pointer(Unsize));
         _102 = &((*_97).0: [Bar]);
-        _101 = core::slice::<impl [Bar]>::is_empty(move _102) -> [return: bb24, unwind continue];
+        _101 = core::slice::<impl [Bar]>::is_empty(move _102) -> bb24;
     }
 
     bb24: {
@@ -735,7 +735,7 @@ fn main() -> () {
     }
 
     bb25: {
-        _103 = core::panicking::panic(const "assertion failed: f5.ptr.is_empty()") -> unwind continue;
+        _103 = core::panicking::panic(const "assertion failed: f5.ptr.is_empty()");
     }
 
     bb26: {

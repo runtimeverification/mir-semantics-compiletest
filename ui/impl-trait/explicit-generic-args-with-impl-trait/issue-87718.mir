@@ -8,7 +8,7 @@ fn f(_1: impl AsRef<T>, _2: impl AsRef<T>) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -29,7 +29,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = f::<[u8], &str, &[u8; 1]>(const "a", const b"a") -> [return: bb1, unwind continue];
+        _1 = f::<[u8], &str, &[u8; 1]>(const "a", const b"a") -> bb1;
     }
 
     bb1: {

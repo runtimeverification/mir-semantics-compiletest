@@ -32,7 +32,7 @@ fn foo(_1: impl Display + Clone) -> String {
     bb1: {
         _8 = [const "", const " + "];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _13 = &_1;
         _12 = core::fmt::rt::Argument::<'_>::new_display::<impl Display + Clone>(_13) -> [return: bb2, unwind: bb8];
     }
@@ -45,7 +45,7 @@ fn foo(_1: impl Display + Clone) -> String {
     bb3: {
         _11 = [move _12, move _14];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb4, unwind: bb8];
     }
 
@@ -59,7 +59,7 @@ fn foo(_1: impl Display + Clone) -> String {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -116,17 +116,17 @@ fn main() -> () {
     bb0: {
         _7 = [const "22"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
-        _4 = Arguments::<'_>::new_const(move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &[&str] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_const(move _5) -> bb1;
     }
 
     bb1: {
-        _3 = format(move _4) -> [return: bb2, unwind continue];
+        _3 = format(move _4) -> bb2;
     }
 
     bb2: {
         _2 = move _3;
-        _1 = foo::<String>(move _2) -> [return: bb3, unwind continue];
+        _1 = foo::<String>(move _2) -> bb3;
     }
 
     bb3: {
@@ -151,7 +151,7 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {

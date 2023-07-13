@@ -34,7 +34,7 @@ test::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedSub(const M, const _);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const M, const _) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const M, const _) -> bb1;
     }
 
     bb1: {
@@ -49,7 +49,7 @@ test::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedSub(const M, const _);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const M, const _) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const M, const _) -> bb1;
     }
 
     bb1: {
@@ -64,11 +64,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = test::<FooCipher, 128>() -> [return: bb1, unwind continue];
+        _1 = test::<FooCipher, 128>() -> bb1;
     }
 
     bb1: {
-        _2 = test::<BarCipher, 64>() -> [return: bb2, unwind continue];
+        _2 = test::<BarCipher, 64>() -> bb2;
     }
 
     bb2: {

@@ -30,7 +30,7 @@ fn <impl at ui/autoref-autoderef/autoref-intermediate-types-issue-3585.rs:7:1: 7
     bb0: {
         _6 = [const "box "];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _14 = deref_copy (*_1);
         _15 = (((_14.0: std::ptr::Unique<T>).0: std::ptr::NonNull<T>).0: *const T);
         _16 = _15 as *const () (PtrToPtr);
@@ -50,7 +50,7 @@ fn <impl at ui/autoref-autoderef/autoref-intermediate-types-issue-3585.rs:7:1: 7
     bb2: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb3, unwind: bb7];
     }
 
@@ -81,7 +81,7 @@ fn <impl at ui/autoref-autoderef/autoref-intermediate-types-issue-3585.rs:7:1: 7
 
     bb9: {
         _13 = &(*_15);
-        _12 = <T as Foo>::foo(move _13) -> [return: bb1, unwind continue];
+        _12 = <T as Foo>::foo(move _13) -> bb1;
     }
 }
 
@@ -104,19 +104,19 @@ fn <impl at ui/autoref-autoderef/autoref-intermediate-types-issue-3585.rs:13:1: 
     bb0: {
         _6 = [const ""];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_1) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_1) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb2;
     }
 
     bb2: {
-        _2 = format(move _3) -> [return: bb3, unwind continue];
+        _2 = format(move _3) -> bb3;
     }
 
     bb3: {
@@ -154,7 +154,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<usize>::new(const 3_usize) -> [return: bb1, unwind continue];
+        _1 = Box::<usize>::new(const 3_usize) -> bb1;
     }
 
     bb1: {
@@ -196,7 +196,7 @@ fn main() -> () {
     }
 
     bb8: {
-        drop(_1) -> [return: bb9, unwind continue];
+        drop(_1) -> bb9;
     }
 
     bb9: {

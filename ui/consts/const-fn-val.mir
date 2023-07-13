@@ -15,7 +15,7 @@ static mut b: Bar<fn() -> isize> = {
 
     bb0: {
         StorageLive(_1);
-        _1 = foo as fn() -> isize (PointerCoercion(ReifyFnPointer));
+        _1 = foo as fn() -> isize (Pointer(ReifyFnPointer));
         _0 = Bar::<fn() -> isize> { f: move _1 };
         StorageDead(_1);
         return;
@@ -84,7 +84,7 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16);
     }
 
     bb3: {
@@ -93,7 +93,7 @@ fn main() -> () {
 
     bb4: {
         _4 = ((*_5).0: fn() -> isize);
-        _3 = move _4() -> [return: bb1, unwind continue];
+        _3 = move _4() -> bb1;
     }
 }
 

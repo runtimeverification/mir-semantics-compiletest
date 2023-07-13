@@ -14,7 +14,7 @@ fn baz(_1: &dyn Foo<A = Bar>) -> Bar {
     let mut _0: Bar;
 
     bb0: {
-        _0 = <dyn Foo<A = Bar> as Foo>::boo(_1) -> [return: bb1, unwind continue];
+        _0 = <dyn Foo<A = Bar> as Foo>::boo(_1) -> bb1;
     }
 
     bb1: {
@@ -35,8 +35,8 @@ fn main() -> () {
     bb0: {
         _1 = const 'a';
         _4 = &_1;
-        _3 = _4 as &dyn Foo<A = Bar> (PointerCoercion(Unsize));
-        _2 = baz(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &dyn Foo<A = Bar> (Pointer(Unsize));
+        _2 = baz(move _3) -> bb1;
     }
 
     bb1: {

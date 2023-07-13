@@ -60,7 +60,7 @@ fn substs2() -> Substs1<{{ M }}> {
     let mut _0: Substs1<{{ M }}>;
 
     bb0: {
-        _0 = zero_init::<{{ M }}>() -> [return: bb1, unwind continue];
+        _0 = zero_init::<{{ M }}>() -> bb1;
     }
 
     bb1: {
@@ -90,7 +90,7 @@ fn substs3() -> Substs1<{{ L }}> {
     let mut _0: Substs1<{{ L }}>;
 
     bb0: {
-        _0 = substs2::<{{ L }}>() -> [return: bb1, unwind continue];
+        _0 = substs2::<{{ L }}>() -> bb1;
     }
 
     bb1: {
@@ -139,7 +139,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = substs3::<2>() -> [return: bb1, unwind continue];
+        _3 = substs3::<2>() -> bb1;
     }
 
     bb1: {
@@ -149,7 +149,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &[u8; {{ N }}]);
         _7 = (_1.1: &[u8; 2]);
-        _9 = <[u8; {{ N }}] as PartialEq<[u8; 2]>>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <[u8; {{ N }}] as PartialEq<[u8; 2]>>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -160,7 +160,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<[u8; {{ N }}], [u8; 2]>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<[u8; {{ N }}], [u8; 2]>(move _10, _6, _7, move _12);
     }
 
     bb4: {

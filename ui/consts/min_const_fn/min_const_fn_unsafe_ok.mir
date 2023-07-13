@@ -23,7 +23,7 @@ fn ret_null_ptr_no_unsafe() -> *const T {
     let mut _0: *const T;
 
     bb0: {
-        _0 = null::<T>() -> [return: bb1, unwind continue];
+        _0 = null::<T>() -> bb1;
     }
 
     bb1: {
@@ -37,7 +37,7 @@ fn ret_null_ptr_no_unsafe() -> *const T {
 
     bb0: {
         ConstEvalCounter;
-        _0 = null::<T>() -> [return: bb1, unwind continue];
+        _0 = null::<T>() -> bb1;
     }
 
     bb1: {
@@ -49,7 +49,7 @@ fn ret_null_mut_ptr_no_unsafe() -> *mut T {
     let mut _0: *mut T;
 
     bb0: {
-        _0 = null_mut::<T>() -> [return: bb1, unwind continue];
+        _0 = null_mut::<T>() -> bb1;
     }
 
     bb1: {
@@ -63,7 +63,7 @@ fn ret_null_mut_ptr_no_unsafe() -> *mut T {
 
     bb0: {
         ConstEvalCounter;
-        _0 = null_mut::<T>() -> [return: bb1, unwind continue];
+        _0 = null_mut::<T>() -> bb1;
     }
 
     bb1: {
@@ -99,7 +99,7 @@ fn call_unsafe_const_fn() -> i32 {
     }
 
     bb0: {
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -115,7 +115,7 @@ fn call_unsafe_const_fn() -> i32 {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -129,7 +129,7 @@ fn call_unsafe_generic_const_fn() -> *const String {
     }
 
     bb0: {
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -145,7 +145,7 @@ fn call_unsafe_generic_const_fn() -> *const String {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -160,11 +160,11 @@ fn call_unsafe_generic_cell_const_fn() -> *const Vec<Cell<u32>> {
     }
 
     bb0: {
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         return;
     }
 }
@@ -179,11 +179,11 @@ fn call_unsafe_generic_cell_const_fn() -> *const Vec<Cell<u32>> {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         StorageDead(_1);
         return;
     }
@@ -195,7 +195,7 @@ fn call_unsafe_const_unsafe_fn() -> i32 {
     }
 
     bb0: {
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -211,7 +211,7 @@ fn call_unsafe_const_unsafe_fn() -> i32 {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -225,7 +225,7 @@ fn call_unsafe_generic_const_unsafe_fn() -> *const String {
     }
 
     bb0: {
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -241,7 +241,7 @@ fn call_unsafe_generic_const_unsafe_fn() -> *const String {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -256,11 +256,11 @@ fn call_unsafe_generic_cell_const_unsafe_fn() -> *const Vec<Cell<u32>> {
     }
 
     bb0: {
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         return;
     }
 }
@@ -275,11 +275,11 @@ fn call_unsafe_generic_cell_const_unsafe_fn() -> *const Vec<Cell<u32>> {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         StorageDead(_1);
         return;
     }
@@ -289,7 +289,7 @@ fn call_unsafe_const_unsafe_fn_immediate() -> i32 {
     let mut _0: i32;
 
     bb0: {
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -303,7 +303,7 @@ fn call_unsafe_const_unsafe_fn_immediate() -> i32 {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_i32_no_unsafe() -> [return: bb1, unwind continue];
+        _0 = ret_i32_no_unsafe() -> bb1;
     }
 
     bb1: {
@@ -315,7 +315,7 @@ fn call_unsafe_generic_const_unsafe_fn_immediate() -> *const String {
     let mut _0: *const std::string::String;
 
     bb0: {
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -329,7 +329,7 @@ fn call_unsafe_generic_const_unsafe_fn_immediate() -> *const String {
 
     bb0: {
         ConstEvalCounter;
-        _0 = ret_null_ptr_no_unsafe::<String>() -> [return: bb1, unwind continue];
+        _0 = ret_null_ptr_no_unsafe::<String>() -> bb1;
     }
 
     bb1: {
@@ -342,11 +342,11 @@ fn call_unsafe_generic_cell_const_unsafe_fn_immediate() -> *const Vec<Cell<u32>>
     let mut _1: *mut std::vec::Vec<std::cell::Cell<u32>>;
 
     bb0: {
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         return;
     }
 }
@@ -359,11 +359,11 @@ fn call_unsafe_generic_cell_const_unsafe_fn_immediate() -> *const Vec<Cell<u32>>
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> [return: bb1, unwind continue];
+        _1 = ret_null_mut_ptr_no_unsafe::<Vec<Cell<u32>>>() -> bb1;
     }
 
     bb1: {
-        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (PointerCoercion(MutToConstPointer));
+        _0 = move _1 as *const std::vec::Vec<std::cell::Cell<u32>> (Pointer(MutToConstPointer));
         StorageDead(_1);
         return;
     }

@@ -13,8 +13,8 @@ fn <impl at ui/dyn-star/drop.rs:8:10: 8:15>::fmt(_1: &Foo, _2: &mut Formatter<'_
         _3 = const "Foo";
         _6 = &((*_1).0: usize);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -34,12 +34,12 @@ fn <impl at ui/dyn-star/drop.rs:11:1: 11:18>::drop(_1: &mut Foo) -> () {
     bb0: {
         _6 = [const "destructor called\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _print(move _3) -> [return: bb2, unwind continue];
+        _2 = _print(move _3) -> bb2;
     }
 
     bb2: {
@@ -57,7 +57,7 @@ fn make_dyn_star(_1: Foo) -> () {
 
     bb0: {
         _2 = move _1 as dyn* std::fmt::Debug (DynStar);
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -72,7 +72,7 @@ fn main() -> () {
 
     bb0: {
         _2 = Foo(const 42_usize);
-        _1 = make_dyn_star(move _2) -> [return: bb1, unwind continue];
+        _1 = make_dyn_star(move _2) -> bb1;
     }
 
     bb1: {

@@ -8,7 +8,7 @@ fn <impl at ui/dropck/cleanup-arm-conditional.rs:16:1: 16:10>::get_x(_1: &Test) 
 
     bb0: {
         _3 = ((*_1).0: isize);
-        _2 = Box::<isize>::new(move _3) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(move _3) -> bb1;
     }
 
     bb1: {
@@ -35,7 +35,7 @@ fn do_something(_1: &Test) -> isize {
     }
 
     bb2: {
-        _4 = Test::get_x(_1) -> [return: bb3, unwind continue];
+        _4 = Test::get_x(_1) -> bb3;
     }
 
     bb3: {
@@ -48,7 +48,7 @@ fn do_something(_1: &Test) -> isize {
     }
 
     bb5: {
-        drop(_4) -> [return: bb6, unwind continue];
+        drop(_4) -> bb6;
     }
 
     bb6: {
@@ -58,7 +58,7 @@ fn do_something(_1: &Test) -> isize {
     }
 
     bb7: {
-        drop(_4) -> [return: bb1, unwind continue];
+        drop(_4) -> bb1;
     }
 
     bb8: {
@@ -86,7 +86,7 @@ fn main() -> () {
     bb0: {
         _1 = Test { x: const 1_isize };
         _3 = &_1;
-        _2 = do_something(_3) -> [return: bb1, unwind continue];
+        _2 = do_something(_3) -> bb1;
     }
 
     bb1: {

@@ -6,7 +6,7 @@ fn <impl at ui/traits/where-clause-vs-impl.rs:21:1: 21:32>::foo(_1: &mut F, _2: 
     let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -22,7 +22,7 @@ fn <impl at ui/traits/where-clause-vs-impl.rs:30:1: 30:40>::clone(_1: &Both<M, F
 
     bb0: {
         _3 = &((*_1).0: std::rc::Rc<(M, F)>);
-        _2 = <Rc<(M, F)> as Clone>::clone(move _3) -> [return: bb1, unwind continue];
+        _2 = <Rc<(M, F)> as Clone>::clone(move _3) -> bb1;
     }
 
     bb1: {
@@ -36,7 +36,7 @@ fn repro1(_1: Both<M, F>) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -60,7 +60,7 @@ fn repro2(_1: M, _2: F) -> () {
 
     bb0: {
         _5 = (move _1, move _2);
-        _4 = Rc::<(M, F)>::new(move _5) -> [return: bb1, unwind continue];
+        _4 = Rc::<(M, F)>::new(move _5) -> bb1;
     }
 
     bb1: {
@@ -74,7 +74,7 @@ fn repro2(_1: M, _2: F) -> () {
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {

@@ -22,7 +22,7 @@ const B: &[u8] = {
         _3 = const _;
         _2 = &(*_3);
         ConstEvalCounter;
-        _1 = core::str::<impl str>::as_bytes(move _2) -> [return: bb1, unwind continue];
+        _1 = core::str::<impl str>::as_bytes(move _2) -> bb1;
     }
 
     bb1: {
@@ -45,7 +45,7 @@ const C: usize = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::slice::<impl [u8]>::len(move _1) -> [return: bb1, unwind continue];
+        _0 = core::slice::<impl [u8]>::len(move _1) -> bb1;
     }
 
     bb1: {
@@ -66,7 +66,7 @@ const D: bool = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::slice::<impl [u8]>::is_empty(move _1) -> [return: bb1, unwind continue];
+        _0 = core::slice::<impl [u8]>::is_empty(move _1) -> bb1;
     }
 
     bb1: {
@@ -87,7 +87,7 @@ const E: bool = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::is_empty(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::is_empty(move _1) -> bb1;
     }
 
     bb1: {
@@ -108,7 +108,7 @@ const F: usize = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::len(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::len(move _1) -> bb1;
     }
 
     bb1: {
@@ -150,20 +150,20 @@ fn foo() -> [u8; 3] {
     bb0: {
         _1 = [const 0_u8; 3];
         _7 = const _;
-        _6 = core::str::<impl str>::as_bytes(_7) -> [return: bb1, unwind continue];
+        _6 = core::str::<impl str>::as_bytes(_7) -> bb1;
     }
 
     bb1: {
         _5 = _6;
-        _4 = core::slice::<impl [u8]>::iter(move _5) -> [return: bb2, unwind continue];
+        _4 = core::slice::<impl [u8]>::iter(move _5) -> bb2;
     }
 
     bb2: {
-        _3 = <std::slice::Iter<'_, u8> as Iterator>::enumerate(move _4) -> [return: bb3, unwind continue];
+        _3 = <std::slice::Iter<'_, u8> as Iterator>::enumerate(move _4) -> bb3;
     }
 
     bb3: {
-        _2 = <Enumerate<std::slice::Iter<'_, u8>> as IntoIterator>::into_iter(move _3) -> [return: bb4, unwind continue];
+        _2 = <Enumerate<std::slice::Iter<'_, u8>> as IntoIterator>::into_iter(move _3) -> bb4;
     }
 
     bb4: {
@@ -173,7 +173,7 @@ fn foo() -> [u8; 3] {
 
     bb5: {
         _10 = &mut _8;
-        _9 = <Enumerate<std::slice::Iter<'_, u8>> as Iterator>::next(_10) -> [return: bb6, unwind continue];
+        _9 = <Enumerate<std::slice::Iter<'_, u8>> as Iterator>::next(_10) -> bb6;
     }
 
     bb6: {
@@ -187,7 +187,7 @@ fn foo() -> [u8; 3] {
         _12 = (((_9 as Some).0: (usize, &u8)).0: usize);
         _14 = const 3_usize;
         _15 = Lt(_12, _14);
-        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _12) -> [success: bb10, unwind continue];
+        assert(move _15, "index out of bounds: the length is {} but the index is {}", move _14, _12) -> bb10;
     }
 
     bb8: {
@@ -216,7 +216,7 @@ foo::{constant#0}: usize = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::len(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::len(move _1) -> bb1;
     }
 
     bb1: {
@@ -237,7 +237,7 @@ foo::{constant#1}: usize = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::len(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::len(move _1) -> bb1;
     }
 
     bb1: {
@@ -408,12 +408,12 @@ fn main() -> () {
     }
 
     bb0: {
-        _6 = foo() -> [return: bb1, unwind continue];
+        _6 = foo() -> bb1;
     }
 
     bb1: {
         _5 = &_6;
-        _4 = <[u8; 3] as Index<RangeFull>>::index(move _5, const RangeFull) -> [return: bb2, unwind continue];
+        _4 = <[u8; 3] as Index<RangeFull>>::index(move _5, const RangeFull) -> bb2;
     }
 
     bb2: {
@@ -424,7 +424,7 @@ fn main() -> () {
         _1 = (move _2, move _7);
         _9 = (_1.0: &&[u8]);
         _10 = (_1.1: &&[u8; 3]);
-        _12 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_9, _10) -> [return: bb3, unwind continue];
+        _12 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_9, _10) -> bb3;
     }
 
     bb3: {
@@ -435,20 +435,20 @@ fn main() -> () {
     bb4: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _13, _9, _10, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _13, _9, _10, move _15);
     }
 
     bb5: {
-        _21 = foo() -> [return: bb6, unwind continue];
+        _21 = foo() -> bb6;
     }
 
     bb6: {
         _20 = &_21;
-        _19 = move _20 as &[u8] (PointerCoercion(Unsize));
+        _19 = move _20 as &[u8] (Pointer(Unsize));
         _18 = Len((*_19));
         _17 = &_18;
         _24 = const _;
-        _23 = core::str::<impl str>::len(_24) -> [return: bb7, unwind continue];
+        _23 = core::str::<impl str>::len(_24) -> bb7;
     }
 
     bb7: {
@@ -466,14 +466,14 @@ fn main() -> () {
     bb8: {
         _31 = core::panicking::AssertKind::Eq;
         _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33) -> unwind continue;
+        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33);
     }
 
     bb9: {
         _36 = const _;
         _35 = &_36;
         _39 = const _;
-        _38 = core::str::<impl str>::len(_39) -> [return: bb10, unwind continue];
+        _38 = core::str::<impl str>::len(_39) -> bb10;
     }
 
     bb10: {
@@ -491,13 +491,13 @@ fn main() -> () {
     bb11: {
         _46 = core::panicking::AssertKind::Eq;
         _48 = Option::<Arguments<'_>>::None;
-        _47 = core::panicking::assert_failed::<usize, usize>(move _46, _40, _41, move _48) -> unwind continue;
+        _47 = core::panicking::assert_failed::<usize, usize>(move _46, _40, _41, move _48);
     }
 
     bb12: {
         _51 = const _;
         _50 = &_51;
-        _53 = foo() -> [return: bb13, unwind continue];
+        _53 = foo() -> bb13;
     }
 
     bb13: {
@@ -505,7 +505,7 @@ fn main() -> () {
         _49 = (move _50, move _52);
         _54 = (_49.0: &&[u8]);
         _55 = (_49.1: &[u8; 3]);
-        _57 = <&[u8] as PartialEq<[u8; 3]>>::eq(_54, _55) -> [return: bb14, unwind continue];
+        _57 = <&[u8] as PartialEq<[u8; 3]>>::eq(_54, _55) -> bb14;
     }
 
     bb14: {
@@ -516,7 +516,7 @@ fn main() -> () {
     bb15: {
         _58 = core::panicking::AssertKind::Eq;
         _60 = Option::<Arguments<'_>>::None;
-        _59 = core::panicking::assert_failed::<&[u8], [u8; 3]>(move _58, _54, _55, move _60) -> unwind continue;
+        _59 = core::panicking::assert_failed::<&[u8], [u8; 3]>(move _58, _54, _55, move _60);
     }
 
     bb16: {
@@ -527,7 +527,7 @@ fn main() -> () {
         _61 = (move _62, move _64);
         _66 = (_61.0: &&[u8]);
         _67 = (_61.1: &&[u8; 3]);
-        _69 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_66, _67) -> [return: bb17, unwind continue];
+        _69 = <&[u8] as PartialEq<&[u8; 3]>>::eq(_66, _67) -> bb17;
     }
 
     bb17: {
@@ -538,7 +538,7 @@ fn main() -> () {
     bb18: {
         _70 = core::panicking::AssertKind::Eq;
         _72 = Option::<Arguments<'_>>::None;
-        _71 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _70, _66, _67, move _72) -> unwind continue;
+        _71 = core::panicking::assert_failed::<&[u8], &[u8; 3]>(move _70, _66, _67, move _72);
     }
 
     bb19: {
@@ -559,7 +559,7 @@ fn main() -> () {
     bb20: {
         _84 = core::panicking::AssertKind::Eq;
         _86 = Option::<Arguments<'_>>::None;
-        _85 = core::panicking::assert_failed::<usize, usize>(move _84, _78, _79, move _86) -> unwind continue;
+        _85 = core::panicking::assert_failed::<usize, usize>(move _84, _78, _79, move _86);
     }
 
     bb21: {
@@ -580,7 +580,7 @@ fn main() -> () {
     bb22: {
         _98 = core::panicking::AssertKind::Eq;
         _100 = Option::<Arguments<'_>>::None;
-        _99 = core::panicking::assert_failed::<usize, usize>(move _98, _92, _93, move _100) -> unwind continue;
+        _99 = core::panicking::assert_failed::<usize, usize>(move _98, _92, _93, move _100);
     }
 
     bb23: {
@@ -590,7 +590,7 @@ fn main() -> () {
     }
 
     bb24: {
-        _103 = core::panicking::panic(const "assertion failed: !D") -> unwind continue;
+        _103 = core::panicking::panic(const "assertion failed: !D");
     }
 
     bb25: {
@@ -600,7 +600,7 @@ fn main() -> () {
     }
 
     bb26: {
-        _106 = core::panicking::panic(const "assertion failed: !E") -> unwind continue;
+        _106 = core::panicking::panic(const "assertion failed: !E");
     }
 
     bb27: {
@@ -609,7 +609,7 @@ fn main() -> () {
     }
 
     bb28: {
-        _108 = core::panicking::panic(const "assertion failed: EMPTY") -> unwind continue;
+        _108 = core::panicking::panic(const "assertion failed: EMPTY");
     }
 
     bb29: {
@@ -636,7 +636,7 @@ const LEN: usize = {
         _2 = const _;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::len(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::len(move _1) -> bb1;
     }
 
     bb1: {
@@ -657,7 +657,7 @@ const EMPTY: bool = {
         _2 = const "";
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = core::str::<impl str>::is_empty(move _1) -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::is_empty(move _1) -> bb1;
     }
 
     bb1: {

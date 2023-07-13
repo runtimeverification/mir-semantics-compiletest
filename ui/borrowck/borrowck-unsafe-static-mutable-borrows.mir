@@ -33,7 +33,7 @@ fn <impl at ui/borrowck/borrowck-unsafe-static-mutable-borrows.rs:9:1: 9:9>::x(_
         _2 = const 0_usize;
         _3 = const 2_usize;
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -142,12 +142,12 @@ fn main() -> () {
     bb5: {
         _7 = const 2_usize;
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb2, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb2;
     }
 
     bb6: {
         _5 = &mut (*_1);
-        _4 = Foo::x(move _5) -> [return: bb1, unwind continue];
+        _4 = Foo::x(move _5) -> bb1;
     }
 
     bb7: {

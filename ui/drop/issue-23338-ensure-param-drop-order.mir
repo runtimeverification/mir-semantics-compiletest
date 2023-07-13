@@ -38,11 +38,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = Vec::<u32>::new() -> [return: bb1, unwind continue];
+        _2 = Vec::<u32>::new() -> bb1;
     }
 
     bb1: {
-        _1 = RefCell::<Vec<u32>>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = RefCell::<Vec<u32>>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -97,7 +97,7 @@ fn main() -> () {
     }
 
     bb11: {
-        drop(_1) -> [return: bb12, unwind continue];
+        drop(_1) -> bb12;
     }
 
     bb12: {
@@ -161,7 +161,7 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
         _25 = const false;
         _24 = const false;
         _25 = const true;
-        _2 = D::<'_>::new(const "da", const 0_u32, _1) -> [return: bb1, unwind continue];
+        _2 = D::<'_>::new(const "da", const 0_u32, _1) -> bb1;
     }
 
     bb1: {
@@ -185,7 +185,7 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     bb4: {
         _18 = [const "result "];
         _17 = &_18;
-        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _16 = _17 as &[&str] (Pointer(Unsize));
         _23 = &_6;
         _22 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_23) -> [return: bb5, unwind: bb13];
     }
@@ -193,7 +193,7 @@ fn test(_1: &RefCell<Vec<u32>>) -> () {
     bb5: {
         _21 = [move _22];
         _20 = &_21;
-        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb6, unwind: bb13];
     }
 
@@ -349,7 +349,7 @@ fn foo(_1: D<'_>, _2: D<'_>) -> D<'_> {
     }
 
     bb14: {
-        drop(_1) -> [return: bb15, unwind continue];
+        drop(_1) -> bb15;
     }
 
     bb15: {
@@ -444,7 +444,7 @@ fn current_width() -> u32 {
     }
 
     bb0: {
-        _1 = max_width() -> [return: bb1, unwind continue];
+        _1 = max_width() -> bb1;
     }
 
     bb1: {
@@ -465,7 +465,7 @@ fn current_width() -> u32 {
 
     bb3: {
         _3 = (*_4);
-        _2 = core::num::<impl u64>::leading_zeros(move _3) -> [return: bb2, unwind continue];
+        _2 = core::num::<impl u64>::leading_zeros(move _3) -> bb2;
     }
 }
 
@@ -507,7 +507,7 @@ fn max_width() -> u32 {
 
     bb2: {
         _3 = &(*_4);
-        _2 = std::mem::size_of_val::<u64>(_3) -> [return: bb1, unwind continue];
+        _2 = std::mem::size_of_val::<u64>(_3) -> bb1;
     }
 }
 
@@ -571,7 +571,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     bb0: {
         _33 = const false;
         _33 = const true;
-        _3 = String::new() -> [return: bb1, unwind continue];
+        _3 = String::new() -> bb1;
     }
 
     bb1: {
@@ -613,7 +613,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     bb7: {
         _25 = [const "", const "", const "\n"];
         _24 = &_25;
-        _23 = _24 as &[&str] (PointerCoercion(Unsize));
+        _23 = _24 as &[&str] (Pointer(Unsize));
         _30 = &_3;
         _29 = core::fmt::rt::Argument::<'_>::new_display::<String>(_30) -> [return: bb12, unwind: bb19];
     }
@@ -652,7 +652,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     bb13: {
         _28 = [move _29, move _31];
         _27 = &_28;
-        _26 = _27 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _26 = _27 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _22 = Arguments::<'_>::new_v1(move _23, move _26) -> [return: bb14, unwind: bb19];
     }
 
@@ -661,7 +661,7 @@ fn indent_println(_1: u32, _2: &str) -> () {
     }
 
     bb15: {
-        drop(_3) -> [return: bb16, unwind continue];
+        drop(_3) -> bb16;
     }
 
     bb16: {
@@ -699,7 +699,7 @@ fn println(_1: &str) -> () {
     let _2: ();
 
     bb0: {
-        _2 = indent_println(const _, _1) -> [return: bb1, unwind continue];
+        _2 = indent_println(const _, _1) -> bb1;
     }
 
     bb1: {
@@ -737,7 +737,7 @@ fn first_avail() -> u32 {
 
     bb0: {
         _2 = std::ops::Range::<u32> { start: const 0_u32, end: const 64_u32 };
-        _1 = <std::ops::Range<u32> as IntoIterator>::into_iter(move _2) -> [return: bb1, unwind continue];
+        _1 = <std::ops::Range<u32> as IntoIterator>::into_iter(move _2) -> bb1;
     }
 
     bb1: {
@@ -747,7 +747,7 @@ fn first_avail() -> u32 {
 
     bb2: {
         _5 = &mut _3;
-        _4 = <std::ops::Range<u32> as Iterator>::next(_5) -> [return: bb3, unwind continue];
+        _4 = <std::ops::Range<u32> as Iterator>::next(_5) -> bb3;
     }
 
     bb3: {
@@ -772,7 +772,7 @@ fn first_avail() -> u32 {
     }
 
     bb6: {
-        _11 = begin_panic::<&str>(const "exhausted trails") -> unwind continue;
+        _11 = begin_panic::<&str>(const "exhausted trails");
     }
 
     bb7: {
@@ -812,30 +812,30 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:129:5: 129:36>::fm
     bb0: {
         _6 = [const "D(", const "_", const ", ", const ")"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &((*_1).0: &str);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> bb1;
     }
 
     bb1: {
         _13 = &((*_1).1: u32);
-        _12 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_13) -> [return: bb2, unwind continue];
+        _12 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_13) -> bb2;
     }
 
     bb2: {
         _15 = &((*_1).2: u32);
-        _14 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_15) -> [return: bb3, unwind continue];
+        _14 = core::fmt::rt::Argument::<'_>::new_display::<u32>(_15) -> bb3;
     }
 
     bb3: {
         _9 = [move _10, move _12, move _14];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb4, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb4;
     }
 
     bb4: {
-        _0 = Formatter::<'_>::write_fmt(_2, move _3) -> [return: bb5, unwind continue];
+        _0 = Formatter::<'_>::write_fmt(_2, move _3) -> bb5;
     }
 
     bb5: {
@@ -919,7 +919,7 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
     }
 
     bb0: {
-        _4 = first_avail() -> [return: bb1, unwind continue];
+        _4 = first_avail() -> bb1;
     }
 
     bb1: {
@@ -936,7 +936,7 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
     bb2: {
         _26 = [move _27];
         _25 = &_26;
-        _24 = _25 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _24 = _25 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _20 = Arguments::<'_>::new_v1(move _21, move _24) -> [return: bb3, unwind: bb9];
     }
 
@@ -983,7 +983,7 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::ne
         _14 = _4;
         _23 = [const "+-- Make "];
         _22 = &_23;
-        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _21 = _22 as &[&str] (Pointer(Unsize));
         _28 = &_11;
         _27 = core::fmt::rt::Argument::<'_>::new_display::<D<'_>>(_28) -> [return: bb2, unwind: bb9];
     }
@@ -1056,7 +1056,7 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:135:5: 135:19>::in
         _4 = ((*_1).1: u32);
         _3 = Add(move _4, const 1_u32);
         _5 = deref_copy ((*_1).4: &std::cell::RefCell<std::vec::Vec<u32>>);
-        _0 = D::<'_>::new(move _2, move _3, _5) -> [return: bb1, unwind continue];
+        _0 = D::<'_>::new(move _2, move _3, _5) -> bb1;
     }
 
     bb1: {
@@ -1140,27 +1140,27 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
     }
 
     bb3: {
-        drop(_10) -> [return: bb4, unwind continue];
+        drop(_10) -> bb4;
     }
 
     bb4: {
         _13 = ((*_1).3: u32);
         _22 = [const "+-- Drop "];
         _21 = &_22;
-        _20 = _21 as &[&str] (PointerCoercion(Unsize));
+        _20 = _21 as &[&str] (Pointer(Unsize));
         _27 = &_1;
-        _26 = core::fmt::rt::Argument::<'_>::new_display::<&mut D<'_>>(_27) -> [return: bb5, unwind continue];
+        _26 = core::fmt::rt::Argument::<'_>::new_display::<&mut D<'_>>(_27) -> bb5;
     }
 
     bb5: {
         _25 = [move _26];
         _24 = &_25;
-        _23 = _24 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> [return: bb6, unwind continue];
+        _23 = _24 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> bb6;
     }
 
     bb6: {
-        _18 = format(move _19) -> [return: bb7, unwind continue];
+        _18 = format(move _19) -> bb7;
     }
 
     bb7: {
@@ -1175,12 +1175,12 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
     }
 
     bb9: {
-        drop(_17) -> [return: bb10, unwind continue];
+        drop(_17) -> bb10;
     }
 
     bb10: {
         _29 = const "";
-        _28 = indent_println(const _, _29) -> [return: bb11, unwind continue];
+        _28 = indent_println(const _, _29) -> bb11;
     }
 
     bb11: {
@@ -1202,7 +1202,7 @@ fn d::<impl at ui/drop/issue-23338-ensure-param-drop-order.rs:154:5: 154:28>::dr
     bb15: {
         (*_5) = BitAnd((*_5), move _2);
         _30 = deref_copy ((*_1).4: &std::cell::RefCell<std::vec::Vec<u32>>);
-        _10 = RefCell::<Vec<u32>>::borrow_mut(_30) -> [return: bb1, unwind continue];
+        _10 = RefCell::<Vec<u32>>::borrow_mut(_30) -> bb1;
     }
 
     bb16: {

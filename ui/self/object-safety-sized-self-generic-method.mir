@@ -22,7 +22,7 @@ fn <impl at ui/self/object-safety-sized-self-generic-method.rs:16:1: 16:26>::wit
     bb0: {
         _5 = ((*_1).0: u32);
         _4 = (move _5,);
-        _3 = <F as FnOnce<(u32,)>>::call_once(move _2, move _4) -> [return: bb1, unwind continue];
+        _3 = <F as FnOnce<(u32,)>>::call_once(move _2, move _4) -> bb1;
     }
 
     bb1: {
@@ -39,13 +39,13 @@ fn tick1(_1: &mut C) -> () {
     let mut _5: &C;
 
     bb0: {
-        _3 = _1 as &mut dyn Counter (PointerCoercion(Unsize));
-        _2 = tick2(move _3) -> [return: bb1, unwind continue];
+        _3 = _1 as &mut dyn Counter (Pointer(Unsize));
+        _2 = tick2(move _3) -> bb1;
     }
 
     bb1: {
         _5 = &(*_1);
-        _4 = <C as Counter>::with::<[closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]>(move _5, const ZeroSized: [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]) -> [return: bb2, unwind continue];
+        _4 = <C as Counter>::with::<[closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]>(move _5, const ZeroSized: [closure@ui/self/object-safety-sized-self-generic-method.rs:23:12: 23:15]) -> bb2;
     }
 
     bb2: {
@@ -68,7 +68,7 @@ fn tick2(_1: &mut dyn Counter) -> () {
     let _2: ();
 
     bb0: {
-        _2 = tick3::<dyn Counter>(_1) -> [return: bb1, unwind continue];
+        _2 = tick3::<dyn Counter>(_1) -> bb1;
     }
 
     bb1: {
@@ -83,11 +83,11 @@ fn tick3(_1: &mut C) -> () {
     let _3: u32;
 
     bb0: {
-        _2 = <C as Counter>::tick(_1) -> [return: bb1, unwind continue];
+        _2 = <C as Counter>::tick(_1) -> bb1;
     }
 
     bb1: {
-        _3 = <C as Counter>::tick(_1) -> [return: bb2, unwind continue];
+        _3 = <C as Counter>::tick(_1) -> bb2;
     }
 
     bb2: {
@@ -129,12 +129,12 @@ fn main() -> () {
     bb0: {
         _1 = CCounter { c: const 0_u32 };
         _3 = &mut _1;
-        _2 = tick1::<CCounter>(_3) -> [return: bb1, unwind continue];
+        _2 = tick1::<CCounter>(_3) -> bb1;
     }
 
     bb1: {
         _7 = &mut _1;
-        _6 = <CCounter as Counter>::tick(move _7) -> [return: bb2, unwind continue];
+        _6 = <CCounter as Counter>::tick(move _7) -> bb2;
     }
 
     bb2: {
@@ -154,7 +154,7 @@ fn main() -> () {
     bb3: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<u32, u32>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<u32, u32>(move _16, _10, _11, move _18);
     }
 
     bb4: {

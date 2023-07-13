@@ -5,7 +5,7 @@ static COUNTER: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -23,7 +23,7 @@ fn <impl at ui/mir/mir_fat_ptr_drop.rs:18:1: 18:21>::drop(_1: &mut DropMe) -> ()
     bb0: {
         _3 = const {alloc1: &AtomicUsize};
         _4 = SeqCst;
-        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> bb1;
     }
 
     bb1: {
@@ -45,7 +45,7 @@ fn fat_ptr_move_then_drop(_1: Box<[DropMe]>) -> () {
 
     bb0: {
         _2 = move _1;
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {
@@ -86,18 +86,18 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = Box::<[DropMe; 1]>::new(const [DropMe {{  }}]) -> [return: bb1, unwind continue];
+        _2 = Box::<[DropMe; 1]>::new(const [DropMe {{  }}]) -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as std::boxed::Box<[DropMe]> (PointerCoercion(Unsize));
-        _3 = fat_ptr_move_then_drop(move _1) -> [return: bb2, unwind continue];
+        _1 = move _2 as std::boxed::Box<[DropMe]> (Pointer(Unsize));
+        _3 = fat_ptr_move_then_drop(move _1) -> bb2;
     }
 
     bb2: {
         _7 = const {alloc1: &AtomicUsize};
         _8 = SeqCst;
-        _6 = AtomicUsize::load(_7, move _8) -> [return: bb3, unwind continue];
+        _6 = AtomicUsize::load(_7, move _8) -> bb3;
     }
 
     bb3: {
@@ -117,7 +117,7 @@ fn main() -> () {
     bb4: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<usize, usize>(move _17, _11, _12, move _19);
     }
 
     bb5: {

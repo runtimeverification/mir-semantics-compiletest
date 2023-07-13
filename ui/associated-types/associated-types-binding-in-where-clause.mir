@@ -41,7 +41,7 @@ fn foo_bar(_1: I) -> Bar {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -68,7 +68,7 @@ fn foo_uint(_1: I) -> usize {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -99,12 +99,12 @@ fn main() -> () {
 
     bb0: {
         _1 = const 42_isize;
-        _2 = foo_uint::<isize>(_1) -> [return: bb1, unwind continue];
+        _2 = foo_uint::<isize>(_1) -> bb1;
     }
 
     bb1: {
         _3 = const 'a';
-        _4 = foo_bar::<char>(_3) -> [return: bb2, unwind continue];
+        _4 = foo_bar::<char>(_3) -> bb2;
     }
 
     bb2: {

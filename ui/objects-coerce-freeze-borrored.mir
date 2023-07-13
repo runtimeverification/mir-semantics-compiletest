@@ -57,12 +57,12 @@ fn do_it_mut(_1: &mut dyn Foo) -> () {
     }
 
     bb0: {
-        _2 = <dyn Foo as Foo>::bar(_1) -> [return: bb1, unwind continue];
+        _2 = <dyn Foo as Foo>::bar(_1) -> bb1;
     }
 
     bb1: {
         _4 = &(*_1);
-        _3 = <dyn Foo as Foo>::foo(move _4) -> [return: bb2, unwind continue];
+        _3 = <dyn Foo as Foo>::foo(move _4) -> bb2;
     }
 
     bb2: {
@@ -81,13 +81,13 @@ fn do_it_mut(_1: &mut dyn Foo) -> () {
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16);
     }
 
     bb4: {
         _18 = &(*_1);
         _19 = _3;
-        _17 = do_it_imm(move _18, move _19) -> [return: bb5, unwind continue];
+        _17 = do_it_imm(move _18, move _19) -> bb5;
     }
 
     bb5: {
@@ -124,7 +124,7 @@ fn do_it_imm(_1: &dyn Foo, _2: usize) -> () {
     }
 
     bb0: {
-        _3 = <dyn Foo as Foo>::foo(_1) -> [return: bb1, unwind continue];
+        _3 = <dyn Foo as Foo>::foo(_1) -> bb1;
     }
 
     bb1: {
@@ -143,7 +143,7 @@ fn do_it_imm(_1: &dyn Foo, _2: usize) -> () {
     bb2: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15);
     }
 
     bb3: {
@@ -170,17 +170,17 @@ fn main() -> () {
     bb0: {
         _1 = const 22_usize;
         _3 = &mut _1;
-        _2 = _3 as &mut dyn Foo (PointerCoercion(Unsize));
-        _4 = do_it_mut(_2) -> [return: bb1, unwind continue];
+        _2 = _3 as &mut dyn Foo (Pointer(Unsize));
+        _4 = do_it_mut(_2) -> bb1;
     }
 
     bb1: {
         _6 = &(*_2);
-        _5 = do_it_imm(move _6, const 23_usize) -> [return: bb2, unwind continue];
+        _5 = do_it_imm(move _6, const 23_usize) -> bb2;
     }
 
     bb2: {
-        _7 = do_it_mut(_2) -> [return: bb3, unwind continue];
+        _7 = do_it_mut(_2) -> bb3;
     }
 
     bb3: {

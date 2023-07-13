@@ -35,7 +35,7 @@ fn test_simple() -> () {
     }
 
     bb1: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _3 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb2: {
@@ -56,7 +56,7 @@ fn test_simple() -> () {
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<bool, bool>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<bool, bool>(move _14, _8, _9, move _16);
     }
 
     bb4: {
@@ -115,13 +115,13 @@ fn test_box() -> () {
     }
 
     bb1: {
-        _8 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _8 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb2: {
         _4 = SizeOf([i32; 1]);
         _5 = AlignOf([i32; 1]);
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb3, unwind continue];
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb3;
     }
 
     bb3: {
@@ -162,7 +162,7 @@ fn test_box() -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {
@@ -179,8 +179,8 @@ fn test_box() -> () {
 
     bb11: {
         (*_24) = [const 10_i32];
-        _3 = move _7 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb4, unwind continue];
+        _3 = move _7 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> bb4;
     }
 }
 
@@ -190,11 +190,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = test_simple() -> [return: bb1, unwind continue];
+        _1 = test_simple() -> bb1;
     }
 
     bb1: {
-        _2 = test_box() -> [return: bb2, unwind continue];
+        _2 = test_box() -> bb2;
     }
 
     bb2: {

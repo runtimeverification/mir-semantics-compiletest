@@ -61,7 +61,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = Foo::<10>::new() -> [return: bb1, unwind continue];
+        _3 = Foo::<10>::new() -> bb1;
     }
 
     bb1: {
@@ -71,7 +71,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &[u8; 10]);
         _7 = (_1.1: &[u8; 10]);
-        _9 = <[u8; 10] as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <[u8; 10] as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -82,7 +82,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<[u8; 10], [u8; 10]>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<[u8; 10], [u8; 10]>(move _10, _6, _7, move _12);
     }
 
     bb4: {

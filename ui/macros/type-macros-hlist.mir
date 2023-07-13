@@ -17,7 +17,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:6:23: 6:28>::fmt(_1: &Nil, _2: &mut F
 
     bb0: {
         _3 = const "Nil";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -79,7 +79,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:16: 9:21>::clone(_1: &Cons<H, T>) -
 
     bb0: {
         _3 = &((*_1).0: H);
-        _2 = <H as Clone>::clone(_3) -> [return: bb1, unwind continue];
+        _2 = <H as Clone>::clone(_3) -> bb1;
     }
 
     bb1: {
@@ -115,11 +115,11 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:23: 9:28>::fmt(_1: &Cons<H, T>, _2:
     bb0: {
         _3 = const "Cons";
         _5 = &((*_1).0: H);
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
         _8 = &((*_1).1: T);
         _7 = &_8;
-        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field2_finish(_2, _3, move _4, move _6) -> [return: bb1, unwind continue];
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field2_finish(_2, _3, move _4, move _6) -> bb1;
     }
 
     bb1: {
@@ -158,7 +158,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:34: 9:37>::cmp(_1: &Cons<H, T>, _2:
     bb0: {
         _4 = &((*_1).0: H);
         _5 = &((*_2).0: H);
-        _3 = <H as Ord>::cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <H as Ord>::cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -175,7 +175,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:34: 9:37>::cmp(_1: &Cons<H, T>, _2:
     bb3: {
         _7 = &((*_1).1: T);
         _8 = &((*_2).1: T);
-        _0 = <T as Ord>::cmp(_7, _8) -> [return: bb4, unwind continue];
+        _0 = <T as Ord>::cmp(_7, _8) -> bb4;
     }
 
     bb4: {
@@ -197,7 +197,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:39: 9:48>::eq(_1: &Cons<H, T>, _2: 
     bb0: {
         _4 = &((*_1).0: H);
         _5 = &((*_2).0: H);
-        _3 = <H as PartialEq>::eq(move _4, move _5) -> [return: bb4, unwind continue];
+        _3 = <H as PartialEq>::eq(move _4, move _5) -> bb4;
     }
 
     bb1: {
@@ -208,7 +208,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:39: 9:48>::eq(_1: &Cons<H, T>, _2: 
     bb2: {
         _7 = &((*_1).1: T);
         _8 = &((*_2).1: T);
-        _6 = <T as PartialEq>::eq(move _7, move _8) -> [return: bb5, unwind continue];
+        _6 = <T as PartialEq>::eq(move _7, move _8) -> bb5;
     }
 
     bb3: {
@@ -244,7 +244,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:50: 9:60>::partial_cmp(_1: &Cons<H,
     bb0: {
         _4 = &((*_1).0: H);
         _5 = &((*_2).0: H);
-        _3 = <H as PartialOrd>::partial_cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <H as PartialOrd>::partial_cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -266,7 +266,7 @@ fn <impl at ui/macros/type-macros-hlist.rs:9:50: 9:60>::partial_cmp(_1: &Cons<H,
     bb4: {
         _8 = &((*_1).1: T);
         _9 = &((*_2).1: T);
-        _0 = <T as PartialOrd>::partial_cmp(_8, _9) -> [return: bb5, unwind continue];
+        _0 = <T as PartialOrd>::partial_cmp(_8, _9) -> bb5;
     }
 
     bb5: {
@@ -360,7 +360,7 @@ fn main() -> () {
 
     bb0: {
         _2 = const "foo";
-        _5 = Vec::<u64>::new() -> [return: bb1, unwind continue];
+        _5 = Vec::<u64>::new() -> bb1;
     }
 
     bb1: {
@@ -370,7 +370,7 @@ fn main() -> () {
         _8 = [const 0_u8, const 1_u8, const 2_u8];
         _7 = Cons::<[u8; 3], Cons<(), Nil>>(move _8, const Cons::<(), Nil>((), Nil));
         _6 = Cons::<u64, Cons<[u8; 3], Cons<(), Nil>>>(const 0_u64, move _7);
-        _9 = aux::<Cons<&str, Cons<bool, Cons<Vec<u64>, Nil>>>, Cons<u64, Cons<[u8; 3], Cons<(), Nil>>>>(move _1, _6) -> [return: bb2, unwind continue];
+        _9 = aux::<Cons<&str, Cons<bool, Cons<Vec<u64>, Nil>>>, Cons<u64, Cons<[u8; 3], Cons<(), Nil>>>>(move _1, _6) -> bb2;
     }
 
     bb2: {
@@ -408,7 +408,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_13) -> [return: bb8, unwind continue];
+        drop(_13) -> bb8;
     }
 
     bb8: {
@@ -438,7 +438,7 @@ fn aux(_1: Xs, _2: Ys) -> <Xs as std::ops::Add<Ys>>::Output {
     let mut _0: <Xs as std::ops::Add<Ys>>::Output;
 
     bb0: {
-        _0 = <Xs as std::ops::Add<Ys>>::add(move _1, move _2) -> [return: bb1, unwind continue];
+        _0 = <Xs as std::ops::Add<Ys>>::add(move _1, move _2) -> bb1;
     }
 
     bb1: {

@@ -4,7 +4,7 @@ fn bug() -> impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> {
     let mut _0: impl std::iter::Iterator<Item = [(); { |x: u32| { x }; 4 }]>;
 
     bb0: {
-        _0 = std::iter::empty::<[(); 4]>() -> [return: bb1, unwind continue];
+        _0 = std::iter::empty::<[(); 4]>() -> bb1;
     }
 
     bb1: {
@@ -41,15 +41,15 @@ fn ok() -> Box<dyn Iterator<Item = [(); 4]>> {
     let mut _2: std::iter::Empty<[(); 4]>;
 
     bb0: {
-        _2 = std::iter::empty::<[(); 4]>() -> [return: bb1, unwind continue];
+        _2 = std::iter::empty::<[(); 4]>() -> bb1;
     }
 
     bb1: {
-        _1 = Box::<std::iter::Empty<[(); 4]>>::new(const std::iter::Empty::<[(); 4]>(PhantomData::<fn() -> [(); 4]>)) -> [return: bb2, unwind continue];
+        _1 = Box::<std::iter::Empty<[(); 4]>>::new(const std::iter::Empty::<[(); 4]>(PhantomData::<fn() -> [(); 4]>)) -> bb2;
     }
 
     bb2: {
-        _0 = move _1 as std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>> (PointerCoercion(Unsize));
+        _0 = move _1 as std::boxed::Box<dyn std::iter::Iterator<Item = [(); 4]>> (Pointer(Unsize));
         return;
     }
 }
@@ -105,11 +105,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = ok::<u32>() -> [return: bb1, unwind continue];
+        _2 = ok::<u32>() -> bb1;
     }
 
     bb1: {
-        _1 = <Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::into_iter(move _2) -> [return: bb2, unwind continue];
+        _1 = <Box<dyn Iterator<Item = [(); 4]>> as IntoIterator>::into_iter(move _2) -> bb2;
     }
 
     bb2: {
@@ -132,20 +132,20 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_3) -> [return: bb7, unwind continue];
+        drop(_3) -> bb7;
     }
 
     bb7: {
-        _8 = bug::<u32>() -> [return: bb8, unwind continue];
+        _8 = bug::<u32>() -> bb8;
     }
 
     bb8: {
-        _7 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::into_iter(const ZeroSized: impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>) -> [return: bb9, unwind continue];
+        _7 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as IntoIterator>::into_iter(const ZeroSized: impl Iterator<Item = [(); { |x: u32| { x }; 4 }]>) -> bb9;
     }
 
     bb9: {
         _11 = &mut _9;
-        _10 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::next(_11) -> [return: bb10, unwind continue];
+        _10 = <impl Iterator<Item = [(); { |x: u32| { x }; 4 }]> as Iterator>::next(_11) -> bb10;
     }
 
     bb10: {

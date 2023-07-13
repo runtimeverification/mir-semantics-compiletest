@@ -187,7 +187,7 @@ fn arr_by_move(_1: [String; 3]) -> () {
 
     bb0: {
         _2 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:31:13: 31:15] { x: move _1 };
-        _3 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:31:13: 31:15] as FnOnce<()>>::call_once(move _2, const ()) -> [return: bb1, unwind continue];
+        _3 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:31:13: 31:15] as FnOnce<()>>::call_once(move _2, const ()) -> bb1;
     }
 
     bb1: {
@@ -221,7 +221,7 @@ fn arr_by_move::{closure#0}(_1: [closure@ui/borrowck/borrowck-closures-slice-pat
     }
 
     bb1: {
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -273,31 +273,31 @@ fn arr_ref_by_ref(_1: &[String; 3]) -> () {
         _6 = &_1;
         _5 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:42:13: 42:15] { x: move _6 };
         _8 = &_3;
-        _7 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:39:13: 39:15] as Fn<()>>::call(move _8, const ()) -> [return: bb1, unwind continue];
+        _7 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:39:13: 39:15] as Fn<()>>::call(move _8, const ()) -> bb1;
     }
 
     bb1: {
         _10 = &_5;
-        _9 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:42:13: 42:15] as Fn<()>>::call(move _10, const ()) -> [return: bb2, unwind continue];
+        _9 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:42:13: 42:15] as Fn<()>>::call(move _10, const ()) -> bb2;
     }
 
     bb2: {
         _12 = &_3;
-        _11 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:39:13: 39:15] as Fn<()>>::call(move _12, const ()) -> [return: bb3, unwind continue];
+        _11 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:39:13: 39:15] as Fn<()>>::call(move _12, const ()) -> bb3;
     }
 
     bb3: {
         _14 = &_5;
-        _13 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:42:13: 42:15] as Fn<()>>::call(move _14, const ()) -> [return: bb4, unwind continue];
+        _13 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:42:13: 42:15] as Fn<()>>::call(move _14, const ()) -> bb4;
     }
 
     bb4: {
-        _15 = std::mem::drop::<&&[String; 3]>(_2) -> [return: bb5, unwind continue];
+        _15 = std::mem::drop::<&&[String; 3]>(_2) -> bb5;
     }
 
     bb5: {
         _17 = _1;
-        _16 = std::mem::drop::<&[String; 3]>(move _17) -> [return: bb6, unwind continue];
+        _16 = std::mem::drop::<&[String; 3]>(move _17) -> bb6;
     }
 
     bb6: {
@@ -392,29 +392,29 @@ fn arr_ref_by_mut(_1: &mut [String; 3]) -> () {
         _3 = &mut _1;
         _2 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:54:17: 54:19] { x: move _3 };
         _5 = &mut _2;
-        _4 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:54:17: 54:19] as FnMut<()>>::call_mut(move _5, const ()) -> [return: bb1, unwind continue];
+        _4 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:54:17: 54:19] as FnMut<()>>::call_mut(move _5, const ()) -> bb1;
     }
 
     bb1: {
         _7 = &mut _2;
-        _6 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:54:17: 54:19] as FnMut<()>>::call_mut(move _7, const ()) -> [return: bb2, unwind continue];
+        _6 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:54:17: 54:19] as FnMut<()>>::call_mut(move _7, const ()) -> bb2;
     }
 
     bb2: {
         _9 = &mut _1;
         _8 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:59:17: 59:19] { x: move _9 };
         _11 = &mut _8;
-        _10 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:59:17: 59:19] as FnMut<()>>::call_mut(move _11, const ()) -> [return: bb3, unwind continue];
+        _10 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:59:17: 59:19] as FnMut<()>>::call_mut(move _11, const ()) -> bb3;
     }
 
     bb3: {
         _13 = &mut _8;
-        _12 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:59:17: 59:19] as FnMut<()>>::call_mut(move _13, const ()) -> [return: bb4, unwind continue];
+        _12 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:59:17: 59:19] as FnMut<()>>::call_mut(move _13, const ()) -> bb4;
     }
 
     bb4: {
         _15 = move _1;
-        _14 = std::mem::drop::<&mut [String; 3]>(move _15) -> [return: bb5, unwind continue];
+        _14 = std::mem::drop::<&mut [String; 3]>(move _15) -> bb5;
     }
 
     bb5: {
@@ -485,12 +485,12 @@ fn arr_ref_by_mut::{closure#1}(_1: &mut [closure@ui/borrowck/borrowck-closures-s
         _6 = const 0_usize;
         _7 = const 2_usize;
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb1, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb1;
     }
 
     bb1: {
         _5 = &mut (*_3)[_6];
-        _4 = std::mem::swap::<String>(_2, _5) -> [return: bb2, unwind continue];
+        _4 = std::mem::swap::<String>(_2, _5) -> bb2;
     }
 
     bb2: {
@@ -509,7 +509,7 @@ fn arr_box_by_move(_1: Box<[String; 3]>) -> () {
 
     bb0: {
         _2 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:70:13: 70:15] { x: move _1 };
-        _3 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:70:13: 70:15] as FnOnce<()>>::call_once(move _2, const ()) -> [return: bb1, unwind continue];
+        _3 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:70:13: 70:15] as FnOnce<()>>::call_once(move _2, const ()) -> bb1;
     }
 
     bb1: {
@@ -574,7 +574,7 @@ fn arr_box_by_move::{closure#0}(_1: [closure@ui/borrowck/borrowck-closures-slice
 
     bb2: {
         _6 = &mut (_1.0: std::boxed::Box<[std::string::String; 3]>);
-        _7 = <Box<[String; 3]> as Drop>::drop(move _6) -> [return: bb5, unwind continue];
+        _7 = <Box<[String; 3]> as Drop>::drop(move _6) -> bb5;
     }
 
     bb3 (cleanup): {
@@ -649,31 +649,31 @@ fn slice_by_ref(_1: &[String]) -> () {
         _6 = &_1;
         _5 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:81:13: 81:15] { x: move _6 };
         _8 = &_3;
-        _7 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:78:13: 78:15] as Fn<()>>::call(move _8, const ()) -> [return: bb1, unwind continue];
+        _7 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:78:13: 78:15] as Fn<()>>::call(move _8, const ()) -> bb1;
     }
 
     bb1: {
         _10 = &_5;
-        _9 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:81:13: 81:15] as Fn<()>>::call(move _10, const ()) -> [return: bb2, unwind continue];
+        _9 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:81:13: 81:15] as Fn<()>>::call(move _10, const ()) -> bb2;
     }
 
     bb2: {
         _12 = &_3;
-        _11 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:78:13: 78:15] as Fn<()>>::call(move _12, const ()) -> [return: bb3, unwind continue];
+        _11 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:78:13: 78:15] as Fn<()>>::call(move _12, const ()) -> bb3;
     }
 
     bb3: {
         _14 = &_5;
-        _13 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:81:13: 81:15] as Fn<()>>::call(move _14, const ()) -> [return: bb4, unwind continue];
+        _13 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:81:13: 81:15] as Fn<()>>::call(move _14, const ()) -> bb4;
     }
 
     bb4: {
-        _15 = std::mem::drop::<&&[String]>(_2) -> [return: bb5, unwind continue];
+        _15 = std::mem::drop::<&&[String]>(_2) -> bb5;
     }
 
     bb5: {
         _17 = _1;
-        _16 = std::mem::drop::<&[String]>(move _17) -> [return: bb6, unwind continue];
+        _16 = std::mem::drop::<&[String]>(move _17) -> bb6;
     }
 
     bb6: {
@@ -795,29 +795,29 @@ fn slice_by_mut(_1: &mut [String]) -> () {
         _3 = &mut _1;
         _2 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:93:17: 93:19] { x: move _3 };
         _5 = &mut _2;
-        _4 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:93:17: 93:19] as FnMut<()>>::call_mut(move _5, const ()) -> [return: bb1, unwind continue];
+        _4 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:93:17: 93:19] as FnMut<()>>::call_mut(move _5, const ()) -> bb1;
     }
 
     bb1: {
         _7 = &mut _2;
-        _6 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:93:17: 93:19] as FnMut<()>>::call_mut(move _7, const ()) -> [return: bb2, unwind continue];
+        _6 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:93:17: 93:19] as FnMut<()>>::call_mut(move _7, const ()) -> bb2;
     }
 
     bb2: {
         _9 = &mut _1;
         _8 = [closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:98:17: 98:19] { x: move _9 };
         _11 = &mut _8;
-        _10 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:98:17: 98:19] as FnMut<()>>::call_mut(move _11, const ()) -> [return: bb3, unwind continue];
+        _10 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:98:17: 98:19] as FnMut<()>>::call_mut(move _11, const ()) -> bb3;
     }
 
     bb3: {
         _13 = &mut _8;
-        _12 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:98:17: 98:19] as FnMut<()>>::call_mut(move _13, const ()) -> [return: bb4, unwind continue];
+        _12 = <[closure@ui/borrowck/borrowck-closures-slice-patterns-ok.rs:98:17: 98:19] as FnMut<()>>::call_mut(move _13, const ()) -> bb4;
     }
 
     bb4: {
         _15 = move _1;
-        _14 = std::mem::drop::<&mut [String]>(move _15) -> [return: bb5, unwind continue];
+        _14 = std::mem::drop::<&mut [String]>(move _15) -> bb5;
     }
 
     bb5: {
@@ -911,12 +911,12 @@ fn slice_by_mut::{closure#1}(_1: &mut [closure@ui/borrowck/borrowck-closures-sli
         _9 = const 0_usize;
         _10 = Len((*_6));
         _11 = Lt(_9, _10);
-        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> [success: bb2, unwind continue];
+        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> bb2;
     }
 
     bb2: {
         _8 = &mut (*_6)[_9];
-        _7 = std::mem::swap::<String>(_5, _8) -> [return: bb3, unwind continue];
+        _7 = std::mem::swap::<String>(_5, _8) -> bb3;
     }
 
     bb3: {
@@ -950,31 +950,31 @@ fn main() -> () {
     let mut _22: [std::string::String; 3];
 
     bb0: {
-        _2 = <[String; 3] as Default>::default() -> [return: bb1, unwind continue];
+        _2 = <[String; 3] as Default>::default() -> bb1;
     }
 
     bb1: {
-        _1 = arr_by_ref(move _2) -> [return: bb2, unwind continue];
+        _1 = arr_by_ref(move _2) -> bb2;
     }
 
     bb2: {
-        _4 = <[String; 3] as Default>::default() -> [return: bb3, unwind continue];
+        _4 = <[String; 3] as Default>::default() -> bb3;
     }
 
     bb3: {
-        _3 = arr_by_mut(move _4) -> [return: bb4, unwind continue];
+        _3 = arr_by_mut(move _4) -> bb4;
     }
 
     bb4: {
-        _6 = <[String; 3] as Default>::default() -> [return: bb5, unwind continue];
+        _6 = <[String; 3] as Default>::default() -> bb5;
     }
 
     bb5: {
-        _5 = arr_by_move(move _6) -> [return: bb6, unwind continue];
+        _5 = arr_by_move(move _6) -> bb6;
     }
 
     bb6: {
-        _9 = <[String; 3] as Default>::default() -> [return: bb7, unwind continue];
+        _9 = <[String; 3] as Default>::default() -> bb7;
     }
 
     bb7: {
@@ -983,11 +983,11 @@ fn main() -> () {
     }
 
     bb8: {
-        drop(_9) -> [return: bb9, unwind continue];
+        drop(_9) -> bb9;
     }
 
     bb9: {
-        _12 = <[String; 3] as Default>::default() -> [return: bb10, unwind continue];
+        _12 = <[String; 3] as Default>::default() -> bb10;
     }
 
     bb10: {
@@ -996,43 +996,43 @@ fn main() -> () {
     }
 
     bb11: {
-        drop(_12) -> [return: bb12, unwind continue];
+        drop(_12) -> bb12;
     }
 
     bb12: {
-        _14 = <Box<[String; 3]> as Default>::default() -> [return: bb13, unwind continue];
+        _14 = <Box<[String; 3]> as Default>::default() -> bb13;
     }
 
     bb13: {
-        _13 = arr_box_by_move(move _14) -> [return: bb14, unwind continue];
+        _13 = arr_box_by_move(move _14) -> bb14;
     }
 
     bb14: {
-        _18 = <[String; 3] as Default>::default() -> [return: bb15, unwind continue];
+        _18 = <[String; 3] as Default>::default() -> bb15;
     }
 
     bb15: {
         _17 = &_18;
-        _16 = _17 as &[std::string::String] (PointerCoercion(Unsize));
+        _16 = _17 as &[std::string::String] (Pointer(Unsize));
         _15 = slice_by_ref(move _16) -> [return: bb16, unwind: bb22];
     }
 
     bb16: {
-        drop(_18) -> [return: bb17, unwind continue];
+        drop(_18) -> bb17;
     }
 
     bb17: {
-        _22 = <[String; 3] as Default>::default() -> [return: bb18, unwind continue];
+        _22 = <[String; 3] as Default>::default() -> bb18;
     }
 
     bb18: {
         _21 = &mut _22;
-        _20 = _21 as &mut [std::string::String] (PointerCoercion(Unsize));
+        _20 = _21 as &mut [std::string::String] (Pointer(Unsize));
         _19 = slice_by_mut(move _20) -> [return: bb19, unwind: bb21];
     }
 
     bb19: {
-        drop(_22) -> [return: bb20, unwind continue];
+        drop(_22) -> bb20;
     }
 
     bb20: {

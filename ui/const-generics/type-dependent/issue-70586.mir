@@ -41,8 +41,8 @@ fn <impl at ui/const-generics/type-dependent/issue-70586.rs:14:10: 14:15>::fmt(_
         _4 = const "inner";
         _7 = &((*_1).0: std::marker::PhantomData<&T>);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -74,7 +74,7 @@ fn <impl at ui/const-generics/type-dependent/issue-70586.rs:19:1: 19:73>::next(_
     let mut _2: !;
 
     bb0: {
-        _2 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _2 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 }
 
@@ -93,16 +93,16 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Namespace::const_chunks_exact::<i32, 3>() -> [return: bb1, unwind continue];
+        _1 = Namespace::const_chunks_exact::<i32, 3>() -> bb1;
     }
 
     bb1: {
         _5 = &mut _1;
-        _4 = <ConstChunksExact<'_, i32, 3> as Iterator>::next(move _5) -> [return: bb2, unwind continue];
+        _4 = <ConstChunksExact<'_, i32, 3> as Iterator>::next(move _5) -> bb2;
     }
 
     bb2: {
-        _3 = Option::<&[i32; 3]>::unwrap(move _4) -> [return: bb3, unwind continue];
+        _3 = Option::<&[i32; 3]>::unwrap(move _4) -> bb3;
     }
 
     bb3: {

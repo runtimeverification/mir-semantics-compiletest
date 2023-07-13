@@ -18,7 +18,7 @@ fn test_clone(_1: T) -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -55,8 +55,8 @@ fn <impl at ui/stdlib-unit-tests/builtin-clone.rs:12:10: 12:15>::fmt(_1: &S, _2:
         _3 = const "S";
         _6 = &((*_1).0: i32);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -191,17 +191,17 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = test_clone::<fn() {foo}>(foo) -> [return: bb1, unwind continue];
+        _1 = test_clone::<fn() {foo}>(foo) -> bb1;
     }
 
     bb1: {
         _3 = [const 1_i32; 56];
-        _2 = test_clone::<[i32; 56]>(move _3) -> [return: bb2, unwind continue];
+        _2 = test_clone::<[i32; 56]>(move _3) -> bb2;
     }
 
     bb2: {
         _5 = (const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32, const 1_i32);
-        _4 = test_clone::<(i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32)>(move _5) -> [return: bb3, unwind continue];
+        _4 = test_clone::<(i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32, i32)>(move _5) -> bb3;
     }
 
     bb3: {
@@ -215,7 +215,7 @@ fn main() -> () {
         _10 = [move _11, move _12, move _13];
         _15 = &_10;
         _18 = &_6;
-        _17 = <[S; 3] as Clone>::clone(move _18) -> [return: bb4, unwind continue];
+        _17 = <[S; 3] as Clone>::clone(move _18) -> bb4;
     }
 
     bb4: {
@@ -223,7 +223,7 @@ fn main() -> () {
         _14 = (move _15, move _16);
         _19 = (_14.0: &[S; 3]);
         _20 = (_14.1: &[S; 3]);
-        _22 = <[S; 3] as PartialEq>::eq(_19, _20) -> [return: bb5, unwind continue];
+        _22 = <[S; 3] as PartialEq>::eq(_19, _20) -> bb5;
     }
 
     bb5: {
@@ -234,7 +234,7 @@ fn main() -> () {
     bb6: {
         _23 = core::panicking::AssertKind::Eq;
         _25 = Option::<Arguments<'_>>::None;
-        _24 = core::panicking::assert_failed::<[S; 3], [S; 3]>(move _23, _19, _20, move _25) -> unwind continue;
+        _24 = core::panicking::assert_failed::<[S; 3], [S; 3]>(move _23, _19, _20, move _25);
     }
 
     bb7: {
@@ -260,7 +260,7 @@ fn main() -> () {
         _36 = (move _37, move _40);
         _47 = &_36;
         _50 = &_26;
-        _49 = <((S, S), ((S, S, S), S)) as Clone>::clone(move _50) -> [return: bb8, unwind continue];
+        _49 = <((S, S), ((S, S, S), S)) as Clone>::clone(move _50) -> bb8;
     }
 
     bb8: {
@@ -268,7 +268,7 @@ fn main() -> () {
         _46 = (move _47, move _48);
         _51 = (_46.0: &((S, S), ((S, S, S), S)));
         _52 = (_46.1: &((S, S), ((S, S, S), S)));
-        _54 = <((S, S), ((S, S, S), S)) as PartialEq>::eq(_51, _52) -> [return: bb9, unwind continue];
+        _54 = <((S, S), ((S, S, S), S)) as PartialEq>::eq(_51, _52) -> bb9;
     }
 
     bb9: {
@@ -279,7 +279,7 @@ fn main() -> () {
     bb10: {
         _55 = core::panicking::AssertKind::Eq;
         _57 = Option::<Arguments<'_>>::None;
-        _56 = core::panicking::assert_failed::<((S, S), ((S, S, S), S)), ((S, S), ((S, S, S), S))>(move _55, _51, _52, move _57) -> unwind continue;
+        _56 = core::panicking::assert_failed::<((S, S), ((S, S, S), S)), ((S, S), ((S, S, S), S))>(move _55, _51, _52, move _57);
     }
 
     bb11: {

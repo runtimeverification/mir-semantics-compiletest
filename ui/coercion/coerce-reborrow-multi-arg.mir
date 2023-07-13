@@ -10,7 +10,7 @@ fn test(_1: T, _2: T) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -58,7 +58,7 @@ fn main() -> () {
         _2 = &_3;
         _5 = const 7_i32;
         _4 = &_5;
-        _1 = test::<&i32>(move _2, _4) -> [return: bb1, unwind continue];
+        _1 = test::<&i32>(move _2, _4) -> bb1;
     }
 
     bb1: {
@@ -67,7 +67,7 @@ fn main() -> () {
         _11 = const 7_i32;
         _10 = &mut _11;
         _9 = &(*_10);
-        _6 = test::<&i32>(move _7, move _9) -> [return: bb2, unwind continue];
+        _6 = test::<&i32>(move _7, move _9) -> bb2;
     }
 
     bb2: {
@@ -76,7 +76,7 @@ fn main() -> () {
         _13 = &(*_14);
         _17 = const 7_i32;
         _16 = &_17;
-        _12 = test::<&i32>(move _13, _16) -> [return: bb3, unwind continue];
+        _12 = test::<&i32>(move _13, _16) -> bb3;
     }
 
     bb3: {
@@ -86,7 +86,7 @@ fn main() -> () {
         _24 = const 7_i32;
         _23 = &mut _24;
         _22 = &(*_23);
-        _18 = test::<&i32>(move _19, move _22) -> [return: bb4, unwind continue];
+        _18 = test::<&i32>(move _19, move _22) -> bb4;
     }
 
     bb4: {

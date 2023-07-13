@@ -71,7 +71,7 @@ fn <impl at ui/try-trait/try-operator-custom.rs:31:1: 31:66>::from_residual(_1: 
 
     bb1: {
         _3 = move ((_1 as Terrible).0: V);
-        _4 = <V as Into<W>>::into(move _3) -> [return: bb3, unwind continue];
+        _4 = <V as Into<W>>::into(move _3) -> bb3;
     }
 
     bb2: {
@@ -104,7 +104,7 @@ fn <impl at ui/try-trait/try-operator-custom.rs:42:1: 42:65>::from_residual(_1: 
 
     bb1: {
         _3 = move ((_1 as Err).0: V);
-        _4 = <V as Into<W>>::into(move _3) -> [return: bb3, unwind continue];
+        _4 = <V as Into<W>>::into(move _3) -> bb3;
     }
 
     bb2: {
@@ -137,7 +137,7 @@ fn <impl at ui/try-trait/try-operator-custom.rs:51:1: 51:64>::from_residual(_1: 
 
     bb1: {
         _3 = move ((_1 as Terrible).0: V);
-        _4 = <V as Into<W>>::into(move _3) -> [return: bb3, unwind continue];
+        _4 = <V as Into<W>>::into(move _3) -> bb3;
     }
 
     bb2: {
@@ -182,11 +182,11 @@ fn f(_1: i32) -> Result<i32, String> {
     }
 
     bb2: {
-        _3 = g(_1) -> [return: bb3, unwind continue];
+        _3 = g(_1) -> bb3;
     }
 
     bb3: {
-        _2 = <MyResult<i32, String> as Try>::branch(move _3) -> [return: bb4, unwind continue];
+        _2 = <MyResult<i32, String> as Try>::branch(move _3) -> bb4;
     }
 
     bb4: {
@@ -206,7 +206,7 @@ fn f(_1: i32) -> Result<i32, String> {
 
     bb7: {
         _5 = move ((_2 as Break).0: MyResult<Never, std::string::String>);
-        _0 = <Result<i32, String> as FromResidual<MyResult<Never, String>>>::from_residual(move _5) -> [return: bb8, unwind continue];
+        _0 = <Result<i32, String> as FromResidual<MyResult<Never, String>>>::from_residual(move _5) -> bb8;
     }
 
     bb8: {
@@ -241,11 +241,11 @@ fn g(_1: i32) -> MyResult<i32, String> {
 
     bb0: {
         _4 = Sub(_1, const 1_i32);
-        _3 = f(move _4) -> [return: bb1, unwind continue];
+        _3 = f(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = <Result<i32, String> as Try>::branch(move _3) -> [return: bb2, unwind continue];
+        _2 = <Result<i32, String> as Try>::branch(move _3) -> bb2;
     }
 
     bb2: {
@@ -256,7 +256,7 @@ fn g(_1: i32) -> MyResult<i32, String> {
     bb3: {
         _7 = ((_2 as Continue).0: i32);
         _9 = const "Hello";
-        _8 = <str as ToOwned>::to_owned(_9) -> [return: bb6, unwind continue];
+        _8 = <str as ToOwned>::to_owned(_9) -> bb6;
     }
 
     bb4: {
@@ -265,7 +265,7 @@ fn g(_1: i32) -> MyResult<i32, String> {
 
     bb5: {
         _6 = move ((_2 as Break).0: std::result::Result<std::convert::Infallible, std::string::String>);
-        _0 = <MyResult<i32, String> as FromResidual<Result<Infallible, String>>>::from_residual(move _6) -> [return: bb7, unwind continue];
+        _0 = <MyResult<i32, String> as FromResidual<Result<Infallible, String>>>::from_residual(move _6) -> bb7;
     }
 
     bb6: {
@@ -306,7 +306,7 @@ fn h() -> MyResult<i32, String> {
     bb0: {
         _2 = const "Hello";
         _1 = Result::<i32, &str>::Err(_2);
-        _3 = <Result<i32, &str> as Try>::branch(_1) -> [return: bb1, unwind continue];
+        _3 = <Result<i32, &str> as Try>::branch(_1) -> bb1;
     }
 
     bb1: {
@@ -326,7 +326,7 @@ fn h() -> MyResult<i32, String> {
 
     bb4: {
         _5 = ((_3 as Break).0: std::result::Result<std::convert::Infallible, &str>);
-        _0 = <MyResult<i32, String> as FromResidual<Result<Infallible, &str>>>::from_residual(_5) -> [return: bb5, unwind continue];
+        _0 = <MyResult<i32, String> as FromResidual<Result<Infallible, &str>>>::from_residual(_5) -> bb5;
     }
 
     bb5: {
@@ -362,7 +362,7 @@ fn i() -> MyResult<i32, String> {
     bb0: {
         _2 = const "Hello";
         _1 = MyResult::<i32, &str>::Terrible(_2);
-        _3 = <MyResult<i32, &str> as Try>::branch(move _1) -> [return: bb1, unwind continue];
+        _3 = <MyResult<i32, &str> as Try>::branch(move _1) -> bb1;
     }
 
     bb1: {
@@ -382,7 +382,7 @@ fn i() -> MyResult<i32, String> {
 
     bb4: {
         _5 = move ((_3 as Break).0: MyResult<Never, &str>);
-        _0 = <MyResult<i32, String> as FromResidual<MyResult<Never, &str>>>::from_residual(move _5) -> [return: bb5, unwind continue];
+        _0 = <MyResult<i32, String> as FromResidual<MyResult<Never, &str>>>::from_residual(move _5) -> bb5;
     }
 
     bb5: {
@@ -416,7 +416,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _4 = f(const 0_i32) -> [return: bb1, unwind continue];
+        _4 = f(const 0_i32) -> bb1;
     }
 
     bb1: {
@@ -432,7 +432,7 @@ fn main() -> () {
     }
 
     bb3: {
-        drop(_4) -> [return: bb4, unwind continue];
+        drop(_4) -> bb4;
     }
 
     bb4: {
@@ -440,11 +440,11 @@ fn main() -> () {
     }
 
     bb5: {
-        _7 = core::panicking::panic(const "assertion failed: f(0) == Ok(42)") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: f(0) == Ok(42)");
     }
 
     bb6: {
-        _11 = f(const 10_i32) -> [return: bb7, unwind continue];
+        _11 = f(const 10_i32) -> bb7;
     }
 
     bb7: {
@@ -465,7 +465,7 @@ fn main() -> () {
     }
 
     bb10: {
-        drop(_11) -> [return: bb11, unwind continue];
+        drop(_11) -> bb11;
     }
 
     bb11: {
@@ -473,23 +473,23 @@ fn main() -> () {
     }
 
     bb12: {
-        _16 = core::panicking::panic(const "assertion failed: f(10) == Err(\\\"Hello\\\".to_owned())") -> unwind continue;
+        _16 = core::panicking::panic(const "assertion failed: f(10) == Err(\\\"Hello\\\".to_owned())");
     }
 
     bb13: {
-        _17 = h() -> [return: bb14, unwind continue];
+        _17 = h() -> bb14;
     }
 
     bb14: {
-        drop(_17) -> [return: bb15, unwind continue];
+        drop(_17) -> bb15;
     }
 
     bb15: {
-        _18 = i() -> [return: bb16, unwind continue];
+        _18 = i() -> bb16;
     }
 
     bb16: {
-        drop(_18) -> [return: bb17, unwind continue];
+        drop(_18) -> bb17;
     }
 
     bb17: {

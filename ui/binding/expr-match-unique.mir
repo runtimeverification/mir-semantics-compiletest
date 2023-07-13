@@ -42,11 +42,11 @@ fn test_box() -> () {
     }
 
     bb1: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _3 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb2: {
-        _1 = Box::<i32>::new(const 100_i32) -> [return: bb3, unwind continue];
+        _1 = Box::<i32>::new(const 100_i32) -> bb3;
     }
 
     bb3: {
@@ -67,7 +67,7 @@ fn test_box() -> () {
     }
 
     bb5: {
-        drop(_1) -> [return: bb6, unwind continue];
+        drop(_1) -> bb6;
     }
 
     bb6: {
@@ -102,7 +102,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = test_box() -> [return: bb1, unwind continue];
+        _1 = test_box() -> bb1;
     }
 
     bb1: {

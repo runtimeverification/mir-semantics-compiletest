@@ -16,8 +16,8 @@ fn <impl at ui/mir/issue-66851.rs:7:10: 7:15>::fmt(_1: &SpecialsRes, _2: &mut Fo
         _3 = &(((*_1) as Res).0: u64);
         _4 = const "Res";
         _6 = &_3;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -77,7 +77,7 @@ fn e103() -> SpecialsRes {
 
     bb0: {
         _2 = const "1";
-        _1 = core::str::<impl str>::parse::<u64>(_2) -> [return: bb1, unwind continue];
+        _1 = core::str::<impl str>::parse::<u64>(_2) -> bb1;
     }
 
     bb1: {
@@ -124,7 +124,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = e103() -> [return: bb1, unwind continue];
+        _3 = e103() -> bb1;
     }
 
     bb1: {
@@ -134,7 +134,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &SpecialsRes);
         _7 = (_1.1: &SpecialsRes);
-        _9 = <SpecialsRes as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <SpecialsRes as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -145,7 +145,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<SpecialsRes, SpecialsRes>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<SpecialsRes, SpecialsRes>(move _10, _6, _7, move _12);
     }
 
     bb4: {

@@ -16,7 +16,7 @@ fn by_value_1(_1: Foo) -> () {
 
     bb0: {
         _3 = &(_1.0: ());
-        _2 = do_nothing(_3) -> [return: bb1, unwind continue];
+        _2 = do_nothing(_3) -> bb1;
     }
 
     bb1: {
@@ -32,7 +32,7 @@ fn by_value_2(_1: Foo) -> () {
 
     bb0: {
         _3 = &(_1.0: ());
-        _2 = do_nothing(_3) -> [return: bb1, unwind continue];
+        _2 = do_nothing(_3) -> bb1;
     }
 
     bb1: {
@@ -46,11 +46,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = by_value_1(const Foo {{ bar: () }}) -> [return: bb1, unwind continue];
+        _1 = by_value_1(const Foo {{ bar: () }}) -> bb1;
     }
 
     bb1: {
-        _2 = by_value_2::<()>(const Foo {{ bar: () }}) -> [return: bb2, unwind continue];
+        _2 = by_value_2::<()>(const Foo {{ bar: () }}) -> bb2;
     }
 
     bb2: {
