@@ -14,7 +14,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:10: 2:19>::eq(_1:
     bb0: {
         _4 = &((*_1).0: T);
         _5 = &((*_2).0: T);
-        _3 = <T as PartialEq>::eq(move _4, move _5) -> [return: bb4, unwind continue];
+        _3 = <T as PartialEq>::eq(move _4, move _5) -> bb4;
     }
 
     bb1: {
@@ -25,7 +25,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:10: 2:19>::eq(_1:
     bb2: {
         _7 = &((*_1).1: T);
         _8 = &((*_2).1: T);
-        _6 = <T as PartialEq>::eq(move _7, move _8) -> [return: bb5, unwind continue];
+        _6 = <T as PartialEq>::eq(move _7, move _8) -> bb5;
     }
 
     bb3: {
@@ -72,7 +72,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:25: 2:35>::partia
     bb0: {
         _4 = &((*_1).0: T);
         _5 = &((*_2).0: T);
-        _3 = <T as PartialOrd>::partial_cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <T as PartialOrd>::partial_cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -94,7 +94,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:25: 2:35>::partia
     bb4: {
         _8 = &((*_1).1: T);
         _9 = &((*_2).1: T);
-        _0 = <T as PartialOrd>::partial_cmp(_8, _9) -> [return: bb5, unwind continue];
+        _0 = <T as PartialOrd>::partial_cmp(_8, _9) -> bb5;
     }
 
     bb5: {
@@ -120,7 +120,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:37: 2:40>::cmp(_1
     bb0: {
         _4 = &((*_1).0: T);
         _5 = &((*_2).0: T);
-        _3 = <T as Ord>::cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <T as Ord>::cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -137,7 +137,7 @@ fn <impl at ui/deriving/deriving-cmp-generic-tuple-struct.rs:2:37: 2:40>::cmp(_1
     bb3: {
         _7 = &((*_1).1: T);
         _8 = &((*_2).1: T);
-        _0 = <T as Ord>::cmp(_7, _8) -> [return: bb4, unwind continue];
+        _0 = <T as Ord>::cmp(_7, _8) -> bb4;
     }
 
     bb4: {
@@ -377,16 +377,16 @@ fn main() -> () {
         _2 = TS::<i32>(const 1_i32, const 2_i32);
         _3 = [move _1, move _2];
         _8 = &_3;
-        _7 = move _8 as &[TS<i32>] (PointerCoercion(Unsize));
-        _6 = core::slice::<impl [TS<i32>]>::iter(move _7) -> [return: bb1, unwind continue];
+        _7 = move _8 as &[TS<i32>] (Pointer(Unsize));
+        _6 = core::slice::<impl [TS<i32>]>::iter(move _7) -> bb1;
     }
 
     bb1: {
-        _5 = <std::slice::Iter<'_, TS<i32>> as Iterator>::enumerate(move _6) -> [return: bb2, unwind continue];
+        _5 = <std::slice::Iter<'_, TS<i32>> as Iterator>::enumerate(move _6) -> bb2;
     }
 
     bb2: {
-        _4 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as IntoIterator>::into_iter(move _5) -> [return: bb3, unwind continue];
+        _4 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as IntoIterator>::into_iter(move _5) -> bb3;
     }
 
     bb3: {
@@ -396,7 +396,7 @@ fn main() -> () {
 
     bb4: {
         _11 = &mut _9;
-        _10 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as Iterator>::next(_11) -> [return: bb5, unwind continue];
+        _10 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as Iterator>::next(_11) -> bb5;
     }
 
     bb5: {
@@ -408,8 +408,8 @@ fn main() -> () {
         _13 = (((_10 as Some).0: (usize, &TS<i32>)).0: usize);
         _14 = (((_10 as Some).0: (usize, &TS<i32>)).1: &TS<i32>);
         _19 = &_3;
-        _18 = move _19 as &[TS<i32>] (PointerCoercion(Unsize));
-        _17 = core::slice::<impl [TS<i32>]>::iter(move _18) -> [return: bb9, unwind continue];
+        _18 = move _19 as &[TS<i32>] (Pointer(Unsize));
+        _17 = core::slice::<impl [TS<i32>]>::iter(move _18) -> bb9;
     }
 
     bb7: {
@@ -421,11 +421,11 @@ fn main() -> () {
     }
 
     bb9: {
-        _16 = <std::slice::Iter<'_, TS<i32>> as Iterator>::enumerate(move _17) -> [return: bb10, unwind continue];
+        _16 = <std::slice::Iter<'_, TS<i32>> as Iterator>::enumerate(move _17) -> bb10;
     }
 
     bb10: {
-        _15 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as IntoIterator>::into_iter(move _16) -> [return: bb11, unwind continue];
+        _15 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as IntoIterator>::into_iter(move _16) -> bb11;
     }
 
     bb11: {
@@ -435,7 +435,7 @@ fn main() -> () {
 
     bb12: {
         _22 = &mut _20;
-        _21 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as Iterator>::next(_22) -> [return: bb13, unwind continue];
+        _21 = <Enumerate<std::slice::Iter<'_, TS<i32>>> as Iterator>::next(_22) -> bb13;
     }
 
     bb13: {
@@ -448,7 +448,7 @@ fn main() -> () {
         _25 = (((_21 as Some).0: (usize, &TS<i32>)).1: &TS<i32>);
         _27 = &_13;
         _28 = &_24;
-        _26 = <usize as Ord>::cmp(move _27, _28) -> [return: bb15, unwind continue];
+        _26 = <usize as Ord>::cmp(move _27, _28) -> bb15;
     }
 
     bb15: {
@@ -467,7 +467,7 @@ fn main() -> () {
         _42 = _13;
         _43 = _24;
         _41 = Ge(move _42, move _43);
-        _46 = <TS<i32> as PartialEq>::eq(_14, _25) -> [return: bb16, unwind continue];
+        _46 = <TS<i32> as PartialEq>::eq(_14, _25) -> bb16;
     }
 
     bb16: {
@@ -486,11 +486,11 @@ fn main() -> () {
     bb17: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<bool, bool>(move _54, _48, _49, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<bool, bool>(move _54, _48, _49, move _56);
     }
 
     bb18: {
-        _59 = <TS<i32> as PartialEq>::ne(_14, _25) -> [return: bb19, unwind continue];
+        _59 = <TS<i32> as PartialEq>::ne(_14, _25) -> bb19;
     }
 
     bb19: {
@@ -511,11 +511,11 @@ fn main() -> () {
     bb20: {
         _69 = core::panicking::AssertKind::Eq;
         _71 = Option::<Arguments<'_>>::None;
-        _70 = core::panicking::assert_failed::<bool, bool>(move _69, _63, _64, move _71) -> unwind continue;
+        _70 = core::panicking::assert_failed::<bool, bool>(move _69, _63, _64, move _71);
     }
 
     bb21: {
-        _74 = <TS<i32> as PartialOrd>::lt(_14, _25) -> [return: bb22, unwind continue];
+        _74 = <TS<i32> as PartialOrd>::lt(_14, _25) -> bb22;
     }
 
     bb22: {
@@ -534,11 +534,11 @@ fn main() -> () {
     bb23: {
         _82 = core::panicking::AssertKind::Eq;
         _84 = Option::<Arguments<'_>>::None;
-        _83 = core::panicking::assert_failed::<bool, bool>(move _82, _76, _77, move _84) -> unwind continue;
+        _83 = core::panicking::assert_failed::<bool, bool>(move _82, _76, _77, move _84);
     }
 
     bb24: {
-        _87 = <TS<i32> as PartialOrd>::gt(_14, _25) -> [return: bb25, unwind continue];
+        _87 = <TS<i32> as PartialOrd>::gt(_14, _25) -> bb25;
     }
 
     bb25: {
@@ -557,11 +557,11 @@ fn main() -> () {
     bb26: {
         _95 = core::panicking::AssertKind::Eq;
         _97 = Option::<Arguments<'_>>::None;
-        _96 = core::panicking::assert_failed::<bool, bool>(move _95, _89, _90, move _97) -> unwind continue;
+        _96 = core::panicking::assert_failed::<bool, bool>(move _95, _89, _90, move _97);
     }
 
     bb27: {
-        _100 = <TS<i32> as PartialOrd>::le(_14, _25) -> [return: bb28, unwind continue];
+        _100 = <TS<i32> as PartialOrd>::le(_14, _25) -> bb28;
     }
 
     bb28: {
@@ -580,11 +580,11 @@ fn main() -> () {
     bb29: {
         _108 = core::panicking::AssertKind::Eq;
         _110 = Option::<Arguments<'_>>::None;
-        _109 = core::panicking::assert_failed::<bool, bool>(move _108, _102, _103, move _110) -> unwind continue;
+        _109 = core::panicking::assert_failed::<bool, bool>(move _108, _102, _103, move _110);
     }
 
     bb30: {
-        _113 = <TS<i32> as PartialOrd>::ge(_14, _25) -> [return: bb31, unwind continue];
+        _113 = <TS<i32> as PartialOrd>::ge(_14, _25) -> bb31;
     }
 
     bb31: {
@@ -603,11 +603,11 @@ fn main() -> () {
     bb32: {
         _121 = core::panicking::AssertKind::Eq;
         _123 = Option::<Arguments<'_>>::None;
-        _122 = core::panicking::assert_failed::<bool, bool>(move _121, _115, _116, move _123) -> unwind continue;
+        _122 = core::panicking::assert_failed::<bool, bool>(move _121, _115, _116, move _123);
     }
 
     bb33: {
-        _126 = <TS<i32> as Ord>::cmp(_14, _25) -> [return: bb34, unwind continue];
+        _126 = <TS<i32> as Ord>::cmp(_14, _25) -> bb34;
     }
 
     bb34: {
@@ -616,7 +616,7 @@ fn main() -> () {
         _124 = (move _125, move _127);
         _128 = (_124.0: &std::cmp::Ordering);
         _129 = (_124.1: &std::cmp::Ordering);
-        _131 = <std::cmp::Ordering as PartialEq>::eq(_128, _129) -> [return: bb35, unwind continue];
+        _131 = <std::cmp::Ordering as PartialEq>::eq(_128, _129) -> bb35;
     }
 
     bb35: {
@@ -627,7 +627,7 @@ fn main() -> () {
     bb36: {
         _132 = core::panicking::AssertKind::Eq;
         _134 = Option::<Arguments<'_>>::None;
-        _133 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _132, _128, _129, move _134) -> unwind continue;
+        _133 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _132, _128, _129, move _134);
     }
 }
 

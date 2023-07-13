@@ -21,7 +21,7 @@ fn make_pq() -> BinaryHeap<isize> {
     bb0: {
         _3 = SizeOf([isize; 3]);
         _4 = AlignOf([isize; 3]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -37,7 +37,7 @@ fn make_pq() -> BinaryHeap<isize> {
     }
 
     bb2: {
-        _0 = <BinaryHeap<isize> as From<Vec<isize>>>::from(move _1) -> [return: bb3, unwind continue];
+        _0 = <BinaryHeap<isize> as From<Vec<isize>>>::from(move _1) -> bb3;
     }
 
     bb3: {
@@ -46,8 +46,8 @@ fn make_pq() -> BinaryHeap<isize> {
 
     bb4: {
         (*_7) = [const 1_isize, const 2_isize, const 3_isize];
-        _2 = move _6 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[isize]> (Pointer(Unsize));
+        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -190,7 +190,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = make_pq() -> [return: bb1, unwind continue];
+        _1 = make_pq() -> bb1;
     }
 
     bb1: {
@@ -419,7 +419,7 @@ fn main() -> () {
     }
 
     bb38: {
-        drop(_1) -> [return: bb39, unwind continue];
+        drop(_1) -> bb39;
     }
 
     bb39: {

@@ -24,7 +24,7 @@ static F: fn(isize) -> isize = {
     let mut _0: fn(isize) -> isize;
 
     bb0: {
-        _0 = f as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _0 = f as fn(isize) -> isize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -33,7 +33,7 @@ static mut G: fn(isize) -> isize = {
     let mut _0: fn(isize) -> isize;
 
     bb0: {
-        _0 = f as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _0 = f as fn(isize) -> isize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -134,7 +134,7 @@ fn main() -> () {
     bb0: {
         _5 = const {alloc1: &fn(isize) -> isize};
         _4 = (*_5);
-        _3 = move _4(const 42_isize) -> [return: bb1, unwind continue];
+        _3 = move _4(const 42_isize) -> bb1;
     }
 
     bb1: {
@@ -154,7 +154,7 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16);
     }
 
     bb3: {
@@ -185,7 +185,7 @@ fn main() -> () {
     bb5: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<isize, isize>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<isize, isize>(move _30, _24, _25, move _32);
     }
 
     bb6: {
@@ -216,7 +216,7 @@ fn main() -> () {
     bb8: {
         _47 = core::panicking::AssertKind::Eq;
         _49 = Option::<Arguments<'_>>::None;
-        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49) -> unwind continue;
+        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49);
     }
 
     bb9: {
@@ -225,11 +225,11 @@ fn main() -> () {
 
     bb10: {
         _37 = (*_38);
-        _36 = move _37(const 42_isize) -> [return: bb7, unwind continue];
+        _36 = move _37(const 42_isize) -> bb7;
     }
 
     bb11: {
-        (*_33) = g as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        (*_33) = g as fn(isize) -> isize (Pointer(ReifyFnPointer));
         _38 = const {alloc2: *mut fn(isize) -> isize};
         _50 = _38 as *const () (PtrToPtr);
         _51 = _50 as usize (Transmute);
@@ -242,7 +242,7 @@ fn main() -> () {
 
     bb12: {
         _20 = (*_21);
-        _19 = move _20(const 42_isize) -> [return: bb4, unwind continue];
+        _19 = move _20(const 42_isize) -> bb4;
     }
 }
 

@@ -5,7 +5,7 @@ static FLAG: std::sync::atomic::AtomicBool = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = std::sync::atomic::AtomicBool::new(const false) -> [return: bb1, unwind continue];
+        _0 = std::sync::atomic::AtomicBool::new(const false) -> bb1;
     }
 
     bb1: {
@@ -23,7 +23,7 @@ fn <impl at ui/consts/promoted_const_call4.rs:8:1: 8:24>::drop(_1: &mut NoisyDro
     bb0: {
         _3 = const {alloc1: &std::sync::atomic::AtomicBool};
         _4 = SeqCst;
-        _2 = std::sync::atomic::AtomicBool::store(_3, const true, move _4) -> [return: bb1, unwind continue];
+        _2 = std::sync::atomic::AtomicBool::store(_3, const true, move _4) -> bb1;
     }
 
     bb1: {
@@ -55,13 +55,13 @@ fn main() -> () {
         _3 = (move _4, const 0_i32);
         _2 = &(_3.1: i32);
         _1 = &_2;
-        drop(_3) -> [return: bb1, unwind continue];
+        drop(_3) -> bb1;
     }
 
     bb1: {
         _7 = const {alloc1: &std::sync::atomic::AtomicBool};
         _8 = SeqCst;
-        _6 = std::sync::atomic::AtomicBool::load(_7, move _8) -> [return: bb2, unwind continue];
+        _6 = std::sync::atomic::AtomicBool::load(_7, move _8) -> bb2;
     }
 
     bb2: {
@@ -70,7 +70,7 @@ fn main() -> () {
     }
 
     bb3: {
-        _9 = core::panicking::panic(const "assertion failed: FLAG.load(Ordering::SeqCst)") -> unwind continue;
+        _9 = core::panicking::panic(const "assertion failed: FLAG.load(Ordering::SeqCst)");
     }
 
     bb4: {

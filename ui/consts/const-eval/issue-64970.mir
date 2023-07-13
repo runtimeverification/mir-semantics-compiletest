@@ -5,7 +5,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = foo(const 10_i32) -> [return: bb1, unwind continue];
+        _1 = foo(const 10_i32) -> bb1;
     }
 
     bb1: {
@@ -46,14 +46,14 @@ fn foo(_1: i32) -> () {
     bb3: {
         _5 = _1;
         _6 = Eq(_5, const 0_i32);
-        assert(!move _6, "attempt to divide `{}` by zero", const 1_i32) -> [success: bb4, unwind continue];
+        assert(!move _6, "attempt to divide `{}` by zero", const 1_i32) -> bb4;
     }
 
     bb4: {
         _7 = Eq(_5, const -1_i32);
         _8 = Eq(const 1_i32, const i32::MIN);
         _9 = BitAnd(move _7, move _8);
-        assert(!move _9, "attempt to compute `{} / {}`, which would overflow", const 1_i32, _5) -> [success: bb5, unwind continue];
+        assert(!move _9, "attempt to compute `{} / {}`, which would overflow", const 1_i32, _5) -> bb5;
     }
 
     bb5: {

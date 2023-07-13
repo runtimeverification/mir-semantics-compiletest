@@ -62,7 +62,7 @@ static BLOCK_STRUCT: Foo = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = null::<()>() -> [return: bb1, unwind continue];
+        _1 = null::<()>() -> bb1;
     }
 
     bb1: {
@@ -87,7 +87,7 @@ static BLOCK_FN_INFERRED: fn(usize) -> usize = {
     let mut _0: fn(usize) -> usize;
 
     bb0: {
-        _0 = foo::<usize> as fn(usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = foo::<usize> as fn(usize) -> usize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -96,7 +96,7 @@ static BLOCK_FN: fn(usize) -> usize = {
     let mut _0: fn(usize) -> usize;
 
     bb0: {
-        _0 = foo::<usize> as fn(usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _0 = foo::<usize> as fn(usize) -> usize (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -105,7 +105,7 @@ static BLOCK_ENUM_CONSTRUCTOR: fn(usize) -> Option<usize> = {
     let mut _0: fn(usize) -> std::option::Option<usize>;
 
     bb0: {
-        _0 = Option::<usize>::Some as fn(usize) -> std::option::Option<usize> (PointerCoercion(ReifyFnPointer));
+        _0 = Option::<usize>::Some as fn(usize) -> std::option::Option<usize> (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -353,7 +353,7 @@ fn main() -> () {
     bb1: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<usize, usize>(move _11, _5, _6, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<usize, usize>(move _11, _5, _6, move _13);
     }
 
     bb2: {
@@ -362,7 +362,7 @@ fn main() -> () {
         _14 = (_15, move _16);
         _18 = (_14.0: &());
         _19 = (_14.1: &());
-        _21 = <() as PartialEq>::eq(_18, _19) -> [return: bb3, unwind continue];
+        _21 = <() as PartialEq>::eq(_18, _19) -> bb3;
     }
 
     bb3: {
@@ -373,7 +373,7 @@ fn main() -> () {
     bb4: {
         _22 = core::panicking::AssertKind::Eq;
         _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<(), ()>(move _22, _18, _19, move _24) -> unwind continue;
+        _23 = core::panicking::assert_failed::<(), ()>(move _22, _18, _19, move _24);
     }
 
     bb5: {
@@ -382,7 +382,7 @@ fn main() -> () {
         _25 = (_26, move _27);
         _29 = (_25.0: &());
         _30 = (_25.1: &());
-        _32 = <() as PartialEq>::eq(_29, _30) -> [return: bb6, unwind continue];
+        _32 = <() as PartialEq>::eq(_29, _30) -> bb6;
     }
 
     bb6: {
@@ -393,7 +393,7 @@ fn main() -> () {
     bb7: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<(), ()>(move _33, _29, _30, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<(), ()>(move _33, _29, _30, move _35);
     }
 
     bb8: {
@@ -413,7 +413,7 @@ fn main() -> () {
     bb9: {
         _46 = core::panicking::AssertKind::Eq;
         _48 = Option::<Arguments<'_>>::None;
-        _47 = core::panicking::assert_failed::<f64, f64>(move _46, _40, _41, move _48) -> unwind continue;
+        _47 = core::panicking::assert_failed::<f64, f64>(move _46, _40, _41, move _48);
     }
 
     bb10: {
@@ -434,13 +434,13 @@ fn main() -> () {
     bb11: {
         _60 = core::panicking::AssertKind::Eq;
         _62 = Option::<Arguments<'_>>::None;
-        _61 = core::panicking::assert_failed::<usize, usize>(move _60, _54, _55, move _62) -> unwind continue;
+        _61 = core::panicking::assert_failed::<usize, usize>(move _60, _54, _55, move _62);
     }
 
     bb12: {
         _65 = const {alloc5: &Foo};
         _64 = &((*_65).1: *const ());
-        _67 = null::<()>() -> [return: bb13, unwind continue];
+        _67 = null::<()>() -> bb13;
     }
 
     bb13: {
@@ -458,7 +458,7 @@ fn main() -> () {
     bb14: {
         _74 = core::panicking::AssertKind::Eq;
         _76 = Option::<Arguments<'_>>::None;
-        _75 = core::panicking::assert_failed::<*const (), *const ()>(move _74, _68, _69, move _76) -> unwind continue;
+        _75 = core::panicking::assert_failed::<*const (), *const ()>(move _74, _68, _69, move _76);
     }
 
     bb15: {
@@ -468,7 +468,7 @@ fn main() -> () {
         _77 = (_78, move _79);
         _81 = (_77.0: &std::option::Option<usize>);
         _82 = (_77.1: &std::option::Option<usize>);
-        _84 = <Option<usize> as PartialEq>::eq(_81, _82) -> [return: bb16, unwind continue];
+        _84 = <Option<usize> as PartialEq>::eq(_81, _82) -> bb16;
     }
 
     bb16: {
@@ -479,7 +479,7 @@ fn main() -> () {
     bb17: {
         _85 = core::panicking::AssertKind::Eq;
         _87 = Option::<Arguments<'_>>::None;
-        _86 = core::panicking::assert_failed::<Option<usize>, Option<usize>>(move _85, _81, _82, move _87) -> unwind continue;
+        _86 = core::panicking::assert_failed::<Option<usize>, Option<usize>>(move _85, _81, _82, move _87);
     }
 
     bb18: {
@@ -499,13 +499,13 @@ fn main() -> () {
     bb19: {
         _98 = core::panicking::AssertKind::Eq;
         _100 = Option::<Arguments<'_>>::None;
-        _99 = core::panicking::assert_failed::<usize, usize>(move _98, _92, _93, move _100) -> unwind continue;
+        _99 = core::panicking::assert_failed::<usize, usize>(move _98, _92, _93, move _100);
     }
 
     bb20: {
         _105 = const {alloc8: &fn(usize) -> usize};
         _104 = (*_105);
-        _103 = move _104(const 300_usize) -> [return: bb21, unwind continue];
+        _103 = move _104(const 300_usize) -> bb21;
     }
 
     bb21: {
@@ -525,13 +525,13 @@ fn main() -> () {
     bb22: {
         _114 = core::panicking::AssertKind::Eq;
         _116 = Option::<Arguments<'_>>::None;
-        _115 = core::panicking::assert_failed::<usize, usize>(move _114, _108, _109, move _116) -> unwind continue;
+        _115 = core::panicking::assert_failed::<usize, usize>(move _114, _108, _109, move _116);
     }
 
     bb23: {
         _121 = const {alloc9: &fn(usize) -> usize};
         _120 = (*_121);
-        _119 = move _120(const 300_usize) -> [return: bb24, unwind continue];
+        _119 = move _120(const 300_usize) -> bb24;
     }
 
     bb24: {
@@ -551,13 +551,13 @@ fn main() -> () {
     bb25: {
         _130 = core::panicking::AssertKind::Eq;
         _132 = Option::<Arguments<'_>>::None;
-        _131 = core::panicking::assert_failed::<usize, usize>(move _130, _124, _125, move _132) -> unwind continue;
+        _131 = core::panicking::assert_failed::<usize, usize>(move _130, _124, _125, move _132);
     }
 
     bb26: {
         _137 = const {alloc10: &fn(usize) -> Option<usize>};
         _136 = (*_137);
-        _135 = move _136(const 200_usize) -> [return: bb27, unwind continue];
+        _135 = move _136(const 200_usize) -> bb27;
     }
 
     bb27: {
@@ -567,7 +567,7 @@ fn main() -> () {
         _133 = (move _134, move _138);
         _140 = (_133.0: &std::option::Option<usize>);
         _141 = (_133.1: &std::option::Option<usize>);
-        _143 = <Option<usize> as PartialEq>::eq(_140, _141) -> [return: bb28, unwind continue];
+        _143 = <Option<usize> as PartialEq>::eq(_140, _141) -> bb28;
     }
 
     bb28: {
@@ -578,7 +578,7 @@ fn main() -> () {
     bb29: {
         _144 = core::panicking::AssertKind::Eq;
         _146 = Option::<Arguments<'_>>::None;
-        _145 = core::panicking::assert_failed::<Option<usize>, Option<usize>>(move _144, _140, _141, move _146) -> unwind continue;
+        _145 = core::panicking::assert_failed::<Option<usize>, Option<usize>>(move _144, _140, _141, move _146);
     }
 
     bb30: {

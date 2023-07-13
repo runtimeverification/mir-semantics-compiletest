@@ -5,7 +5,7 @@ fn failfn() -> () {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -15,15 +15,15 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = Box::<i32>::new(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = Box::<i32>::new(const 0_i32) -> bb1;
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
-        _2 = failfn() -> [return: bb3, unwind continue];
+        _2 = failfn() -> bb3;
     }
 
     bb3: {

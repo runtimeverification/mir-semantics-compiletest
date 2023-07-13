@@ -58,7 +58,7 @@ fn main() -> () {
         _1 = const "test";
         _4 = &_1;
         _3 = &raw const (*_4);
-        _2 = read_volatile::<&str>(move _3) -> [return: bb1, unwind continue];
+        _2 = read_volatile::<&str>(move _3) -> bb1;
     }
 
     bb1: {
@@ -68,7 +68,7 @@ fn main() -> () {
         _5 = (move _6, move _7);
         _9 = (_5.0: &&str);
         _10 = (_5.1: &&str);
-        _12 = <&str as PartialEq>::eq(_9, _10) -> [return: bb2, unwind continue];
+        _12 = <&str as PartialEq>::eq(_9, _10) -> bb2;
     }
 
     bb2: {
@@ -79,13 +79,13 @@ fn main() -> () {
     bb3: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<&str, &str>(move _13, _9, _10, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<&str, &str>(move _13, _9, _10, move _15);
     }
 
     bb4: {
         _18 = &mut _1;
         _17 = &raw mut (*_18);
-        _16 = write_volatile::<&str>(move _17, const "foo") -> [return: bb5, unwind continue];
+        _16 = write_volatile::<&str>(move _17, const "foo") -> bb5;
     }
 
     bb5: {
@@ -95,7 +95,7 @@ fn main() -> () {
         _19 = (move _20, move _21);
         _23 = (_19.0: &&str);
         _24 = (_19.1: &&str);
-        _26 = <&str as PartialEq>::eq(_23, _24) -> [return: bb6, unwind continue];
+        _26 = <&str as PartialEq>::eq(_23, _24) -> bb6;
     }
 
     bb6: {
@@ -106,7 +106,7 @@ fn main() -> () {
     bb7: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<&str, &str>(move _27, _23, _24, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<&str, &str>(move _27, _23, _24, move _29);
     }
 
     bb8: {

@@ -30,7 +30,7 @@ fn bar(_1: T, _2: <T as Foo>::A) -> <T as Foo>::A {
 
     bb2: {
         _0 = move _2;
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -68,7 +68,7 @@ fn <impl at ui/associated-types/associated-types-sugar-path.rs:33:1: 33:24>::f()
     }
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -80,7 +80,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = bar::<isize>(const 2_isize, const 4_usize) -> [return: bb1, unwind continue];
+        _1 = bar::<isize>(const 2_isize, const 4_usize) -> bb1;
     }
 
     bb1: {

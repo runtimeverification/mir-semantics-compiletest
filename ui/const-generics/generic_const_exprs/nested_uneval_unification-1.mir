@@ -26,7 +26,7 @@ zero_init::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -41,7 +41,7 @@ zero_init::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -56,7 +56,7 @@ Substs1::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -71,7 +71,7 @@ Substs1::0::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -84,7 +84,7 @@ fn substs2() -> Substs1<{ M * 2 }> {
     let mut _0: Substs1<{ M * 2 }>;
 
     bb0: {
-        _0 = zero_init::<{ M * 2 }>() -> [return: bb1, unwind continue];
+        _0 = zero_init::<{ M * 2 }>() -> bb1;
     }
 
     bb1: {
@@ -98,7 +98,7 @@ substs2::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedMul(const M, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -116,13 +116,13 @@ substs2::{constant#0}: usize = {
     bb0: {
         StorageLive(_1);
         _2 = CheckedMul(const M, const 2_usize);
-        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> bb1;
     }
 
     bb1: {
         _1 = move (_2.0: usize);
         _3 = CheckedAdd(_1, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> [success: bb2, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> bb2;
     }
 
     bb2: {
@@ -138,7 +138,7 @@ substs2::{constant#2}: usize = {
 
     bb0: {
         _1 = CheckedMul(const M, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const M, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -151,7 +151,7 @@ fn substs3() -> Substs1<{ (L - 1) * 2 }> {
     let mut _0: Substs1<{ (L - 1) * 2 }>;
 
     bb0: {
-        _0 = substs2::<{ L - 1 }>() -> [return: bb1, unwind continue];
+        _0 = substs2::<{ L - 1 }>() -> bb1;
     }
 
     bb1: {
@@ -168,13 +168,13 @@ substs3::{constant#1}: usize = {
     bb0: {
         StorageLive(_1);
         _2 = CheckedSub(const L, const 1_usize);
-        assert(!move (_2.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> bb1;
     }
 
     bb1: {
         _1 = move (_2.0: usize);
         _3 = CheckedMul(_1, const 2_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 2_usize) -> [success: bb2, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 2_usize) -> bb2;
     }
 
     bb2: {
@@ -196,20 +196,20 @@ substs3::{constant#0}: usize = {
         StorageLive(_1);
         StorageLive(_2);
         _3 = CheckedSub(const L, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> bb1;
     }
 
     bb1: {
         _2 = move (_3.0: usize);
         _4 = CheckedMul(_2, const 2_usize);
-        assert(!move (_4.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_usize) -> [success: bb2, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 2_usize) -> bb2;
     }
 
     bb2: {
         _1 = move (_4.0: usize);
         StorageDead(_2);
         _5 = CheckedAdd(_1, const 1_usize);
-        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> [success: bb3, unwind continue];
+        assert(!move (_5.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> bb3;
     }
 
     bb3: {
@@ -225,7 +225,7 @@ substs3::{constant#2}: usize = {
 
     bb0: {
         _1 = CheckedSub(const L, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const L, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -257,7 +257,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = substs3::<2>() -> [return: bb1, unwind continue];
+        _3 = substs3::<2>() -> bb1;
     }
 
     bb1: {
@@ -267,7 +267,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &[u8; N + 1]);
         _7 = (_1.1: &[u8; 3]);
-        _9 = <[u8; N + 1] as PartialEq<[u8; 3]>>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <[u8; N + 1] as PartialEq<[u8; 3]>>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -278,7 +278,7 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<[u8; N + 1], [u8; 3]>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<[u8; N + 1], [u8; 3]>(move _10, _6, _7, move _12);
     }
 
     bb4: {

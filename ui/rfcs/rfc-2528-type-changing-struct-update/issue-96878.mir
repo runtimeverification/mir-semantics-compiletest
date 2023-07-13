@@ -5,7 +5,7 @@ fn <impl at ui/rfcs/rfc-2528-type-changing-struct-update/issue-96878.rs:9:10: 9:
     let mut _1: usize;
 
     bb0: {
-        _1 = <usize as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <usize as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -20,7 +20,7 @@ fn <impl at ui/rfcs/rfc-2528-type-changing-struct-update/issue-96878.rs:14:10: 1
     let mut _2: U;
 
     bb0: {
-        _1 = <T as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <T as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -65,11 +65,11 @@ fn <impl at ui/rfcs/rfc-2528-type-changing-struct-update/issue-96878.rs:20:10: 2
     let mut _2: std::borrow::Cow<'_, str>;
 
     bb0: {
-        _1 = <PhantomData<[u32; N]> as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <PhantomData<[u32; N]> as Default>::default() -> bb1;
     }
 
     bb1: {
-        _2 = <Cow<'_, str> as Default>::default() -> [return: bb2, unwind continue];
+        _2 = <Cow<'_, str> as Default>::default() -> bb2;
     }
 
     bb2: {
@@ -106,22 +106,22 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = <NonGeneric as Default>::default() -> [return: bb1, unwind continue];
+        _2 = <NonGeneric as Default>::default() -> bb1;
     }
 
     bb1: {
         _1 = NonGeneric { field1: (_2.0: usize) };
-        _4 = <Generic<i32, f32> as Default>::default() -> [return: bb2, unwind continue];
+        _4 = <Generic<i32, f32> as Default>::default() -> bb2;
     }
 
     bb2: {
         _3 = Generic::<i32, f32> { field1: (_4.0: i32), field2: (_4.1: f32) };
-        _6 = <MoreGeneric<'_, 12> as Default>::default() -> [return: bb3, unwind continue];
+        _6 = <MoreGeneric<'_, 12> as Default>::default() -> bb3;
     }
 
     bb3: {
         _5 = MoreGeneric::<'_, 12> { field1: const PhantomData::<[u32; 12]>, field2: move (_6.1: std::borrow::Cow<'_, str>) };
-        drop(_5) -> [return: bb4, unwind continue];
+        drop(_5) -> bb4;
     }
 
     bb4: {

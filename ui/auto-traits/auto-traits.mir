@@ -4,7 +4,7 @@ fn take_auto(_1: T) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -16,7 +16,7 @@ fn take_auto_unsafe(_1: T) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -36,21 +36,21 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = take_auto::<i32>(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = take_auto::<i32>(const 0_i32) -> bb1;
     }
 
     bb1: {
         _3 = AutoBool(const true);
-        _2 = take_auto::<AutoBool>(move _3) -> [return: bb2, unwind continue];
+        _2 = take_auto::<AutoBool>(move _3) -> bb2;
     }
 
     bb2: {
-        _4 = take_auto_unsafe::<i32>(const 0_i32) -> [return: bb3, unwind continue];
+        _4 = take_auto_unsafe::<i32>(const 0_i32) -> bb3;
     }
 
     bb3: {
         _6 = AutoBool(const true);
-        _5 = take_auto_unsafe::<AutoBool>(move _6) -> [return: bb4, unwind continue];
+        _5 = take_auto_unsafe::<AutoBool>(move _6) -> bb4;
     }
 
     bb4: {

@@ -13,8 +13,8 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:2:10: 2:15>::fmt(_1: &IntW
         _3 = const "IntWrapper";
         _6 = &((*_1).0: u32);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -63,8 +63,8 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:5:10: 5:15>::fmt(_1: &HasK
         _4 = const "struct";
         _7 = &((*_1).0: u32);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -82,7 +82,7 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:5:17: 5:20>::cmp(_1: &HasK
     bb0: {
         _3 = &((*_1).0: u32);
         _4 = &((*_2).0: u32);
-        _0 = <u32 as Ord>::cmp(_3, _4) -> [return: bb1, unwind continue];
+        _0 = <u32 as Ord>::cmp(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -100,7 +100,7 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:5:22: 5:32>::partial_cmp(_
     bb0: {
         _3 = &((*_1).0: u32);
         _4 = &((*_2).0: u32);
-        _0 = <u32 as PartialOrd>::partial_cmp(_3, _4) -> [return: bb1, unwind continue];
+        _0 = <u32 as PartialOrd>::partial_cmp(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -142,7 +142,7 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:5:49: 5:53>::hash(_1: &Has
 
     bb0: {
         _3 = &((*_1).0: u32);
-        _0 = <u32 as Hash>::hash::<__H>(_3, _2) -> [return: bb1, unwind continue];
+        _0 = <u32 as Hash>::hash::<__H>(_3, _2) -> bb1;
     }
 
     bb1: {
@@ -167,7 +167,7 @@ fn <impl at ui/rfcs/rfc-2151-raw-identifiers/items.rs:5:68: 5:75>::default() -> 
     let mut _1: u32;
 
     bb0: {
-        _1 = <u32 as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <u32 as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -318,7 +318,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &IntWrapper);
         _7 = (_1.1: &IntWrapper);
-        _9 = <IntWrapper as PartialEq>::eq(_6, _7) -> [return: bb1, unwind continue];
+        _9 = <IntWrapper as PartialEq>::eq(_6, _7) -> bb1;
     }
 
     bb1: {
@@ -329,7 +329,7 @@ fn main() -> () {
     bb2: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<IntWrapper, IntWrapper>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<IntWrapper, IntWrapper>(move _10, _6, _7, move _12);
     }
 
     bb3: {
@@ -351,7 +351,7 @@ fn main() -> () {
     bb4: {
         _25 = core::panicking::AssertKind::Eq;
         _27 = Option::<Arguments<'_>>::None;
-        _26 = core::panicking::assert_failed::<u32, u32>(move _25, _19, _20, move _27) -> unwind continue;
+        _26 = core::panicking::assert_failed::<u32, u32>(move _25, _19, _20, move _27);
     }
 
     bb5: {
@@ -359,21 +359,21 @@ fn main() -> () {
         _29 = &_30;
         _37 = [const ""];
         _36 = &_37;
-        _35 = _36 as &[&str] (PointerCoercion(Unsize));
+        _35 = _36 as &[&str] (Pointer(Unsize));
         _43 = HasKeywordField { struct: const 3_u32 };
         _42 = &_43;
-        _41 = core::fmt::rt::Argument::<'_>::new_debug::<HasKeywordField>(_42) -> [return: bb6, unwind continue];
+        _41 = core::fmt::rt::Argument::<'_>::new_debug::<HasKeywordField>(_42) -> bb6;
     }
 
     bb6: {
         _40 = [move _41];
         _39 = &_40;
-        _38 = _39 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _34 = Arguments::<'_>::new_v1(move _35, move _38) -> [return: bb7, unwind continue];
+        _38 = _39 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _34 = Arguments::<'_>::new_v1(move _35, move _38) -> bb7;
     }
 
     bb7: {
-        _33 = format(move _34) -> [return: bb8, unwind continue];
+        _33 = format(move _34) -> bb8;
     }
 
     bb8: {
@@ -397,7 +397,7 @@ fn main() -> () {
     }
 
     bb11: {
-        drop(_32) -> [return: bb12, unwind continue];
+        drop(_32) -> bb12;
     }
 
     bb12: {
@@ -418,7 +418,7 @@ fn main() -> () {
     bb13: {
         _62 = core::panicking::AssertKind::Eq;
         _64 = Option::<Arguments<'_>>::None;
-        _63 = core::panicking::assert_failed::<i32, i32>(move _62, _56, _57, move _64) -> unwind continue;
+        _63 = core::panicking::assert_failed::<i32, i32>(move _62, _56, _57, move _64);
     }
 
     bb14: {
@@ -426,7 +426,7 @@ fn main() -> () {
         _66 = &_67;
         _71 = Generic::<u32>(const 5_u32);
         _70 = &_71;
-        _69 = <Generic<u32> as Trait>::r#trait(move _70) -> [return: bb15, unwind continue];
+        _69 = <Generic<u32> as Trait>::r#trait(move _70) -> bb15;
     }
 
     bb15: {
@@ -444,7 +444,7 @@ fn main() -> () {
     bb16: {
         _78 = core::panicking::AssertKind::Eq;
         _80 = Option::<Arguments<'_>>::None;
-        _79 = core::panicking::assert_failed::<u32, u32>(move _78, _72, _73, move _80) -> unwind continue;
+        _79 = core::panicking::assert_failed::<u32, u32>(move _78, _72, _73, move _80);
     }
 
     bb17: {

@@ -43,36 +43,36 @@ fn <impl at ui/methods/method-mut-self-modifies-mut-slice-lvalue.rs:13:1: 13:35>
         _5 = &(*_24);
         _4 = Len((*_5));
         _6 = Len((*_2));
-        _3 = std::cmp::min::<usize>(move _4, move _6) -> [return: bb1, unwind continue];
+        _3 = std::cmp::min::<usize>(move _4, move _6) -> bb1;
     }
 
     bb1: {
         _25 = deref_copy (*_1);
         _11 = _3;
         _10 = RangeTo::<usize> { end: move _11 };
-        _9 = <[u8] as IndexMut<RangeTo<usize>>>::index_mut(_25, move _10) -> [return: bb2, unwind continue];
+        _9 = <[u8] as IndexMut<RangeTo<usize>>>::index_mut(_25, move _10) -> bb2;
     }
 
     bb2: {
         _8 = _9;
         _15 = _3;
         _14 = RangeTo::<usize> { end: move _15 };
-        _13 = <[u8] as Index<RangeTo<usize>>>::index(_2, move _14) -> [return: bb3, unwind continue];
+        _13 = <[u8] as Index<RangeTo<usize>>>::index(_2, move _14) -> bb3;
     }
 
     bb3: {
         _12 = _13;
-        _7 = core::slice::<impl [u8]>::clone_from_slice(move _8, _12) -> [return: bb4, unwind continue];
+        _7 = core::slice::<impl [u8]>::clone_from_slice(move _8, _12) -> bb4;
     }
 
     bb4: {
         _16 = Len((*_2));
         _26 = deref_copy (*_1);
-        _20 = core::slice::<impl [u8]>::as_mut_ptr(_26) -> [return: bb5, unwind continue];
+        _20 = core::slice::<impl [u8]>::as_mut_ptr(_26) -> bb5;
     }
 
     bb5: {
-        _19 = ptr::mut_ptr::<impl *mut u8>::add(move _20, _16) -> [return: bb6, unwind continue];
+        _19 = ptr::mut_ptr::<impl *mut u8>::add(move _20, _16) -> bb6;
     }
 
     bb6: {
@@ -80,7 +80,7 @@ fn <impl at ui/methods/method-mut-self-modifies-mut-slice-lvalue.rs:13:1: 13:35>
         _23 = &(*_27);
         _22 = Len((*_23));
         _21 = Sub(move _22, _16);
-        _18 = std::slice::from_raw_parts_mut::<'_, u8>(move _19, move _21) -> [return: bb7, unwind continue];
+        _18 = std::slice::from_raw_parts_mut::<'_, u8>(move _19, move _21) -> bb7;
     }
 
     bb7: {
@@ -136,28 +136,28 @@ fn main() -> () {
     bb0: {
         _1 = [const 0_u8; 6];
         _3 = &mut _1;
-        _2 = _3 as &mut [u8] (PointerCoercion(Unsize));
+        _2 = _3 as &mut [u8] (Pointer(Unsize));
         _6 = &mut _2;
         _9 = [const 0_u8, const 1_u8, const 2_u8];
         _8 = &_9;
-        _7 = _8 as &[u8] (PointerCoercion(Unsize));
-        _5 = <&mut [u8] as MyWriter>::my_write(move _6, move _7) -> [return: bb1, unwind continue];
+        _7 = _8 as &[u8] (Pointer(Unsize));
+        _5 = <&mut [u8] as MyWriter>::my_write(move _6, move _7) -> bb1;
     }
 
     bb1: {
-        _4 = Result::<(), ()>::unwrap(move _5) -> [return: bb2, unwind continue];
+        _4 = Result::<(), ()>::unwrap(move _5) -> bb2;
     }
 
     bb2: {
         _12 = &mut _2;
         _15 = [const 3_u8, const 4_u8, const 5_u8];
         _14 = &_15;
-        _13 = _14 as &[u8] (PointerCoercion(Unsize));
-        _11 = <&mut [u8] as MyWriter>::my_write(move _12, move _13) -> [return: bb3, unwind continue];
+        _13 = _14 as &[u8] (Pointer(Unsize));
+        _11 = <&mut [u8] as MyWriter>::my_write(move _12, move _13) -> bb3;
     }
 
     bb3: {
-        _10 = Result::<(), ()>::unwrap(move _11) -> [return: bb4, unwind continue];
+        _10 = Result::<(), ()>::unwrap(move _11) -> bb4;
     }
 
     bb4: {
@@ -167,7 +167,7 @@ fn main() -> () {
         _16 = (move _17, move _18);
         _20 = (_16.0: &[u8; 6]);
         _21 = (_16.1: &[u8; 6]);
-        _23 = <[u8; 6] as PartialEq>::eq(_20, _21) -> [return: bb5, unwind continue];
+        _23 = <[u8; 6] as PartialEq>::eq(_20, _21) -> bb5;
     }
 
     bb5: {
@@ -178,7 +178,7 @@ fn main() -> () {
     bb6: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<[u8; 6], [u8; 6]>(move _24, _20, _21, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<[u8; 6], [u8; 6]>(move _24, _20, _21, move _26);
     }
 
     bb7: {

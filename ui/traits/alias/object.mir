@@ -70,10 +70,10 @@ fn main() -> () {
     bb0: {
         _3 = const 123_i32;
         _2 = &_3;
-        _1 = _2 as &dyn std::cmp::PartialEq<i32> + std::marker::Send + std::marker::Sync (PointerCoercion(Unsize));
+        _1 = _2 as &dyn std::cmp::PartialEq<i32> + std::marker::Send + std::marker::Sync (Pointer(Unsize));
         _7 = const 123_i32;
         _6 = &_7;
-        _5 = <dyn PartialEq<i32> + Send + Sync as PartialEq<i32>>::eq(_1, move _6) -> [return: bb1, unwind continue];
+        _5 = <dyn PartialEq<i32> + Send + Sync as PartialEq<i32>>::eq(_1, move _6) -> bb1;
     }
 
     bb1: {
@@ -82,15 +82,15 @@ fn main() -> () {
     }
 
     bb2: {
-        _8 = core::panicking::panic(const "assertion failed: *a == 123") -> unwind continue;
+        _8 = core::panicking::panic(const "assertion failed: *a == 123");
     }
 
     bb3: {
-        _11 = Box::<i32>::new(const 456_i32) -> [return: bb4, unwind continue];
+        _11 = Box::<i32>::new(const 456_i32) -> bb4;
     }
 
     bb4: {
-        _10 = move _11 as std::boxed::Box<dyn std::cmp::PartialEq<i32> + std::marker::Send> (PointerCoercion(Unsize));
+        _10 = move _11 as std::boxed::Box<dyn std::cmp::PartialEq<i32> + std::marker::Send> (Pointer(Unsize));
         _9 = move _10;
         _39 = (((_9.0: std::ptr::Unique<dyn std::cmp::PartialEq<i32> + std::marker::Send>).0: std::ptr::NonNull<dyn std::cmp::PartialEq<i32> + std::marker::Send>).0: *const dyn std::cmp::PartialEq<i32> + std::marker::Send);
         _14 = &(*_39);
@@ -132,7 +132,7 @@ fn main() -> () {
 
     bb10: {
         _19 = &mut _20;
-        _18 = _19 as &mut dyn std::iter::Iterator<Item = i32> (PointerCoercion(Unsize));
+        _18 = _19 as &mut dyn std::iter::Iterator<Item = i32> (Pointer(Unsize));
         _29 = <dyn Iterator<Item = i32> as Iterator>::next(_18) -> [return: bb11, unwind: bb17];
     }
 
@@ -162,7 +162,7 @@ fn main() -> () {
     }
 
     bb15: {
-        drop(_9) -> [return: bb16, unwind continue];
+        drop(_9) -> bb16;
     }
 
     bb16: {
@@ -183,7 +183,7 @@ fn main() -> () {
 
     bb20: {
         (*_40) = [const 123_i32];
-        _22 = move _26 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
+        _22 = move _26 as std::boxed::Box<[i32]> (Pointer(Unsize));
         _21 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _22) -> [return: bb9, unwind: bb18];
     }
 }

@@ -24,12 +24,12 @@ fn <impl at ui/traits/coercion.rs:18:1: 18:22>::f(_1: &Struct) -> () {
     bb0: {
         _6 = [const "Hi!\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _print(move _3) -> [return: bb2, unwind continue];
+        _2 = _print(move _3) -> bb2;
     }
 
     bb2: {
@@ -42,7 +42,7 @@ fn foo(_1: Box<dyn std::io::Write>) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -83,11 +83,11 @@ fn main() -> () {
     bb0: {
         _1 = Struct { x: const 1_isize, y: const 2_isize };
         _4 = _1;
-        _3 = Box::<Struct>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<Struct>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn Trait> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn Trait> (Pointer(Unsize));
         _15 = (((_2.0: std::ptr::Unique<dyn Trait>).0: std::ptr::NonNull<dyn Trait>).0: *const dyn Trait);
         _6 = &(*_15);
         _5 = <dyn Trait as Trait>::f(move _6) -> [return: bb2, unwind: bb8];
@@ -95,7 +95,7 @@ fn main() -> () {
 
     bb2: {
         _8 = &_1;
-        _7 = _8 as &dyn Trait (PointerCoercion(Unsize));
+        _7 = _8 as &dyn Trait (Pointer(Unsize));
         _9 = <dyn Trait as Trait>::f(_7) -> [return: bb3, unwind: bb8];
     }
 
@@ -109,12 +109,12 @@ fn main() -> () {
     }
 
     bb5: {
-        _12 = move _13 as std::boxed::Box<dyn std::io::Write> (PointerCoercion(Unsize));
+        _12 = move _13 as std::boxed::Box<dyn std::io::Write> (Pointer(Unsize));
         _11 = foo(move _12) -> [return: bb6, unwind: bb8];
     }
 
     bb6: {
-        drop(_2) -> [return: bb7, unwind continue];
+        drop(_2) -> bb7;
     }
 
     bb7: {

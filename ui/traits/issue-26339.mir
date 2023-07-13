@@ -38,9 +38,9 @@ fn main() -> () {
 
     bb0: {
         _2 = &_3;
-        _1 = _2 as &dyn A (PointerCoercion(Unsize));
+        _1 = _2 as &dyn A (Pointer(Unsize));
         _6 = &_7;
-        _5 = <dyn A as PartialEq<Foo>>::eq(_1, move _6) -> [return: bb1, unwind continue];
+        _5 = <dyn A as PartialEq<Foo>>::eq(_1, move _6) -> bb1;
     }
 
     bb1: {
@@ -49,7 +49,7 @@ fn main() -> () {
     }
 
     bb2: {
-        _8 = core::panicking::panic(const "assertion failed: *a == Foo") -> unwind continue;
+        _8 = core::panicking::panic(const "assertion failed: *a == Foo");
     }
 
     bb3: {

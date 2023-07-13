@@ -18,7 +18,7 @@ fn <impl at ui/overloaded/overloaded-autoderef-count.rs:5:10: 5:19>::eq(_1: &Der
     bb0: {
         _5 = &((*_1).0: std::cell::Cell<usize>);
         _6 = &((*_2).0: std::cell::Cell<usize>);
-        _4 = <Cell<usize> as PartialEq>::eq(move _5, move _6) -> [return: bb7, unwind continue];
+        _4 = <Cell<usize> as PartialEq>::eq(move _5, move _6) -> bb7;
     }
 
     bb1: {
@@ -29,7 +29,7 @@ fn <impl at ui/overloaded/overloaded-autoderef-count.rs:5:10: 5:19>::eq(_1: &Der
     bb2: {
         _11 = &((*_1).2: T);
         _12 = &((*_2).2: T);
-        _10 = <T as PartialEq>::eq(move _11, move _12) -> [return: bb8, unwind continue];
+        _10 = <T as PartialEq>::eq(move _11, move _12) -> bb8;
     }
 
     bb3: {
@@ -97,7 +97,7 @@ fn <impl at ui/overloaded/overloaded-autoderef-count.rs:12:1: 12:24>::counts(_1:
 
     bb0: {
         _3 = &((*_1).0: std::cell::Cell<usize>);
-        _2 = Cell::<usize>::get(move _3) -> [return: bb1, unwind continue];
+        _2 = Cell::<usize>::get(move _3) -> bb1;
     }
 
     bb1: {
@@ -119,12 +119,12 @@ fn <impl at ui/overloaded/overloaded-autoderef-count.rs:26:1: 26:34>::deref(_1: 
     bb0: {
         _3 = &((*_1).0: std::cell::Cell<usize>);
         _6 = &((*_1).0: std::cell::Cell<usize>);
-        _5 = Cell::<usize>::get(move _6) -> [return: bb1, unwind continue];
+        _5 = Cell::<usize>::get(move _6) -> bb1;
     }
 
     bb1: {
         _4 = Add(move _5, const 1_usize);
-        _2 = Cell::<usize>::set(move _3, move _4) -> [return: bb2, unwind continue];
+        _2 = Cell::<usize>::set(move _3, move _4) -> bb2;
     }
 
     bb2: {
@@ -197,12 +197,12 @@ fn <impl at ui/overloaded/overloaded-autoderef-count.rs:42:21: 42:26>::fmt(_1: &
         _3 = const "Point";
         _4 = const "x";
         _6 = &((*_1).0: isize);
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
         _7 = const "y";
         _10 = &((*_1).1: isize);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
+        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> bb1;
     }
 
     bb1: {
@@ -372,17 +372,17 @@ fn main() -> () {
 
     bb0: {
         _2 = Point { x: const 0_isize, y: const 0_isize };
-        _1 = DerefCounter::<Point>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = DerefCounter::<Point>::new(move _2) -> bb1;
     }
 
     bb1: {
         _4 = &_1;
-        _3 = <DerefCounter<Point> as Deref>::deref(move _4) -> [return: bb2, unwind continue];
+        _3 = <DerefCounter<Point> as Deref>::deref(move _4) -> bb2;
     }
 
     bb2: {
         _8 = &_1;
-        _7 = DerefCounter::<Point>::counts(move _8) -> [return: bb3, unwind continue];
+        _7 = DerefCounter::<Point>::counts(move _8) -> bb3;
     }
 
     bb3: {
@@ -392,7 +392,7 @@ fn main() -> () {
         _5 = (move _6, move _9);
         _11 = (_5.0: &(usize, usize));
         _12 = (_5.1: &(usize, usize));
-        _14 = <(usize, usize) as PartialEq>::eq(_11, _12) -> [return: bb4, unwind continue];
+        _14 = <(usize, usize) as PartialEq>::eq(_11, _12) -> bb4;
     }
 
     bb4: {
@@ -403,17 +403,17 @@ fn main() -> () {
     bb5: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _15, _11, _12, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _15, _11, _12, move _17);
     }
 
     bb6: {
         _19 = &_1;
-        _18 = <DerefCounter<Point> as Deref>::deref(move _19) -> [return: bb7, unwind continue];
+        _18 = <DerefCounter<Point> as Deref>::deref(move _19) -> bb7;
     }
 
     bb7: {
         _23 = &_1;
-        _22 = DerefCounter::<Point>::counts(move _23) -> [return: bb8, unwind continue];
+        _22 = DerefCounter::<Point>::counts(move _23) -> bb8;
     }
 
     bb8: {
@@ -423,7 +423,7 @@ fn main() -> () {
         _20 = (move _21, move _24);
         _26 = (_20.0: &(usize, usize));
         _27 = (_20.1: &(usize, usize));
-        _29 = <(usize, usize) as PartialEq>::eq(_26, _27) -> [return: bb9, unwind continue];
+        _29 = <(usize, usize) as PartialEq>::eq(_26, _27) -> bb9;
     }
 
     bb9: {
@@ -434,17 +434,17 @@ fn main() -> () {
     bb10: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _30, _26, _27, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _30, _26, _27, move _32);
     }
 
     bb11: {
         _34 = &mut _1;
-        _33 = <DerefCounter<Point> as DerefMut>::deref_mut(move _34) -> [return: bb12, unwind continue];
+        _33 = <DerefCounter<Point> as DerefMut>::deref_mut(move _34) -> bb12;
     }
 
     bb12: {
         _38 = &_1;
-        _37 = DerefCounter::<Point>::counts(move _38) -> [return: bb13, unwind continue];
+        _37 = DerefCounter::<Point>::counts(move _38) -> bb13;
     }
 
     bb13: {
@@ -454,7 +454,7 @@ fn main() -> () {
         _35 = (move _36, move _39);
         _41 = (_35.0: &(usize, usize));
         _42 = (_35.1: &(usize, usize));
-        _44 = <(usize, usize) as PartialEq>::eq(_41, _42) -> [return: bb14, unwind continue];
+        _44 = <(usize, usize) as PartialEq>::eq(_41, _42) -> bb14;
     }
 
     bb14: {
@@ -465,18 +465,18 @@ fn main() -> () {
     bb15: {
         _45 = core::panicking::AssertKind::Eq;
         _47 = Option::<Arguments<'_>>::None;
-        _46 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _45, _41, _42, move _47) -> unwind continue;
+        _46 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _45, _41, _42, move _47);
     }
 
     bb16: {
         _49 = &mut _1;
-        _48 = <DerefCounter<Point> as DerefMut>::deref_mut(move _49) -> [return: bb17, unwind continue];
+        _48 = <DerefCounter<Point> as DerefMut>::deref_mut(move _49) -> bb17;
     }
 
     bb17: {
         ((*_48).0: isize) = Add(((*_48).0: isize), const 3_isize);
         _53 = &_1;
-        _52 = DerefCounter::<Point>::counts(move _53) -> [return: bb18, unwind continue];
+        _52 = DerefCounter::<Point>::counts(move _53) -> bb18;
     }
 
     bb18: {
@@ -486,7 +486,7 @@ fn main() -> () {
         _50 = (move _51, move _54);
         _56 = (_50.0: &(usize, usize));
         _57 = (_50.1: &(usize, usize));
-        _59 = <(usize, usize) as PartialEq>::eq(_56, _57) -> [return: bb19, unwind continue];
+        _59 = <(usize, usize) as PartialEq>::eq(_56, _57) -> bb19;
     }
 
     bb19: {
@@ -497,22 +497,22 @@ fn main() -> () {
     bb20: {
         _60 = core::panicking::AssertKind::Eq;
         _62 = Option::<Arguments<'_>>::None;
-        _61 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _60, _56, _57, move _62) -> unwind continue;
+        _61 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _60, _56, _57, move _62);
     }
 
     bb21: {
         _66 = &_1;
-        _65 = <DerefCounter<Point> as Deref>::deref(move _66) -> [return: bb22, unwind continue];
+        _65 = <DerefCounter<Point> as Deref>::deref(move _66) -> bb22;
     }
 
     bb22: {
         _64 = _65;
-        _63 = Point::get(move _64) -> [return: bb23, unwind continue];
+        _63 = Point::get(move _64) -> bb23;
     }
 
     bb23: {
         _70 = &_1;
-        _69 = DerefCounter::<Point>::counts(move _70) -> [return: bb24, unwind continue];
+        _69 = DerefCounter::<Point>::counts(move _70) -> bb24;
     }
 
     bb24: {
@@ -522,7 +522,7 @@ fn main() -> () {
         _67 = (move _68, move _71);
         _73 = (_67.0: &(usize, usize));
         _74 = (_67.1: &(usize, usize));
-        _76 = <(usize, usize) as PartialEq>::eq(_73, _74) -> [return: bb25, unwind continue];
+        _76 = <(usize, usize) as PartialEq>::eq(_73, _74) -> bb25;
     }
 
     bb25: {
@@ -533,12 +533,12 @@ fn main() -> () {
     bb26: {
         _77 = core::panicking::AssertKind::Eq;
         _79 = Option::<Arguments<'_>>::None;
-        _78 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _77, _73, _74, move _79) -> unwind continue;
+        _78 = core::panicking::assert_failed::<(usize, usize), (usize, usize)>(move _77, _73, _74, move _79);
     }
 
     bb27: {
         _83 = &_1;
-        _82 = <DerefCounter<Point> as Deref>::deref(move _83) -> [return: bb28, unwind continue];
+        _82 = <DerefCounter<Point> as Deref>::deref(move _83) -> bb28;
     }
 
     bb28: {
@@ -548,7 +548,7 @@ fn main() -> () {
         _80 = (move _81, move _84);
         _86 = (_80.0: &Point);
         _87 = (_80.1: &Point);
-        _89 = <Point as PartialEq>::eq(_86, _87) -> [return: bb29, unwind continue];
+        _89 = <Point as PartialEq>::eq(_86, _87) -> bb29;
     }
 
     bb29: {
@@ -559,7 +559,7 @@ fn main() -> () {
     bb30: {
         _90 = core::panicking::AssertKind::Eq;
         _92 = Option::<Arguments<'_>>::None;
-        _91 = core::panicking::assert_failed::<Point, Point>(move _90, _86, _87, move _92) -> unwind continue;
+        _91 = core::panicking::assert_failed::<Point, Point>(move _90, _86, _87, move _92);
     }
 
     bb31: {

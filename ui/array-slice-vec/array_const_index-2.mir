@@ -49,7 +49,7 @@ const VAL: i32 = {
         _2 = const _;
         _3 = Len(_1);
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -88,13 +88,13 @@ BLUB::{constant#0}: usize = {
         _4 = const 0_usize;
         _5 = Len(_3);
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb1;
     }
 
     bb1: {
         _2 = _3[_4];
         _7 = CheckedSub(_2, const 41_i32);
-        assert(!move (_7.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, const 41_i32) -> [success: bb2, unwind continue];
+        assert(!move (_7.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, const 41_i32) -> bb2;
     }
 
     bb2: {

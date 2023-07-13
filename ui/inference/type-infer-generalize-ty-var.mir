@@ -7,7 +7,7 @@ fn <impl at ui/inference/type-infer-generalize-ty-var.rs:28:1: 28:43>::get(_1: &
 
     bb0: {
         _2 = const {alloc1: &usize};
-        _0 = _2 as &dyn MyShow (PointerCoercion(Unsize));
+        _0 = _2 as &dyn MyShow (Pointer(Unsize));
         return;
     }
 }
@@ -89,17 +89,17 @@ fn main() -> () {
     bb0: {
         _1 = Wrap::<T>::WrapNone;
         _3 = &_1;
-        _2 = <Wrap<T> as Get<dyn MyShow>>::get(_3) -> [return: bb1, unwind continue];
+        _2 = <Wrap<T> as Get<dyn MyShow>>::get(_3) -> bb1;
     }
 
     bb1: {
         _5 = _2;
-        _4 = RefCell::<&dyn MyShow>::new(move _5) -> [return: bb2, unwind continue];
+        _4 = RefCell::<&dyn MyShow>::new(move _5) -> bb2;
     }
 
     bb2: {
         _7 = move _4;
-        _6 = constrain(move _7) -> [return: bb3, unwind continue];
+        _6 = constrain(move _7) -> bb3;
     }
 
     bb3: {

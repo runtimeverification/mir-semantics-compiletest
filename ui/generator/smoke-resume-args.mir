@@ -172,7 +172,7 @@ static DROPS: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -188,7 +188,7 @@ fn <impl at ui/generator/smoke-resume-args.rs:33:10: 33:15>::fmt(_1: &DropMe, _2
 
     bb0: {
         _3 = const "DropMe";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -217,7 +217,7 @@ fn <impl at ui/generator/smoke-resume-args.rs:36:1: 36:21>::drop(_1: &mut DropMe
     bb0: {
         _3 = const {alloc1: &AtomicUsize};
         _4 = SeqCst;
-        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicUsize::fetch_add(_3, const 1_usize, move _4) -> bb1;
     }
 
     bb1: {
@@ -374,7 +374,7 @@ fn main() -> () {
         _2 = &mut _3;
         _6 = SizeOf([(i32, std::ops::GeneratorState<i32, i32>); 4]);
         _7 = AlignOf([(i32, std::ops::GeneratorState<i32, i32>); 4]);
-        _8 = alloc::alloc::exchange_malloc(move _6, move _7) -> [return: bb1, unwind continue];
+        _8 = alloc::alloc::exchange_malloc(move _6, move _7) -> bb1;
     }
 
     bb1: {
@@ -398,27 +398,27 @@ fn main() -> () {
     }
 
     bb2: {
-        _1 = drain::<[generator@ui/generator/smoke-resume-args.rs:54:14: 54:21], i32, i32>(_2, move _4) -> [return: bb3, unwind continue];
+        _1 = drain::<[generator@ui/generator/smoke-resume-args.rs:54:14: 54:21], i32, i32>(_2, move _4) -> bb3;
     }
 
     bb3: {
-        _18 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23]) -> [return: bb4, unwind continue];
+        _18 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23]) -> bb4;
     }
 
     bb4: {
-        _19 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23]>(const 6_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23]) -> [return: bb5, unwind continue];
+        _19 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23]>(const 6_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23]) -> bb5;
     }
 
     bb5: {
-        _20 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23]) -> [return: bb6, unwind continue];
+        _20 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23]) -> bb6;
     }
 
     bb6: {
-        _21 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23]) -> [return: bb7, unwind continue];
+        _21 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23]>(const 2_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23]) -> bb7;
     }
 
     bb7: {
-        _22 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23]>(const 4_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23]) -> [return: bb8, unwind continue];
+        _22 = expect_drops::<(), [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23]>(const 4_usize, const ZeroSized: [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23]) -> bb8;
     }
 
     bb8: {
@@ -427,8 +427,8 @@ fn main() -> () {
 
     bb9: {
         (*_23) = [move _10, move _12, move _14, move _16];
-        _5 = move _9 as std::boxed::Box<[(i32, std::ops::GeneratorState<i32, i32>)]> (PointerCoercion(Unsize));
-        _4 = slice::<impl [(i32, GeneratorState<i32, i32>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind continue];
+        _5 = move _9 as std::boxed::Box<[(i32, std::ops::GeneratorState<i32, i32>)]> (Pointer(Unsize));
+        _4 = slice::<impl [(i32, GeneratorState<i32, i32>)]>::into_vec::<std::alloc::Global>(move _5) -> bb2;
     }
 }
 
@@ -484,7 +484,7 @@ fn main::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-resume-args.rs:5
     }
 
     bb6: {
-        assert(const false, "generator resumed after completion") -> [success: bb6, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb6;
     }
 
     bb7: {
@@ -541,7 +541,7 @@ fn main::{closure#1}(_1: [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -558,7 +558,7 @@ fn main::{closure#1}(_1: [closure@ui/generator/smoke-resume-args.rs:63:21: 63:23
 
     bb7: {
         (*_12) = [move _10];
-        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<DropMe, DropMe>)]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<DropMe, DropMe>)]> (Pointer(Unsize));
         _4 = slice::<impl [(DropMe, GeneratorState<DropMe, DropMe>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb5];
     }
 }
@@ -592,7 +592,7 @@ fn main::{closure#1}::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-res
     }
 
     bb3: {
-        assert(const false, "generator resumed after completion") -> [success: bb3, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb3;
     }
 
     bb4: {
@@ -657,7 +657,7 @@ fn main::{closure#2}(_1: [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -674,7 +674,7 @@ fn main::{closure#2}(_1: [closure@ui/generator/smoke-resume-args.rs:65:21: 65:23
 
     bb7: {
         (*_16) = [move _10, move _12, move _14];
-        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<DropMe, DropMe>)]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<DropMe, DropMe>)]> (Pointer(Unsize));
         _4 = slice::<impl [(DropMe, GeneratorState<DropMe, DropMe>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb5];
     }
 }
@@ -716,7 +716,7 @@ fn main::{closure#2}::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-res
     }
 
     bb4: {
-        assert(const false, "generator resumed after completion") -> [success: bb4, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb4;
     }
 
     bb5: {
@@ -773,7 +773,7 @@ fn main::{closure#3}(_1: [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -790,7 +790,7 @@ fn main::{closure#3}(_1: [closure@ui/generator/smoke-resume-args.rs:73:21: 73:23
 
     bb7: {
         (*_12) = [move _10];
-        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), DropMe>)]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), DropMe>)]> (Pointer(Unsize));
         _4 = slice::<impl [(DropMe, GeneratorState<(), DropMe>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb5];
     }
 }
@@ -816,7 +816,7 @@ fn main::{closure#3}::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-res
     }
 
     bb2: {
-        assert(const false, "generator resumed after completion") -> [success: bb2, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb2;
     }
 
     bb3: {
@@ -873,7 +873,7 @@ fn main::{closure#4}(_1: [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -890,7 +890,7 @@ fn main::{closure#4}(_1: [closure@ui/generator/smoke-resume-args.rs:75:21: 75:23
 
     bb7: {
         (*_12) = [move _10];
-        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), DropMe>)]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), DropMe>)]> (Pointer(Unsize));
         _4 = slice::<impl [(DropMe, GeneratorState<(), DropMe>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb5];
     }
 }
@@ -976,11 +976,11 @@ fn main::{closure#4}::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-res
     }
 
     bb9: {
-        assert(const false, "generator resumed after panicking") -> [success: bb9, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb9;
     }
 
     bb10: {
-        assert(const false, "generator resumed after completion") -> [success: bb10, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb10;
     }
 
     bb11: {
@@ -1051,7 +1051,7 @@ fn main::{closure#5}(_1: [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -1068,7 +1068,7 @@ fn main::{closure#5}(_1: [closure@ui/generator/smoke-resume-args.rs:84:21: 84:23
 
     bb7: {
         (*_18) = [move _10, move _12, move _14, move _16];
-        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), ()>)]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[(DropMe, std::ops::GeneratorState<(), ()>)]> (Pointer(Unsize));
         _4 = slice::<impl [(DropMe, GeneratorState<(), ()>)]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb5];
     }
 }
@@ -1196,11 +1196,11 @@ fn main::{closure#5}::{closure#0}(_1: Pin<&mut [generator@ui/generator/smoke-res
     }
 
     bb14: {
-        assert(const false, "generator resumed after panicking") -> [success: bb14, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb14;
     }
 
     bb15: {
-        assert(const false, "generator resumed after completion") -> [success: bb15, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb15;
     }
 
     bb16: {

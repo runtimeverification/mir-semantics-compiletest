@@ -196,12 +196,12 @@ fn main() -> () {
 
     bb0: {
         _2 = [const 1_i32, const 2_i32, const 3_i32];
-        _1 = Rc::<[i32; 3]>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = Rc::<[i32; 3]>::new(move _2) -> bb1;
     }
 
     bb1: {
         _4 = move _1;
-        _3 = move _4 as std::rc::Rc<[i32]> (PointerCoercion(Unsize));
+        _3 = move _4 as std::rc::Rc<[i32]> (Pointer(Unsize));
         _8 = &_3;
         _7 = <Rc<[i32]> as Deref>::deref(move _8) -> [return: bb2, unwind: bb51];
     }
@@ -307,7 +307,7 @@ fn main() -> () {
     }
 
     bb15: {
-        _60 = move _61 as std::rc::Rc<dyn Baz> (PointerCoercion(Unsize));
+        _60 = move _61 as std::rc::Rc<dyn Baz> (Pointer(Unsize));
         _68 = &_60;
         _67 = <Rc<dyn Baz> as Deref>::deref(move _68) -> [return: bb16, unwind: bb49];
     }
@@ -348,7 +348,7 @@ fn main() -> () {
     }
 
     bb21: {
-        _82 = move _83 as std::rc::Weak<dyn Baz> (PointerCoercion(Unsize));
+        _82 = move _83 as std::rc::Weak<dyn Baz> (Pointer(Unsize));
         _86 = &_60;
         _85 = <Rc<dyn Baz> as Clone>::clone(move _86) -> [return: bb22, unwind: bb47];
     }
@@ -367,7 +367,7 @@ fn main() -> () {
     }
 
     bb25: {
-        _89 = move _90 as std::rc::Rc<std::cell::RefCell<dyn Baz>> (PointerCoercion(Unsize));
+        _89 = move _90 as std::rc::Rc<std::cell::RefCell<dyn Baz>> (Pointer(Unsize));
         _101 = &_89;
         _100 = <Rc<RefCell<dyn Baz>> as Deref>::deref(move _101) -> [return: bb26, unwind: bb44];
     }
@@ -417,7 +417,7 @@ fn main() -> () {
     }
 
     bb33: {
-        _114 = move _115 as std::rc::Weak<std::cell::RefCell<dyn Baz>> (PointerCoercion(Unsize));
+        _114 = move _115 as std::rc::Weak<std::cell::RefCell<dyn Baz>> (Pointer(Unsize));
         _113 = move _114;
         drop(_113) -> [return: bb34, unwind: bb44];
     }
@@ -451,7 +451,7 @@ fn main() -> () {
     }
 
     bb41: {
-        drop(_3) -> [return: bb42, unwind continue];
+        drop(_3) -> bb42;
     }
 
     bb42: {

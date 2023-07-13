@@ -44,7 +44,7 @@ fn main() -> () {
         _4 = const 1_usize;
         _5 = const 2_usize;
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb1;
     }
 
     bb1: {
@@ -53,7 +53,7 @@ fn main() -> () {
         _9 = const 0_usize;
         _10 = const 2_usize;
         _11 = Lt(_9, _10);
-        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> [success: bb2, unwind continue];
+        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> bb2;
     }
 
     bb2: {
@@ -61,7 +61,7 @@ fn main() -> () {
         _7 = Mul(move _8, const 2_i32);
         _1 = [move _2, move _7];
         _16 = &_1;
-        _15 = <[i32; 2] as Index<RangeFull>>::index(move _16, const RangeFull) -> [return: bb3, unwind continue];
+        _15 = <[i32; 2] as Index<RangeFull>>::index(move _16, const RangeFull) -> bb3;
     }
 
     bb3: {
@@ -73,7 +73,7 @@ fn main() -> () {
         _12 = (move _13, move _17);
         _20 = (_12.0: &&[i32]);
         _21 = (_12.1: &&[i32; 2]);
-        _23 = <&[i32] as PartialEq<&[i32; 2]>>::eq(_20, _21) -> [return: bb4, unwind continue];
+        _23 = <&[i32] as PartialEq<&[i32; 2]>>::eq(_20, _21) -> bb4;
     }
 
     bb4: {
@@ -84,7 +84,7 @@ fn main() -> () {
     bb5: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<&[i32], &[i32; 2]>(move _24, _20, _21, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<&[i32], &[i32; 2]>(move _24, _20, _21, move _26);
     }
 
     bb6: {

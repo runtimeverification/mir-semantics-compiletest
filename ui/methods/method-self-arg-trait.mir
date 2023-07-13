@@ -104,7 +104,7 @@ fn Bar::bar2(_1: Self) -> () {
 
     bb2: {
         (*_2) = Mul((*_2), const 11_u64);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb3: {
@@ -158,7 +158,7 @@ fn Bar::bar3(_1: Box<Self>) -> () {
 
     bb2: {
         (*_2) = Mul((*_2), const 13_u64);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb3: {
@@ -312,7 +312,7 @@ fn <impl at ui/methods/method-self-arg-trait.rs:25:1: 25:17>::foo3(_1: Box<Foo>)
 
     bb2: {
         (*_2) = Mul((*_2), const 5_u64);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb3: {
@@ -371,32 +371,32 @@ fn <impl at ui/methods/method-self-arg-trait.rs:39:1: 39:9>::baz(_1: Foo) -> () 
     }
 
     bb1: {
-        _5 = <Foo as Bar>::foo2(const Foo) -> [return: bb2, unwind continue];
+        _5 = <Foo as Bar>::foo2(const Foo) -> bb2;
     }
 
     bb2: {
-        _7 = Box::<Foo>::new(const Foo) -> [return: bb3, unwind continue];
+        _7 = Box::<Foo>::new(const Foo) -> bb3;
     }
 
     bb3: {
-        _6 = <Foo as Bar>::foo3(move _7) -> [return: bb4, unwind continue];
+        _6 = <Foo as Bar>::foo3(move _7) -> bb4;
     }
 
     bb4: {
         _9 = &_1;
-        _8 = <Foo as Bar>::bar1(_9) -> [return: bb5, unwind continue];
+        _8 = <Foo as Bar>::bar1(_9) -> bb5;
     }
 
     bb5: {
-        _10 = <Foo as Bar>::bar2(const Foo) -> [return: bb6, unwind continue];
+        _10 = <Foo as Bar>::bar2(const Foo) -> bb6;
     }
 
     bb6: {
-        _12 = Box::<Foo>::new(const Foo) -> [return: bb7, unwind continue];
+        _12 = Box::<Foo>::new(const Foo) -> bb7;
     }
 
     bb7: {
-        _11 = <Foo as Bar>::bar3(move _12) -> [return: bb8, unwind continue];
+        _11 = <Foo as Bar>::bar3(move _12) -> bb8;
     }
 
     bb8: {
@@ -406,7 +406,7 @@ fn <impl at ui/methods/method-self-arg-trait.rs:39:1: 39:9>::baz(_1: Foo) -> () 
     bb9: {
         (*_2) = Mul((*_2), const 17_u64);
         _4 = &_1;
-        _3 = <Foo as Bar>::foo1(_4) -> [return: bb1, unwind continue];
+        _3 = <Foo as Bar>::foo1(_4) -> bb1;
     }
 
     bb10: {
@@ -484,40 +484,40 @@ fn main() -> () {
 
     bb0: {
         _3 = &_1;
-        _2 = <Foo as Bar>::foo1(_3) -> [return: bb1, unwind continue];
+        _2 = <Foo as Bar>::foo1(_3) -> bb1;
     }
 
     bb1: {
-        _4 = <Foo as Bar>::foo2(const Foo) -> [return: bb2, unwind continue];
+        _4 = <Foo as Bar>::foo2(const Foo) -> bb2;
     }
 
     bb2: {
-        _6 = Box::<Foo>::new(const Foo) -> [return: bb3, unwind continue];
+        _6 = Box::<Foo>::new(const Foo) -> bb3;
     }
 
     bb3: {
-        _5 = <Foo as Bar>::foo3(move _6) -> [return: bb4, unwind continue];
+        _5 = <Foo as Bar>::foo3(move _6) -> bb4;
     }
 
     bb4: {
         _8 = &_1;
-        _7 = <Foo as Bar>::bar1(_8) -> [return: bb5, unwind continue];
+        _7 = <Foo as Bar>::bar1(_8) -> bb5;
     }
 
     bb5: {
-        _9 = <Foo as Bar>::bar2(const Foo) -> [return: bb6, unwind continue];
+        _9 = <Foo as Bar>::bar2(const Foo) -> bb6;
     }
 
     bb6: {
-        _11 = Box::<Foo>::new(const Foo) -> [return: bb7, unwind continue];
+        _11 = Box::<Foo>::new(const Foo) -> bb7;
     }
 
     bb7: {
-        _10 = <Foo as Bar>::bar3(move _11) -> [return: bb8, unwind continue];
+        _10 = <Foo as Bar>::bar3(move _11) -> bb8;
     }
 
     bb8: {
-        _12 = Foo::baz(const Foo) -> [return: bb9, unwind continue];
+        _12 = Foo::baz(const Foo) -> bb9;
     }
 
     bb9: {
@@ -534,7 +534,7 @@ fn main() -> () {
     bb10: {
         _35 = core::panicking::AssertKind::Eq;
         _37 = Option::<Arguments<'_>>::None;
-        _36 = core::panicking::assert_failed::<u64, u64>(move _35, _29, _30, move _37) -> unwind continue;
+        _36 = core::panicking::assert_failed::<u64, u64>(move _35, _29, _30, move _37);
     }
 
     bb11: {

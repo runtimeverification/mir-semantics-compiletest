@@ -30,12 +30,12 @@ fn check_align(_1: *const Aligned<'_>) -> () {
 
     bb0: {
         _5 = _1 as usize (PointerExposeAddress);
-        _6 = align_of::<Aligned<'_>>() -> [return: bb1, unwind continue];
+        _6 = align_of::<Aligned<'_>>() -> bb1;
     }
 
     bb1: {
         _7 = Eq(_6, const 0_usize);
-        assert(!move _7, "attempt to calculate the remainder of `{}` with a divisor of zero", _5) -> [success: bb2, unwind continue];
+        assert(!move _7, "attempt to calculate the remainder of `{}` with a divisor of zero", _5) -> bb2;
     }
 
     bb2: {
@@ -56,7 +56,7 @@ fn check_align(_1: *const Aligned<'_>) -> () {
     bb3: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18);
     }
 
     bb4: {
@@ -77,18 +77,18 @@ fn <impl at ui/packed/packed-struct-drop-aligned.rs:19:1: 19:30>::drop(_1: &mut 
 
     bb0: {
         _3 = &raw const (*_1);
-        _2 = check_align(move _3) -> [return: bb1, unwind continue];
+        _2 = check_align(move _3) -> bb1;
     }
 
     bb1: {
         _7 = deref_copy ((*_1).0: &std::cell::Cell<usize>);
         _8 = deref_copy ((*_1).0: &std::cell::Cell<usize>);
-        _6 = Cell::<usize>::get(_8) -> [return: bb2, unwind continue];
+        _6 = Cell::<usize>::get(_8) -> bb2;
     }
 
     bb2: {
         _5 = Add(move _6, const 1_usize);
-        _4 = Cell::<usize>::set(_7, move _5) -> [return: bb3, unwind continue];
+        _4 = Cell::<usize>::set(_7, move _5) -> bb3;
     }
 
     bb3: {
@@ -216,7 +216,7 @@ fn main() -> () {
 
     bb0: {
         _74 = const false;
-        _2 = Cell::<usize>::new(const 0_usize) -> [return: bb1, unwind continue];
+        _2 = Cell::<usize>::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -255,11 +255,11 @@ fn main() -> () {
     }
 
     bb5: {
-        drop(_3) -> [return: bb6, unwind continue];
+        drop(_3) -> bb6;
     }
 
     bb6: {
-        _23 = Cell::<usize>::get(_1) -> [return: bb7, unwind continue];
+        _23 = Cell::<usize>::get(_1) -> bb7;
     }
 
     bb7: {
@@ -279,11 +279,11 @@ fn main() -> () {
     bb8: {
         _32 = core::panicking::AssertKind::Eq;
         _34 = Option::<Arguments<'_>>::None;
-        _33 = core::panicking::assert_failed::<usize, usize>(move _32, _26, _27, move _34) -> unwind continue;
+        _33 = core::panicking::assert_failed::<usize, usize>(move _32, _26, _27, move _34);
     }
 
     bb9: {
-        _36 = Cell::<usize>::new(const 0_usize) -> [return: bb10, unwind continue];
+        _36 = Cell::<usize>::new(const 0_usize) -> bb10;
     }
 
     bb10: {
@@ -542,11 +542,11 @@ fn main::{closure#0}(_1: Pin<&mut [generator@ui/packed/packed-struct-drop-aligne
     }
 
     bb12: {
-        assert(const false, "generator resumed after panicking") -> [success: bb12, unwind continue];
+        assert(const false, "generator resumed after panicking") -> bb12;
     }
 
     bb13: {
-        assert(const false, "generator resumed after completion") -> [success: bb13, unwind continue];
+        assert(const false, "generator resumed after completion") -> bb13;
     }
 
     bb14: {

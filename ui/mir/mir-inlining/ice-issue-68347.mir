@@ -8,7 +8,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = handle_debug_column as fn() (PointerCoercion(ReifyFnPointer));
+        _1 = handle_debug_column as fn() (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -28,14 +28,14 @@ fn handle_debug_column() -> () {
     }
 
     bb0: {
-        _1 = sample_columns() -> [return: bb1, unwind continue];
+        _1 = sample_columns() -> bb1;
     }
 
     bb1: {
         _3 = &_1;
         _2 = [closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] { sampler: move _3 };
         _5 = &_2;
-        _4 = <[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] as Fn<()>>::call(move _5, const ()) -> [return: bb2, unwind continue];
+        _4 = <[closure@ui/mir/mir-inlining/ice-issue-68347.rs:10:15: 10:17] as Fn<()>>::call(move _5, const ()) -> bb2;
     }
 
     bb2: {
@@ -51,7 +51,7 @@ fn handle_debug_column::{closure#0}(_1: &[closure@ui/mir/mir-inlining/ice-issue-
 
     bb0: {
         _3 = deref_copy ((*_1).0: &impl Sampler);
-        _2 = <impl Sampler as Sampler>::get(_3, const 17_i32) -> [return: bb1, unwind continue];
+        _2 = <impl Sampler as Sampler>::get(_3, const 17_i32) -> bb1;
     }
 
     bb1: {

@@ -7,7 +7,7 @@ fn good(_1: &String) -> Foo<'_> {
     let _3: &str;
 
     bb0: {
-        _3 = <String as Deref>::deref(_1) -> [return: bb1, unwind continue];
+        _3 = <String as Deref>::deref(_1) -> bb1;
     }
 
     bb1: {
@@ -33,12 +33,12 @@ fn bad1(_1: String) -> Option<&str> {
     }
 
     bb0: {
-        _4 = good as for<'a> fn(&'a std::string::String) -> Foo<'a> (PointerCoercion(ReifyFnPointer));
+        _4 = good as for<'a> fn(&'a std::string::String) -> Foo<'a> (Pointer(ReifyFnPointer));
         _3 = Box::<for<'a> fn(&'a String) -> Foo<'a>>::new(move _4) -> [return: bb1, unwind: bb7];
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
         _9 = (((_2.0: std::ptr::Unique<dyn std::any::Any>).0: std::ptr::NonNull<dyn std::any::Any>).0: *const dyn std::any::Any);
         _6 = &(*_9);
         _5 = <(dyn Any + 'static)>::downcast_ref::<for<'a> fn(&'a String) -> Foo<'_>>(move _6) -> [return: bb2, unwind: bb6];
@@ -55,7 +55,7 @@ fn bad1(_1: String) -> Option<&str> {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -86,7 +86,7 @@ fn bad1::{closure#0}(_1: [closure@ui/type-id-higher-rank-2.rs:12:57: 12:60], _2:
     bb0: {
         _4 = (*_2);
         _5 = deref_copy (_1.0: &std::string::String);
-        _3 = move _4(_5) -> [return: bb1, unwind continue];
+        _3 = move _4(_5) -> bb1;
     }
 
     bb1: {
@@ -101,7 +101,7 @@ fn <impl at ui/type-id-higher-rank-2.rs:19:1: 19:34>::get(_1: &String) -> &str {
     let _2: &str;
 
     bb0: {
-        _2 = <String as Deref>::deref(_1) -> [return: bb1, unwind continue];
+        _2 = <String as Deref>::deref(_1) -> bb1;
     }
 
     bb1: {
@@ -125,16 +125,16 @@ fn bad2(_1: String) -> Option<&str> {
     }
 
     bb0: {
-        _5 = Box::<String>::new(move _1) -> [return: bb1, unwind continue];
+        _5 = Box::<String>::new(move _1) -> bb1;
     }
 
     bb1: {
-        _4 = move _5 as std::boxed::Box<dyn for<'a> AsStr<'a, 'a>> (PointerCoercion(Unsize));
-        _3 = Box::<Box<dyn for<'a> AsStr<'a, 'a>>>::new(move _4) -> [return: bb2, unwind continue];
+        _4 = move _5 as std::boxed::Box<dyn for<'a> AsStr<'a, 'a>> (Pointer(Unsize));
+        _3 = Box::<Box<dyn for<'a> AsStr<'a, 'a>>>::new(move _4) -> bb2;
     }
 
     bb2: {
-        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
         _8 = (((_2.0: std::ptr::Unique<dyn std::any::Any>).0: std::ptr::NonNull<dyn std::any::Any>).0: *const dyn std::any::Any);
         _7 = &(*_8);
         _6 = <(dyn Any + 'static)>::downcast_ref::<Box<dyn for<'a> AsStr<'a, '_>>>(move _7) -> [return: bb3, unwind: bb6];
@@ -145,7 +145,7 @@ fn bad2(_1: String) -> Option<&str> {
     }
 
     bb4: {
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb5: {
@@ -172,7 +172,7 @@ fn bad2::{closure#0}(_1: [closure@ui/type-id-higher-rank-2.rs:25:65: 25:68], _2:
         _4 = deref_copy (*_2);
         _5 = (((_4.0: std::ptr::Unique<dyn for<'a> AsStr<'a, '_>>).0: std::ptr::NonNull<dyn for<'a> AsStr<'a, '_>>).0: *const dyn for<'a> AsStr<'a, '_>);
         _3 = &(*_5);
-        _0 = <dyn for<'a> AsStr<'a, '_> as AsStr<'_, '_>>::get(move _3) -> [return: bb1, unwind continue];
+        _0 = <dyn for<'a> AsStr<'a, '_> as AsStr<'_, '_>>::get(move _3) -> bb1;
     }
 
     bb1: {
@@ -224,11 +224,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _4 = <String as From<&str>>::from(const "foo") -> [return: bb1, unwind continue];
+        _4 = <String as From<&str>>::from(const "foo") -> bb1;
     }
 
     bb1: {
-        _3 = bad1(move _4) -> [return: bb2, unwind continue];
+        _3 = bad1(move _4) -> bb2;
     }
 
     bb2: {
@@ -238,7 +238,7 @@ fn main() -> () {
         _1 = (move _2, move _5);
         _7 = (_1.0: &std::option::Option<&str>);
         _8 = (_1.1: &std::option::Option<&str>);
-        _10 = <Option<&str> as PartialEq>::eq(_7, _8) -> [return: bb3, unwind continue];
+        _10 = <Option<&str> as PartialEq>::eq(_7, _8) -> bb3;
     }
 
     bb3: {
@@ -249,15 +249,15 @@ fn main() -> () {
     bb4: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _11, _7, _8, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _11, _7, _8, move _13);
     }
 
     bb5: {
-        _17 = <String as From<&str>>::from(const "bar") -> [return: bb6, unwind continue];
+        _17 = <String as From<&str>>::from(const "bar") -> bb6;
     }
 
     bb6: {
-        _16 = bad2(move _17) -> [return: bb7, unwind continue];
+        _16 = bad2(move _17) -> bb7;
     }
 
     bb7: {
@@ -267,7 +267,7 @@ fn main() -> () {
         _14 = (move _15, move _18);
         _20 = (_14.0: &std::option::Option<&str>);
         _21 = (_14.1: &std::option::Option<&str>);
-        _23 = <Option<&str> as PartialEq>::eq(_20, _21) -> [return: bb8, unwind continue];
+        _23 = <Option<&str> as PartialEq>::eq(_20, _21) -> bb8;
     }
 
     bb8: {
@@ -278,7 +278,7 @@ fn main() -> () {
     bb9: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _24, _20, _21, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<Option<&str>, Option<&str>>(move _24, _20, _21, move _26);
     }
 
     bb10: {

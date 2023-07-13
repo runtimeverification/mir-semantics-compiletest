@@ -12,7 +12,7 @@ fn by_ref(_1: &mut S<'_>) -> () {
         _5 = &mut _1;
         _4 = [closure@ui/closures/2229_closure_analysis/issue-89606.rs:11:6: 11:8] { s: move _5 };
         _3 = &mut _4;
-        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:11:6: 11:8] as FnMut<()>>::call_mut(move _3, const ()) -> [return: bb1, unwind continue];
+        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:11:6: 11:8] as FnMut<()>>::call_mut(move _3, const ()) -> bb1;
     }
 
     bb1: {
@@ -53,7 +53,7 @@ fn by_value(_1: S<'_>) -> () {
 
     bb0: {
         _3 = [closure@ui/closures/2229_closure_analysis/issue-89606.rs:18:6: 18:8] { s: move _1 };
-        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:18:6: 18:8] as FnOnce<()>>::call_once(move _3, const ()) -> [return: bb1, unwind continue];
+        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:18:6: 18:8] as FnOnce<()>>::call_once(move _3, const ()) -> bb1;
     }
 
     bb1: {
@@ -92,7 +92,7 @@ fn nested(_1: &mut V<'_>) -> () {
         _5 = &mut _1;
         _4 = [closure@ui/closures/2229_closure_analysis/issue-89606.rs:27:6: 27:8] { v: move _5 };
         _3 = &mut _4;
-        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:27:6: 27:8] as FnMut<()>>::call_mut(move _3, const ()) -> [return: bb1, unwind continue];
+        _2 = <[closure@ui/closures/2229_closure_analysis/issue-89606.rs:27:6: 27:8] as FnMut<()>>::call_mut(move _3, const ()) -> bb1;
     }
 
     bb1: {
@@ -149,12 +149,12 @@ fn main() -> () {
         _2 = Option::<&mut i32>::None;
         _1 = S::<'_>(move _2);
         _4 = &mut _1;
-        _3 = by_ref(_4) -> [return: bb1, unwind continue];
+        _3 = by_ref(_4) -> bb1;
     }
 
     bb1: {
         _6 = move _1;
-        _5 = by_value(move _6) -> [return: bb2, unwind continue];
+        _5 = by_value(move _6) -> bb2;
     }
 
     bb2: {
@@ -162,7 +162,7 @@ fn main() -> () {
         _8 = (move _9,);
         _7 = V::<'_>(move _8);
         _11 = &mut _7;
-        _10 = nested(_11) -> [return: bb3, unwind continue];
+        _10 = nested(_11) -> bb3;
     }
 
     bb3: {

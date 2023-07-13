@@ -45,7 +45,7 @@ fn <impl at ui/traits/conditional-dispatch.rs:17:1: 17:25>::get(_1: &T) -> T {
     let mut _0: T;
 
     bb0: {
-        _0 = <T as MyCopy>::copy(_1) -> [return: bb1, unwind continue];
+        _0 = <T as MyCopy>::copy(_1) -> bb1;
     }
 
     bb1: {
@@ -80,7 +80,7 @@ fn <impl at ui/traits/conditional-dispatch.rs:21:1: 21:22>::get(_1: &Box<i32>) -
     }
 
     bb1: {
-        _0 = Box::<i32>::new(move _2) -> [return: bb2, unwind continue];
+        _0 = Box::<i32>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -89,7 +89,7 @@ fn <impl at ui/traits/conditional-dispatch.rs:21:1: 21:22>::get(_1: &Box<i32>) -
 
     bb3: {
         _3 = &(*_5);
-        _2 = get_it::<i32>(_3) -> [return: bb1, unwind continue];
+        _2 = get_it::<i32>(_3) -> bb1;
     }
 }
 
@@ -98,7 +98,7 @@ fn get_it(_1: &T) -> T {
     let mut _0: T;
 
     bb0: {
-        _0 = <T as Get>::get(_1) -> [return: bb1, unwind continue];
+        _0 = <T as Get>::get(_1) -> bb1;
     }
 
     bb1: {
@@ -200,7 +200,7 @@ fn main() -> () {
     bb0: {
         _5 = const 1_u32;
         _4 = &_5;
-        _3 = get_it::<u32>(_4) -> [return: bb1, unwind continue];
+        _3 = get_it::<u32>(_4) -> bb1;
     }
 
     bb1: {
@@ -220,13 +220,13 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16);
     }
 
     bb3: {
         _21 = const 1_u16;
         _20 = &_21;
-        _19 = get_it::<u16>(_20) -> [return: bb4, unwind continue];
+        _19 = get_it::<u16>(_20) -> bb4;
     }
 
     bb4: {
@@ -246,13 +246,13 @@ fn main() -> () {
     bb5: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<u16, u16>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<u16, u16>(move _30, _24, _25, move _32);
     }
 
     bb6: {
         _37 = Option::<u16>::Some(const 1_u16);
         _36 = &_37;
-        _35 = get_it::<Option<u16>>(_36) -> [return: bb7, unwind continue];
+        _35 = get_it::<Option<u16>>(_36) -> bb7;
     }
 
     bb7: {
@@ -262,7 +262,7 @@ fn main() -> () {
         _33 = (move _34, move _38);
         _40 = (_33.0: &std::option::Option<u16>);
         _41 = (_33.1: &std::option::Option<u16>);
-        _43 = <Option<u16> as PartialEq>::eq(_40, _41) -> [return: bb8, unwind continue];
+        _43 = <Option<u16> as PartialEq>::eq(_40, _41) -> bb8;
     }
 
     bb8: {
@@ -273,11 +273,11 @@ fn main() -> () {
     bb9: {
         _44 = core::panicking::AssertKind::Eq;
         _46 = Option::<Arguments<'_>>::None;
-        _45 = core::panicking::assert_failed::<Option<u16>, Option<u16>>(move _44, _40, _41, move _46) -> unwind continue;
+        _45 = core::panicking::assert_failed::<Option<u16>, Option<u16>>(move _44, _40, _41, move _46);
     }
 
     bb10: {
-        _51 = Box::<i32>::new(const 1_i32) -> [return: bb11, unwind continue];
+        _51 = Box::<i32>::new(const 1_i32) -> bb11;
     }
 
     bb11: {
@@ -318,7 +318,7 @@ fn main() -> () {
     }
 
     bb18: {
-        drop(_51) -> [return: bb19, unwind continue];
+        drop(_51) -> bb19;
     }
 
     bb19: {

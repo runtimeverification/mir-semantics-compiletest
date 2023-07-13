@@ -64,7 +64,7 @@ fn bar() -> usize {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -84,7 +84,7 @@ fn foo() -> () {
 
     bb0: {
         _2 = &_3;
-        _1 = _2 as &[Foo] (PointerCoercion(Unsize));
+        _1 = _2 as &[Foo] (Pointer(Unsize));
         _6 = bar() -> [return: bb1, unwind: bb4];
     }
 
@@ -94,7 +94,7 @@ fn foo() -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -147,15 +147,15 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = spawn::<[closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33], ()>(const ZeroSized: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]) -> [return: bb1, unwind continue];
+        _2 = spawn::<[closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33], ()>(const ZeroSized: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:33]) -> bb1;
     }
 
     bb1: {
-        _1 = JoinHandle::<()>::join(move _2) -> [return: bb2, unwind continue];
+        _1 = JoinHandle::<()>::join(move _2) -> bb2;
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -172,7 +172,7 @@ fn main() -> () {
     bb4: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<isize, isize>(move _14, _8, _9, move _16);
     }
 
     bb5: {
@@ -202,7 +202,7 @@ fn main::{closure#0}(_1: [closure@ui/array-slice-vec/slice-panic-2.rs:29:27: 29:
     let mut _0: ();
 
     bb0: {
-        _0 = foo() -> [return: bb1, unwind continue];
+        _0 = foo() -> bb1;
     }
 
     bb1: {

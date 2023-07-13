@@ -78,7 +78,7 @@ fn foo(_1: Vec<isize>) -> () {
         _12 = ((_9 as Some).0: &isize);
         _17 = [const "", const "\n"];
         _16 = &_17;
-        _15 = _16 as &[&str] (PointerCoercion(Unsize));
+        _15 = _16 as &[&str] (Pointer(Unsize));
         _22 = &_2;
         _21 = core::fmt::rt::Argument::<'_>::new_display::<isize>(_22) -> [return: bb8, unwind: bb14];
     }
@@ -90,7 +90,7 @@ fn foo(_1: Vec<isize>) -> () {
     bb8: {
         _20 = [move _21];
         _19 = &_20;
-        _18 = _19 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _18 = _19 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _14 = Arguments::<'_>::new_v1(move _15, move _18) -> [return: bb9, unwind: bb14];
     }
 
@@ -109,7 +109,7 @@ fn foo(_1: Vec<isize>) -> () {
     }
 
     bb12: {
-        drop(_1) -> [return: bb13, unwind continue];
+        drop(_1) -> bb13;
     }
 
     bb13: {
@@ -185,15 +185,15 @@ fn main() -> () {
     bb1: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15);
     }
 
     bb2: {
-        _17 = Vec::<isize>::new() -> [return: bb3, unwind continue];
+        _17 = Vec::<isize>::new() -> bb3;
     }
 
     bb3: {
-        _16 = foo(move _17) -> [return: bb4, unwind continue];
+        _16 = foo(move _17) -> bb4;
     }
 
     bb4: {

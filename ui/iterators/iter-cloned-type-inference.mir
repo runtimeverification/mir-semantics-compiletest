@@ -13,15 +13,15 @@ fn square_sum(_1: &[i64]) -> i64 {
     }
 
     bb0: {
-        _4 = core::slice::<impl [i64]>::iter(_1) -> [return: bb1, unwind continue];
+        _4 = core::slice::<impl [i64]>::iter(_1) -> bb1;
     }
 
     bb1: {
-        _3 = <std::slice::Iter<'_, i64> as Iterator>::cloned::<'_, i64>(move _4) -> [return: bb2, unwind continue];
+        _3 = <std::slice::Iter<'_, i64> as Iterator>::cloned::<'_, i64>(move _4) -> bb2;
     }
 
     bb2: {
-        _2 = <Cloned<std::slice::Iter<'_, i64>> as Iterator>::sum::<i64>(move _3) -> [return: bb3, unwind continue];
+        _2 = <Cloned<std::slice::Iter<'_, i64>> as Iterator>::sum::<i64>(move _3) -> bb3;
     }
 
     bb3: {
@@ -64,8 +64,8 @@ fn main() -> () {
         _2 = &_3;
         _8 = [const 1_i64, const 2_i64, const 3_i64];
         _7 = &_8;
-        _6 = _7 as &[i64] (PointerCoercion(Unsize));
-        _5 = square_sum(move _6) -> [return: bb1, unwind continue];
+        _6 = _7 as &[i64] (Pointer(Unsize));
+        _5 = square_sum(move _6) -> bb1;
     }
 
     bb1: {
@@ -83,7 +83,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<i64, i64>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<i64, i64>(move _15, _9, _10, move _17);
     }
 
     bb3: {

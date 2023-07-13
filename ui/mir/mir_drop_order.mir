@@ -15,7 +15,7 @@ fn <impl at ui/mir/mir_drop_order.rs:12:1: 12:33>::drop(_1: &mut DropLogger<'_>)
     bb0: {
         _9 = deref_copy ((*_1).1: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>);
         _7 = &((*_9).0: std::cell::RefCell<std::vec::Vec<usize>>);
-        _6 = RefCell::<Vec<usize>>::borrow_mut(move _7) -> [return: bb1, unwind continue];
+        _6 = RefCell::<Vec<usize>>::borrow_mut(move _7) -> bb1;
     }
 
     bb1: {
@@ -30,7 +30,7 @@ fn <impl at ui/mir/mir_drop_order.rs:12:1: 12:33>::drop(_1: &mut DropLogger<'_>)
     }
 
     bb3: {
-        drop(_6) -> [return: bb4, unwind continue];
+        drop(_6) -> bb4;
     }
 
     bb4: {
@@ -177,11 +177,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = Vec::<usize>::new() -> [return: bb1, unwind continue];
+        _3 = Vec::<usize>::new() -> bb1;
     }
 
     bb1: {
-        _2 = RefCell::<Vec<usize>>::new(move _3) -> [return: bb2, unwind continue];
+        _2 = RefCell::<Vec<usize>>::new(move _3) -> bb2;
     }
 
     bb2: {
@@ -378,7 +378,7 @@ fn main() -> () {
     }
 
     bb34: {
-        drop(_1) -> [return: bb35, unwind continue];
+        drop(_1) -> bb35;
     }
 
     bb35: {
@@ -443,13 +443,13 @@ fn main() -> () {
 
     bb50: {
         (*_76) = [const 6_usize, const 4_usize, const 7_usize, const 5_usize];
-        _63 = move _67 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
+        _63 = move _67 as std::boxed::Box<[usize]> (Pointer(Unsize));
         _62 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _63) -> [return: bb29, unwind: bb37];
     }
 
     bb51: {
         (*_75) = [const 0_usize, const 2_usize, const 3_usize, const 1_usize];
-        _42 = move _46 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
+        _42 = move _46 as std::boxed::Box<[usize]> (Pointer(Unsize));
         _41 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _42) -> [return: bb19, unwind: bb39];
     }
 }
@@ -488,7 +488,7 @@ fn main::{closure#1}(_1: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]) -> Ve
     bb0: {
         _9 = deref_copy ((*_1).0: &std::panic::AssertUnwindSafe<std::cell::RefCell<std::vec::Vec<usize>>>);
         _3 = &((*_9).0: std::cell::RefCell<std::vec::Vec<usize>>);
-        _2 = RefCell::<Vec<usize>>::borrow_mut(move _3) -> [return: bb1, unwind continue];
+        _2 = RefCell::<Vec<usize>>::borrow_mut(move _3) -> bb1;
     }
 
     bb1: {
@@ -507,7 +507,7 @@ fn main::{closure#1}(_1: &[closure@ui/mir/mir_drop_order.rs:24:15: 24:27]) -> Ve
     }
 
     bb4: {
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb5: {
@@ -543,7 +543,7 @@ fn main::{closure#2}(_1: [closure@ui/mir/mir_drop_order.rs:40:38: 40:40]) -> () 
     bb0: {
         _11 = deref_copy (_1.0: &[closure@ui/mir/mir_drop_order.rs:23:13: 23:17]);
         _3 = (const 4_usize,);
-        _2 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(_11, move _3) -> [return: bb1, unwind continue];
+        _2 = <[closure@ui/mir/mir_drop_order.rs:23:13: 23:17] as Fn<(usize,)>>::call(_11, move _3) -> bb1;
     }
 
     bb1: {

@@ -13,8 +13,8 @@ fn <impl at ui/drop/issue-21486.rs:9:10: 9:15>::fmt(_1: &Noisy, _2: &mut Formatt
         _3 = const "Noisy";
         _6 = &((*_1).0: u8);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -30,7 +30,7 @@ fn <impl at ui/drop/issue-21486.rs:11:1: 11:20>::drop(_1: &mut Noisy) -> () {
 
     bb0: {
         _3 = ((*_1).0: u8);
-        _2 = event(move _3) -> [return: bb1, unwind continue];
+        _2 = event(move _3) -> bb1;
     }
 
     bb1: {
@@ -55,12 +55,12 @@ fn <impl at ui/drop/issue-21486.rs:19:10: 19:15>::fmt(_1: &Foo, _2: &mut Formatt
         _3 = const "Foo";
         _4 = const "n0";
         _6 = &((*_1).0: Noisy);
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
         _7 = const "n1";
         _10 = &((*_1).1: Noisy);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
+        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> bb1;
     }
 
     bb1: {
@@ -100,7 +100,7 @@ fn leak_1_ret() -> Foo {
         _4 = Noisy(const 3_u8);
         _5 = Noisy(const 4_u8);
         _0 = Foo { n0: move _4, n1: move _5 };
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -126,7 +126,7 @@ fn leak_2_ret() -> Foo {
         _4 = Noisy(const 3_u8);
         _5 = Noisy(const 4_u8);
         _0 = Foo { n0: move _4, n1: move _5 };
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -296,11 +296,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = reset_log() -> [return: bb1, unwind continue];
+        _1 = reset_log() -> bb1;
     }
 
     bb1: {
-        _6 = leak_1_ret() -> [return: bb2, unwind continue];
+        _6 = leak_1_ret() -> bb2;
     }
 
     bb2: {
@@ -330,13 +330,13 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_6) -> [return: bb7, unwind continue];
+        drop(_6) -> bb7;
     }
 
     bb7: {
         _18 = const 16909060_usize;
         _17 = &_18;
-        _20 = event_log() -> [return: bb8, unwind continue];
+        _20 = event_log() -> bb8;
     }
 
     bb8: {
@@ -354,15 +354,15 @@ fn main() -> () {
     bb9: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<usize, usize>(move _27, _21, _22, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<usize, usize>(move _27, _21, _22, move _29);
     }
 
     bb10: {
-        _30 = reset_log() -> [return: bb11, unwind continue];
+        _30 = reset_log() -> bb11;
     }
 
     bb11: {
-        _35 = leak_2_ret() -> [return: bb12, unwind continue];
+        _35 = leak_2_ret() -> bb12;
     }
 
     bb12: {
@@ -392,13 +392,13 @@ fn main() -> () {
     }
 
     bb16: {
-        drop(_35) -> [return: bb17, unwind continue];
+        drop(_35) -> bb17;
     }
 
     bb17: {
         _47 = const 16909060_usize;
         _46 = &_47;
-        _49 = event_log() -> [return: bb18, unwind continue];
+        _49 = event_log() -> bb18;
     }
 
     bb18: {
@@ -416,15 +416,15 @@ fn main() -> () {
     bb19: {
         _56 = core::panicking::AssertKind::Eq;
         _58 = Option::<Arguments<'_>>::None;
-        _57 = core::panicking::assert_failed::<usize, usize>(move _56, _50, _51, move _58) -> unwind continue;
+        _57 = core::panicking::assert_failed::<usize, usize>(move _56, _50, _51, move _58);
     }
 
     bb20: {
-        _59 = reset_log() -> [return: bb21, unwind continue];
+        _59 = reset_log() -> bb21;
     }
 
     bb21: {
-        _64 = leak_3_ret() -> [return: bb22, unwind continue];
+        _64 = leak_3_ret() -> bb22;
     }
 
     bb22: {
@@ -454,13 +454,13 @@ fn main() -> () {
     }
 
     bb26: {
-        drop(_64) -> [return: bb27, unwind continue];
+        drop(_64) -> bb27;
     }
 
     bb27: {
         _76 = const 772_usize;
         _75 = &_76;
-        _78 = event_log() -> [return: bb28, unwind continue];
+        _78 = event_log() -> bb28;
     }
 
     bb28: {
@@ -478,7 +478,7 @@ fn main() -> () {
     bb29: {
         _85 = core::panicking::AssertKind::Eq;
         _87 = Option::<Arguments<'_>>::None;
-        _86 = core::panicking::assert_failed::<usize, usize>(move _85, _79, _80, move _87) -> unwind continue;
+        _86 = core::panicking::assert_failed::<usize, usize>(move _85, _79, _80, move _87);
     }
 
     bb30: {
@@ -507,7 +507,7 @@ static LOG: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 0_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 0_usize) -> bb1;
     }
 
     bb1: {
@@ -524,7 +524,7 @@ fn reset_log() -> () {
     bb0: {
         _2 = const {alloc1: &AtomicUsize};
         _3 = SeqCst;
-        _1 = AtomicUsize::store(_2, const 0_usize, move _3) -> [return: bb1, unwind continue];
+        _1 = AtomicUsize::store(_2, const 0_usize, move _3) -> bb1;
     }
 
     bb1: {
@@ -544,7 +544,7 @@ fn event_log() -> usize {
     bb0: {
         _1 = const {alloc1: &AtomicUsize};
         _2 = SeqCst;
-        _0 = AtomicUsize::load(_1, move _2) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::load(_1, move _2) -> bb1;
     }
 
     bb1: {
@@ -579,7 +579,7 @@ fn event(_1: u8) -> () {
     bb0: {
         _3 = const {alloc1: &AtomicUsize};
         _4 = SeqCst;
-        _2 = AtomicUsize::load(_3, move _4) -> [return: bb1, unwind continue];
+        _2 = AtomicUsize::load(_3, move _4) -> bb1;
     }
 
     bb1: {
@@ -589,7 +589,7 @@ fn event(_1: u8) -> () {
         _5 = Add(move _6, move _8);
         _10 = const {alloc1: &AtomicUsize};
         _11 = SeqCst;
-        _9 = AtomicUsize::store(_10, _5, move _11) -> [return: bb2, unwind continue];
+        _9 = AtomicUsize::store(_10, _5, move _11) -> bb2;
     }
 
     bb2: {

@@ -7,7 +7,7 @@ fn bar(_1: &mut [usize]) -> Vec<usize> {
 
     bb0: {
         _2 = &(*_1);
-        _0 = slice::<impl [usize]>::to_vec(move _2) -> [return: bb1, unwind continue];
+        _0 = slice::<impl [usize]>::to_vec(move _2) -> bb1;
     }
 
     bb1: {
@@ -20,7 +20,7 @@ fn bip(_1: &[usize]) -> Vec<usize> {
     let mut _0: std::vec::Vec<usize>;
 
     bb0: {
-        _0 = slice::<impl [usize]>::to_vec(_1) -> [return: bb1, unwind continue];
+        _0 = slice::<impl [usize]>::to_vec(_1) -> bb1;
     }
 
     bb1: {
@@ -98,7 +98,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([usize; 4]);
         _4 = AlignOf([usize; 4]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -200,7 +200,7 @@ fn main() -> () {
     }
 
     bb18: {
-        drop(_1) -> [return: bb19, unwind continue];
+        drop(_1) -> bb19;
     }
 
     bb19: {
@@ -233,7 +233,7 @@ fn main() -> () {
 
     bb26: {
         (*_39) = [const 1_usize, const 2_usize, const 3_usize, const 100_usize];
-        _2 = move _6 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[usize]> (Pointer(Unsize));
+        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

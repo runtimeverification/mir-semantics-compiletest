@@ -88,13 +88,13 @@ fn refut(_1: W) -> () {
     }
 
     bb2: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<u8, u8>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<u8, u8>(move _14, _8, _9, move _16);
     }
 
     bb4: {
@@ -141,7 +141,7 @@ fn main() -> () {
         _2 = Tag::I;
         _3 = U { i: const 1_i32 };
         _1 = Value { tag: move _2, u: move _3 };
-        _6 = is_zero(move _1) -> [return: bb1, unwind continue];
+        _6 = is_zero(move _1) -> bb1;
     }
 
     bb1: {
@@ -161,12 +161,12 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<bool, bool>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<bool, bool>(move _15, _9, _10, move _17);
     }
 
     bb3: {
         _18 = W { a: const 11_u8 };
-        _19 = refut(move _18) -> [return: bb4, unwind continue];
+        _19 = refut(move _18) -> bb4;
     }
 
     bb4: {

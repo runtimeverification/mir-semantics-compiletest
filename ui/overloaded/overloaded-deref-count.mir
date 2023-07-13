@@ -34,7 +34,7 @@ fn <impl at ui/overloaded/overloaded-deref-count.rs:13:1: 13:24>::counts(_1: &De
 
     bb0: {
         _3 = &((*_1).0: std::cell::Cell<usize>);
-        _2 = Cell::<usize>::get(move _3) -> [return: bb1, unwind continue];
+        _2 = Cell::<usize>::get(move _3) -> bb1;
     }
 
     bb1: {
@@ -56,12 +56,12 @@ fn <impl at ui/overloaded/overloaded-deref-count.rs:27:1: 27:34>::deref(_1: &Der
     bb0: {
         _3 = &((*_1).0: std::cell::Cell<usize>);
         _6 = &((*_1).0: std::cell::Cell<usize>);
-        _5 = Cell::<usize>::get(move _6) -> [return: bb1, unwind continue];
+        _5 = Cell::<usize>::get(move _6) -> bb1;
     }
 
     bb1: {
         _4 = Add(move _5, const 1_usize);
-        _2 = Cell::<usize>::set(move _3, move _4) -> [return: bb2, unwind continue];
+        _2 = Cell::<usize>::set(move _3, move _4) -> bb2;
     }
 
     bb2: {
@@ -382,15 +382,15 @@ fn main() -> () {
     bb0: {
         _193 = const false;
         _192 = const false;
-        _1 = DerefCounter::<i32>::new(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = DerefCounter::<i32>::new(const 0_i32) -> bb1;
     }
 
     bb1: {
-        _3 = Vec::<i32>::new() -> [return: bb2, unwind continue];
+        _3 = Vec::<i32>::new() -> bb2;
     }
 
     bb2: {
-        _2 = DerefCounter::<Vec<i32>>::new(move _3) -> [return: bb3, unwind continue];
+        _2 = DerefCounter::<Vec<i32>>::new(move _3) -> bb3;
     }
 
     bb3: {
@@ -773,7 +773,7 @@ fn main() -> () {
     bb63: {
         _179 = [const 1_i32, const 2_i32];
         _178 = &_179;
-        _177 = _178 as &[i32] (PointerCoercion(Unsize));
+        _177 = _178 as &[i32] (Pointer(Unsize));
         _183 = &_2;
         _182 = <DerefCounter<Vec<i32>> as Deref>::deref(move _183) -> [return: bb64, unwind: bb74];
     }
@@ -800,7 +800,7 @@ fn main() -> () {
 
     bb67: {
         _193 = const false;
-        drop(_2) -> [return: bb68, unwind continue];
+        drop(_2) -> bb68;
     }
 
     bb68: {

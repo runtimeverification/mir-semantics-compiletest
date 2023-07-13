@@ -23,7 +23,7 @@ fn want_slice(_1: &[isize]) -> isize {
 
     bb0: {
         _2 = const 0_isize;
-        _3 = <&[isize] as IntoIterator>::into_iter(_1) -> [return: bb1, unwind continue];
+        _3 = <&[isize] as IntoIterator>::into_iter(_1) -> bb1;
     }
 
     bb1: {
@@ -33,7 +33,7 @@ fn want_slice(_1: &[isize]) -> isize {
 
     bb2: {
         _6 = &mut _4;
-        _5 = <std::slice::Iter<'_, isize> as Iterator>::next(_6) -> [return: bb3, unwind continue];
+        _5 = <std::slice::Iter<'_, isize> as Iterator>::next(_6) -> bb3;
     }
 
     bb3: {
@@ -76,7 +76,7 @@ fn has_mut_vec(_1: Vec<isize>) -> isize {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -134,7 +134,7 @@ fn main() -> () {
     bb0: {
         _6 = SizeOf([isize; 3]);
         _7 = AlignOf([isize; 3]);
-        _8 = alloc::alloc::exchange_malloc(move _6, move _7) -> [return: bb1, unwind continue];
+        _8 = alloc::alloc::exchange_malloc(move _6, move _7) -> bb1;
     }
 
     bb1: {
@@ -150,7 +150,7 @@ fn main() -> () {
     }
 
     bb2: {
-        _3 = has_mut_vec(move _4) -> [return: bb3, unwind continue];
+        _3 = has_mut_vec(move _4) -> bb3;
     }
 
     bb3: {
@@ -170,7 +170,7 @@ fn main() -> () {
     bb4: {
         _18 = core::panicking::AssertKind::Eq;
         _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<isize, isize>(move _18, _12, _13, move _20) -> unwind continue;
+        _19 = core::panicking::assert_failed::<isize, isize>(move _18, _12, _13, move _20);
     }
 
     bb5: {
@@ -179,7 +179,7 @@ fn main() -> () {
 
     bb6: {
         (*_21) = [const 1_isize, const 2_isize, const 3_isize];
-        _5 = move _9 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
-        _4 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind continue];
+        _5 = move _9 as std::boxed::Box<[isize]> (Pointer(Unsize));
+        _4 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _5) -> bb2;
     }
 }

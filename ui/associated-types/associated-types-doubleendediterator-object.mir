@@ -55,7 +55,7 @@ fn pairwise_sub(_1: Box<dyn DoubleEndedIterator<Item = isize>>) -> isize {
 
     bb4: {
         _0 = _2;
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb5: {
@@ -136,7 +136,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([isize; 6]);
         _4 = AlignOf([isize; 6]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -153,16 +153,16 @@ fn main() -> () {
 
     bb2: {
         _11 = move _1;
-        _10 = <Vec<isize> as IntoIterator>::into_iter(move _11) -> [return: bb3, unwind continue];
+        _10 = <Vec<isize> as IntoIterator>::into_iter(move _11) -> bb3;
     }
 
     bb3: {
-        _9 = Box::<std::vec::IntoIter<isize>>::new(move _10) -> [return: bb4, unwind continue];
+        _9 = Box::<std::vec::IntoIter<isize>>::new(move _10) -> bb4;
     }
 
     bb4: {
-        _8 = move _9 as std::boxed::Box<dyn std::iter::DoubleEndedIterator<Item = isize>> (PointerCoercion(Unsize));
-        _7 = pairwise_sub(move _8) -> [return: bb5, unwind continue];
+        _8 = move _9 as std::boxed::Box<dyn std::iter::DoubleEndedIterator<Item = isize>> (Pointer(Unsize));
+        _7 = pairwise_sub(move _8) -> bb5;
     }
 
     bb5: {
@@ -182,7 +182,7 @@ fn main() -> () {
     bb6: {
         _22 = core::panicking::AssertKind::Eq;
         _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<isize, isize>(move _22, _16, _17, move _24) -> unwind continue;
+        _23 = core::panicking::assert_failed::<isize, isize>(move _22, _16, _17, move _24);
     }
 
     bb7: {
@@ -191,7 +191,7 @@ fn main() -> () {
 
     bb8: {
         (*_25) = [const 1_isize, const 2_isize, const 3_isize, const 4_isize, const 5_isize, const 6_isize];
-        _2 = move _6 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[isize]> (Pointer(Unsize));
+        _1 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

@@ -52,7 +52,7 @@ fn foo(_1: Option<T>) -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {
@@ -89,17 +89,17 @@ fn main() -> () {
     bb0: {
         _5 = [const "hello\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
         _7 = Option::<isize>::Some(const 5_isize);
-        _6 = foo::<isize>(move _7) -> [return: bb3, unwind continue];
+        _6 = foo::<isize>(move _7) -> bb3;
     }
 
     bb3: {

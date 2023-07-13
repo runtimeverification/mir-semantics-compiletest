@@ -107,19 +107,19 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = foo() -> [return: bb1, unwind continue];
+        _3 = foo() -> bb1;
     }
 
     bb1: {
         _4 = Eq(const 2_i64, const 0_i64);
-        assert(!move _4, "attempt to calculate the remainder of `{}` with a divisor of zero", _3) -> [success: bb2, unwind continue];
+        assert(!move _4, "attempt to calculate the remainder of `{}` with a divisor of zero", _3) -> bb2;
     }
 
     bb2: {
         _5 = Eq(const 2_i64, const -1_i64);
         _6 = Eq(_3, const i64::MIN);
         _7 = BitAnd(move _5, move _6);
-        assert(!move _7, "attempt to compute the remainder of `{} % {}`, which would overflow", _3, const 2_i64) -> [success: bb3, unwind continue];
+        assert(!move _7, "attempt to compute the remainder of `{} % {}`, which would overflow", _3, const 2_i64) -> bb3;
     }
 
     bb3: {
@@ -140,24 +140,24 @@ fn main() -> () {
     bb4: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<i64, i64>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<i64, i64>(move _17, _11, _12, move _19);
     }
 
     bb5: {
         _23 = Add(const 1_i64, const 1_i64);
-        _22 = bar(move _23) -> [return: bb6, unwind continue];
+        _22 = bar(move _23) -> bb6;
     }
 
     bb6: {
         _24 = Eq(const 3_i64, const 0_i64);
-        assert(!move _24, "attempt to calculate the remainder of `{}` with a divisor of zero", _22) -> [success: bb7, unwind continue];
+        assert(!move _24, "attempt to calculate the remainder of `{}` with a divisor of zero", _22) -> bb7;
     }
 
     bb7: {
         _25 = Eq(const 3_i64, const -1_i64);
         _26 = Eq(_22, const i64::MIN);
         _27 = BitAnd(move _25, move _26);
-        assert(!move _27, "attempt to compute the remainder of `{} % {}`, which would overflow", _22, const 3_i64) -> [success: bb8, unwind continue];
+        assert(!move _27, "attempt to compute the remainder of `{} % {}`, which would overflow", _22, const 3_i64) -> bb8;
     }
 
     bb8: {
@@ -178,7 +178,7 @@ fn main() -> () {
     bb9: {
         _37 = core::panicking::AssertKind::Eq;
         _39 = Option::<Arguments<'_>>::None;
-        _38 = core::panicking::assert_failed::<i64, i64>(move _37, _31, _32, move _39) -> unwind continue;
+        _38 = core::panicking::assert_failed::<i64, i64>(move _37, _31, _32, move _39);
     }
 
     bb10: {

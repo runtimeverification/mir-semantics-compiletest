@@ -27,15 +27,15 @@ fn start(_1: isize, _2: *const *const u8) -> isize {
     bb0: {
         _5 = SizeOf([u8; 3]);
         _6 = AlignOf([u8; 3]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
         _8 = ShallowInitBox(move _7, [u8; 3]);
         _16 = (((_8.0: core::ptr::Unique<[u8; 3]>).0: core::ptr::NonNull<[u8; 3]>).0: *const [u8; 3]);
         (*_16) = [const 0_u8, const 1_u8, const 2_u8];
-        _4 = move _8 as other::boxed::Box<[u8]> (PointerCoercion(Unsize));
-        _3 = other::slice::<impl [u8]>::into_vec::<other::alloc::Global>(move _4) -> [return: bb2, unwind continue];
+        _4 = move _8 as other::boxed::Box<[u8]> (Pointer(Unsize));
+        _3 = other::slice::<impl [u8]>::into_vec::<other::alloc::Global>(move _4) -> bb2;
     }
 
     bb2: {
@@ -64,7 +64,7 @@ fn start(_1: isize, _2: *const *const u8) -> isize {
 
     bb7: {
         _0 = const 0_isize;
-        drop(_3) -> [return: bb8, unwind continue];
+        drop(_3) -> bb8;
     }
 
     bb8: {

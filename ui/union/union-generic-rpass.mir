@@ -97,7 +97,7 @@ fn main() -> () {
 
     bb0: {
         _2 = (const 1_u8, const 1_u8);
-        _1 = union_transmute::<(u8, u8), u16>(move _2) -> [return: bb1, unwind continue];
+        _1 = union_transmute::<(u8, u8), u16>(move _2) -> bb1;
     }
 
     bb1: {
@@ -118,21 +118,21 @@ fn main() -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<u16, u16>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<u16, u16>(move _14, _8, _9, move _16);
     }
 
     bb3: {
         _19 = SizeOf([u8; 3]);
         _20 = AlignOf([u8; 3]);
-        _21 = alloc::alloc::exchange_malloc(move _19, move _20) -> [return: bb4, unwind continue];
+        _21 = alloc::alloc::exchange_malloc(move _19, move _20) -> bb4;
     }
 
     bb4: {
         _22 = ShallowInitBox(move _21, [u8; 3]);
         _50 = (((_22.0: std::ptr::Unique<[u8; 3]>).0: std::ptr::NonNull<[u8; 3]>).0: *const [u8; 3]);
         (*_50) = [const 1_u8, const 2_u8, const 3_u8];
-        _18 = move _22 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
-        _17 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _18) -> [return: bb5, unwind continue];
+        _18 = move _22 as std::boxed::Box<[u8]> (Pointer(Unsize));
+        _17 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _18) -> bb5;
     }
 
     bb5: {
@@ -191,7 +191,7 @@ fn main() -> () {
     }
 
     bb14: {
-        drop(_17) -> [return: bb15, unwind continue];
+        drop(_17) -> bb15;
     }
 
     bb15: {

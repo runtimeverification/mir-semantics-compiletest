@@ -70,7 +70,7 @@ fn <impl at ui/binding/match-arm-statics.rs:17:10: 17:19>::eq(_1: &Foo, _2: &Foo
     bb0: {
         _4 = &((*_1).0: std::option::Option<Direction>);
         _5 = &((*_2).0: std::option::Option<Direction>);
-        _3 = <Option<Direction> as PartialEq>::eq(move _4, move _5) -> [return: bb4, unwind continue];
+        _3 = <Option<Direction> as PartialEq>::eq(move _4, move _5) -> bb4;
     }
 
     bb1: {
@@ -81,7 +81,7 @@ fn <impl at ui/binding/match-arm-statics.rs:17:10: 17:19>::eq(_1: &Foo, _2: &Foo
     bb2: {
         _7 = &((*_1).1: NewBool);
         _8 = &((*_2).1: NewBool);
-        _6 = <NewBool as PartialEq>::eq(move _7, move _8) -> [return: bb5, unwind continue];
+        _6 = <NewBool as PartialEq>::eq(move _7, move _8) -> bb5;
     }
 
     bb3: {
@@ -208,7 +208,7 @@ fn <impl at ui/binding/match-arm-statics.rs:23:10: 23:19>::eq(_1: &EnumWithStruc
         _15 = &(((*_22) as Variant2).0: Direction);
         _23 = deref_copy (_7.1: &EnumWithStructVariants);
         _16 = &(((*_23) as Variant2).0: Direction);
-        _6 = <Direction as PartialEq>::eq(_15, _16) -> [return: bb9, unwind continue];
+        _6 = <Direction as PartialEq>::eq(_15, _16) -> bb9;
     }
 
     bb9: {
@@ -422,7 +422,7 @@ fn issue_6533() -> () {
     }
 
     bb0: {
-        _3 = action_to_str(const _) -> [return: bb1, unwind continue];
+        _3 = action_to_str(const _) -> bb1;
     }
 
     bb1: {
@@ -432,7 +432,7 @@ fn issue_6533() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &&str);
         _7 = (_1.1: &&str);
-        _9 = <&str as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <&str as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -443,11 +443,11 @@ fn issue_6533() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<&str, &str>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<&str, &str>(move _10, _6, _7, move _12);
     }
 
     bb4: {
-        _15 = action_to_str(const _) -> [return: bb5, unwind continue];
+        _15 = action_to_str(const _) -> bb5;
     }
 
     bb5: {
@@ -457,7 +457,7 @@ fn issue_6533() -> () {
         _13 = (move _14, move _16);
         _18 = (_13.0: &&str);
         _19 = (_13.1: &&str);
-        _21 = <&str as PartialEq>::eq(_18, _19) -> [return: bb6, unwind continue];
+        _21 = <&str as PartialEq>::eq(_18, _19) -> bb6;
     }
 
     bb6: {
@@ -468,11 +468,11 @@ fn issue_6533() -> () {
     bb7: {
         _22 = core::panicking::AssertKind::Eq;
         _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<&str, &str>(move _22, _18, _19, move _24) -> unwind continue;
+        _23 = core::panicking::assert_failed::<&str, &str>(move _22, _18, _19, move _24);
     }
 
     bb8: {
-        _27 = action_to_str(const _) -> [return: bb9, unwind continue];
+        _27 = action_to_str(const _) -> bb9;
     }
 
     bb9: {
@@ -482,7 +482,7 @@ fn issue_6533() -> () {
         _25 = (move _26, move _28);
         _30 = (_25.0: &&str);
         _31 = (_25.1: &&str);
-        _33 = <&str as PartialEq>::eq(_30, _31) -> [return: bb10, unwind continue];
+        _33 = <&str as PartialEq>::eq(_30, _31) -> bb10;
     }
 
     bb10: {
@@ -493,7 +493,7 @@ fn issue_6533() -> () {
     bb11: {
         _34 = core::panicking::AssertKind::Eq;
         _36 = Option::<Arguments<'_>>::None;
-        _35 = core::panicking::assert_failed::<&str, &str>(move _34, _30, _31, move _36) -> unwind continue;
+        _35 = core::panicking::assert_failed::<&str, &str>(move _34, _30, _31, move _36);
     }
 
     bb12: {
@@ -549,7 +549,7 @@ fn issue_13626() -> () {
     }
 
     bb2: {
-        _2 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _2 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 }
 
@@ -633,7 +633,7 @@ fn issue_14576() -> () {
     }
 
     bb2: {
-        _3 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _3 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb3: {
@@ -641,7 +641,7 @@ fn issue_14576() -> () {
     }
 
     bb4: {
-        _2 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _2 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb5: {
@@ -677,7 +677,7 @@ fn issue_14576() -> () {
     bb9: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<i32, i32>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<i32, i32>(move _17, _11, _12, move _19);
     }
 
     bb10: {
@@ -713,7 +713,7 @@ fn issue_14576() -> () {
     bb14: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<i32, i32>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<i32, i32>(move _33, _27, _28, move _35);
     }
 
     bb15: {
@@ -881,7 +881,7 @@ fn issue_13731::<impl at ui/binding/match-arm-statics.rs:98:14: 98:23>::eq(_1: &
         _4 = &(((*_6) as AA).0: ());
         _7 = deref_copy (_3.1: &issue_13731::A);
         _5 = &(((*_7) as AA).0: ());
-        _0 = <() as PartialEq>::eq(_4, _5) -> [return: bb1, unwind continue];
+        _0 = <() as PartialEq>::eq(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -925,11 +925,11 @@ fn issue_15393() -> () {
     }
 
     bb1: {
-        _3 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _3 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb2: {
-        _2 = core::panicking::panic(const "internal error: entered unreachable code") -> unwind continue;
+        _2 = core::panicking::panic(const "internal error: entered unreachable code");
     }
 
     bb3: {
@@ -1144,7 +1144,7 @@ fn main() -> () {
     bb8: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15);
     }
 
     bb9: {
@@ -1216,7 +1216,7 @@ fn main() -> () {
     bb20: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<i32, i32>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<i32, i32>(move _33, _27, _28, move _35);
     }
 
     bb21: {
@@ -1326,7 +1326,7 @@ fn main() -> () {
     bb40: {
         _57 = core::panicking::AssertKind::Eq;
         _59 = Option::<Arguments<'_>>::None;
-        _58 = core::panicking::assert_failed::<i32, i32>(move _57, _51, _52, move _59) -> unwind continue;
+        _58 = core::panicking::assert_failed::<i32, i32>(move _57, _51, _52, move _59);
     }
 
     bb41: {
@@ -1392,27 +1392,27 @@ fn main() -> () {
     bb51: {
         _75 = core::panicking::AssertKind::Eq;
         _77 = Option::<Arguments<'_>>::None;
-        _76 = core::panicking::assert_failed::<i32, i32>(move _75, _69, _70, move _77) -> unwind continue;
+        _76 = core::panicking::assert_failed::<i32, i32>(move _75, _69, _70, move _77);
     }
 
     bb52: {
-        _78 = issue_6533() -> [return: bb53, unwind continue];
+        _78 = issue_6533() -> bb53;
     }
 
     bb53: {
-        _79 = issue_13626() -> [return: bb54, unwind continue];
+        _79 = issue_13626() -> bb54;
     }
 
     bb54: {
-        _80 = issue_13731() -> [return: bb55, unwind continue];
+        _80 = issue_13731() -> bb55;
     }
 
     bb55: {
-        _81 = issue_14576() -> [return: bb56, unwind continue];
+        _81 = issue_14576() -> bb56;
     }
 
     bb56: {
-        _82 = issue_15393() -> [return: bb57, unwind continue];
+        _82 = issue_15393() -> bb57;
     }
 
     bb57: {

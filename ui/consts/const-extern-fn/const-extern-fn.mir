@@ -186,7 +186,7 @@ fn main() -> () {
         _3 = (move _4, move _5);
         _6 = (_3.0: &[u8; 26]);
         _7 = (_3.1: &[u8; 26]);
-        _9 = <[u8; 26] as PartialEq>::eq(_6, _7) -> [return: bb1, unwind continue];
+        _9 = <[u8; 26] as PartialEq>::eq(_6, _7) -> bb1;
     }
 
     bb1: {
@@ -197,15 +197,15 @@ fn main() -> () {
     bb2: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<[u8; 26], [u8; 26]>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<[u8; 26], [u8; 26]>(move _10, _6, _7, move _12);
     }
 
     bb3: {
-        _13 = bar1(const false) -> [return: bb4, unwind continue];
+        _13 = bar1(const false) -> bb4;
     }
 
     bb4: {
-        _14 = bar2(const false) -> [return: bb5, unwind continue];
+        _14 = bar2(const false) -> bb5;
     }
 
     bb5: {
@@ -215,7 +215,7 @@ fn main() -> () {
     }
 
     bb6: {
-        _17 = core::panicking::panic(const "assertion failed: bar1_res") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: bar1_res");
     }
 
     bb7: {
@@ -234,14 +234,14 @@ fn main() -> () {
     bb8: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<bool, bool>(move _27, _21, _22, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<bool, bool>(move _27, _21, _22, move _29);
     }
 
     bb9: {
-        _30 = foo1 as extern "C" fn(u8) -> u8 (PointerCoercion(ReifyFnPointer));
-        _31 = foo2 as extern "C" fn(u8) -> u8 (PointerCoercion(ReifyFnPointer));
-        _32 = bar1 as unsafe extern "C" fn(bool) -> bool (PointerCoercion(ReifyFnPointer));
-        _33 = bar2 as unsafe extern "C" fn(bool) -> bool (PointerCoercion(ReifyFnPointer));
+        _30 = foo1 as extern "C" fn(u8) -> u8 (Pointer(ReifyFnPointer));
+        _31 = foo2 as extern "C" fn(u8) -> u8 (Pointer(ReifyFnPointer));
+        _32 = bar1 as unsafe extern "C" fn(bool) -> bool (Pointer(ReifyFnPointer));
+        _33 = bar2 as unsafe extern "C" fn(bool) -> bool (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -262,7 +262,7 @@ main::{constant#0}: usize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = foo1(const 25_u8) -> [return: bb1, unwind continue];
+        _1 = foo1(const 25_u8) -> bb1;
     }
 
     bb1: {
@@ -288,7 +288,7 @@ main::{constant#2}: usize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = foo2(const 25_u8) -> [return: bb1, unwind continue];
+        _1 = foo2(const 25_u8) -> bb1;
     }
 
     bb1: {

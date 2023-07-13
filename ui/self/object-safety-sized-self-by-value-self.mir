@@ -34,7 +34,7 @@ fn tick1(_1: C) -> u32 {
         _6 = const false;
         _6 = const true;
         _4 = &mut _1;
-        _3 = _4 as &mut dyn Counter (PointerCoercion(Unsize));
+        _3 = _4 as &mut dyn Counter (Pointer(Unsize));
         _2 = tick2(move _3) -> [return: bb1, unwind: bb5];
     }
 
@@ -67,7 +67,7 @@ fn tick2(_1: &mut dyn Counter) -> () {
     let _2: ();
 
     bb0: {
-        _2 = tick3::<dyn Counter>(_1) -> [return: bb1, unwind continue];
+        _2 = tick3::<dyn Counter>(_1) -> bb1;
     }
 
     bb1: {
@@ -82,11 +82,11 @@ fn tick3(_1: &mut C) -> () {
     let _3: u32;
 
     bb0: {
-        _2 = <C as Counter>::tick(_1) -> [return: bb1, unwind continue];
+        _2 = <C as Counter>::tick(_1) -> bb1;
     }
 
     bb1: {
-        _3 = <C as Counter>::tick(_1) -> [return: bb2, unwind continue];
+        _3 = <C as Counter>::tick(_1) -> bb2;
     }
 
     bb2: {
@@ -127,7 +127,7 @@ fn main() -> () {
 
     bb0: {
         _1 = CCounter { c: const 0_u32 };
-        _2 = tick1::<CCounter>(move _1) -> [return: bb1, unwind continue];
+        _2 = tick1::<CCounter>(move _1) -> bb1;
     }
 
     bb1: {
@@ -147,7 +147,7 @@ fn main() -> () {
     bb2: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<u32, u32>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<u32, u32>(move _13, _7, _8, move _15);
     }
 
     bb3: {

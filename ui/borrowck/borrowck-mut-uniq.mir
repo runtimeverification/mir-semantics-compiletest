@@ -17,12 +17,12 @@ fn <impl at ui/borrowck/borrowck-mut-uniq.rs:5:10: 5:15>::fmt(_1: &Ints, _2: &mu
         _3 = const "Ints";
         _4 = const "sum";
         _6 = &((*_1).0: std::boxed::Box<isize>);
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
         _7 = const "values";
         _10 = &((*_1).1: std::vec::Vec<isize>);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
+        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> bb1;
     }
 
     bb1: {
@@ -95,7 +95,7 @@ fn add_int(_1: &mut Ints, _2: isize) -> () {
     }
 
     bb4: {
-        drop(_3) -> [return: bb5, unwind continue];
+        drop(_3) -> bb5;
     }
 
     bb5: {
@@ -112,7 +112,7 @@ fn add_int(_1: &mut Ints, _2: isize) -> () {
 
     bb8: {
         (*_14) = Add((*_15), _2);
-        _3 = Vec::<isize>::new() -> [return: bb1, unwind continue];
+        _3 = Vec::<isize>::new() -> bb1;
     }
 
     bb9: {
@@ -158,7 +158,7 @@ fn iter_ints(_1: &Ints, _2: F) -> bool {
     }
 
     bb2: {
-        drop(_2) -> [return: bb3, unwind continue];
+        drop(_2) -> bb3;
     }
 
     bb3: {
@@ -192,13 +192,13 @@ fn iter_ints::{closure#0}(_1: &mut [closure@ui/borrowck/borrowck-mut-uniq.rs:18:
         _8 = deref_copy ((*_1).1: &&Ints);
         _9 = deref_copy (*_8);
         _6 = &((*_9).1: std::vec::Vec<isize>);
-        _5 = <Vec<isize> as Index<usize>>::index(move _6, _2) -> [return: bb1, unwind continue];
+        _5 = <Vec<isize> as Index<usize>>::index(move _6, _2) -> bb1;
     }
 
     bb1: {
         _4 = _5;
         _3 = (_4,);
-        _0 = <F as FnMut<(&isize,)>>::call_mut(_7, move _3) -> [return: bb2, unwind continue];
+        _0 = <F as FnMut<(&isize,)>>::call_mut(_7, move _3) -> bb2;
     }
 
     bb2: {
@@ -254,7 +254,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
@@ -263,7 +263,7 @@ fn main() -> () {
 
     bb2: {
         _2 = Ints { sum: move _3, values: move _4 };
-        _1 = Box::<Ints>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<Ints>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -302,7 +302,7 @@ fn main() -> () {
     bb6: {
         _15 = [const "ints=", const "\n"];
         _14 = &_15;
-        _13 = _14 as &[&str] (PointerCoercion(Unsize));
+        _13 = _14 as &[&str] (Pointer(Unsize));
         _20 = &_1;
         _19 = core::fmt::rt::Argument::<'_>::new_debug::<Box<Ints>>(_20) -> [return: bb7, unwind: bb11];
     }
@@ -310,7 +310,7 @@ fn main() -> () {
     bb7: {
         _18 = [move _19];
         _17 = &_18;
-        _16 = _17 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _16 = _17 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _12 = Arguments::<'_>::new_v1(move _13, move _16) -> [return: bb8, unwind: bb11];
     }
 
@@ -319,7 +319,7 @@ fn main() -> () {
     }
 
     bb9: {
-        drop(_1) -> [return: bb10, unwind continue];
+        drop(_1) -> bb10;
     }
 
     bb10: {
@@ -370,19 +370,19 @@ fn main::{closure#0}(_1: &mut [closure@ui/borrowck/borrowck-mut-uniq.rs:26:23: 2
     bb0: {
         _7 = [const "isize = ", const "\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
-        _11 = core::fmt::rt::Argument::<'_>::new_debug::<isize>(_2) -> [return: bb1, unwind continue];
+        _5 = _6 as &[&str] (Pointer(Unsize));
+        _11 = core::fmt::rt::Argument::<'_>::new_debug::<isize>(_2) -> bb1;
     }
 
     bb1: {
         _10 = [move _11];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb2, unwind continue];
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb2;
     }
 
     bb2: {
-        _3 = _print(move _4) -> [return: bb3, unwind continue];
+        _3 = _print(move _4) -> bb3;
     }
 
     bb3: {

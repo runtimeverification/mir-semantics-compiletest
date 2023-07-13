@@ -5,7 +5,7 @@ fn <impl at ui/associated-types/associated-types-issue-20220.rs:14:1: 14:33>::in
     let mut _0: std::vec::IntoIter<T>;
 
     bb0: {
-        _0 = <Vec<T> as IntoIterator>::into_iter(move _1) -> [return: bb1, unwind continue];
+        _0 = <Vec<T> as IntoIterator>::into_iter(move _1) -> bb1;
     }
 
     bb1: {
@@ -74,7 +74,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([usize; 3]);
         _4 = AlignOf([usize; 3]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -91,15 +91,15 @@ fn main() -> () {
 
     bb2: {
         _10 = move _1;
-        _9 = <Vec<usize> as IntoIterator>::into_iter(move _10) -> [return: bb3, unwind continue];
+        _9 = <Vec<usize> as IntoIterator>::into_iter(move _10) -> bb3;
     }
 
     bb3: {
-        _8 = <std::vec::IntoIter<usize> as Iterator>::enumerate(move _9) -> [return: bb4, unwind continue];
+        _8 = <std::vec::IntoIter<usize> as Iterator>::enumerate(move _9) -> bb4;
     }
 
     bb4: {
-        _7 = <Enumerate<std::vec::IntoIter<usize>> as IntoIterator>::into_iter(move _8) -> [return: bb5, unwind continue];
+        _7 = <Enumerate<std::vec::IntoIter<usize>> as IntoIterator>::into_iter(move _8) -> bb5;
     }
 
     bb5: {
@@ -138,7 +138,7 @@ fn main() -> () {
     }
 
     bb10: {
-        drop(_11) -> [return: bb12, unwind continue];
+        drop(_11) -> bb12;
     }
 
     bb11: {
@@ -161,7 +161,7 @@ fn main() -> () {
 
     bb15: {
         (*_30) = [const 1_usize, const 2_usize, const 3_usize];
-        _2 = move _6 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[usize]> (Pointer(Unsize));
+        _1 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

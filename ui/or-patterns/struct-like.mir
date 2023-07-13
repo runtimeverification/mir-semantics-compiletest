@@ -38,7 +38,7 @@ fn <impl at ui/or-patterns/struct-like.rs:3:10: 3:15>::fmt(_1: &Other, _2: &mut 
     }
 
     bb5: {
-        _0 = Formatter::<'_>::write_str(_2, move _3) -> [return: bb6, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, move _3) -> bb6;
     }
 
     bb6: {
@@ -80,7 +80,7 @@ fn <impl at ui/or-patterns/struct-like.rs:10:10: 10:15>::fmt(_1: &Test, _2: &mut
 
     bb1: {
         _17 = const "Baz";
-        _0 = Formatter::<'_>::write_str(_2, _17) -> [return: bb5, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _17) -> bb5;
     }
 
     bb2: {
@@ -92,11 +92,11 @@ fn <impl at ui/or-patterns/struct-like.rs:10:10: 10:15>::fmt(_1: &Test, _2: &mut
         _5 = &(((*_1) as Foo).1: usize);
         _6 = const "Foo";
         _7 = const "first";
-        _8 = _4 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _8 = _4 as &dyn std::fmt::Debug (Pointer(Unsize));
         _9 = const "second";
         _11 = &_5;
-        _10 = _11 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _6, _7, move _8, _9, move _10) -> [return: bb5, unwind continue];
+        _10 = _11 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _6, _7, move _8, _9, move _10) -> bb5;
     }
 
     bb4: {
@@ -104,8 +104,8 @@ fn <impl at ui/or-patterns/struct-like.rs:10:10: 10:15>::fmt(_1: &Test, _2: &mut
         _13 = const "Bar";
         _14 = const "other";
         _16 = &_12;
-        _15 = _16 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _13, _14, move _15) -> [return: bb5, unwind continue];
+        _15 = _16 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _13, _14, move _15) -> bb5;
     }
 
     bb5: {
@@ -236,7 +236,7 @@ fn main() -> () {
     bb0: {
         _4 = Test::Foo { first: const 1024_usize, second: const 4096_usize };
         _3 = Option::<Test>::Some(move _4);
-        _2 = test(move _3) -> [return: bb1, unwind continue];
+        _2 = test(move _3) -> bb1;
     }
 
     bb1: {
@@ -245,13 +245,13 @@ fn main() -> () {
     }
 
     bb2: {
-        _5 = core::panicking::panic(const "assertion failed: test(Some(Test::Foo { first: 1024, second: 4096 }))") -> unwind continue;
+        _5 = core::panicking::panic(const "assertion failed: test(Some(Test::Foo { first: 1024, second: 4096 }))");
     }
 
     bb3: {
         _10 = Test::Foo { first: const 2048_usize, second: const 8192_usize };
         _9 = Option::<Test>::Some(move _10);
-        _8 = test(move _9) -> [return: bb4, unwind continue];
+        _8 = test(move _9) -> bb4;
     }
 
     bb4: {
@@ -261,13 +261,13 @@ fn main() -> () {
     }
 
     bb5: {
-        _11 = core::panicking::panic(const "assertion failed: !test(Some(Test::Foo { first: 2048, second: 8192 }))") -> unwind continue;
+        _11 = core::panicking::panic(const "assertion failed: !test(Some(Test::Foo { first: 2048, second: 8192 }))");
     }
 
     bb6: {
         _16 = Test::Foo { first: const 42_usize, second: const 2048_usize };
         _15 = Option::<Test>::Some(move _16);
-        _14 = test(move _15) -> [return: bb7, unwind continue];
+        _14 = test(move _15) -> bb7;
     }
 
     bb7: {
@@ -277,7 +277,7 @@ fn main() -> () {
     }
 
     bb8: {
-        _17 = core::panicking::panic(const "assertion failed: !test(Some(Test::Foo { first: 42, second: 2048 }))") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: !test(Some(Test::Foo { first: 42, second: 2048 }))");
     }
 
     bb9: {
@@ -285,7 +285,7 @@ fn main() -> () {
         _22 = Option::<Other>::Some(move _23);
         _21 = Test::Bar { other: move _22 };
         _20 = Option::<Test>::Some(move _21);
-        _19 = test(move _20) -> [return: bb10, unwind continue];
+        _19 = test(move _20) -> bb10;
     }
 
     bb10: {
@@ -294,7 +294,7 @@ fn main() -> () {
     }
 
     bb11: {
-        _24 = core::panicking::panic(const "assertion failed: test(Some(Test::Bar { other: Some(Other::One) }))") -> unwind continue;
+        _24 = core::panicking::panic(const "assertion failed: test(Some(Test::Bar { other: Some(Other::One) }))");
     }
 
     bb12: {
@@ -302,7 +302,7 @@ fn main() -> () {
         _29 = Option::<Other>::Some(move _30);
         _28 = Test::Bar { other: move _29 };
         _27 = Option::<Test>::Some(move _28);
-        _26 = test(move _27) -> [return: bb13, unwind continue];
+        _26 = test(move _27) -> bb13;
     }
 
     bb13: {
@@ -311,7 +311,7 @@ fn main() -> () {
     }
 
     bb14: {
-        _31 = core::panicking::panic(const "assertion failed: test(Some(Test::Bar { other: Some(Other::Two) }))") -> unwind continue;
+        _31 = core::panicking::panic(const "assertion failed: test(Some(Test::Bar { other: Some(Other::Two) }))");
     }
 
     bb15: {
@@ -319,7 +319,7 @@ fn main() -> () {
         _37 = Option::<Other>::Some(move _38);
         _36 = Test::Bar { other: move _37 };
         _35 = Option::<Test>::Some(move _36);
-        _34 = test(move _35) -> [return: bb16, unwind continue];
+        _34 = test(move _35) -> bb16;
     }
 
     bb16: {
@@ -329,14 +329,14 @@ fn main() -> () {
     }
 
     bb17: {
-        _39 = core::panicking::panic(const "assertion failed: !test(Some(Test::Bar { other: Some(Other::Three) }))") -> unwind continue;
+        _39 = core::panicking::panic(const "assertion failed: !test(Some(Test::Bar { other: Some(Other::Three) }))");
     }
 
     bb18: {
         _45 = Option::<Other>::None;
         _44 = Test::Bar { other: move _45 };
         _43 = Option::<Test>::Some(move _44);
-        _42 = test(move _43) -> [return: bb19, unwind continue];
+        _42 = test(move _43) -> bb19;
     }
 
     bb19: {
@@ -346,13 +346,13 @@ fn main() -> () {
     }
 
     bb20: {
-        _46 = core::panicking::panic(const "assertion failed: !test(Some(Test::Bar { other: None }))") -> unwind continue;
+        _46 = core::panicking::panic(const "assertion failed: !test(Some(Test::Bar { other: None }))");
     }
 
     bb21: {
         _51 = Test::Baz;
         _50 = Option::<Test>::Some(move _51);
-        _49 = test(move _50) -> [return: bb22, unwind continue];
+        _49 = test(move _50) -> bb22;
     }
 
     bb22: {
@@ -362,12 +362,12 @@ fn main() -> () {
     }
 
     bb23: {
-        _52 = core::panicking::panic(const "assertion failed: !test(Some(Test::Baz))") -> unwind continue;
+        _52 = core::panicking::panic(const "assertion failed: !test(Some(Test::Baz))");
     }
 
     bb24: {
         _56 = Option::<Test>::None;
-        _55 = test(move _56) -> [return: bb25, unwind continue];
+        _55 = test(move _56) -> bb25;
     }
 
     bb25: {
@@ -377,7 +377,7 @@ fn main() -> () {
     }
 
     bb26: {
-        _57 = core::panicking::panic(const "assertion failed: !test(None)") -> unwind continue;
+        _57 = core::panicking::panic(const "assertion failed: !test(None)");
     }
 
     bb27: {

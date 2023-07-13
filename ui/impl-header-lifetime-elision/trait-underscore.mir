@@ -17,7 +17,7 @@ fn impls_my_trait_val(_1: T) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -58,15 +58,15 @@ fn main() -> () {
     bb0: {
         _1 = const 22_i32;
         _2 = &_1;
-        _3 = impls_my_trait_val::<&i32>(_2) -> [return: bb1, unwind continue];
+        _3 = impls_my_trait_val::<&i32>(_2) -> bb1;
     }
 
     bb1: {
-        _4 = impls_my_trait::<&i32>() -> [return: bb2, unwind continue];
+        _4 = impls_my_trait::<&i32>() -> bb2;
     }
 
     bb2: {
-        _5 = random_where_clause() -> [return: bb3, unwind continue];
+        _5 = random_where_clause() -> bb3;
     }
 
     bb3: {

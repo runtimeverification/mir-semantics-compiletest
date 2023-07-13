@@ -21,7 +21,7 @@ fn invoke_dyn_star(_1: dyn* Foo) -> usize {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -47,7 +47,7 @@ fn make_and_invoke_dyn_star(_1: usize) -> usize {
 
     bb0: {
         _2 = _1 as dyn* Foo (DynStar);
-        _0 = invoke_dyn_star(move _2) -> [return: bb1, unwind continue];
+        _0 = invoke_dyn_star(move _2) -> bb1;
     }
 
     bb1: {
@@ -72,24 +72,24 @@ fn main() -> () {
     bb0: {
         _5 = [const "", const "\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _11 = make_and_invoke_dyn_star(const 42_usize) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _11 = make_and_invoke_dyn_star(const 42_usize) -> bb1;
     }
 
     bb1: {
         _10 = &_11;
-        _9 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_10) -> [return: bb2, unwind continue];
+        _9 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_10) -> bb2;
     }
 
     bb2: {
         _8 = [move _9];
         _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb3, unwind continue];
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb3;
     }
 
     bb3: {
-        _1 = _print(move _2) -> [return: bb4, unwind continue];
+        _1 = _print(move _2) -> bb4;
     }
 
     bb4: {

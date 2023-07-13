@@ -50,10 +50,10 @@ fn main() -> () {
     bb0: {
         _2 = [const 1_i32, const 2_i32, const 3_i32];
         _1 = &_2;
-        _8 = _1 as &[i32] (PointerCoercion(Unsize));
+        _8 = _1 as &[i32] (Pointer(Unsize));
         _7 = DerefArray::<'_, i32> { inner: move _8 };
         _6 = &_7;
-        _5 = <DerefArray<'_, i32> as Deref>::deref(move _6) -> [return: bb1, unwind continue];
+        _5 = <DerefArray<'_, i32> as Deref>::deref(move _6) -> bb1;
     }
 
     bb1: {
@@ -61,7 +61,7 @@ fn main() -> () {
         _23 = deref_copy (*_5);
         _10 = Len((*_23));
         _11 = Lt(_9, _10);
-        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> [success: bb2, unwind continue];
+        assert(move _11, "index out of bounds: the length is {} but the index is {}", move _10, _9) -> bb2;
     }
 
     bb2: {
@@ -82,7 +82,7 @@ fn main() -> () {
     bb3: {
         _20 = core::panicking::AssertKind::Eq;
         _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<i32, i32>(move _20, _14, _15, move _22) -> unwind continue;
+        _21 = core::panicking::assert_failed::<i32, i32>(move _20, _14, _15, move _22);
     }
 
     bb4: {

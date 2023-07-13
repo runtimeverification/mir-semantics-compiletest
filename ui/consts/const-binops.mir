@@ -6,7 +6,7 @@ static A: isize = {
 
     bb0: {
         _1 = CheckedAdd(const -4_isize, const 3_isize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const -4_isize, const 3_isize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const -4_isize, const 3_isize) -> bb1;
     }
 
     bb1: {
@@ -21,7 +21,7 @@ static A2: usize = {
 
     bb0: {
         _1 = CheckedAdd(const 3_usize, const 3_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 3_usize, const 3_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 3_usize, const 3_usize) -> bb1;
     }
 
     bb1: {
@@ -45,7 +45,7 @@ static C: isize = {
 
     bb0: {
         _1 = CheckedSub(const 3_isize, const 4_isize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 3_isize, const 4_isize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 3_isize, const 4_isize) -> bb1;
     }
 
     bb1: {
@@ -60,7 +60,7 @@ static D: usize = {
 
     bb0: {
         _1 = CheckedSub(const 3_usize, const 3_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 3_usize, const 3_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} - {}`, which would overflow", const 3_usize, const 3_usize) -> bb1;
     }
 
     bb1: {
@@ -84,7 +84,7 @@ static E2: isize = {
 
     bb0: {
         _1 = CheckedMul(const -3_isize, const 3_isize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const -3_isize, const 3_isize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const -3_isize, const 3_isize) -> bb1;
     }
 
     bb1: {
@@ -99,7 +99,7 @@ static F: usize = {
 
     bb0: {
         _1 = CheckedMul(const 3_usize, const 3_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 3_usize, const 3_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 3_usize, const 3_usize) -> bb1;
     }
 
     bb1: {
@@ -126,14 +126,14 @@ static H: isize = {
 
     bb0: {
         _1 = Eq(const -1_isize, const 0_isize);
-        assert(!move _1, "attempt to divide `{}` by zero", const 3_isize) -> [success: bb1, unwind continue];
+        assert(!move _1, "attempt to divide `{}` by zero", const 3_isize) -> bb1;
     }
 
     bb1: {
         _2 = Eq(const -1_isize, const -1_isize);
         _3 = Eq(const 3_isize, const isize::MIN);
         _4 = BitAnd(move _2, move _3);
-        assert(!move _4, "attempt to compute `{} / {}`, which would overflow", const 3_isize, const -1_isize) -> [success: bb2, unwind continue];
+        assert(!move _4, "attempt to compute `{} / {}`, which would overflow", const 3_isize, const -1_isize) -> bb2;
     }
 
     bb2: {
@@ -148,7 +148,7 @@ static I: usize = {
 
     bb0: {
         _1 = Eq(const 3_usize, const 0_usize);
-        assert(!move _1, "attempt to divide `{}` by zero", const 3_usize) -> [success: bb1, unwind continue];
+        assert(!move _1, "attempt to divide `{}` by zero", const 3_usize) -> bb1;
     }
 
     bb1: {
@@ -272,7 +272,7 @@ static V: isize = {
     bb0: {
         _1 = const 3_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 64_u32);
-        assert(move _2, "attempt to shift left by `{}`, which would overflow", const 3_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift left by `{}`, which would overflow", const 3_i32) -> bb1;
     }
 
     bb1: {
@@ -289,7 +289,7 @@ static W: isize = {
     bb0: {
         _1 = const 4_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 64_u32);
-        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 4_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 4_i32) -> bb1;
     }
 
     bb1: {
@@ -306,7 +306,7 @@ static X: usize = {
     bb0: {
         _1 = const 4_i32 as u32 (IntToInt);
         _2 = Lt(move _1, const 64_u32);
-        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 4_i32) -> [success: bb1, unwind continue];
+        assert(move _2, "attempt to shift right by `{}`, which would overflow", const 4_i32) -> bb1;
     }
 
     bb1: {
@@ -1312,7 +1312,7 @@ fn main() -> () {
     bb1: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<isize, isize>(move _11, _5, _6, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<isize, isize>(move _11, _5, _6, move _13);
     }
 
     bb2: {
@@ -1332,7 +1332,7 @@ fn main() -> () {
     bb3: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<usize, usize>(move _24, _18, _19, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<usize, usize>(move _24, _18, _19, move _26);
     }
 
     bb4: {
@@ -1345,7 +1345,7 @@ fn main() -> () {
         _37 = (*_27);
         _38 = (*_28);
         _36 = Sub(move _37, move _38);
-        _35 = f64::<impl f64>::abs(move _36) -> [return: bb5, unwind continue];
+        _35 = f64::<impl f64>::abs(move _36) -> bb5;
     }
 
     bb5: {
@@ -1357,23 +1357,23 @@ fn main() -> () {
     bb6: {
         _43 = [const "", const " is not approximately equal to "];
         _42 = &_43;
-        _41 = _42 as &[&str] (PointerCoercion(Unsize));
-        _47 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_27) -> [return: bb7, unwind continue];
+        _41 = _42 as &[&str] (Pointer(Unsize));
+        _47 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_27) -> bb7;
     }
 
     bb7: {
-        _48 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_28) -> [return: bb8, unwind continue];
+        _48 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_28) -> bb8;
     }
 
     bb8: {
         _46 = [move _47, move _48];
         _45 = &_46;
-        _44 = _45 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _40 = Arguments::<'_>::new_v1(move _41, move _44) -> [return: bb9, unwind continue];
+        _44 = _45 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _40 = Arguments::<'_>::new_v1(move _41, move _44) -> bb9;
     }
 
     bb9: {
-        _39 = panic_fmt(move _40) -> unwind continue;
+        _39 = panic_fmt(move _40);
     }
 
     bb10: {
@@ -1393,7 +1393,7 @@ fn main() -> () {
     bb11: {
         _59 = core::panicking::AssertKind::Eq;
         _61 = Option::<Arguments<'_>>::None;
-        _60 = core::panicking::assert_failed::<isize, isize>(move _59, _53, _54, move _61) -> unwind continue;
+        _60 = core::panicking::assert_failed::<isize, isize>(move _59, _53, _54, move _61);
     }
 
     bb12: {
@@ -1413,7 +1413,7 @@ fn main() -> () {
     bb13: {
         _72 = core::panicking::AssertKind::Eq;
         _74 = Option::<Arguments<'_>>::None;
-        _73 = core::panicking::assert_failed::<usize, usize>(move _72, _66, _67, move _74) -> unwind continue;
+        _73 = core::panicking::assert_failed::<usize, usize>(move _72, _66, _67, move _74);
     }
 
     bb14: {
@@ -1426,7 +1426,7 @@ fn main() -> () {
         _85 = (*_75);
         _86 = (*_76);
         _84 = Sub(move _85, move _86);
-        _83 = f64::<impl f64>::abs(move _84) -> [return: bb15, unwind continue];
+        _83 = f64::<impl f64>::abs(move _84) -> bb15;
     }
 
     bb15: {
@@ -1438,23 +1438,23 @@ fn main() -> () {
     bb16: {
         _91 = [const "", const " is not approximately equal to "];
         _90 = &_91;
-        _89 = _90 as &[&str] (PointerCoercion(Unsize));
-        _95 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_75) -> [return: bb17, unwind continue];
+        _89 = _90 as &[&str] (Pointer(Unsize));
+        _95 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_75) -> bb17;
     }
 
     bb17: {
-        _96 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_76) -> [return: bb18, unwind continue];
+        _96 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_76) -> bb18;
     }
 
     bb18: {
         _94 = [move _95, move _96];
         _93 = &_94;
-        _92 = _93 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _88 = Arguments::<'_>::new_v1(move _89, move _92) -> [return: bb19, unwind continue];
+        _92 = _93 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _88 = Arguments::<'_>::new_v1(move _89, move _92) -> bb19;
     }
 
     bb19: {
-        _87 = panic_fmt(move _88) -> unwind continue;
+        _87 = panic_fmt(move _88);
     }
 
     bb20: {
@@ -1474,7 +1474,7 @@ fn main() -> () {
     bb21: {
         _107 = core::panicking::AssertKind::Eq;
         _109 = Option::<Arguments<'_>>::None;
-        _108 = core::panicking::assert_failed::<isize, isize>(move _107, _101, _102, move _109) -> unwind continue;
+        _108 = core::panicking::assert_failed::<isize, isize>(move _107, _101, _102, move _109);
     }
 
     bb22: {
@@ -1494,7 +1494,7 @@ fn main() -> () {
     bb23: {
         _120 = core::panicking::AssertKind::Eq;
         _122 = Option::<Arguments<'_>>::None;
-        _121 = core::panicking::assert_failed::<usize, usize>(move _120, _114, _115, move _122) -> unwind continue;
+        _121 = core::panicking::assert_failed::<usize, usize>(move _120, _114, _115, move _122);
     }
 
     bb24: {
@@ -1507,7 +1507,7 @@ fn main() -> () {
         _133 = (*_123);
         _134 = (*_124);
         _132 = Sub(move _133, move _134);
-        _131 = f64::<impl f64>::abs(move _132) -> [return: bb25, unwind continue];
+        _131 = f64::<impl f64>::abs(move _132) -> bb25;
     }
 
     bb25: {
@@ -1519,23 +1519,23 @@ fn main() -> () {
     bb26: {
         _139 = [const "", const " is not approximately equal to "];
         _138 = &_139;
-        _137 = _138 as &[&str] (PointerCoercion(Unsize));
-        _143 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_123) -> [return: bb27, unwind continue];
+        _137 = _138 as &[&str] (Pointer(Unsize));
+        _143 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_123) -> bb27;
     }
 
     bb27: {
-        _144 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_124) -> [return: bb28, unwind continue];
+        _144 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_124) -> bb28;
     }
 
     bb28: {
         _142 = [move _143, move _144];
         _141 = &_142;
-        _140 = _141 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _136 = Arguments::<'_>::new_v1(move _137, move _140) -> [return: bb29, unwind continue];
+        _140 = _141 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _136 = Arguments::<'_>::new_v1(move _137, move _140) -> bb29;
     }
 
     bb29: {
-        _135 = panic_fmt(move _136) -> unwind continue;
+        _135 = panic_fmt(move _136);
     }
 
     bb30: {
@@ -1555,7 +1555,7 @@ fn main() -> () {
     bb31: {
         _155 = core::panicking::AssertKind::Eq;
         _157 = Option::<Arguments<'_>>::None;
-        _156 = core::panicking::assert_failed::<isize, isize>(move _155, _149, _150, move _157) -> unwind continue;
+        _156 = core::panicking::assert_failed::<isize, isize>(move _155, _149, _150, move _157);
     }
 
     bb32: {
@@ -1575,7 +1575,7 @@ fn main() -> () {
     bb33: {
         _168 = core::panicking::AssertKind::Eq;
         _170 = Option::<Arguments<'_>>::None;
-        _169 = core::panicking::assert_failed::<usize, usize>(move _168, _162, _163, move _170) -> unwind continue;
+        _169 = core::panicking::assert_failed::<usize, usize>(move _168, _162, _163, move _170);
     }
 
     bb34: {
@@ -1588,7 +1588,7 @@ fn main() -> () {
         _181 = (*_171);
         _182 = (*_172);
         _180 = Sub(move _181, move _182);
-        _179 = f64::<impl f64>::abs(move _180) -> [return: bb35, unwind continue];
+        _179 = f64::<impl f64>::abs(move _180) -> bb35;
     }
 
     bb35: {
@@ -1600,23 +1600,23 @@ fn main() -> () {
     bb36: {
         _187 = [const "", const " is not approximately equal to "];
         _186 = &_187;
-        _185 = _186 as &[&str] (PointerCoercion(Unsize));
-        _191 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_171) -> [return: bb37, unwind continue];
+        _185 = _186 as &[&str] (Pointer(Unsize));
+        _191 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_171) -> bb37;
     }
 
     bb37: {
-        _192 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_172) -> [return: bb38, unwind continue];
+        _192 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_172) -> bb38;
     }
 
     bb38: {
         _190 = [move _191, move _192];
         _189 = &_190;
-        _188 = _189 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _184 = Arguments::<'_>::new_v1(move _185, move _188) -> [return: bb39, unwind continue];
+        _188 = _189 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _184 = Arguments::<'_>::new_v1(move _185, move _188) -> bb39;
     }
 
     bb39: {
-        _183 = panic_fmt(move _184) -> unwind continue;
+        _183 = panic_fmt(move _184);
     }
 
     bb40: {
@@ -1636,7 +1636,7 @@ fn main() -> () {
     bb41: {
         _203 = core::panicking::AssertKind::Eq;
         _205 = Option::<Arguments<'_>>::None;
-        _204 = core::panicking::assert_failed::<bool, bool>(move _203, _197, _198, move _205) -> unwind continue;
+        _204 = core::panicking::assert_failed::<bool, bool>(move _203, _197, _198, move _205);
     }
 
     bb42: {
@@ -1656,7 +1656,7 @@ fn main() -> () {
     bb43: {
         _216 = core::panicking::AssertKind::Eq;
         _218 = Option::<Arguments<'_>>::None;
-        _217 = core::panicking::assert_failed::<bool, bool>(move _216, _210, _211, move _218) -> unwind continue;
+        _217 = core::panicking::assert_failed::<bool, bool>(move _216, _210, _211, move _218);
     }
 
     bb44: {
@@ -1676,7 +1676,7 @@ fn main() -> () {
     bb45: {
         _229 = core::panicking::AssertKind::Eq;
         _231 = Option::<Arguments<'_>>::None;
-        _230 = core::panicking::assert_failed::<isize, isize>(move _229, _223, _224, move _231) -> unwind continue;
+        _230 = core::panicking::assert_failed::<isize, isize>(move _229, _223, _224, move _231);
     }
 
     bb46: {
@@ -1696,7 +1696,7 @@ fn main() -> () {
     bb47: {
         _242 = core::panicking::AssertKind::Eq;
         _244 = Option::<Arguments<'_>>::None;
-        _243 = core::panicking::assert_failed::<usize, usize>(move _242, _236, _237, move _244) -> unwind continue;
+        _243 = core::panicking::assert_failed::<usize, usize>(move _242, _236, _237, move _244);
     }
 
     bb48: {
@@ -1716,7 +1716,7 @@ fn main() -> () {
     bb49: {
         _255 = core::panicking::AssertKind::Eq;
         _257 = Option::<Arguments<'_>>::None;
-        _256 = core::panicking::assert_failed::<isize, isize>(move _255, _249, _250, move _257) -> unwind continue;
+        _256 = core::panicking::assert_failed::<isize, isize>(move _255, _249, _250, move _257);
     }
 
     bb50: {
@@ -1736,7 +1736,7 @@ fn main() -> () {
     bb51: {
         _268 = core::panicking::AssertKind::Eq;
         _270 = Option::<Arguments<'_>>::None;
-        _269 = core::panicking::assert_failed::<usize, usize>(move _268, _262, _263, move _270) -> unwind continue;
+        _269 = core::panicking::assert_failed::<usize, usize>(move _268, _262, _263, move _270);
     }
 
     bb52: {
@@ -1756,7 +1756,7 @@ fn main() -> () {
     bb53: {
         _281 = core::panicking::AssertKind::Eq;
         _283 = Option::<Arguments<'_>>::None;
-        _282 = core::panicking::assert_failed::<isize, isize>(move _281, _275, _276, move _283) -> unwind continue;
+        _282 = core::panicking::assert_failed::<isize, isize>(move _281, _275, _276, move _283);
     }
 
     bb54: {
@@ -1776,7 +1776,7 @@ fn main() -> () {
     bb55: {
         _294 = core::panicking::AssertKind::Eq;
         _296 = Option::<Arguments<'_>>::None;
-        _295 = core::panicking::assert_failed::<usize, usize>(move _294, _288, _289, move _296) -> unwind continue;
+        _295 = core::panicking::assert_failed::<usize, usize>(move _294, _288, _289, move _296);
     }
 
     bb56: {
@@ -1796,7 +1796,7 @@ fn main() -> () {
     bb57: {
         _307 = core::panicking::AssertKind::Eq;
         _309 = Option::<Arguments<'_>>::None;
-        _308 = core::panicking::assert_failed::<isize, isize>(move _307, _301, _302, move _309) -> unwind continue;
+        _308 = core::panicking::assert_failed::<isize, isize>(move _307, _301, _302, move _309);
     }
 
     bb58: {
@@ -1816,7 +1816,7 @@ fn main() -> () {
     bb59: {
         _320 = core::panicking::AssertKind::Eq;
         _322 = Option::<Arguments<'_>>::None;
-        _321 = core::panicking::assert_failed::<isize, isize>(move _320, _314, _315, move _322) -> unwind continue;
+        _321 = core::panicking::assert_failed::<isize, isize>(move _320, _314, _315, move _322);
     }
 
     bb60: {
@@ -1836,7 +1836,7 @@ fn main() -> () {
     bb61: {
         _333 = core::panicking::AssertKind::Eq;
         _335 = Option::<Arguments<'_>>::None;
-        _334 = core::panicking::assert_failed::<usize, usize>(move _333, _327, _328, move _335) -> unwind continue;
+        _334 = core::panicking::assert_failed::<usize, usize>(move _333, _327, _328, move _335);
     }
 
     bb62: {
@@ -1856,7 +1856,7 @@ fn main() -> () {
     bb63: {
         _346 = core::panicking::AssertKind::Eq;
         _348 = Option::<Arguments<'_>>::None;
-        _347 = core::panicking::assert_failed::<bool, bool>(move _346, _340, _341, move _348) -> unwind continue;
+        _347 = core::panicking::assert_failed::<bool, bool>(move _346, _340, _341, move _348);
     }
 
     bb64: {
@@ -1876,7 +1876,7 @@ fn main() -> () {
     bb65: {
         _359 = core::panicking::AssertKind::Eq;
         _361 = Option::<Arguments<'_>>::None;
-        _360 = core::panicking::assert_failed::<bool, bool>(move _359, _353, _354, move _361) -> unwind continue;
+        _360 = core::panicking::assert_failed::<bool, bool>(move _359, _353, _354, move _361);
     }
 
     bb66: {
@@ -1896,7 +1896,7 @@ fn main() -> () {
     bb67: {
         _372 = core::panicking::AssertKind::Eq;
         _374 = Option::<Arguments<'_>>::None;
-        _373 = core::panicking::assert_failed::<bool, bool>(move _372, _366, _367, move _374) -> unwind continue;
+        _373 = core::panicking::assert_failed::<bool, bool>(move _372, _366, _367, move _374);
     }
 
     bb68: {
@@ -1916,7 +1916,7 @@ fn main() -> () {
     bb69: {
         _385 = core::panicking::AssertKind::Eq;
         _387 = Option::<Arguments<'_>>::None;
-        _386 = core::panicking::assert_failed::<bool, bool>(move _385, _379, _380, move _387) -> unwind continue;
+        _386 = core::panicking::assert_failed::<bool, bool>(move _385, _379, _380, move _387);
     }
 
     bb70: {
@@ -1936,7 +1936,7 @@ fn main() -> () {
     bb71: {
         _398 = core::panicking::AssertKind::Eq;
         _400 = Option::<Arguments<'_>>::None;
-        _399 = core::panicking::assert_failed::<bool, bool>(move _398, _392, _393, move _400) -> unwind continue;
+        _399 = core::panicking::assert_failed::<bool, bool>(move _398, _392, _393, move _400);
     }
 
     bb72: {
@@ -1956,7 +1956,7 @@ fn main() -> () {
     bb73: {
         _411 = core::panicking::AssertKind::Eq;
         _413 = Option::<Arguments<'_>>::None;
-        _412 = core::panicking::assert_failed::<bool, bool>(move _411, _405, _406, move _413) -> unwind continue;
+        _412 = core::panicking::assert_failed::<bool, bool>(move _411, _405, _406, move _413);
     }
 
     bb74: {
@@ -1976,7 +1976,7 @@ fn main() -> () {
     bb75: {
         _424 = core::panicking::AssertKind::Eq;
         _426 = Option::<Arguments<'_>>::None;
-        _425 = core::panicking::assert_failed::<bool, bool>(move _424, _418, _419, move _426) -> unwind continue;
+        _425 = core::panicking::assert_failed::<bool, bool>(move _424, _418, _419, move _426);
     }
 
     bb76: {
@@ -1996,7 +1996,7 @@ fn main() -> () {
     bb77: {
         _437 = core::panicking::AssertKind::Eq;
         _439 = Option::<Arguments<'_>>::None;
-        _438 = core::panicking::assert_failed::<bool, bool>(move _437, _431, _432, move _439) -> unwind continue;
+        _438 = core::panicking::assert_failed::<bool, bool>(move _437, _431, _432, move _439);
     }
 
     bb78: {
@@ -2016,7 +2016,7 @@ fn main() -> () {
     bb79: {
         _450 = core::panicking::AssertKind::Eq;
         _452 = Option::<Arguments<'_>>::None;
-        _451 = core::panicking::assert_failed::<bool, bool>(move _450, _444, _445, move _452) -> unwind continue;
+        _451 = core::panicking::assert_failed::<bool, bool>(move _450, _444, _445, move _452);
     }
 
     bb80: {
@@ -2036,7 +2036,7 @@ fn main() -> () {
     bb81: {
         _463 = core::panicking::AssertKind::Eq;
         _465 = Option::<Arguments<'_>>::None;
-        _464 = core::panicking::assert_failed::<bool, bool>(move _463, _457, _458, move _465) -> unwind continue;
+        _464 = core::panicking::assert_failed::<bool, bool>(move _463, _457, _458, move _465);
     }
 
     bb82: {
@@ -2056,7 +2056,7 @@ fn main() -> () {
     bb83: {
         _476 = core::panicking::AssertKind::Eq;
         _478 = Option::<Arguments<'_>>::None;
-        _477 = core::panicking::assert_failed::<bool, bool>(move _476, _470, _471, move _478) -> unwind continue;
+        _477 = core::panicking::assert_failed::<bool, bool>(move _476, _470, _471, move _478);
     }
 
     bb84: {
@@ -2076,7 +2076,7 @@ fn main() -> () {
     bb85: {
         _489 = core::panicking::AssertKind::Eq;
         _491 = Option::<Arguments<'_>>::None;
-        _490 = core::panicking::assert_failed::<bool, bool>(move _489, _483, _484, move _491) -> unwind continue;
+        _490 = core::panicking::assert_failed::<bool, bool>(move _489, _483, _484, move _491);
     }
 
     bb86: {
@@ -2096,7 +2096,7 @@ fn main() -> () {
     bb87: {
         _502 = core::panicking::AssertKind::Eq;
         _504 = Option::<Arguments<'_>>::None;
-        _503 = core::panicking::assert_failed::<bool, bool>(move _502, _496, _497, move _504) -> unwind continue;
+        _503 = core::panicking::assert_failed::<bool, bool>(move _502, _496, _497, move _504);
     }
 
     bb88: {
@@ -2116,7 +2116,7 @@ fn main() -> () {
     bb89: {
         _515 = core::panicking::AssertKind::Eq;
         _517 = Option::<Arguments<'_>>::None;
-        _516 = core::panicking::assert_failed::<bool, bool>(move _515, _509, _510, move _517) -> unwind continue;
+        _516 = core::panicking::assert_failed::<bool, bool>(move _515, _509, _510, move _517);
     }
 
     bb90: {
@@ -2136,7 +2136,7 @@ fn main() -> () {
     bb91: {
         _528 = core::panicking::AssertKind::Eq;
         _530 = Option::<Arguments<'_>>::None;
-        _529 = core::panicking::assert_failed::<bool, bool>(move _528, _522, _523, move _530) -> unwind continue;
+        _529 = core::panicking::assert_failed::<bool, bool>(move _528, _522, _523, move _530);
     }
 
     bb92: {
@@ -2156,7 +2156,7 @@ fn main() -> () {
     bb93: {
         _541 = core::panicking::AssertKind::Eq;
         _543 = Option::<Arguments<'_>>::None;
-        _542 = core::panicking::assert_failed::<bool, bool>(move _541, _535, _536, move _543) -> unwind continue;
+        _542 = core::panicking::assert_failed::<bool, bool>(move _541, _535, _536, move _543);
     }
 
     bb94: {
@@ -2176,7 +2176,7 @@ fn main() -> () {
     bb95: {
         _554 = core::panicking::AssertKind::Eq;
         _556 = Option::<Arguments<'_>>::None;
-        _555 = core::panicking::assert_failed::<bool, bool>(move _554, _548, _549, move _556) -> unwind continue;
+        _555 = core::panicking::assert_failed::<bool, bool>(move _554, _548, _549, move _556);
     }
 
     bb96: {

@@ -24,13 +24,13 @@ fn <impl at ui/traits/principal-less-objects.rs:11:1: 11:32>::drop(_1: &mut SetO
         _7 = deref_copy ((*_1).0: &std::sync::atomic::AtomicUsize);
         _8 = deref_copy ((*_1).0: &std::sync::atomic::AtomicUsize);
         _5 = Relaxed;
-        _4 = AtomicUsize::load(_8, move _5) -> [return: bb1, unwind continue];
+        _4 = AtomicUsize::load(_8, move _5) -> bb1;
     }
 
     bb1: {
         _3 = Add(move _4, const 1_usize);
         _6 = Relaxed;
-        _2 = AtomicUsize::store(_7, move _3, move _6) -> [return: bb2, unwind continue];
+        _2 = AtomicUsize::store(_7, move _3, move _6) -> bb2;
     }
 
     bb2: {
@@ -157,30 +157,30 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = assert_types_eq::<dyn Sync, dyn Sync>() -> [return: bb1, unwind continue];
+        _1 = assert_types_eq::<dyn Sync, dyn Sync>() -> bb1;
     }
 
     bb1: {
-        _2 = assert_types_eq::<dyn Send + Sync, dyn Send + Sync>() -> [return: bb2, unwind continue];
+        _2 = assert_types_eq::<dyn Send + Sync, dyn Send + Sync>() -> bb2;
     }
 
     bb2: {
-        _3 = assert_types_eq::<dyn Send + Sync, dyn Send + Sync>() -> [return: bb3, unwind continue];
+        _3 = assert_types_eq::<dyn Send + Sync, dyn Send + Sync>() -> bb3;
     }
 
     bb3: {
-        _4 = AtomicUsize::new(const 0_usize) -> [return: bb4, unwind continue];
+        _4 = AtomicUsize::new(const 0_usize) -> bb4;
     }
 
     bb4: {
         _8 = &_4;
         _9 = [const 0_u8; 64];
         _7 = SetOnDrop::<'_>(_8, move _9);
-        _6 = Box::<SetOnDrop<'_>>::new(move _7) -> [return: bb5, unwind continue];
+        _6 = Box::<SetOnDrop<'_>>::new(move _7) -> bb5;
     }
 
     bb5: {
-        _5 = move _6 as std::boxed::Box<dyn std::marker::Sync> (PointerCoercion(Unsize));
+        _5 = move _6 as std::boxed::Box<dyn std::marker::Sync> (Pointer(Unsize));
         _72 = (((_5.0: std::ptr::Unique<dyn std::marker::Sync>).0: std::ptr::NonNull<dyn std::marker::Sync>).0: *const dyn std::marker::Sync);
         _13 = &(*_72);
         _12 = std::mem::size_of_val::<dyn Sync>(_13) -> [return: bb6, unwind: bb21];
@@ -265,13 +265,13 @@ fn main() -> () {
     }
 
     bb16: {
-        drop(_5) -> [return: bb17, unwind continue];
+        drop(_5) -> bb17;
     }
 
     bb17: {
         _59 = &_4;
         _60 = Relaxed;
-        _58 = AtomicUsize::load(move _59, move _60) -> [return: bb18, unwind continue];
+        _58 = AtomicUsize::load(move _59, move _60) -> bb18;
     }
 
     bb18: {
@@ -291,7 +291,7 @@ fn main() -> () {
     bb19: {
         _69 = core::panicking::AssertKind::Eq;
         _71 = Option::<Arguments<'_>>::None;
-        _70 = core::panicking::assert_failed::<usize, usize>(move _69, _63, _64, move _71) -> unwind continue;
+        _70 = core::panicking::assert_failed::<usize, usize>(move _69, _63, _64, move _71);
     }
 
     bb20: {

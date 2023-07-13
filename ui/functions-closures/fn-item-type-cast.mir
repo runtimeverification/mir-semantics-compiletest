@@ -30,7 +30,7 @@ fn eq(_1: T, _2: T) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -52,7 +52,7 @@ static TEST: Option<fn(isize) -> isize> = {
 
     bb0: {
         StorageLive(_1);
-        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
         _0 = Option::<fn(isize) -> isize>::Some(move _1);
         StorageDead(_1);
         return;
@@ -97,24 +97,24 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
         _3 = const true;
         switchInt(move _3) -> [0: bb2, otherwise: bb1];
     }
 
     bb1: {
-        _2 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _2 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
         goto -> bb3;
     }
 
     bb2: {
-        _2 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
+        _2 = bar as fn(isize) -> isize (Pointer(ReifyFnPointer));
         goto -> bb3;
     }
 
     bb3: {
         _7 = _2;
-        _6 = move _7(const 4_isize) -> [return: bb4, unwind continue];
+        _6 = move _7(const 4_isize) -> bb4;
     }
 
     bb4: {
@@ -134,13 +134,13 @@ fn main() -> () {
     bb5: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<isize, isize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<isize, isize>(move _16, _10, _11, move _18);
     }
 
     bb6: {
-        _20 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
-        _21 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
-        _19 = eq::<fn(isize) -> isize>(move _20, move _21) -> [return: bb7, unwind continue];
+        _20 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _21 = bar as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _19 = eq::<fn(isize) -> isize>(move _20, move _21) -> bb7;
     }
 
     bb7: {

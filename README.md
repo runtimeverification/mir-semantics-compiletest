@@ -29,10 +29,10 @@ make ui-mir         # compile all '.rs' files and emit MIR
 
 ```
 nightly-x86_64-unknown-linux-gnu (default)
-rustc 1.72.0-nightly (839e9a6e1 2023-07-09)
+rustc 1.72.0-nightly (46514218f 2023-06-20)
 ```
 
 If using `rustup`, this can be installed and made default with
 ```
-rustup default nightly-2023-07-09
+rustup default nightly-2023-06-20
 ```

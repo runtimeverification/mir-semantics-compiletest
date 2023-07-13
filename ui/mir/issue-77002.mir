@@ -29,14 +29,14 @@ fn f(_1: &[i64; 2]) -> [i64; 2] {
     }
 
     bb0: {
-        _2 = <[i64; 2] as Default>::default() -> [return: bb1, unwind continue];
+        _2 = <[i64; 2] as Default>::default() -> bb1;
     }
 
     bb1: {
         _4 = const 0_usize;
         _5 = const 2_usize;
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb2, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb2;
     }
 
     bb2: {
@@ -44,7 +44,7 @@ fn f(_1: &[i64; 2]) -> [i64; 2] {
         _8 = const 0_usize;
         _9 = const 2_usize;
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb3, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb3;
     }
 
     bb3: {
@@ -52,7 +52,7 @@ fn f(_1: &[i64; 2]) -> [i64; 2] {
         _11 = const 0_usize;
         _12 = const 2_usize;
         _13 = Lt(_11, _12);
-        assert(move _13, "index out of bounds: the length is {} but the index is {}", move _12, _11) -> [success: bb4, unwind continue];
+        assert(move _13, "index out of bounds: the length is {} but the index is {}", move _12, _11) -> bb4;
     }
 
     bb4: {
@@ -97,7 +97,7 @@ fn main() -> () {
     bb0: {
         _1 = [const 1_i64, const 1_i64];
         _3 = &_1;
-        _2 = f(_3) -> [return: bb1, unwind continue];
+        _2 = f(_3) -> bb1;
     }
 
     bb1: {
@@ -105,7 +105,7 @@ fn main() -> () {
         _6 = const 0_usize;
         _7 = const 2_usize;
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb2, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb2;
     }
 
     bb2: {
@@ -125,7 +125,7 @@ fn main() -> () {
     bb3: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<i64, i64>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<i64, i64>(move _17, _11, _12, move _19);
     }
 
     bb4: {

@@ -27,7 +27,7 @@ fn Foo::complicated(_1: *const *const Self) -> i64 {
 
     bb2: {
         _2 = (*_1);
-        _0 = <Self as Foo>::bar(move _2) -> [return: bb1, unwind continue];
+        _0 = <Self as Foo>::bar(move _2) -> bb1;
     }
 }
 
@@ -409,19 +409,19 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = null::<i32>() -> [return: bb1, unwind continue];
+        _2 = null::<i32>() -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as *const dyn Foo (PointerCoercion(Unsize));
-        _4 = null::<u32>() -> [return: bb2, unwind continue];
+        _1 = move _2 as *const dyn Foo (Pointer(Unsize));
+        _4 = null::<u32>() -> bb2;
     }
 
     bb2: {
-        _3 = move _4 as *const dyn Foo (PointerCoercion(Unsize));
+        _3 = move _4 as *const dyn Foo (Pointer(Unsize));
         _7 = const "I'm an i32!";
         _6 = &_7;
-        _9 = <dyn Foo as Foo>::foo(_1) -> [return: bb3, unwind continue];
+        _9 = <dyn Foo as Foo>::foo(_1) -> bb3;
     }
 
     bb3: {
@@ -429,7 +429,7 @@ fn main() -> () {
         _5 = (move _6, move _8);
         _10 = (_5.0: &&str);
         _11 = (_5.1: &&str);
-        _13 = <&str as PartialEq>::eq(_10, _11) -> [return: bb4, unwind continue];
+        _13 = <&str as PartialEq>::eq(_10, _11) -> bb4;
     }
 
     bb4: {
@@ -440,13 +440,13 @@ fn main() -> () {
     bb5: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<&str, &str>(move _14, _10, _11, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<&str, &str>(move _14, _10, _11, move _16);
     }
 
     bb6: {
         _19 = const "I'm a u32!";
         _18 = &_19;
-        _21 = <dyn Foo as Foo>::foo(_3) -> [return: bb7, unwind continue];
+        _21 = <dyn Foo as Foo>::foo(_3) -> bb7;
     }
 
     bb7: {
@@ -454,7 +454,7 @@ fn main() -> () {
         _17 = (move _18, move _20);
         _22 = (_17.0: &&str);
         _23 = (_17.1: &&str);
-        _25 = <&str as PartialEq>::eq(_22, _23) -> [return: bb8, unwind continue];
+        _25 = <&str as PartialEq>::eq(_22, _23) -> bb8;
     }
 
     bb8: {
@@ -465,7 +465,7 @@ fn main() -> () {
     bb9: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<&str, &str>(move _26, _22, _23, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<&str, &str>(move _26, _22, _23, move _28);
     }
 
     bb10: {
@@ -475,7 +475,7 @@ fn main() -> () {
         _34 = const "I'm an i32!";
         _33 = &_34;
         _37 = _30;
-        _36 = <i32 as Foo>::foo(move _37) -> [return: bb11, unwind continue];
+        _36 = <i32 as Foo>::foo(move _37) -> bb11;
     }
 
     bb11: {
@@ -483,7 +483,7 @@ fn main() -> () {
         _32 = (move _33, move _35);
         _38 = (_32.0: &&str);
         _39 = (_32.1: &&str);
-        _41 = <&str as PartialEq>::eq(_38, _39) -> [return: bb12, unwind continue];
+        _41 = <&str as PartialEq>::eq(_38, _39) -> bb12;
     }
 
     bb12: {
@@ -494,14 +494,14 @@ fn main() -> () {
     bb13: {
         _42 = core::panicking::AssertKind::Eq;
         _44 = Option::<Arguments<'_>>::None;
-        _43 = core::panicking::assert_failed::<&str, &str>(move _42, _38, _39, move _44) -> unwind continue;
+        _43 = core::panicking::assert_failed::<&str, &str>(move _42, _38, _39, move _44);
     }
 
     bb14: {
         _47 = const 5_i64;
         _46 = &_47;
         _50 = _30;
-        _49 = <i32 as Foo>::bar(move _50) -> [return: bb15, unwind continue];
+        _49 = <i32 as Foo>::bar(move _50) -> bb15;
     }
 
     bb15: {
@@ -519,7 +519,7 @@ fn main() -> () {
     bb16: {
         _57 = core::panicking::AssertKind::Eq;
         _59 = Option::<Arguments<'_>>::None;
-        _58 = core::panicking::assert_failed::<i64, i64>(move _57, _51, _52, move _59) -> unwind continue;
+        _58 = core::panicking::assert_failed::<i64, i64>(move _57, _51, _52, move _59);
     }
 
     bb17: {
@@ -527,7 +527,7 @@ fn main() -> () {
         _61 = &_62;
         _66 = &_30;
         _65 = &raw const (*_66);
-        _64 = <i32 as Foo>::complicated(move _65) -> [return: bb18, unwind continue];
+        _64 = <i32 as Foo>::complicated(move _65) -> bb18;
     }
 
     bb18: {
@@ -545,15 +545,15 @@ fn main() -> () {
     bb19: {
         _73 = core::panicking::AssertKind::Eq;
         _75 = Option::<Arguments<'_>>::None;
-        _74 = core::panicking::assert_failed::<i64, i64>(move _73, _67, _68, move _75) -> unwind continue;
+        _74 = core::panicking::assert_failed::<i64, i64>(move _73, _67, _68, move _75);
     }
 
     bb20: {
         _77 = _30;
-        _76 = move _77 as *const dyn Foo (PointerCoercion(Unsize));
+        _76 = move _77 as *const dyn Foo (Pointer(Unsize));
         _80 = const "I'm an i32!";
         _79 = &_80;
-        _82 = <dyn Foo as Foo>::foo(_76) -> [return: bb21, unwind continue];
+        _82 = <dyn Foo as Foo>::foo(_76) -> bb21;
     }
 
     bb21: {
@@ -561,7 +561,7 @@ fn main() -> () {
         _78 = (move _79, move _81);
         _83 = (_78.0: &&str);
         _84 = (_78.1: &&str);
-        _86 = <&str as PartialEq>::eq(_83, _84) -> [return: bb22, unwind continue];
+        _86 = <&str as PartialEq>::eq(_83, _84) -> bb22;
     }
 
     bb22: {
@@ -572,13 +572,13 @@ fn main() -> () {
     bb23: {
         _87 = core::panicking::AssertKind::Eq;
         _89 = Option::<Arguments<'_>>::None;
-        _88 = core::panicking::assert_failed::<&str, &str>(move _87, _83, _84, move _89) -> unwind continue;
+        _88 = core::panicking::assert_failed::<&str, &str>(move _87, _83, _84, move _89);
     }
 
     bb24: {
         _92 = const 5_i64;
         _91 = &_92;
-        _94 = <dyn Foo as Foo>::bar(_76) -> [return: bb25, unwind continue];
+        _94 = <dyn Foo as Foo>::bar(_76) -> bb25;
     }
 
     bb25: {
@@ -596,7 +596,7 @@ fn main() -> () {
     bb26: {
         _101 = core::panicking::AssertKind::Eq;
         _103 = Option::<Arguments<'_>>::None;
-        _102 = core::panicking::assert_failed::<i64, i64>(move _101, _95, _96, move _103) -> unwind continue;
+        _102 = core::panicking::assert_failed::<i64, i64>(move _101, _95, _96, move _103);
     }
 
     bb27: {
@@ -606,7 +606,7 @@ fn main() -> () {
         _109 = const "I'm a u32!";
         _108 = &_109;
         _112 = _105;
-        _111 = <u32 as Foo>::foo(move _112) -> [return: bb28, unwind continue];
+        _111 = <u32 as Foo>::foo(move _112) -> bb28;
     }
 
     bb28: {
@@ -614,7 +614,7 @@ fn main() -> () {
         _107 = (move _108, move _110);
         _113 = (_107.0: &&str);
         _114 = (_107.1: &&str);
-        _116 = <&str as PartialEq>::eq(_113, _114) -> [return: bb29, unwind continue];
+        _116 = <&str as PartialEq>::eq(_113, _114) -> bb29;
     }
 
     bb29: {
@@ -625,14 +625,14 @@ fn main() -> () {
     bb30: {
         _117 = core::panicking::AssertKind::Eq;
         _119 = Option::<Arguments<'_>>::None;
-        _118 = core::panicking::assert_failed::<&str, &str>(move _117, _113, _114, move _119) -> unwind continue;
+        _118 = core::panicking::assert_failed::<&str, &str>(move _117, _113, _114, move _119);
     }
 
     bb31: {
         _122 = const 18_i64;
         _121 = &_122;
         _125 = _105;
-        _124 = <u32 as Foo>::bar(move _125) -> [return: bb32, unwind continue];
+        _124 = <u32 as Foo>::bar(move _125) -> bb32;
     }
 
     bb32: {
@@ -650,7 +650,7 @@ fn main() -> () {
     bb33: {
         _132 = core::panicking::AssertKind::Eq;
         _134 = Option::<Arguments<'_>>::None;
-        _133 = core::panicking::assert_failed::<i64, i64>(move _132, _126, _127, move _134) -> unwind continue;
+        _133 = core::panicking::assert_failed::<i64, i64>(move _132, _126, _127, move _134);
     }
 
     bb34: {
@@ -658,7 +658,7 @@ fn main() -> () {
         _136 = &_137;
         _141 = &_105;
         _140 = &raw const (*_141);
-        _139 = <u32 as Foo>::complicated(move _140) -> [return: bb35, unwind continue];
+        _139 = <u32 as Foo>::complicated(move _140) -> bb35;
     }
 
     bb35: {
@@ -676,15 +676,15 @@ fn main() -> () {
     bb36: {
         _148 = core::panicking::AssertKind::Eq;
         _150 = Option::<Arguments<'_>>::None;
-        _149 = core::panicking::assert_failed::<i64, i64>(move _148, _142, _143, move _150) -> unwind continue;
+        _149 = core::panicking::assert_failed::<i64, i64>(move _148, _142, _143, move _150);
     }
 
     bb37: {
         _152 = _105;
-        _151 = move _152 as *const dyn Foo (PointerCoercion(Unsize));
+        _151 = move _152 as *const dyn Foo (Pointer(Unsize));
         _155 = const "I'm a u32!";
         _154 = &_155;
-        _157 = <dyn Foo as Foo>::foo(_151) -> [return: bb38, unwind continue];
+        _157 = <dyn Foo as Foo>::foo(_151) -> bb38;
     }
 
     bb38: {
@@ -692,7 +692,7 @@ fn main() -> () {
         _153 = (move _154, move _156);
         _158 = (_153.0: &&str);
         _159 = (_153.1: &&str);
-        _161 = <&str as PartialEq>::eq(_158, _159) -> [return: bb39, unwind continue];
+        _161 = <&str as PartialEq>::eq(_158, _159) -> bb39;
     }
 
     bb39: {
@@ -703,13 +703,13 @@ fn main() -> () {
     bb40: {
         _162 = core::panicking::AssertKind::Eq;
         _164 = Option::<Arguments<'_>>::None;
-        _163 = core::panicking::assert_failed::<&str, &str>(move _162, _158, _159, move _164) -> unwind continue;
+        _163 = core::panicking::assert_failed::<&str, &str>(move _162, _158, _159, move _164);
     }
 
     bb41: {
         _167 = const 18_i64;
         _166 = &_167;
-        _169 = <dyn Foo as Foo>::bar(_151) -> [return: bb42, unwind continue];
+        _169 = <dyn Foo as Foo>::bar(_151) -> bb42;
     }
 
     bb42: {
@@ -727,7 +727,7 @@ fn main() -> () {
     bb43: {
         _176 = core::panicking::AssertKind::Eq;
         _178 = Option::<Arguments<'_>>::None;
-        _177 = core::panicking::assert_failed::<i64, i64>(move _176, _170, _171, move _178) -> unwind continue;
+        _177 = core::panicking::assert_failed::<i64, i64>(move _176, _170, _171, move _178);
     }
 
     bb44: {

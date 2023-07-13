@@ -253,7 +253,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = <u8 as Into<i32>>::into(const _) -> [return: bb1, unwind continue];
+        _3 = <u8 as Into<i32>>::into(const _) -> bb1;
     }
 
     bb1: {
@@ -273,7 +273,7 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<i32, i32>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<i32, i32>(move _12, _6, _7, move _14);
     }
 
     bb3: {
@@ -281,7 +281,7 @@ fn main() -> () {
         _18 = const 0_usize;
         _19 = const 1_usize;
         _20 = Lt(_18, _19);
-        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> [success: bb4, unwind continue];
+        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> bb4;
     }
 
     bb4: {
@@ -301,7 +301,7 @@ fn main() -> () {
     bb5: {
         _29 = core::panicking::AssertKind::Eq;
         _31 = Option::<Arguments<'_>>::None;
-        _30 = core::panicking::assert_failed::<u8, u8>(move _29, _23, _24, move _31) -> unwind continue;
+        _30 = core::panicking::assert_failed::<u8, u8>(move _29, _23, _24, move _31);
     }
 
     bb6: {
@@ -309,16 +309,16 @@ fn main() -> () {
         _32 = S { a: _33 };
         _35 = [const 1_u8, const 2_u8, const 3_u8];
         _34 = &_35;
-        _40 = _34 as &[u8] (PointerCoercion(Unsize));
-        _39 = core::slice::<impl [u8]>::iter(move _40) -> [return: bb7, unwind continue];
+        _40 = _34 as &[u8] (Pointer(Unsize));
+        _39 = core::slice::<impl [u8]>::iter(move _40) -> bb7;
     }
 
     bb7: {
-        _38 = <std::slice::Iter<'_, u8> as Iterator>::cloned::<'_, u8>(move _39) -> [return: bb8, unwind continue];
+        _38 = <std::slice::Iter<'_, u8> as Iterator>::cloned::<'_, u8>(move _39) -> bb8;
     }
 
     bb8: {
-        _37 = <Cloned<std::slice::Iter<'_, u8>> as Iterator>::collect::<Vec<u8>>(move _38) -> [return: bb9, unwind continue];
+        _37 = <Cloned<std::slice::Iter<'_, u8>> as Iterator>::collect::<Vec<u8>>(move _38) -> bb9;
     }
 
     bb9: {
@@ -471,7 +471,7 @@ fn main() -> () {
         _126 = ShallowInitBox(move _125, [u8; 3]);
         _138 = (((_126.0: std::ptr::Unique<[u8; 3]>).0: std::ptr::NonNull<[u8; 3]>).0: *const [u8; 3]);
         (*_138) = [const 1_u8, const 2_u8, const 3_u8];
-        _122 = move _126 as std::boxed::Box<[u8]> (PointerCoercion(Unsize));
+        _122 = move _126 as std::boxed::Box<[u8]> (Pointer(Unsize));
         _121 = slice::<impl [u8]>::into_vec::<std::alloc::Global>(move _122) -> [return: bb29, unwind: bb37];
     }
 
@@ -511,7 +511,7 @@ fn main() -> () {
     }
 
     bb35: {
-        drop(_36) -> [return: bb36, unwind continue];
+        drop(_36) -> bb36;
     }
 
     bb36: {

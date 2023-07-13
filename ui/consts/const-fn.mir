@@ -70,7 +70,7 @@ fn div(_1: u32, _2: u32) -> u32 {
 
     bb0: {
         _3 = Eq(_2, const 0_u32);
-        assert(!move _3, "attempt to divide `{}` by zero", _1) -> [success: bb1, unwind continue];
+        assert(!move _3, "attempt to divide `{}` by zero", _1) -> bb1;
     }
 
     bb1: {
@@ -94,7 +94,7 @@ fn div(_1: u32, _2: u32) -> u32 {
         StorageLive(_4);
         _4 = _2;
         _5 = Eq(_4, const 0_u32);
-        assert(!move _5, "attempt to divide `{}` by zero", _3) -> [success: bb1, unwind continue];
+        assert(!move _5, "attempt to divide `{}` by zero", _3) -> bb1;
     }
 
     bb1: {
@@ -137,7 +137,7 @@ fn generic_arr(_1: [T; 1]) -> T {
         _2 = const 0_usize;
         _3 = const 1_usize;
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -159,7 +159,7 @@ fn generic_arr(_1: [T; 1]) -> T {
         _2 = const 0_usize;
         _3 = Len(_1);
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -183,7 +183,7 @@ const SUM: u32 = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = add(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
+        _0 = add(const 44_u32, const 22_u32) -> bb1;
     }
 
     bb1: {
@@ -196,7 +196,7 @@ const DIFF: u32 = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = sub(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
+        _0 = sub(const 44_u32, const 22_u32) -> bb1;
     }
 
     bb1: {
@@ -211,7 +211,7 @@ const DIV: u32 = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = div(const 44_u32, const 22_u32) -> [return: bb1, unwind continue];
+        _0 = div(const 44_u32, const 22_u32) -> bb1;
     }
 
     bb1: {
@@ -312,7 +312,7 @@ fn main() -> () {
     bb1: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u32, u32>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u32, u32>(move _12, _6, _7, move _14);
     }
 
     bb2: {
@@ -322,7 +322,7 @@ fn main() -> () {
     }
 
     bb3: {
-        _17 = core::panicking::panic(const "assertion failed: SUM != 88") -> unwind continue;
+        _17 = core::panicking::panic(const "assertion failed: SUM != 88");
     }
 
     bb4: {
@@ -343,7 +343,7 @@ fn main() -> () {
     bb5: {
         _29 = core::panicking::AssertKind::Eq;
         _31 = Option::<Arguments<'_>>::None;
-        _30 = core::panicking::assert_failed::<u32, u32>(move _29, _23, _24, move _31) -> unwind continue;
+        _30 = core::panicking::assert_failed::<u32, u32>(move _29, _23, _24, move _31);
     }
 
     bb6: {
@@ -364,7 +364,7 @@ fn main() -> () {
     bb7: {
         _43 = core::panicking::AssertKind::Eq;
         _45 = Option::<Arguments<'_>>::None;
-        _44 = core::panicking::assert_failed::<u32, u32>(move _43, _37, _38, move _45) -> unwind continue;
+        _44 = core::panicking::assert_failed::<u32, u32>(move _43, _37, _38, move _45);
     }
 
     bb8: {
@@ -379,7 +379,7 @@ main::{constant#0}: usize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = sub(const 100_u32, const 99_u32) -> [return: bb1, unwind continue];
+        _1 = sub(const 100_u32, const 99_u32) -> bb1;
     }
 
     bb1: {
@@ -394,7 +394,7 @@ main::{constant#1}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = generic::<usize>(const 1_usize) -> [return: bb1, unwind continue];
+        _0 = generic::<usize>(const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -410,7 +410,7 @@ main::{constant#2}: usize = {
         StorageLive(_1);
         _1 = [const 1_usize];
         ConstEvalCounter;
-        _0 = generic_arr::<usize>(move _1) -> [return: bb1, unwind continue];
+        _0 = generic_arr::<usize>(move _1) -> bb1;
     }
 
     bb1: {

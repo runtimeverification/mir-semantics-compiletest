@@ -30,7 +30,7 @@ fn <impl at ui/binding/fn-arg-incomplete-pattern-drop-order.rs:17:1: 17:21>::rec
 
     bb0: {
         _11 = deref_copy (_1.1: &std::cell::RefCell<std::vec::Vec<i32>>);
-        _7 = RefCell::<Vec<i32>>::borrow_mut(_11) -> [return: bb1, unwind continue];
+        _7 = RefCell::<Vec<i32>>::borrow_mut(_11) -> bb1;
     }
 
     bb1: {
@@ -44,7 +44,7 @@ fn <impl at ui/binding/fn-arg-incomplete-pattern-drop-order.rs:17:1: 17:21>::rec
     }
 
     bb3: {
-        drop(_7) -> [return: bb4, unwind continue];
+        drop(_7) -> bb4;
     }
 
     bb4: {
@@ -54,7 +54,7 @@ fn <impl at ui/binding/fn-arg-incomplete-pattern-drop-order.rs:17:1: 17:21>::rec
     }
 
     bb5: {
-        _10 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _10 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb6: {
@@ -80,7 +80,7 @@ fn <impl at ui/binding/fn-arg-incomplete-pattern-drop-order.rs:26:1: 26:30>::dro
     bb0: {
         _3 = ((*_1).1: Context<'_>);
         _4 = ((*_1).0: i32);
-        _2 = Context::<'_>::record_drop(move _3, move _4) -> [return: bb1, unwind continue];
+        _2 = Context::<'_>::record_drop(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -108,7 +108,7 @@ fn bindings_in_params(_1: (LogDrop<'_>, LogDrop<'_>), _2: (LogDrop<'_>, LogDrop<
     }
 
     bb2: {
-        drop((_1.1: LogDrop<'_>)) -> [return: bb6, unwind continue];
+        drop((_1.1: LogDrop<'_>)) -> bb6;
     }
 
     bb3 (cleanup): {
@@ -170,7 +170,7 @@ fn bindings_with_let(_1: (LogDrop<'_>, LogDrop<'_>), _2: (LogDrop<'_>, LogDrop<'
     }
 
     bb2: {
-        drop((_3.1: LogDrop<'_>)) -> [return: bb6, unwind continue];
+        drop((_3.1: LogDrop<'_>)) -> bb6;
     }
 
     bb3 (cleanup): {
@@ -268,11 +268,11 @@ fn test_drop_order(_1: i32, _2: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>
     }
 
     bb0: {
-        _6 = Vec::<i32>::new() -> [return: bb1, unwind continue];
+        _6 = Vec::<i32>::new() -> bb1;
     }
 
     bb1: {
-        _5 = RefCell::<Vec<i32>>::new(move _6) -> [return: bb2, unwind continue];
+        _5 = RefCell::<Vec<i32>>::new(move _6) -> bb2;
     }
 
     bb2: {
@@ -349,7 +349,7 @@ fn test_drop_order(_1: i32, _2: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>
         _34 = core::panicking::AssertKind::Eq;
         _40 = [const "incorrect drop order"];
         _39 = &_40;
-        _38 = _39 as &[&str] (PointerCoercion(Unsize));
+        _38 = _39 as &[&str] (Pointer(Unsize));
         _37 = Arguments::<'_>::new_const(move _38) -> [return: bb15, unwind: bb20];
     }
 
@@ -367,7 +367,7 @@ fn test_drop_order(_1: i32, _2: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>
     }
 
     bb18: {
-        drop(_5) -> [return: bb19, unwind continue];
+        drop(_5) -> bb19;
     }
 
     bb19: {
@@ -417,7 +417,7 @@ fn test_drop_order::{closure#0}(_1: [closure@ui/binding/fn-arg-incomplete-patter
         _8 = move (_1.3: LogDrop<'_>);
         _9 = move (_1.4: LogDrop<'_>);
         _7 = (move _8, move _9);
-        _2 = move _3(move _4, move _7) -> [return: bb1, unwind continue];
+        _2 = move _3(move _4, move _7) -> bb1;
     }
 
     bb1: {
@@ -435,27 +435,27 @@ fn main() -> () {
     let mut _6: std::ops::RangeInclusive<i32>;
 
     bb0: {
-        _2 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> [return: bb1, unwind continue];
+        _2 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> bb1;
     }
 
     bb1: {
-        _1 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:66:22: 66:25]>(move _2, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:66:22: 66:25]) -> [return: bb2, unwind continue];
+        _1 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:66:22: 66:25]>(move _2, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:66:22: 66:25]) -> bb2;
     }
 
     bb2: {
-        _4 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> [return: bb3, unwind continue];
+        _4 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> bb3;
     }
 
     bb3: {
-        _3 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:67:22: 67:25]>(move _4, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:67:22: 67:25]) -> [return: bb4, unwind continue];
+        _3 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:67:22: 67:25]>(move _4, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:67:22: 67:25]) -> bb4;
     }
 
     bb4: {
-        _6 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> [return: bb5, unwind continue];
+        _6 = RangeInclusive::<i32>::new(const 0_i32, const 4_i32) -> bb5;
     }
 
     bb5: {
-        _5 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:22: 68:25]>(move _6, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:22: 68:25]) -> [return: bb6, unwind continue];
+        _5 = <RangeInclusive<i32> as Iterator>::for_each::<[closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:22: 68:25]>(move _6, const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:22: 68:25]) -> bb6;
     }
 
     bb6: {
@@ -469,8 +469,8 @@ fn main::{closure#0}(_1: &mut [closure@ui/binding/fn-arg-incomplete-pattern-drop
     let mut _3: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>));
 
     bb0: {
-        _3 = bindings_in_params as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (PointerCoercion(ReifyFnPointer));
-        _0 = test_drop_order(_2, move _3) -> [return: bb1, unwind continue];
+        _3 = bindings_in_params as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (Pointer(ReifyFnPointer));
+        _0 = test_drop_order(_2, move _3) -> bb1;
     }
 
     bb1: {
@@ -484,8 +484,8 @@ fn main::{closure#1}(_1: &mut [closure@ui/binding/fn-arg-incomplete-pattern-drop
     let mut _3: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>));
 
     bb0: {
-        _3 = bindings_with_let as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (PointerCoercion(ReifyFnPointer));
-        _0 = test_drop_order(_2, move _3) -> [return: bb1, unwind continue];
+        _3 = bindings_with_let as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (Pointer(ReifyFnPointer));
+        _0 = test_drop_order(_2, move _3) -> bb1;
     }
 
     bb1: {
@@ -499,8 +499,8 @@ fn main::{closure#2}(_1: &mut [closure@ui/binding/fn-arg-incomplete-pattern-drop
     let mut _3: for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>));
 
     bb0: {
-        _3 = const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:45: 68:63] as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (PointerCoercion(ClosureFnPointer(Normal)));
-        _0 = test_drop_order(_2, move _3) -> [return: bb1, unwind continue];
+        _3 = const ZeroSized: [closure@ui/binding/fn-arg-incomplete-pattern-drop-order.rs:68:45: 68:63] as for<'a, 'b, 'c, 'd> fn((LogDrop<'a>, LogDrop<'b>), (LogDrop<'c>, LogDrop<'d>)) (Pointer(ClosureFnPointer(Normal)));
+        _0 = test_drop_order(_2, move _3) -> bb1;
     }
 
     bb1: {
@@ -528,7 +528,7 @@ fn main::{closure#2}::{closure#0}(_1: &[closure@ui/binding/fn-arg-incomplete-pat
     }
 
     bb2: {
-        drop((_2.1: LogDrop<'_>)) -> [return: bb6, unwind continue];
+        drop((_2.1: LogDrop<'_>)) -> bb6;
     }
 
     bb3 (cleanup): {

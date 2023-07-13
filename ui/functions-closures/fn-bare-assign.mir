@@ -42,7 +42,7 @@ fn f(_1: isize, _2: &mut bool) -> () {
     bb1: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15);
     }
 
     bb2: {
@@ -58,7 +58,7 @@ fn g(_1: for<'a> fn(isize, &'a mut bool), _2: &mut bool) -> () {
     let _3: ();
 
     bb0: {
-        _3 = _1(const 10_isize, _2) -> [return: bb1, unwind continue];
+        _3 = _1(const 10_isize, _2) -> bb1;
     }
 
     bb1: {
@@ -101,9 +101,9 @@ fn main() -> () {
 
     bb0: {
         _1 = const false;
-        _3 = f as for<'a> fn(isize, &'a mut bool) (PointerCoercion(ReifyFnPointer));
+        _3 = f as for<'a> fn(isize, &'a mut bool) (Pointer(ReifyFnPointer));
         _4 = &mut _1;
-        _2 = g(move _3, _4) -> [return: bb1, unwind continue];
+        _2 = g(move _3, _4) -> bb1;
     }
 
     bb1: {
@@ -123,7 +123,7 @@ fn main() -> () {
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<bool, bool>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<bool, bool>(move _15, _9, _10, move _17);
     }
 
     bb3: {

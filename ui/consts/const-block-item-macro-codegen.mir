@@ -10,7 +10,7 @@ fn <impl at ui/consts/const-block-item-macro-codegen.rs:13:1: 13:12>::eval(_1: &
     bb0: {
         _3 = ((*_1).2: fn(usize, usize) -> usize);
         _4 = ((*_1).1: usize);
-        _0 = move _3(move _4, _2) -> [return: bb1, unwind continue];
+        _0 = move _3(move _4, _2) -> bb1;
     }
 
     bb1: {
@@ -24,7 +24,7 @@ static GENERATED_CODE_1: MyType = {
 
     bb0: {
         StorageLive(_1);
-        _1 = GENERATED_CODE_1::generated as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _1 = GENERATED_CODE_1::generated as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         _0 = MyType { desc: const "test", data: const 100_usize, code: move _1 };
         StorageDead(_1);
         return;
@@ -50,7 +50,7 @@ static GENERATED_CODE_2: MyType = {
 
     bb0: {
         StorageLive(_1);
-        _1 = GENERATED_CODE_2::generated as fn(usize, usize) -> usize (PointerCoercion(ReifyFnPointer));
+        _1 = GENERATED_CODE_2::generated as fn(usize, usize) -> usize (Pointer(ReifyFnPointer));
         _0 = MyType { desc: const "test", data: const 1000_usize, code: move _1 };
         StorageDead(_1);
         return;
@@ -119,7 +119,7 @@ fn main() -> () {
 
     bb0: {
         _4 = const {alloc1: &MyType};
-        _3 = MyType::eval(_4, const 10_usize) -> [return: bb1, unwind continue];
+        _3 = MyType::eval(_4, const 10_usize) -> bb1;
     }
 
     bb1: {
@@ -139,12 +139,12 @@ fn main() -> () {
     bb2: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<usize, usize>(move _13, _7, _8, move _15);
     }
 
     bb3: {
         _19 = const {alloc2: &MyType};
-        _18 = MyType::eval(_19, const 100_usize) -> [return: bb4, unwind continue];
+        _18 = MyType::eval(_19, const 100_usize) -> bb4;
     }
 
     bb4: {
@@ -164,7 +164,7 @@ fn main() -> () {
     bb5: {
         _28 = core::panicking::AssertKind::Eq;
         _30 = Option::<Arguments<'_>>::None;
-        _29 = core::panicking::assert_failed::<usize, usize>(move _28, _22, _23, move _30) -> unwind continue;
+        _29 = core::panicking::assert_failed::<usize, usize>(move _28, _22, _23, move _30);
     }
 
     bb6: {

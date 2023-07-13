@@ -15,8 +15,8 @@ fn <impl at ui/traits/inheritance/overloading-simple.rs:7:10: 7:15>::fmt(_1: &My
         _4 = const "val";
         _7 = &((*_1).0: isize);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -46,7 +46,7 @@ fn <impl at ui/traits/inheritance/overloading-simple.rs:10:1: 10:25>::ne(_1: &My
     let mut _3: bool;
 
     bb0: {
-        _3 = <MyInt as PartialEq>::eq(_1, _2) -> [return: bb1, unwind continue];
+        _3 = <MyInt as PartialEq>::eq(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -73,7 +73,7 @@ fn f(_1: T, _2: T) -> bool {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -141,15 +141,15 @@ fn main() -> () {
     }
 
     bb0: {
-        _5 = mi(const 3_isize) -> [return: bb1, unwind continue];
+        _5 = mi(const 3_isize) -> bb1;
     }
 
     bb1: {
-        _6 = mi(const 5_isize) -> [return: bb2, unwind continue];
+        _6 = mi(const 5_isize) -> bb2;
     }
 
     bb2: {
-        _7 = mi(const 3_isize) -> [return: bb3, unwind continue];
+        _7 = mi(const 3_isize) -> bb3;
     }
 
     bb3: {
@@ -159,7 +159,7 @@ fn main() -> () {
         _3 = move (_4.2: MyInt);
         _10 = &_1;
         _11 = &_2;
-        _9 = <MyInt as PartialEq>::ne(move _10, move _11) -> [return: bb4, unwind continue];
+        _9 = <MyInt as PartialEq>::ne(move _10, move _11) -> bb4;
     }
 
     bb4: {
@@ -168,7 +168,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _12 = core::panicking::panic(const "assertion failed: x != y") -> unwind continue;
+        _12 = core::panicking::panic(const "assertion failed: x != y");
     }
 
     bb6: {
@@ -177,7 +177,7 @@ fn main() -> () {
         _13 = (move _14, move _15);
         _16 = (_13.0: &MyInt);
         _17 = (_13.1: &MyInt);
-        _19 = <MyInt as PartialEq>::eq(_16, _17) -> [return: bb7, unwind continue];
+        _19 = <MyInt as PartialEq>::eq(_16, _17) -> bb7;
     }
 
     bb7: {
@@ -188,7 +188,7 @@ fn main() -> () {
     bb8: {
         _20 = core::panicking::AssertKind::Eq;
         _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<MyInt, MyInt>(move _20, _16, _17, move _22) -> unwind continue;
+        _21 = core::panicking::assert_failed::<MyInt, MyInt>(move _20, _16, _17, move _22);
     }
 
     bb9: {

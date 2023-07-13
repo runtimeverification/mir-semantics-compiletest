@@ -23,7 +23,7 @@ fn field_copy_after_field_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -59,7 +59,7 @@ fn field_copy_after_field_borrow() -> () {
 
     bb6: {
         (*_7) = const 3_isize;
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 }
 
@@ -90,7 +90,7 @@ fn fu_field_copy_after_field_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -130,7 +130,7 @@ fn fu_field_copy_after_field_borrow() -> () {
 
     bb7: {
         (*_8) = const 4_isize;
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 }
 
@@ -157,7 +157,7 @@ fn field_deref_after_field_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -176,7 +176,7 @@ fn field_deref_after_field_borrow() -> () {
 
     bb2: {
         (*_3) = const 3_isize;
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -212,14 +212,14 @@ fn field_move_after_field_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _3 = &mut (_1.0: isize);
         _5 = move (_1.1: std::boxed::Box<isize>);
-        _4 = std::mem::drop::<Box<isize>>(move _5) -> [return: bb2, unwind continue];
+        _4 = std::mem::drop::<Box<isize>>(move _5) -> bb2;
     }
 
     bb2: {
@@ -246,14 +246,14 @@ fn fu_field_move_after_field_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _3 = &mut (_1.0: isize);
         _4 = A { a: const 3_isize, b: move (_1.1: std::boxed::Box<isize>) };
-        _5 = std::mem::drop::<A>(move _4) -> [return: bb2, unwind continue];
+        _5 = std::mem::drop::<A>(move _4) -> bb2;
     }
 
     bb2: {
@@ -271,23 +271,23 @@ fn main() -> () {
     let _5: ();
 
     bb0: {
-        _1 = field_copy_after_field_borrow() -> [return: bb1, unwind continue];
+        _1 = field_copy_after_field_borrow() -> bb1;
     }
 
     bb1: {
-        _2 = fu_field_copy_after_field_borrow() -> [return: bb2, unwind continue];
+        _2 = fu_field_copy_after_field_borrow() -> bb2;
     }
 
     bb2: {
-        _3 = field_deref_after_field_borrow() -> [return: bb3, unwind continue];
+        _3 = field_deref_after_field_borrow() -> bb3;
     }
 
     bb3: {
-        _4 = field_move_after_field_borrow() -> [return: bb4, unwind continue];
+        _4 = field_move_after_field_borrow() -> bb4;
     }
 
     bb4: {
-        _5 = fu_field_move_after_field_borrow() -> [return: bb5, unwind continue];
+        _5 = fu_field_move_after_field_borrow() -> bb5;
     }
 
     bb5: {

@@ -45,7 +45,7 @@ fn the_bug() -> () {
         _5 = &(*_20);
         _7 = const "left";
         _6 = &_7;
-        _4 = <&str as PartialEq>::eq(move _5, move _6) -> [return: bb1, unwind continue];
+        _4 = <&str as PartialEq>::eq(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -65,7 +65,7 @@ fn the_bug() -> () {
         _9 = (move _10, move _11);
         _13 = (_9.0: &(&str, &str));
         _14 = (_9.1: &(&str, &str));
-        _16 = <(&str, &str) as PartialEq>::eq(_13, _14) -> [return: bb4, unwind continue];
+        _16 = <(&str, &str) as PartialEq>::eq(_13, _14) -> bb4;
     }
 
     bb4: {
@@ -76,7 +76,7 @@ fn the_bug() -> () {
     bb5: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<(&str, &str), (&str, &str)>(move _17, _13, _14, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<(&str, &str), (&str, &str)>(move _17, _13, _14, move _19);
     }
 
     bb6: {
@@ -89,7 +89,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = the_bug() -> [return: bb1, unwind continue];
+        _1 = the_bug() -> bb1;
     }
 
     bb1: {

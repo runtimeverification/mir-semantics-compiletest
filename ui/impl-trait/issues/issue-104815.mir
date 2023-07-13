@@ -21,7 +21,7 @@ fn <impl at ui/impl-trait/issues/issue-104815.rs:9:1: 9:10>::new() -> Data {
     bb0: {
         _3 = SizeOf([It; 2]);
         _4 = AlignOf([It; 2]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -42,8 +42,8 @@ fn <impl at ui/impl-trait/issues/issue-104815.rs:9:1: 9:10>::new() -> Data {
     }
 
     bb3: {
-        _2 = move _6 as std::boxed::Box<[It]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [It]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[It]> (Pointer(Unsize));
+        _1 = slice::<impl [It]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -56,12 +56,12 @@ fn <impl at ui/impl-trait/issues/issue-104815.rs:9:1: 9:10>::content(_1: &Data) 
 
     bb0: {
         _4 = &((*_1).0: std::vec::Vec<It>);
-        _3 = <Vec<It> as Deref>::deref(move _4) -> [return: bb1, unwind continue];
+        _3 = <Vec<It> as Deref>::deref(move _4) -> bb1;
     }
 
     bb1: {
         _2 = _3;
-        _0 = core::slice::<impl [It]>::iter(move _2) -> [return: bb2, unwind continue];
+        _0 = core::slice::<impl [It]>::iter(move _2) -> bb2;
     }
 
     bb2: {
@@ -92,7 +92,7 @@ fn <impl at ui/impl-trait/issues/issue-104815.rs:26:1: 26:23>::new(_1: &str, _2:
     }
 
     bb2: {
-        _4 = move _5 as std::boxed::Box<dyn Resolver> (PointerCoercion(Unsize));
+        _4 = move _5 as std::boxed::Box<dyn Resolver> (Pointer(Unsize));
         _0 = Container::<'_> { name: move _3, resolver: move _4 };
         return;
     }
@@ -130,7 +130,7 @@ fn get(_1: impl Iterator<Item = &'a It>) -> impl Resolver + '_ {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -162,7 +162,7 @@ fn get2(_1: impl Iterator<Item = &'a It>) -> impl Resolver + '_ {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -222,7 +222,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Data::new() -> [return: bb1, unwind continue];
+        _1 = Data::new() -> bb1;
     }
 
     bb1: {
@@ -238,7 +238,7 @@ fn main() -> () {
         _12 = const "b";
         _11 = [const "a", _12];
         _10 = &_11;
-        _9 = move _10 as &[&str] (PointerCoercion(Unsize));
+        _9 = move _10 as &[&str] (Pointer(Unsize));
         _8 = core::slice::<impl [&str]>::iter(move _9) -> [return: bb4, unwind: bb17];
     }
 
@@ -273,7 +273,7 @@ fn main() -> () {
         _25 = const "b";
         _24 = [const "a", _25];
         _23 = &_24;
-        _22 = move _23 as &[&str] (PointerCoercion(Unsize));
+        _22 = move _23 as &[&str] (Pointer(Unsize));
         _21 = core::slice::<impl [&str]>::iter(move _22) -> [return: bb11, unwind: bb17];
     }
 
@@ -296,7 +296,7 @@ fn main() -> () {
     }
 
     bb15: {
-        drop(_1) -> [return: bb16, unwind continue];
+        drop(_1) -> bb16;
     }
 
     bb16: {
@@ -324,7 +324,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:55:1
     bb0: {
         _3 = (*_2);
         _4 = deref_copy ((*_1).0: &impl Resolver + '_);
-        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> [return: bb1, unwind continue];
+        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -338,7 +338,7 @@ fn main::{closure#1}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:56:1
 
     bb0: {
         _0 = move (_2.0: std::string::String);
-        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> [return: bb1, unwind continue];
+        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> bb1;
     }
 
     bb1: {
@@ -358,7 +358,7 @@ fn main::{closure#2}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:63:1
     bb0: {
         _3 = (*_2);
         _4 = deref_copy ((*_1).0: &impl Resolver + '_);
-        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> [return: bb1, unwind continue];
+        _0 = Container::<'_>::new::<&impl Resolver + '_>(_3, _4) -> bb1;
     }
 
     bb1: {
@@ -372,7 +372,7 @@ fn main::{closure#3}(_1: &mut [closure@ui/impl-trait/issues/issue-104815.rs:64:1
 
     bb0: {
         _0 = move (_2.0: std::string::String);
-        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> [return: bb1, unwind continue];
+        drop((_2.1: std::boxed::Box<dyn Resolver>)) -> bb1;
     }
 
     bb1: {

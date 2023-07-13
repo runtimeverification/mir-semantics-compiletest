@@ -8,15 +8,15 @@ fn f(_1: &dyn Derived<P>) -> () {
     let _4: ();
 
     bb0: {
-        _2 = <dyn Derived<P> as Derived<P>>::is_derived(_1) -> [return: bb1, unwind continue];
+        _2 = <dyn Derived<P> as Derived<P>>::is_derived(_1) -> bb1;
     }
 
     bb1: {
-        _3 = <dyn Derived<P> as Base<<P as Proj>::S>>::is_base(_1) -> [return: bb2, unwind continue];
+        _3 = <dyn Derived<P> as Base<<P as Proj>::S>>::is_base(_1) -> bb2;
     }
 
     bb2: {
-        _4 = <dyn Derived<P> as Base<()>>::is_base(_1) -> [return: bb3, unwind continue];
+        _4 = <dyn Derived<P> as Base<()>>::is_base(_1) -> bb3;
     }
 
     bb3: {
@@ -36,8 +36,8 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = f::<()> as for<'a> fn(&'a (dyn Derived<()> + 'a)) (PointerCoercion(ReifyFnPointer));
-        _2 = f::<i32> as for<'a> fn(&'a (dyn Derived<i32> + 'a)) (PointerCoercion(ReifyFnPointer));
+        _1 = f::<()> as for<'a> fn(&'a (dyn Derived<()> + 'a)) (Pointer(ReifyFnPointer));
+        _2 = f::<i32> as for<'a> fn(&'a (dyn Derived<i32> + 'a)) (Pointer(ReifyFnPointer));
         return;
     }
 }

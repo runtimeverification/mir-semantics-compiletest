@@ -5,7 +5,7 @@ fn <impl at ui/coherence/coherence-where-clause.rs:10:1: 10:22>::get(_1: &T) -> 
     let mut _0: T;
 
     bb0: {
-        _0 = <T as Default>::default() -> [return: bb1, unwind continue];
+        _0 = <T as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -40,8 +40,8 @@ fn <impl at ui/coherence/coherence-where-clause.rs:18:23: 18:28>::fmt(_1: &MyTyp
         _4 = const "dummy";
         _7 = &((*_1).0: usize);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -69,7 +69,7 @@ fn <impl at ui/coherence/coherence-where-clause.rs:23:1: 23:24>::get(_1: &MyType
     let mut _0: MyType;
 
     bb0: {
-        _0 = <MyType as Clone>::clone(_1) -> [return: bb1, unwind continue];
+        _0 = <MyType as Clone>::clone(_1) -> bb1;
     }
 
     bb1: {
@@ -135,7 +135,7 @@ fn test_eq(_1: M, _2: M) -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -170,13 +170,13 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = test_eq::<usize>(const 0_usize, const 0_usize) -> [return: bb1, unwind continue];
+        _1 = test_eq::<usize>(const 0_usize, const 0_usize) -> bb1;
     }
 
     bb1: {
         _3 = Add(const 256_usize, const 22_usize);
         _2 = MyType { dummy: move _3 };
-        _4 = test_eq::<MyType>(_2, _2) -> [return: bb2, unwind continue];
+        _4 = test_eq::<MyType>(_2, _2) -> bb2;
     }
 
     bb2: {

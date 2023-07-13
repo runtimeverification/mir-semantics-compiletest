@@ -12,7 +12,7 @@ fn test_me(_1: usize, _2: usize) -> usize {
     }
 
     bb1: {
-        _0 = std::mem::size_of::<T>() -> [return: bb3, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb3;
     }
 
     bb2: {
@@ -48,7 +48,7 @@ fn test_me(_1: usize, _2: usize) -> usize {
 
     bb1: {
         ConstEvalCounter;
-        _0 = std::mem::size_of::<T>() -> [return: bb3, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb3;
     }
 
     bb2: {
@@ -76,7 +76,7 @@ test_simple::{constant#1}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb1;
     }
 
     bb1: {
@@ -89,7 +89,7 @@ test_simple::{constant#0}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb1;
     }
 
     bb1: {
@@ -102,7 +102,7 @@ test_simple::{constant#2}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb1;
     }
 
     bb1: {
@@ -130,19 +130,19 @@ test_with_args::{constant#1}: usize = {
         StorageLive(_1);
         StorageLive(_2);
         _3 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
         _2 = move (_3.0: usize);
         ConstEvalCounter;
-        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
+        _1 = test_me::<T>(const N, move _2) -> bb2;
     }
 
     bb2: {
         StorageDead(_2);
         _4 = CheckedAdd(_1, const N);
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3;
     }
 
     bb3: {
@@ -163,19 +163,19 @@ test_with_args::{constant#0}: usize = {
         StorageLive(_1);
         StorageLive(_2);
         _3 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
         _2 = move (_3.0: usize);
         ConstEvalCounter;
-        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
+        _1 = test_me::<T>(const N, move _2) -> bb2;
     }
 
     bb2: {
         StorageDead(_2);
         _4 = CheckedAdd(_1, const N);
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3;
     }
 
     bb3: {
@@ -196,19 +196,19 @@ test_with_args::{constant#2}: usize = {
         StorageLive(_1);
         StorageLive(_2);
         _3 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
         _2 = move (_3.0: usize);
         ConstEvalCounter;
-        _1 = test_me::<T>(const N, move _2) -> [return: bb2, unwind continue];
+        _1 = test_me::<T>(const N, move _2) -> bb2;
     }
 
     bb2: {
         StorageDead(_2);
         _4 = CheckedAdd(_1, const N);
-        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> [success: bb3, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const N) -> bb3;
     }
 
     bb3: {
@@ -262,7 +262,7 @@ fn main() -> () {
     bb0: {
         _3 = [const 0_u8; 8];
         _2 = &_3;
-        _5 = test_simple::<u64>() -> [return: bb1, unwind continue];
+        _5 = test_simple::<u64>() -> bb1;
     }
 
     bb1: {
@@ -270,7 +270,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &[u8; 8]);
         _7 = (_1.1: &[u8; std::mem::size_of::<T>()]);
-        _9 = <[u8; 8] as PartialEq<[u8; std::mem::size_of::<T>()]>>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <[u8; 8] as PartialEq<[u8; std::mem::size_of::<T>()]>>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -281,13 +281,13 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<[u8; 8], [u8; std::mem::size_of::<T>()]>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<[u8; 8], [u8; std::mem::size_of::<T>()]>(move _10, _6, _7, move _12);
     }
 
     bb4: {
         _15 = [const 0_u8; 12];
         _14 = &_15;
-        _17 = test_with_args::<u64, 4>() -> [return: bb5, unwind continue];
+        _17 = test_with_args::<u64, 4>() -> bb5;
     }
 
     bb5: {
@@ -295,7 +295,7 @@ fn main() -> () {
         _13 = (move _14, move _16);
         _18 = (_13.0: &[u8; 12]);
         _19 = (_13.1: &[u8; test_me::<T>(N, N + 1) + N]);
-        _21 = <[u8; 12] as PartialEq<[u8; test_me::<T>(N, N + 1) + N]>>::eq(_18, _19) -> [return: bb6, unwind continue];
+        _21 = <[u8; 12] as PartialEq<[u8; test_me::<T>(N, N + 1) + N]>>::eq(_18, _19) -> bb6;
     }
 
     bb6: {
@@ -306,7 +306,7 @@ fn main() -> () {
     bb7: {
         _22 = core::panicking::AssertKind::Eq;
         _24 = Option::<Arguments<'_>>::None;
-        _23 = core::panicking::assert_failed::<[u8; 12], [u8; test_me::<T>(N, N + 1) + N]>(move _22, _18, _19, move _24) -> unwind continue;
+        _23 = core::panicking::assert_failed::<[u8; 12], [u8; test_me::<T>(N, N + 1) + N]>(move _22, _18, _19, move _24);
     }
 
     bb8: {

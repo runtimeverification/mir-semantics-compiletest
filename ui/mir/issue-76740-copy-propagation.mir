@@ -84,7 +84,7 @@ fn <impl at ui/mir/issue-76740-copy-propagation.rs:8:1: 8:7>::check(_1: V) -> ()
         _4 = const 0_usize;
         _5 = const 4_usize;
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb1;
     }
 
     bb1: {
@@ -104,14 +104,14 @@ fn <impl at ui/mir/issue-76740-copy-propagation.rs:8:1: 8:7>::check(_1: V) -> ()
     bb2: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<usize, usize>(move _15, _9, _10, move _17);
     }
 
     bb3: {
         _18 = const 0_usize;
         _19 = const 4_usize;
         _20 = Lt(_18, _19);
-        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> [success: bb4, unwind continue];
+        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> bb4;
     }
 
     bb4: {
@@ -135,7 +135,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = V::new() -> [return: bb1, unwind continue];
+        _1 = V::new() -> bb1;
     }
 
     bb1: {
@@ -150,7 +150,7 @@ fn main() -> () {
 
     bb3: {
         _5 = _1;
-        _4 = V::check(move _5) -> [return: bb4, unwind continue];
+        _4 = V::check(move _5) -> bb4;
     }
 
     bb4: {

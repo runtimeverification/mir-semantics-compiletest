@@ -47,7 +47,7 @@ fn main() -> () {
 
     bb1: {
         _4 = &_1;
-        _3 = <&[u8; 2] as IntoIterator>::into_iter(move _4) -> [return: bb2, unwind continue];
+        _3 = <&[u8; 2] as IntoIterator>::into_iter(move _4) -> bb2;
     }
 
     bb2: {
@@ -57,7 +57,7 @@ fn main() -> () {
 
     bb3: {
         _7 = &mut _5;
-        _6 = <std::slice::Iter<'_, u8> as Iterator>::next(_7) -> [return: bb4, unwind continue];
+        _6 = <std::slice::Iter<'_, u8> as Iterator>::next(_7) -> bb4;
     }
 
     bb4: {
@@ -85,7 +85,7 @@ fn main() -> () {
     }
 
     bb9: {
-        _15 = unreachable_unchecked() -> unwind continue;
+        _15 = unreachable_unchecked();
     }
 
     bb10: {
@@ -105,16 +105,16 @@ fn main() -> () {
     bb12: {
         _21 = [const "What did you expect?\n"];
         _20 = &_21;
-        _19 = _20 as &[&str] (PointerCoercion(Unsize));
-        _18 = Arguments::<'_>::new_const(move _19) -> [return: bb14, unwind continue];
+        _19 = _20 as &[&str] (Pointer(Unsize));
+        _18 = Arguments::<'_>::new_const(move _19) -> bb14;
     }
 
     bb13: {
-        _22 = begin_panic::<&str>(const "this should be unreachable.") -> unwind continue;
+        _22 = begin_panic::<&str>(const "this should be unreachable.");
     }
 
     bb14: {
-        _17 = _print(move _18) -> [return: bb15, unwind continue];
+        _17 = _print(move _18) -> bb15;
     }
 
     bb15: {

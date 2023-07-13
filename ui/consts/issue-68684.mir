@@ -4,6 +4,10 @@ fn _a() -> _Enum {
     let mut _0: _Enum;
 
     bb0: {
+        _0 = _Enum::A() -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -13,7 +17,11 @@ fn _a() -> _Enum {
     let mut _0: _Enum;
 
     bb0: {
-        _0 = _Enum::A;
+        ConstEvalCounter;
+        _0 = _Enum::A() -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -23,7 +31,7 @@ const _A: _Enum = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = _a() -> [return: bb1, unwind continue];
+        _0 = _a() -> bb1;
     }
 
     bb1: {

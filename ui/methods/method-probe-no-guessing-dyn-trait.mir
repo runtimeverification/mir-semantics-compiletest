@@ -15,7 +15,7 @@ fn <impl at ui/methods/method-probe-no-guessing-dyn-trait.rs:20:1: 20:23>::deref
     let mut _2: !;
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -35,7 +35,7 @@ fn <impl at ui/methods/method-probe-no-guessing-dyn-trait.rs:37:1: 37:23>::deref
 
     bb0: {
         _2 = &((*_1).1: u32);
-        _0 = _2 as &dyn MyTrait2 (PointerCoercion(Unsize));
+        _0 = _2 as &dyn MyTrait2 (Pointer(Unsize));
         return;
     }
 }
@@ -89,35 +89,35 @@ fn main() -> () {
 
     bb2: {
         _10 = &_1;
-        _9 = Option::<Foo<u32>>::as_ref(move _10) -> [return: bb3, unwind continue];
+        _9 = Option::<Foo<u32>>::as_ref(move _10) -> bb3;
     }
 
     bb3: {
-        _8 = Option::<&Foo<u32>>::unwrap(move _9) -> [return: bb4, unwind continue];
+        _8 = Option::<&Foo<u32>>::unwrap(move _9) -> bb4;
     }
 
     bb4: {
         _7 = _8;
-        _6 = <Foo<u32> as MyTrait1>::my_fn(move _7) -> [return: bb5, unwind continue];
+        _6 = <Foo<u32> as MyTrait1>::my_fn(move _7) -> bb5;
     }
 
     bb5: {
         _17 = &_2;
-        _16 = Option::<Bar<u8>>::as_ref(move _17) -> [return: bb6, unwind continue];
+        _16 = Option::<Bar<u8>>::as_ref(move _17) -> bb6;
     }
 
     bb6: {
-        _15 = Option::<&Bar<u8>>::unwrap(move _16) -> [return: bb7, unwind continue];
+        _15 = Option::<&Bar<u8>>::unwrap(move _16) -> bb7;
     }
 
     bb7: {
         _14 = _15;
-        _13 = <Bar<u8> as Deref>::deref(move _14) -> [return: bb8, unwind continue];
+        _13 = <Bar<u8> as Deref>::deref(move _14) -> bb8;
     }
 
     bb8: {
         _12 = _13;
-        _11 = <dyn MyTrait2 as MyTrait2>::my_fn2(move _12) -> [return: bb9, unwind continue];
+        _11 = <dyn MyTrait2 as MyTrait2>::my_fn2(move _12) -> bb9;
     }
 
     bb9: {
@@ -128,7 +128,7 @@ fn main() -> () {
         _19 = Foo::<u32>(const 0_u32);
         _18 = Option::<Foo<u32>>::Some(move _19);
         _1 = move _18;
-        _22 = <u8 as Default>::default() -> [return: bb11, unwind continue];
+        _22 = <u8 as Default>::default() -> bb11;
     }
 
     bb11: {

@@ -31,21 +31,21 @@ fn main() -> () {
     bb0: {
         _3 = Option::<<impl Copy + Id as Id>::Assoc>::None;
         _2 = Foo::<fn() -> impl Copy + Id {bar}> { _func: bar, value: move _3 };
-        _1 = std::hint::black_box::<Foo<fn() -> impl Copy + Id {bar}>>(move _2) -> [return: bb1, unwind continue];
+        _1 = std::hint::black_box::<Foo<fn() -> impl Copy + Id {bar}>>(move _2) -> bb1;
     }
 
     bb1: {
-        _6 = bar as fn() -> impl std::marker::Copy + Id (PointerCoercion(ReifyFnPointer));
+        _6 = bar as fn() -> impl std::marker::Copy + Id (Pointer(ReifyFnPointer));
         _7 = Option::<<impl Copy + Id as Id>::Assoc>::None;
         _5 = Foo::<fn() -> impl Copy + Id> { _func: _6, value: move _7 };
-        _4 = std::hint::black_box::<Foo<fn() -> impl Copy + Id>>(move _5) -> [return: bb2, unwind continue];
+        _4 = std::hint::black_box::<Foo<fn() -> impl Copy + Id>>(move _5) -> bb2;
     }
 
     bb2: {
         _8 = move (_4.1: std::option::Option<<impl std::marker::Copy + Id as Id>::Assoc>);
         (_1.1: std::option::Option<<impl std::marker::Copy + Id as Id>::Assoc>) = move _8;
         _10 = move _1;
-        _9 = std::hint::black_box::<Foo<fn() -> impl Copy + Id {bar}>>(move _10) -> [return: bb3, unwind continue];
+        _9 = std::hint::black_box::<Foo<fn() -> impl Copy + Id {bar}>>(move _10) -> bb3;
     }
 
     bb3: {

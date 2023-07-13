@@ -108,7 +108,7 @@ fn max_usize(_1: usize, _2: usize) -> usize {
         _4 = Gt(_1, _2);
         _5 = _1 as u64 (IntToInt);
         _6 = _2 as u64 (IntToInt);
-        _3 = choice_u64(move _4, move _5, move _6) -> [return: bb1, unwind continue];
+        _3 = choice_u64(move _4, move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -152,7 +152,7 @@ fn max_usize(_1: usize, _2: usize) -> usize {
         _9 = move _10 as u64 (IntToInt);
         StorageDead(_10);
         ConstEvalCounter;
-        _3 = choice_u64(move _4, move _7, move _9) -> [return: bb1, unwind continue];
+        _3 = choice_u64(move _4, move _7, move _9) -> bb1;
     }
 
     bb1: {
@@ -230,15 +230,15 @@ fn packed_union_size_of() -> usize {
     let mut _2: usize;
 
     bb0: {
-        _1 = std::mem::size_of::<A>() -> [return: bb1, unwind continue];
+        _1 = std::mem::size_of::<A>() -> bb1;
     }
 
     bb1: {
-        _2 = std::mem::size_of::<B>() -> [return: bb2, unwind continue];
+        _2 = std::mem::size_of::<B>() -> bb2;
     }
 
     bb2: {
-        _0 = max_usize(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = max_usize(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -255,18 +255,18 @@ fn packed_union_size_of() -> usize {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = std::mem::size_of::<A>() -> [return: bb1, unwind continue];
+        _1 = std::mem::size_of::<A>() -> bb1;
     }
 
     bb1: {
         StorageLive(_2);
         ConstEvalCounter;
-        _2 = std::mem::size_of::<B>() -> [return: bb2, unwind continue];
+        _2 = std::mem::size_of::<B>() -> bb2;
     }
 
     bb2: {
         ConstEvalCounter;
-        _0 = max_usize(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = max_usize(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -282,15 +282,15 @@ fn union_align_of() -> usize {
     let mut _2: usize;
 
     bb0: {
-        _1 = align_of::<A>() -> [return: bb1, unwind continue];
+        _1 = align_of::<A>() -> bb1;
     }
 
     bb1: {
-        _2 = align_of::<B>() -> [return: bb2, unwind continue];
+        _2 = align_of::<B>() -> bb2;
     }
 
     bb2: {
-        _0 = max_usize(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = max_usize(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -307,18 +307,18 @@ fn union_align_of() -> usize {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = align_of::<A>() -> [return: bb1, unwind continue];
+        _1 = align_of::<A>() -> bb1;
     }
 
     bb1: {
         StorageLive(_2);
         ConstEvalCounter;
-        _2 = align_of::<B>() -> [return: bb2, unwind continue];
+        _2 = align_of::<B>() -> bb2;
     }
 
     bb2: {
         ConstEvalCounter;
-        _0 = max_usize(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = max_usize(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -334,15 +334,15 @@ fn union_size_of() -> usize {
     let mut _2: usize;
 
     bb0: {
-        _1 = packed_union_size_of::<A, B>() -> [return: bb1, unwind continue];
+        _1 = packed_union_size_of::<A, B>() -> bb1;
     }
 
     bb1: {
-        _2 = union_align_of::<A, B>() -> [return: bb2, unwind continue];
+        _2 = union_align_of::<A, B>() -> bb2;
     }
 
     bb2: {
-        _0 = align_to(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = align_to(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -359,18 +359,18 @@ fn union_size_of() -> usize {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = packed_union_size_of::<A, B>() -> [return: bb1, unwind continue];
+        _1 = packed_union_size_of::<A, B>() -> bb1;
     }
 
     bb1: {
         StorageLive(_2);
         ConstEvalCounter;
-        _2 = union_align_of::<A, B>() -> [return: bb2, unwind continue];
+        _2 = union_align_of::<A, B>() -> bb2;
     }
 
     bb2: {
         ConstEvalCounter;
-        _0 = align_to(move _1, move _2) -> [return: bb3, unwind continue];
+        _0 = align_to(move _1, move _2) -> bb3;
     }
 
     bb3: {
@@ -412,7 +412,7 @@ U::_bytes::{constant#0}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = union_size_of::<u16, [u8; 3]>() -> [return: bb1, unwind continue];
+        _0 = union_size_of::<u16, [u8; 3]>() -> bb1;
     }
 
     bb1: {
@@ -457,7 +457,7 @@ fn test(_1: U) -> () {
 
     bb0: {
         _5 = &(_1.1: [u8; 4]);
-        _4 = std::mem::size_of_val::<[u8; 4]>(_5) -> [return: bb1, unwind continue];
+        _4 = std::mem::size_of_val::<[u8; 4]>(_5) -> bb1;
     }
 
     bb1: {
@@ -477,7 +477,7 @@ fn test(_1: U) -> () {
     bb2: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<usize, usize>(move _14, _8, _9, move _16);
     }
 
     bb3: {
@@ -531,7 +531,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = std::mem::size_of::<U>() -> [return: bb1, unwind continue];
+        _3 = std::mem::size_of::<U>() -> bb1;
     }
 
     bb1: {
@@ -551,11 +551,11 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14);
     }
 
     bb3: {
-        _17 = align_of::<U>() -> [return: bb4, unwind continue];
+        _17 = align_of::<U>() -> bb4;
     }
 
     bb4: {
@@ -575,7 +575,7 @@ fn main() -> () {
     bb5: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28);
     }
 
     bb6: {

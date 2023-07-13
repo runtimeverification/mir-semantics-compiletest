@@ -7,11 +7,11 @@ fn <impl at ui/overloaded/overloaded-autoderef-vtable.rs:15:1: 15:32>::helper_bo
     let mut _3: std::option::Option<&T>;
 
     bb0: {
-        _3 = Option::<T>::as_ref(_1) -> [return: bb1, unwind continue];
+        _3 = Option::<T>::as_ref(_1) -> bb1;
     }
 
     bb1: {
-        _2 = Option::<&T>::unwrap(move _3) -> [return: bb2, unwind continue];
+        _2 = Option::<&T>::unwrap(move _3) -> bb2;
     }
 
     bb2: {
@@ -28,7 +28,7 @@ fn <impl at ui/overloaded/overloaded-autoderef-vtable.rs:21:1: 21:54>::deref(_1:
 
     bb0: {
         _3 = &((*_1).0: H);
-        _2 = <H as Helper<T>>::helper_borrow(move _3) -> [return: bb1, unwind continue];
+        _2 = <H as Helper<T>>::helper_borrow(move _3) -> bb1;
     }
 
     bb1: {
@@ -87,12 +87,12 @@ fn main() -> () {
         _4 = Foo { x: const 2_isize };
         _1 = DerefWithHelper::<Option<Foo>, Foo> { helper: move _2, value: move _4 };
         _10 = &_1;
-        _9 = <DerefWithHelper<Option<Foo>, Foo> as Deref>::deref(move _10) -> [return: bb1, unwind continue];
+        _9 = <DerefWithHelper<Option<Foo>, Foo> as Deref>::deref(move _10) -> bb1;
     }
 
     bb1: {
         _8 = _9;
-        _7 = Foo::foo(move _8) -> [return: bb2, unwind continue];
+        _7 = Foo::foo(move _8) -> bb2;
     }
 
     bb2: {
@@ -112,7 +112,7 @@ fn main() -> () {
     bb3: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<isize, isize>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<isize, isize>(move _19, _13, _14, move _21);
     }
 
     bb4: {

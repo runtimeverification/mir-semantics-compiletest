@@ -53,7 +53,7 @@ const AC: &[isize] = {
         StorageLive(_2);
         _2 = const _;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -73,7 +73,7 @@ const AD: &[isize] = {
         _3 = const _;
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -118,7 +118,7 @@ const AF: &[isize] = {
         _3 = [const 1_isize, const 2_isize, const 3_isize];
         _2 = &_3;
         _1 = &(*_2);
-        _0 = move _1 as &[isize] (PointerCoercion(Unsize));
+        _0 = move _1 as &[isize] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -139,7 +139,7 @@ static CA: isize = {
         _2 = const 0_usize;
         _3 = Len(_1);
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -164,7 +164,7 @@ static CB: isize = {
         _2 = const 1_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -189,7 +189,7 @@ static CC: isize = {
         _2 = const 2_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -214,7 +214,7 @@ static CD: isize = {
         _2 = const 0_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -239,7 +239,7 @@ static CE: isize = {
         _2 = const 1_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -264,7 +264,7 @@ static CF: isize = {
         _2 = const 2_usize;
         _3 = Len((*_1));
         _4 = Lt(_2, _3);
-        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> [success: bb1, unwind continue];
+        assert(move _4, "index out of bounds: the length is {} but the index is {}", move _3, _2) -> bb1;
     }
 
     bb1: {
@@ -291,7 +291,7 @@ static AG: &isize = {
         _3 = const 2_usize;
         _4 = Len(_2);
         _5 = Lt(_3, _4);
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1;
     }
 
     bb1: {
@@ -509,14 +509,14 @@ fn main() -> () {
     bb0: {
         _3 = [const 1_isize, const 2_isize, const 3_isize];
         _2 = &_3;
-        _1 = _2 as &[isize] (PointerCoercion(Unsize));
+        _1 = _2 as &[isize] (Pointer(Unsize));
         _6 = const _;
         _5 = &_6;
         _7 = &_1;
         _4 = (move _5, move _7);
         _8 = (_4.0: &&[isize]);
         _9 = (_4.1: &&[isize]);
-        _11 = <&[isize] as PartialEq>::eq(_8, _9) -> [return: bb1, unwind continue];
+        _11 = <&[isize] as PartialEq>::eq(_8, _9) -> bb1;
     }
 
     bb1: {
@@ -527,7 +527,7 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<&[isize], &[isize]>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<&[isize], &[isize]>(move _12, _8, _9, move _14);
     }
 
     bb3: {
@@ -537,7 +537,7 @@ fn main() -> () {
         _15 = (move _16, move _18);
         _19 = (_15.0: &&[isize]);
         _20 = (_15.1: &&[isize]);
-        _22 = <&[isize] as PartialEq>::eq(_19, _20) -> [return: bb4, unwind continue];
+        _22 = <&[isize] as PartialEq>::eq(_19, _20) -> bb4;
     }
 
     bb4: {
@@ -548,7 +548,7 @@ fn main() -> () {
     bb5: {
         _23 = core::panicking::AssertKind::Eq;
         _25 = Option::<Arguments<'_>>::None;
-        _24 = core::panicking::assert_failed::<&[isize], &[isize]>(move _23, _19, _20, move _25) -> unwind continue;
+        _24 = core::panicking::assert_failed::<&[isize], &[isize]>(move _23, _19, _20, move _25);
     }
 
     bb6: {
@@ -558,7 +558,7 @@ fn main() -> () {
         _26 = (move _27, move _29);
         _30 = (_26.0: &&[isize]);
         _31 = (_26.1: &&[isize]);
-        _33 = <&[isize] as PartialEq>::eq(_30, _31) -> [return: bb7, unwind continue];
+        _33 = <&[isize] as PartialEq>::eq(_30, _31) -> bb7;
     }
 
     bb7: {
@@ -569,7 +569,7 @@ fn main() -> () {
     bb8: {
         _34 = core::panicking::AssertKind::Eq;
         _36 = Option::<Arguments<'_>>::None;
-        _35 = core::panicking::assert_failed::<&[isize], &[isize]>(move _34, _30, _31, move _36) -> unwind continue;
+        _35 = core::panicking::assert_failed::<&[isize], &[isize]>(move _34, _30, _31, move _36);
     }
 
     bb9: {
@@ -590,7 +590,7 @@ fn main() -> () {
     bb10: {
         _47 = core::panicking::AssertKind::Eq;
         _49 = Option::<Arguments<'_>>::None;
-        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49) -> unwind continue;
+        _48 = core::panicking::assert_failed::<isize, isize>(move _47, _41, _42, move _49);
     }
 
     bb11: {
@@ -610,7 +610,7 @@ fn main() -> () {
     bb12: {
         _60 = core::panicking::AssertKind::Eq;
         _62 = Option::<Arguments<'_>>::None;
-        _61 = core::panicking::assert_failed::<isize, isize>(move _60, _54, _55, move _62) -> unwind continue;
+        _61 = core::panicking::assert_failed::<isize, isize>(move _60, _54, _55, move _62);
     }
 
     bb13: {
@@ -630,7 +630,7 @@ fn main() -> () {
     bb14: {
         _73 = core::panicking::AssertKind::Eq;
         _75 = Option::<Arguments<'_>>::None;
-        _74 = core::panicking::assert_failed::<isize, isize>(move _73, _67, _68, move _75) -> unwind continue;
+        _74 = core::panicking::assert_failed::<isize, isize>(move _73, _67, _68, move _75);
     }
 
     bb15: {
@@ -650,7 +650,7 @@ fn main() -> () {
     bb16: {
         _86 = core::panicking::AssertKind::Eq;
         _88 = Option::<Arguments<'_>>::None;
-        _87 = core::panicking::assert_failed::<isize, isize>(move _86, _80, _81, move _88) -> unwind continue;
+        _87 = core::panicking::assert_failed::<isize, isize>(move _86, _80, _81, move _88);
     }
 
     bb17: {
@@ -670,7 +670,7 @@ fn main() -> () {
     bb18: {
         _99 = core::panicking::AssertKind::Eq;
         _101 = Option::<Arguments<'_>>::None;
-        _100 = core::panicking::assert_failed::<isize, isize>(move _99, _93, _94, move _101) -> unwind continue;
+        _100 = core::panicking::assert_failed::<isize, isize>(move _99, _93, _94, move _101);
     }
 
     bb19: {
@@ -690,7 +690,7 @@ fn main() -> () {
     bb20: {
         _112 = core::panicking::AssertKind::Eq;
         _114 = Option::<Arguments<'_>>::None;
-        _113 = core::panicking::assert_failed::<isize, isize>(move _112, _106, _107, move _114) -> unwind continue;
+        _113 = core::panicking::assert_failed::<isize, isize>(move _112, _106, _107, move _114);
     }
 
     bb21: {
@@ -710,7 +710,7 @@ fn main() -> () {
     bb22: {
         _125 = core::panicking::AssertKind::Eq;
         _127 = Option::<Arguments<'_>>::None;
-        _126 = core::panicking::assert_failed::<isize, isize>(move _125, _119, _120, move _127) -> unwind continue;
+        _126 = core::panicking::assert_failed::<isize, isize>(move _125, _119, _120, move _127);
     }
 
     bb23: {

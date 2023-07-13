@@ -8,7 +8,7 @@ fn f(_1: Vec<T>) -> T {
     let mut _4: std::vec::IntoIter<T>;
 
     bb0: {
-        _4 = <Vec<T> as IntoIterator>::into_iter(move _1) -> [return: bb1, unwind continue];
+        _4 = <Vec<T> as IntoIterator>::into_iter(move _1) -> bb1;
     }
 
     bb1: {
@@ -21,7 +21,7 @@ fn f(_1: Vec<T>) -> T {
     }
 
     bb3: {
-        drop(_4) -> [return: bb4, unwind continue];
+        drop(_4) -> bb4;
     }
 
     bb4: {
@@ -105,7 +105,7 @@ fn g(_1: F) -> isize {
 
     bb7: {
         (*_11) = [const 1_isize, const 2_isize, const 3_isize];
-        _5 = move _9 as std::boxed::Box<[isize]> (PointerCoercion(Unsize));
+        _5 = move _9 as std::boxed::Box<[isize]> (Pointer(Unsize));
         _4 = slice::<impl [isize]>::into_vec::<std::alloc::Global>(move _5) -> [return: bb2, unwind: bb6];
     }
 }
@@ -182,7 +182,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = g::<fn(Vec<isize>) -> isize {f::<isize>}>(f::<isize>) -> [return: bb1, unwind continue];
+        _3 = g::<fn(Vec<isize>) -> isize {f::<isize>}>(f::<isize>) -> bb1;
     }
 
     bb1: {
@@ -202,13 +202,13 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<isize, isize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<isize, isize>(move _12, _6, _7, move _14);
     }
 
     bb3: {
         _21 = SizeOf([std::string::String; 3]);
         _22 = AlignOf([std::string::String; 3]);
-        _23 = alloc::alloc::exchange_malloc(move _21, move _22) -> [return: bb4, unwind continue];
+        _23 = alloc::alloc::exchange_malloc(move _21, move _22) -> bb4;
     }
 
     bb4: {
@@ -239,7 +239,7 @@ fn main() -> () {
     }
 
     bb8: {
-        _17 = f::<String>(move _18) -> [return: bb9, unwind continue];
+        _17 = f::<String>(move _18) -> bb9;
     }
 
     bb9: {
@@ -272,7 +272,7 @@ fn main() -> () {
     }
 
     bb14: {
-        drop(_17) -> [return: bb15, unwind continue];
+        drop(_17) -> bb15;
     }
 
     bb15: {
@@ -307,8 +307,8 @@ fn main() -> () {
     bb22: {
         (*_43) = [move _25, move _27, move _29];
         _20 = move _24;
-        _19 = move _20 as std::boxed::Box<[std::string::String]> (PointerCoercion(Unsize));
-        _18 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _19) -> [return: bb8, unwind continue];
+        _19 = move _20 as std::boxed::Box<[std::string::String]> (Pointer(Unsize));
+        _18 = slice::<impl [String]>::into_vec::<std::alloc::Global>(move _19) -> bb8;
     }
 
     bb23 (cleanup): {

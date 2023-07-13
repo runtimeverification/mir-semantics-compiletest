@@ -14,7 +14,7 @@ foo::{constant#0}: usize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = std::mem::size_of::<T>() -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of::<T>() -> bb1;
     }
 
     bb1: {
@@ -37,7 +37,7 @@ bar::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -52,11 +52,11 @@ fn main() -> () {
     let _2: usize;
 
     bb0: {
-        _1 = foo::<i32>() -> [return: bb1, unwind continue];
+        _1 = foo::<i32>() -> bb1;
     }
 
     bb1: {
-        _2 = bar::<1>() -> [return: bb2, unwind continue];
+        _2 = bar::<1>() -> bb2;
     }
 
     bb2: {

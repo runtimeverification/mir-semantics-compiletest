@@ -21,15 +21,15 @@ fn main() -> () {
     bb0: {
         _5 = const "test";
         _4 = Thing::<'_>(_5);
-        _3 = <Thing<'_> as Iterator>::fuse(move _4) -> [return: bb1, unwind continue];
+        _3 = <Thing<'_> as Iterator>::fuse(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = <Fuse<Thing<'_>> as Iterator>::filter::<[closure@ui/inference/issue-36053.rs:21:33: 21:36]>(move _3, const ZeroSized: [closure@ui/inference/issue-36053.rs:21:33: 21:36]) -> [return: bb2, unwind continue];
+        _2 = <Fuse<Thing<'_>> as Iterator>::filter::<[closure@ui/inference/issue-36053.rs:21:33: 21:36]>(move _3, const ZeroSized: [closure@ui/inference/issue-36053.rs:21:33: 21:36]) -> bb2;
     }
 
     bb2: {
-        _1 = <Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]> as Iterator>::count(move _2) -> [return: bb3, unwind continue];
+        _1 = <Filter<Fuse<Thing<'_>>, [closure@ui/inference/issue-36053.rs:21:33: 21:36]> as Iterator>::count(move _2) -> bb3;
     }
 
     bb3: {

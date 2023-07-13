@@ -34,10 +34,10 @@ static DATA: Data<i32> = {
         StorageLive(_1);
         StorageLive(_2);
         _2 = [closure@ui/consts/issue-46553.rs:15:40: 15:42];
-        _1 = move _2 as fn() -> i32 (PointerCoercion(ClosureFnPointer(Normal)));
+        _1 = move _2 as fn() -> i32 (Pointer(ClosureFnPointer(Normal)));
         StorageDead(_2);
         ConstEvalCounter;
-        _0 = Data::<i32>::new(move _1) -> [return: bb1, unwind continue];
+        _0 = Data::<i32>::new(move _1) -> bb1;
     }
 
     bb1: {
@@ -74,26 +74,26 @@ fn main() -> () {
     bb0: {
         _5 = [const ""];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
+        _3 = _4 as &[&str] (Pointer(Unsize));
         _13 = const {alloc1: &Data<i32>};
         _12 = ((*_13).0: fn() -> i32);
-        _11 = move _12() -> [return: bb1, unwind continue];
+        _11 = move _12() -> bb1;
     }
 
     bb1: {
         _10 = &_11;
-        _9 = core::fmt::rt::Argument::<'_>::new_debug::<i32>(_10) -> [return: bb2, unwind continue];
+        _9 = core::fmt::rt::Argument::<'_>::new_debug::<i32>(_10) -> bb2;
     }
 
     bb2: {
         _8 = [move _9];
         _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb3, unwind continue];
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_v1(move _3, move _6) -> bb3;
     }
 
     bb3: {
-        _1 = _print(move _2) -> [return: bb4, unwind continue];
+        _1 = _print(move _2) -> bb4;
     }
 
     bb4: {

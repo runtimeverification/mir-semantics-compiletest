@@ -55,27 +55,27 @@ fn main() -> () {
         _7 = Sub(move _8, const 1_usize);
         _9 = const 2_usize;
         _10 = Lt(_7, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _7) -> [success: bb1, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _7) -> bb1;
     }
 
     bb1: {
         _15 = deref_copy _3[_7];
-        _6 = A::take_mutably(_15) -> [return: bb2, unwind continue];
+        _6 = A::take_mutably(_15) -> bb2;
     }
 
     bb2: {
-        _12 = identity::<usize>(const 0_usize) -> [return: bb3, unwind continue];
+        _12 = identity::<usize>(const 0_usize) -> bb3;
     }
 
     bb3: {
         _13 = const 2_usize;
         _14 = Lt(_12, _13);
-        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> [success: bb4, unwind continue];
+        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> bb4;
     }
 
     bb4: {
         _16 = deref_copy _3[_12];
-        _11 = A::take_mutably(_16) -> [return: bb5, unwind continue];
+        _11 = A::take_mutably(_16) -> bb5;
     }
 
     bb5: {

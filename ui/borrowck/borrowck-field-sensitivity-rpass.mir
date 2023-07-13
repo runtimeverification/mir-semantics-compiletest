@@ -15,7 +15,7 @@ fn move_after_copy() -> () {
 
     bb0: {
         _7 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -67,7 +67,7 @@ fn move_after_fu_copy() -> () {
 
     bb0: {
         _7 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -126,7 +126,7 @@ fn fu_move_after_copy() -> () {
 
     bb0: {
         _6 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -180,7 +180,7 @@ fn fu_move_after_fu_copy() -> () {
 
     bb0: {
         _6 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -235,18 +235,18 @@ fn copy_after_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _4 = move (_1.1: std::boxed::Box<isize>);
-        _3 = std::mem::drop::<Box<isize>>(move _4) -> [return: bb2, unwind continue];
+        _3 = std::mem::drop::<Box<isize>>(move _4) -> bb2;
     }
 
     bb2: {
         _6 = (_1.0: isize);
-        _5 = std::mem::drop::<isize>(move _6) -> [return: bb3, unwind continue];
+        _5 = std::mem::drop::<isize>(move _6) -> bb3;
     }
 
     bb3: {
@@ -269,7 +269,7 @@ fn copy_after_fu_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -280,7 +280,7 @@ fn copy_after_fu_move() -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -312,22 +312,22 @@ fn fu_copy_after_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _4 = move (_1.1: std::boxed::Box<isize>);
-        _3 = std::mem::drop::<Box<isize>>(move _4) -> [return: bb2, unwind continue];
+        _3 = std::mem::drop::<Box<isize>>(move _4) -> bb2;
     }
 
     bb2: {
-        _6 = Box::<isize>::new(const 3_isize) -> [return: bb3, unwind continue];
+        _6 = Box::<isize>::new(const 3_isize) -> bb3;
     }
 
     bb3: {
         _5 = A { a: (_1.0: isize), b: move _6 };
-        drop(_5) -> [return: bb4, unwind continue];
+        drop(_5) -> bb4;
     }
 
     bb4: {
@@ -353,7 +353,7 @@ fn fu_copy_after_fu_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -368,7 +368,7 @@ fn fu_copy_after_fu_move() -> () {
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -401,19 +401,19 @@ fn borrow_after_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _4 = move (_1.1: std::boxed::Box<isize>);
-        _3 = std::mem::drop::<Box<isize>>(move _4) -> [return: bb2, unwind continue];
+        _3 = std::mem::drop::<Box<isize>>(move _4) -> bb2;
     }
 
     bb2: {
         _5 = &(_1.0: isize);
         _7 = (*_5);
-        _6 = std::mem::drop::<isize>(move _7) -> [return: bb3, unwind continue];
+        _6 = std::mem::drop::<isize>(move _7) -> bb3;
     }
 
     bb3: {
@@ -440,7 +440,7 @@ fn borrow_after_fu_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -452,7 +452,7 @@ fn borrow_after_fu_move() -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -485,19 +485,19 @@ fn move_after_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _3 = &(_1.0: isize);
         _5 = move (_1.1: std::boxed::Box<isize>);
-        _4 = std::mem::drop::<Box<isize>>(move _5) -> [return: bb2, unwind continue];
+        _4 = std::mem::drop::<Box<isize>>(move _5) -> bb2;
     }
 
     bb2: {
         _7 = (*_3);
-        _6 = std::mem::drop::<isize>(move _7) -> [return: bb3, unwind continue];
+        _6 = std::mem::drop::<isize>(move _7) -> bb3;
     }
 
     bb3: {
@@ -524,7 +524,7 @@ fn fu_move_after_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -536,7 +536,7 @@ fn fu_move_after_borrow() -> () {
     }
 
     bb2: {
-        drop(_4) -> [return: bb3, unwind continue];
+        drop(_4) -> bb3;
     }
 
     bb3: {
@@ -581,7 +581,7 @@ fn mut_borrow_after_mut_borrow() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -605,7 +605,7 @@ fn mut_borrow_after_mut_borrow() -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -642,7 +642,7 @@ fn move_after_move() -> () {
 
     bb0: {
         _8 = const false;
-        _2 = Box::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 1_isize) -> bb1;
     }
 
     bb1: {
@@ -705,7 +705,7 @@ fn move_after_fu_move() -> () {
     bb0: {
         _9 = const false;
         _8 = const false;
-        _2 = Box::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 1_isize) -> bb1;
     }
 
     bb1: {
@@ -787,7 +787,7 @@ fn fu_move_after_move() -> () {
 
     bb0: {
         _10 = const false;
-        _2 = Box::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 1_isize) -> bb1;
     }
 
     bb1: {
@@ -866,7 +866,7 @@ fn fu_move_after_fu_move() -> () {
     bb0: {
         _9 = const false;
         _8 = const false;
-        _2 = Box::<isize>::new(const 1_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 1_isize) -> bb1;
     }
 
     bb1: {
@@ -956,7 +956,7 @@ fn copy_after_assign_after_move() -> () {
 
     bb0: {
         _10 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -987,7 +987,7 @@ fn copy_after_assign_after_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1040,7 +1040,7 @@ fn copy_after_assign_after_fu_move() -> () {
 
     bb0: {
         _9 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1071,7 +1071,7 @@ fn copy_after_assign_after_fu_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1125,7 +1125,7 @@ fn copy_after_field_assign_after_move() -> () {
 
     bb0: {
         _9 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1155,7 +1155,7 @@ fn copy_after_field_assign_after_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1207,7 +1207,7 @@ fn copy_after_field_assign_after_fu_move() -> () {
 
     bb0: {
         _8 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1237,7 +1237,7 @@ fn copy_after_field_assign_after_fu_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1296,7 +1296,7 @@ fn borrow_after_assign_after_move() -> () {
 
     bb0: {
         _11 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1328,7 +1328,7 @@ fn borrow_after_assign_after_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1385,7 +1385,7 @@ fn borrow_after_assign_after_fu_move() -> () {
 
     bb0: {
         _10 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1417,7 +1417,7 @@ fn borrow_after_assign_after_fu_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1475,7 +1475,7 @@ fn borrow_after_field_assign_after_move() -> () {
 
     bb0: {
         _10 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1506,7 +1506,7 @@ fn borrow_after_field_assign_after_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1562,7 +1562,7 @@ fn borrow_after_field_assign_after_fu_move() -> () {
 
     bb0: {
         _9 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1593,7 +1593,7 @@ fn borrow_after_field_assign_after_fu_move() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1642,7 +1642,7 @@ fn move_after_assign_after_move() -> () {
 
     bb0: {
         _8 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1707,7 +1707,7 @@ fn move_after_assign_after_fu_move() -> () {
 
     bb0: {
         _8 = const false;
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1767,23 +1767,23 @@ fn move_after_field_assign_after_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _4 = move (_1.1: std::boxed::Box<isize>);
-        _3 = std::mem::drop::<Box<isize>>(move _4) -> [return: bb2, unwind continue];
+        _3 = std::mem::drop::<Box<isize>>(move _4) -> bb2;
     }
 
     bb2: {
-        _5 = Box::<isize>::new(const 3_isize) -> [return: bb3, unwind continue];
+        _5 = Box::<isize>::new(const 3_isize) -> bb3;
     }
 
     bb3: {
         (_1.1: std::boxed::Box<isize>) = move _5;
         _7 = move (_1.1: std::boxed::Box<isize>);
-        _6 = std::mem::drop::<Box<isize>>(move _7) -> [return: bb4, unwind continue];
+        _6 = std::mem::drop::<Box<isize>>(move _7) -> bb4;
     }
 
     bb4: {
@@ -1807,7 +1807,7 @@ fn move_after_field_assign_after_fu_move() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
@@ -1823,7 +1823,7 @@ fn move_after_field_assign_after_fu_move() -> () {
     }
 
     bb3: {
-        drop(_3) -> [return: bb4, unwind continue];
+        drop(_3) -> bb4;
     }
 
     bb4: {
@@ -1865,7 +1865,7 @@ fn copy_after_assign_after_uninit() -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -1917,7 +1917,7 @@ fn borrow_after_assign_after_uninit() -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
@@ -1949,13 +1949,13 @@ fn move_after_assign_after_uninit() -> () {
     }
 
     bb0: {
-        _2 = Box::<isize>::new(const 2_isize) -> [return: bb1, unwind continue];
+        _2 = Box::<isize>::new(const 2_isize) -> bb1;
     }
 
     bb1: {
         _1 = A { a: const 1_isize, b: move _2 };
         _4 = move (_1.1: std::boxed::Box<isize>);
-        _3 = std::mem::drop::<Box<isize>>(move _4) -> [return: bb2, unwind continue];
+        _3 = std::mem::drop::<Box<isize>>(move _4) -> bb2;
     }
 
     bb2: {
@@ -1999,131 +1999,131 @@ fn main() -> () {
     let _32: ();
 
     bb0: {
-        _1 = move_after_copy() -> [return: bb1, unwind continue];
+        _1 = move_after_copy() -> bb1;
     }
 
     bb1: {
-        _2 = move_after_fu_copy() -> [return: bb2, unwind continue];
+        _2 = move_after_fu_copy() -> bb2;
     }
 
     bb2: {
-        _3 = fu_move_after_copy() -> [return: bb3, unwind continue];
+        _3 = fu_move_after_copy() -> bb3;
     }
 
     bb3: {
-        _4 = fu_move_after_fu_copy() -> [return: bb4, unwind continue];
+        _4 = fu_move_after_fu_copy() -> bb4;
     }
 
     bb4: {
-        _5 = copy_after_move() -> [return: bb5, unwind continue];
+        _5 = copy_after_move() -> bb5;
     }
 
     bb5: {
-        _6 = copy_after_fu_move() -> [return: bb6, unwind continue];
+        _6 = copy_after_fu_move() -> bb6;
     }
 
     bb6: {
-        _7 = fu_copy_after_move() -> [return: bb7, unwind continue];
+        _7 = fu_copy_after_move() -> bb7;
     }
 
     bb7: {
-        _8 = fu_copy_after_fu_move() -> [return: bb8, unwind continue];
+        _8 = fu_copy_after_fu_move() -> bb8;
     }
 
     bb8: {
-        _9 = borrow_after_move() -> [return: bb9, unwind continue];
+        _9 = borrow_after_move() -> bb9;
     }
 
     bb9: {
-        _10 = borrow_after_fu_move() -> [return: bb10, unwind continue];
+        _10 = borrow_after_fu_move() -> bb10;
     }
 
     bb10: {
-        _11 = move_after_borrow() -> [return: bb11, unwind continue];
+        _11 = move_after_borrow() -> bb11;
     }
 
     bb11: {
-        _12 = fu_move_after_borrow() -> [return: bb12, unwind continue];
+        _12 = fu_move_after_borrow() -> bb12;
     }
 
     bb12: {
-        _13 = mut_borrow_after_mut_borrow() -> [return: bb13, unwind continue];
+        _13 = mut_borrow_after_mut_borrow() -> bb13;
     }
 
     bb13: {
-        _14 = move_after_move() -> [return: bb14, unwind continue];
+        _14 = move_after_move() -> bb14;
     }
 
     bb14: {
-        _15 = move_after_fu_move() -> [return: bb15, unwind continue];
+        _15 = move_after_fu_move() -> bb15;
     }
 
     bb15: {
-        _16 = fu_move_after_move() -> [return: bb16, unwind continue];
+        _16 = fu_move_after_move() -> bb16;
     }
 
     bb16: {
-        _17 = fu_move_after_fu_move() -> [return: bb17, unwind continue];
+        _17 = fu_move_after_fu_move() -> bb17;
     }
 
     bb17: {
-        _18 = copy_after_assign_after_move() -> [return: bb18, unwind continue];
+        _18 = copy_after_assign_after_move() -> bb18;
     }
 
     bb18: {
-        _19 = copy_after_assign_after_fu_move() -> [return: bb19, unwind continue];
+        _19 = copy_after_assign_after_fu_move() -> bb19;
     }
 
     bb19: {
-        _20 = copy_after_field_assign_after_move() -> [return: bb20, unwind continue];
+        _20 = copy_after_field_assign_after_move() -> bb20;
     }
 
     bb20: {
-        _21 = copy_after_field_assign_after_fu_move() -> [return: bb21, unwind continue];
+        _21 = copy_after_field_assign_after_fu_move() -> bb21;
     }
 
     bb21: {
-        _22 = borrow_after_assign_after_move() -> [return: bb22, unwind continue];
+        _22 = borrow_after_assign_after_move() -> bb22;
     }
 
     bb22: {
-        _23 = borrow_after_assign_after_fu_move() -> [return: bb23, unwind continue];
+        _23 = borrow_after_assign_after_fu_move() -> bb23;
     }
 
     bb23: {
-        _24 = borrow_after_field_assign_after_move() -> [return: bb24, unwind continue];
+        _24 = borrow_after_field_assign_after_move() -> bb24;
     }
 
     bb24: {
-        _25 = borrow_after_field_assign_after_fu_move() -> [return: bb25, unwind continue];
+        _25 = borrow_after_field_assign_after_fu_move() -> bb25;
     }
 
     bb25: {
-        _26 = move_after_assign_after_move() -> [return: bb26, unwind continue];
+        _26 = move_after_assign_after_move() -> bb26;
     }
 
     bb26: {
-        _27 = move_after_assign_after_fu_move() -> [return: bb27, unwind continue];
+        _27 = move_after_assign_after_fu_move() -> bb27;
     }
 
     bb27: {
-        _28 = move_after_field_assign_after_move() -> [return: bb28, unwind continue];
+        _28 = move_after_field_assign_after_move() -> bb28;
     }
 
     bb28: {
-        _29 = move_after_field_assign_after_fu_move() -> [return: bb29, unwind continue];
+        _29 = move_after_field_assign_after_fu_move() -> bb29;
     }
 
     bb29: {
-        _30 = copy_after_assign_after_uninit() -> [return: bb30, unwind continue];
+        _30 = copy_after_assign_after_uninit() -> bb30;
     }
 
     bb30: {
-        _31 = borrow_after_assign_after_uninit() -> [return: bb31, unwind continue];
+        _31 = borrow_after_assign_after_uninit() -> bb31;
     }
 
     bb31: {
-        _32 = move_after_assign_after_uninit() -> [return: bb32, unwind continue];
+        _32 = move_after_assign_after_uninit() -> bb32;
     }
 
     bb32: {

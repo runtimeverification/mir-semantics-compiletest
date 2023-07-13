@@ -115,7 +115,11 @@ const <impl at ui/consts/const_constructor/const_constructor_qpath.rs:13:1: 13:2
     let mut _0: E;
 
     bb0: {
-        _0 = E::V(const 23_i32);
+        ConstEvalCounter;
+        _0 = E::V(const 23_i32) -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -124,7 +128,11 @@ const <impl at ui/consts/const_constructor/const_constructor_qpath.rs:17:1: 17:3
     let mut _0: std::option::Option<i32>;
 
     bb0: {
-        _0 = Option::<i32>::Some(const 23_i32);
+        ConstEvalCounter;
+        _0 = Option::<i32>::Some(const 23_i32) -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -133,7 +141,11 @@ const <impl at ui/consts/const_constructor/const_constructor_qpath.rs:21:1: 21:7
     let mut _0: E;
 
     bb0: {
-        _0 = E::W(const 12_usize);
+        ConstEvalCounter;
+        _0 = E::W(const 12_usize) -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -142,7 +154,10 @@ fn <impl at ui/consts/const_constructor/const_constructor_qpath.rs:21:1: 21:7>::
     let mut _0: E;
 
     bb0: {
-        _0 = E::V(const 23_i32);
+        _0 = E::V(const 23_i32) -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -152,7 +167,11 @@ fn <impl at ui/consts/const_constructor/const_constructor_qpath.rs:21:1: 21:7>::
     let mut _0: E;
 
     bb0: {
-        _0 = E::V(const 23_i32);
+        ConstEvalCounter;
+        _0 = E::V(const 23_i32) -> bb1;
+    }
+
+    bb1: {
         return;
     }
 }
@@ -165,8 +184,14 @@ fn explicit_qpath() -> E {
     }
 
     bb0: {
-        _1 = Option::<usize>::Some(const 23_usize);
-        _0 = E::W(const 12_usize);
+        _1 = Option::<usize>::Some(const 23_usize) -> bb1;
+    }
+
+    bb1: {
+        _0 = E::W(const 12_usize) -> bb2;
+    }
+
+    bb2: {
         return;
     }
 }
@@ -181,8 +206,16 @@ fn explicit_qpath() -> E {
 
     bb0: {
         StorageLive(_1);
-        _1 = Option::<usize>::Some(const 23_usize);
-        _0 = E::W(const 12_usize);
+        ConstEvalCounter;
+        _1 = Option::<usize>::Some(const 23_usize) -> bb1;
+    }
+
+    bb1: {
+        ConstEvalCounter;
+        _0 = E::W(const 12_usize) -> bb2;
+    }
+
+    bb2: {
         StorageDead(_1);
         return;
     }
@@ -215,12 +248,12 @@ fn main() -> () {
     bb0: {
         _4 = const _;
         _3 = &_4;
-        _6 = E::local_fn() -> [return: bb1, unwind continue];
+        _6 = E::local_fn() -> bb1;
     }
 
     bb1: {
         _5 = &_6;
-        _2 = <E as PartialEq>::eq(move _3, move _5) -> [return: bb2, unwind continue];
+        _2 = <E as PartialEq>::eq(move _3, move _5) -> bb2;
     }
 
     bb2: {
@@ -229,7 +262,7 @@ fn main() -> () {
     }
 
     bb3: {
-        _7 = core::panicking::panic(const "assertion failed: E::DEFAULT == E::local_fn()") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: E::DEFAULT == E::local_fn()");
     }
 
     bb4: {
@@ -237,7 +270,7 @@ fn main() -> () {
         _10 = &_11;
         _13 = Option::<i32>::Some(const 23_i32);
         _12 = &_13;
-        _9 = <Option<i32> as PartialEq>::eq(move _10, move _12) -> [return: bb5, unwind continue];
+        _9 = <Option<i32> as PartialEq>::eq(move _10, move _12) -> bb5;
     }
 
     bb5: {
@@ -246,18 +279,18 @@ fn main() -> () {
     }
 
     bb6: {
-        _14 = core::panicking::panic(const "assertion failed: Option::DEFAULT == Some(23)") -> unwind continue;
+        _14 = core::panicking::panic(const "assertion failed: Option::DEFAULT == Some(23)");
     }
 
     bb7: {
         _18 = const _;
         _17 = &_18;
-        _20 = explicit_qpath() -> [return: bb8, unwind continue];
+        _20 = explicit_qpath() -> bb8;
     }
 
     bb8: {
         _19 = &_20;
-        _16 = <E as PartialEq>::eq(move _17, move _19) -> [return: bb9, unwind continue];
+        _16 = <E as PartialEq>::eq(move _17, move _19) -> bb9;
     }
 
     bb9: {
@@ -266,7 +299,7 @@ fn main() -> () {
     }
 
     bb10: {
-        _21 = core::panicking::panic(const "assertion failed: E::NON_DEFAULT == explicit_qpath()") -> unwind continue;
+        _21 = core::panicking::panic(const "assertion failed: E::NON_DEFAULT == explicit_qpath()");
     }
 
     bb11: {

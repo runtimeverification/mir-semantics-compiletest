@@ -24,25 +24,25 @@ fn <impl at ui/drop/issue-30018-nopanic.rs:15:1: 15:24>::drop(_1: &mut D<'_>) ->
     bb0: {
         _6 = [const "Dropping D(", const ")\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &((*_1).1: i32);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<i32>(_11) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb2;
     }
 
     bb2: {
-        _2 = _print(move _3) -> [return: bb3, unwind continue];
+        _2 = _print(move _3) -> bb3;
     }
 
     bb3: {
         _18 = deref_copy ((*_1).0: &std::cell::RefCell<std::vec::Vec<i32>>);
-        _16 = RefCell::<Vec<i32>>::borrow_mut(_18) -> [return: bb4, unwind continue];
+        _16 = RefCell::<Vec<i32>>::borrow_mut(_18) -> bb4;
     }
 
     bb4: {
@@ -57,7 +57,7 @@ fn <impl at ui/drop/issue-30018-nopanic.rs:15:1: 15:24>::drop(_1: &mut D<'_>) ->
     }
 
     bb6: {
-        drop(_16) -> [return: bb7, unwind continue];
+        drop(_16) -> bb7;
     }
 
     bb7: {
@@ -91,31 +91,31 @@ fn main() -> () {
     bb0: {
         _5 = [const "Start\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
-        _6 = break_during_elem() -> [return: bb3, unwind continue];
+        _6 = break_during_elem() -> bb3;
     }
 
     bb3: {
-        _7 = break_after_whole() -> [return: bb4, unwind continue];
+        _7 = break_after_whole() -> bb4;
     }
 
     bb4: {
         _12 = [const "Finis\n"];
         _11 = &_12;
-        _10 = _11 as &[&str] (PointerCoercion(Unsize));
-        _9 = Arguments::<'_>::new_const(move _10) -> [return: bb5, unwind continue];
+        _10 = _11 as &[&str] (Pointer(Unsize));
+        _9 = Arguments::<'_>::new_const(move _10) -> bb5;
     }
 
     bb5: {
-        _8 = _print(move _9) -> [return: bb6, unwind continue];
+        _8 = _print(move _9) -> bb6;
     }
 
     bb6: {
@@ -244,11 +244,11 @@ fn break_during_elem() -> () {
     }
 
     bb0: {
-        _3 = Vec::<i32>::new() -> [return: bb1, unwind continue];
+        _3 = Vec::<i32>::new() -> bb1;
     }
 
     bb1: {
-        _2 = RefCell::<Vec<i32>>::new(move _3) -> [return: bb2, unwind continue];
+        _2 = RefCell::<Vec<i32>>::new(move _3) -> bb2;
     }
 
     bb2: {
@@ -475,7 +475,7 @@ fn break_during_elem() -> () {
     }
 
     bb44: {
-        drop(_2) -> [return: bb45, unwind continue];
+        drop(_2) -> bb45;
     }
 
     bb45: {
@@ -664,11 +664,11 @@ fn break_after_whole() -> () {
     }
 
     bb0: {
-        _3 = Vec::<i32>::new() -> [return: bb1, unwind continue];
+        _3 = Vec::<i32>::new() -> bb1;
     }
 
     bb1: {
-        _2 = RefCell::<Vec<i32>>::new(move _3) -> [return: bb2, unwind continue];
+        _2 = RefCell::<Vec<i32>>::new(move _3) -> bb2;
     }
 
     bb2: {
@@ -881,7 +881,7 @@ fn break_after_whole() -> () {
     }
 
     bb39: {
-        drop(_2) -> [return: bb40, unwind continue];
+        drop(_2) -> bb40;
     }
 
     bb40: {

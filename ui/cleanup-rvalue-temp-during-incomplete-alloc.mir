@@ -6,7 +6,7 @@ fn do_it(_1: &[usize]) -> Foo {
     let mut _2: !;
 
     bb0: {
-        _2 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _2 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -32,7 +32,7 @@ fn get_bar(_1: usize) -> Vec<usize> {
     bb0: {
         _3 = SizeOf([usize; 1]);
         _4 = AlignOf([usize; 1]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -54,8 +54,8 @@ fn get_bar(_1: usize) -> Vec<usize> {
 
     bb3: {
         (*_8) = [move _7];
-        _2 = move _6 as std::boxed::Box<[usize]> (PointerCoercion(Unsize));
-        _0 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[usize]> (Pointer(Unsize));
+        _0 = slice::<impl [usize]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -81,7 +81,7 @@ fn fails() -> () {
 
     bb0: {
         _1 = const 2_usize;
-        _2 = Vec::<Box<Conzabble>>::new() -> [return: bb1, unwind continue];
+        _2 = Vec::<Box<Conzabble>>::new() -> bb1;
     }
 
     bb1: {
@@ -113,7 +113,7 @@ fn fails() -> () {
     }
 
     bb7: {
-        drop(_2) -> [return: bb8, unwind continue];
+        drop(_2) -> bb8;
     }
 
     bb8: {
@@ -139,15 +139,15 @@ fn main() -> () {
     let mut _2: std::thread::JoinHandle<()>;
 
     bb0: {
-        _2 = spawn::<fn() {fails}, ()>(fails) -> [return: bb1, unwind continue];
+        _2 = spawn::<fn() {fails}, ()>(fails) -> bb1;
     }
 
     bb1: {
-        _1 = JoinHandle::<()>::join(move _2) -> [return: bb2, unwind continue];
+        _1 = JoinHandle::<()>::join(move _2) -> bb2;
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {

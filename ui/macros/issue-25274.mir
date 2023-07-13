@@ -6,7 +6,7 @@ fn fun(_1: i32) -> Option<Box<i32>> {
     let mut _2: std::boxed::Box<i32>;
 
     bb0: {
-        _2 = Box::<i32>::new(_1) -> [return: bb1, unwind continue];
+        _2 = Box::<i32>::new(_1) -> bb1;
     }
 
     bb1: {
@@ -33,12 +33,12 @@ fn main() -> () {
     bb0: {
         _5 = [const "", const "\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _12 = fun(const 0_i32) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _12 = fun(const 0_i32) -> bb1;
     }
 
     bb1: {
-        _11 = Option::<Box<i32>>::unwrap(move _12) -> [return: bb2, unwind continue];
+        _11 = Option::<Box<i32>>::unwrap(move _12) -> bb2;
     }
 
     bb2: {
@@ -49,7 +49,7 @@ fn main() -> () {
     bb3: {
         _8 = [move _9];
         _7 = &_8;
-        _6 = _7 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _6 = _7 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _2 = Arguments::<'_>::new_v1(move _3, move _6) -> [return: bb4, unwind: bb7];
     }
 
@@ -58,7 +58,7 @@ fn main() -> () {
     }
 
     bb5: {
-        drop(_11) -> [return: bb6, unwind continue];
+        drop(_11) -> bb6;
     }
 
     bb6: {

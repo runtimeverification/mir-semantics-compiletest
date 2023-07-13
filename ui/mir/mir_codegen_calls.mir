@@ -7,7 +7,7 @@ fn test1(_1: isize, _2: (i32, i32), _3: &[i32]) -> (isize, (i32, i32), &[i32]) {
     let mut _0: (isize, (i32, i32), &[i32]);
 
     bb0: {
-        _0 = test1::callee(_1, _2, _3) -> [return: bb1, unwind continue];
+        _0 = test1::callee(_1, _2, _3) -> bb1;
     }
 
     bb1: {
@@ -32,7 +32,7 @@ fn test2(_1: isize) -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = test2::callee(_1) -> [return: bb1, unwind continue];
+        _0 = test2::callee(_1) -> bb1;
     }
 
     bb1: {
@@ -78,7 +78,7 @@ fn <impl at ui/mir/mir_codegen_calls.rs:24:25: 24:30>::fmt(_1: &Foo, _2: &mut Fo
 
     bb0: {
         _3 = const "Foo";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -103,7 +103,7 @@ fn test3(_1: &Foo, _2: isize) -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = Foo::inherent_method(_1, _2) -> [return: bb1, unwind continue];
+        _0 = Foo::inherent_method(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -128,7 +128,7 @@ fn test4(_1: &Foo, _2: isize) -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = <Foo as Bar>::extension_method(_1, _2) -> [return: bb1, unwind continue];
+        _0 = <Foo as Bar>::extension_method(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -142,7 +142,7 @@ fn test5(_1: &dyn Bar, _2: isize) -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = <dyn Bar as Bar>::extension_method(_1, _2) -> [return: bb1, unwind continue];
+        _0 = <dyn Bar as Bar>::extension_method(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -156,7 +156,7 @@ fn test6(_1: &T, _2: isize) -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = <T as Bar>::extension_method(_1, _2) -> [return: bb1, unwind continue];
+        _0 = <T as Bar>::extension_method(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -177,7 +177,7 @@ fn test7() -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = <isize as One>::one() -> [return: bb1, unwind continue];
+        _0 = <isize as One>::one() -> bb1;
     }
 
     bb1: {
@@ -198,7 +198,7 @@ fn test8() -> isize {
     let mut _0: isize;
 
     bb0: {
-        _0 = Two::two() -> [return: bb1, unwind continue];
+        _0 = Two::two() -> bb1;
     }
 
     bb1: {
@@ -229,7 +229,7 @@ fn test9() -> u32 {
 
     bb0: {
         _1 = (const 42_u32, const 43_u32);
-        _0 = simple_extern(const 41_u32, move _1) -> [return: bb1, unwind continue];
+        _0 = simple_extern(const 41_u32, move _1) -> bb1;
     }
 
     bb1: {
@@ -246,7 +246,7 @@ fn test_closure(_1: &F, _2: i32, _3: i32) -> i32 {
 
     bb0: {
         _4 = (_2, _3);
-        _0 = <F as Fn<(i32, i32)>>::call(_1, move _4) -> [return: bb1, unwind continue];
+        _0 = <F as Fn<(i32, i32)>>::call(_1, move _4) -> bb1;
     }
 
     bb1: {
@@ -263,7 +263,7 @@ fn test_fn_object(_1: &dyn Fn(i32, i32) -> i32, _2: i32, _3: i32) -> i32 {
 
     bb0: {
         _4 = (_2, _3);
-        _0 = <dyn Fn(i32, i32) -> i32 as Fn<(i32, i32)>>::call(_1, move _4) -> [return: bb1, unwind continue];
+        _0 = <dyn Fn(i32, i32) -> i32 as Fn<(i32, i32)>>::call(_1, move _4) -> bb1;
     }
 
     bb1: {
@@ -280,7 +280,7 @@ fn test_fn_impl(_1: &&dyn Fn(i32, i32) -> i32, _2: i32, _3: i32) -> i32 {
 
     bb0: {
         _4 = (_2, _3);
-        _0 = <&dyn Fn(i32, i32) -> i32 as Fn<(i32, i32)>>::call(_1, move _4) -> [return: bb1, unwind continue];
+        _0 = <&dyn Fn(i32, i32) -> i32 as Fn<(i32, i32)>>::call(_1, move _4) -> bb1;
     }
 
     bb1: {
@@ -297,7 +297,7 @@ fn test_fn_direct_call(_1: &F, _2: i32, _3: i32) -> i32 {
 
     bb0: {
         _4 = (_2, _3);
-        _0 = <F as Fn<(i32, i32)>>::call(_1, move _4) -> [return: bb1, unwind continue];
+        _0 = <F as Fn<(i32, i32)>>::call(_1, move _4) -> bb1;
     }
 
     bb1: {
@@ -312,7 +312,7 @@ fn test_fn_const_call(_1: &F) -> i32 {
 
     bb0: {
         _2 = (const 100_i32, const -1_i32);
-        _0 = <F as Fn<(i32, i32)>>::call(_1, move _2) -> [return: bb1, unwind continue];
+        _0 = <F as Fn<(i32, i32)>>::call(_1, move _2) -> bb1;
     }
 
     bb1: {
@@ -325,7 +325,7 @@ fn test_fn_nil_call(_1: &F) -> i32 {
     let mut _0: i32;
 
     bb0: {
-        _0 = <F as Fn<()>>::call(_1, const ()) -> [return: bb1, unwind continue];
+        _0 = <F as Fn<()>>::call(_1, const ()) -> bb1;
     }
 
     bb1: {
@@ -340,7 +340,7 @@ fn test_fn_transmute_zst(_1: ()) -> [(); 1] {
     }
 
     bb0: {
-        _0 = test_fn_transmute_zst::id::<[(); 1]>(const [()]) -> [return: bb1, unwind continue];
+        _0 = test_fn_transmute_zst::id::<[(); 1]>(const [()]) -> bb1;
     }
 
     bb1: {
@@ -380,7 +380,7 @@ fn test_fn_ignored_pair_0() -> () {
     let mut _1: ((), ());
 
     bb0: {
-        _1 = test_fn_ignored_pair() -> [return: bb1, unwind continue];
+        _1 = test_fn_ignored_pair() -> bb1;
     }
 
     bb1: {
@@ -411,11 +411,11 @@ fn test_fn_ignored_pair_named() -> (Foo, Foo) {
     let mut _1: (Foo, Foo);
 
     bb0: {
-        _1 = ignored_pair_named() -> [return: bb1, unwind continue];
+        _1 = ignored_pair_named() -> bb1;
     }
 
     bb1: {
-        _0 = id::<(Foo, Foo)>(const (Foo, Foo)) -> [return: bb2, unwind continue];
+        _0 = id::<(Foo, Foo)>(const (Foo, Foo)) -> bb2;
     }
 
     bb2: {
@@ -482,14 +482,14 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
 
     bb0: {
         _3 = &mut _1;
-        _2 = test::black_box::<&mut [u64; 4]>(move _3) -> [return: bb1, unwind continue];
+        _2 = test::black_box::<&mut [u64; 4]>(move _3) -> bb1;
     }
 
     bb1: {
         _5 = const 1_usize;
         _6 = const 4_usize;
         _7 = Lt(_5, _6);
-        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> [success: bb2, unwind continue];
+        assert(move _7, "index out of bounds: the length is {} but the index is {}", move _6, _5) -> bb2;
     }
 
     bb2: {
@@ -497,7 +497,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _8 = const 0_usize;
         _9 = const 4_usize;
         _10 = Lt(_8, _9);
-        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> [success: bb3, unwind continue];
+        assert(move _10, "index out of bounds: the length is {} but the index is {}", move _9, _8) -> bb3;
     }
 
     bb3: {
@@ -505,7 +505,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _12 = const 2_usize;
         _13 = const 4_usize;
         _14 = Lt(_12, _13);
-        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> [success: bb4, unwind continue];
+        assert(move _14, "index out of bounds: the length is {} but the index is {}", move _13, _12) -> bb4;
     }
 
     bb4: {
@@ -513,7 +513,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _15 = const 0_usize;
         _16 = const 4_usize;
         _17 = Lt(_15, _16);
-        assert(move _17, "index out of bounds: the length is {} but the index is {}", move _16, _15) -> [success: bb5, unwind continue];
+        assert(move _17, "index out of bounds: the length is {} but the index is {}", move _16, _15) -> bb5;
     }
 
     bb5: {
@@ -521,7 +521,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _19 = const 3_usize;
         _20 = const 4_usize;
         _21 = Lt(_19, _20);
-        assert(move _21, "index out of bounds: the length is {} but the index is {}", move _20, _19) -> [success: bb6, unwind continue];
+        assert(move _21, "index out of bounds: the length is {} but the index is {}", move _20, _19) -> bb6;
     }
 
     bb6: {
@@ -529,7 +529,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _22 = const 0_usize;
         _23 = const 4_usize;
         _24 = Lt(_22, _23);
-        assert(move _24, "index out of bounds: the length is {} but the index is {}", move _23, _22) -> [success: bb7, unwind continue];
+        assert(move _24, "index out of bounds: the length is {} but the index is {}", move _23, _22) -> bb7;
     }
 
     bb7: {
@@ -537,7 +537,7 @@ fn test_fn_const_arg_by_ref(_1: [u64; 4]) -> u64 {
         _25 = const 0_usize;
         _26 = const 4_usize;
         _27 = Lt(_25, _26);
-        assert(move _27, "index out of bounds: the length is {} but the index is {}", move _26, _25) -> [success: bb8, unwind continue];
+        assert(move _27, "index out of bounds: the length is {} but the index is {}", move _26, _25) -> bb8;
     }
 
     bb8: {
@@ -1018,8 +1018,8 @@ fn main() -> () {
         _4 = (const 2_i32, const 3_i32);
         _7 = [const 4_i32, const 5_i32, const 6_i32];
         _6 = &_7;
-        _5 = _6 as &[i32] (PointerCoercion(Unsize));
-        _3 = test1(const 1_isize, move _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &[i32] (Pointer(Unsize));
+        _3 = test1(const 1_isize, move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -1027,7 +1027,7 @@ fn main() -> () {
         _10 = (const 2_i32, const 3_i32);
         _14 = [const 4_i32, const 5_i32, const 6_i32];
         _13 = &_14;
-        _12 = <[i32; 3] as Index<RangeFull>>::index(move _13, const RangeFull) -> [return: bb2, unwind continue];
+        _12 = <[i32; 3] as Index<RangeFull>>::index(move _13, const RangeFull) -> bb2;
     }
 
     bb2: {
@@ -1037,7 +1037,7 @@ fn main() -> () {
         _1 = (move _2, move _8);
         _15 = (_1.0: &(isize, (i32, i32), &[i32]));
         _16 = (_1.1: &(isize, (i32, i32), &[i32]));
-        _18 = <(isize, (i32, i32), &[i32]) as PartialEq>::eq(_15, _16) -> [return: bb3, unwind continue];
+        _18 = <(isize, (i32, i32), &[i32]) as PartialEq>::eq(_15, _16) -> bb3;
     }
 
     bb3: {
@@ -1048,11 +1048,11 @@ fn main() -> () {
     bb4: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<(isize, (i32, i32), &[i32]), (isize, (i32, i32), &[i32])>(move _19, _15, _16, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<(isize, (i32, i32), &[i32]), (isize, (i32, i32), &[i32])>(move _19, _15, _16, move _21);
     }
 
     bb5: {
-        _24 = test2(const 98_isize) -> [return: bb6, unwind continue];
+        _24 = test2(const 98_isize) -> bb6;
     }
 
     bb6: {
@@ -1072,12 +1072,12 @@ fn main() -> () {
     bb7: {
         _33 = core::panicking::AssertKind::Eq;
         _35 = Option::<Arguments<'_>>::None;
-        _34 = core::panicking::assert_failed::<isize, isize>(move _33, _27, _28, move _35) -> unwind continue;
+        _34 = core::panicking::assert_failed::<isize, isize>(move _33, _27, _28, move _35);
     }
 
     bb8: {
         _39 = &_40;
-        _38 = test3(_39, const 42_isize) -> [return: bb9, unwind continue];
+        _38 = test3(_39, const 42_isize) -> bb9;
     }
 
     bb9: {
@@ -1097,12 +1097,12 @@ fn main() -> () {
     bb10: {
         _49 = core::panicking::AssertKind::Eq;
         _51 = Option::<Arguments<'_>>::None;
-        _50 = core::panicking::assert_failed::<isize, isize>(move _49, _43, _44, move _51) -> unwind continue;
+        _50 = core::panicking::assert_failed::<isize, isize>(move _49, _43, _44, move _51);
     }
 
     bb11: {
         _55 = &_56;
-        _54 = test4(_55, const 970_isize) -> [return: bb12, unwind continue];
+        _54 = test4(_55, const 970_isize) -> bb12;
     }
 
     bb12: {
@@ -1122,13 +1122,13 @@ fn main() -> () {
     bb13: {
         _65 = core::panicking::AssertKind::Eq;
         _67 = Option::<Arguments<'_>>::None;
-        _66 = core::panicking::assert_failed::<isize, isize>(move _65, _59, _60, move _67) -> unwind continue;
+        _66 = core::panicking::assert_failed::<isize, isize>(move _65, _59, _60, move _67);
     }
 
     bb14: {
         _72 = &_73;
-        _71 = _72 as &dyn Bar (PointerCoercion(Unsize));
-        _70 = test5(move _71, const 8576_isize) -> [return: bb15, unwind continue];
+        _71 = _72 as &dyn Bar (Pointer(Unsize));
+        _70 = test5(move _71, const 8576_isize) -> bb15;
     }
 
     bb15: {
@@ -1148,12 +1148,12 @@ fn main() -> () {
     bb16: {
         _82 = core::panicking::AssertKind::Eq;
         _84 = Option::<Arguments<'_>>::None;
-        _83 = core::panicking::assert_failed::<isize, isize>(move _82, _76, _77, move _84) -> unwind continue;
+        _83 = core::panicking::assert_failed::<isize, isize>(move _82, _76, _77, move _84);
     }
 
     bb17: {
         _88 = &_89;
-        _87 = test6::<Foo>(_88, const 12367_isize) -> [return: bb18, unwind continue];
+        _87 = test6::<Foo>(_88, const 12367_isize) -> bb18;
     }
 
     bb18: {
@@ -1173,11 +1173,11 @@ fn main() -> () {
     bb19: {
         _98 = core::panicking::AssertKind::Eq;
         _100 = Option::<Arguments<'_>>::None;
-        _99 = core::panicking::assert_failed::<isize, isize>(move _98, _92, _93, move _100) -> unwind continue;
+        _99 = core::panicking::assert_failed::<isize, isize>(move _98, _92, _93, move _100);
     }
 
     bb20: {
-        _103 = test7() -> [return: bb21, unwind continue];
+        _103 = test7() -> bb21;
     }
 
     bb21: {
@@ -1197,11 +1197,11 @@ fn main() -> () {
     bb22: {
         _112 = core::panicking::AssertKind::Eq;
         _114 = Option::<Arguments<'_>>::None;
-        _113 = core::panicking::assert_failed::<isize, isize>(move _112, _106, _107, move _114) -> unwind continue;
+        _113 = core::panicking::assert_failed::<isize, isize>(move _112, _106, _107, move _114);
     }
 
     bb23: {
-        _117 = test8() -> [return: bb24, unwind continue];
+        _117 = test8() -> bb24;
     }
 
     bb24: {
@@ -1221,11 +1221,11 @@ fn main() -> () {
     bb25: {
         _126 = core::panicking::AssertKind::Eq;
         _128 = Option::<Arguments<'_>>::None;
-        _127 = core::panicking::assert_failed::<isize, isize>(move _126, _120, _121, move _128) -> unwind continue;
+        _127 = core::panicking::assert_failed::<isize, isize>(move _126, _120, _121, move _128);
     }
 
     bb26: {
-        _131 = test9() -> [return: bb27, unwind continue];
+        _131 = test9() -> bb27;
     }
 
     bb27: {
@@ -1246,7 +1246,7 @@ fn main() -> () {
     bb28: {
         _141 = core::panicking::AssertKind::Eq;
         _143 = Option::<Arguments<'_>>::None;
-        _142 = core::panicking::assert_failed::<u32, u32>(move _141, _135, _136, move _143) -> unwind continue;
+        _142 = core::panicking::assert_failed::<u32, u32>(move _141, _135, _136, move _143);
     }
 
     bb29: {
@@ -1254,7 +1254,7 @@ fn main() -> () {
         _146 = &_144;
         _145 = [closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35] { r: move _146 };
         _150 = &_145;
-        _149 = test_fn_const_call::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_150) -> [return: bb30, unwind continue];
+        _149 = test_fn_const_call::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_150) -> bb30;
     }
 
     bb30: {
@@ -1274,12 +1274,12 @@ fn main() -> () {
     bb31: {
         _159 = core::panicking::AssertKind::Eq;
         _161 = Option::<Arguments<'_>>::None;
-        _160 = core::panicking::assert_failed::<i32, i32>(move _159, _153, _154, move _161) -> unwind continue;
+        _160 = core::panicking::assert_failed::<i32, i32>(move _159, _153, _154, move _161);
     }
 
     bb32: {
         _165 = &_145;
-        _164 = test_closure::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_165, const 100_i32, const 1_i32) -> [return: bb33, unwind continue];
+        _164 = test_closure::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_165, const 100_i32, const 1_i32) -> bb33;
     }
 
     bb33: {
@@ -1299,15 +1299,15 @@ fn main() -> () {
     bb34: {
         _174 = core::panicking::AssertKind::Eq;
         _176 = Option::<Arguments<'_>>::None;
-        _175 = core::panicking::assert_failed::<i32, i32>(move _174, _168, _169, move _176) -> unwind continue;
+        _175 = core::panicking::assert_failed::<i32, i32>(move _174, _168, _169, move _176);
     }
 
     bb35: {
         _179 = &_145;
-        _178 = _179 as &dyn std::ops::Fn(i32, i32) -> i32 (PointerCoercion(Unsize));
+        _178 = _179 as &dyn std::ops::Fn(i32, i32) -> i32 (Pointer(Unsize));
         _177 = _178;
         _183 = _177;
-        _182 = test_fn_object(move _183, const 100_i32, const 2_i32) -> [return: bb36, unwind continue];
+        _182 = test_fn_object(move _183, const 100_i32, const 2_i32) -> bb36;
     }
 
     bb36: {
@@ -1327,12 +1327,12 @@ fn main() -> () {
     bb37: {
         _192 = core::panicking::AssertKind::Eq;
         _194 = Option::<Arguments<'_>>::None;
-        _193 = core::panicking::assert_failed::<i32, i32>(move _192, _186, _187, move _194) -> unwind continue;
+        _193 = core::panicking::assert_failed::<i32, i32>(move _192, _186, _187, move _194);
     }
 
     bb38: {
         _198 = &_177;
-        _197 = test_fn_impl(_198, const 100_i32, const 3_i32) -> [return: bb39, unwind continue];
+        _197 = test_fn_impl(_198, const 100_i32, const 3_i32) -> bb39;
     }
 
     bb39: {
@@ -1352,12 +1352,12 @@ fn main() -> () {
     bb40: {
         _207 = core::panicking::AssertKind::Eq;
         _209 = Option::<Arguments<'_>>::None;
-        _208 = core::panicking::assert_failed::<i32, i32>(move _207, _201, _202, move _209) -> unwind continue;
+        _208 = core::panicking::assert_failed::<i32, i32>(move _207, _201, _202, move _209);
     }
 
     bb41: {
         _213 = &_145;
-        _212 = test_fn_direct_call::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_213, const 100_i32, const 4_i32) -> [return: bb42, unwind continue];
+        _212 = test_fn_direct_call::<[closure@ui/mir/mir_codegen_calls.rs:175:19: 175:35]>(_213, const 100_i32, const 4_i32) -> bb42;
     }
 
     bb42: {
@@ -1377,12 +1377,12 @@ fn main() -> () {
     bb43: {
         _222 = core::panicking::AssertKind::Eq;
         _224 = Option::<Arguments<'_>>::None;
-        _223 = core::panicking::assert_failed::<i32, i32>(move _222, _216, _217, move _224) -> unwind continue;
+        _223 = core::panicking::assert_failed::<i32, i32>(move _222, _216, _217, move _224);
     }
 
     bb44: {
         _228 = &_229;
-        _227 = test_fn_nil_call::<[closure@ui/mir/mir_codegen_calls.rs:183:35: 183:37]>(_228) -> [return: bb45, unwind continue];
+        _227 = test_fn_nil_call::<[closure@ui/mir/mir_codegen_calls.rs:183:35: 183:37]>(_228) -> bb45;
     }
 
     bb45: {
@@ -1402,11 +1402,11 @@ fn main() -> () {
     bb46: {
         _238 = core::panicking::AssertKind::Eq;
         _240 = Option::<Arguments<'_>>::None;
-        _239 = core::panicking::assert_failed::<i32, i32>(move _238, _232, _233, move _240) -> unwind continue;
+        _239 = core::panicking::assert_failed::<i32, i32>(move _238, _232, _233, move _240);
     }
 
     bb47: {
-        _243 = test_fn_transmute_zst(const ()) -> [return: bb48, unwind continue];
+        _243 = test_fn_transmute_zst(const ()) -> bb48;
     }
 
     bb48: {
@@ -1415,7 +1415,7 @@ fn main() -> () {
         _241 = (move _242, move _244);
         _246 = (_241.0: &[(); 1]);
         _247 = (_241.1: &[(); 1]);
-        _249 = <[(); 1] as PartialEq>::eq(_246, _247) -> [return: bb49, unwind continue];
+        _249 = <[(); 1] as PartialEq>::eq(_246, _247) -> bb49;
     }
 
     bb49: {
@@ -1426,11 +1426,11 @@ fn main() -> () {
     bb50: {
         _250 = core::panicking::AssertKind::Eq;
         _252 = Option::<Arguments<'_>>::None;
-        _251 = core::panicking::assert_failed::<[(); 1], [(); 1]>(move _250, _246, _247, move _252) -> unwind continue;
+        _251 = core::panicking::assert_failed::<[(); 1], [(); 1]>(move _250, _246, _247, move _252);
     }
 
     bb51: {
-        _255 = test_fn_ignored_pair_0() -> [return: bb52, unwind continue];
+        _255 = test_fn_ignored_pair_0() -> bb52;
     }
 
     bb52: {
@@ -1439,7 +1439,7 @@ fn main() -> () {
         _253 = (move _254, move _256);
         _258 = (_253.0: &());
         _259 = (_253.1: &());
-        _261 = <() as PartialEq>::eq(_258, _259) -> [return: bb53, unwind continue];
+        _261 = <() as PartialEq>::eq(_258, _259) -> bb53;
     }
 
     bb53: {
@@ -1450,11 +1450,11 @@ fn main() -> () {
     bb54: {
         _262 = core::panicking::AssertKind::Eq;
         _264 = Option::<Arguments<'_>>::None;
-        _263 = core::panicking::assert_failed::<(), ()>(move _262, _258, _259, move _264) -> unwind continue;
+        _263 = core::panicking::assert_failed::<(), ()>(move _262, _258, _259, move _264);
     }
 
     bb55: {
-        _267 = test_fn_ignored_pair_named() -> [return: bb56, unwind continue];
+        _267 = test_fn_ignored_pair_named() -> bb56;
     }
 
     bb56: {
@@ -1463,7 +1463,7 @@ fn main() -> () {
         _265 = (move _266, move _268);
         _270 = (_265.0: &(Foo, Foo));
         _271 = (_265.1: &(Foo, Foo));
-        _273 = <(Foo, Foo) as PartialEq>::eq(_270, _271) -> [return: bb57, unwind continue];
+        _273 = <(Foo, Foo) as PartialEq>::eq(_270, _271) -> bb57;
     }
 
     bb57: {
@@ -1474,14 +1474,14 @@ fn main() -> () {
     bb58: {
         _274 = core::panicking::AssertKind::Eq;
         _276 = Option::<Arguments<'_>>::None;
-        _275 = core::panicking::assert_failed::<(Foo, Foo), (Foo, Foo)>(move _274, _270, _271, move _276) -> unwind continue;
+        _275 = core::panicking::assert_failed::<(Foo, Foo), (Foo, Foo)>(move _274, _270, _271, move _276);
     }
 
     bb59: {
         _282 = (const 1f32, const 2f32);
         _281 = (move _282, const 0_u32);
         _280 = &_281;
-        _279 = test_fn_nested_pair(_280) -> [return: bb60, unwind continue];
+        _279 = test_fn_nested_pair(_280) -> bb60;
     }
 
     bb60: {
@@ -1491,7 +1491,7 @@ fn main() -> () {
         _277 = (move _278, move _283);
         _285 = (_277.0: &(f32, f32));
         _286 = (_277.1: &(f32, f32));
-        _288 = <(f32, f32) as PartialEq>::eq(_285, _286) -> [return: bb61, unwind continue];
+        _288 = <(f32, f32) as PartialEq>::eq(_285, _286) -> bb61;
     }
 
     bb61: {
@@ -1502,11 +1502,11 @@ fn main() -> () {
     bb62: {
         _289 = core::panicking::AssertKind::Eq;
         _291 = Option::<Arguments<'_>>::None;
-        _290 = core::panicking::assert_failed::<(f32, f32), (f32, f32)>(move _289, _285, _286, move _291) -> unwind continue;
+        _290 = core::panicking::assert_failed::<(f32, f32), (f32, f32)>(move _289, _285, _286, move _291);
     }
 
     bb63: {
-        _294 = test_fn_const_arg_by_ref(const _) -> [return: bb64, unwind continue];
+        _294 = test_fn_const_arg_by_ref(const _) -> bb64;
     }
 
     bb64: {
@@ -1528,7 +1528,7 @@ fn main() -> () {
     bb65: {
         _305 = core::panicking::AssertKind::Eq;
         _307 = Option::<Arguments<'_>>::None;
-        _306 = core::panicking::assert_failed::<u64, u64>(move _305, _299, _300, move _307) -> unwind continue;
+        _306 = core::panicking::assert_failed::<u64, u64>(move _305, _299, _300, move _307);
     }
 
     bb66: {

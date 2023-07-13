@@ -24,7 +24,7 @@ const WRITE_SIZE: usize = {
 
     bb0: {
         _1 = CheckedMul(const 1024_usize, const 32_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1024_usize, const 32_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} * {}`, which would overflow", const 1024_usize, const 32_usize) -> bb1;
     }
 
     bb1: {
@@ -46,11 +46,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = args() -> [return: bb1, unwind continue];
+        _2 = args() -> bb1;
     }
 
     bb1: {
-        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> [return: bb2, unwind continue];
+        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> bb2;
     }
 
     bb2: {
@@ -71,7 +71,7 @@ fn main() -> () {
     }
 
     bb6: {
-        drop(_1) -> [return: bb7, unwind continue];
+        drop(_1) -> bb7;
     }
 
     bb7: {
@@ -201,16 +201,16 @@ fn parent() -> () {
     }
 
     bb0: {
-        _2 = current_exe() -> [return: bb1, unwind continue];
+        _2 = current_exe() -> bb1;
     }
 
     bb1: {
-        _1 = Result::<PathBuf, std::io::Error>::unwrap(move _2) -> [return: bb2, unwind continue];
+        _1 = Result::<PathBuf, std::io::Error>::unwrap(move _2) -> bb2;
     }
 
     bb2: {
         _4 = move _1;
-        _3 = Command::new::<PathBuf>(move _4) -> [return: bb3, unwind continue];
+        _3 = Command::new::<PathBuf>(move _4) -> bb3;
     }
 
     bb3: {
@@ -350,7 +350,7 @@ fn parent() -> () {
     }
 
     bb25: {
-        drop(_3) -> [return: bb26, unwind continue];
+        drop(_3) -> bb26;
     }
 
     bb26: {
@@ -396,16 +396,16 @@ fn child() -> () {
 
     bb0: {
         _3 = std::ops::Range::<usize> { start: const 0_usize, end: const _ };
-        _2 = <std::ops::Range<usize> as Iterator>::map::<JoinHandle<()>, [closure@ui/stdio-is-blocking.rs:37:36: 37:39]>(move _3, const ZeroSized: [closure@ui/stdio-is-blocking.rs:37:36: 37:39]) -> [return: bb1, unwind continue];
+        _2 = <std::ops::Range<usize> as Iterator>::map::<JoinHandle<()>, [closure@ui/stdio-is-blocking.rs:37:36: 37:39]>(move _3, const ZeroSized: [closure@ui/stdio-is-blocking.rs:37:36: 37:39]) -> bb1;
     }
 
     bb1: {
-        _1 = <Map<std::ops::Range<usize>, [closure@ui/stdio-is-blocking.rs:37:36: 37:39]> as Iterator>::collect::<Vec<JoinHandle<()>>>(move _2) -> [return: bb2, unwind continue];
+        _1 = <Map<std::ops::Range<usize>, [closure@ui/stdio-is-blocking.rs:37:36: 37:39]> as Iterator>::collect::<Vec<JoinHandle<()>>>(move _2) -> bb2;
     }
 
     bb2: {
         _5 = move _1;
-        _4 = <Vec<JoinHandle<()>> as IntoIterator>::into_iter(move _5) -> [return: bb3, unwind continue];
+        _4 = <Vec<JoinHandle<()>> as IntoIterator>::into_iter(move _5) -> bb3;
     }
 
     bb3: {
@@ -433,7 +433,7 @@ fn child() -> () {
     }
 
     bb8: {
-        drop(_6) -> [return: bb10, unwind continue];
+        drop(_6) -> bb10;
     }
 
     bb9: {
@@ -461,7 +461,7 @@ fn child::{closure#0}(_1: &mut [closure@ui/stdio-is-blocking.rs:37:36: 37:39], _
     let mut _0: std::thread::JoinHandle<()>;
 
     bb0: {
-        _0 = spawn::<[closure@ui/stdio-is-blocking.rs:38:23: 38:25], ()>(const ZeroSized: [closure@ui/stdio-is-blocking.rs:38:23: 38:25]) -> [return: bb1, unwind continue];
+        _0 = spawn::<[closure@ui/stdio-is-blocking.rs:38:23: 38:25], ()>(const ZeroSized: [closure@ui/stdio-is-blocking.rs:38:23: 38:25]) -> bb1;
     }
 
     bb1: {
@@ -491,7 +491,7 @@ fn child::{closure#0}::{closure#0}(_1: [closure@ui/stdio-is-blocking.rs:38:23: 3
     bb0: {
         _2 = [const 97_u8; 32768];
         _4 = std::ops::Range::<usize> { start: const 0_usize, end: const _ };
-        _3 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _4) -> [return: bb1, unwind continue];
+        _3 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _4) -> bb1;
     }
 
     bb1: {
@@ -501,7 +501,7 @@ fn child::{closure#0}::{closure#0}(_1: [closure@ui/stdio-is-blocking.rs:38:23: 3
 
     bb2: {
         _7 = &mut _5;
-        _6 = <std::ops::Range<usize> as Iterator>::next(_7) -> [return: bb3, unwind continue];
+        _6 = <std::ops::Range<usize> as Iterator>::next(_7) -> bb3;
     }
 
     bb3: {
@@ -511,8 +511,8 @@ fn child::{closure#0}::{closure#0}(_1: [closure@ui/stdio-is-blocking.rs:38:23: 3
 
     bb4: {
         _11 = &_2;
-        _10 = _11 as &[u8] (PointerCoercion(Unsize));
-        _9 = write_all(move _10) -> [return: bb2, unwind continue];
+        _10 = _11 as &[u8] (Pointer(Unsize));
+        _9 = write_all(move _10) -> bb2;
     }
 
     bb5: {
@@ -558,7 +558,7 @@ fn write_all(_1: &[u8]) -> () {
         _10 = const false;
         _9 = const false;
         _10 = const true;
-        _2 = <File as std::os::fd::FromRawFd>::from_raw_fd(const 1_i32) -> [return: bb1, unwind continue];
+        _2 = <File as std::os::fd::FromRawFd>::from_raw_fd(const 1_i32) -> bb1;
     }
 
     bb1: {

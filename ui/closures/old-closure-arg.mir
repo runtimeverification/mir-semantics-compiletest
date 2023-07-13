@@ -46,7 +46,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([f64; 5]);
         _4 = AlignOf([f64; 5]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -85,7 +85,7 @@ fn main() -> () {
         _13 = ((_10 as Some).0: &f64);
         _18 = [const "", const "\n"];
         _17 = &_18;
-        _16 = _17 as &[&str] (PointerCoercion(Unsize));
+        _16 = _17 as &[&str] (Pointer(Unsize));
         _22 = core::fmt::rt::Argument::<'_>::new_display::<f64>(_13) -> [return: bb9, unwind: bb12];
     }
 
@@ -94,13 +94,13 @@ fn main() -> () {
     }
 
     bb8: {
-        drop(_1) -> [return: bb11, unwind continue];
+        drop(_1) -> bb11;
     }
 
     bb9: {
         _21 = [move _22];
         _20 = &_21;
-        _19 = _20 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _19 = _20 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _15 = Arguments::<'_>::new_v1(move _16, move _19) -> [return: bb10, unwind: bb12];
     }
 
@@ -122,8 +122,8 @@ fn main() -> () {
 
     bb14: {
         (*_23) = [const -1f64, const 0f64, const 1f64, const 2f64, const 3f64];
-        _2 = move _6 as std::boxed::Box<[f64]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [f64]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[f64]> (Pointer(Unsize));
+        _1 = slice::<impl [f64]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 
     bb15: {

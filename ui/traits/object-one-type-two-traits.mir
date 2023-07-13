@@ -15,7 +15,7 @@ fn <impl at ui/traits/object-one-type-two-traits.rs:14:1: 14:20>::wrap(_1: Box<i
     let mut _0: std::boxed::Box<dyn std::any::Any>;
 
     bb0: {
-        _0 = move _1 as std::boxed::Box<dyn std::any::Any> (PointerCoercion(Unsize));
+        _0 = move _1 as std::boxed::Box<dyn std::any::Any> (Pointer(Unsize));
         return;
     }
 }
@@ -25,7 +25,7 @@ fn is(_1: &dyn Any) -> bool {
     let mut _0: bool;
 
     bb0: {
-        _0 = <(dyn Any + 'static)>::is::<T>(_1) -> [return: bb1, unwind continue];
+        _0 = <(dyn Any + 'static)>::is::<T>(_1) -> bb1;
     }
 
     bb1: {
@@ -63,16 +63,16 @@ fn main() -> () {
 
     bb0: {
         _18 = const false;
-        _3 = Box::<isize>::new(const 22_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 22_isize) -> bb1;
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn Wrap> (PointerCoercion(Unsize));
+        _2 = move _3 as std::boxed::Box<dyn Wrap> (Pointer(Unsize));
         _18 = const true;
         _1 = move _2;
         _8 = [const "x=", const "\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _19 = (((_1.0: std::ptr::Unique<dyn Wrap>).0: std::ptr::NonNull<dyn Wrap>).0: *const dyn Wrap);
         _15 = &(*_19);
         _14 = <dyn Wrap as Wrap>::get(move _15) -> [return: bb2, unwind: bb10];
@@ -86,7 +86,7 @@ fn main() -> () {
     bb3: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb4, unwind: bb10];
     }
 

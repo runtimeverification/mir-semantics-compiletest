@@ -26,7 +26,7 @@ fn foo(_1: T) -> <() as Foo<{ N + 1 }>>::Assoc {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -48,7 +48,7 @@ foo::{constant#1}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -63,7 +63,7 @@ foo::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -82,12 +82,12 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = <i64 as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <i64 as Default>::default() -> bb1;
     }
 
     bb1: {
         _3 = _1;
-        _2 = foo::<i64, 2>(move _3) -> [return: bb2, unwind continue];
+        _2 = foo::<i64, 2>(move _3) -> bb2;
     }
 
     bb2: {

@@ -6,7 +6,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:10:1: 10:27>::eq(_1: &FailC
     let _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "eq") -> unwind continue;
+        _3 = begin_panic::<&str>(const "eq");
     }
 }
 
@@ -16,7 +16,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:14:1: 14:28>::partial_cmp(_
     let _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "partial_cmp") -> unwind continue;
+        _3 = begin_panic::<&str>(const "partial_cmp");
     }
 }
 
@@ -26,7 +26,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:20:1: 20:21>::cmp(_1: &Fail
     let _3: !;
 
     bb0: {
-        _3 = begin_panic::<&str>(const "cmp") -> unwind continue;
+        _3 = begin_panic::<&str>(const "cmp");
     }
 }
 
@@ -56,7 +56,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:24:10: 24:19>::eq(_1: &Shor
     bb2: {
         _7 = &((*_1).1: FailCmp);
         _8 = &((*_2).1: FailCmp);
-        _6 = <FailCmp as PartialEq>::eq(move _7, move _8) -> [return: bb4, unwind continue];
+        _6 = <FailCmp as PartialEq>::eq(move _7, move _8) -> bb4;
     }
 
     bb3: {
@@ -88,7 +88,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:24:20: 24:30>::partial_cmp(
     bb0: {
         _4 = &((*_1).0: isize);
         _5 = &((*_2).0: isize);
-        _3 = <isize as PartialOrd>::partial_cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <isize as PartialOrd>::partial_cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -110,7 +110,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:24:20: 24:30>::partial_cmp(
     bb4: {
         _8 = &((*_1).1: FailCmp);
         _9 = &((*_2).1: FailCmp);
-        _0 = <FailCmp as PartialOrd>::partial_cmp(_8, _9) -> [return: bb5, unwind continue];
+        _0 = <FailCmp as PartialOrd>::partial_cmp(_8, _9) -> bb5;
     }
 
     bb5: {
@@ -149,7 +149,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:24:34: 24:37>::cmp(_1: &Sho
     bb0: {
         _4 = &((*_1).0: isize);
         _5 = &((*_2).0: isize);
-        _3 = <isize as Ord>::cmp(_4, _5) -> [return: bb1, unwind continue];
+        _3 = <isize as Ord>::cmp(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -166,7 +166,7 @@ fn <impl at ui/deriving/deriving-cmp-shortcircuit.rs:24:34: 24:37>::cmp(_1: &Sho
     bb3: {
         _7 = &((*_1).1: FailCmp);
         _8 = &((*_2).1: FailCmp);
-        _0 = <FailCmp as Ord>::cmp(_7, _8) -> [return: bb4, unwind continue];
+        _0 = <FailCmp as Ord>::cmp(_7, _8) -> bb4;
     }
 
     bb4: {
@@ -221,7 +221,7 @@ fn main() -> () {
         _2 = ShortCircuit { x: const 2_isize, y: const FailCmp };
         _5 = &_1;
         _6 = &_2;
-        _4 = <ShortCircuit as PartialEq>::ne(move _5, move _6) -> [return: bb1, unwind continue];
+        _4 = <ShortCircuit as PartialEq>::ne(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -230,13 +230,13 @@ fn main() -> () {
     }
 
     bb2: {
-        _7 = core::panicking::panic(const "assertion failed: a != b") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: a != b");
     }
 
     bb3: {
         _10 = &_1;
         _11 = &_2;
-        _9 = <ShortCircuit as PartialOrd>::lt(move _10, move _11) -> [return: bb4, unwind continue];
+        _9 = <ShortCircuit as PartialOrd>::lt(move _10, move _11) -> bb4;
     }
 
     bb4: {
@@ -245,13 +245,13 @@ fn main() -> () {
     }
 
     bb5: {
-        _12 = core::panicking::panic(const "assertion failed: a < b") -> unwind continue;
+        _12 = core::panicking::panic(const "assertion failed: a < b");
     }
 
     bb6: {
         _16 = &_1;
         _17 = &_2;
-        _15 = <ShortCircuit as Ord>::cmp(move _16, _17) -> [return: bb7, unwind continue];
+        _15 = <ShortCircuit as Ord>::cmp(move _16, _17) -> bb7;
     }
 
     bb7: {
@@ -261,7 +261,7 @@ fn main() -> () {
         _13 = (move _14, move _18);
         _20 = (_13.0: &std::cmp::Ordering);
         _21 = (_13.1: &std::cmp::Ordering);
-        _23 = <std::cmp::Ordering as PartialEq>::eq(_20, _21) -> [return: bb8, unwind continue];
+        _23 = <std::cmp::Ordering as PartialEq>::eq(_20, _21) -> bb8;
     }
 
     bb8: {
@@ -272,7 +272,7 @@ fn main() -> () {
     bb9: {
         _24 = core::panicking::AssertKind::Eq;
         _26 = Option::<Arguments<'_>>::None;
-        _25 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _24, _20, _21, move _26) -> unwind continue;
+        _25 = core::panicking::assert_failed::<std::cmp::Ordering, std::cmp::Ordering>(move _24, _20, _21, move _26);
     }
 
     bb10: {

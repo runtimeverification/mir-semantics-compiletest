@@ -38,7 +38,7 @@ fn <impl at ui/autoref-autoderef/autoderef-method-twice-but-not-thrice.rs:8:1: 8
     bb2: {
         _2 = (*_5);
         _0 = Mul(move _2, const 2_usize);
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb3: {
@@ -176,23 +176,23 @@ fn main() -> () {
     }
 
     bb0: {
-        _5 = Box::<usize>::new(const 3_usize) -> [return: bb1, unwind continue];
+        _5 = Box::<usize>::new(const 3_usize) -> bb1;
     }
 
     bb1: {
-        _4 = Box::<Box<usize>>::new(move _5) -> [return: bb2, unwind continue];
+        _4 = Box::<Box<usize>>::new(move _5) -> bb2;
     }
 
     bb2: {
-        _3 = Box::<Box<Box<usize>>>::new(move _4) -> [return: bb3, unwind continue];
+        _3 = Box::<Box<Box<usize>>>::new(move _4) -> bb3;
     }
 
     bb3: {
-        _2 = Box::<Box<Box<Box<usize>>>>::new(move _3) -> [return: bb4, unwind continue];
+        _2 = Box::<Box<Box<Box<usize>>>>::new(move _3) -> bb4;
     }
 
     bb4: {
-        _1 = Box::<Box<Box<Box<Box<usize>>>>>::new(move _2) -> [return: bb5, unwind continue];
+        _1 = Box::<Box<Box<Box<Box<usize>>>>>::new(move _2) -> bb5;
     }
 
     bb5: {
@@ -252,7 +252,7 @@ fn main() -> () {
 
     bb12: {
         _23 = &mut _1;
-        _24 = <Box<Box<Box<Box<Box<usize>>>>> as Drop>::drop(move _23) -> [return: bb10, unwind continue];
+        _24 = <Box<Box<Box<Box<Box<usize>>>>> as Drop>::drop(move _23) -> bb10;
     }
 
     bb13 (cleanup): {

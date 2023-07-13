@@ -39,12 +39,12 @@ fn main() -> () {
     bb0: {
         _3 = E::Foo(const 0_u32);
         _2 = S { node: move _3 };
-        _1 = RefCell::<S>::new(move _2) -> [return: bb1, unwind continue];
+        _1 = RefCell::<S>::new(move _2) -> bb1;
     }
 
     bb1: {
         _5 = &_1;
-        _4 = RefCell::<S>::borrow_mut(move _5) -> [return: bb2, unwind continue];
+        _4 = RefCell::<S>::borrow_mut(move _5) -> bb2;
     }
 
     bb2: {
@@ -83,7 +83,7 @@ fn main() -> () {
     }
 
     bb9: {
-        drop(_4) -> [return: bb10, unwind continue];
+        drop(_4) -> bb10;
     }
 
     bb10: {
@@ -118,7 +118,7 @@ fn foo(_1: &mut RefCell<Option<String>>) -> () {
 
     bb0: {
         _5 = &(*_1);
-        _4 = RefCell::<Option<String>>::borrow_mut(move _5) -> [return: bb1, unwind continue];
+        _4 = RefCell::<Option<String>>::borrow_mut(move _5) -> bb1;
     }
 
     bb1: {
@@ -137,7 +137,7 @@ fn foo(_1: &mut RefCell<Option<String>>) -> () {
     }
 
     bb4: {
-        drop(_4) -> [return: bb5, unwind continue];
+        drop(_4) -> bb5;
     }
 
     bb5: {

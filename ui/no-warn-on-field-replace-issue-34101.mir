@@ -22,7 +22,7 @@ fn inline() -> () {
     }
 
     bb0: {
-        _2 = <String as From<&str>>::from(const "foo") -> [return: bb1, unwind continue];
+        _2 = <String as From<&str>>::from(const "foo") -> bb1;
     }
 
     bb1: {
@@ -36,7 +36,7 @@ fn inline() -> () {
 
     bb3: {
         (_1.0: std::string::String) = move _3;
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb4 (cleanup): {
@@ -71,7 +71,7 @@ fn outline() -> () {
     }
 
     bb0: {
-        _1 = <String as From<&str>>::from(const "foo") -> [return: bb1, unwind continue];
+        _1 = <String as From<&str>>::from(const "foo") -> bb1;
     }
 
     bb1: {
@@ -86,7 +86,7 @@ fn outline() -> () {
 
     bb3: {
         (_2.0: std::string::String) = move _4;
-        drop(_2) -> [return: bb5, unwind continue];
+        drop(_2) -> bb5;
     }
 
     bb4 (cleanup): {
@@ -113,11 +113,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = inline() -> [return: bb1, unwind continue];
+        _1 = inline() -> bb1;
     }
 
     bb1: {
-        _2 = outline() -> [return: bb2, unwind continue];
+        _2 = outline() -> bb2;
     }
 
     bb2: {

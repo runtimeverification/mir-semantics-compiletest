@@ -35,7 +35,7 @@ const OFFSET: usize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = MaybeUninit::<Struct>::uninit() -> [return: bb1, unwind continue];
+        _1 = MaybeUninit::<Struct>::uninit() -> bb1;
     }
 
     bb1: {
@@ -67,7 +67,7 @@ const OFFSET: usize = {
         _11 = move _12 as *const u8 (PtrToPtr);
         StorageDead(_12);
         ConstEvalCounter;
-        _9 = ptr::const_ptr::<impl *const u8>::offset_from(move _10, move _11) -> [return: bb2, unwind continue];
+        _9 = ptr::const_ptr::<impl *const u8>::offset_from(move _10, move _11) -> bb2;
     }
 
     bb2: {
@@ -119,7 +119,7 @@ const OFFSET_2: usize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = MaybeUninit::<Struct2>::uninit() -> [return: bb1, unwind continue];
+        _1 = MaybeUninit::<Struct2>::uninit() -> bb1;
     }
 
     bb1: {
@@ -148,7 +148,7 @@ const OFFSET_2: usize = {
         _10 = move _11 as *const u8 (PtrToPtr);
         StorageDead(_11);
         ConstEvalCounter;
-        _8 = ptr::const_ptr::<impl *const u8>::offset_from(move _9, move _10) -> [return: bb2, unwind continue];
+        _8 = ptr::const_ptr::<impl *const u8>::offset_from(move _9, move _10) -> bb2;
     }
 
     bb2: {
@@ -195,7 +195,7 @@ const OVERFLOW: isize = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = MaybeUninit::<Struct2>::uninit() -> [return: bb1, unwind continue];
+        _1 = MaybeUninit::<Struct2>::uninit() -> bb1;
     }
 
     bb1: {
@@ -223,7 +223,7 @@ const OVERFLOW: isize = {
         StorageLive(_10);
         _10 = _6;
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _8, move _10) -> [return: bb2, unwind continue];
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _8, move _10) -> bb2;
     }
 
     bb2: {
@@ -255,7 +255,7 @@ const OFFSET_EQUAL_INTS: isize = {
         StorageLive(_3);
         _3 = _1;
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _3) -> [return: bb1, unwind continue];
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _3) -> bb1;
     }
 
     bb1: {
@@ -291,10 +291,10 @@ const OFFSET_UNSIGNED: usize = {
         StorageLive(_3);
         StorageLive(_4);
         _4 = &_1;
-        _3 = move _4 as &[char] (PointerCoercion(Unsize));
+        _3 = move _4 as &[char] (Pointer(Unsize));
         StorageDead(_4);
         ConstEvalCounter;
-        _2 = core::slice::<impl [char]>::as_ptr(move _3) -> [return: bb1, unwind continue];
+        _2 = core::slice::<impl [char]>::as_ptr(move _3) -> bb1;
     }
 
     bb1: {
@@ -303,7 +303,7 @@ const OFFSET_UNSIGNED: usize = {
         StorageLive(_6);
         _6 = _2;
         ConstEvalCounter;
-        _5 = ptr::const_ptr::<impl *const char>::add(move _6, const 2_usize) -> [return: bb2, unwind continue];
+        _5 = ptr::const_ptr::<impl *const char>::add(move _6, const 2_usize) -> bb2;
     }
 
     bb2: {
@@ -311,7 +311,7 @@ const OFFSET_UNSIGNED: usize = {
         StorageLive(_7);
         _7 = _2;
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const char>::sub_ptr(move _5, move _7) -> [return: bb3, unwind continue];
+        _0 = ptr::const_ptr::<impl *const char>::sub_ptr(move _5, move _7) -> bb3;
     }
 
     bb3: {
@@ -449,7 +449,7 @@ fn main() -> () {
     bb1: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14);
     }
 
     bb2: {
@@ -470,7 +470,7 @@ fn main() -> () {
     bb3: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28);
     }
 
     bb4: {
@@ -491,7 +491,7 @@ fn main() -> () {
     bb5: {
         _40 = core::panicking::AssertKind::Eq;
         _42 = Option::<Arguments<'_>>::None;
-        _41 = core::panicking::assert_failed::<isize, isize>(move _40, _34, _35, move _42) -> unwind continue;
+        _41 = core::panicking::assert_failed::<isize, isize>(move _40, _34, _35, move _42);
     }
 
     bb6: {
@@ -512,7 +512,7 @@ fn main() -> () {
     bb7: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<isize, isize>(move _54, _48, _49, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<isize, isize>(move _54, _48, _49, move _56);
     }
 
     bb8: {
@@ -533,7 +533,7 @@ fn main() -> () {
     bb9: {
         _68 = core::panicking::AssertKind::Eq;
         _70 = Option::<Arguments<'_>>::None;
-        _69 = core::panicking::assert_failed::<usize, usize>(move _68, _62, _63, move _70) -> unwind continue;
+        _69 = core::panicking::assert_failed::<usize, usize>(move _68, _62, _63, move _70);
     }
 
     bb10: {

@@ -12,12 +12,12 @@ fn <impl at ui/mir/mir_codegen_calls_converging_drops_2.rs:8:1: 8:24>::drop(_1: 
     bb0: {
         _6 = [const "dropped\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_const(move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &[&str] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_const(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = _eprint(move _3) -> [return: bb2, unwind continue];
+        _2 = _eprint(move _3) -> bb2;
     }
 
     bb2: {
@@ -36,12 +36,12 @@ fn complex() -> u64 {
     bb0: {
         _5 = [const "complex called\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _eprint(move _2) -> [return: bb2, unwind continue];
+        _1 = _eprint(move _2) -> bb2;
     }
 
     bb2: {
@@ -62,7 +62,7 @@ fn mir() -> u64 {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -104,7 +104,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = mir() -> [return: bb1, unwind continue];
+        _3 = mir() -> bb1;
     }
 
     bb1: {
@@ -124,10 +124,10 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u64, u64>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u64, u64>(move _12, _6, _7, move _14);
     }
 
     bb3: {
-        _15 = begin_panic::<&str>(const "exit") -> unwind continue;
+        _15 = begin_panic::<&str>(const "exit");
     }
 }

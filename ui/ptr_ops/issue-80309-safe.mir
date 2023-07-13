@@ -8,11 +8,11 @@ fn zero(_1: usize) -> usize {
     let mut _4: *const i8;
 
     bb0: {
-        _4 = null::<i8>() -> [return: bb1, unwind continue];
+        _4 = null::<i8>() -> bb1;
     }
 
     bb1: {
-        _3 = ptr::const_ptr::<impl *const i8>::wrapping_add(move _4, _1) -> [return: bb2, unwind continue];
+        _3 = ptr::const_ptr::<impl *const i8>::wrapping_add(move _4, _1) -> bb2;
     }
 
     bb2: {
@@ -32,18 +32,18 @@ fn qux(_1: &[i8]) -> i8 {
     let mut _6: bool;
 
     bb0: {
-        _4 = core::slice::<impl [i8]>::as_ptr(_1) -> [return: bb1, unwind continue];
+        _4 = core::slice::<impl [i8]>::as_ptr(_1) -> bb1;
     }
 
     bb1: {
         _3 = move _4 as usize (PointerExposeAddress);
-        _2 = zero(move _3) -> [return: bb2, unwind continue];
+        _2 = zero(move _3) -> bb2;
     }
 
     bb2: {
         _5 = Len((*_1));
         _6 = Lt(_2, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _2) -> [success: bb3, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _2) -> bb3;
     }
 
     bb3: {
@@ -84,21 +84,21 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([i8; 2]);
         _4 = AlignOf([i8; 2]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
         _6 = ShallowInitBox(move _5, [i8; 2]);
         _21 = (((_6.0: std::ptr::Unique<[i8; 2]>).0: std::ptr::NonNull<[i8; 2]>).0: *const [i8; 2]);
         (*_21) = [const 42_i8, const 43_i8];
-        _2 = move _6 as std::boxed::Box<[i8]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [i8]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[i8]> (Pointer(Unsize));
+        _1 = slice::<impl [i8]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 
     bb2: {
         _11 = [const "", const "\n"];
         _10 = &_11;
-        _9 = _10 as &[&str] (PointerCoercion(Unsize));
+        _9 = _10 as &[&str] (Pointer(Unsize));
         _20 = &_1;
         _19 = <Vec<i8> as Deref>::deref(_20) -> [return: bb3, unwind: bb9];
     }
@@ -116,7 +116,7 @@ fn main() -> () {
     bb5: {
         _14 = [move _15];
         _13 = &_14;
-        _12 = _13 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _12 = _13 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _8 = Arguments::<'_>::new_v1(move _9, move _12) -> [return: bb6, unwind: bb9];
     }
 
@@ -125,7 +125,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {

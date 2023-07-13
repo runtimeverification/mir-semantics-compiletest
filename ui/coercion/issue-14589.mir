@@ -19,37 +19,37 @@ fn main() -> () {
 
     bb0: {
         _4 = Output(const 0_isize);
-        _3 = Box::<Output>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<Output>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _2 = move _3 as std::boxed::Box<dyn Foo> (PointerCoercion(Unsize));
-        _1 = send::<Box<dyn Foo>>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _3 as std::boxed::Box<dyn Foo> (Pointer(Unsize));
+        _1 = send::<Box<dyn Foo>>(move _2) -> bb2;
     }
 
     bb2: {
         _8 = Output(const 0_isize);
-        _7 = Box::<Output>::new(move _8) -> [return: bb3, unwind continue];
+        _7 = Box::<Output>::new(move _8) -> bb3;
     }
 
     bb3: {
-        _6 = move _7 as std::boxed::Box<dyn Foo> (PointerCoercion(Unsize));
-        _5 = Test::<Box<dyn Foo>>::foo(move _6) -> [return: bb4, unwind continue];
+        _6 = move _7 as std::boxed::Box<dyn Foo> (Pointer(Unsize));
+        _5 = Test::<Box<dyn Foo>>::foo(move _6) -> bb4;
     }
 
     bb4: {
-        _11 = Test::<Box<dyn Foo>>::new() -> [return: bb5, unwind continue];
+        _11 = Test::<Box<dyn Foo>>::new() -> bb5;
     }
 
     bb5: {
         _10 = &_11;
         _14 = Output(const 0_isize);
-        _13 = Box::<Output>::new(move _14) -> [return: bb6, unwind continue];
+        _13 = Box::<Output>::new(move _14) -> bb6;
     }
 
     bb6: {
-        _12 = move _13 as std::boxed::Box<dyn Foo> (PointerCoercion(Unsize));
-        _9 = Test::<Box<dyn Foo>>::send(move _10, move _12) -> [return: bb7, unwind continue];
+        _12 = move _13 as std::boxed::Box<dyn Foo> (Pointer(Unsize));
+        _9 = Test::<Box<dyn Foo>>::send(move _10, move _12) -> bb7;
     }
 
     bb7: {
@@ -61,7 +61,7 @@ fn send(_1: T) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -81,7 +81,7 @@ fn <impl at ui/coercion/issue-14589.rs:16:1: 16:16>::foo(_1: T) -> () {
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -94,7 +94,7 @@ fn <impl at ui/coercion/issue-14589.rs:16:1: 16:16>::send(_1: &Test<T>, _2: T) -
     let mut _0: ();
 
     bb0: {
-        drop(_2) -> [return: bb1, unwind continue];
+        drop(_2) -> bb1;
     }
 
     bb1: {

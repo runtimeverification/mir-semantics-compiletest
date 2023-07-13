@@ -8,7 +8,7 @@ fn <impl at ui/newtype-polymorphic.rs:6:10: 6:15>::clone(_1: &myvec<X>) -> myvec
 
     bb0: {
         _3 = &((*_1).0: std::vec::Vec<X>);
-        _2 = <Vec<X> as Clone>::clone(_3) -> [return: bb1, unwind continue];
+        _2 = <Vec<X> as Clone>::clone(_3) -> bb1;
     }
 
     bb1: {
@@ -33,7 +33,7 @@ fn myvec_deref(_1: myvec<X>) -> Vec<X> {
     }
 
     bb1: {
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -62,7 +62,7 @@ fn myvec_elt(_1: myvec<X>) -> X {
 
     bb0: {
         _2 = move (_1.0: std::vec::Vec<X>);
-        _5 = <Vec<X> as IntoIterator>::into_iter(move _2) -> [return: bb1, unwind continue];
+        _5 = <Vec<X> as IntoIterator>::into_iter(move _2) -> bb1;
     }
 
     bb1: {
@@ -75,7 +75,7 @@ fn myvec_elt(_1: myvec<X>) -> X {
     }
 
     bb3: {
-        drop(_5) -> [return: bb4, unwind continue];
+        drop(_5) -> bb4;
     }
 
     bb4: {
@@ -199,7 +199,7 @@ fn main() -> () {
         _59 = const false;
         _4 = SizeOf([i32; 3]);
         _5 = AlignOf([i32; 3]);
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -342,8 +342,8 @@ fn main() -> () {
 
     bb22: {
         (*_60) = [const 1_i32, const 2_i32, const 3_i32];
-        _3 = move _7 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb2, unwind continue];
+        _3 = move _7 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> bb2;
     }
 }
 

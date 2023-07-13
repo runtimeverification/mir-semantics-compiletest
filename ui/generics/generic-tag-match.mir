@@ -25,7 +25,7 @@ fn altfoo(_1: foo<T>) -> () {
         _3 = move ((_1 as arm).0: T);
         _8 = [const "in arm\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _5 = Arguments::<'_>::new_const(move _6) -> [return: bb1, unwind: bb6];
     }
 
@@ -35,7 +35,7 @@ fn altfoo(_1: foo<T>) -> () {
 
     bb2: {
         _2 = const true;
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -45,7 +45,7 @@ fn altfoo(_1: foo<T>) -> () {
     }
 
     bb4: {
-        _11 = core::panicking::panic(const "assertion failed: (hit)") -> unwind continue;
+        _11 = core::panicking::panic(const "assertion failed: (hit)");
     }
 
     bb5: {
@@ -68,7 +68,7 @@ fn main() -> () {
 
     bb0: {
         _2 = foo::<isize>::arm(const 10_isize);
-        _1 = altfoo::<isize>(move _2) -> [return: bb1, unwind continue];
+        _1 = altfoo::<isize>(move _2) -> bb1;
     }
 
     bb1: {

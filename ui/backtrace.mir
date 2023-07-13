@@ -28,7 +28,7 @@ fn foo() -> () {
     bb0: {
         _3 = SizeOf([i32; 3]);
         _4 = AlignOf([i32; 3]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -65,7 +65,7 @@ fn foo() -> () {
     }
 
     bb7: {
-        drop(_1) -> [return: bb8, unwind continue];
+        drop(_1) -> bb8;
     }
 
     bb8: {
@@ -86,8 +86,8 @@ fn foo() -> () {
 
     bb12: {
         (*_11) = [const 1_i32, const 2_i32, const 3_i32];
-        _2 = move _6 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _1 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }
 
@@ -118,7 +118,7 @@ fn double::<impl at ui/backtrace.rs:27:5: 27:25>::drop(_1: &mut Double) -> () {
     let _2: !;
 
     bb0: {
-        _2 = begin_panic::<&str>(const "twice") -> unwind continue;
+        _2 = begin_panic::<&str>(const "twice");
     }
 }
 
@@ -139,7 +139,7 @@ fn template(_1: &str) -> Command {
     }
 
     bb0: {
-        _2 = Command::new::<&str>(_1) -> [return: bb1, unwind continue];
+        _2 = Command::new::<&str>(_1) -> bb1;
     }
 
     bb1: {
@@ -199,20 +199,20 @@ fn expected(_1: &str) -> String {
     bb0: {
         _6 = [const " backtrace::"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &_1;
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb2;
     }
 
     bb2: {
-        _2 = format(move _3) -> [return: bb3, unwind continue];
+        _2 = format(move _3) -> bb3;
     }
 
     bb3: {
@@ -260,20 +260,20 @@ fn contains_verbose_expected(_1: &str, _2: &str) -> bool {
         _3 = const " backtrace";
         _10 = [const "::"];
         _9 = &_10;
-        _8 = _9 as &[&str] (PointerCoercion(Unsize));
+        _8 = _9 as &[&str] (Pointer(Unsize));
         _15 = &_2;
-        _14 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_15) -> [return: bb1, unwind continue];
+        _14 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_15) -> bb1;
     }
 
     bb1: {
         _13 = [move _14];
         _12 = &_13;
-        _11 = _12 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> [return: bb2, unwind continue];
+        _11 = _12 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> bb2;
     }
 
     bb2: {
-        _6 = format(move _7) -> [return: bb3, unwind continue];
+        _6 = format(move _7) -> bb3;
     }
 
     bb3: {
@@ -294,7 +294,7 @@ fn contains_verbose_expected(_1: &str, _2: &str) -> bool {
     }
 
     bb5: {
-        drop(_5) -> [return: bb6, unwind continue];
+        drop(_5) -> bb6;
     }
 
     bb6: {
@@ -343,35 +343,35 @@ fn contains_verbose_expected::{closure#0}(_1: &mut [closure@ui/backtrace.rs:55:3
         _17 = deref_copy (*_16);
         _18 = deref_copy ((*_1).1: &&str);
         _19 = deref_copy (*_18);
-        _14 = core::str::<impl str>::len(_19) -> [return: bb1, unwind continue];
+        _14 = core::str::<impl str>::len(_19) -> bb1;
     }
 
     bb1: {
         _13 = Add(_3, move _14);
         _12 = RangeFrom::<usize> { start: move _13 };
-        _11 = <str as Index<RangeFrom<usize>>>::index(_17, move _12) -> [return: bb2, unwind continue];
+        _11 = <str as Index<RangeFrom<usize>>>::index(_17, move _12) -> bb2;
     }
 
     bb2: {
         _10 = _11;
-        _9 = core::str::<impl str>::trim_start_matches::<'_, char>(move _10, const '[') -> [return: bb3, unwind continue];
+        _9 = core::str::<impl str>::trim_start_matches::<'_, char>(move _10, const '[') -> bb3;
     }
 
     bb3: {
         _8 = _9;
-        _7 = core::str::<impl str>::trim_start_matches::<'_, fn(char) -> bool {char::methods::<impl char>::is_alphanumeric}>(move _8, char::methods::<impl char>::is_alphanumeric) -> [return: bb4, unwind continue];
+        _7 = core::str::<impl str>::trim_start_matches::<'_, fn(char) -> bool {char::methods::<impl char>::is_alphanumeric}>(move _8, char::methods::<impl char>::is_alphanumeric) -> bb4;
     }
 
     bb4: {
         _6 = _7;
-        _5 = core::str::<impl str>::trim_start_matches::<'_, char>(move _6, const ']') -> [return: bb5, unwind continue];
+        _5 = core::str::<impl str>::trim_start_matches::<'_, char>(move _6, const ']') -> bb5;
     }
 
     bb5: {
         _4 = _5;
         _20 = deref_copy ((*_1).2: &&std::string::String);
         _15 = (*_20);
-        _0 = core::str::<impl str>::starts_with::<'_, &String>(move _4, move _15) -> [return: bb6, unwind continue];
+        _0 = core::str::<impl str>::starts_with::<'_, &String>(move _4, move _15) -> bb6;
     }
 
     bb6: {
@@ -663,7 +663,7 @@ fn runtest(_1: &str) -> () {
         _222 = const false;
         _221 = const false;
         _220 = const false;
-        _9 = template(_1) -> [return: bb1, unwind continue];
+        _9 = template(_1) -> bb1;
     }
 
     bb1: {
@@ -771,7 +771,7 @@ fn runtest(_1: &str) -> () {
     bb22: {
         _36 = [const "bad output: "];
         _35 = &_36;
-        _34 = _35 as &[&str] (PointerCoercion(Unsize));
+        _34 = _35 as &[&str] (Pointer(Unsize));
         _41 = &_18;
         _40 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_41) -> [return: bb23, unwind: bb144];
     }
@@ -779,7 +779,7 @@ fn runtest(_1: &str) -> () {
     bb23: {
         _39 = [move _40];
         _38 = &_39;
-        _37 = _38 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _37 = _38 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _33 = Arguments::<'_>::new_v1(move _34, move _37) -> [return: bb24, unwind: bb144];
     }
 
@@ -912,7 +912,7 @@ fn runtest(_1: &str) -> () {
     bb50: {
         _82 = [const "bad output2: "];
         _81 = &_82;
-        _80 = _81 as &[&str] (PointerCoercion(Unsize));
+        _80 = _81 as &[&str] (Pointer(Unsize));
         _87 = &_62;
         _86 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_87) -> [return: bb51, unwind: bb141];
     }
@@ -920,7 +920,7 @@ fn runtest(_1: &str) -> () {
     bb51: {
         _85 = [move _86];
         _84 = &_85;
-        _83 = _84 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _83 = _84 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _79 = Arguments::<'_>::new_v1(move _80, move _83) -> [return: bb52, unwind: bb141];
     }
 
@@ -1029,7 +1029,7 @@ fn runtest(_1: &str) -> () {
     bb73: {
         _121 = [const "bad output3: "];
         _120 = &_121;
-        _119 = _120 as &[&str] (PointerCoercion(Unsize));
+        _119 = _120 as &[&str] (Pointer(Unsize));
         _126 = &_104;
         _125 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_126) -> [return: bb74, unwind: bb138];
     }
@@ -1037,7 +1037,7 @@ fn runtest(_1: &str) -> () {
     bb74: {
         _124 = [move _125];
         _123 = &_124;
-        _122 = _123 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _122 = _123 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _118 = Arguments::<'_>::new_v1(move _119, move _122) -> [return: bb75, unwind: bb138];
     }
 
@@ -1140,7 +1140,7 @@ fn runtest(_1: &str) -> () {
     bb95: {
         _157 = [const "bad output3: "];
         _156 = &_157;
-        _155 = _156 as &[&str] (PointerCoercion(Unsize));
+        _155 = _156 as &[&str] (Pointer(Unsize));
         _162 = &_141;
         _161 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_162) -> [return: bb96, unwind: bb136];
     }
@@ -1148,7 +1148,7 @@ fn runtest(_1: &str) -> () {
     bb96: {
         _160 = [move _161];
         _159 = &_160;
-        _158 = _159 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _158 = _159 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _154 = Arguments::<'_>::new_v1(move _155, move _158) -> [return: bb97, unwind: bb136];
     }
 
@@ -1297,7 +1297,7 @@ fn runtest(_1: &str) -> () {
     bb125: {
         _214 = [const "bad output4: "];
         _213 = &_214;
-        _212 = _213 as &[&str] (PointerCoercion(Unsize));
+        _212 = _213 as &[&str] (Pointer(Unsize));
         _219 = &_179;
         _218 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_219) -> [return: bb126, unwind: bb134];
     }
@@ -1305,7 +1305,7 @@ fn runtest(_1: &str) -> () {
     bb126: {
         _217 = [move _218];
         _216 = &_217;
-        _215 = _216 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _215 = _216 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _211 = Arguments::<'_>::new_v1(move _212, move _215) -> [return: bb127, unwind: bb134];
     }
 
@@ -1472,11 +1472,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = args() -> [return: bb1, unwind continue];
+        _2 = args() -> bb1;
     }
 
     bb1: {
-        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> [return: bb2, unwind continue];
+        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> bb2;
     }
 
     bb2: {
@@ -1575,7 +1575,7 @@ fn main() -> () {
     }
 
     bb21: {
-        drop(_1) -> [return: bb22, unwind continue];
+        drop(_1) -> bb22;
     }
 
     bb22: {

@@ -65,11 +65,11 @@ fn concrete_foo() -> Foo<13> {
     let mut _2: [u8; 13];
 
     bb0: {
-        _1 = <[u8; 13] as Default>::default() -> [return: bb1, unwind continue];
+        _1 = <[u8; 13] as Default>::default() -> bb1;
     }
 
     bb1: {
-        _2 = <[u8; 13] as Default>::default() -> [return: bb2, unwind continue];
+        _2 = <[u8; 13] as Default>::default() -> bb2;
     }
 
     bb2: {
@@ -133,7 +133,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = foo::<13>() -> [return: bb1, unwind continue];
+        _1 = foo::<13>() -> bb1;
     }
 
     bb1: {
@@ -142,7 +142,7 @@ fn main() -> () {
         _2 = (move _3, move _4);
         _5 = (_2.0: &[u8; 13]);
         _6 = (_2.1: &[u8; 13]);
-        _8 = <[u8; 13] as PartialEq>::eq(_5, _6) -> [return: bb2, unwind continue];
+        _8 = <[u8; 13] as PartialEq>::eq(_5, _6) -> bb2;
     }
 
     bb2: {
@@ -153,11 +153,11 @@ fn main() -> () {
     bb3: {
         _9 = core::panicking::AssertKind::Eq;
         _11 = Option::<Arguments<'_>>::None;
-        _10 = core::panicking::assert_failed::<[u8; 13], [u8; 13]>(move _9, _5, _6, move _11) -> unwind continue;
+        _10 = core::panicking::assert_failed::<[u8; 13], [u8; 13]>(move _9, _5, _6, move _11);
     }
 
     bb4: {
-        _12 = concrete_foo() -> [return: bb5, unwind continue];
+        _12 = concrete_foo() -> bb5;
     }
 
     bb5: {
@@ -166,7 +166,7 @@ fn main() -> () {
         _13 = (move _14, move _15);
         _16 = (_13.0: &[u8; 13]);
         _17 = (_13.1: &[u8; 13]);
-        _19 = <[u8; 13] as PartialEq>::eq(_16, _17) -> [return: bb6, unwind continue];
+        _19 = <[u8; 13] as PartialEq>::eq(_16, _17) -> bb6;
     }
 
     bb6: {
@@ -177,7 +177,7 @@ fn main() -> () {
     bb7: {
         _20 = core::panicking::AssertKind::Eq;
         _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<[u8; 13], [u8; 13]>(move _20, _16, _17, move _22) -> unwind continue;
+        _21 = core::panicking::assert_failed::<[u8; 13], [u8; 13]>(move _20, _16, _17, move _22);
     }
 
     bb8: {

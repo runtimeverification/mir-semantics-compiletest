@@ -87,12 +87,12 @@ fn label_break_nested() -> () {
     bb0: {
         _5 = [const "hi\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {
@@ -108,12 +108,12 @@ fn label_break_nested() -> () {
     bb4: {
         _12 = [const "hello\n"];
         _11 = &_12;
-        _10 = _11 as &[&str] (PointerCoercion(Unsize));
-        _9 = Arguments::<'_>::new_const(move _10) -> [return: bb5, unwind continue];
+        _10 = _11 as &[&str] (Pointer(Unsize));
+        _9 = Arguments::<'_>::new_const(move _10) -> bb5;
     }
 
     bb5: {
-        _8 = _print(move _9) -> [return: bb6, unwind continue];
+        _8 = _print(move _9) -> bb6;
     }
 
     bb6: {
@@ -209,7 +209,7 @@ fn label_break_mixed(_1: u32) -> u32 {
     bb4: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<u32, u32>(move _14, _8, _9, move _16);
     }
 
     bb5: {
@@ -249,7 +249,7 @@ fn label_break_mixed(_1: u32) -> u32 {
     bb10: {
         _30 = core::panicking::AssertKind::Eq;
         _32 = Option::<Arguments<'_>>::None;
-        _31 = core::panicking::assert_failed::<u32, u32>(move _30, _24, _25, move _32) -> unwind continue;
+        _31 = core::panicking::assert_failed::<u32, u32>(move _30, _24, _25, move _32);
     }
 
     bb11: {
@@ -260,7 +260,7 @@ fn label_break_mixed(_1: u32) -> u32 {
     }
 
     bb12: {
-        _36 = core::panicking::panic(const "assertion failed: v > r") -> unwind continue;
+        _36 = core::panicking::panic(const "assertion failed: v > r");
     }
 
     bb13: {
@@ -363,7 +363,7 @@ fn label_break_match(_1: u8, _2: u8, _3: i8) -> () {
         _7 = &_1;
         _9 = (*_7);
         _10 = Eq(const 2_u8, const 0_u8);
-        assert(!move _10, "attempt to calculate the remainder of `{}` with a divisor of zero", _9) -> [success: bb3, unwind continue];
+        assert(!move _10, "attempt to calculate the remainder of `{}` with a divisor of zero", _9) -> bb3;
     }
 
     bb3: {
@@ -379,7 +379,7 @@ fn label_break_match(_1: u8, _2: u8, _3: i8) -> () {
     bb5: {
         _12 = (*_7);
         _13 = Eq(const 3_u8, const 0_u8);
-        assert(!move _13, "attempt to calculate the remainder of `{}` with a divisor of zero", _12) -> [success: bb6, unwind continue];
+        assert(!move _13, "attempt to calculate the remainder of `{}` with a divisor of zero", _12) -> bb6;
     }
 
     bb6: {
@@ -427,7 +427,7 @@ fn label_break_match(_1: u8, _2: u8, _3: i8) -> () {
     bb12: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<u8, u8>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<u8, u8>(move _26, _20, _21, move _28);
     }
 
     bb13: {
@@ -446,7 +446,7 @@ fn label_break_match(_1: u8, _2: u8, _3: i8) -> () {
     bb14: {
         _38 = core::panicking::AssertKind::Eq;
         _40 = Option::<Arguments<'_>>::None;
-        _39 = core::panicking::assert_failed::<i8, i8>(move _38, _32, _33, move _40) -> unwind continue;
+        _39 = core::panicking::assert_failed::<i8, i8>(move _38, _32, _33, move _40);
     }
 
     bb15: {
@@ -524,7 +524,7 @@ fn label_break_macro() -> () {
     bb1: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u8, u8>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u8, u8>(move _12, _6, _7, move _14);
     }
 
     bb2: {
@@ -559,7 +559,7 @@ fn label_break_macro() -> () {
     bb6: {
         _27 = core::panicking::AssertKind::Eq;
         _29 = Option::<Arguments<'_>>::None;
-        _28 = core::panicking::assert_failed::<u8, u8>(move _27, _21, _22, move _29) -> unwind continue;
+        _28 = core::panicking::assert_failed::<u8, u8>(move _27, _21, _22, move _29);
     }
 
     bb7: {
@@ -851,7 +851,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = label_break(const true, const false) -> [return: bb1, unwind continue];
+        _3 = label_break(const true, const false) -> bb1;
     }
 
     bb1: {
@@ -871,11 +871,11 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<u32, u32>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<u32, u32>(move _12, _6, _7, move _14);
     }
 
     bb3: {
-        _17 = label_break(const false, const true) -> [return: bb4, unwind continue];
+        _17 = label_break(const false, const true) -> bb4;
     }
 
     bb4: {
@@ -895,11 +895,11 @@ fn main() -> () {
     bb5: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<u32, u32>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<u32, u32>(move _26, _20, _21, move _28);
     }
 
     bb6: {
-        _31 = label_break(const false, const false) -> [return: bb7, unwind continue];
+        _31 = label_break(const false, const false) -> bb7;
     }
 
     bb7: {
@@ -919,11 +919,11 @@ fn main() -> () {
     bb8: {
         _40 = core::panicking::AssertKind::Eq;
         _42 = Option::<Arguments<'_>>::None;
-        _41 = core::panicking::assert_failed::<u32, u32>(move _40, _34, _35, move _42) -> unwind continue;
+        _41 = core::panicking::assert_failed::<u32, u32>(move _40, _34, _35, move _42);
     }
 
     bb9: {
-        _45 = break_value(const true, const false) -> [return: bb10, unwind continue];
+        _45 = break_value(const true, const false) -> bb10;
     }
 
     bb10: {
@@ -943,11 +943,11 @@ fn main() -> () {
     bb11: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<u32, u32>(move _54, _48, _49, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<u32, u32>(move _54, _48, _49, move _56);
     }
 
     bb12: {
-        _59 = break_value(const false, const true) -> [return: bb13, unwind continue];
+        _59 = break_value(const false, const true) -> bb13;
     }
 
     bb13: {
@@ -967,11 +967,11 @@ fn main() -> () {
     bb14: {
         _68 = core::panicking::AssertKind::Eq;
         _70 = Option::<Arguments<'_>>::None;
-        _69 = core::panicking::assert_failed::<u32, u32>(move _68, _62, _63, move _70) -> unwind continue;
+        _69 = core::panicking::assert_failed::<u32, u32>(move _68, _62, _63, move _70);
     }
 
     bb15: {
-        _73 = break_value(const false, const false) -> [return: bb16, unwind continue];
+        _73 = break_value(const false, const false) -> bb16;
     }
 
     bb16: {
@@ -991,11 +991,11 @@ fn main() -> () {
     bb17: {
         _82 = core::panicking::AssertKind::Eq;
         _84 = Option::<Arguments<'_>>::None;
-        _83 = core::panicking::assert_failed::<u32, u32>(move _82, _76, _77, move _84) -> unwind continue;
+        _83 = core::panicking::assert_failed::<u32, u32>(move _82, _76, _77, move _84);
     }
 
     bb18: {
-        _87 = label_break_mixed(const 0_u32) -> [return: bb19, unwind continue];
+        _87 = label_break_mixed(const 0_u32) -> bb19;
     }
 
     bb19: {
@@ -1015,11 +1015,11 @@ fn main() -> () {
     bb20: {
         _96 = core::panicking::AssertKind::Eq;
         _98 = Option::<Arguments<'_>>::None;
-        _97 = core::panicking::assert_failed::<u32, u32>(move _96, _90, _91, move _98) -> unwind continue;
+        _97 = core::panicking::assert_failed::<u32, u32>(move _96, _90, _91, move _98);
     }
 
     bb21: {
-        _101 = label_break_mixed(const 1_u32) -> [return: bb22, unwind continue];
+        _101 = label_break_mixed(const 1_u32) -> bb22;
     }
 
     bb22: {
@@ -1039,11 +1039,11 @@ fn main() -> () {
     bb23: {
         _110 = core::panicking::AssertKind::Eq;
         _112 = Option::<Arguments<'_>>::None;
-        _111 = core::panicking::assert_failed::<u32, u32>(move _110, _104, _105, move _112) -> unwind continue;
+        _111 = core::panicking::assert_failed::<u32, u32>(move _110, _104, _105, move _112);
     }
 
     bb24: {
-        _115 = label_break_mixed(const 2_u32) -> [return: bb25, unwind continue];
+        _115 = label_break_mixed(const 2_u32) -> bb25;
     }
 
     bb25: {
@@ -1063,11 +1063,11 @@ fn main() -> () {
     bb26: {
         _124 = core::panicking::AssertKind::Eq;
         _126 = Option::<Arguments<'_>>::None;
-        _125 = core::panicking::assert_failed::<u32, u32>(move _124, _118, _119, move _126) -> unwind continue;
+        _125 = core::panicking::assert_failed::<u32, u32>(move _124, _118, _119, move _126);
     }
 
     bb27: {
-        _129 = label_break_mixed(const 3_u32) -> [return: bb28, unwind continue];
+        _129 = label_break_mixed(const 3_u32) -> bb28;
     }
 
     bb28: {
@@ -1087,11 +1087,11 @@ fn main() -> () {
     bb29: {
         _138 = core::panicking::AssertKind::Eq;
         _140 = Option::<Arguments<'_>>::None;
-        _139 = core::panicking::assert_failed::<u32, u32>(move _138, _132, _133, move _140) -> unwind continue;
+        _139 = core::panicking::assert_failed::<u32, u32>(move _138, _132, _133, move _140);
     }
 
     bb30: {
-        _143 = label_break_mixed(const 4_u32) -> [return: bb31, unwind continue];
+        _143 = label_break_mixed(const 4_u32) -> bb31;
     }
 
     bb31: {
@@ -1111,11 +1111,11 @@ fn main() -> () {
     bb32: {
         _152 = core::panicking::AssertKind::Eq;
         _154 = Option::<Arguments<'_>>::None;
-        _153 = core::panicking::assert_failed::<u32, u32>(move _152, _146, _147, move _154) -> unwind continue;
+        _153 = core::panicking::assert_failed::<u32, u32>(move _152, _146, _147, move _154);
     }
 
     bb33: {
-        _157 = label_break_mixed(const 5_u32) -> [return: bb34, unwind continue];
+        _157 = label_break_mixed(const 5_u32) -> bb34;
     }
 
     bb34: {
@@ -1135,11 +1135,11 @@ fn main() -> () {
     bb35: {
         _166 = core::panicking::AssertKind::Eq;
         _168 = Option::<Arguments<'_>>::None;
-        _167 = core::panicking::assert_failed::<u32, u32>(move _166, _160, _161, move _168) -> unwind continue;
+        _167 = core::panicking::assert_failed::<u32, u32>(move _166, _160, _161, move _168);
     }
 
     bb36: {
-        _171 = label_break_mixed(const 6_u32) -> [return: bb37, unwind continue];
+        _171 = label_break_mixed(const 6_u32) -> bb37;
     }
 
     bb37: {
@@ -1159,35 +1159,35 @@ fn main() -> () {
     bb38: {
         _180 = core::panicking::AssertKind::Eq;
         _182 = Option::<Arguments<'_>>::None;
-        _181 = core::panicking::assert_failed::<u32, u32>(move _180, _174, _175, move _182) -> unwind continue;
+        _181 = core::panicking::assert_failed::<u32, u32>(move _180, _174, _175, move _182);
     }
 
     bb39: {
-        _183 = label_break_match(const 0_u8, const 0_u8, const 0_i8) -> [return: bb40, unwind continue];
+        _183 = label_break_match(const 0_u8, const 0_u8, const 0_i8) -> bb40;
     }
 
     bb40: {
-        _184 = label_break_match(const 1_u8, const 1_u8, const -1_i8) -> [return: bb41, unwind continue];
+        _184 = label_break_match(const 1_u8, const 1_u8, const -1_i8) -> bb41;
     }
 
     bb41: {
-        _185 = label_break_match(const 2_u8, const 0_u8, const 1_i8) -> [return: bb42, unwind continue];
+        _185 = label_break_match(const 2_u8, const 0_u8, const 1_i8) -> bb42;
     }
 
     bb42: {
-        _186 = label_break_match(const 3_u8, const 2_u8, const -1_i8) -> [return: bb43, unwind continue];
+        _186 = label_break_match(const 3_u8, const 2_u8, const -1_i8) -> bb43;
     }
 
     bb43: {
-        _187 = label_break_match(const 5_u8, const 42_u8, const -1_i8) -> [return: bb44, unwind continue];
+        _187 = label_break_match(const 5_u8, const 42_u8, const -1_i8) -> bb44;
     }
 
     bb44: {
-        _188 = label_break_match(const 7_u8, const 1_u8, const -1_i8) -> [return: bb45, unwind continue];
+        _188 = label_break_match(const 7_u8, const 1_u8, const -1_i8) -> bb45;
     }
 
     bb45: {
-        _189 = label_break_macro() -> [return: bb46, unwind continue];
+        _189 = label_break_macro() -> bb46;
     }
 
     bb46: {

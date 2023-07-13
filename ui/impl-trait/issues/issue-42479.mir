@@ -7,7 +7,7 @@ fn <impl at ui/impl-trait/issues/issue-42479.rs:9:1: 9:9>::inside(_1: &Foo) -> i
 
     bb0: {
         _2 = &((*_1).0: i32);
-        _0 = once::<&i32>(move _2) -> [return: bb1, unwind continue];
+        _0 = once::<&i32>(move _2) -> bb1;
     }
 
     bb1: {
@@ -26,12 +26,12 @@ fn main() -> () {
     bb0: {
         _5 = [const "hi\n"];
         _4 = &_5;
-        _3 = _4 as &[&str] (PointerCoercion(Unsize));
-        _2 = Arguments::<'_>::new_const(move _3) -> [return: bb1, unwind continue];
+        _3 = _4 as &[&str] (Pointer(Unsize));
+        _2 = Arguments::<'_>::new_const(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = _print(move _2) -> [return: bb2, unwind continue];
+        _1 = _print(move _2) -> bb2;
     }
 
     bb2: {

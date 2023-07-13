@@ -11,7 +11,7 @@ fn foo(_1: U) -> T {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -76,11 +76,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = cbar(const 5_isize) -> [return: bb1, unwind continue];
+        _2 = cbar(const 5_isize) -> bb1;
     }
 
     bb1: {
-        _1 = foo::<isize, cbar>(move _2) -> [return: bb2, unwind continue];
+        _1 = foo::<isize, cbar>(move _2) -> bb2;
     }
 
     bb2: {
@@ -100,7 +100,7 @@ fn main() -> () {
     bb3: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<isize, isize>(move _13, _7, _8, move _15);
     }
 
     bb4: {

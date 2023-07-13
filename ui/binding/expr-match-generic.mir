@@ -73,8 +73,8 @@ fn test_bool() -> () {
     let mut _2: fn(bool, bool) -> bool;
 
     bb0: {
-        _2 = compare_bool as fn(bool, bool) -> bool (PointerCoercion(ReifyFnPointer));
-        _1 = test_generic::<bool>(const true, move _2) -> [return: bb1, unwind continue];
+        _2 = compare_bool as fn(bool, bool) -> bool (Pointer(ReifyFnPointer));
+        _1 = test_generic::<bool>(const true, move _2) -> bb1;
     }
 
     bb1: {
@@ -119,8 +119,8 @@ fn test_rec() -> () {
 
     bb0: {
         _2 = Pair { a: const 1_isize, b: const 2_isize };
-        _3 = compare_rec as fn(Pair, Pair) -> bool (PointerCoercion(ReifyFnPointer));
-        _1 = test_generic::<Pair>(move _2, move _3) -> [return: bb1, unwind continue];
+        _3 = compare_rec as fn(Pair, Pair) -> bool (Pointer(ReifyFnPointer));
+        _1 = test_generic::<Pair>(move _2, move _3) -> bb1;
     }
 
     bb1: {
@@ -170,11 +170,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = test_bool() -> [return: bb1, unwind continue];
+        _1 = test_bool() -> bb1;
     }
 
     bb1: {
-        _2 = test_rec() -> [return: bb2, unwind continue];
+        _2 = test_rec() -> bb2;
     }
 
     bb2: {

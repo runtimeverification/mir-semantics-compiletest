@@ -5,7 +5,7 @@ fn foo(_1: &[u8; N]) -> &[u8] {
     let mut _0: &[u8];
 
     bb0: {
-        _0 = _1 as &[u8] (PointerCoercion(Unsize));
+        _0 = _1 as &[u8] (Pointer(Unsize));
         return;
     }
 }
@@ -47,7 +47,7 @@ fn main() -> () {
     bb0: {
         _5 = [const 1_u8, const 2_u8];
         _4 = &_5;
-        _3 = foo::<2>(_4) -> [return: bb1, unwind continue];
+        _3 = foo::<2>(_4) -> bb1;
     }
 
     bb1: {
@@ -58,7 +58,7 @@ fn main() -> () {
         _1 = (move _2, move _6);
         _9 = (_1.0: &&[u8]);
         _10 = (_1.1: &&[u8; 2]);
-        _12 = <&[u8] as PartialEq<&[u8; 2]>>::eq(_9, _10) -> [return: bb2, unwind continue];
+        _12 = <&[u8] as PartialEq<&[u8; 2]>>::eq(_9, _10) -> bb2;
     }
 
     bb2: {
@@ -69,7 +69,7 @@ fn main() -> () {
     bb3: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<&[u8], &[u8; 2]>(move _13, _9, _10, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<&[u8], &[u8; 2]>(move _13, _9, _10, move _15);
     }
 
     bb4: {

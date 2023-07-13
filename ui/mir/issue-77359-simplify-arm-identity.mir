@@ -23,7 +23,7 @@ fn <impl at ui/mir/issue-77359-simplify-arm-identity.rs:5:10: 5:15>::fmt(_1: &My
 
     bb1: {
         _10 = const "Variant4";
-        _0 = Formatter::<'_>::write_str(_2, _10) -> [return: bb6, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _10) -> bb6;
     }
 
     bb2: {
@@ -34,18 +34,18 @@ fn <impl at ui/mir/issue-77359-simplify-arm-identity.rs:5:10: 5:15>::fmt(_1: &My
         _4 = &(((*_1) as Variant1).0: std::vec::Vec<u8>);
         _5 = const "Variant1";
         _7 = &_4;
-        _6 = _7 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> [return: bb6, unwind continue];
+        _6 = _7 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _5, move _6) -> bb6;
     }
 
     bb4: {
         _8 = const "Variant2";
-        _0 = Formatter::<'_>::write_str(_2, _8) -> [return: bb6, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _8) -> bb6;
     }
 
     bb5: {
         _9 = const "Variant3";
-        _0 = Formatter::<'_>::write_str(_2, _9) -> [return: bb6, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _9) -> bb6;
     }
 
     bb6: {
@@ -95,11 +95,11 @@ fn f(_1: &bool, _2: &bool, _3: bool) -> MyStruct {
     bb1: {
         _9 = [const "", const "\n"];
         _8 = &_9;
-        _7 = _8 as &[&str] (PointerCoercion(Unsize));
+        _7 = _8 as &[&str] (Pointer(Unsize));
         _16 = &_2;
         _25 = deref_copy (*_16);
         _17 = _2;
-        _15 = f(_25, move _17, _3) -> [return: bb2, unwind continue];
+        _15 = f(_25, move _17, _3) -> bb2;
     }
 
     bb2: {
@@ -110,7 +110,7 @@ fn f(_1: &bool, _2: &bool, _3: bool) -> MyStruct {
     bb3: {
         _12 = [move _13];
         _11 = &_12;
-        _10 = _11 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _10 = _11 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _6 = Arguments::<'_>::new_v1(move _7, move _10) -> [return: bb4, unwind: bb14];
     }
 
@@ -119,7 +119,7 @@ fn f(_1: &bool, _2: &bool, _3: bool) -> MyStruct {
     }
 
     bb5: {
-        drop(_15) -> [return: bb6, unwind continue];
+        drop(_15) -> bb6;
     }
 
     bb6: {
@@ -151,7 +151,7 @@ fn f(_1: &bool, _2: &bool, _3: bool) -> MyStruct {
     bb11: {
         _24 = Option::<MyEnum>::None;
         _0 = MyStruct(move _24);
-        drop(_19) -> [return: bb13, unwind continue];
+        drop(_19) -> bb13;
     }
 
     bb12: {
@@ -187,8 +187,8 @@ fn <impl at ui/mir/issue-77359-simplify-arm-identity.rs:28:10: 28:15>::fmt(_1: &
         _3 = const "MyStruct";
         _6 = &((*_1).0: std::option::Option<MyEnum>);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -215,11 +215,11 @@ fn main() -> () {
         _2 = const false;
         _4 = &_1;
         _5 = &_2;
-        _3 = f(_4, _5, const true) -> [return: bb1, unwind continue];
+        _3 = f(_4, _5, const true) -> bb1;
     }
 
     bb1: {
-        drop(_3) -> [return: bb2, unwind continue];
+        drop(_3) -> bb2;
     }
 
     bb2: {

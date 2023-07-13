@@ -10,11 +10,11 @@ fn yes_vec() -> () {
 
     bb0: {
         _2 = [const 0_i32; 33];
-        _1 = <[i32; 33] as Into<Vec<i32>>>::into(move _2) -> [return: bb1, unwind continue];
+        _1 = <[i32; 33] as Into<Vec<i32>>>::into(move _2) -> bb1;
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -51,12 +51,12 @@ fn yes_box() -> () {
 
     bb0: {
         _3 = [const 0_i32; 33];
-        _2 = Box::<[i32; 33]>::new(move _3) -> [return: bb1, unwind continue];
+        _2 = Box::<[i32; 33]>::new(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _4 = <Box<[i32; 33]> as TryFrom<Box<[i32]>>>::try_from(move _1) -> [return: bb2, unwind continue];
+        _1 = move _2 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _4 = <Box<[i32; 33]> as TryFrom<Box<[i32]>>>::try_from(move _1) -> bb2;
     }
 
     bb2: {
@@ -69,7 +69,7 @@ fn yes_box() -> () {
     }
 
     bb4: {
-        drop(_4) -> [return: bb5, unwind continue];
+        drop(_4) -> bb5;
     }
 
     bb5: {
@@ -127,16 +127,16 @@ fn yes_rc() -> () {
 
     bb0: {
         _3 = [const 0_i32; 33];
-        _2 = Rc::<[i32; 33]>::new(move _3) -> [return: bb1, unwind continue];
+        _2 = Rc::<[i32; 33]>::new(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as std::rc::Rc<[i32]> (PointerCoercion(Unsize));
-        _4 = <Rc<[i32; 33]> as TryFrom<Rc<[i32]>>>::try_from(move _1) -> [return: bb2, unwind continue];
+        _1 = move _2 as std::rc::Rc<[i32]> (Pointer(Unsize));
+        _4 = <Rc<[i32; 33]> as TryFrom<Rc<[i32]>>>::try_from(move _1) -> bb2;
     }
 
     bb2: {
-        drop(_4) -> [return: bb3, unwind continue];
+        drop(_4) -> bb3;
     }
 
     bb3: {
@@ -177,16 +177,16 @@ fn yes_arc() -> () {
 
     bb0: {
         _3 = [const 0_i32; 33];
-        _2 = Arc::<[i32; 33]>::new(move _3) -> [return: bb1, unwind continue];
+        _2 = Arc::<[i32; 33]>::new(move _3) -> bb1;
     }
 
     bb1: {
-        _1 = move _2 as std::sync::Arc<[i32]> (PointerCoercion(Unsize));
-        _4 = <Arc<[i32; 33]> as TryFrom<Arc<[i32]>>>::try_from(move _1) -> [return: bb2, unwind continue];
+        _1 = move _2 as std::sync::Arc<[i32]> (Pointer(Unsize));
+        _4 = <Arc<[i32; 33]> as TryFrom<Arc<[i32]>>>::try_from(move _1) -> bb2;
     }
 
     bb2: {
-        drop(_4) -> [return: bb3, unwind continue];
+        drop(_4) -> bb3;
     }
 
     bb3: {

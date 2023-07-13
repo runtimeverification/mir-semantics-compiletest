@@ -76,7 +76,7 @@ fn main() -> () {
         _2 = Option::<i32>::Some(const 1_i32);
         _5 = SizeOf([i32; 2]);
         _6 = AlignOf([i32; 2]);
-        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> [return: bb1, unwind continue];
+        _7 = alloc::alloc::exchange_malloc(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -152,7 +152,7 @@ fn main() -> () {
     }
 
     bb10: {
-        drop(_1) -> [return: bb11, unwind continue];
+        drop(_1) -> bb11;
     }
 
     bb11: {
@@ -169,7 +169,7 @@ fn main() -> () {
 
     bb14: {
         (*_40) = [const 2_i32, const 3_i32];
-        _4 = move _8 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _3 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _4) -> [return: bb2, unwind continue];
+        _4 = move _8 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _3 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _4) -> bb2;
     }
 }

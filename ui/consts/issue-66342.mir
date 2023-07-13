@@ -5,7 +5,7 @@ fn foo() -> [u8; 4398046511104] {
     let mut _1: !;
 
     bb0: {
-        _1 = core::panicking::panic(const "not implemented") -> unwind continue;
+        _1 = core::panicking::panic(const "not implemented");
     }
 }
 
@@ -24,27 +24,27 @@ foo::{constant#0}: usize = {
         StorageLive(_2);
         StorageLive(_3);
         _4 = CheckedMul(const 4_usize, const 1024_usize);
-        assert(!move (_4.1: bool), "attempt to compute `{} * {}`, which would overflow", const 4_usize, const 1024_usize) -> [success: bb1, unwind continue];
+        assert(!move (_4.1: bool), "attempt to compute `{} * {}`, which would overflow", const 4_usize, const 1024_usize) -> bb1;
     }
 
     bb1: {
         _3 = move (_4.0: usize);
         _5 = CheckedMul(_3, const 1024_usize);
-        assert(!move (_5.1: bool), "attempt to compute `{} * {}`, which would overflow", move _3, const 1024_usize) -> [success: bb2, unwind continue];
+        assert(!move (_5.1: bool), "attempt to compute `{} * {}`, which would overflow", move _3, const 1024_usize) -> bb2;
     }
 
     bb2: {
         _2 = move (_5.0: usize);
         StorageDead(_3);
         _6 = CheckedMul(_2, const 1024_usize);
-        assert(!move (_6.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 1024_usize) -> [success: bb3, unwind continue];
+        assert(!move (_6.1: bool), "attempt to compute `{} * {}`, which would overflow", move _2, const 1024_usize) -> bb3;
     }
 
     bb3: {
         _1 = move (_6.0: usize);
         StorageDead(_2);
         _7 = CheckedMul(_1, const 1024_usize);
-        assert(!move (_7.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 1024_usize) -> [success: bb4, unwind continue];
+        assert(!move (_7.1: bool), "attempt to compute `{} * {}`, which would overflow", move _1, const 1024_usize) -> bb4;
     }
 
     bb4: {
@@ -59,7 +59,7 @@ fn main() -> () {
     let _1: [u8; 4398046511104];
 
     bb0: {
-        _1 = foo() -> [return: bb1, unwind continue];
+        _1 = foo() -> bb1;
     }
 
     bb1: {

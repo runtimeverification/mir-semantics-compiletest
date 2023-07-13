@@ -9,7 +9,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = test_triangle() -> [return: bb1, unwind continue];
+        _2 = test_triangle() -> bb1;
     }
 
     bb1: {
@@ -18,7 +18,7 @@ fn main() -> () {
     }
 
     bb2: {
-        _3 = core::panicking::panic(const "assertion failed: test_triangle()") -> unwind continue;
+        _3 = core::panicking::panic(const "assertion failed: test_triangle()");
     }
 
     bb3: {
@@ -182,13 +182,13 @@ fn test_triangle() -> bool {
     }
 
     bb0: {
-        _2 = null_mut::<u8>() -> [return: bb1, unwind continue];
+        _2 = null_mut::<u8>() -> bb1;
     }
 
     bb1: {
         _4 = const {alloc1: &usize};
         _3 = (*_4);
-        _1 = from_elem::<*mut u8>(move _2, move _3) -> [return: bb2, unwind continue];
+        _1 = from_elem::<*mut u8>(move _2, move _3) -> bb2;
     }
 
     bb2: {
@@ -430,7 +430,7 @@ fn test_triangle() -> bool {
 
     bb45: {
         _0 = const true;
-        drop(_1) -> [return: bb54, unwind continue];
+        drop(_1) -> bb54;
     }
 
     bb46: {
@@ -622,13 +622,13 @@ fn sanity_check(_1: &[*mut u8]) -> () {
         _6 = const {alloc1: &usize};
         _5 = (*_6);
         _7 = Eq(const 2_usize, const 0_usize);
-        assert(!move _7, "attempt to divide `{}` by zero", _5) -> [success: bb1, unwind continue];
+        assert(!move _7, "attempt to divide `{}` by zero", _5) -> bb1;
     }
 
     bb1: {
         _4 = Div(move _5, const 2_usize);
         _3 = std::ops::Range::<usize> { start: const 0_usize, end: move _4 };
-        _2 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _3) -> [return: bb2, unwind continue];
+        _2 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _3) -> bb2;
     }
 
     bb2: {
@@ -638,7 +638,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
 
     bb3: {
         _10 = &mut _8;
-        _9 = <std::ops::Range<usize> as Iterator>::next(_10) -> [return: bb4, unwind continue];
+        _9 = <std::ops::Range<usize> as Iterator>::next(_10) -> bb4;
     }
 
     bb4: {
@@ -651,7 +651,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
         _18 = Mul(const 2_usize, _12);
         _19 = Len((*_1));
         _20 = Lt(_18, _19);
-        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> [success: bb8, unwind continue];
+        assert(move _20, "index out of bounds: the length is {} but the index is {}", move _19, _18) -> bb8;
     }
 
     bb6: {
@@ -668,12 +668,12 @@ fn sanity_check(_1: &[*mut u8]) -> () {
         _22 = Add(move _23, const 1_usize);
         _24 = Len((*_1));
         _25 = Lt(_22, _24);
-        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _22) -> [success: bb9, unwind continue];
+        assert(move _25, "index out of bounds: the length is {} but the index is {}", move _24, _22) -> bb9;
     }
 
     bb9: {
         _21 = (*_1)[_22];
-        _26 = idx_to_size(_12) -> [return: bb10, unwind continue];
+        _26 = idx_to_size(_12) -> bb10;
     }
 
     bb10: {
@@ -682,7 +682,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
         _14 = (_16.1: *mut u8);
         _15 = (_16.2: usize);
         _28 = std::ops::Range::<usize> { start: const 0_usize, end: _15 };
-        _27 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _28) -> [return: bb11, unwind continue];
+        _27 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _28) -> bb11;
     }
 
     bb11: {
@@ -692,7 +692,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
 
     bb12: {
         _31 = &mut _29;
-        _30 = <std::ops::Range<usize> as Iterator>::next(_31) -> [return: bb13, unwind continue];
+        _30 = <std::ops::Range<usize> as Iterator>::next(_31) -> bb13;
     }
 
     bb13: {
@@ -702,7 +702,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
 
     bb14: {
         _33 = ((_30 as Some).0: usize);
-        _36 = ptr::mut_ptr::<impl *mut u8>::add(_13, _33) -> [return: bb15, unwind continue];
+        _36 = ptr::mut_ptr::<impl *mut u8>::add(_13, _33) -> bb15;
     }
 
     bb15: {
@@ -722,11 +722,11 @@ fn sanity_check(_1: &[*mut u8]) -> () {
     bb16: {
         _45 = core::panicking::AssertKind::Eq;
         _47 = Option::<Arguments<'_>>::None;
-        _46 = core::panicking::assert_failed::<u8, u8>(move _45, _39, _40, move _47) -> unwind continue;
+        _46 = core::panicking::assert_failed::<u8, u8>(move _45, _39, _40, move _47);
     }
 
     bb17: {
-        _50 = ptr::mut_ptr::<impl *mut u8>::add(_14, _33) -> [return: bb18, unwind continue];
+        _50 = ptr::mut_ptr::<impl *mut u8>::add(_14, _33) -> bb18;
     }
 
     bb18: {
@@ -746,7 +746,7 @@ fn sanity_check(_1: &[*mut u8]) -> () {
     bb19: {
         _59 = core::panicking::AssertKind::Eq;
         _61 = Option::<Arguments<'_>>::None;
-        _60 = core::panicking::assert_failed::<u8, u8>(move _59, _53, _54, move _61) -> unwind continue;
+        _60 = core::panicking::assert_failed::<u8, u8>(move _59, _53, _54, move _61);
     }
 }
 
@@ -813,32 +813,32 @@ fn test_triangle::allocate(_1: Layout) -> *mut u8 {
     bb1: {
         _8 = [const "allocate(", const ")\n"];
         _7 = &_8;
-        _6 = _7 as &[&str] (PointerCoercion(Unsize));
+        _6 = _7 as &[&str] (Pointer(Unsize));
         _13 = &_1;
-        _12 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_13) -> [return: bb2, unwind continue];
+        _12 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_13) -> bb2;
     }
 
     bb2: {
         _11 = [move _12];
         _10 = &_11;
-        _9 = _10 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> [return: bb3, unwind continue];
+        _9 = _10 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _5 = Arguments::<'_>::new_v1(move _6, move _9) -> bb3;
     }
 
     bb3: {
-        _4 = _print(move _5) -> [return: bb4, unwind continue];
+        _4 = _print(move _5) -> bb4;
     }
 
     bb4: {
         _16 = &_17;
         _18 = _1;
-        _15 = <std::alloc::Global as Allocator>::allocate(move _16, move _18) -> [return: bb5, unwind continue];
+        _15 = <std::alloc::Global as Allocator>::allocate(move _16, move _18) -> bb5;
     }
 
     bb5: {
         _20 = &_1;
         _19 = [closure@ui/realloc-16687.rs:45:58: 45:61] { layout: move _20 };
-        _14 = Result::<NonNull<[u8]>, std::alloc::AllocError>::unwrap_or_else::<[closure@ui/realloc-16687.rs:45:58: 45:61]>(move _15, move _19) -> [return: bb6, unwind continue];
+        _14 = Result::<NonNull<[u8]>, std::alloc::AllocError>::unwrap_or_else::<[closure@ui/realloc-16687.rs:45:58: 45:61]>(move _15, move _19) -> bb6;
     }
 
     bb6: {
@@ -850,30 +850,30 @@ fn test_triangle::allocate(_1: Layout) -> *mut u8 {
     bb7: {
         _27 = [const "allocate(", const ") = ", const "\n"];
         _26 = &_27;
-        _25 = _26 as &[&str] (PointerCoercion(Unsize));
+        _25 = _26 as &[&str] (Pointer(Unsize));
         _32 = &_1;
-        _31 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_32) -> [return: bb8, unwind continue];
+        _31 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_32) -> bb8;
     }
 
     bb8: {
         _34 = &_14;
-        _33 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_34) -> [return: bb9, unwind continue];
+        _33 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_34) -> bb9;
     }
 
     bb9: {
         _30 = [move _31, move _33];
         _29 = &_30;
-        _28 = _29 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _24 = Arguments::<'_>::new_v1(move _25, move _28) -> [return: bb10, unwind continue];
+        _28 = _29 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _24 = Arguments::<'_>::new_v1(move _25, move _28) -> bb10;
     }
 
     bb10: {
-        _23 = _print(move _24) -> [return: bb11, unwind continue];
+        _23 = _print(move _24) -> bb11;
     }
 
     bb11: {
         _35 = _14;
-        _0 = NonNull::<[u8]>::as_mut_ptr(move _35) -> [return: bb12, unwind continue];
+        _0 = NonNull::<[u8]>::as_mut_ptr(move _35) -> bb12;
     }
 
     bb12: {
@@ -895,7 +895,7 @@ fn test_triangle::allocate::{closure#0}(_1: [closure@ui/realloc-16687.rs:45:58: 
     bb0: {
         _5 = deref_copy (_1.0: &std::alloc::Layout);
         _4 = (*_5);
-        _3 = handle_alloc_error(move _4) -> unwind continue;
+        _3 = handle_alloc_error(move _4);
     }
 }
 
@@ -933,36 +933,36 @@ fn test_triangle::deallocate(_1: *mut u8, _2: Layout) -> () {
     bb1: {
         _9 = [const "deallocate(", const ", ", const "\n"];
         _8 = &_9;
-        _7 = _8 as &[&str] (PointerCoercion(Unsize));
+        _7 = _8 as &[&str] (Pointer(Unsize));
         _14 = &_1;
-        _13 = core::fmt::rt::Argument::<'_>::new_debug::<*mut u8>(_14) -> [return: bb2, unwind continue];
+        _13 = core::fmt::rt::Argument::<'_>::new_debug::<*mut u8>(_14) -> bb2;
     }
 
     bb2: {
         _16 = &_2;
-        _15 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_16) -> [return: bb3, unwind continue];
+        _15 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_16) -> bb3;
     }
 
     bb3: {
         _12 = [move _13, move _15];
         _11 = &_12;
-        _10 = _11 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _6 = Arguments::<'_>::new_v1(move _7, move _10) -> [return: bb4, unwind continue];
+        _10 = _11 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _6 = Arguments::<'_>::new_v1(move _7, move _10) -> bb4;
     }
 
     bb4: {
-        _5 = _print(move _6) -> [return: bb5, unwind continue];
+        _5 = _print(move _6) -> bb5;
     }
 
     bb5: {
         _18 = &_19;
         _21 = _1;
-        _20 = NonNull::<u8>::new_unchecked(move _21) -> [return: bb6, unwind continue];
+        _20 = NonNull::<u8>::new_unchecked(move _21) -> bb6;
     }
 
     bb6: {
         _22 = _2;
-        _17 = <std::alloc::Global as Allocator>::deallocate(move _18, move _20, move _22) -> [return: bb7, unwind continue];
+        _17 = <std::alloc::Global as Allocator>::deallocate(move _18, move _20, move _22) -> bb7;
     }
 
     bb7: {
@@ -1052,40 +1052,40 @@ fn reallocate(_1: *mut u8, _2: Layout, _3: Layout) -> *mut u8 {
     bb1: {
         _10 = [const "reallocate(", const ", old=", const ", new=", const ")\n"];
         _9 = &_10;
-        _8 = _9 as &[&str] (PointerCoercion(Unsize));
+        _8 = _9 as &[&str] (Pointer(Unsize));
         _15 = &_1;
-        _14 = core::fmt::rt::Argument::<'_>::new_debug::<*mut u8>(_15) -> [return: bb2, unwind continue];
+        _14 = core::fmt::rt::Argument::<'_>::new_debug::<*mut u8>(_15) -> bb2;
     }
 
     bb2: {
         _17 = &_2;
-        _16 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_17) -> [return: bb3, unwind continue];
+        _16 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_17) -> bb3;
     }
 
     bb3: {
         _19 = &_3;
-        _18 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_19) -> [return: bb4, unwind continue];
+        _18 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_19) -> bb4;
     }
 
     bb4: {
         _13 = [move _14, move _16, move _18];
         _12 = &_13;
-        _11 = _12 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> [return: bb5, unwind continue];
+        _11 = _12 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> bb5;
     }
 
     bb5: {
-        _6 = _print(move _7) -> [return: bb6, unwind continue];
+        _6 = _print(move _7) -> bb6;
     }
 
     bb6: {
         _23 = &_3;
-        _22 = Layout::size(move _23) -> [return: bb7, unwind continue];
+        _22 = Layout::size(move _23) -> bb7;
     }
 
     bb7: {
         _25 = &_2;
-        _24 = Layout::size(move _25) -> [return: bb8, unwind continue];
+        _24 = Layout::size(move _25) -> bb8;
     }
 
     bb8: {
@@ -1096,32 +1096,32 @@ fn reallocate(_1: *mut u8, _2: Layout, _3: Layout) -> *mut u8 {
     bb9: {
         _26 = &_27;
         _29 = _1;
-        _28 = NonNull::<u8>::new_unchecked(move _29) -> [return: bb10, unwind continue];
+        _28 = NonNull::<u8>::new_unchecked(move _29) -> bb10;
     }
 
     bb10: {
         _30 = _2;
         _31 = _3;
-        _20 = <std::alloc::Global as Allocator>::grow(move _26, move _28, move _30, move _31) -> [return: bb13, unwind continue];
+        _20 = <std::alloc::Global as Allocator>::grow(move _26, move _28, move _30, move _31) -> bb13;
     }
 
     bb11: {
         _32 = &_33;
         _35 = _1;
-        _34 = NonNull::<u8>::new_unchecked(move _35) -> [return: bb12, unwind continue];
+        _34 = NonNull::<u8>::new_unchecked(move _35) -> bb12;
     }
 
     bb12: {
         _36 = _2;
         _37 = _3;
-        _20 = <std::alloc::Global as Allocator>::shrink(move _32, move _34, move _36, move _37) -> [return: bb13, unwind continue];
+        _20 = <std::alloc::Global as Allocator>::shrink(move _32, move _34, move _36, move _37) -> bb13;
     }
 
     bb13: {
         _39 = _20;
         _41 = &_3;
         _40 = [closure@ui/realloc-16687.rs:73:41: 73:44] { new: move _41 };
-        _38 = Result::<NonNull<[u8]>, std::alloc::AllocError>::unwrap_or_else::<[closure@ui/realloc-16687.rs:73:41: 73:44]>(move _39, move _40) -> [return: bb14, unwind continue];
+        _38 = Result::<NonNull<[u8]>, std::alloc::AllocError>::unwrap_or_else::<[closure@ui/realloc-16687.rs:73:41: 73:44]>(move _39, move _40) -> bb14;
     }
 
     bb14: {
@@ -1133,40 +1133,40 @@ fn reallocate(_1: *mut u8, _2: Layout, _3: Layout) -> *mut u8 {
     bb15: {
         _48 = [const "reallocate(", const ", old=", const ", new=", const ") = ", const "\n"];
         _47 = &_48;
-        _46 = _47 as &[&str] (PointerCoercion(Unsize));
+        _46 = _47 as &[&str] (Pointer(Unsize));
         _53 = &_38;
-        _52 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_53) -> [return: bb16, unwind continue];
+        _52 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_53) -> bb16;
     }
 
     bb16: {
         _55 = &_2;
-        _54 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_55) -> [return: bb17, unwind continue];
+        _54 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_55) -> bb17;
     }
 
     bb17: {
         _57 = &_3;
-        _56 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_57) -> [return: bb18, unwind continue];
+        _56 = core::fmt::rt::Argument::<'_>::new_debug::<Layout>(_57) -> bb18;
     }
 
     bb18: {
         _59 = &_38;
-        _58 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_59) -> [return: bb19, unwind continue];
+        _58 = core::fmt::rt::Argument::<'_>::new_debug::<NonNull<[u8]>>(_59) -> bb19;
     }
 
     bb19: {
         _51 = [move _52, move _54, move _56, move _58];
         _50 = &_51;
-        _49 = _50 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _45 = Arguments::<'_>::new_v1(move _46, move _49) -> [return: bb20, unwind continue];
+        _49 = _50 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _45 = Arguments::<'_>::new_v1(move _46, move _49) -> bb20;
     }
 
     bb20: {
-        _44 = _print(move _45) -> [return: bb21, unwind continue];
+        _44 = _print(move _45) -> bb21;
     }
 
     bb21: {
         _60 = _38;
-        _0 = NonNull::<[u8]>::as_mut_ptr(move _60) -> [return: bb22, unwind continue];
+        _0 = NonNull::<[u8]>::as_mut_ptr(move _60) -> bb22;
     }
 
     bb22: {
@@ -1188,7 +1188,7 @@ fn reallocate::{closure#0}(_1: [closure@ui/realloc-16687.rs:73:41: 73:44], _2: s
     bb0: {
         _5 = deref_copy (_1.0: &std::alloc::Layout);
         _4 = (*_5);
-        _3 = handle_alloc_error(move _4) -> unwind continue;
+        _3 = handle_alloc_error(move _4);
     }
 }
 
@@ -1295,31 +1295,31 @@ fn test_1(_1: &mut [*mut u8]) -> () {
         _5 = const {alloc1: &usize};
         _4 = (*_5);
         _3 = Sub(move _4, const 1_usize);
-        _2 = idx_to_size(move _3) -> [return: bb1, unwind continue];
+        _2 = idx_to_size(move _3) -> bb1;
     }
 
     bb1: {
         _8 = _2;
         _10 = const {alloc2: &usize};
         _9 = (*_10);
-        _7 = Layout::from_size_align(move _8, move _9) -> [return: bb2, unwind continue];
+        _7 = Layout::from_size_align(move _8, move _9) -> bb2;
     }
 
     bb2: {
-        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> [return: bb3, unwind continue];
+        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> bb3;
     }
 
     bb3: {
         _15 = const {alloc1: &usize};
         _14 = (*_15);
         _16 = Eq(const 2_usize, const 0_usize);
-        assert(!move _16, "attempt to divide `{}` by zero", _14) -> [success: bb4, unwind continue];
+        assert(!move _16, "attempt to divide `{}` by zero", _14) -> bb4;
     }
 
     bb4: {
         _13 = Div(move _14, const 2_usize);
         _12 = std::ops::Range::<usize> { start: const 0_usize, end: move _13 };
-        _11 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _12) -> [return: bb5, unwind continue];
+        _11 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _12) -> bb5;
     }
 
     bb5: {
@@ -1329,7 +1329,7 @@ fn test_1(_1: &mut [*mut u8]) -> () {
 
     bb6: {
         _19 = &mut _17;
-        _18 = <std::ops::Range<usize> as Iterator>::next(_19) -> [return: bb7, unwind continue];
+        _18 = <std::ops::Range<usize> as Iterator>::next(_19) -> bb7;
     }
 
     bb7: {
@@ -1342,7 +1342,7 @@ fn test_1(_1: &mut [*mut u8]) -> () {
         _27 = Mul(const 2_usize, _21);
         _28 = Len((*_1));
         _29 = Lt(_27, _28);
-        assert(move _29, "index out of bounds: the length is {} but the index is {}", move _28, _27) -> [success: bb11, unwind continue];
+        assert(move _29, "index out of bounds: the length is {} but the index is {}", move _28, _27) -> bb11;
     }
 
     bb9: {
@@ -1359,12 +1359,12 @@ fn test_1(_1: &mut [*mut u8]) -> () {
         _31 = Add(move _32, const 1_usize);
         _33 = Len((*_1));
         _34 = Lt(_31, _33);
-        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _31) -> [success: bb12, unwind continue];
+        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _31) -> bb12;
     }
 
     bb12: {
         _30 = (*_1)[_31];
-        _35 = idx_to_size(_21) -> [return: bb13, unwind continue];
+        _35 = idx_to_size(_21) -> bb13;
     }
 
     bb13: {
@@ -1379,58 +1379,58 @@ fn test_1(_1: &mut [*mut u8]) -> () {
     }
 
     bb14: {
-        _39 = core::panicking::panic(const "assertion failed: old_size < new_size") -> unwind continue;
+        _39 = core::panicking::panic(const "assertion failed: old_size < new_size");
     }
 
     bb15: {
         _43 = const {alloc2: &usize};
         _42 = (*_43);
-        _41 = Layout::from_size_align(_24, move _42) -> [return: bb16, unwind continue];
+        _41 = Layout::from_size_align(_24, move _42) -> bb16;
     }
 
     bb16: {
-        _40 = Result::<Layout, LayoutError>::unwrap(move _41) -> [return: bb17, unwind continue];
+        _40 = Result::<Layout, LayoutError>::unwrap(move _41) -> bb17;
     }
 
     bb17: {
         _46 = &_40;
-        _45 = <Layout as Clone>::clone(move _46) -> [return: bb18, unwind continue];
+        _45 = <Layout as Clone>::clone(move _46) -> bb18;
     }
 
     bb18: {
         _48 = &_6;
-        _47 = <Layout as Clone>::clone(move _48) -> [return: bb19, unwind continue];
+        _47 = <Layout as Clone>::clone(move _48) -> bb19;
     }
 
     bb19: {
-        _44 = reallocate(_22, move _45, move _47) -> [return: bb20, unwind continue];
+        _44 = reallocate(_22, move _45, move _47) -> bb20;
     }
 
     bb20: {
         _49 = Mul(const 2_usize, _21);
         _50 = Len((*_1));
         _51 = Lt(_49, _50);
-        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> [success: bb21, unwind continue];
+        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> bb21;
     }
 
     bb21: {
         (*_1)[_49] = move _44;
         _53 = &(*_1);
-        _52 = sanity_check(_53) -> [return: bb22, unwind continue];
+        _52 = sanity_check(_53) -> bb22;
     }
 
     bb22: {
         _56 = &_40;
-        _55 = <Layout as Clone>::clone(move _56) -> [return: bb23, unwind continue];
+        _55 = <Layout as Clone>::clone(move _56) -> bb23;
     }
 
     bb23: {
         _58 = &_6;
-        _57 = <Layout as Clone>::clone(move _58) -> [return: bb24, unwind continue];
+        _57 = <Layout as Clone>::clone(move _58) -> bb24;
     }
 
     bb24: {
-        _54 = reallocate(_23, move _55, move _57) -> [return: bb25, unwind continue];
+        _54 = reallocate(_23, move _55, move _57) -> bb25;
     }
 
     bb25: {
@@ -1438,13 +1438,13 @@ fn test_1(_1: &mut [*mut u8]) -> () {
         _59 = Add(move _60, const 1_usize);
         _61 = Len((*_1));
         _62 = Lt(_59, _61);
-        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _59) -> [success: bb26, unwind continue];
+        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _59) -> bb26;
     }
 
     bb26: {
         (*_1)[_59] = move _54;
         _64 = &(*_1);
-        _63 = sanity_check(_64) -> [return: bb6, unwind continue];
+        _63 = sanity_check(_64) -> bb6;
     }
 }
 
@@ -1547,31 +1547,31 @@ fn test_2(_1: &mut [*mut u8]) -> () {
         _5 = const {alloc1: &usize};
         _4 = (*_5);
         _3 = Sub(move _4, const 1_usize);
-        _2 = idx_to_size(move _3) -> [return: bb1, unwind continue];
+        _2 = idx_to_size(move _3) -> bb1;
     }
 
     bb1: {
         _8 = _2;
         _10 = const {alloc2: &usize};
         _9 = (*_10);
-        _7 = Layout::from_size_align(move _8, move _9) -> [return: bb2, unwind continue];
+        _7 = Layout::from_size_align(move _8, move _9) -> bb2;
     }
 
     bb2: {
-        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> [return: bb3, unwind continue];
+        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> bb3;
     }
 
     bb3: {
         _15 = const {alloc1: &usize};
         _14 = (*_15);
         _16 = Eq(const 2_usize, const 0_usize);
-        assert(!move _16, "attempt to divide `{}` by zero", _14) -> [success: bb4, unwind continue];
+        assert(!move _16, "attempt to divide `{}` by zero", _14) -> bb4;
     }
 
     bb4: {
         _13 = Div(move _14, const 2_usize);
         _12 = std::ops::Range::<usize> { start: const 0_usize, end: move _13 };
-        _11 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _12) -> [return: bb5, unwind continue];
+        _11 = <std::ops::Range<usize> as IntoIterator>::into_iter(move _12) -> bb5;
     }
 
     bb5: {
@@ -1581,7 +1581,7 @@ fn test_2(_1: &mut [*mut u8]) -> () {
 
     bb6: {
         _19 = &mut _17;
-        _18 = <std::ops::Range<usize> as Iterator>::next(_19) -> [return: bb7, unwind continue];
+        _18 = <std::ops::Range<usize> as Iterator>::next(_19) -> bb7;
     }
 
     bb7: {
@@ -1594,7 +1594,7 @@ fn test_2(_1: &mut [*mut u8]) -> () {
         _27 = Mul(const 2_usize, _21);
         _28 = Len((*_1));
         _29 = Lt(_27, _28);
-        assert(move _29, "index out of bounds: the length is {} but the index is {}", move _28, _27) -> [success: bb11, unwind continue];
+        assert(move _29, "index out of bounds: the length is {} but the index is {}", move _28, _27) -> bb11;
     }
 
     bb9: {
@@ -1611,12 +1611,12 @@ fn test_2(_1: &mut [*mut u8]) -> () {
         _31 = Add(move _32, const 1_usize);
         _33 = Len((*_1));
         _34 = Lt(_31, _33);
-        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _31) -> [success: bb12, unwind continue];
+        assert(move _34, "index out of bounds: the length is {} but the index is {}", move _33, _31) -> bb12;
     }
 
     bb12: {
         _30 = (*_1)[_31];
-        _35 = idx_to_size(_21) -> [return: bb13, unwind continue];
+        _35 = idx_to_size(_21) -> bb13;
     }
 
     bb13: {
@@ -1631,58 +1631,58 @@ fn test_2(_1: &mut [*mut u8]) -> () {
     }
 
     bb14: {
-        _39 = core::panicking::panic(const "assertion failed: new_size < old_size") -> unwind continue;
+        _39 = core::panicking::panic(const "assertion failed: new_size < old_size");
     }
 
     bb15: {
         _43 = const {alloc2: &usize};
         _42 = (*_43);
-        _41 = Layout::from_size_align(_24, move _42) -> [return: bb16, unwind continue];
+        _41 = Layout::from_size_align(_24, move _42) -> bb16;
     }
 
     bb16: {
-        _40 = Result::<Layout, LayoutError>::unwrap(move _41) -> [return: bb17, unwind continue];
+        _40 = Result::<Layout, LayoutError>::unwrap(move _41) -> bb17;
     }
 
     bb17: {
         _46 = &_6;
-        _45 = <Layout as Clone>::clone(move _46) -> [return: bb18, unwind continue];
+        _45 = <Layout as Clone>::clone(move _46) -> bb18;
     }
 
     bb18: {
         _48 = &_40;
-        _47 = <Layout as Clone>::clone(move _48) -> [return: bb19, unwind continue];
+        _47 = <Layout as Clone>::clone(move _48) -> bb19;
     }
 
     bb19: {
-        _44 = reallocate(_22, move _45, move _47) -> [return: bb20, unwind continue];
+        _44 = reallocate(_22, move _45, move _47) -> bb20;
     }
 
     bb20: {
         _49 = Mul(const 2_usize, _21);
         _50 = Len((*_1));
         _51 = Lt(_49, _50);
-        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> [success: bb21, unwind continue];
+        assert(move _51, "index out of bounds: the length is {} but the index is {}", move _50, _49) -> bb21;
     }
 
     bb21: {
         (*_1)[_49] = move _44;
         _53 = &(*_1);
-        _52 = sanity_check(_53) -> [return: bb22, unwind continue];
+        _52 = sanity_check(_53) -> bb22;
     }
 
     bb22: {
         _56 = &_6;
-        _55 = <Layout as Clone>::clone(move _56) -> [return: bb23, unwind continue];
+        _55 = <Layout as Clone>::clone(move _56) -> bb23;
     }
 
     bb23: {
         _58 = &_40;
-        _57 = <Layout as Clone>::clone(move _58) -> [return: bb24, unwind continue];
+        _57 = <Layout as Clone>::clone(move _58) -> bb24;
     }
 
     bb24: {
-        _54 = reallocate(_23, move _55, move _57) -> [return: bb25, unwind continue];
+        _54 = reallocate(_23, move _55, move _57) -> bb25;
     }
 
     bb25: {
@@ -1690,13 +1690,13 @@ fn test_2(_1: &mut [*mut u8]) -> () {
         _59 = Add(move _60, const 1_usize);
         _61 = Len((*_1));
         _62 = Lt(_59, _61);
-        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _59) -> [success: bb26, unwind continue];
+        assert(move _62, "index out of bounds: the length is {} but the index is {}", move _61, _59) -> bb26;
     }
 
     bb26: {
         (*_1)[_59] = move _54;
         _64 = &(*_1);
-        _63 = sanity_check(_64) -> [return: bb6, unwind continue];
+        _63 = sanity_check(_64) -> bb6;
     }
 }
 
@@ -1800,35 +1800,35 @@ fn test_3(_1: &mut [*mut u8]) -> () {
         _5 = const {alloc1: &usize};
         _4 = (*_5);
         _3 = Sub(move _4, const 1_usize);
-        _2 = idx_to_size(move _3) -> [return: bb1, unwind continue];
+        _2 = idx_to_size(move _3) -> bb1;
     }
 
     bb1: {
         _8 = _2;
         _10 = const {alloc2: &usize};
         _9 = (*_10);
-        _7 = Layout::from_size_align(move _8, move _9) -> [return: bb2, unwind continue];
+        _7 = Layout::from_size_align(move _8, move _9) -> bb2;
     }
 
     bb2: {
-        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> [return: bb3, unwind continue];
+        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> bb3;
     }
 
     bb3: {
         _16 = const {alloc1: &usize};
         _15 = (*_16);
         _17 = Eq(const 2_usize, const 0_usize);
-        assert(!move _17, "attempt to divide `{}` by zero", _15) -> [success: bb4, unwind continue];
+        assert(!move _17, "attempt to divide `{}` by zero", _15) -> bb4;
     }
 
     bb4: {
         _14 = Div(move _15, const 2_usize);
         _13 = std::ops::Range::<usize> { start: const 0_usize, end: move _14 };
-        _12 = <std::ops::Range<usize> as Iterator>::rev(move _13) -> [return: bb5, unwind continue];
+        _12 = <std::ops::Range<usize> as Iterator>::rev(move _13) -> bb5;
     }
 
     bb5: {
-        _11 = <Rev<std::ops::Range<usize>> as IntoIterator>::into_iter(move _12) -> [return: bb6, unwind continue];
+        _11 = <Rev<std::ops::Range<usize>> as IntoIterator>::into_iter(move _12) -> bb6;
     }
 
     bb6: {
@@ -1838,7 +1838,7 @@ fn test_3(_1: &mut [*mut u8]) -> () {
 
     bb7: {
         _20 = &mut _18;
-        _19 = <Rev<std::ops::Range<usize>> as Iterator>::next(_20) -> [return: bb8, unwind continue];
+        _19 = <Rev<std::ops::Range<usize>> as Iterator>::next(_20) -> bb8;
     }
 
     bb8: {
@@ -1851,7 +1851,7 @@ fn test_3(_1: &mut [*mut u8]) -> () {
         _28 = Mul(const 2_usize, _22);
         _29 = Len((*_1));
         _30 = Lt(_28, _29);
-        assert(move _30, "index out of bounds: the length is {} but the index is {}", move _29, _28) -> [success: bb12, unwind continue];
+        assert(move _30, "index out of bounds: the length is {} but the index is {}", move _29, _28) -> bb12;
     }
 
     bb10: {
@@ -1868,12 +1868,12 @@ fn test_3(_1: &mut [*mut u8]) -> () {
         _32 = Add(move _33, const 1_usize);
         _34 = Len((*_1));
         _35 = Lt(_32, _34);
-        assert(move _35, "index out of bounds: the length is {} but the index is {}", move _34, _32) -> [success: bb13, unwind continue];
+        assert(move _35, "index out of bounds: the length is {} but the index is {}", move _34, _32) -> bb13;
     }
 
     bb13: {
         _31 = (*_1)[_32];
-        _36 = idx_to_size(_22) -> [return: bb14, unwind continue];
+        _36 = idx_to_size(_22) -> bb14;
     }
 
     bb14: {
@@ -1888,31 +1888,31 @@ fn test_3(_1: &mut [*mut u8]) -> () {
     }
 
     bb15: {
-        _40 = core::panicking::panic(const "assertion failed: old_size < new_size") -> unwind continue;
+        _40 = core::panicking::panic(const "assertion failed: old_size < new_size");
     }
 
     bb16: {
         _44 = const {alloc2: &usize};
         _43 = (*_44);
-        _42 = Layout::from_size_align(_25, move _43) -> [return: bb17, unwind continue];
+        _42 = Layout::from_size_align(_25, move _43) -> bb17;
     }
 
     bb17: {
-        _41 = Result::<Layout, LayoutError>::unwrap(move _42) -> [return: bb18, unwind continue];
+        _41 = Result::<Layout, LayoutError>::unwrap(move _42) -> bb18;
     }
 
     bb18: {
         _47 = &_41;
-        _46 = <Layout as Clone>::clone(move _47) -> [return: bb19, unwind continue];
+        _46 = <Layout as Clone>::clone(move _47) -> bb19;
     }
 
     bb19: {
         _49 = &_6;
-        _48 = <Layout as Clone>::clone(move _49) -> [return: bb20, unwind continue];
+        _48 = <Layout as Clone>::clone(move _49) -> bb20;
     }
 
     bb20: {
-        _45 = reallocate(_24, move _46, move _48) -> [return: bb21, unwind continue];
+        _45 = reallocate(_24, move _46, move _48) -> bb21;
     }
 
     bb21: {
@@ -1920,40 +1920,40 @@ fn test_3(_1: &mut [*mut u8]) -> () {
         _50 = Add(move _51, const 1_usize);
         _52 = Len((*_1));
         _53 = Lt(_50, _52);
-        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _50) -> [success: bb22, unwind continue];
+        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _50) -> bb22;
     }
 
     bb22: {
         (*_1)[_50] = move _45;
         _55 = &(*_1);
-        _54 = sanity_check(_55) -> [return: bb23, unwind continue];
+        _54 = sanity_check(_55) -> bb23;
     }
 
     bb23: {
         _58 = &_41;
-        _57 = <Layout as Clone>::clone(move _58) -> [return: bb24, unwind continue];
+        _57 = <Layout as Clone>::clone(move _58) -> bb24;
     }
 
     bb24: {
         _60 = &_6;
-        _59 = <Layout as Clone>::clone(move _60) -> [return: bb25, unwind continue];
+        _59 = <Layout as Clone>::clone(move _60) -> bb25;
     }
 
     bb25: {
-        _56 = reallocate(_23, move _57, move _59) -> [return: bb26, unwind continue];
+        _56 = reallocate(_23, move _57, move _59) -> bb26;
     }
 
     bb26: {
         _61 = Mul(const 2_usize, _22);
         _62 = Len((*_1));
         _63 = Lt(_61, _62);
-        assert(move _63, "index out of bounds: the length is {} but the index is {}", move _62, _61) -> [success: bb27, unwind continue];
+        assert(move _63, "index out of bounds: the length is {} but the index is {}", move _62, _61) -> bb27;
     }
 
     bb27: {
         (*_1)[_61] = move _56;
         _65 = &(*_1);
-        _64 = sanity_check(_65) -> [return: bb7, unwind continue];
+        _64 = sanity_check(_65) -> bb7;
     }
 }
 
@@ -2057,35 +2057,35 @@ fn test_4(_1: &mut [*mut u8]) -> () {
         _5 = const {alloc1: &usize};
         _4 = (*_5);
         _3 = Sub(move _4, const 1_usize);
-        _2 = idx_to_size(move _3) -> [return: bb1, unwind continue];
+        _2 = idx_to_size(move _3) -> bb1;
     }
 
     bb1: {
         _8 = _2;
         _10 = const {alloc2: &usize};
         _9 = (*_10);
-        _7 = Layout::from_size_align(move _8, move _9) -> [return: bb2, unwind continue];
+        _7 = Layout::from_size_align(move _8, move _9) -> bb2;
     }
 
     bb2: {
-        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> [return: bb3, unwind continue];
+        _6 = Result::<Layout, LayoutError>::unwrap(move _7) -> bb3;
     }
 
     bb3: {
         _16 = const {alloc1: &usize};
         _15 = (*_16);
         _17 = Eq(const 2_usize, const 0_usize);
-        assert(!move _17, "attempt to divide `{}` by zero", _15) -> [success: bb4, unwind continue];
+        assert(!move _17, "attempt to divide `{}` by zero", _15) -> bb4;
     }
 
     bb4: {
         _14 = Div(move _15, const 2_usize);
         _13 = std::ops::Range::<usize> { start: const 0_usize, end: move _14 };
-        _12 = <std::ops::Range<usize> as Iterator>::rev(move _13) -> [return: bb5, unwind continue];
+        _12 = <std::ops::Range<usize> as Iterator>::rev(move _13) -> bb5;
     }
 
     bb5: {
-        _11 = <Rev<std::ops::Range<usize>> as IntoIterator>::into_iter(move _12) -> [return: bb6, unwind continue];
+        _11 = <Rev<std::ops::Range<usize>> as IntoIterator>::into_iter(move _12) -> bb6;
     }
 
     bb6: {
@@ -2095,7 +2095,7 @@ fn test_4(_1: &mut [*mut u8]) -> () {
 
     bb7: {
         _20 = &mut _18;
-        _19 = <Rev<std::ops::Range<usize>> as Iterator>::next(_20) -> [return: bb8, unwind continue];
+        _19 = <Rev<std::ops::Range<usize>> as Iterator>::next(_20) -> bb8;
     }
 
     bb8: {
@@ -2108,7 +2108,7 @@ fn test_4(_1: &mut [*mut u8]) -> () {
         _28 = Mul(const 2_usize, _22);
         _29 = Len((*_1));
         _30 = Lt(_28, _29);
-        assert(move _30, "index out of bounds: the length is {} but the index is {}", move _29, _28) -> [success: bb12, unwind continue];
+        assert(move _30, "index out of bounds: the length is {} but the index is {}", move _29, _28) -> bb12;
     }
 
     bb10: {
@@ -2125,12 +2125,12 @@ fn test_4(_1: &mut [*mut u8]) -> () {
         _32 = Add(move _33, const 1_usize);
         _34 = Len((*_1));
         _35 = Lt(_32, _34);
-        assert(move _35, "index out of bounds: the length is {} but the index is {}", move _34, _32) -> [success: bb13, unwind continue];
+        assert(move _35, "index out of bounds: the length is {} but the index is {}", move _34, _32) -> bb13;
     }
 
     bb13: {
         _31 = (*_1)[_32];
-        _36 = idx_to_size(_22) -> [return: bb14, unwind continue];
+        _36 = idx_to_size(_22) -> bb14;
     }
 
     bb14: {
@@ -2145,31 +2145,31 @@ fn test_4(_1: &mut [*mut u8]) -> () {
     }
 
     bb15: {
-        _40 = core::panicking::panic(const "assertion failed: new_size < old_size") -> unwind continue;
+        _40 = core::panicking::panic(const "assertion failed: new_size < old_size");
     }
 
     bb16: {
         _44 = const {alloc2: &usize};
         _43 = (*_44);
-        _42 = Layout::from_size_align(_25, move _43) -> [return: bb17, unwind continue];
+        _42 = Layout::from_size_align(_25, move _43) -> bb17;
     }
 
     bb17: {
-        _41 = Result::<Layout, LayoutError>::unwrap(move _42) -> [return: bb18, unwind continue];
+        _41 = Result::<Layout, LayoutError>::unwrap(move _42) -> bb18;
     }
 
     bb18: {
         _47 = &_6;
-        _46 = <Layout as Clone>::clone(move _47) -> [return: bb19, unwind continue];
+        _46 = <Layout as Clone>::clone(move _47) -> bb19;
     }
 
     bb19: {
         _49 = &_41;
-        _48 = <Layout as Clone>::clone(move _49) -> [return: bb20, unwind continue];
+        _48 = <Layout as Clone>::clone(move _49) -> bb20;
     }
 
     bb20: {
-        _45 = reallocate(_24, move _46, move _48) -> [return: bb21, unwind continue];
+        _45 = reallocate(_24, move _46, move _48) -> bb21;
     }
 
     bb21: {
@@ -2177,40 +2177,40 @@ fn test_4(_1: &mut [*mut u8]) -> () {
         _50 = Add(move _51, const 1_usize);
         _52 = Len((*_1));
         _53 = Lt(_50, _52);
-        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _50) -> [success: bb22, unwind continue];
+        assert(move _53, "index out of bounds: the length is {} but the index is {}", move _52, _50) -> bb22;
     }
 
     bb22: {
         (*_1)[_50] = move _45;
         _55 = &(*_1);
-        _54 = sanity_check(_55) -> [return: bb23, unwind continue];
+        _54 = sanity_check(_55) -> bb23;
     }
 
     bb23: {
         _58 = &_6;
-        _57 = <Layout as Clone>::clone(move _58) -> [return: bb24, unwind continue];
+        _57 = <Layout as Clone>::clone(move _58) -> bb24;
     }
 
     bb24: {
         _60 = &_41;
-        _59 = <Layout as Clone>::clone(move _60) -> [return: bb25, unwind continue];
+        _59 = <Layout as Clone>::clone(move _60) -> bb25;
     }
 
     bb25: {
-        _56 = reallocate(_23, move _57, move _59) -> [return: bb26, unwind continue];
+        _56 = reallocate(_23, move _57, move _59) -> bb26;
     }
 
     bb26: {
         _61 = Mul(const 2_usize, _22);
         _62 = Len((*_1));
         _63 = Lt(_61, _62);
-        assert(move _63, "index out of bounds: the length is {} but the index is {}", move _62, _61) -> [success: bb27, unwind continue];
+        assert(move _63, "index out of bounds: the length is {} but the index is {}", move _62, _61) -> bb27;
     }
 
     bb27: {
         (*_1)[_61] = move _56;
         _65 = &(*_1);
-        _64 = sanity_check(_65) -> [return: bb7, unwind continue];
+        _64 = sanity_check(_65) -> bb7;
     }
 }
 

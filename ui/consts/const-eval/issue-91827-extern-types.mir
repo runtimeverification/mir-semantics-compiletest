@@ -35,7 +35,7 @@ fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:29:1: 29:16>::as_sl
         _3 = &raw const ((*_1).2: Opaque);
         _2 = move _3 as *const T (PtrToPtr);
         _5 = ((*_1).0: usize);
-        _4 = std::slice::from_raw_parts::<'_, T>(_2, move _5) -> [return: bb1, unwind continue];
+        _4 = std::slice::from_raw_parts::<'_, T>(_2, move _5) -> bb1;
     }
 
     bb1: {
@@ -71,7 +71,7 @@ fn <impl at ui/consts/const-eval/issue-91827-extern-types.rs:29:1: 29:16>::as_sl
         StorageLive(_6);
         _6 = ((*_1).0: usize);
         ConstEvalCounter;
-        _4 = std::slice::from_raw_parts::<'_, T>(move _5, move _6) -> [return: bb1, unwind continue];
+        _4 = std::slice::from_raw_parts::<'_, T>(move _5, move _6) -> bb1;
     }
 
     bb1: {
@@ -157,7 +157,7 @@ static A_REF: &List<u128> = {
         _3 = const {alloc1: &ListImpl<u128, 3>};
         _2 = &(*_3);
         ConstEvalCounter;
-        _1 = ListImpl::<u128, 3>::as_list(move _2) -> [return: bb1, unwind continue];
+        _1 = ListImpl::<u128, 3>::as_list(move _2) -> bb1;
     }
 
     bb1: {
@@ -191,14 +191,14 @@ static A_TAIL_OFFSET: isize = {
         _4 = const {alloc1: &ListImpl<u128, 3>};
         _3 = &(*_4);
         ConstEvalCounter;
-        _2 = ListImpl::<u128, 3>::as_list(move _3) -> [return: bb1, unwind continue];
+        _2 = ListImpl::<u128, 3>::as_list(move _3) -> bb1;
     }
 
     bb1: {
         _1 = &(*_2);
         StorageDead(_3);
         ConstEvalCounter;
-        _0 = tail_offset::<u128>(move _1) -> [return: bb2, unwind continue];
+        _0 = tail_offset::<u128>(move _1) -> bb2;
     }
 
     bb2: {
@@ -231,7 +231,7 @@ fn tail_offset(_1: &List<T>) -> isize {
         _2 = move _3 as *const u8 (PtrToPtr);
         _5 = &raw const (*_1);
         _4 = move _5 as *const u8 (PtrToPtr);
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> [return: bb1, unwind continue];
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> bb1;
     }
 
     bb1: {
@@ -262,7 +262,7 @@ fn tail_offset(_1: &List<T>) -> isize {
         _4 = move _5 as *const u8 (PtrToPtr);
         StorageDead(_5);
         ConstEvalCounter;
-        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> [return: bb1, unwind continue];
+        _0 = ptr::const_ptr::<impl *const u8>::offset_from(move _2, move _4) -> bb1;
     }
 
     bb1: {
@@ -322,7 +322,7 @@ fn main() -> () {
     bb0: {
         _4 = const {alloc2: &&List<u128>};
         _29 = deref_copy (*_4);
-        _3 = List::<u128>::as_slice(_29) -> [return: bb1, unwind continue];
+        _3 = List::<u128>::as_slice(_29) -> bb1;
     }
 
     bb1: {
@@ -333,7 +333,7 @@ fn main() -> () {
         _1 = (move _2, move _5);
         _8 = (_1.0: &&[u128]);
         _9 = (_1.1: &&[u128; 3]);
-        _11 = <&[u128] as PartialEq<&[u128; 3]>>::eq(_8, _9) -> [return: bb2, unwind continue];
+        _11 = <&[u128] as PartialEq<&[u128; 3]>>::eq(_8, _9) -> bb2;
     }
 
     bb2: {
@@ -344,14 +344,14 @@ fn main() -> () {
     bb3: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<&[u128], &[u128; 3]>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<&[u128], &[u128; 3]>(move _12, _8, _9, move _14);
     }
 
     bb4: {
         _16 = const {alloc3: &isize};
         _19 = const {alloc2: &&List<u128>};
         _30 = deref_copy (*_19);
-        _18 = tail_offset::<u128>(_30) -> [return: bb5, unwind continue];
+        _18 = tail_offset::<u128>(_30) -> bb5;
     }
 
     bb5: {
@@ -369,7 +369,7 @@ fn main() -> () {
     bb6: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<isize, isize>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<isize, isize>(move _26, _20, _21, move _28);
     }
 
     bb7: {

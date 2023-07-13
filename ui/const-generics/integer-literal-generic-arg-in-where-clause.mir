@@ -16,7 +16,7 @@ fn takes_closure_of_array_3(_1: F) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -57,7 +57,7 @@ fn takes_closure_of_array_3_apit(_1: impl Fn([i32; 3])) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -115,19 +115,19 @@ fn main() -> () {
     let mut _4: impl Fn([i32; 3]);
 
     bb0: {
-        _2 = returns_closure_of_array_3() -> [return: bb1, unwind continue];
+        _2 = returns_closure_of_array_3() -> bb1;
     }
 
     bb1: {
-        _1 = takes_closure_of_array_3::<impl Fn([i32; 3])>(const ZeroSized: impl Fn([i32; 3])) -> [return: bb2, unwind continue];
+        _1 = takes_closure_of_array_3::<impl Fn([i32; 3])>(const ZeroSized: impl Fn([i32; 3])) -> bb2;
     }
 
     bb2: {
-        _4 = returns_closure_of_array_3() -> [return: bb3, unwind continue];
+        _4 = returns_closure_of_array_3() -> bb3;
     }
 
     bb3: {
-        _3 = takes_closure_of_array_3_apit::<impl Fn([i32; 3])>(const ZeroSized: impl Fn([i32; 3])) -> [return: bb4, unwind continue];
+        _3 = takes_closure_of_array_3_apit::<impl Fn([i32; 3])>(const ZeroSized: impl Fn([i32; 3])) -> bb4;
     }
 
     bb4: {

@@ -39,14 +39,14 @@ const BLA: usize = {
         _4 = const 3_usize;
         _5 = Len(_3);
         _6 = Lt(_4, _5);
-        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> [success: bb1, unwind continue];
+        assert(move _6, "index out of bounds: the length is {} but the index is {}", move _5, _4) -> bb1;
     }
 
     bb1: {
         _2 = _3[_4];
         _7 = Len(_1);
         _8 = Lt(_2, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _2) -> [success: bb2, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _2) -> bb2;
     }
 
     bb2: {
@@ -101,7 +101,7 @@ fn main() -> () {
     bb1: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14);
     }
 
     bb2: {

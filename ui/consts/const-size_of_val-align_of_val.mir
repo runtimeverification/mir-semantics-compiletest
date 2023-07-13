@@ -77,7 +77,7 @@ const SIZE_OF_FOO: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = std::mem::size_of_val::<Foo>(move _1) -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of_val::<Foo>(move _1) -> bb1;
     }
 
     bb1: {
@@ -102,7 +102,7 @@ const SIZE_OF_BAR: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = std::mem::size_of_val::<Bar>(move _1) -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of_val::<Bar>(move _1) -> bb1;
     }
 
     bb1: {
@@ -127,7 +127,7 @@ const SIZE_OF_UGH: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = std::mem::size_of_val::<Ugh>(move _1) -> [return: bb1, unwind continue];
+        _0 = std::mem::size_of_val::<Ugh>(move _1) -> bb1;
     }
 
     bb1: {
@@ -152,7 +152,7 @@ const ALIGN_OF_FOO: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = align_of_val::<Foo>(move _1) -> [return: bb1, unwind continue];
+        _0 = align_of_val::<Foo>(move _1) -> bb1;
     }
 
     bb1: {
@@ -177,7 +177,7 @@ const ALIGN_OF_BAR: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = align_of_val::<Bar>(move _1) -> [return: bb1, unwind continue];
+        _0 = align_of_val::<Bar>(move _1) -> bb1;
     }
 
     bb1: {
@@ -202,7 +202,7 @@ const ALIGN_OF_UGH: usize = {
         _2 = &_3;
         _1 = &(*_2);
         ConstEvalCounter;
-        _0 = align_of_val::<Ugh>(move _1) -> [return: bb1, unwind continue];
+        _0 = align_of_val::<Ugh>(move _1) -> bb1;
     }
 
     bb1: {
@@ -228,14 +228,14 @@ const SIZE_OF_SLICE: usize = {
         _4 = const "foobar";
         _3 = &(*_4);
         ConstEvalCounter;
-        _2 = core::str::<impl str>::as_bytes(move _3) -> [return: bb1, unwind continue];
+        _2 = core::str::<impl str>::as_bytes(move _3) -> bb1;
     }
 
     bb1: {
         _1 = &(*_2);
         StorageDead(_3);
         ConstEvalCounter;
-        _0 = std::mem::size_of_val::<[u8]>(move _1) -> [return: bb2, unwind continue];
+        _0 = std::mem::size_of_val::<[u8]>(move _1) -> bb2;
     }
 
     bb2: {
@@ -256,7 +256,7 @@ const SIZE_OF_DANGLING: usize = {
         StorageLive(_1);
         _1 = const 256_usize as *const i32 (PointerFromExposedAddress);
         ConstEvalCounter;
-        _0 = size_of_val_raw::<i32>(move _1) -> [return: bb1, unwind continue];
+        _0 = size_of_val_raw::<i32>(move _1) -> bb1;
     }
 
     bb1: {
@@ -280,14 +280,14 @@ const SIZE_OF_BIG: usize = {
         StorageLive(_3);
         _3 = const _ as usize (IntToInt);
         ConstEvalCounter;
-        _1 = slice_from_raw_parts::<u8>(move _2, move _3) -> [return: bb1, unwind continue];
+        _1 = slice_from_raw_parts::<u8>(move _2, move _3) -> bb1;
     }
 
     bb1: {
         StorageDead(_3);
         StorageDead(_2);
         ConstEvalCounter;
-        _0 = size_of_val_raw::<[u8]>(move _1) -> [return: bb2, unwind continue];
+        _0 = size_of_val_raw::<[u8]>(move _1) -> bb2;
     }
 
     bb2: {
@@ -306,7 +306,7 @@ const ALIGN_OF_DANGLING: usize = {
         StorageLive(_1);
         _1 = const 256_usize as *const i16 (PointerFromExposedAddress);
         ConstEvalCounter;
-        _0 = align_of_val_raw::<i16>(move _1) -> [return: bb1, unwind continue];
+        _0 = align_of_val_raw::<i16>(move _1) -> bb1;
     }
 
     bb1: {
@@ -532,7 +532,7 @@ fn main() -> () {
     bb0: {
         _3 = const _;
         _2 = &_3;
-        _5 = std::mem::size_of::<Foo>() -> [return: bb1, unwind continue];
+        _5 = std::mem::size_of::<Foo>() -> bb1;
     }
 
     bb1: {
@@ -550,13 +550,13 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14);
     }
 
     bb3: {
         _17 = const _;
         _16 = &_17;
-        _19 = std::mem::size_of::<Bar>() -> [return: bb4, unwind continue];
+        _19 = std::mem::size_of::<Bar>() -> bb4;
     }
 
     bb4: {
@@ -574,13 +574,13 @@ fn main() -> () {
     bb5: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<usize, usize>(move _26, _20, _21, move _28);
     }
 
     bb6: {
         _31 = const _;
         _30 = &_31;
-        _33 = std::mem::size_of::<Ugh>() -> [return: bb7, unwind continue];
+        _33 = std::mem::size_of::<Ugh>() -> bb7;
     }
 
     bb7: {
@@ -598,13 +598,13 @@ fn main() -> () {
     bb8: {
         _40 = core::panicking::AssertKind::Eq;
         _42 = Option::<Arguments<'_>>::None;
-        _41 = core::panicking::assert_failed::<usize, usize>(move _40, _34, _35, move _42) -> unwind continue;
+        _41 = core::panicking::assert_failed::<usize, usize>(move _40, _34, _35, move _42);
     }
 
     bb9: {
         _45 = const _;
         _44 = &_45;
-        _47 = align_of::<Foo>() -> [return: bb10, unwind continue];
+        _47 = align_of::<Foo>() -> bb10;
     }
 
     bb10: {
@@ -622,13 +622,13 @@ fn main() -> () {
     bb11: {
         _54 = core::panicking::AssertKind::Eq;
         _56 = Option::<Arguments<'_>>::None;
-        _55 = core::panicking::assert_failed::<usize, usize>(move _54, _48, _49, move _56) -> unwind continue;
+        _55 = core::panicking::assert_failed::<usize, usize>(move _54, _48, _49, move _56);
     }
 
     bb12: {
         _59 = const _;
         _58 = &_59;
-        _61 = align_of::<Bar>() -> [return: bb13, unwind continue];
+        _61 = align_of::<Bar>() -> bb13;
     }
 
     bb13: {
@@ -646,13 +646,13 @@ fn main() -> () {
     bb14: {
         _68 = core::panicking::AssertKind::Eq;
         _70 = Option::<Arguments<'_>>::None;
-        _69 = core::panicking::assert_failed::<usize, usize>(move _68, _62, _63, move _70) -> unwind continue;
+        _69 = core::panicking::assert_failed::<usize, usize>(move _68, _62, _63, move _70);
     }
 
     bb15: {
         _73 = const _;
         _72 = &_73;
-        _75 = align_of::<Ugh>() -> [return: bb16, unwind continue];
+        _75 = align_of::<Ugh>() -> bb16;
     }
 
     bb16: {
@@ -670,13 +670,13 @@ fn main() -> () {
     bb17: {
         _82 = core::panicking::AssertKind::Eq;
         _84 = Option::<Arguments<'_>>::None;
-        _83 = core::panicking::assert_failed::<usize, usize>(move _82, _76, _77, move _84) -> unwind continue;
+        _83 = core::panicking::assert_failed::<usize, usize>(move _82, _76, _77, move _84);
     }
 
     bb18: {
         _87 = const _;
         _86 = &_87;
-        _89 = std::mem::size_of::<i32>() -> [return: bb19, unwind continue];
+        _89 = std::mem::size_of::<i32>() -> bb19;
     }
 
     bb19: {
@@ -694,7 +694,7 @@ fn main() -> () {
     bb20: {
         _96 = core::panicking::AssertKind::Eq;
         _98 = Option::<Arguments<'_>>::None;
-        _97 = core::panicking::assert_failed::<usize, usize>(move _96, _90, _91, move _98) -> unwind continue;
+        _97 = core::panicking::assert_failed::<usize, usize>(move _96, _90, _91, move _98);
     }
 
     bb21: {
@@ -715,13 +715,13 @@ fn main() -> () {
     bb22: {
         _110 = core::panicking::AssertKind::Eq;
         _112 = Option::<Arguments<'_>>::None;
-        _111 = core::panicking::assert_failed::<usize, usize>(move _110, _104, _105, move _112) -> unwind continue;
+        _111 = core::panicking::assert_failed::<usize, usize>(move _110, _104, _105, move _112);
     }
 
     bb23: {
         _115 = const _;
         _114 = &_115;
-        _117 = align_of::<i16>() -> [return: bb24, unwind continue];
+        _117 = align_of::<i16>() -> bb24;
     }
 
     bb24: {
@@ -739,14 +739,14 @@ fn main() -> () {
     bb25: {
         _124 = core::panicking::AssertKind::Eq;
         _126 = Option::<Arguments<'_>>::None;
-        _125 = core::panicking::assert_failed::<usize, usize>(move _124, _118, _119, move _126) -> unwind continue;
+        _125 = core::panicking::assert_failed::<usize, usize>(move _124, _118, _119, move _126);
     }
 
     bb26: {
         _129 = const _;
         _128 = &_129;
         _132 = const "foobar";
-        _131 = core::str::<impl str>::len(_132) -> [return: bb27, unwind continue];
+        _131 = core::str::<impl str>::len(_132) -> bb27;
     }
 
     bb27: {
@@ -764,7 +764,7 @@ fn main() -> () {
     bb28: {
         _139 = core::panicking::AssertKind::Eq;
         _141 = Option::<Arguments<'_>>::None;
-        _140 = core::panicking::assert_failed::<usize, usize>(move _139, _133, _134, move _141) -> unwind continue;
+        _140 = core::panicking::assert_failed::<usize, usize>(move _139, _133, _134, move _141);
     }
 
     bb29: {

@@ -31,7 +31,7 @@ fn foo(_1: Foo) -> *const usize {
     }
 
     bb1: {
-        drop((_1.1: std::boxed::Box<usize>)) -> [return: bb3, unwind continue];
+        drop((_1.1: std::boxed::Box<usize>)) -> bb3;
     }
 
     bb2 (cleanup): {
@@ -102,7 +102,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<usize>::new(const 1_usize) -> [return: bb1, unwind continue];
+        _1 = Box::<usize>::new(const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -118,7 +118,7 @@ fn main() -> () {
 
     bb2: {
         _4 = Foo { x: move _5, y: move _6 };
-        _7 = foo(move _4) -> [return: bb3, unwind continue];
+        _7 = foo(move _4) -> bb3;
     }
 
     bb3: {
@@ -137,7 +137,7 @@ fn main() -> () {
     bb4: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<*const usize, *const usize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<*const usize, *const usize>(move _17, _11, _12, move _19);
     }
 
     bb5: {

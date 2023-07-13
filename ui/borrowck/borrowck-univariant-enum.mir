@@ -60,32 +60,32 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = Cell::<isize>::new(const 5_isize) -> [return: bb1, unwind continue];
+        _2 = Cell::<isize>::new(const 5_isize) -> bb1;
     }
 
     bb1: {
         _1 = &_2;
         _5 = newtype::newvar(const 3_isize);
-        _4 = Cell::<newtype>::new(move _5) -> [return: bb2, unwind continue];
+        _4 = Cell::<newtype>::new(move _5) -> bb2;
     }
 
     bb2: {
         _3 = &_4;
-        _7 = Cell::<newtype>::get(_3) -> [return: bb3, unwind continue];
+        _7 = Cell::<newtype>::get(_3) -> bb3;
     }
 
     bb3: {
         _8 = ((_7 as newvar).0: isize);
-        _11 = Cell::<isize>::get(_1) -> [return: bb4, unwind continue];
+        _11 = Cell::<isize>::get(_1) -> bb4;
     }
 
     bb4: {
         _10 = Add(move _11, const 1_isize);
-        _9 = Cell::<isize>::set(_1, move _10) -> [return: bb5, unwind continue];
+        _9 = Cell::<isize>::set(_1, move _10) -> bb5;
     }
 
     bb5: {
-        _12 = Cell::<isize>::get(_1) -> [return: bb6, unwind continue];
+        _12 = Cell::<isize>::get(_1) -> bb6;
     }
 
     bb6: {
@@ -106,7 +106,7 @@ fn main() -> () {
     bb7: {
         _23 = core::panicking::AssertKind::Eq;
         _25 = Option::<Arguments<'_>>::None;
-        _24 = core::panicking::assert_failed::<isize, isize>(move _23, _17, _18, move _25) -> unwind continue;
+        _24 = core::panicking::assert_failed::<isize, isize>(move _23, _17, _18, move _25);
     }
 
     bb8: {

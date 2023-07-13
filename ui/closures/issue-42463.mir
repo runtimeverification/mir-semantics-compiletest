@@ -14,7 +14,7 @@ fn <impl at ui/closures/issue-42463.rs:9:1: 9:56>::deref(_1: &CheckedDeref<T, F>
         _4 = &((*_1).1: F);
         _6 = &((*_1).0: T);
         _5 = (_6,);
-        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> [return: bb1, unwind continue];
+        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -23,7 +23,7 @@ fn <impl at ui/closures/issue-42463.rs:9:1: 9:56>::deref(_1: &CheckedDeref<T, F>
     }
 
     bb2: {
-        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)");
     }
 
     bb3: {
@@ -46,7 +46,7 @@ fn <impl at ui/closures/issue-42463.rs:17:1: 17:59>::deref_mut(_1: &mut CheckedD
         _4 = &((*_1).1: F);
         _6 = &((*_1).0: T);
         _5 = (_6,);
-        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> [return: bb1, unwind continue];
+        _3 = <F as Fn<(&T,)>>::call(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -55,7 +55,7 @@ fn <impl at ui/closures/issue-42463.rs:17:1: 17:59>::deref_mut(_1: &mut CheckedD
     }
 
     bb2: {
-        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: (self.check)(&self.value)");
     }
 
     bb3: {
@@ -127,7 +127,7 @@ fn main() -> () {
     bb0: {
         _4 = SizeOf([i32; 1]);
         _5 = AlignOf([i32; 1]);
-        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> [return: bb1, unwind continue];
+        _6 = alloc::alloc::exchange_malloc(move _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -201,7 +201,7 @@ fn main() -> () {
     }
 
     bb11: {
-        drop(_1) -> [return: bb12, unwind continue];
+        drop(_1) -> bb12;
     }
 
     bb12: {
@@ -222,14 +222,14 @@ fn main() -> () {
 
     bb16: {
         (*_31) = [const 0_i32, const 1_i32];
-        _18 = move _22 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
+        _18 = move _22 as std::boxed::Box<[i32]> (Pointer(Unsize));
         _17 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _18) -> [return: bb7, unwind: bb14];
     }
 
     bb17: {
         (*_30) = [const 0_i32];
-        _3 = move _7 as std::boxed::Box<[i32]> (PointerCoercion(Unsize));
-        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> [return: bb2, unwind continue];
+        _3 = move _7 as std::boxed::Box<[i32]> (Pointer(Unsize));
+        _2 = slice::<impl [i32]>::into_vec::<std::alloc::Global>(move _3) -> bb2;
     }
 }
 
@@ -239,7 +239,7 @@ fn main::{closure#0}(_1: &[closure@ui/closures/issue-42463.rs:28:16: 28:28], _2:
     let mut _3: bool;
 
     bb0: {
-        _3 = Vec::<i32>::is_empty(_2) -> [return: bb1, unwind continue];
+        _3 = Vec::<i32>::is_empty(_2) -> bb1;
     }
 
     bb1: {

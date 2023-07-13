@@ -6,7 +6,7 @@ fn <impl at ui/self/move-self.rs:6:1: 6:7>::foo(_1: S) -> () {
     let _2: ();
 
     bb0: {
-        _2 = S::bar(move _1) -> [return: bb1, unwind continue];
+        _2 = S::bar(move _1) -> bb1;
     }
 
     bb1: {
@@ -31,7 +31,7 @@ fn <impl at ui/self/move-self.rs:6:1: 6:7>::bar(_1: S) -> () {
     bb0: {
         _6 = [const "", const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &(_1.0: std::string::String);
         _10 = core::fmt::rt::Argument::<'_>::new_display::<String>(_11) -> [return: bb1, unwind: bb5];
     }
@@ -39,7 +39,7 @@ fn <impl at ui/self/move-self.rs:6:1: 6:7>::bar(_1: S) -> () {
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb5];
     }
 
@@ -48,7 +48,7 @@ fn <impl at ui/self/move-self.rs:6:1: 6:7>::bar(_1: S) -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -76,12 +76,12 @@ fn main() -> () {
 
     bb0: {
         _3 = const "Hello!";
-        _2 = <str as ToString>::to_string(_3) -> [return: bb1, unwind continue];
+        _2 = <str as ToString>::to_string(_3) -> bb1;
     }
 
     bb1: {
         _1 = S { x: move _2 };
-        _4 = S::foo(move _1) -> [return: bb2, unwind continue];
+        _4 = S::foo(move _1) -> bb2;
     }
 
     bb2: {

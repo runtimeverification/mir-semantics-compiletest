@@ -43,7 +43,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = Box::<i32>::new(const 0_i32) -> [return: bb1, unwind continue];
+        _1 = Box::<i32>::new(const 0_i32) -> bb1;
     }
 
     bb1: {
@@ -60,11 +60,11 @@ fn main() -> () {
     }
 
     bb2: {
-        _11 = Box::<fn() {main}>::new(main) -> [return: bb3, unwind continue];
+        _11 = Box::<fn() {main}>::new(main) -> bb3;
     }
 
     bb3: {
-        drop(_11) -> [return: bb4, unwind continue];
+        drop(_11) -> bb4;
     }
 
     bb4: {
@@ -84,7 +84,7 @@ fn main() -> () {
     bb5: {
         _18 = core::panicking::AssertKind::Eq;
         _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<i32, i32>(move _18, _12, _13, move _20) -> unwind continue;
+        _19 = core::panicking::assert_failed::<i32, i32>(move _18, _12, _13, move _20);
     }
 
     bb6: {
@@ -94,6 +94,6 @@ fn main() -> () {
     bb7: {
         _7 = (*_21);
         _10 = move _1;
-        _9 = std::mem::drop::<Box<i32>>(move _10) -> [return: bb2, unwind continue];
+        _9 = std::mem::drop::<Box<i32>>(move _10) -> bb2;
     }
 }

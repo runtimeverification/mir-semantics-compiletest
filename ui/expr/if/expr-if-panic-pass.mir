@@ -35,7 +35,7 @@ fn test_if_panic() -> () {
     }
 
     bb1: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _3 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb2: {
@@ -56,7 +56,7 @@ fn test_if_panic() -> () {
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16);
     }
 
     bb4: {
@@ -114,13 +114,13 @@ fn test_else_panic() -> () {
     }
 
     bb2: {
-        _3 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _3 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb3: {
         _14 = core::panicking::AssertKind::Eq;
         _16 = Option::<Arguments<'_>>::None;
-        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16) -> unwind continue;
+        _15 = core::panicking::assert_failed::<i32, i32>(move _14, _8, _9, move _16);
     }
 
     bb4: {
@@ -174,7 +174,7 @@ fn test_elseif_panic() -> () {
     }
 
     bb3: {
-        _4 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _4 = begin_panic::<&str>(const "explicit panic");
     }
 
     bb4: {
@@ -199,7 +199,7 @@ fn test_elseif_panic() -> () {
     bb6: {
         _15 = core::panicking::AssertKind::Eq;
         _17 = Option::<Arguments<'_>>::None;
-        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17) -> unwind continue;
+        _16 = core::panicking::assert_failed::<i32, i32>(move _15, _9, _10, move _17);
     }
 
     bb7: {
@@ -214,15 +214,15 @@ fn main() -> () {
     let _3: ();
 
     bb0: {
-        _1 = test_if_panic() -> [return: bb1, unwind continue];
+        _1 = test_if_panic() -> bb1;
     }
 
     bb1: {
-        _2 = test_else_panic() -> [return: bb2, unwind continue];
+        _2 = test_else_panic() -> bb2;
     }
 
     bb2: {
-        _3 = test_elseif_panic() -> [return: bb3, unwind continue];
+        _3 = test_elseif_panic() -> bb3;
     }
 
     bb3: {

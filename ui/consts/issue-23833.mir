@@ -20,7 +20,7 @@ A_I8_T::{constant#0}: usize = {
         StorageLive(_2);
         _2 = const _;
         _3 = CheckedSub(_2, const 1_i8);
-        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, const 1_i8) -> [success: bb1, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} - {}`, which would overflow", move _2, const 1_i8) -> bb1;
     }
 
     bb1: {
@@ -41,7 +41,7 @@ A_I8_T::{constant#1}: usize = {
         StorageLive(_1);
         _1 = const _ as usize (IntToInt);
         _2 = CheckedSub(_1, const 1_usize);
-        assert(!move (_2.1: bool), "attempt to compute `{} - {}`, which would overflow", move _1, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} - {}`, which would overflow", move _1, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -62,12 +62,12 @@ fn main() -> () {
     bb0: {
         _5 = const _;
         _4 = &_5;
-        _3 = <[u32; 126] as Index<RangeFull>>::index(move _4, const RangeFull) -> [return: bb1, unwind continue];
+        _3 = <[u32; 126] as Index<RangeFull>>::index(move _4, const RangeFull) -> bb1;
     }
 
     bb1: {
         _2 = _3;
-        _1 = foo::<&[u32]>(move _2) -> [return: bb2, unwind continue];
+        _1 = foo::<&[u32]>(move _2) -> bb2;
     }
 
     bb2: {
@@ -92,7 +92,7 @@ fn foo(_1: T) -> () {
     bb0: {
         _6 = [const "", const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &_1;
         _10 = core::fmt::rt::Argument::<'_>::new_debug::<T>(_11) -> [return: bb1, unwind: bb5];
     }
@@ -100,7 +100,7 @@ fn foo(_1: T) -> () {
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind: bb5];
     }
 
@@ -109,7 +109,7 @@ fn foo(_1: T) -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {

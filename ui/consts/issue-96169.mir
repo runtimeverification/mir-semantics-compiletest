@@ -22,7 +22,7 @@ fn baz() -> *const dyn Fn(u32) {
     let mut _1: !;
 
     bb0: {
-        _1 = core::panicking::panic(const "not implemented") -> unwind continue;
+        _1 = core::panicking::panic(const "not implemented");
     }
 }
 
@@ -39,17 +39,17 @@ fn foo() -> () {
     let _9: fn(u32) {bar};
 
     bb0: {
-        _3 = baz() -> [return: bb1, unwind continue];
+        _3 = baz() -> bb1;
     }
 
     bb1: {
         _2 = &_3;
         _8 = &_9;
-        _7 = _8 as &dyn std::ops::Fn(u32) (PointerCoercion(Unsize));
+        _7 = _8 as &dyn std::ops::Fn(u32) (Pointer(Unsize));
         _6 = &raw const (*_7);
         _5 = move _6;
         _4 = &_5;
-        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> [return: bb2, unwind continue];
+        _1 = <*const dyn Fn(u32) as PartialEq>::eq(move _2, move _4) -> bb2;
     }
 
     bb2: {

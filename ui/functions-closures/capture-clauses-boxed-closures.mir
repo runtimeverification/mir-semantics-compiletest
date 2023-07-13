@@ -51,7 +51,7 @@ fn each(_1: &[T], _2: F) -> () {
     }
 
     bb6: {
-        drop(_2) -> [return: bb7, unwind continue];
+        drop(_2) -> bb7;
     }
 
     bb7: {
@@ -111,10 +111,10 @@ fn main() -> () {
         _1 = const 0_usize;
         _2 = [const 1_usize, const 2_usize, const 3_usize, const 4_usize, const 5_usize];
         _5 = &_2;
-        _4 = _5 as &[usize] (PointerCoercion(Unsize));
+        _4 = _5 as &[usize] (Pointer(Unsize));
         _7 = &mut _1;
         _6 = [closure@ui/functions-closures/capture-clauses-boxed-closures.rs:12:18: 12:23] { sum: move _7 };
-        _3 = each::<usize, [closure@ui/functions-closures/capture-clauses-boxed-closures.rs:12:18: 12:23]>(move _4, move _6) -> [return: bb1, unwind continue];
+        _3 = each::<usize, [closure@ui/functions-closures/capture-clauses-boxed-closures.rs:12:18: 12:23]>(move _4, move _6) -> bb1;
     }
 
     bb1: {
@@ -134,7 +134,7 @@ fn main() -> () {
     bb2: {
         _18 = core::panicking::AssertKind::Eq;
         _20 = Option::<Arguments<'_>>::None;
-        _19 = core::panicking::assert_failed::<usize, usize>(move _18, _12, _13, move _20) -> unwind continue;
+        _19 = core::panicking::assert_failed::<usize, usize>(move _18, _12, _13, move _20);
     }
 
     bb3: {

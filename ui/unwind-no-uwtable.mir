@@ -19,7 +19,7 @@ fn unwind() -> () {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -38,7 +38,7 @@ fn increase(_1: &mut u8) -> () {
     }
 
     bb1: {
-        drop(_2) -> [return: bb2, unwind continue];
+        drop(_2) -> bb2;
     }
 
     bb2: {
@@ -94,7 +94,7 @@ fn main() -> () {
         _8 = &mut _1;
         _7 = [closure@ui/unwind-no-uwtable.rs:31:9: 31:11] { count: move _8 };
         _6 = AssertUnwindSafe::<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>(move _7);
-        _5 = catch_unwind::<AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>, ()>(move _6) -> [return: bb1, unwind continue];
+        _5 = catch_unwind::<AssertUnwindSafe<[closure@ui/unwind-no-uwtable.rs:31:9: 31:11]>, ()>(move _6) -> bb1;
     }
 
     bb1: {
@@ -104,7 +104,7 @@ fn main() -> () {
 
     bb2: {
         _2 = Not(move _3);
-        drop(_5) -> [return: bb3, unwind continue];
+        drop(_5) -> bb3;
     }
 
     bb3: {
@@ -112,7 +112,7 @@ fn main() -> () {
     }
 
     bb4: {
-        _9 = core::panicking::panic(const "assertion failed: panic::catch_unwind(AssertUnwindSafe(#[inline(never)] ||\\n                increase(&mut count))).is_err()") -> unwind continue;
+        _9 = core::panicking::panic(const "assertion failed: panic::catch_unwind(AssertUnwindSafe(#[inline(never)] ||\\n                increase(&mut count))).is_err()");
     }
 
     bb5: {
@@ -132,7 +132,7 @@ fn main() -> () {
     bb6: {
         _20 = core::panicking::AssertKind::Eq;
         _22 = Option::<Arguments<'_>>::None;
-        _21 = core::panicking::assert_failed::<u8, u8>(move _20, _14, _15, move _22) -> unwind continue;
+        _21 = core::panicking::assert_failed::<u8, u8>(move _20, _14, _15, move _22);
     }
 
     bb7: {
@@ -155,7 +155,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/unwind-no-uwtable.rs:31:9: 31:11]) -> 
 
     bb0: {
         _2 = deref_copy ((*_1).0: &mut u8);
-        _0 = increase(_2) -> [return: bb1, unwind continue];
+        _0 = increase(_2) -> bb1;
     }
 
     bb1: {

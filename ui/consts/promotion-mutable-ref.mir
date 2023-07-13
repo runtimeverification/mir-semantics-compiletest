@@ -24,12 +24,12 @@ static mut TEST: i32 = {
         _3 = const 0_usize;
         _4 = Len((*_1));
         _5 = Lt(_3, _4);
-        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> [success: bb1, unwind continue];
+        assert(move _5, "index out of bounds: the length is {} but the index is {}", move _4, _3) -> bb1;
     }
 
     bb1: {
         _6 = CheckedAdd((*_1)[_3], const 1_i32);
-        assert(!move (_6.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_1)[_3], const 1_i32) -> [success: bb2, unwind continue];
+        assert(!move (_6.1: bool), "attempt to compute `{} + {}`, which would overflow", (*_1)[_3], const 1_i32) -> bb2;
     }
 
     bb2: {
@@ -39,7 +39,7 @@ static mut TEST: i32 = {
         _7 = const 0_usize;
         _8 = Len((*_1));
         _9 = Lt(_7, _8);
-        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> [success: bb3, unwind continue];
+        assert(move _9, "index out of bounds: the length is {} but the index is {}", move _8, _7) -> bb3;
     }
 
     bb3: {
@@ -64,7 +64,7 @@ static mut TEST2: &mut [i32] = {
         _3 = [const 0_i32, const 1_i32, const 2_i32];
         _2 = &mut _3;
         _1 = &mut (*_2);
-        _0 = move _1 as &mut [i32] (PointerCoercion(Unsize));
+        _0 = move _1 as &mut [i32] (Pointer(Unsize));
         StorageDead(_2);
         StorageDead(_1);
         return;
@@ -118,7 +118,7 @@ fn main() -> () {
     bb1: {
         _13 = core::panicking::AssertKind::Eq;
         _15 = Option::<Arguments<'_>>::None;
-        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15) -> unwind continue;
+        _14 = core::panicking::assert_failed::<i32, i32>(move _13, _7, _8, move _15);
     }
 
     bb2: {

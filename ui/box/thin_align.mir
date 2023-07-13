@@ -44,7 +44,7 @@ fn main() -> () {
         _1 = const "Foo error!";
         _4 = _1;
         _3 = Foo(move _4);
-        _2 = ThinBox::<dyn std::error::Error>::new_unsize::<Foo>(move _3) -> [return: bb1, unwind continue];
+        _2 = ThinBox::<dyn std::error::Error>::new_unsize::<Foo>(move _3) -> bb1;
     }
 
     bb1: {
@@ -82,7 +82,7 @@ fn main() -> () {
     }
 
     bb7: {
-        drop(_2) -> [return: bb8, unwind continue];
+        drop(_2) -> bb8;
     }
 
     bb8: {
@@ -115,8 +115,8 @@ fn <impl at ui/box/thin_align.rs:16:10: 16:15>::fmt(_1: &Foo, _2: &mut Formatter
         _3 = const "Foo";
         _6 = &((*_1).0: &str);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -141,20 +141,20 @@ fn <impl at ui/box/thin_align.rs:20:1: 20:26>::fmt(_1: &Foo, _2: &mut Formatter<
     bb0: {
         _6 = [const ""];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &((*_1).0: &str);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_11) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb2;
     }
 
     bb2: {
-        _0 = Formatter::<'_>::write_fmt(_2, move _3) -> [return: bb3, unwind continue];
+        _0 = Formatter::<'_>::write_fmt(_2, move _3) -> bb3;
     }
 
     bb3: {

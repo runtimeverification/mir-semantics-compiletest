@@ -13,7 +13,7 @@ fn Getter::do_get2(_1: &Self) -> (T, T) {
     }
 
     bb0: {
-        _2 = <Self as Getter<T>>::do_get(_1) -> [return: bb1, unwind continue];
+        _2 = <Self as Getter<T>>::do_get(_1) -> bb1;
     }
 
     bb1: {
@@ -28,7 +28,7 @@ fn Getter::do_get2(_1: &Self) -> (T, T) {
 
     bb3: {
         _0 = (move _3, move _5);
-        drop(_2) -> [return: bb4, unwind continue];
+        drop(_2) -> bb4;
     }
 
     bb4: {
@@ -66,16 +66,16 @@ fn <impl at ui/traits/with-bounds-default.rs:24:1: 24:39>::do_get(_1: &Option<T>
     let mut _4: std::option::Option<&T>;
 
     bb0: {
-        _4 = Option::<T>::as_ref(_1) -> [return: bb1, unwind continue];
+        _4 = Option::<T>::as_ref(_1) -> bb1;
     }
 
     bb1: {
-        _3 = Option::<&T>::unwrap(move _4) -> [return: bb2, unwind continue];
+        _3 = Option::<&T>::unwrap(move _4) -> bb2;
     }
 
     bb2: {
         _2 = _3;
-        _0 = <T as Clone>::clone(move _2) -> [return: bb3, unwind continue];
+        _0 = <T as Clone>::clone(move _2) -> bb3;
     }
 
     bb3: {
@@ -137,7 +137,7 @@ fn main() -> () {
     bb0: {
         _5 = const 3_isize;
         _4 = &_5;
-        _3 = <isize as Getter<isize>>::do_get2(move _4) -> [return: bb1, unwind continue];
+        _3 = <isize as Getter<isize>>::do_get2(move _4) -> bb1;
     }
 
     bb1: {
@@ -147,7 +147,7 @@ fn main() -> () {
         _1 = (move _2, move _6);
         _8 = (_1.0: &(isize, isize));
         _9 = (_1.1: &(isize, isize));
-        _11 = <(isize, isize) as PartialEq>::eq(_8, _9) -> [return: bb2, unwind continue];
+        _11 = <(isize, isize) as PartialEq>::eq(_8, _9) -> bb2;
     }
 
     bb2: {
@@ -158,12 +158,12 @@ fn main() -> () {
     bb3: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<(isize, isize), (isize, isize)>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<(isize, isize), (isize, isize)>(move _12, _8, _9, move _14);
     }
 
     bb4: {
         _21 = const "hi";
-        _20 = <str as ToString>::to_string(_21) -> [return: bb5, unwind continue];
+        _20 = <str as ToString>::to_string(_21) -> bb5;
     }
 
     bb5: {
@@ -212,7 +212,7 @@ fn main() -> () {
     }
 
     bb13: {
-        drop(_19) -> [return: bb14, unwind continue];
+        drop(_19) -> bb14;
     }
 
     bb14: {

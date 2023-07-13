@@ -30,7 +30,7 @@ fn eq(_1: T, _2: T) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -57,10 +57,10 @@ fn main() -> () {
     }
 
     bb0: {
-        _1 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
-        _3 = foo as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
-        _4 = bar as fn(isize) -> isize (PointerCoercion(ReifyFnPointer));
-        _2 = eq::<fn(isize) -> isize>(move _3, move _4) -> [return: bb1, unwind continue];
+        _1 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _3 = foo as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _4 = bar as fn(isize) -> isize (Pointer(ReifyFnPointer));
+        _2 = eq::<fn(isize) -> isize>(move _3, move _4) -> bb1;
     }
 
     bb1: {

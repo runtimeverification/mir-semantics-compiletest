@@ -46,20 +46,20 @@ fn <impl at ui/consts/issue-90762.rs:8:1: 8:20>::drop(_1: &mut Print) -> () {
     bb0: {
         _6 = [const "", const "\n"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _11 = &((*_1).0: usize);
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_11) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> [return: bb2, unwind continue];
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _3 = Arguments::<'_>::new_v1(move _4, move _7) -> bb2;
     }
 
     bb2: {
-        _2 = _print(move _3) -> [return: bb3, unwind continue];
+        _2 = _print(move _3) -> bb3;
     }
 
     bb3: {
@@ -67,19 +67,19 @@ fn <impl at ui/consts/issue-90762.rs:8:1: 8:20>::drop(_1: &mut Print) -> () {
         _15 = ((*_1).0: usize);
         _16 = const 3_usize;
         _17 = Lt(_15, _16);
-        assert(move _17, "index out of bounds: the length is {} but the index is {}", move _16, _15) -> [success: bb4, unwind continue];
+        assert(move _17, "index out of bounds: the length is {} but the index is {}", move _16, _15) -> bb4;
     }
 
     bb4: {
         _13 = &(*_14)[_15];
         _18 = Relaxed;
-        _12 = AtomicBool::store(move _13, const true, move _18) -> [return: bb5, unwind continue];
+        _12 = AtomicBool::store(move _13, const true, move _18) -> bb5;
     }
 
     bb5: {
         _22 = const {alloc2: &AtomicUsize};
         _23 = Relaxed;
-        _21 = AtomicUsize::fetch_sub(_22, const 1_usize, move _23) -> [return: bb6, unwind continue];
+        _21 = AtomicUsize::fetch_sub(_22, const 1_usize, move _23) -> bb6;
     }
 
     bb6: {
@@ -98,7 +98,7 @@ fn <impl at ui/consts/issue-90762.rs:8:1: 8:20>::drop(_1: &mut Print) -> () {
     bb7: {
         _31 = core::panicking::AssertKind::Eq;
         _33 = Option::<Arguments<'_>>::None;
-        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33) -> unwind continue;
+        _32 = core::panicking::assert_failed::<usize, usize>(move _31, _25, _26, move _33);
     }
 
     bb8: {
@@ -141,19 +141,19 @@ static FOO: [AtomicBool; 3] = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = AtomicBool::new(const false) -> [return: bb1, unwind continue];
+        _1 = AtomicBool::new(const false) -> bb1;
     }
 
     bb1: {
         StorageLive(_2);
         ConstEvalCounter;
-        _2 = AtomicBool::new(const false) -> [return: bb2, unwind continue];
+        _2 = AtomicBool::new(const false) -> bb2;
     }
 
     bb2: {
         StorageLive(_3);
         ConstEvalCounter;
-        _3 = AtomicBool::new(const false) -> [return: bb3, unwind continue];
+        _3 = AtomicBool::new(const false) -> bb3;
     }
 
     bb3: {
@@ -179,7 +179,7 @@ static BAR: AtomicUsize = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = AtomicUsize::new(const 2_usize) -> [return: bb1, unwind continue];
+        _0 = AtomicUsize::new(const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -259,21 +259,21 @@ fn main() -> () {
     }
 
     bb2: {
-        drop(_1) -> [return: bb3, unwind continue];
+        drop(_1) -> bb3;
     }
 
     bb3: {
         _8 = const {alloc1: &[AtomicBool; 3]};
-        _7 = _8 as &[std::sync::atomic::AtomicBool] (PointerCoercion(Unsize));
-        _6 = core::slice::<impl [AtomicBool]>::iter(move _7) -> [return: bb4, unwind continue];
+        _7 = _8 as &[std::sync::atomic::AtomicBool] (Pointer(Unsize));
+        _6 = core::slice::<impl [AtomicBool]>::iter(move _7) -> bb4;
     }
 
     bb4: {
-        _5 = <std::slice::Iter<'_, AtomicBool> as Iterator>::enumerate(move _6) -> [return: bb5, unwind continue];
+        _5 = <std::slice::Iter<'_, AtomicBool> as Iterator>::enumerate(move _6) -> bb5;
     }
 
     bb5: {
-        _4 = <Enumerate<std::slice::Iter<'_, AtomicBool>> as IntoIterator>::into_iter(move _5) -> [return: bb6, unwind continue];
+        _4 = <Enumerate<std::slice::Iter<'_, AtomicBool>> as IntoIterator>::into_iter(move _5) -> bb6;
     }
 
     bb6: {
@@ -283,7 +283,7 @@ fn main() -> () {
 
     bb7: {
         _11 = &mut _9;
-        _10 = <Enumerate<std::slice::Iter<'_, AtomicBool>> as Iterator>::next(_11) -> [return: bb8, unwind continue];
+        _10 = <Enumerate<std::slice::Iter<'_, AtomicBool>> as Iterator>::next(_11) -> bb8;
     }
 
     bb8: {
@@ -295,7 +295,7 @@ fn main() -> () {
         _13 = (((_10 as Some).0: (usize, &std::sync::atomic::AtomicBool)).0: usize);
         _14 = (((_10 as Some).0: (usize, &std::sync::atomic::AtomicBool)).1: &std::sync::atomic::AtomicBool);
         _17 = Relaxed;
-        _16 = AtomicBool::load(_14, move _17) -> [return: bb12, unwind continue];
+        _16 = AtomicBool::load(_14, move _17) -> bb12;
     }
 
     bb10: {
@@ -305,7 +305,7 @@ fn main() -> () {
     bb11: {
         _31 = const {alloc2: &AtomicUsize};
         _32 = Relaxed;
-        _30 = AtomicUsize::fetch_add(_31, const 1_usize, move _32) -> [return: bb16, unwind continue];
+        _30 = AtomicUsize::fetch_add(_31, const 1_usize, move _32) -> bb16;
     }
 
     bb12: {
@@ -316,25 +316,25 @@ fn main() -> () {
     bb13: {
         _22 = [const "", const " not set"];
         _21 = &_22;
-        _20 = _21 as &[&str] (PointerCoercion(Unsize));
+        _20 = _21 as &[&str] (Pointer(Unsize));
         _27 = &_13;
-        _26 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_27) -> [return: bb14, unwind continue];
+        _26 = core::fmt::rt::Argument::<'_>::new_display::<usize>(_27) -> bb14;
     }
 
     bb14: {
         _25 = [move _26];
         _24 = &_25;
-        _23 = _24 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> [return: bb15, unwind continue];
+        _23 = _24 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _19 = Arguments::<'_>::new_v1(move _20, move _23) -> bb15;
     }
 
     bb15: {
-        _18 = panic_fmt(move _19) -> unwind continue;
+        _18 = panic_fmt(move _19);
     }
 
     bb16: {
         _29 = &_30;
-        _34 = core::num::<impl usize>::max_value() -> [return: bb17, unwind continue];
+        _34 = core::num::<impl usize>::max_value() -> bb17;
     }
 
     bb17: {
@@ -352,7 +352,7 @@ fn main() -> () {
     bb18: {
         _41 = core::panicking::AssertKind::Eq;
         _43 = Option::<Arguments<'_>>::None;
-        _42 = core::panicking::assert_failed::<usize, usize>(move _41, _35, _36, move _43) -> unwind continue;
+        _42 = core::panicking::assert_failed::<usize, usize>(move _41, _35, _36, move _43);
     }
 
     bb19: {

@@ -4,7 +4,7 @@ fn foo() -> impl Into<for<'a> fn(&'a ())> {
     let mut _0: impl std::convert::Into<for<'a> fn(&'a ())>;
 
     bb0: {
-        _0 = const ZeroSized: [closure@ui/impl-trait/issue-51185.rs:3:6: 3:9] as for<'a> fn(&'a ()) (PointerCoercion(ClosureFnPointer(Normal)));
+        _0 = const ZeroSized: [closure@ui/impl-trait/issue-51185.rs:3:6: 3:9] as for<'a> fn(&'a ()) (Pointer(ClosureFnPointer(Normal)));
         return;
     }
 }
@@ -26,16 +26,16 @@ fn main() -> () {
     let _5: ();
 
     bb0: {
-        _3 = foo() -> [return: bb1, unwind continue];
+        _3 = foo() -> bb1;
     }
 
     bb1: {
-        _2 = <impl Into<for<'a> fn(&'a ())> as Into<for<'a> fn(&'a ())>>::into(move _3) -> [return: bb2, unwind continue];
+        _2 = <impl Into<for<'a> fn(&'a ())> as Into<for<'a> fn(&'a ())>>::into(move _3) -> bb2;
     }
 
     bb2: {
         _4 = &_5;
-        _1 = move _2(_4) -> [return: bb3, unwind continue];
+        _1 = move _2(_4) -> bb3;
     }
 
     bb3: {

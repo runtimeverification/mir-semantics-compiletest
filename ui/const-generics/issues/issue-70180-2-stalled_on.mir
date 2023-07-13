@@ -12,12 +12,12 @@ fn works() -> () {
     }
 
     bb0: {
-        _1 = default_byte_array::<4>() -> [return: bb1, unwind continue];
+        _1 = default_byte_array::<4>() -> bb1;
     }
 
     bb1: {
         _3 = &_1;
-        _2 = <[u8; 4] as Foo<i32>>::foo(_3) -> [return: bb2, unwind continue];
+        _2 = <[u8; 4] as Foo<i32>>::foo(_3) -> bb2;
     }
 
     bb2: {
@@ -46,12 +46,12 @@ fn didnt_work() -> () {
     }
 
     bb0: {
-        _1 = default_byte_array::<4>() -> [return: bb1, unwind continue];
+        _1 = default_byte_array::<4>() -> bb1;
     }
 
     bb1: {
         _3 = &_1;
-        _2 = <[u8; 4] as Foo<i32>>::foo(_3) -> [return: bb2, unwind continue];
+        _2 = <[u8; 4] as Foo<i32>>::foo(_3) -> bb2;
     }
 
     bb2: {
@@ -99,7 +99,7 @@ fn default_byte_array() -> [u8; N] {
     let mut _0: [u8; N];
 
     bb0: {
-        _0 = <[u8; N] as Default>::default() -> [return: bb1, unwind continue];
+        _0 = <[u8; N] as Default>::default() -> bb1;
     }
 
     bb1: {
@@ -131,11 +131,11 @@ fn main() -> () {
     let _2: ();
 
     bb0: {
-        _1 = works() -> [return: bb1, unwind continue];
+        _1 = works() -> bb1;
     }
 
     bb1: {
-        _2 = didnt_work() -> [return: bb2, unwind continue];
+        _2 = didnt_work() -> bb2;
     }
 
     bb2: {

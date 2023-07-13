@@ -5,7 +5,7 @@ const DANGLING: NonNull<u32> = {
 
     bb0: {
         ConstEvalCounter;
-        _0 = NonNull::<u32>::dangling() -> [return: bb1, unwind continue];
+        _0 = NonNull::<u32>::dangling() -> bb1;
     }
 
     bb1: {
@@ -20,12 +20,12 @@ const CASTED: NonNull<u32> = {
     bb0: {
         StorageLive(_1);
         ConstEvalCounter;
-        _1 = NonNull::<i32>::dangling() -> [return: bb1, unwind continue];
+        _1 = NonNull::<i32>::dangling() -> bb1;
     }
 
     bb1: {
         ConstEvalCounter;
-        _0 = NonNull::<i32>::cast::<u32>(move _1) -> [return: bb2, unwind continue];
+        _0 = NonNull::<i32>::cast::<u32>(move _1) -> bb2;
     }
 
     bb2: {
@@ -82,12 +82,12 @@ fn main() -> () {
     bb0: {
         _3 = const _;
         _2 = &_3;
-        _7 = NonNull::<u32>::dangling as fn() -> std::ptr::NonNull<u32> (PointerCoercion(ReifyFnPointer));
-        _6 = test::black_box::<fn() -> NonNull<u32>>(move _7) -> [return: bb1, unwind continue];
+        _7 = NonNull::<u32>::dangling as fn() -> std::ptr::NonNull<u32> (Pointer(ReifyFnPointer));
+        _6 = test::black_box::<fn() -> NonNull<u32>>(move _7) -> bb1;
     }
 
     bb1: {
-        _5 = move _6() -> [return: bb2, unwind continue];
+        _5 = move _6() -> bb2;
     }
 
     bb2: {
@@ -95,7 +95,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _8 = (_1.0: &std::ptr::NonNull<u32>);
         _9 = (_1.1: &std::ptr::NonNull<u32>);
-        _11 = <NonNull<u32> as PartialEq>::eq(_8, _9) -> [return: bb3, unwind continue];
+        _11 = <NonNull<u32> as PartialEq>::eq(_8, _9) -> bb3;
     }
 
     bb3: {
@@ -106,18 +106,18 @@ fn main() -> () {
     bb4: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<NonNull<u32>, NonNull<u32>>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<NonNull<u32>, NonNull<u32>>(move _12, _8, _9, move _14);
     }
 
     bb5: {
         _17 = const _;
         _16 = &_17;
-        _21 = NonNull::<u32>::dangling as fn() -> std::ptr::NonNull<u32> (PointerCoercion(ReifyFnPointer));
-        _20 = test::black_box::<fn() -> NonNull<u32>>(move _21) -> [return: bb6, unwind continue];
+        _21 = NonNull::<u32>::dangling as fn() -> std::ptr::NonNull<u32> (Pointer(ReifyFnPointer));
+        _20 = test::black_box::<fn() -> NonNull<u32>>(move _21) -> bb6;
     }
 
     bb6: {
-        _19 = move _20() -> [return: bb7, unwind continue];
+        _19 = move _20() -> bb7;
     }
 
     bb7: {
@@ -125,7 +125,7 @@ fn main() -> () {
         _15 = (move _16, move _18);
         _22 = (_15.0: &std::ptr::NonNull<u32>);
         _23 = (_15.1: &std::ptr::NonNull<u32>);
-        _25 = <NonNull<u32> as PartialEq>::eq(_22, _23) -> [return: bb8, unwind continue];
+        _25 = <NonNull<u32> as PartialEq>::eq(_22, _23) -> bb8;
     }
 
     bb8: {
@@ -136,7 +136,7 @@ fn main() -> () {
     bb9: {
         _26 = core::panicking::AssertKind::Eq;
         _28 = Option::<Arguments<'_>>::None;
-        _27 = core::panicking::assert_failed::<NonNull<u32>, NonNull<u32>>(move _26, _22, _23, move _28) -> unwind continue;
+        _27 = core::panicking::assert_failed::<NonNull<u32>, NonNull<u32>>(move _26, _22, _23, move _28);
     }
 
     bb10: {

@@ -42,12 +42,12 @@ fn check_align(_1: *const Aligned) -> () {
 
     bb0: {
         _5 = _1 as usize (PointerExposeAddress);
-        _6 = align_of::<Aligned>() -> [return: bb1, unwind continue];
+        _6 = align_of::<Aligned>() -> bb1;
     }
 
     bb1: {
         _7 = Eq(_6, const 0_usize);
-        assert(!move _7, "attempt to calculate the remainder of `{}` with a divisor of zero", _5) -> [success: bb2, unwind continue];
+        assert(!move _7, "attempt to calculate the remainder of `{}` with a divisor of zero", _5) -> bb2;
     }
 
     bb2: {
@@ -68,7 +68,7 @@ fn check_align(_1: *const Aligned) -> () {
     bb3: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18);
     }
 
     bb4: {
@@ -89,12 +89,12 @@ fn <impl at ui/deriving/deriving-with-repr-packed.rs:16:1: 16:27>::eq(_1: &Align
 
     bb0: {
         _4 = &raw const (*_1);
-        _3 = check_align(move _4) -> [return: bb1, unwind continue];
+        _3 = check_align(move _4) -> bb1;
     }
 
     bb1: {
         _6 = &raw const (*_2);
-        _5 = check_align(move _6) -> [return: bb2, unwind continue];
+        _5 = check_align(move _6) -> bb2;
     }
 
     bb2: {
@@ -137,7 +137,7 @@ fn <impl at ui/deriving/deriving-with-repr-packed.rs:25:23: 25:32>::eq(_1: &Pack
         _4 = &_5;
         _7 = ((*_2).0: Aligned);
         _6 = &_7;
-        _3 = <Aligned as PartialEq>::eq(move _4, move _6) -> [return: bb4, unwind continue];
+        _3 = <Aligned as PartialEq>::eq(move _4, move _6) -> bb4;
     }
 
     bb1: {
@@ -150,7 +150,7 @@ fn <impl at ui/deriving/deriving-with-repr-packed.rs:25:23: 25:32>::eq(_1: &Pack
         _9 = &_10;
         _12 = ((*_2).1: Aligned);
         _11 = &_12;
-        _8 = <Aligned as PartialEq>::eq(move _9, move _11) -> [return: bb5, unwind continue];
+        _8 = <Aligned as PartialEq>::eq(move _9, move _11) -> bb5;
     }
 
     bb3: {
@@ -193,7 +193,7 @@ fn <impl at ui/deriving/deriving-with-repr-packed.rs:28:10: 28:19>::eq(_1: &Deal
     bb2: {
         _7 = &((*_1).1: T);
         _8 = &((*_2).1: T);
-        _6 = <T as PartialEq>::eq(move _7, move _8) -> [return: bb4, unwind continue];
+        _6 = <T as PartialEq>::eq(move _7, move _8) -> bb4;
     }
 
     bb3: {
@@ -232,7 +232,7 @@ fn main() -> () {
         _1 = Dealigned::<Packed>(const 0_u8, move _2);
         _6 = &_1;
         _7 = &_1;
-        _5 = <Dealigned<Packed> as PartialEq>::eq(move _6, move _7) -> [return: bb1, unwind continue];
+        _5 = <Dealigned<Packed> as PartialEq>::eq(move _6, move _7) -> bb1;
     }
 
     bb1: {
@@ -242,7 +242,7 @@ fn main() -> () {
     }
 
     bb2: {
-        _10 = core::panicking::panic(const "assertion failed: ck") -> unwind continue;
+        _10 = core::panicking::panic(const "assertion failed: ck");
     }
 
     bb3: {

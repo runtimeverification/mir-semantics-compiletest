@@ -15,7 +15,7 @@
 
     bb0: {
         _1 = CheckedAdd(const 1_usize, const 2_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 1_usize, const 2_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const 1_usize, const 2_usize) -> bb1;
     }
 
     bb1: {
@@ -58,7 +58,7 @@ fn bug() -> () {
     let _3: <[u8; N] as Foo>::Output;
 
     bb0: {
-        _3 = <[u8; N] as Foo>::foo() -> [return: bb1, unwind continue];
+        _3 = <[u8; N] as Foo>::foo() -> bb1;
     }
 
     bb1: {
@@ -67,7 +67,7 @@ fn bug() -> () {
     }
 
     bb2: {
-        drop(_3) -> [return: bb3, unwind continue];
+        drop(_3) -> bb3;
     }
 
     bb3: {
@@ -115,7 +115,7 @@ fn main() -> () {
     let _1: ();
 
     bb0: {
-        _1 = bug::<3>() -> [return: bb1, unwind continue];
+        _1 = bug::<3>() -> bb1;
     }
 
     bb1: {

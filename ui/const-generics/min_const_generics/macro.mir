@@ -54,7 +54,7 @@ fn from_marker(_1: impl Marker<{     #[macro_export]     macro_rules! inline { (
     let mut _0: ();
 
     bb0: {
-        drop(_1) -> [return: bb1, unwind continue];
+        drop(_1) -> bb1;
     }
 
     bb1: {
@@ -113,7 +113,7 @@ fn main() -> () {
         _1 = [const 0_i32, const 0_i32, const 0_i32];
         _5 = [const 0_i32; 3];
         _6 = [const 0_i32; 3];
-        _8 = make_marker() -> [return: bb1, unwind continue];
+        _8 = make_marker() -> bb1;
     }
 
     bb1: {
@@ -123,7 +123,7 @@ fn main() -> () {
 }>>(const ZeroSized: impl Marker<{
     #[macro_export]
     macro_rules! const_macro { () => {{ 3 }} } inline!()
-}>) -> [return: bb2, unwind continue];
+}>) -> bb2;
     }
 
     bb2: {

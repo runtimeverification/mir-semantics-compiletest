@@ -24,8 +24,8 @@ fn <impl at ui/deriving/issue-19358.rs:7:10: 7:15>::fmt(_1: &Foo<T>, _2: &mut Fo
         _4 = const "foo";
         _7 = &((*_1).0: T);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -48,8 +48,8 @@ fn <impl at ui/deriving/issue-19358.rs:12:10: 12:15>::fmt(_1: &Bar<T>, _2: &mut 
         _4 = const "bar";
         _7 = &((*_1).0: T);
         _6 = &_7;
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> [return: bb1, unwind continue];
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field1_finish(_2, _3, _4, move _5) -> bb1;
     }
 
     bb1: {
@@ -85,25 +85,25 @@ fn main() -> () {
         _2 = Bar::<isize> { bar: const 12_isize };
         _7 = [const "", const " ", const "\n"];
         _6 = &_7;
-        _5 = _6 as &[&str] (PointerCoercion(Unsize));
+        _5 = _6 as &[&str] (Pointer(Unsize));
         _12 = &_1;
-        _11 = core::fmt::rt::Argument::<'_>::new_debug::<Foo<isize>>(_12) -> [return: bb1, unwind continue];
+        _11 = core::fmt::rt::Argument::<'_>::new_debug::<Foo<isize>>(_12) -> bb1;
     }
 
     bb1: {
         _14 = &_2;
-        _13 = core::fmt::rt::Argument::<'_>::new_debug::<Bar<isize>>(_14) -> [return: bb2, unwind continue];
+        _13 = core::fmt::rt::Argument::<'_>::new_debug::<Bar<isize>>(_14) -> bb2;
     }
 
     bb2: {
         _10 = [move _11, move _13];
         _9 = &_10;
-        _8 = _9 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> [return: bb3, unwind continue];
+        _8 = _9 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _4 = Arguments::<'_>::new_v1(move _5, move _8) -> bb3;
     }
 
     bb3: {
-        _3 = _print(move _4) -> [return: bb4, unwind continue];
+        _3 = _print(move _4) -> bb4;
     }
 
     bb4: {

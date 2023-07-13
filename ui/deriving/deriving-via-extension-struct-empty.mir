@@ -19,7 +19,7 @@ fn <impl at ui/deriving/deriving-via-extension-struct-empty.rs:2:21: 2:26>::fmt(
 
     bb0: {
         _3 = const "Foo";
-        _0 = Formatter::<'_>::write_str(_2, _3) -> [return: bb1, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, _3) -> bb1;
     }
 
     bb1: {
@@ -63,7 +63,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &Foo);
         _7 = (_1.1: &Foo);
-        _9 = <Foo as PartialEq>::eq(_6, _7) -> [return: bb1, unwind continue];
+        _9 = <Foo as PartialEq>::eq(_6, _7) -> bb1;
     }
 
     bb1: {
@@ -74,13 +74,13 @@ fn main() -> () {
     bb2: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<Foo, Foo>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<Foo, Foo>(move _10, _6, _7, move _12);
     }
 
     bb3: {
         _16 = &_17;
         _18 = &_19;
-        _15 = <Foo as PartialEq>::ne(move _16, move _18) -> [return: bb4, unwind continue];
+        _15 = <Foo as PartialEq>::ne(move _16, move _18) -> bb4;
     }
 
     bb4: {
@@ -90,7 +90,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _20 = core::panicking::panic(const "assertion failed: !(Foo != Foo)") -> unwind continue;
+        _20 = core::panicking::panic(const "assertion failed: !(Foo != Foo)");
     }
 
     bb6: {

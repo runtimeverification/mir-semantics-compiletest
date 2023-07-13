@@ -82,11 +82,11 @@ fn find_zombies() -> () {
     }
 
     bb0: {
-        _1 = getpid() -> [return: bb1, unwind continue];
+        _1 = getpid() -> bb1;
     }
 
     bb1: {
-        _7 = Command::new::<&str>(const "ps") -> [return: bb2, unwind continue];
+        _7 = Command::new::<&str>(const "ps") -> bb2;
     }
 
     bb2: {
@@ -260,7 +260,7 @@ fn find_zombies() -> () {
     bb36: {
         _55 = [const "Zombie child "];
         _54 = &_55;
-        _53 = _54 as &[&str] (PointerCoercion(Unsize));
+        _53 = _54 as &[&str] (Pointer(Unsize));
         _60 = &_27;
         _59 = core::fmt::rt::Argument::<'_>::new_display::<&str>(_60) -> [return: bb37, unwind: bb41];
     }
@@ -268,7 +268,7 @@ fn find_zombies() -> () {
     bb37: {
         _58 = [move _59];
         _57 = &_58;
-        _56 = _57 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _56 = _57 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _52 = Arguments::<'_>::new_v1(move _53, move _56) -> [return: bb38, unwind: bb41];
     }
 
@@ -277,7 +277,7 @@ fn find_zombies() -> () {
     }
 
     bb39: {
-        drop(_2) -> [return: bb40, unwind continue];
+        drop(_2) -> bb40;
     }
 
     bb40: {
@@ -309,7 +309,7 @@ fn find_zombies::{closure#0}(_1: &mut [closure@ui/wait-forked-but-failed-child.r
 
     bb0: {
         _4 = deref_copy (*_2);
-        _3 = core::str::<impl str>::len(_4) -> [return: bb1, unwind continue];
+        _3 = core::str::<impl str>::len(_4) -> bb1;
     }
 
     bb1: {
@@ -361,74 +361,77 @@ fn main() -> () {
     bb0: {
         _6 = [const "/NoSuchCommand"];
         _5 = &_6;
-        _4 = _5 as &[&str] (PointerCoercion(Unsize));
+        _4 = _5 as &[&str] (Pointer(Unsize));
         _12 = const 0_u8;
         _11 = &_12;
-        _10 = core::fmt::rt::Argument::<'_>::new_display::<u8>(_11) -> [return: bb1, unwind continue];
+        _10 = core::fmt::rt::Argument::<'_>::new_display::<u8>(_11) -> bb1;
     }
 
     bb1: {
         _9 = [move _10];
         _8 = &_9;
-        _7 = _8 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _7 = _8 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _17 = core::fmt::rt::Alignment::Unknown;
         _18 = core::fmt::rt::Count::Implied;
-        _19 = core::fmt::rt::Count::Is(const 300_usize);
-        _16 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _17, const 8_u32, move _18, move _19) -> [return: bb2, unwind continue];
+        _19 = core::fmt::rt::Count::Is(const 300_usize) -> bb2;
     }
 
     bb2: {
-        _15 = [move _16];
-        _14 = &_15;
-        _13 = _14 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
-        _20 = core::fmt::rt::UnsafeArg::new() -> [return: bb3, unwind continue];
+        _16 = core::fmt::rt::Placeholder::new(const 0_usize, const ' ', move _17, const 8_u32, move _18, move _19) -> bb3;
     }
 
     bb3: {
-        _3 = Arguments::<'_>::new_v1_formatted(move _4, move _7, move _13, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> [return: bb4, unwind continue];
+        _15 = [move _16];
+        _14 = &_15;
+        _13 = _14 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
+        _20 = core::fmt::rt::UnsafeArg::new() -> bb4;
     }
 
     bb4: {
-        _2 = format(move _3) -> [return: bb5, unwind continue];
+        _3 = Arguments::<'_>::new_v1_formatted(move _4, move _7, move _13, const core::fmt::rt::UnsafeArg {{ _private: () }}) -> bb5;
     }
 
     bb5: {
+        _2 = format(move _3) -> bb6;
+    }
+
+    bb6: {
         _1 = move _2;
         _23 = std::ops::Range::<i32> { start: const 0_i32, end: const 100_i32 };
         _25 = &_1;
         _24 = [closure@ui/wait-forked-but-failed-child.rs:55:34: 55:37] { too_long: move _25 };
-        _22 = <std::ops::Range<i32> as Iterator>::map::<Result<Child, std::io::Error>, [closure@ui/wait-forked-but-failed-child.rs:55:34: 55:37]>(move _23, move _24) -> [return: bb6, unwind: bb12];
-    }
-
-    bb6: {
-        _21 = <Map<std::ops::Range<i32>, [closure@ui/wait-forked-but-failed-child.rs:55:34: 55:37]> as Iterator>::collect::<Vec<Result<Child, std::io::Error>>>(move _22) -> [return: bb7, unwind: bb12];
+        _22 = <std::ops::Range<i32> as Iterator>::map::<Result<Child, std::io::Error>, [closure@ui/wait-forked-but-failed-child.rs:55:34: 55:37]>(move _23, move _24) -> [return: bb7, unwind: bb13];
     }
 
     bb7: {
-        _26 = find_zombies() -> [return: bb8, unwind: bb11];
+        _21 = <Map<std::ops::Range<i32>, [closure@ui/wait-forked-but-failed-child.rs:55:34: 55:37]> as Iterator>::collect::<Vec<Result<Child, std::io::Error>>>(move _22) -> [return: bb8, unwind: bb13];
     }
 
     bb8: {
-        drop(_21) -> [return: bb9, unwind: bb12];
+        _26 = find_zombies() -> [return: bb9, unwind: bb12];
     }
 
     bb9: {
-        drop(_1) -> [return: bb10, unwind continue];
+        drop(_21) -> [return: bb10, unwind: bb13];
     }
 
     bb10: {
+        drop(_1) -> bb11;
+    }
+
+    bb11: {
         return;
     }
 
-    bb11 (cleanup): {
-        drop(_21) -> [return: bb12, unwind terminate];
-    }
-
     bb12 (cleanup): {
-        drop(_1) -> [return: bb13, unwind terminate];
+        drop(_21) -> [return: bb13, unwind terminate];
     }
 
     bb13 (cleanup): {
+        drop(_1) -> [return: bb14, unwind terminate];
+    }
+
+    bb14 (cleanup): {
         resume;
     }
 }
@@ -462,7 +465,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/wait-forked-but-failed-child.rs:55:34:
 
     bb0: {
         _19 = deref_copy ((*_1).0: &std::string::String);
-        _3 = Command::new::<&String>(_19) -> [return: bb1, unwind continue];
+        _3 = Command::new::<&String>(_19) -> bb1;
     }
 
     bb1: {
@@ -483,7 +486,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/wait-forked-but-failed-child.rs:55:34:
     bb4: {
         _13 = [const "Make sure the command fails to spawn(): "];
         _12 = &_13;
-        _11 = _12 as &[&str] (PointerCoercion(Unsize));
+        _11 = _12 as &[&str] (Pointer(Unsize));
         _18 = &_3;
         _17 = core::fmt::rt::Argument::<'_>::new_debug::<Command>(_18) -> [return: bb5, unwind: bb9];
     }
@@ -491,7 +494,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/wait-forked-but-failed-child.rs:55:34:
     bb5: {
         _16 = [move _17];
         _15 = &_16;
-        _14 = _15 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _14 = _15 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _10 = Arguments::<'_>::new_v1(move _11, move _14) -> [return: bb6, unwind: bb9];
     }
 
@@ -501,7 +504,7 @@ fn main::{closure#0}(_1: &mut [closure@ui/wait-forked-but-failed-child.rs:55:34:
 
     bb7: {
         _0 = move _4;
-        drop(_3) -> [return: bb8, unwind continue];
+        drop(_3) -> bb8;
     }
 
     bb8: {

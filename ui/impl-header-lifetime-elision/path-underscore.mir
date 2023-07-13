@@ -17,7 +17,7 @@ fn impls_my_trait_val(_1: T) -> () {
     }
 
     bb1: {
-        drop(_1) -> [return: bb2, unwind continue];
+        drop(_1) -> bb2;
     }
 
     bb2: {
@@ -60,15 +60,15 @@ fn main() -> () {
         _1 = const 22_u32;
         _3 = &_1;
         _2 = Foo::<'_> { x: _3 };
-        _4 = impls_my_trait_val::<Foo<'_>>(move _2) -> [return: bb1, unwind continue];
+        _4 = impls_my_trait_val::<Foo<'_>>(move _2) -> bb1;
     }
 
     bb1: {
-        _5 = impls_my_trait::<Foo<'_>>() -> [return: bb2, unwind continue];
+        _5 = impls_my_trait::<Foo<'_>>() -> bb2;
     }
 
     bb2: {
-        _6 = random_where_clause() -> [return: bb3, unwind continue];
+        _6 = random_where_clause() -> bb3;
     }
 
     bb3: {

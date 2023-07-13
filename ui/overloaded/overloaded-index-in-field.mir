@@ -94,12 +94,12 @@ fn main() -> () {
         _2 = Foo { x: const 1_isize, y: const 2_isize };
         _1 = Bar { foo: move _2 };
         _8 = &(_1.0: Foo);
-        _7 = <Foo as Index<isize>>::index(move _8, const 1_isize) -> [return: bb1, unwind continue];
+        _7 = <Foo as Index<isize>>::index(move _8, const 1_isize) -> bb1;
     }
 
     bb1: {
         _6 = (*_7);
-        _5 = <isize as Int>::get(move _6) -> [return: bb2, unwind continue];
+        _5 = <isize as Int>::get(move _6) -> bb2;
     }
 
     bb2: {
@@ -119,7 +119,7 @@ fn main() -> () {
     bb3: {
         _17 = core::panicking::AssertKind::Eq;
         _19 = Option::<Arguments<'_>>::None;
-        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19) -> unwind continue;
+        _18 = core::panicking::assert_failed::<isize, isize>(move _17, _11, _12, move _19);
     }
 
     bb4: {

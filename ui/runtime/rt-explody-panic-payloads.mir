@@ -6,7 +6,7 @@ fn <impl at ui/runtime/rt-explody-panic-payloads.rs:11:1: 11:19>::drop(_1: &mut 
     let _2: !;
 
     bb0: {
-        _2 = panic_any::<Bomb>(const Bomb) -> unwind continue;
+        _2 = panic_any::<Bomb>(const Bomb);
     }
 }
 
@@ -74,11 +74,11 @@ fn main() -> () {
     }
 
     bb0: {
-        _2 = args() -> [return: bb1, unwind continue];
+        _2 = args() -> bb1;
     }
 
     bb1: {
-        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> [return: bb2, unwind continue];
+        _1 = <Args as Iterator>::collect::<Vec<String>>(move _2) -> bb2;
     }
 
     bb2: {
@@ -126,7 +126,7 @@ fn main() -> () {
     bb10: {
         _23 = [const "", const "\n"];
         _22 = &_23;
-        _21 = _22 as &[&str] (PointerCoercion(Unsize));
+        _21 = _22 as &[&str] (Pointer(Unsize));
         _28 = &_3;
         _27 = core::fmt::rt::Argument::<'_>::new_debug::<Output>(_28) -> [return: bb11, unwind: bb25];
     }
@@ -134,7 +134,7 @@ fn main() -> () {
     bb11: {
         _26 = [move _27];
         _25 = &_26;
-        _24 = _25 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
+        _24 = _25 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
         _33 = core::fmt::rt::Alignment::Unknown;
         _34 = core::fmt::rt::Count::Implied;
         _35 = core::fmt::rt::Count::Implied;
@@ -144,7 +144,7 @@ fn main() -> () {
     bb12: {
         _31 = [move _32];
         _30 = &_31;
-        _29 = _30 as &[core::fmt::rt::Placeholder] (PointerCoercion(Unsize));
+        _29 = _30 as &[core::fmt::rt::Placeholder] (Pointer(Unsize));
         _36 = core::fmt::rt::UnsafeArg::new() -> [return: bb13, unwind: bb25];
     }
 
@@ -193,7 +193,7 @@ fn main() -> () {
     }
 
     bb23: {
-        drop(_1) -> [return: bb24, unwind continue];
+        drop(_1) -> bb24;
     }
 
     bb24: {
@@ -223,11 +223,11 @@ fn main::{closure#0}(_1: [closure@ui/runtime/rt-explody-panic-payloads.rs:26:14:
     let mut _3: std::option::Option<&str>;
 
     bb0: {
-        _3 = core::str::<impl str>::strip_suffix::<'_, &str>(_2, const "qemu: uncaught target signal 6 (Aborted) - core dumped\n") -> [return: bb1, unwind continue];
+        _3 = core::str::<impl str>::strip_suffix::<'_, &str>(_2, const "qemu: uncaught target signal 6 (Aborted) - core dumped\n") -> bb1;
     }
 
     bb1: {
-        _0 = Option::<&str>::unwrap_or(move _3, _2) -> [return: bb2, unwind continue];
+        _0 = Option::<&str>::unwrap_or(move _3, _2) -> bb2;
     }
 
     bb2: {
@@ -240,7 +240,7 @@ fn main::{closure#1}(_1: [closure@ui/runtime/rt-explody-panic-payloads.rs:31:14:
     let mut _0: bool;
 
     bb0: {
-        _0 = core::str::<impl str>::ends_with::<'_, &str>(_2, const "fatal runtime error: drop of the panic payload panicked\n") -> [return: bb1, unwind continue];
+        _0 = core::str::<impl str>::ends_with::<'_, &str>(_2, const "fatal runtime error: drop of the panic payload panicked\n") -> bb1;
     }
 
     bb1: {

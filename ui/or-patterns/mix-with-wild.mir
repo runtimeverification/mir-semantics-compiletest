@@ -26,7 +26,7 @@ fn main() -> () {
 
     bb0: {
         _3 = Option::<usize>::Some(const 42_usize);
-        _2 = test(move _3) -> [return: bb1, unwind continue];
+        _2 = test(move _3) -> bb1;
     }
 
     bb1: {
@@ -35,12 +35,12 @@ fn main() -> () {
     }
 
     bb2: {
-        _4 = core::panicking::panic(const "assertion failed: test(Some(42))") -> unwind continue;
+        _4 = core::panicking::panic(const "assertion failed: test(Some(42))");
     }
 
     bb3: {
         _8 = Option::<usize>::None;
-        _7 = test(move _8) -> [return: bb4, unwind continue];
+        _7 = test(move _8) -> bb4;
     }
 
     bb4: {
@@ -50,7 +50,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _9 = core::panicking::panic(const "assertion failed: !test(None)") -> unwind continue;
+        _9 = core::panicking::panic(const "assertion failed: !test(None)");
     }
 
     bb6: {

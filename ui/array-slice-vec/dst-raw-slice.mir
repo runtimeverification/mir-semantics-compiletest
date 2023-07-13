@@ -35,7 +35,7 @@ fn main() -> () {
         _4 = [const 1_i32, const 2_i32, const 3_i32];
         _3 = &_4;
         _2 = &raw const (*_3);
-        _1 = move _2 as *const [i32] (PointerCoercion(Unsize));
+        _1 = move _2 as *const [i32] (Pointer(Unsize));
         _6 = const 3_usize;
         _15 = _1 as *const () (PtrToPtr);
         _16 = _15 as usize (Transmute);
@@ -64,6 +64,6 @@ fn main() -> () {
     bb3: {
         _7 = Len((*_1));
         _8 = Lt(_6, _7);
-        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> [success: bb1, unwind continue];
+        assert(move _8, "index out of bounds: the length is {} but the index is {}", move _7, _6) -> bb1;
     }
 }

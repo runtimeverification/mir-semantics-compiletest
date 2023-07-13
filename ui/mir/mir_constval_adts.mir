@@ -53,12 +53,12 @@ fn <impl at ui/mir/mir_constval_adts.rs:2:21: 2:26>::fmt(_1: &Point, _2: &mut Fo
         _3 = const "Point";
         _4 = const "_x";
         _6 = &((*_1).0: i32);
-        _5 = _6 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
+        _5 = _6 as &dyn std::fmt::Debug (Pointer(Unsize));
         _7 = const "_y";
         _10 = &((*_1).1: i32);
         _9 = &_10;
-        _8 = _9 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> [return: bb1, unwind continue];
+        _8 = _9 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_struct_field2_finish(_2, _3, _4, move _5, _7, move _8) -> bb1;
     }
 
     bb1: {
@@ -76,7 +76,7 @@ fn <impl at ui/mir/mir_constval_adts.rs:8:10: 8:19>::eq(_1: &Newtype<T>, _2: &Ne
     bb0: {
         _3 = &((*_1).0: T);
         _4 = &((*_2).0: T);
-        _0 = <T as PartialEq>::eq(move _3, move _4) -> [return: bb1, unwind continue];
+        _0 = <T as PartialEq>::eq(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -108,8 +108,8 @@ fn <impl at ui/mir/mir_constval_adts.rs:8:25: 8:30>::fmt(_1: &Newtype<T>, _2: &m
         _3 = const "Newtype";
         _6 = &((*_1).0: T);
         _5 = &_6;
-        _4 = _5 as &dyn std::fmt::Debug (PointerCoercion(Unsize));
-        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> [return: bb1, unwind continue];
+        _4 = _5 as &dyn std::fmt::Debug (Pointer(Unsize));
+        _0 = Formatter::<'_>::debug_tuple_field1_finish(_2, _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -244,7 +244,7 @@ fn test_promoted_newtype_str_ref() -> () {
         _3 = (move _4, move _5);
         _8 = (_3.0: &&Newtype<&str>);
         _9 = (_3.1: &&Newtype<&str>);
-        _11 = <&Newtype<&str> as PartialEq>::eq(_8, _9) -> [return: bb1, unwind continue];
+        _11 = <&Newtype<&str> as PartialEq>::eq(_8, _9) -> bb1;
     }
 
     bb1: {
@@ -255,7 +255,7 @@ fn test_promoted_newtype_str_ref() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<&Newtype<&str>, &Newtype<&str>>(move _12, _8, _9, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<&Newtype<&str>, &Newtype<&str>>(move _12, _8, _9, move _14);
     }
 
     bb3: {
@@ -287,7 +287,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = mir() -> [return: bb1, unwind continue];
+        _3 = mir() -> bb1;
     }
 
     bb1: {
@@ -297,7 +297,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _6 = (_1.0: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
         _7 = (_1.1: &(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)));
-        _9 = <(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) as PartialEq>::eq(_6, _7) -> [return: bb2, unwind continue];
+        _9 = <(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)) as PartialEq>::eq(_6, _7) -> bb2;
     }
 
     bb2: {
@@ -308,11 +308,11 @@ fn main() -> () {
     bb3: {
         _10 = core::panicking::AssertKind::Eq;
         _12 = Option::<Arguments<'_>>::None;
-        _11 = core::panicking::assert_failed::<(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)), (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>))>(move _10, _6, _7, move _12) -> unwind continue;
+        _11 = core::panicking::assert_failed::<(Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>)), (Point, (i32, i32), (&str, &str), (Newtype<i32>, Newtype<i32>))>(move _10, _6, _7, move _12);
     }
 
     bb4: {
-        _13 = test_promoted_newtype_str_ref() -> [return: bb5, unwind continue];
+        _13 = test_promoted_newtype_str_ref() -> bb5;
     }
 
     bb5: {

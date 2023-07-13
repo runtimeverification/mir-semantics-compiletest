@@ -31,7 +31,7 @@ fn <impl at ui/mir/issue-76803-branches-not-same.rs:3:10: 3:15>::fmt(_1: &Type, 
     }
 
     bb4: {
-        _0 = Formatter::<'_>::write_str(_2, move _3) -> [return: bb5, unwind continue];
+        _0 = Formatter::<'_>::write_str(_2, move _3) -> bb5;
     }
 
     bb5: {
@@ -121,7 +121,7 @@ fn main() -> () {
         _3 = Type::B;
         _2 = &_3;
         _6 = Type::A;
-        _5 = encode(move _6) -> [return: bb1, unwind continue];
+        _5 = encode(move _6) -> bb1;
     }
 
     bb1: {
@@ -129,7 +129,7 @@ fn main() -> () {
         _1 = (move _2, move _4);
         _7 = (_1.0: &Type);
         _8 = (_1.1: &Type);
-        _10 = <Type as PartialEq>::eq(_7, _8) -> [return: bb2, unwind continue];
+        _10 = <Type as PartialEq>::eq(_7, _8) -> bb2;
     }
 
     bb2: {
@@ -140,7 +140,7 @@ fn main() -> () {
     bb3: {
         _11 = core::panicking::AssertKind::Eq;
         _13 = Option::<Arguments<'_>>::None;
-        _12 = core::panicking::assert_failed::<Type, Type>(move _11, _7, _8, move _13) -> unwind continue;
+        _12 = core::panicking::assert_failed::<Type, Type>(move _11, _7, _8, move _13);
     }
 
     bb4: {

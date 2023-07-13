@@ -73,7 +73,7 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([&str; 2]);
         _4 = AlignOf([&str; 2]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
@@ -160,7 +160,7 @@ fn main() -> () {
     }
 
     bb14: {
-        drop(_1) -> [return: bb15, unwind continue];
+        drop(_1) -> bb15;
     }
 
     bb15: {
@@ -181,7 +181,7 @@ fn main() -> () {
 
     bb19: {
         (*_39) = [const "foobie", _7];
-        _2 = move _6 as std::boxed::Box<[&str]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[&str]> (Pointer(Unsize));
+        _1 = slice::<impl [&str]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 }

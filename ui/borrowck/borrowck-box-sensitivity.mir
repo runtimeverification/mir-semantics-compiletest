@@ -36,12 +36,12 @@ fn copy_after_move() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _2 = A { x: move _3, y: const 1_isize };
-        _1 = Box::<A>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<A>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -57,7 +57,7 @@ fn copy_after_move() -> () {
 
     bb3: {
         _6 = &mut _1;
-        _7 = <Box<A> as Drop>::drop(move _6) -> [return: bb5, unwind continue];
+        _7 = <Box<A> as Drop>::drop(move _6) -> bb5;
     }
 
     bb4 (cleanup): {
@@ -128,7 +128,7 @@ fn move_after_move() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
@@ -137,7 +137,7 @@ fn move_after_move() -> () {
 
     bb2: {
         _2 = B { x: move _3, y: move _4 };
-        _1 = Box::<B>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<B>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -157,7 +157,7 @@ fn move_after_move() -> () {
 
     bb5: {
         _7 = &mut _1;
-        _8 = <Box<B> as Drop>::drop(move _7) -> [return: bb9, unwind continue];
+        _8 = <Box<B> as Drop>::drop(move _7) -> bb9;
     }
 
     bb6 (cleanup): {
@@ -239,12 +239,12 @@ fn borrow_after_move() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _2 = A { x: move _3, y: const 1_isize };
-        _1 = Box::<A>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<A>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -260,7 +260,7 @@ fn borrow_after_move() -> () {
 
     bb3: {
         _6 = &mut _1;
-        _7 = <Box<A> as Drop>::drop(move _6) -> [return: bb5, unwind continue];
+        _7 = <Box<A> as Drop>::drop(move _6) -> bb5;
     }
 
     bb4 (cleanup): {
@@ -336,7 +336,7 @@ fn move_after_borrow() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
@@ -345,7 +345,7 @@ fn move_after_borrow() -> () {
 
     bb2: {
         _2 = B { x: move _3, y: move _4 };
-        _1 = Box::<B>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<B>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -391,7 +391,7 @@ fn move_after_borrow() -> () {
 
     bb11: {
         _8 = &mut _1;
-        _9 = <Box<B> as Drop>::drop(move _8) -> [return: bb9, unwind continue];
+        _9 = <Box<B> as Drop>::drop(move _8) -> bb9;
     }
 
     bb12 (cleanup): {
@@ -463,12 +463,12 @@ fn copy_after_mut_borrow() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _2 = A { x: move _3, y: const 1_isize };
-        _1 = Box::<A>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<A>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -483,7 +483,7 @@ fn copy_after_mut_borrow() -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -558,7 +558,7 @@ fn move_after_mut_borrow() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
@@ -567,7 +567,7 @@ fn move_after_mut_borrow() -> () {
 
     bb2: {
         _2 = B { x: move _3, y: move _4 };
-        _1 = Box::<B>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<B>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -613,7 +613,7 @@ fn move_after_mut_borrow() -> () {
 
     bb11: {
         _8 = &mut _1;
-        _9 = <Box<B> as Drop>::drop(move _8) -> [return: bb9, unwind continue];
+        _9 = <Box<B> as Drop>::drop(move _8) -> bb9;
     }
 
     bb12 (cleanup): {
@@ -685,12 +685,12 @@ fn borrow_after_mut_borrow() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _2 = A { x: move _3, y: const 1_isize };
-        _1 = Box::<A>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<A>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -705,7 +705,7 @@ fn borrow_after_mut_borrow() -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -771,12 +771,12 @@ fn mut_borrow_after_borrow() -> () {
     }
 
     bb0: {
-        _3 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _3 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _2 = A { x: move _3, y: const 1_isize };
-        _1 = Box::<A>::new(move _2) -> [return: bb2, unwind continue];
+        _1 = Box::<A>::new(move _2) -> bb2;
     }
 
     bb2: {
@@ -791,7 +791,7 @@ fn mut_borrow_after_borrow() -> () {
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -890,17 +890,17 @@ fn copy_after_move_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
         _2 = C { x: move _3, y: const 2_isize };
-        _1 = Box::<C>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<C>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -940,7 +940,7 @@ fn copy_after_move_nested() -> () {
 
     bb8: {
         _9 = &mut _1;
-        _10 = <Box<C> as Drop>::drop(move _9) -> [return: bb6, unwind continue];
+        _10 = <Box<C> as Drop>::drop(move _9) -> bb6;
     }
 
     bb9 (cleanup): {
@@ -1074,12 +1074,12 @@ fn move_after_move_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
@@ -1088,7 +1088,7 @@ fn move_after_move_nested() -> () {
 
     bb3: {
         _2 = D { x: move _3, y: move _6 };
-        _1 = Box::<D>::new(move _2) -> [return: bb4, unwind continue];
+        _1 = Box::<D>::new(move _2) -> bb4;
     }
 
     bb4: {
@@ -1140,7 +1140,7 @@ fn move_after_move_nested() -> () {
 
     bb12: {
         _10 = &mut _1;
-        _11 = <Box<D> as Drop>::drop(move _10) -> [return: bb10, unwind continue];
+        _11 = <Box<D> as Drop>::drop(move _10) -> bb10;
     }
 
     bb13 (cleanup): {
@@ -1273,17 +1273,17 @@ fn borrow_after_move_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
         _2 = C { x: move _3, y: const 2_isize };
-        _1 = Box::<C>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<C>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -1323,7 +1323,7 @@ fn borrow_after_move_nested() -> () {
 
     bb8: {
         _9 = &mut _1;
-        _10 = <Box<C> as Drop>::drop(move _9) -> [return: bb6, unwind continue];
+        _10 = <Box<C> as Drop>::drop(move _9) -> bb6;
     }
 
     bb9 (cleanup): {
@@ -1442,12 +1442,12 @@ fn move_after_borrow_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
@@ -1456,7 +1456,7 @@ fn move_after_borrow_nested() -> () {
 
     bb3: {
         _2 = D { x: move _3, y: move _6 };
-        _1 = Box::<D>::new(move _2) -> [return: bb4, unwind continue];
+        _1 = Box::<D>::new(move _2) -> bb4;
     }
 
     bb4: {
@@ -1502,7 +1502,7 @@ fn move_after_borrow_nested() -> () {
 
     bb12: {
         _11 = &mut _1;
-        _12 = <Box<D> as Drop>::drop(move _11) -> [return: bb10, unwind continue];
+        _12 = <Box<D> as Drop>::drop(move _11) -> bb10;
     }
 
     bb13 (cleanup): {
@@ -1596,17 +1596,17 @@ fn copy_after_mut_borrow_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
         _2 = C { x: move _3, y: const 2_isize };
-        _1 = Box::<C>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<C>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -1621,7 +1621,7 @@ fn copy_after_mut_borrow_nested() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1718,12 +1718,12 @@ fn move_after_mut_borrow_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
@@ -1732,7 +1732,7 @@ fn move_after_mut_borrow_nested() -> () {
 
     bb3: {
         _2 = D { x: move _3, y: move _6 };
-        _1 = Box::<D>::new(move _2) -> [return: bb4, unwind continue];
+        _1 = Box::<D>::new(move _2) -> bb4;
     }
 
     bb4: {
@@ -1778,7 +1778,7 @@ fn move_after_mut_borrow_nested() -> () {
 
     bb12: {
         _11 = &mut _1;
-        _12 = <Box<D> as Drop>::drop(move _11) -> [return: bb10, unwind continue];
+        _12 = <Box<D> as Drop>::drop(move _11) -> bb10;
     }
 
     bb13 (cleanup): {
@@ -1872,17 +1872,17 @@ fn borrow_after_mut_borrow_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
         _2 = C { x: move _3, y: const 2_isize };
-        _1 = Box::<C>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<C>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -1897,7 +1897,7 @@ fn borrow_after_mut_borrow_nested() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -1985,17 +1985,17 @@ fn mut_borrow_after_borrow_nested() -> () {
     }
 
     bb0: {
-        _5 = Box::<isize>::new(const 0_isize) -> [return: bb1, unwind continue];
+        _5 = Box::<isize>::new(const 0_isize) -> bb1;
     }
 
     bb1: {
         _4 = A { x: move _5, y: const 1_isize };
-        _3 = Box::<A>::new(move _4) -> [return: bb2, unwind continue];
+        _3 = Box::<A>::new(move _4) -> bb2;
     }
 
     bb2: {
         _2 = C { x: move _3, y: const 2_isize };
-        _1 = Box::<C>::new(move _2) -> [return: bb3, unwind continue];
+        _1 = Box::<C>::new(move _2) -> bb3;
     }
 
     bb3: {
@@ -2010,7 +2010,7 @@ fn mut_borrow_after_borrow_nested() -> () {
     }
 
     bb4: {
-        drop(_1) -> [return: bb5, unwind continue];
+        drop(_1) -> bb5;
     }
 
     bb5: {
@@ -2075,67 +2075,67 @@ fn main() -> () {
     let _16: ();
 
     bb0: {
-        _1 = copy_after_move() -> [return: bb1, unwind continue];
+        _1 = copy_after_move() -> bb1;
     }
 
     bb1: {
-        _2 = move_after_move() -> [return: bb2, unwind continue];
+        _2 = move_after_move() -> bb2;
     }
 
     bb2: {
-        _3 = borrow_after_move() -> [return: bb3, unwind continue];
+        _3 = borrow_after_move() -> bb3;
     }
 
     bb3: {
-        _4 = move_after_borrow() -> [return: bb4, unwind continue];
+        _4 = move_after_borrow() -> bb4;
     }
 
     bb4: {
-        _5 = copy_after_mut_borrow() -> [return: bb5, unwind continue];
+        _5 = copy_after_mut_borrow() -> bb5;
     }
 
     bb5: {
-        _6 = move_after_mut_borrow() -> [return: bb6, unwind continue];
+        _6 = move_after_mut_borrow() -> bb6;
     }
 
     bb6: {
-        _7 = borrow_after_mut_borrow() -> [return: bb7, unwind continue];
+        _7 = borrow_after_mut_borrow() -> bb7;
     }
 
     bb7: {
-        _8 = mut_borrow_after_borrow() -> [return: bb8, unwind continue];
+        _8 = mut_borrow_after_borrow() -> bb8;
     }
 
     bb8: {
-        _9 = copy_after_move_nested() -> [return: bb9, unwind continue];
+        _9 = copy_after_move_nested() -> bb9;
     }
 
     bb9: {
-        _10 = move_after_move_nested() -> [return: bb10, unwind continue];
+        _10 = move_after_move_nested() -> bb10;
     }
 
     bb10: {
-        _11 = borrow_after_move_nested() -> [return: bb11, unwind continue];
+        _11 = borrow_after_move_nested() -> bb11;
     }
 
     bb11: {
-        _12 = move_after_borrow_nested() -> [return: bb12, unwind continue];
+        _12 = move_after_borrow_nested() -> bb12;
     }
 
     bb12: {
-        _13 = copy_after_mut_borrow_nested() -> [return: bb13, unwind continue];
+        _13 = copy_after_mut_borrow_nested() -> bb13;
     }
 
     bb13: {
-        _14 = move_after_mut_borrow_nested() -> [return: bb14, unwind continue];
+        _14 = move_after_mut_borrow_nested() -> bb14;
     }
 
     bb14: {
-        _15 = borrow_after_mut_borrow_nested() -> [return: bb15, unwind continue];
+        _15 = borrow_after_mut_borrow_nested() -> bb15;
     }
 
     bb15: {
-        _16 = mut_borrow_after_borrow_nested() -> [return: bb16, unwind continue];
+        _16 = mut_borrow_after_borrow_nested() -> bb16;
     }
 
     bb16: {

@@ -9,7 +9,7 @@ fn <impl at ui/close-over-big-then-small-data.rs:21:1: 21:42>::f(_1: &Invoker<A>
 
     bb0: {
         _3 = &((*_1).0: A);
-        _2 = <A as Clone>::clone(move _3) -> [return: bb1, unwind continue];
+        _2 = <A as Clone>::clone(move _3) -> bb1;
     }
 
     bb1: {
@@ -28,11 +28,11 @@ fn f(_1: A, _2: u16) -> Box<dyn Invokable<A>> {
 
     bb0: {
         _4 = Invoker::<A> { a: move _1, b: _2 };
-        _3 = Box::<Invoker<A>>::new(move _4) -> [return: bb1, unwind continue];
+        _3 = Box::<Invoker<A>>::new(move _4) -> bb1;
     }
 
     bb1: {
-        _0 = move _3 as std::boxed::Box<dyn Invokable<A>> (PointerCoercion(Unsize));
+        _0 = move _3 as std::boxed::Box<dyn Invokable<A>> (Pointer(Unsize));
         return;
     }
 }
@@ -103,7 +103,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _5 = f::<u64>(const 22_u64, const 44_u16) -> [return: bb1, unwind continue];
+        _5 = f::<u64>(const 22_u64, const 44_u16) -> bb1;
     }
 
     bb1: {
@@ -115,31 +115,31 @@ fn main() -> () {
     bb2: {
         _1 = (_3.0: u64);
         _2 = (_3.1: u16);
-        drop(_5) -> [return: bb3, unwind continue];
+        drop(_5) -> bb3;
     }
 
     bb3: {
         _10 = [const "a=", const " b=", const "\n"];
         _9 = &_10;
-        _8 = _9 as &[&str] (PointerCoercion(Unsize));
+        _8 = _9 as &[&str] (Pointer(Unsize));
         _15 = &_1;
-        _14 = core::fmt::rt::Argument::<'_>::new_display::<u64>(_15) -> [return: bb4, unwind continue];
+        _14 = core::fmt::rt::Argument::<'_>::new_display::<u64>(_15) -> bb4;
     }
 
     bb4: {
         _17 = &_2;
-        _16 = core::fmt::rt::Argument::<'_>::new_display::<u16>(_17) -> [return: bb5, unwind continue];
+        _16 = core::fmt::rt::Argument::<'_>::new_display::<u16>(_17) -> bb5;
     }
 
     bb5: {
         _13 = [move _14, move _16];
         _12 = &_13;
-        _11 = _12 as &[core::fmt::rt::Argument<'_>] (PointerCoercion(Unsize));
-        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> [return: bb6, unwind continue];
+        _11 = _12 as &[core::fmt::rt::Argument<'_>] (Pointer(Unsize));
+        _7 = Arguments::<'_>::new_v1(move _8, move _11) -> bb6;
     }
 
     bb6: {
-        _6 = _print(move _7) -> [return: bb7, unwind continue];
+        _6 = _print(move _7) -> bb7;
     }
 
     bb7: {
@@ -159,7 +159,7 @@ fn main() -> () {
     bb8: {
         _28 = core::panicking::AssertKind::Eq;
         _30 = Option::<Arguments<'_>>::None;
-        _29 = core::panicking::assert_failed::<u64, u64>(move _28, _22, _23, move _30) -> unwind continue;
+        _29 = core::panicking::assert_failed::<u64, u64>(move _28, _22, _23, move _30);
     }
 
     bb9: {
@@ -179,7 +179,7 @@ fn main() -> () {
     bb10: {
         _41 = core::panicking::AssertKind::Eq;
         _43 = Option::<Arguments<'_>>::None;
-        _42 = core::panicking::assert_failed::<u16, u16>(move _41, _35, _36, move _43) -> unwind continue;
+        _42 = core::panicking::assert_failed::<u16, u16>(move _41, _35, _36, move _43);
     }
 
     bb11: {

@@ -5,7 +5,7 @@ fn <impl at ui/associated-types/associated-types-binding-in-trait.rs:13:1: 13:27
     let mut _0: std::vec::IntoIter<bool>;
 
     bb0: {
-        _0 = <Vec<bool> as IntoIterator>::into_iter(move _1) -> [return: bb1, unwind continue];
+        _0 = <Vec<bool> as IntoIterator>::into_iter(move _1) -> bb1;
     }
 
     bb1: {
@@ -36,11 +36,11 @@ fn count(_1: T) -> usize {
 
     bb0: {
         _2 = const 0_usize;
-        _4 = <T as BitIter>::bit_iter(move _1) -> [return: bb1, unwind continue];
+        _4 = <T as BitIter>::bit_iter(move _1) -> bb1;
     }
 
     bb1: {
-        _3 = <<T as BitIter>::Iter as IntoIterator>::into_iter(move _4) -> [return: bb2, unwind continue];
+        _3 = <<T as BitIter>::Iter as IntoIterator>::into_iter(move _4) -> bb2;
     }
 
     bb2: {
@@ -68,7 +68,7 @@ fn count(_1: T) -> usize {
     }
 
     bb7: {
-        drop(_5) -> [return: bb9, unwind continue];
+        drop(_5) -> bb9;
     }
 
     bb8: {
@@ -133,20 +133,20 @@ fn main() -> () {
     bb0: {
         _3 = SizeOf([bool; 3]);
         _4 = AlignOf([bool; 3]);
-        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> [return: bb1, unwind continue];
+        _5 = alloc::alloc::exchange_malloc(move _3, move _4) -> bb1;
     }
 
     bb1: {
         _6 = ShallowInitBox(move _5, [bool; 3]);
         _22 = (((_6.0: std::ptr::Unique<[bool; 3]>).0: std::ptr::NonNull<[bool; 3]>).0: *const [bool; 3]);
         (*_22) = [const true, const false, const true];
-        _2 = move _6 as std::boxed::Box<[bool]> (PointerCoercion(Unsize));
-        _1 = slice::<impl [bool]>::into_vec::<std::alloc::Global>(move _2) -> [return: bb2, unwind continue];
+        _2 = move _6 as std::boxed::Box<[bool]> (Pointer(Unsize));
+        _1 = slice::<impl [bool]>::into_vec::<std::alloc::Global>(move _2) -> bb2;
     }
 
     bb2: {
         _8 = move _1;
-        _7 = count::<Vec<bool>>(move _8) -> [return: bb3, unwind continue];
+        _7 = count::<Vec<bool>>(move _8) -> bb3;
     }
 
     bb3: {
@@ -166,7 +166,7 @@ fn main() -> () {
     bb4: {
         _19 = core::panicking::AssertKind::Eq;
         _21 = Option::<Arguments<'_>>::None;
-        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21) -> unwind continue;
+        _20 = core::panicking::assert_failed::<usize, usize>(move _19, _13, _14, move _21);
     }
 
     bb5: {

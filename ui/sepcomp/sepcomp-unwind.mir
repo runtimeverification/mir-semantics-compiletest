@@ -14,7 +14,7 @@ fn f() -> () {
     let mut _1: !;
 
     bb0: {
-        _1 = begin_panic::<&str>(const "explicit panic") -> unwind continue;
+        _1 = begin_panic::<&str>(const "explicit panic");
     }
 }
 
@@ -23,7 +23,7 @@ fn g() -> () {
     let _1: ();
 
     bb0: {
-        _1 = f() -> [return: bb1, unwind continue];
+        _1 = f() -> bb1;
     }
 
     bb1: {
@@ -38,19 +38,19 @@ fn main() -> () {
     let mut _3: std::thread::JoinHandle<()>;
 
     bb0: {
-        _3 = spawn::<[closure@ui/sepcomp/sepcomp-unwind.rs:34:19: 34:25], ()>(const ZeroSized: [closure@ui/sepcomp/sepcomp-unwind.rs:34:19: 34:25]) -> [return: bb1, unwind continue];
+        _3 = spawn::<[closure@ui/sepcomp/sepcomp-unwind.rs:34:19: 34:25], ()>(const ZeroSized: [closure@ui/sepcomp/sepcomp-unwind.rs:34:19: 34:25]) -> bb1;
     }
 
     bb1: {
-        _2 = JoinHandle::<()>::join(move _3) -> [return: bb2, unwind continue];
+        _2 = JoinHandle::<()>::join(move _3) -> bb2;
     }
 
     bb2: {
-        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> [return: bb3, unwind continue];
+        _1 = Result::<(), Box<dyn Any + Send>>::unwrap_err(move _2) -> bb3;
     }
 
     bb3: {
-        drop(_1) -> [return: bb4, unwind continue];
+        drop(_1) -> bb4;
     }
 
     bb4: {
@@ -62,7 +62,7 @@ fn main::{closure#0}(_1: [closure@ui/sepcomp/sepcomp-unwind.rs:34:19: 34:25]) ->
     let mut _0: ();
 
     bb0: {
-        _0 = g() -> [return: bb1, unwind continue];
+        _0 = g() -> bb1;
     }
 
     bb1: {

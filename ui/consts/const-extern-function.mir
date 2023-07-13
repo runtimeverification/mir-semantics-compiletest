@@ -12,7 +12,7 @@ static f: extern "C" fn() = {
     let mut _0: extern "C" fn();
 
     bb0: {
-        _0 = foopy as extern "C" fn() (PointerCoercion(ReifyFnPointer));
+        _0 = foopy as extern "C" fn() (Pointer(ReifyFnPointer));
         return;
     }
 }
@@ -23,7 +23,7 @@ static s: S = {
 
     bb0: {
         StorageLive(_1);
-        _1 = foopy as extern "C" fn() (PointerCoercion(ReifyFnPointer));
+        _1 = foopy as extern "C" fn() (Pointer(ReifyFnPointer));
         _0 = S { f: move _1 };
         StorageDead(_1);
         return;
@@ -47,7 +47,7 @@ fn main() -> () {
     let mut _13: !;
 
     bb0: {
-        _3 = foopy as extern "C" fn() (PointerCoercion(ReifyFnPointer));
+        _3 = foopy as extern "C" fn() (Pointer(ReifyFnPointer));
         _5 = const {alloc1: &extern "C" fn()};
         _4 = (*_5);
         _2 = Eq(move _3, move _4);
@@ -56,7 +56,7 @@ fn main() -> () {
     }
 
     bb1: {
-        _6 = core::panicking::panic(const "assertion failed: foopy as extern \\\"C\\\" fn() == f") -> unwind continue;
+        _6 = core::panicking::panic(const "assertion failed: foopy as extern \\\"C\\\" fn() == f");
     }
 
     bb2: {
@@ -70,7 +70,7 @@ fn main() -> () {
     }
 
     bb3: {
-        _13 = core::panicking::panic(const "assertion failed: f == s.f") -> unwind continue;
+        _13 = core::panicking::panic(const "assertion failed: f == s.f");
     }
 
     bb4: {

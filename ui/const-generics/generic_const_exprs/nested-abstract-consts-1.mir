@@ -15,7 +15,7 @@ callee::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const M2, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M2, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const M2, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -28,7 +28,7 @@ fn caller() -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = callee::<{ N1 + 1 }>() -> [return: bb1, unwind continue];
+        _0 = callee::<{ N1 + 1 }>() -> bb1;
     }
 
     bb1: {
@@ -42,7 +42,7 @@ caller::{constant#0}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N1, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -60,13 +60,13 @@ caller::{constant#1}: usize = {
     bb0: {
         StorageLive(_1);
         _2 = CheckedAdd(const N1, const 1_usize);
-        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_2.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> bb1;
     }
 
     bb1: {
         _1 = move (_2.0: usize);
         _3 = CheckedAdd(_1, const 1_usize);
-        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> [success: bb2, unwind continue];
+        assert(!move (_3.1: bool), "attempt to compute `{} + {}`, which would overflow", move _1, const 1_usize) -> bb2;
     }
 
     bb2: {
@@ -82,7 +82,7 @@ caller::{constant#2}: usize = {
 
     bb0: {
         _1 = CheckedAdd(const N1, const 1_usize);
-        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> [success: bb1, unwind continue];
+        assert(!move (_1.1: bool), "attempt to compute `{} + {}`, which would overflow", const N1, const 1_usize) -> bb1;
     }
 
     bb1: {
@@ -116,7 +116,7 @@ fn main() -> () {
     }
 
     bb0: {
-        _3 = caller::<4>() -> [return: bb1, unwind continue];
+        _3 = caller::<4>() -> bb1;
     }
 
     bb1: {
@@ -136,7 +136,7 @@ fn main() -> () {
     bb2: {
         _12 = core::panicking::AssertKind::Eq;
         _14 = Option::<Arguments<'_>>::None;
-        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14) -> unwind continue;
+        _13 = core::panicking::assert_failed::<usize, usize>(move _12, _6, _7, move _14);
     }
 
     bb3: {

@@ -29,12 +29,12 @@ fn <impl at ui/traits/issue-6334.rs:30:1: 30:15>::combine(_1: &Bar, _2: &T) -> u
     let mut _5: usize;
 
     bb0: {
-        _4 = <T as A>::a(_2) -> [return: bb1, unwind continue];
+        _4 = <T as A>::a(_2) -> bb1;
     }
 
     bb1: {
         _3 = Mul(move _4, const 100_usize);
-        _5 = <T as B>::b(_2) -> [return: bb2, unwind continue];
+        _5 = <T as B>::b(_2) -> bb2;
     }
 
     bb2: {
@@ -49,7 +49,7 @@ fn use_c(_1: &S, _2: &T) -> usize {
     let mut _0: usize;
 
     bb0: {
-        _0 = <S as C>::combine::<T>(_1, _2) -> [return: bb1, unwind continue];
+        _0 = <S as C>::combine::<T>(_1, _2) -> bb1;
     }
 
     bb1: {
@@ -97,7 +97,7 @@ fn main() -> () {
     bb0: {
         _4 = &_2;
         _5 = &_1;
-        _3 = use_c::<Bar, Foo>(_4, _5) -> [return: bb1, unwind continue];
+        _3 = use_c::<Bar, Foo>(_4, _5) -> bb1;
     }
 
     bb1: {
@@ -117,7 +117,7 @@ fn main() -> () {
     bb2: {
         _16 = core::panicking::AssertKind::Eq;
         _18 = Option::<Arguments<'_>>::None;
-        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18) -> unwind continue;
+        _17 = core::panicking::assert_failed::<usize, usize>(move _16, _10, _11, move _18);
     }
 
     bb3: {

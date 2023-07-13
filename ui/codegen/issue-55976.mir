@@ -6,8 +6,8 @@ fn main() -> () {
     let mut _2: for<'a> fn(&'a std::vec::Vec<std::boxed::Box<dyn for<'b> std::ops::Fn(&'b u8)>>) -> &'a std::vec::Vec<std::boxed::Box<dyn std::ops::Fn(&u8)>>;
 
     bb0: {
-        _2 = const ZeroSized: [closure@ui/codegen/issue-55976.rs:7:16: 7:19] as for<'a> fn(&'a std::vec::Vec<std::boxed::Box<dyn for<'b> std::ops::Fn(&'b u8)>>) -> &'a std::vec::Vec<std::boxed::Box<dyn std::ops::Fn(&u8)>> (PointerCoercion(ClosureFnPointer(Normal)));
-        _1 = type_error::<&u8>(move _2) -> [return: bb1, unwind continue];
+        _2 = const ZeroSized: [closure@ui/codegen/issue-55976.rs:7:16: 7:19] as for<'a> fn(&'a std::vec::Vec<std::boxed::Box<dyn for<'b> std::ops::Fn(&'b u8)>>) -> &'a std::vec::Vec<std::boxed::Box<dyn std::ops::Fn(&u8)>> (Pointer(ClosureFnPointer(Normal)));
+        _1 = type_error::<&u8>(move _2) -> bb1;
     }
 
     bb1: {
@@ -19,12 +19,10 @@ fn main::{closure#0}(_1: &[closure@ui/codegen/issue-55976.rs:7:16: 7:19], _2: &V
     debug x => _2;
     let mut _0: &std::vec::Vec<std::boxed::Box<dyn std::ops::Fn(&u8)>>;
     let _3: &&std::vec::Vec<std::boxed::Box<dyn for<'b> std::ops::Fn(&'b u8)>>;
-    let mut _4: &std::vec::Vec<std::boxed::Box<dyn for<'b> std::ops::Fn(&'b u8)>>;
 
     bb0: {
         _3 = &_2;
-        _4 = deref_copy (*_3);
-        _0 = _4;
+        _0 = deref_copy (*_3);
         return;
     }
 }

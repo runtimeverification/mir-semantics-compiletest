@@ -7,7 +7,7 @@ const <impl at ui/consts/issue-58435-ice-with-assoc-const.rs:7:1: 7:13>::ID: for
     bb0: {
         StorageLive(_1);
         _1 = [closure@ui/consts/issue-58435-ice-with-assoc-const.rs:8:36: 8:39];
-        _0 = move _1 as for<'a> fn(&'a S<T>) -> &'a S<T> (PointerCoercion(ClosureFnPointer(Normal)));
+        _0 = move _1 as for<'a> fn(&'a S<T>) -> &'a S<T> (Pointer(ClosureFnPointer(Normal)));
         StorageDead(_1);
         return;
     }
@@ -29,7 +29,7 @@ fn <impl at ui/consts/issue-58435-ice-with-assoc-const.rs:7:1: 7:13>::id(_1: &S<
     let _2: &S<T>;
 
     bb0: {
-        _2 = const _(_1) -> [return: bb1, unwind continue];
+        _2 = const _(_1) -> bb1;
     }
 
     bb1: {
@@ -60,7 +60,7 @@ fn main() -> () {
     bb0: {
         _1 = S::<u32>(const 10_u32);
         _6 = &_1;
-        _5 = const _(_6) -> [return: bb1, unwind continue];
+        _5 = const _(_6) -> bb1;
     }
 
     bb1: {
@@ -71,12 +71,12 @@ fn main() -> () {
     }
 
     bb2: {
-        _7 = core::panicking::panic(const "assertion failed: S::<u32>::ID(&s).0 == 10") -> unwind continue;
+        _7 = core::panicking::panic(const "assertion failed: S::<u32>::ID(&s).0 == 10");
     }
 
     bb3: {
         _12 = &_1;
-        _11 = S::<u32>::id(move _12) -> [return: bb4, unwind continue];
+        _11 = S::<u32>::id(move _12) -> bb4;
     }
 
     bb4: {
@@ -87,7 +87,7 @@ fn main() -> () {
     }
 
     bb5: {
-        _13 = core::panicking::panic(const "assertion failed: s.id().0 == 10") -> unwind continue;
+        _13 = core::panicking::panic(const "assertion failed: s.id().0 == 10");
     }
 
     bb6: {
