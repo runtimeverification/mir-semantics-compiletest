@@ -34,5 +34,5 @@ rustc 1.72.0-nightly (46514218f 2023-06-20)
 
 If using `rustup`, this can be installed and made default with
 ```
-rustup default nightly-2023-06-20
+rustup default nightly-2023-06-21
 ```
