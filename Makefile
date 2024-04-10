@@ -13,13 +13,13 @@ UI_MIR=$(patsubst %.rs,%.mir,${UI_RS})
 
 # Remove MIR files
 clean-mir:
-	find . -name "*.mir" -type f -delete
+	find ui -name "*.mir" -type f -delete
 
 ui-mir: ${UI_MIR}
 
 # Default MIR generation
 ui/%.mir: ui/%.rs
-	-$(RUSTC) --emit mir $(RUSTC_OPTIONS) -o $@ ui/$*.rs
+	timeout 30s $(RUSTC) --emit mir $(RUSTC_OPTIONS) -o $@ ui/$*.rs || true
 	
 # # 'async-await' tests use 2021 ed. 
 # ui/async-await/%.mir: ui/async-await/%.rs 
@@ -72,7 +72,7 @@ ui-exe: ${UI_EXE}
 
 # Default compilation
 ui/%.exe: ui/%.rs
-	-$(RUSTC) $(RUSTC_OPTIONS) -o $@ ui/$*.rs
+	timeout 30s $(RUSTC) $(RUSTC_OPTIONS) -o $@ ui/$*.rs || true
 
 # # 'async-await' tests use 2021 ed. 
 # ui/async-await/%.exe: ui/async-await/%.rs 
