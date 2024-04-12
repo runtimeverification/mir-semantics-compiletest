@@ -11,7 +11,7 @@ RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && die "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
 # Top directory of the mir semantics test repository.
-MIRSEMANTICS_COMPILETEST=$(pwd)
+MIRSEMANTICS_COMPILETEST=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 # Choose whether to run the make step to generate *.mir, *.stdout, *.stderr.
 # true to run
