@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 
-# Top directory of the rust repository, that includes the test suite.
-RUST_TOP=/home/maria/builds/RV/rust
+die() {
+  echo "$1"
+  exit 1
+}
+# RUST_TOP: environment variable, must be set to the top directory of the Rust
+# compiler source, that includes the test suite.
+[ -z "${RUST_TOP}" ] && die "Must set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
 RUST_TESTS=${RUST_TOP}/tests
+[ ! -d "${RUST_TESTS}" ] && die "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
 # Top directory of the mir semantics test repository.
 MIRSEMANTICS_COMPILETEST=$(pwd)
