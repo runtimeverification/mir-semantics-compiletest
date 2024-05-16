@@ -3,7 +3,7 @@
 set -e
 print_usage() {
   printf "usage: $(basename $0) [-x] [-e] [-f] [-t] [-h]\n\n"
-  printf "print out rustc UI tests which satisfy certain criteria; by default those that are:\n"
+  printf "print rustc UI test sources which satisfy certain criteria; by default those that are:\n"
   printf "normal, passing, contain a non-empty main function, and compile in reasonable time\n\n"
   printf "options:\n"
   printf "x\tinclude fixed tests [may contain run-rustfix header]\n"
@@ -46,7 +46,7 @@ done
 RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
-# find test files that pass filters
+# find test source files that pass filters
 find "${RUST_TESTS}/ui"
      -name '*.rs'    \
      "${RUSTFIX[@]}" \
