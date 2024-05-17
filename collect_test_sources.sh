@@ -61,5 +61,5 @@ find "${RUST_TESTS}/ui" \
 
 # remove temp mir file whenever timing mir, ignore errors
 if [ -n "${TIMEMIR[*]}" ]; then
-  rm "$TMPMIR" &> /dev/null
+  rm "$TMPMIR" &> /dev/null || true
 fi
