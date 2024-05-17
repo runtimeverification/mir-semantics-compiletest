@@ -50,14 +50,15 @@ RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
 # find test source files that pass filters
-find "${RUST_TESTS}/ui" \
-     -name '*.rs'       \
-     "${RUSTFIX[@]}"    \
-     "${RUNPASS[@]}"    \
-     "${HASMAIN[@]}"    \
-     "${EMPMAIN[@]}"    \
-     "${TIMEMIR[@]}"    \
-     -print
+( cd "${RUST_TOP}";
+  find tests/ui           \
+       -name '*.rs'       \
+       "${RUSTFIX[@]}"    \
+       "${RUNPASS[@]}"    \
+       "${HASMAIN[@]}"    \
+       "${EMPMAIN[@]}"    \
+       "${TIMEMIR[@]}"    \
+       -print )
 
 # remove temp mir file whenever timing mir, ignore errors
 if [ -n "${TIMEMIR[*]}" ]; then
