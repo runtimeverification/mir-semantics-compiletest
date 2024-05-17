@@ -27,10 +27,10 @@ TIMEMIR=('-execdir' 'timeout' '30s' "$RUSTC_MIR" '{}' "$TMPMIR" "${RUSTOPT[@]}" 
 
 # setup grep filters
 HAS_MATCH=$SCRIPT_DIR/has_match.sh
-RUSTFIX=('-execdir' "$HAS_MATCH" 'n' '//@[[:space:]]*run-rustfix'                                  '{}' ';')
-RUNPASS=('-execdir' "$HAS_MATCH" 'y' '//@[[:space:]]*run-pass'                                     '{}' ';')
-HASMAIN=('-execdir' "$HAS_MATCH" 'y' 'fn main[[:space:]]*([[:space:]]*)'                           '{}' ';')
-EMPMAIN=('-execdir' "$HAS_MATCH" 'n' 'fn main[[:space:]]*([[:space:]]*)[[:space:]]*{[[:space:]]*}' '{}' ';')
+RUSTFIX=('-execdir' "$HAS_MATCH" 'n' '//@[[:space:]]*run-rustfix'                                                  '{}' ';')
+RUNPASS=('-execdir' "$HAS_MATCH" 'y' '//@[[:space:]]*run-pass'                                                     '{}' ';')
+HASMAIN=('-execdir' "$HAS_MATCH" 'y' 'fn[[:space:]]\{1,\}main[[:space:]]*([[:space:]]*)'                           '{}' ';')
+EMPMAIN=('-execdir' "$HAS_MATCH" 'n' 'fn[[:space:]]\{1,\}main[[:space:]]*([[:space:]]*)[[:space:]]*{[[:space:]]*}' '{}' ';')
 
 # parse opts
 while getopts 'xfet' opt; do
