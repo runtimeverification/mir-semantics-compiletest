@@ -10,7 +10,9 @@ print_usage() {
   printf "f\tinclude failing tests [may NOT contain run-pass header] (implies -t)\n"
   printf "t\tinclude tests that fail to generate MIR within 30s\n"
   printf "h\tprint this usage and exit\n\n"
-  printf "if -t unset, set environment variable RUSTC_MIR_VERBOSE to see raw rustc invocation and CLI output\n\n"
+  printf "if -t unset:\n"
+  printf "  set environment variable RUSTC_MIR_VERBOSE to see raw rustc invocation and CLI output\n"
+  printf "  set environment variable RUSTC_MIR_NOFILEOPTS to skip //@ compile-flags: ...\n\n"
   [ $# -ne 0 ] && echo "ERROR: $*"
   exit 1
 }
