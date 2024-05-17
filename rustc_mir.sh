@@ -3,7 +3,8 @@ set -eu # fail on non-zero retcode or undefined variable
 if [ $# -lt 2 ]; then
   printf "usage $0: <inputfile> <outputfile> [extra_rustc_opt...]\n\n"
   printf "alias for:\n\nrustc --emit mir -o <outputfile> [rustc_opt...] [extra_rustc_opt...] -- <inputfile>\n\n"
-  printf "where:\n\n[rustc_opt...] is from <inputfile> comments of form: '//@ compile-flags: [rustc_opt...]'\n"
+  printf "where:\n\n[rustc_opt...] is from <inputfile> comments of form: '//@ compile-flags: [rustc_opt...]'\n\n"
+  printf "set environment variable RUSTC_MIR_VERBOSE to see raw rustc invocation and CLI output\n"
   exit 1
 fi
 
@@ -25,5 +26,11 @@ set -e
 fileopts=${fileopts:1}
 read -a fileopts <<< "$fileopts"
 
-# invoke rustc with options
-echo rustc --emit mir -o "$outfile" "${fileopts[@]}" "${extraopts[@]}" -- "$infile"
+# invoke rustc with options and optionally ignore output
+rustc_cmd=(rustc --emit mir -o "$outfile" "${fileopts[@]}" "${extraopts[@]}" -- "$infile")
+if [ -n "${RUSTC_MIR_VERBOSE:-}" ]; then
+  printf "%s\n" "${rustc_cmd[*]}"
+  "${rustc_cmd[@]}"
+else
+  "${rustc_cmd[@]}" &>/dev/null
+fi

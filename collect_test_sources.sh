@@ -1,6 +1,5 @@
 #!/bin/bash
-
-set -eu
+set -eu # fail on non-zero retcode or undefined variable
 print_usage() {
   printf "usage: $(basename $0) [-x] [-e] [-f] [-t] [-h]\n\n"
   printf "print rustc UI test sources which satisfy certain criteria; by default those that are:\n"
@@ -45,6 +44,7 @@ while getopts 'xfet' opt; do
 done
 
 # check test dir
+# NOTE: ${var:-default} expands to default if var unset
 [ -z "${RUST_TOP:-}" ] && print_usage "set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
 RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
