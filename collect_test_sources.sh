@@ -50,6 +50,11 @@ done
 RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
+# clean temp mir file whenever timing mir, ignore errors
+if [ -n "${TIMEMIR[*]}" ]; then
+  trap "rm \"$TMPMIR\" &> /dev/null" SIGINT SIGTERM EXIT
+fi
+
 # find test source files that pass filters
 ( cd "${RUST_TOP}";
   find tests/ui           \
@@ -60,8 +65,3 @@ RUST_TESTS=${RUST_TOP}/tests
        "${EMPMAIN[@]}"    \
        "${TIMEMIR[@]}"    \
        -print )
-
-# remove temp mir file whenever timing mir, ignore errors
-if [ -n "${TIMEMIR[*]}" ]; then
-  rm "$TMPMIR" &> /dev/null || true
-fi
