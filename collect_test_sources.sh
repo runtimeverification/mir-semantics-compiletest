@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e
+set -eu
 print_usage() {
   printf "usage: $(basename $0) [-x] [-e] [-f] [-t] [-h]\n\n"
   printf "print rustc UI test sources which satisfy certain criteria; by default those that are:\n"
@@ -15,12 +15,15 @@ print_usage() {
   exit 1
 }
 
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
 # setup time mir filter
 # NOTE: temp file is needed because rustc chokes when writing directly to /dev/null
 # NOTE: this filter does not work natively on mac due to no timeout command
-TMPMIR=$PWD/temp.mir
+RUSTC_MIR=$SCRIPT_DIR/rustc_mir.sh
+TMPMIR=$SCRIPT_DIR/temp.mir
 RUSTOPT=('-C' 'overflow-checks=off')
-TIMEMIR=('-execdir' 'timeout' '30s' 'rustc' "${RUSTOPT[@]}" '--emit' 'mir' '-o' "$TMPMIR"      '{}' ';')
+TIMEMIR=('-execdir' 'timeout' '30s' "$RUSTC_MIR" '{}' "$TMPMIR" "${RUSTOPT[@]}" ';')
 
 # setup grep filters
 RUSTFIX=('-execdir' 'grep' '-qv' '//@[[:space:]]*run-rustfix'                                  '{}' ';')
@@ -42,7 +45,7 @@ while getopts 'xfet' opt; do
 done
 
 # check test dir
-[ -z "${RUST_TOP}" ] && print_usage "set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
+[ -z "${RUST_TOP:-}" ] && print_usage "set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
 RUST_TESTS=${RUST_TOP}/tests
 [ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
@@ -54,8 +57,7 @@ find "${RUST_TESTS}/ui" \
      "${HASMAIN[@]}"    \
      "${EMPMAIN[@]}"    \
      "${TIMEMIR[@]}"    \
-     -print             \
-  | sort
+     -print
 
 # remove temp mir file whenever timing mir, ignore errors
 if [ -n "${TIMEMIR[*]}" ]; then
