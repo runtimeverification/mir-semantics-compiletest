@@ -9,6 +9,7 @@ print_usage() {
   printf "e\tinclude tests with empty/missing main function\n"
   printf "f\tinclude failing tests [may NOT contain run-pass header] (implies -t)\n"
   printf "t\tinclude tests that fail to generate MIR within 30s\n"
+  printf "d\tset duration of build-mir filter timeout\n"
   printf "h\tprint this usage and exit\n\n"
   printf "if -t unset:\n"
   printf "  set environment variable RUSTC_MIR_VERBOSE to see raw rustc invocation and CLI output\n"
@@ -39,14 +40,6 @@ else
   echo "Warning: could not find local build: RUST_TOP/build/<arch>/rustc; falling back to rustc on PATH"
 fi
 
-# setup time mir filter
-# NOTE: temp file is needed because rustc chokes when writing directly to /dev/null
-# NOTE: this filter does not work natively on mac due to no timeout command
-RUSTC_MIR=$SCRIPT_DIR/rustc_mir.sh
-TMPMIR=$SCRIPT_DIR/temp.mir
-RUSTOPT=('-C' 'overflow-checks=off')
-TIMEMIR=('-execdir' 'timeout' '30s' "$RUSTC_MIR" '{}' "$TMPMIR" "${RUSTOPT[@]}" ';')
-
 # setup grep filters
 HAS_MATCH=$SCRIPT_DIR/has_match.sh
 RUSTFIX=('-execdir' "$HAS_MATCH" 'n' '//@[[:space:]]*run-rustfix'                                                  '{}' ';')
@@ -55,17 +48,35 @@ HASMAIN=('-execdir' "$HAS_MATCH" 'y' 'fn[[:space:]]\{1,\}main[[:space:]]*([[:spa
 EMPMAIN=('-execdir' "$HAS_MATCH" 'n' 'fn[[:space:]]\{1,\}main[[:space:]]*([[:space:]]*)[[:space:]]*{[[:space:]]*}' '{}' ';')
 
 # parse opts
-while getopts 'xfet' opt; do
+timemir=true
+DURATION=30
+while getopts 'xfetd:' opt; do
   case "${opt}" in
-    x)   RUSTFIX=()  ;;
+    x)   RUSTFIX=()    ;;
     e)   HASMAIN=()
-         EMPMAIN=()  ;;
+         EMPMAIN=()    ;;
     f)   RUNPASS=()
-         TIMEMIR=()  ;;
-    t)   TIMEMIR=()  ;;
+         timemir=false ;;
+    t)   timemir=false ;;
+    d)   DURATION="${OPTARG}" ;;
     ?|h) print_usage "environment variable RUST_TOP must point to a valid rustc distribution" ;;
   esac
 done
+
+# setup time mir filter
+# NOTE: temp file is needed because rustc chokes when writing directly to /dev/null
+# NOTE: this filter does not work natively on mac due to no timeout command
+TIMEMIR=()
+if $timemir; then
+  RUSTC_MIR=$SCRIPT_DIR/rustc_mir.sh
+  TMPMIR=$SCRIPT_DIR/temp.mir
+  RUSTOPT=('-C' 'overflow-checks=off')
+  case "$DURATION" in
+    ''|*[!0-9]*|0*) print_usage "option -d expects a timeout in seconds" ;;
+    *) ;;
+  esac
+  TIMEMIR=('-execdir' 'timeout' "${DURATION}s" "$RUSTC_MIR" '{}' "$TMPMIR" "${RUSTOPT[@]}" ';')
+fi
 
 # clean temp mir file whenever timing mir, ignore errors
 if [ -n "${TIMEMIR[*]}" ]; then
