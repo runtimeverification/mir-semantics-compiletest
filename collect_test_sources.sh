@@ -37,7 +37,7 @@ then
   export RUSTC
 else
   echo "Warning: could not find local build: RUST_TOP/build/<arch>/rustc; falling back to rustc on PATH"
-if
+fi
 
 # setup time mir filter
 # NOTE: temp file is needed because rustc chokes when writing directly to /dev/null
