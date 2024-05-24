@@ -32,7 +32,7 @@ if [ -z "${RUSTC_MIR_NOFILEOPTS+x}" ]; then
 fi
 
 # invoke rustc with options and optionally ignore output
-rustc_cmd=(rustc --emit mir -o "$outfile" "${fileopts[@]}" "${extraopts[@]}" -- "$infile")
+rustc_cmd=("${RUSTC:-rustc}" --emit mir -o "$outfile" "${fileopts[@]}" "${extraopts[@]}" -- "$infile")
 if [ -n "${RUSTC_MIR_VERBOSE:-}" ]; then
   printf "%s\n" "${rustc_cmd[*]}"
   "${rustc_cmd[@]}"

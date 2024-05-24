@@ -19,6 +19,26 @@ print_usage() {
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
+# check test dir
+# NOTE: ${var:-default} expands to default if var unset
+[ -z "${RUST_TOP:-}" ] && print_usage "set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
+RUST_TESTS=${RUST_TOP}/tests
+[ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
+
+# get rustc for compiler if available
+set +e
+RUSTC=$(if command -v rustc)
+set -e
+if   [ -x "$RUSTC" ]                                                          \
+  && ARCH=$("$RUSTC" --version --verbose | grep '^host' | grep -o '[^: ]*$')  \
+  && RUSTC="${RUST_TOP}/build/${ARCH}/stage2/bin/rustc"                       \
+  && [ -x "$RUSTC" ]
+then
+  export RUSTC
+else
+  echo "Warning: could not find local build: RUST_TOP/build/<arch>/rustc; falling back to rustc on PATH"
+if
+
 # setup time mir filter
 # NOTE: temp file is needed because rustc chokes when writing directly to /dev/null
 # NOTE: this filter does not work natively on mac due to no timeout command
@@ -46,12 +66,6 @@ while getopts 'xfet' opt; do
     ?|h) print_usage "environment variable RUST_TOP must point to a valid rustc distribution" ;;
   esac
 done
-
-# check test dir
-# NOTE: ${var:-default} expands to default if var unset
-[ -z "${RUST_TOP:-}" ] && print_usage "set RUST_TOP environment variable to your local Rust compiler source directory before running this script"
-RUST_TESTS=${RUST_TOP}/tests
-[ ! -d "${RUST_TESTS}" ] && print_usage "RUST_TOP environment variable does not appear to point to a local Rust compiler source directory"
 
 # clean temp mir file whenever timing mir, ignore errors
 if [ -n "${TIMEMIR[*]}" ]; then
