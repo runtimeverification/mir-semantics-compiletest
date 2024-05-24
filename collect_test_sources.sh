@@ -27,7 +27,7 @@ RUST_TESTS=${RUST_TOP}/tests
 
 # get rustc for compiler if available
 set +e
-RUSTC=$(if command -v rustc)
+RUSTC=$(command -v rustc)
 set -e
 if   [ -x "$RUSTC" ]                                                          \
   && ARCH=$("$RUSTC" --version --verbose | grep '^host' | grep -o '[^: ]*$')  \
