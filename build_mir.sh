@@ -23,7 +23,7 @@ do
   mkdir -p "$out_dir"
   echo "$RUNNER $in_file > $out_file"
   set +e
-  RUSTC="$RUNNER" "$SCRIPT_DIR/rustc_mir.sh" "$in_file" > "$out_file"
+  RUSTC="$RUNNER" "$SCRIPT_DIR/rustc_mir.sh" "$in_file" "$out_file"
   success=$?
   set -e
   [ "$success" -ne 0 ] && failed=$(( failed + 1 ))

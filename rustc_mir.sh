@@ -36,6 +36,8 @@ rustc_cmd=("${RUSTC:-rustc}" --emit mir -o "$outfile" "${fileopts[@]}" "${extrao
 if [ -n "${RUSTC_MIR_VERBOSE:-}" ]; then
   printf "%s\n" "${rustc_cmd[*]}"
   "${rustc_cmd[@]}"
+elif [ -n "${SMIR_PRETTY:-}" ]; then
+  "${rustc_cmd[@]}" > "$outfile"
 else
   "${rustc_cmd[@]}" &>/dev/null
 fi
