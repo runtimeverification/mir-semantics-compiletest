@@ -44,7 +44,7 @@ Do the following:
 ```sh
 # build rustc at <path-to-rustc> stage 2 compiler
 RUST_TOP=<path-to-rustc> ./collect_test_sources.sh &> sources
-SMIR_PRETTY=1 SRC=sources IN_DIR=<path-to-rustc> IN_EXT=rs RUNNER=smir-pretty OUT_DIR=<absolute-path-to-output-dir> OUT_EXT=mir ./build_mir.sh &> build-mir-log
+SMIR_PRETTY=1 SRC=sources IN_DIR=<path-to-rustc> IN_EXT=rs RUNNER=<path-to-smir-pretty-run.sh> OUT_DIR=<absolute-path-to-output-dir> OUT_EXT=mir ./build_mir.sh &> build-mir-log
 ```
 
 Note: the `./build-mir.sh` script should create `output-dir` for you.
